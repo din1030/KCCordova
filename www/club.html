@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Kelly Club 全省八大行業資訊專用APP平台</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="./js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.css" />
+        <link rel="stylesheet" href="./css/font-awesome.css" />
+        <link rel="stylesheet" href="./js/flex-slider/flexslider.css" type="text/css">
+        <link rel="stylesheet" href="./css/main.css" />
+    </head>
+
+    <body>
+        <!-- club -->
+        <div data-role="page" id="club" data-theme="a" data-title="club">
+            <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
+                <div style="width:100%; text-align:center;">
+                    <a href="#menu-panel" class="ui-link">
+                        <div id="menu-btn" class="header-btn header-link left-link"></div>
+                    </a>
+                    <span class="page-title">酒店系統</span>
+                    <a href="#club-search" class="ui-link">
+                        <div id="search-btn" class="header-btn header-link right-link"></div>
+                    </a>
+                </div>
+            </div>
+            <!-- /header -->
+            <div data-role="main" class="ui-content" id="club-main">
+                <div class="member-info">
+                    <div class="float-left">
+                        <span class="member">（未知使用者）</span>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <ul id="club_list" class="store_list" data-role="listview" data-inset="true">
+                    <li data-icon="false">
+                        <a href="#club-intro" data-ajax="false">
+                            <img src="./img/square_img.jpg">
+                            <h2>898 Music Talking</h2>
+                            <p>台中市 西屯區｜</p>
+                            <div class="slogan">
+                                店家標語
+                            </div>
+                            <p class="update-time">更新時間 2016/05/20</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- club search -->
+        <div data-role="page" id="club-search" data-theme="a" data-title="club">
+            <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
+                <div style="width:100%; text-align:center;">
+                    <a href="#menu-panel" class="ui-link">
+                        <div id="menu-btn" class="header-btn header-link left-link"></div>
+                    </a>
+                    <span class="page-title">搜尋</span>
+                    <a href="#club-search" class="ui-link">
+                        <div id="search-btn" class="header-btn header-link right-link"></div>
+                    </a>
+                </div>
+            </div>
+            <!-- /header -->
+            <div data-role="main" class="ui-content" id="club-search-main">
+                <div class="member-info">
+                    <div class="float-right">
+                        <span class="member">（未知使用者）</span>
+                    </div>
+                    <div class="float-left">
+                        <span>台灣地區</span>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="search-block">
+                    <form class="" action="index.html" method="post">
+                        <div class="ui-field-contain">
+                            <label for="county">區域</label>
+                            <select name="county" id="county">
+                                <option value="small">台北市</option>
+                                <option value="medium">新北市</option>
+                                <option value="large">台中市</option>
+                            </select>
+                        </div>
+                        <div class="ui-field-contain">
+                            <label for="club_type">店家類別</label>
+                            <select name="club_type" id="club_type">
+                                <option value="small">類別一</option>
+                                <option value="medium">類別二</option>
+                                <option value="large">類別三</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Club detail - intro -->
+        <div data-role="page" id="club-intro" data-theme="a" data-title="club">
+            <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
+                <div style="width:100%; text-align:center;">
+                    <a href="#menu-panel" class="ui-link">
+                        <div id="menu-btn" class="header-btn header-link left-link"></div>
+                    </a>
+                    <span class="page-title">酒店系統</span>
+                    <a href="#club-search" class="ui-link">
+                        <div id="search-btn" class="header-btn header-link right-link"></div>
+                    </a>
+                </div>
+                <div data-role="navbar">
+                    <ul class="page-content-nav">
+                        <li><a href="#club-intro" data-ajax="false" class="active">店家介紹</a></li>
+                        <li><a href="#club-service">消費服務</a></li>
+                        <li><a href="#club-job-info">應徵資訊</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /header -->
+            <div data-role="main" class="ui-content" id="club-intro-main">
+                <div class="flexslider">
+                    <ul class="slides">
+                        <li>
+                            <img src="./img/slide1.jpg" />
+                        </li>
+                        <li>
+                            <img src="./img/slide2.jpg" />
+                        </li>
+                        <li>
+                            <img src="./img/slide3.jpg" />
+                        </li>
+                        <li>
+                            <img src="./img/slide4.jpg" />
+                        </li>
+                    </ul>
+                </div>
+                <div id="info_block" class="detail_block">
+                    <div class="ui-bar ui-bar-a">
+                        <h3>店家資訊</h3>
+                    </div>
+                    <div class="ui-body ui-body-a">
+                        <div id="club_title">鈕吧</div>
+                        <div id="club_address">位置：台中市南屯區大川街38號</div>
+                        <div id="club_tel">電話：04-22493919、22493910</div>
+                        營業時間：
+                        <div id="opentime">
+                            <!-- <br>星期三：22：00-03：30
+                        <br>星期四：22：00-03：30
+                        <br>星期五：22：00-03：30
+                        <br>星期六：22：00-03：30
+                        <br>星期日：22：00-03：30 -->
+                        </div>
+                        <div id="action_block" class="text-right">
+                            <a id="website-link" href="#" class="ui-btn ui-btn-inline no-bg-bd" rel="external" data-ajax="false">
+                                <img src="./img/icons/official_site.png" alt="" />
+                            </a>
+                            <button id="add-fav-btn" type="button" class="ui-btn ui-btn-inline no-bg-bd">
+                                <img src="./img/icons/fav_gray.png" alt="" />
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div id="brief_block" class="detail_block">
+                    <div class="ui-bar ui-bar-a">
+                        <h3>店家介紹</h3>
+                    </div>
+                    <div id="intro_content" class="ui-body ui-body-a text-justify">
+                        現有的暢飲夜店，就是指付了固定的票錢後，在夜店裡面的酒水是無限供應給客人的。一般來說，暢飲的型式是以杯換杯，一杯喝到見底，方可以至吧台再換一杯新的，就這樣一直無限供應至收吧為止，暢飲夜店收吧時間通常為表訂結束營業時間的前半小時。有別於單點夜店，暢飲夜店在酒水的品質上，會稍微比單點夜店遜色一點。不過好處就是因為消費門檻低，便宜又大碗的派對氣氛，因此很受學生族群歡迎。暢飲夜店的客層多坐落在18~22歲之間，以學生打工族為主。
+                    </div>
+                </div>
+                <div id="map_block" class="detail_block">
+                    <div class="ui-bar ui-bar-a">
+                        <h3>店家地址位置</h3>
+                    </div>
+                    <div class="ui-body ui-body-a text-center">
+                        <p id="map_addr">台北市信義區松壽路18號B1</p>
+                        <div id="map_canvas" style="width:100%; height:300px;">
+                        </div>
+                        <!-- <div style="width:82vw; height:60vw; margin: 0 auto; border:1px solid; text-align:center; background-color:#DDD">
+                            (GOOGLE MAP)
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Club detail - service -->
+        <div data-role="page" id="club-service" data-theme="a" data-title="club">
+            <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
+                <div style="width:100%; text-align:center;">
+                    <a href="#menu-panel" class="ui-link">
+                        <div id="menu-btn" class="header-btn header-link left-link"></div>
+                    </a>
+                    <span class="page-title">酒店系統</span>
+                    <a href="#club-search" class="ui-link">
+                        <div id="search-btn" class="header-btn header-link right-link"></div>
+                    </a>
+                </div>
+                <div data-role="navbar">
+                    <ul class="page-content-nav">
+                        <li><a href="#club-intro" data-ajax="false">店家介紹</a></li>
+                        <li><a href="#club-service" class="active">消費服務</a></li>
+                        <li><a href="#club-job-info">應徵資訊</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /header -->
+            <div data-role="main" class="ui-content" id="club-service-main">
+                <div id="rsvp_block" class="detail_block">
+                    <div class="ui-bar ui-bar-a">
+                        <h3>店家訂位服務電話(R.S.V.P.)</h3>
+                    </div>
+                    <div class="ui-body ui-body-a">
+                        <div class="avatar float-left">
+                        </div>
+                        <strong>公關 Larmar</strong>&nbsp;<small>客服專員</small>
+                        <br> 電話：0912-345678
+                        <br> LINE: kabc1230
+                    </div>
+                </div>
+                <div class="detail_block">
+                    <div class="ui-bar ui-bar-a">
+                        <h3>消費介紹（門票）</h3>
+                    </div>
+                    <div class="ui-body ui-body-a tab_wrap_block">
+                        <div data-role="tabs" id="first_tabs" class="service-tabs">
+                            <div data-role="navbar">
+                                <ul>
+                                    <li><a href="#one" data-ajax="false" class="active">星期三</a></li>
+                                    <li><a href="#two" data-ajax="false">星期四</a></li>
+                                    <li><a href="#three" data-ajax="false">星期五</a></li>
+                                    <li><a href="#four" data-ajax="false">星期六</a></li>
+                                    <li><a href="#five" data-ajax="false">星期日</a></li>
+                                </ul>
+                            </div>
+                            <div id="one" class="ui-body-d ui-content">
+                                星期三
+                            </div>
+                            <div id="two" class="ui-body-d ui-content">
+                                星期四
+                            </div>
+                            <div id="three" class="ui-body-d ui-content">
+                                星期五
+                            </div>
+                            <div id="four" class="ui-body-d ui-content">
+                                星期六
+                            </div>
+                            <div id="five" class="ui-body-d ui-content">
+                                星期日
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="detail_block">
+                    <div class="ui-bar ui-bar-a">
+                        <h3>消費介紹（包廂）</h3>
+                    </div>
+                    <div class="ui-body ui-body-a tab_wrap_block">
+                        <div data-role="tabs" id="second_tabs" class="service-tabs">
+                            <div data-role="navbar">
+                                <ul>
+                                    <li><a href="#one" data-ajax="false" class="active">星期三</a></li>
+                                    <li><a href="#two" data-ajax="false">星期四</a></li>
+                                    <li><a href="#three" data-ajax="false">星期五</a></li>
+                                    <li><a href="#four" data-ajax="false">星期六</a></li>
+                                    <li><a href="#five" data-ajax="false">星期日</a></li>
+                                </ul>
+                            </div>
+                            <div id="one" class="ui-body-d ui-content">
+                                星期三
+                            </div>
+                            <div id="two" class="ui-body-d ui-content">
+                                星期四
+                            </div>
+                            <div id="three" class="ui-body-d ui-content">
+                                星期五
+                            </div>
+                            <div id="four" class="ui-body-d ui-content">
+                                星期六
+                            </div>
+                            <div id="five" class="ui-body-d ui-content">
+                                星期日
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="map_block" class="detail_block">
+                    <div class="ui-bar ui-bar-a">
+                        <h3>優惠活動訊息</h3>
+                    </div>
+                    <div class="ui-body ui-body-a">
+                        SHOT 暢飲、免排隊換酒、免排隊入場、壽星生日免費入場
+                        <br>提前一週定位並登記壽星可帶兩位女生免費
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Club detail - job info -->
+        <div data-role="page" id="club-job-info" data-theme="a" data-title="club">
+
+            <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
+                <div style="width:100%; text-align:center;">
+                    <a href="#menu-panel" class="ui-link">
+                        <div id="menu-btn" class="header-btn header-link left-link"></div>
+                    </a>
+                    <span class="page-title">酒店系統</span>
+                    <a href="#club-search" class="ui-link">
+                        <div id="search-btn" class="header-btn header-link right-link"></div>
+                    </a>
+                </div>
+                <div data-role="navbar">
+                    <ul class="page-content-nav">
+                        <li><a href="#club-intro" data-ajax="false">店家介紹</a></li>
+                        <li><a href="#club-service">消費服務</a></li>
+                        <li><a href="#club-job-info" class="active">應徵資訊</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /header -->
+            <div data-role="main" class="ui-content" id="club-job-info-main">
+                <div id="contact_block" class="detail_block">
+                    <div class="ui-bar ui-bar-a">
+                        <h3>應徵聯絡人</h3>
+                    </div>
+                    <div class="ui-body ui-body-a">
+                        <div class="avatar float-left">
+                            <!-- <img src="./img/seeker-a.jpg" alt="" /> -->
+                        </div>
+                        <strong>經理 Larmar </strong>&nbsp;<small>面試人</small>
+                        <br> 電話：0912-345678
+                        <br> LINE: kabc1230
+                        <div id="action_block" class="text-right">
+                            <a href="#msg_to_jobseeker" class="ui-btn ui-btn-inline no-bg-bd msg-btn" data-rel="popup">
+                                <img src="./img/icons/message.png" alt="" />
+                            </a>
+                            <button type="button" class="ui-btn ui-btn-inline no-bg-bd">
+                                <img src="./img/icons/fav_gray.png" alt="" />
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div id="map_block" class="detail_block">
+                    <div class="ui-bar ui-bar-a">
+                        <h3>上班時段 / 服務內容</h3>
+                    </div>
+                    <div class="ui-body ui-body-a">
+                        <p>下午2點起～凌晨6點，時段彈性</p>
+                        <p>服務生/櫃檯/兼差/模特兒
+                            <br>服務生/櫃檯/兼差/模特兒
+                        </p>
+                    </div>
+                </div>
+                <div id="map_block" class="detail_block">
+                    <div class="ui-bar ui-bar-a">
+                        <h3>公司福利與制度</h3>
+                    </div>
+                    <div class="ui-body ui-body-a">
+                        <p>專人接待/經濟紓困/福利豐富/員工旅遊/提供宿舍津貼</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- external footer -->
+        <div data-role="footer" data-position="fixed" data-theme="a" data-tap-toggle="false">
+            <div data-role="navbar">
+                <ul>
+                    <li>
+                        <a href="#club">
+                            <div class="footer-tab tab1" data-title="club"></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./jobseeker.html" data-ajax="false">
+                            <div class="footer-tab tab2" data-title="jobseeker"></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./lifeservice.html" data-ajax="false">
+                            <div class="footer-tab tab3" data-title="lifeservice"></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./messages.html" data-ajax="false">
+                            <div class="footer-tab tab4" data-title="messages"></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./favorite.html" data-ajax="false">
+                            <div class="footer-tab tab5" data-title="favorite"></div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /navbar -->
+        </div>
+        <script src="./js/jquery-1.12.4.min.js"></script>
+        <script src="./js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
+        <script src="https://maps.google.com/maps/api/js?key=AIzaSyCiv5hpI5vlZTCelUwM5rpPh4nqxka8kaA" type="text/javascript"></script>
+        <script src="./js/flex-slider/jquery.flexslider-min.js"></script>
+        <script src="./js/main.js"></script>
+        <script src="./js/club.js"></script>
+    </body>
+
+</html>
+</body>
+
+</html>

@@ -1,0 +1,840 @@
+// out: main.css
+border-radius()
+    -webkit-border-radius arguments
+    -moz-border-radius arguments
+    border-radius arguments
+
+bg-setting()
+    background-size: contain
+    background-position: center center
+    background-repeat: no-repeat
+
+main-purple = #CB6EEA
+deep-purple = #AA3C89
+btn-purple = #AE53C9
+form-hint-red = #BE0800
+inacitve-gray = #bbbbbb
+
+// global style
+*
+    text-shadow: none !important
+    text-decoration: none
+
+html, body, [data-role=page], [data-role=content]
+    // height: 100%
+    width: 100%
+    margin: 0
+textarea
+    height: inherit !important
+
+.no-bg-bd
+    background:none !important
+    border:none !important
+
+.text-center
+    text-align: center
+
+.text-right
+    text-align: right
+
+.text-justify
+    text-align: justify
+
+.float-left
+    float: left
+
+.float-right
+    float: right
+
+.clearfix
+    clear: both
+
+// --- end globaql style ---
+
+//
+#lang_title
+    padding: 10px 0
+    margin: 0 20px
+    text-align: center
+    background-color: rgba(232, 110, 247, 0.3)
+    color: white
+    font-size: 20px
+    border-radius(5px)
+
+#lang_list fieldset
+    input
+        visibility: hidden
+    label
+        background: none
+        border: none
+        padding: 10px 15px
+        margin: 0 40px
+        font-size: 20px
+        &:not(.ui-last-child)
+            border-bottom: 2px dashed rgba(232, 110, 247, 0.3)
+//
+
+
+.log-operation, #share-main
+    #logo, #login-block
+        margin: 0 auto
+    #logo #subtitle
+        font-size: 1.7em
+        color: #5D0062
+        margin-top: 30px
+    #logo, #login-block, #login-form-block
+        width: 80%
+        text-align: center
+        img
+            width: 100%
+    .log-info
+        color: #888888
+        font-size: 1.2em
+        margin-top: 20px
+
+#login-form, #app-reg-form
+    label
+        padding-top: 6px
+
+// app-log-in
+#app-log-in-main, #app-reg
+    #logo, #login-form-block
+        margin: 70px auto
+
+// login
+.pink-bg .ui-panel-wrapper
+    background-image: url('../img/bg.jpg')
+    // background-repeat: no-repeat
+    background-size: cover
+    width: 100%;
+    height: 100%
+    position: relative
+
+.pink-bg
+    #feather
+        text-align: right
+        img
+            width: 50%
+    #logo #subtitle
+        margin-bottom: 100px
+    #login-block *
+        margin: 10px 0
+
+.dynamic-reg-form-block.hide
+    display: none
+
+// --- end login style ---
+
+// home
+#home-main
+    margin: 5px 0
+    .ui-grid-a .ui-block-a
+        padding: 5px 5px 5px 0
+    .ui-grid-a .ui-block-b
+        padding: 5px 0 5px 5px
+    .home-img
+        width: 100%
+
+// --- end home style ---
+
+// club
+.store_list
+    h2
+        color: deep-purple
+        font-size: 16px !important
+        font-weight: bolder !important
+    .slogan
+        font-size: 14px
+        color: gray
+        font-weight: lighter
+        padding: 4px
+        border: 1px solid silver
+        border-radius(5px)
+        overflow : hidden
+        text-overflow : ellipsis
+        white-space : nowrap
+
+.tab_wrap_block .ui-tabs-nav
+    // margin-bottom: 10px
+    li
+        & > a
+            // color: inacitve-gray
+            background-color: #FFF
+            // font-size: 1.2em
+            font-weight: lighter
+            border-bottom: 6px solid #ddd
+            border-top: none
+        &.ui-tabs-active a.ui-btn-active.active
+            color: #000 !important
+            background-color: #FFF !important
+            border-bottom: 6px solid #AA3C89
+
+//  --- end club style ---
+// job seeker
+#jobseeker-main
+    .ui-grid-b
+        margin: 0 4px 10px 4px
+    // .seeker_list_item
+    .ui-block-a, .ui-block-b, .ui-block-c
+        margin: 4px
+        width: calc(33.33vw - 11px)
+        height: calc(33.33vw - 11px)
+    .seeker_list_item img
+        width: 100%
+        border-radius(5px)
+
+// --- end jobseeker style ---
+
+// life service
+#lifeservice-main
+    #service-category-block
+        div
+            margin: 8px 16px
+        img
+            width: 100%
+            border-radius(5px)
+
+#lifeservice-list
+    .ui-listview
+        li h2
+            margin: 0
+        & > .ui-li-has-thumb > .ui-btn
+            padding-left: 7em
+// --- life service style---
+
+// messages
+.msg_block .msg-badge
+    background: btn-purple
+    color: #FFF
+    border-radius: 50%
+    text-align: center
+    min-width: 1.5em
+    min-width: 1.5em
+
+.msg_wrapper
+    margin-bottom: 25px
+    .msg_title
+        border-bottom: 1px solid #333
+        .msg_sender, .msg_me
+            font-size: 1.2em
+        .msg_sender
+            color: btn-purple
+    .msg_body
+        color: #666
+        padding: 10px 0
+
+// --- messages style---
+
+// favorite
+
+.ui-btn.del-fav-btn
+    // width: 30px
+    padding: 0
+    margin: 0
+    // top: .24em
+    // right: inherit
+    border-width: 2px
+    background-color: transparent !important
+    &.ui-btn-icon-notext
+        width: 20px
+        height: 20px
+    &:after
+        background-color: transparent !important
+
+
+// --- favorite style---
+
+// recommend-record
+#recommend-record-main
+    background-color: #FFF
+    #rec_block
+        padding: 0 30px
+    .rec_content_title
+        color: btn-purple
+        font-size: 1.2em
+    ul
+        padding-left: 0
+    ol
+        padding-left: 1.5em
+    li
+        border-bottom: 2px solid #999
+        margin: 10px 0
+
+#redeem-main
+    .redeem_pic
+        width: 60%
+        height: 100px
+        bg-setting()
+        background-image: url(../img/redeem_item.jpg)
+
+// --- recommend-record style ---
+
+// news
+#news-main
+    background-color: #FFF
+    padding: 0 30px
+    h3
+        color: deep-purple
+        margin: 0
+    .news-content-bolck
+        margin-top: 15px
+
+// --- news style ---
+
+//  share page
+#share-main
+    padding: 15px 30px
+    h4
+        margin: 0
+    #logo #subtitle
+        margin-bottom: 50px
+    .share-btn
+        margin-bottom: 40px
+// --- share page ---
+
+//  setting page
+#setting-main
+    padding: 0 15px
+    .ui-listview
+        border: 1px gray
+        border-radius: 5px
+    .listview-grouptitle
+        background-color: deep-purple
+        color: white
+        padding-top: 4px
+        padding-bottom: 4px
+    .ui-flipswitch
+        float: right
+
+.policy-page-content
+    padding: 15px 30px
+    background-color: #FFF
+    h4
+        text-align: center
+        color: deep-purple
+        margin: 10px auto
+    p
+        font-size: 12px
+        padding-bottom: 15px
+
+// --- setting page ---
+
+// profile
+.profile-main
+    padding: 15px 30px
+    background-color: #FFF
+    line-height: 2em
+    .item_title
+        color: deep-purple
+        font-weight: bold
+        margin-top: 2px
+
+.ui-field-contain
+    &.ui-disabled, &.ui-disabled *
+        background: none
+        border: none
+        box-shadow: none
+        opacity: 1
+
+.ui-disabled
+    opacity: 1
+
+// #member-profile-main, #member-modify-main, #jobseeker-profile-main, #jobseeker-profile-modify-main, #club-profile-main, #club-profile-modify-main
+[id$='profile-main'], [id$='modify-main']
+    .upper_block
+        > *
+            float: left
+        [type='image']
+            width: 100px
+            height: 100px
+            border-radius(5px)
+        [type='file']
+            display: none
+        div:nth-child(2)
+            margin: 0 10px
+            font-size: 0.8em
+        .name_block
+            div:nth-child(1)
+                margin: 30px 10px
+                line-height: 20px
+                font-size: 1.5em
+
+label[for='height'], label[for='weight'], label[for='pay']
+    & + .ui-input-text
+        width: 30% !important
+        margin-right: 15px
+
+.club-page-nav
+    font-size: 14px
+    li a
+        padding-left: 7px
+        padding-right: 7px
+
+// --- profile ---
+
+// plan
+#pay-main
+    background-color: white
+    padding: 15px
+    line-height: 1.7em
+#pay_title
+    color: deep-purple
+    font-size: 20px
+
+//  --- plan ---
+
+// category
+.cat_title_block
+    border-bottom: 2px solid black
+    padding: 10px 0
+    font-weight: bold
+    color: deep-purple
+    font-size: 1.3em
+
+.cat_list_item
+    border-bottom: 1px solid
+    padding: 10px 0 3px 0
+
+.cat_list_item, .cat_title_block
+    .ui-btn
+        margin: 0
+
+// admin
+
+div[id|=admin]
+    .category-block
+        padding: 0
+
+.admin-page
+    .ui-panel-wrapper
+        padding: 0 15px
+        background-color: white !important
+
+.area_title
+    width: auto !important
+    margin-top: 10px !important
+
+.area_block .ui-mini
+    font-size: 14px
+
+
+// member
+.list_search
+    *
+        float: left
+    label
+        width: 64px
+        padding-top: 5px
+        margin-right: 5px
+    .ui-input-text
+        width: calc(100% - 120px - 15px)
+    .ui-btn
+        margin-left: 5px
+        width: 50px
+        float: right
+        padding: 8px
+.member_num
+    float: right
+    margin-top: 15px
+
+#member_type_nav li a
+    background: inacitve-gray
+    color: white
+    font-size: 15px
+    padding: 5px
+    border: none
+    &.ui-btn-active
+        background: deep-purple !important
+
+.list_table
+    width: 100%
+    // border-collapse: collapse
+    border-spacing: 0
+    th
+        border-bottom: 2px solid black
+    td
+        border-bottom: 1px solid black
+    tr
+        th:nth-child(1), td:nth-child(1)
+            text-align: left
+        th:nth-child(2), td:nth-child(2)
+            text-align: center
+        th:nth-child(3), td:nth-child(3)
+            text-align: right
+
+#admin-member-detail-main
+    > div
+        background-color: white
+        margin-bottom: 15px
+        padding: 10px 15px
+        &:first-child
+            font-size: 20px
+            font-weight: bold
+#auth_list fieldset
+    input[type='radio']
+        visibility: hidden
+    .ui-radio label
+        background: none
+        border: none
+        padding: 10px 15px
+        font-size: 16px
+        font-weight: normal
+        border-bottom: 1px solid inacitve-gray
+
+#plan_block .ui-field-contain
+    *
+        float: left
+    > :first-child
+        .ui-btn
+            border-bottom: 1px solid #DDD
+        // width: 20%
+    > :nth-child(2)
+        margin-left: 10px
+    > :nth-child(3)
+        width: 40%
+
+#member_info_block
+    label
+        margin-top: 6px
+
+// homepage
+
+.home-pic-block
+    border-bottom: 1px solid
+    padding: 20px 0 10px 0
+    > div:first-child
+        float: left
+        width: 60%
+    > div:nth-child(2)
+        float: left
+        width: 40%
+        [type='image']
+            width: 100%
+            + .ui-input-text
+                display: none
+.pic-position
+    font-weight: bold
+    font-size: 1.2em
+    margin-bottom: 10px
+
+// recommend
+
+#rec_page li a
+    background: inacitve-gray
+    color: white
+    font-size: 15px
+    padding: 5px
+    border: none
+    &.active
+        background: deep-purple !important
+
+#admin-recommend-detail-main
+    table tr td:nth-child(2)
+        text-align: right
+
+.redeem_item_block
+    padding: 0 0 10px 0
+    border-bottom: 1px solid
+.redeem-pic-block
+    > div:first-child
+        float: left
+        width: 50%
+        .item_title
+            width: 90px
+        .ui-input-text
+            width: 30%
+    > div:nth-child(2)
+        float: left
+        width: 50%
+        [type='image']
+            width: 100%
+            + .ui-input-text
+                display: none
+
+.news_operation
+    margin-bottom: 15px
+    border-bottom: 1px solid
+    .ui-field-contain .ui-input-text
+        width: 15%
+    .ui-btn
+        float: right !important
+        padding-top: 8px
+        padding-bottom: 8px
+
+.admin_type
+    font-size: 18px
+    margin: 15px 0 10px 0
+    font-weight: bold
+.admin_info
+    padding-left: 15px
+    line-height: 1.5em
+    border-bottom: 1px solid
+
+.life_category_block
+    padding: 0 0 10px 0
+.life-pic-block
+    border-bottom: 1px solid
+    > div:first-child
+        float: left
+        width: 40%
+        .item_title
+            width: 90px
+        .ui-input-text
+            width: 30%
+    > div:nth-child(2)
+        float: left
+        width: 60%
+        [type='image']
+            width: 100%
+            + .ui-input-text
+                display: none
+
+.life_store_block
+    padding: 0 0 10px 0
+    border-bottom: 1px solid
+.store-pic-block
+    > div:first-child
+        float: left
+        padding-right: 15px
+        width: 35%
+        .item_title
+            width: 90px
+        .ui-input-text
+            width: 30%
+    > div:nth-child(2)
+        float: left
+        width: 60%
+        text-align: right
+        [type='image']
+            width: 100%
+            + .ui-input-text
+                display: none
+
+.admin-page
+    .item_title
+        color: deep-purple !important
+
+// --- admin ---
+
+// shared element
+// *** header
+[data-role=header]
+    color: #FFFFFF
+    font-weight: normal
+    padding: 0
+    top: 0
+    border: none
+    & > div:first-child
+        position: relative
+        width: 100%;
+        background-color: main-purple
+        text-align: center;
+        padding: 10px 0;
+    .header-link, .header-link:hover, .header-link:visited
+        font-size: 1em
+        color: #FFFFFF
+        font-weight: 200
+        padding: 5px 10px
+        position: absolute
+        top: 8px
+        &.left-link
+            left: 4px
+        &.right-link
+            right: 4px
+    .page-title
+        font-size: 1.6em
+
+// *** menu panel
+#menu-panel a
+    font-size:18px
+
+#menu-panel .menu-icon
+    height: 30px
+    width: 55px
+    bg-setting()
+    float: left
+
+for num in 0..8
+    #menu-panel .icon{num}
+        background-image: url('../img/icons/menu-icon'num'.png')
+
+.header-btn
+    margin: 5px
+    height: 15px
+    width: 15px
+    bg-setting()
+    display: inline-block
+
+#menu-btn
+    background-image: url('../img/icons/menu-white.png')
+    float: left
+
+#search-btn
+    background-image: url('../img/icons/search-white.png')
+    float: right
+
+.search-block
+    width: 80%
+    text-align: center
+    margin: 70px auto
+
+.member-info
+    margin: 15px
+
+.form-hint
+    color: form-hint-red !important
+    text-align: right
+    font-size: 0.9em
+    // display: none
+
+.ui-panel-wrapper
+    background-color: #E9E9E9 !important
+    .ui-content
+        border: none
+
+.padding_main_content
+    padding: 15px
+
+// *** detail page
+
+[data-role="navbar"].ui-navbar ul.page-content-nav
+    li > a
+        color: inacitve-gray
+        background-color: #FFF
+        font-size: 1.2em
+        font-weight: lighter
+        border-bottom: none
+        border-top: none
+        &.active
+            color: #000
+            border-bottom: 6px solid #AA3C89
+
+@media screen and (max-width: 400px)
+    [data-role="navbar"].ui-navbar ul.page-content-nav
+        li > a
+            font-size: 1em
+
+.detail_block
+    margin: 10px
+    line-height: 1.5rem
+    // border: none
+    > *
+        border: none
+    .ui-bar
+        border-radius: 8px 8px 0 0
+        text-align: center
+        color: #FFF
+        background-color: deep-purple
+    &.offcial_msg_block
+        .ui-bar
+            background-color: #71BB06
+    .ui-body
+        border-radius:  0 0 8px 8px
+        padding: 15px
+        &.tab_wrap_block
+            padding: 0
+            .ui-tabs
+                padding: 0
+            .ui-tabs-panel
+                padding: 15px
+                // text-align: center
+        #club_title
+            font-size: 1.5em
+            border-bottom: 1px solid
+            margin-bottom: 0.7em
+            font-weight: bold
+        #action_block
+            .ui-btn
+                padding: 0
+                margin: 0 0 0 15px
+            img
+                height: 55px
+        .avatar
+            width: 70px
+            height: 70px
+            border-radius: 50%
+            background-image: url(../img/seeker-a.jpg)
+            bg-setting()
+            margin: 0 15px 0 0
+            &.msg-avatar
+                border-radius: 5px
+
+
+[id$=popup].ui-popup-container
+    width: 80%
+    .msg-popup
+        h3, button
+            color: #FFF
+            font-weight: normal
+        h3
+            margin: 5px 0
+
+.ui-popup-screen.in
+    opacity: 0.9;
+    filter: Alpha(Opacity=90);
+
+.ui-btn.ui-btn-active
+    color: #FFF !important
+    background-color: btn-purple !important
+
+.purple-btn
+    padding: 5px 10px
+    color: #FFF !important
+    // border: 1px solid main-purple !important
+    background-color: btn-purple !important
+    border: none !important
+    &.send-btn
+        letter-spacing: 3px
+        width: 25%
+        min-width: 100px
+        margin: 10px auto
+    &.redeem-btn
+        min-width: 100px
+        // width: 25%
+
+.orange-btn
+    padding: 5px 10px
+    color: #FFF !important
+    background-color: #ED6615 !important
+    margin-right: 0
+    // margin: 0 0 10px 0
+
+.green-btn
+    padding: 5px 10px
+    color: #FFF !important
+    background-color: #47AA2C !important
+    margin-right: 0
+
+.ui-page-theme-a .ui-flipswitch-active
+    background-color: btn-purple
+    color: #FFF
+
+// *** footer tabs
+.footer-tab
+    height: 50px
+    bg-setting()
+
+for tab in 1..5
+    .footer-tab.tab{tab}
+        background-image: url('../img/icons/tab'tab'.png')
+    .footer-tab.tab{tab}.active
+        background-image: url('../img/icons/tab'tab'active.png')
+
+.page_mask
+    // display: none
+    width: 100vw
+    height: 100%
+    color: white
+    font-size: 25px
+    background-color: rgba(0, 0, 0, 0.8)
+    z-index: 1500
+    position: absolute
+    top: 0
+    left: 0
+    p
+        margin-top: 40vh
+
+.category-block
+    padding: 0 10px
+
+// --- end shared element style ---
