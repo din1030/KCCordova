@@ -13,10 +13,6 @@ $(document).on('pagebeforecreate', '#club', function() {
 			var admin_id = $(this).jqmData("admin-id");
 			window.localStorage.setItem('get_club_id', admin_id);
 			$.mobile.changePage($('#club-intro'), {
-				// dataUrl: "#club-intro?id=" + admin_id,
-				// data: {
-				// 	'admin_id': admin_id
-				// },
 				reloadPage: true,
 				changeHash: true
 			});
@@ -44,7 +40,7 @@ $(document).on('pagebeforeshow', '#club-intro', function() {
 			}
 		}
 		$('#website-link').attr('href', club.website);
-		$('#add-fav-btn').click(function(event) {
+		$('#club-intro .add-fav-btn').click(function(event) {
 			$.ajax({
 				url: 'http://52.69.53.255/KellyClub/api/add_fav.php?user_id=' + window.localStorage.getItem('user_id') + '&type=2&item_id=' + get_club_id,
 				dataType: 'json',
@@ -100,9 +96,77 @@ function initialize(address) {
 			marker.setTitle(address); //重新設定標記點的title
 		}
 	});
-
 }
 
+$(document).on('pagebeforeshow', '#club-job-info', function() {
+	var get_club_id = window.localStorage.getItem('get_club_id');
+	console.log(get_club_id);
+	$.ajax({
+		url: 'http://52.69.53.255/KellyClub/api/get_club_offer.php?club_id=' + get_club_id,
+		dataType: 'json'
+	}).success(function(data) {
+		if (data.status) {
+			var club = data.result[0];
+			$('#interviewer').text(club.name);
+			$('#tel').text(club.tel);
+			$('#line').text(club.line);
+			if (typeof(club.offer_content) !== 'undefined') {
+				club.offer_content = club.offer_content.replace(/\n/g, "<br>")
+			}
+			if (typeof(club.welfare) !== 'undefined') {
+				club.welfare = club.welfare.replace(/\n/g, "<br>")
+			}
+			$('#offer_content').html(club.offer_content);
+			$('#offer_welfare').html(club.welfare);
+			$('#club-job-info .add-fav-btn').click(function(event) {
+				$.ajax({
+					url: 'http://52.69.53.255/KellyClub/api/add_fav.php?user_id=' + window.localStorage.getItem('user_id') + '&type=2&item_id=' + get_club_id,
+					dataType: 'json',
+					success: function(result) {
+						alert(result.message);
+					}
+				});
+			});
+		} else {
+			$('#interviewer').text(data.message);
+			$('#tel').text(data.message);
+			$('#line').text(data.message);
+			$('#offer_content').html(data.message);
+			$('#offer_welfare').html(data.message);
+		}
+	});
+});
+
+$(document).on('pagebeforeshow', "#club-intro, #club-service", function() {
+	// 沒有權限觀看應徵資訊的提示
+	var mask = '<div style="display:block;" class="page_mask text-center" data-position-to="window" data-dismissible="true"><a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a><p>您不是求職者會員<br>店家應徵資訊僅供求職者會員瀏覽</p></div>';
+	if (window.localStorage.getItem('auth') != '0' && window.localStorage.getItem('auth') != '3') {
+		$("a[href='#club-job-info']").click(function(event) {
+			event.preventDefault();
+			$("[data-role='page']").prepend(mask);
+			$(".page_mask .ui-icon-delete").click(function(event) {
+				$(".page_mask").remove();
+			});
+		});
+	}
+});
+
 $(document).on('pagebeforehide', '#club-intro', function() {
-	window.localStorage.removeItem('get_club_id');
+	// window.localStorage.removeItem('get_club_id');
+});
+
+// 改變小區塊 navbar 的 class
+$(document).on('pagebeforeshow', "#club-service", function() {
+	$("#first_tabs").tabs({
+		activate: function(event, ui) {
+			ui.newTab.children('a').addClass('active');
+			ui.oldTab.children('a').removeClass('active');
+		}
+	});
+	$("#second_tabs").tabs({
+		activate: function(event, ui) {
+			ui.newTab.children('a').addClass('active');
+			ui.oldTab.children('a').removeClass('active');
+		}
+	});
 });

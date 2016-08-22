@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Kelly Club 全省八大行業資訊專用APP平台</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="./js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.css" />
+        <link rel="stylesheet" href="./css/font-awesome.css" />
+        <link rel="stylesheet" href="./js/flex-slider/flexslider.css" type="text/css">
+        <link rel="stylesheet" href="css/main.css" />
+    </head>
+
+    <body>
+        <!-- life service -->
+        <div data-role="page" id="lifeservice" data-theme="a" data-title="lifeservice">
+            <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
+                <div style="width:100%; text-align:center;">
+                    <a href="#menu-panel" class="ui-link">
+                        <div id="menu-btn" class="header-btn header-link left-link"></div>
+                    </a>
+                    <span class="page-title">生活服務</span>
+                    <a href="#lifeservice-search" class="ui-link">
+                        <div id="search-btn" class="header-btn header-link right-link"></div>
+                    </a>
+                </div>
+            </div>
+            <!-- /header -->
+            <div data-role="main" class="ui-content" id="lifeservice-main">
+                <div class="member-info">
+                    <div class="float-right">
+                        <span class="member">（未知使用者）</span>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div id="service-category-block">
+                    <div class="">
+                        <a href="#lifeservice-list" class="">
+                            <img src="./img/service.jpg" alt="" />
+                        </a>
+                    </div>
+                    <div class="">
+                        <a href="#lifeservice-list" class="">
+                            <img src="./img/service.jpg" alt="" />
+                        </a>
+                    </div>
+                    <div class="">
+                        <a href="#lifeservice-list" class="">
+                            <img src="./img/service.jpg" alt="" />
+                        </a>
+                    </div>
+                    <div class="">
+                        <a href="#lifeservice-list" class="">
+                            <img src="./img/service.jpg" alt="" />
+                        </a>
+                    </div>
+                    <div class="">
+                        <a href="#lifeservice-list" class="">
+                            <img src="./img/service.jpg" alt="" />
+                        </a>
+                    </div>
+                    <div class="">
+
+                        <a href="#lifeservice-list" class="">
+                            <img src="./img/service.jpg" alt="" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- /grid-solo -->
+        </div>
+
+        <!-- lifeservice search -->
+        <div data-role="page" id="lifeservice-search" data-theme="a" data-title="lifeservice">
+            <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
+                <div style="width:100%; text-align:center;">
+                    <a href="#menu-panel" class="ui-link">
+                        <div id="menu-btn" class="header-btn header-link left-link"></div>
+                    </a>
+                    <span class="page-title">搜尋</span>
+                    <a href="#lifeservice-search" class="ui-link">
+                        <div id="search-btn" class="header-btn header-link right-link"></div>
+                    </a>
+                </div>
+            </div>
+            <!-- /header -->
+            <div data-role="main" class="ui-content" id="lifeservice-search-main">
+                <div class="member-info">
+                    <div class="float-left">
+                        <span class="member">（未知使用者）</span>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="search-block">
+                    <form class="" action="index.html" method="post">
+                        <div class="ui-field-contain">
+                            <label for="county">區域</label>
+                            <select name="county" id="county">
+                                <option value="small">台北市</option>
+                                <option value="medium">新北市</option>
+                                <option value="large">台中市</option>
+                            </select>
+                        </div>
+                        <div class="ui-field-contain">
+                            <label for="club_type">店家類別</label>
+                            <select name="club_type" id="club_type">
+                                <option value="small">類別一</option>
+                                <option value="medium">類別二</option>
+                                <option value="large">類別三</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- club -->
+        <div data-role="page" id="lifeservice-list" data-theme="a" data-title="lifeservice">
+            <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
+                <div style="width:100%; text-align:center;">
+                    <a href="#menu-panel" class="ui-link">
+                        <div id="menu-btn" class="header-btn header-link left-link"></div>
+                    </a>
+                    <span class="page-title">生活服務</span>
+                    <a href="#lifeservice-search" class="ui-link">
+                        <div id="search-btn" class="header-btn header-link right-link"></div>
+                    </a>
+                </div>
+            </div>
+            <!-- /header -->
+            <div data-role="main" class="ui-content" id="lifeservice-list-main">
+                <div class="category-block">
+                    <select name="select-choice-1" id="select-choice-1" data-native-menu="false">
+                        <option value="standard">美甲美睫</option>
+                        <option value="rush">美容美體</option>
+                        <option value="express">禮服租賃</option>
+                        <option value="overnight">家事清潔</option>
+                        <option value="test">美甲美睫</option>
+                    </select>
+                </div>
+                <ul class="store_list" data-role="listview" data-inset="true">
+                    <li data-icon="false">
+                        <a href="#lifeservice-detail" data-ajax="false">
+                            <img src="./img/square_img.jpg">
+                            <h2>Divas 美甲美睫概念館</h2>
+                            <p>台中市 西屯區｜</p>
+                            <div class="slogan">
+                                店家標語
+                            </div>
+                            <!-- <p class="update-time">更新時間 2016/05/20</p> -->
+                        </a>
+                    </li>
+                    <li data-icon="false">
+                        <a href="#lifeservice-detail" data-ajax="false">
+                            <img src="./img/square_img.jpg">
+                            <h2>綠野仙蹤美甲美睫沙龍</h2>
+                            <p>台中市 西屯區｜</p>
+                            <div class="slogan">
+                                店家標語
+                            </div>
+                            <!-- <p class="update-time">更新時間 2016/05/20</p> -->
+                        </a>
+                    </li>
+                    <li data-icon="false">
+                        <a href="#lifeservice-detail" data-ajax="false">
+                            <img src="./img/square_img.jpg">
+                            <h2>日式美睫美甲</h2>
+                            <p>台中市 西屯區｜</p>
+                            <div class="slogan">
+                                店家標語
+                            </div>
+                            <!-- <p class="update-time">更新時間 2016/05/20</p> -->
+                        </a>
+                    </li>
+                    <li data-icon="false">
+                        <a href="#lifeservice-detail" data-ajax="false">
+                            <img src="./img/square_img.jpg">
+                            <h2>Divas 美甲美睫概念館</h2>
+                            <p>台中市 西屯區｜</p>
+                            <div class="slogan">
+                                店家標語
+                            </div>
+                            <!-- <p class="update-time">更新時間 2016/05/20</p> -->
+                        </a>
+                    </li>
+                    <li data-icon="false">
+                        <a href="#lifeservice-detail" data-ajax="false">
+                            <img src="./img/square_img.jpg">
+                            <h2>綠野仙蹤美甲美睫沙龍</h2>
+                            <p>台中市 西屯區｜</p>
+                            <div class="slogan">
+                                店家標語
+                            </div>
+                            <!-- <p class="update-time">更新時間 2016/05/20</p> -->
+                        </a>
+                    </li>
+                    <li data-icon="false">
+                        <a href="#lifeservice-detail" data-ajax="false">
+                            <img src="./img/square_img.jpg">
+                            <h2>日式美睫美甲</h2>
+                            <p>台中市 西屯區｜</p>
+                            <div class="slogan">
+                                店家標語
+                            </div>
+                            <!-- <p class="update-time">更新時間 2016/05/20</p> -->
+                        </a>
+                    </li>
+                    <li data-icon="false">
+                        <a href="#lifeservice-detail" data-ajax="false">
+                            <img src="./img/square_img.jpg">
+                            <h2>Divas 美甲美睫概念館</h2>
+                            <p>台中市 西屯區｜</p>
+                            <div class="slogan">
+                                店家標語
+                            </div>
+                            <!-- <p class="update-time">更新時間 2016/05/20</p> -->
+                        </a>
+                    </li>
+                    <li data-icon="false">
+                        <a href="#lifeservice-detail" data-ajax="false">
+                            <img src="./img/square_img.jpg">
+                            <h2>綠野仙蹤美甲美睫沙龍</h2>
+                            <p>台中市 西屯區｜</p>
+                            <div class="slogan">
+                                店家標語
+                            </div>
+                            <!-- <p class="update-time">更新時間 2016/05/20</p> -->
+                        </a>
+                    </li>
+                    <li data-icon="false">
+                        <a href="#lifeservice-detail" data-ajax="false">
+                            <img src="./img/square_img.jpg">
+                            <h2>日式美睫美甲</h2>
+                            <p>台中市 西屯區｜</p>
+                            <div class="slogan">
+                                店家標語
+                            </div>
+                            <!-- <p class="update-time">更新時間 2016/05/20</p> -->
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- lifeservice detail -->
+        <div data-role="page" id="lifeservice-detail" data-theme="a" data-title="lifeservice">
+            <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
+                <div style="width:100%; text-align:center;">
+                    <a href="#menu-panel" class="ui-link">
+                        <div id="menu-btn" class="header-btn header-link left-link"></div>
+                    </a>
+                    <span class="page-title">生活服務</span>
+                    <a href="#jobseeker-search" class="ui-link">
+                        <div id="search-btn" class="header-btn header-link right-link"></div>
+                    </a>
+                </div>
+            </div>
+            <!-- /header -->
+            <div data-role="main" class="ui-content" id="lifeservice-detail-main">
+                <div class="flexslider">
+                    <ul class="slides">
+                        <li>
+                            <img src="./img/slide1.jpg" />
+                        </li>
+                        <li>
+                            <img src="./img/slide2.jpg" />
+                        </li>
+                        <li>
+                            <img src="./img/slide3.jpg" />
+                        </li>
+                        <li>
+                            <img src="./img/slide4.jpg" />
+                        </li>
+                    </ul>
+                </div>
+                <div id="info_block" class="detail_block">
+                    <div class="ui-bar ui-bar-a">
+                        <h3>店家資訊</h3>
+                    </div>
+                    <div class="ui-body ui-body-a">
+                        <div id="club_title">日式美睫美甲</div>
+                        位置：台中市南屯區大川街38號
+                        <br>電話：04-22493919、22493910
+                        <br>營業時間：
+                        <br>星期三～星期五：22：00-03：30
+                        <br>星期六、日：22：00-03：30
+                        <div id="action_block" class="text-right">
+                            <a href="#" class="ui-btn ui-btn-inline no-bg-bd" rel="external" data-ajax="false">
+                                <img src="./img/icons/official_site.png" alt="" />
+                            </a>
+                            <button type="button" class="ui-btn ui-btn-inline no-bg-bd">
+                                <img src="./img/icons/fav_gray.png" alt="" />
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div id="contact_block" class="detail_block">
+                    <div class="ui-bar ui-bar-a">
+                        <h3>預約資訊</h3>
+                    </div>
+                    <div class="ui-body ui-body-a">
+                        <div class="avatar float-left">
+                            <!-- <img src="./img/seeker-a.jpg" alt="" /> -->
+                        </div>
+                        <strong>設計師 Larmar </strong>&nbsp;<small>預約窗口</small>
+                        <br> 電話：0912-345678
+                        <br> LINE: kabc1230
+                    </div>
+                </div>
+                <div id="contact_block" class="detail_block">
+                    <div class="ui-bar ui-bar-a">
+                        <h3>消費介紹</h3>
+                    </div>
+                    <div class="ui-body ui-body-a">
+                        <p>
+                            真甲甲油凝膠
+                        </p>
+                        <p>
+                            凝膠指甲
+                        </p>
+                        <p>
+                            卸甲服務
+                        </p>
+                        <p>
+                            其他造型服務
+                        </p>
+                    </div>
+                </div>
+                <div id="compaign_block" class="detail_block">
+                    <div class="ui-bar ui-bar-a">
+                        <h3>優惠活動</h3>
+                    </div>
+                    <div class="ui-body ui-body-a text-justify">
+                        凡下載 Kelly Club app 至本店消費出示使用畫面可享九折優惠
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- external footer -->
+        <div data-role="footer" data-position="fixed" data-theme="a" data-tap-toggle="false">
+            <div data-role="navbar">
+                <ul>
+                    <li>
+                        <a href="./club.html" data-ajax="false">
+                            <div class="footer-tab tab1" data-title="club"></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./jobseeker.html" data-ajax="false">
+                            <div class="footer-tab tab2" data-title="jobseeker"></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#lifeservice">
+                            <div class="footer-tab tab3 active" data-title="lifeservice"></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./messages.html" data-ajax="false">
+                            <div class="footer-tab tab4"></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./favorite.html" data-ajax="false">
+                            <div class="footer-tab tab5" data-title="favorite"></div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /footer -->
+        </div>
+        <script src="./js/jquery-1.12.4.min.js"></script>
+        <script src="./js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
+        <script src="./js/flex-slider/jquery.flexslider-min.js"></script>
+        <script src="./js/main.js"></script>
+    </body>
+
+</html>

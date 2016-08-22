@@ -366,9 +366,9 @@ textarea {
   line-height: 20px;
   font-size: 1.5em;
 }
-label[for='height'] + .ui-input-text,
-label[for='weight'] + .ui-input-text,
-label[for='pay'] + .ui-input-text {
+label[for='height-input'] + .ui-input-text,
+label[for='weight-input'] + .ui-input-text,
+label[for='pay-input'] + .ui-input-text {
   width: 30% !important;
   margin-right: 15px;
 }

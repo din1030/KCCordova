@@ -114,9 +114,11 @@ $(document).on('pagecreate', '#app-log-in', function() {
 				},
 				success: function(result) {
 					if (result.status) {
+						window.localStorage.setItem('user_id', result.user_id);
 						window.localStorage.setItem('user', result.user);
 						window.localStorage.setItem('auth', result.auth);
 						window.localStorage.setItem('name', result.name);
+						window.localStorage.setItem('user_info', result.user_info);
 						alert(window.localStorage.getItem('name') + ' ' + window.localStorage.getItem('user') + '(' + window.localStorage.getItem('auth') + ')');
 						$.mobile.changePage("#home");
 					} else {

@@ -48,25 +48,30 @@ $(document).on("pagebeforeshow", "[data-role='page']", function() {
 	$('span.member').text(member);
 });
 
-var panel = '<div data-role="panel" id="menu-panel" data-display="push" data-theme="a" data-position-fixed="true">' + '<div class="ui-panel-inner"><ul data-role="listview" class="ui-listview">' + '<li><a href="./index.html#home" class="ui-btn" data-ajax="false"><div class="menu-icon icon0"></div> 首頁 </a></li>' + '<li><a id="profile-link" href="./profile.html" class="ui-btn" data-ajax="false"><div class="menu-icon icon1"></div> 我的檔案 </a></li>' + '<li><a href="./menu.html#recommend-record" class="ui-btn" data-ajax="false"><div class="menu-icon icon2"></div> 推薦紀錄 </a></li>' + '<li><a href="./menu.html#news" class="ui-btn" data-ajax="false"><div class="menu-icon icon3"></div> 最新消息 </a></li>' + '<li><a href="./menu.html#share" class="ui-btn" data-ajax="false"><div class="menu-icon icon4"></div> 分享好友 </a></li>' + '<li><a href="http://www.kelly-club.com/" class="ui-btn" rel="external" target="_blank"><div class="menu-icon icon5"></div> 連官網 </a></li>' + '<li><a href="./menu.html#setting" class="ui-btn" data-ajax="false"><div class="menu-icon icon6"></div> 設定 </a></li>' + '<li><a id="menu-logout" href="./index.html#login" class="ui-btn" data-ajax="false"><div class="menu-icon icon7"></div> 登出 </a></li>' + ' </ul></div></div>';
-$(document).one('pagecreate', function() {
-	$.mobile.pageContainer.prepend(panel);
-	// Admin 才會有後台選項
+$(document).on('pagecreate', function() {
+	var href;
+	var admin_li = '';
 	if (window.localStorage.getItem('auth') == '0') {
-		$('#menu-panel ul').append('<li><a href="./admin.html" class="ui-btn" data-ajax="false"><div class="menu-icon icon8"></div> 管理者後台 </a></li>')
-		$('#profile-link').attr('href', './profile.html#member-profile');
+		// Admin 才會有後台選項
+		admin_li = '<li><a href="./admin.html" class="ui-btn" data-ajax="false"><div class="menu-icon icon8"></div> 管理者後台 </a></li>';
+		// $('#profile-link').attr('href', './profile.html#member-profile');
+		href = './profile.html#member-profile';
 	} else if (window.localStorage.getItem('auth') == '1') {
-		$('#profile-link').attr('href', './profile.html#member-profile');
+		href = './profile.html#member-profile';
+		// $('#profile-link').attr('href', './profile.html#member-profile');
 	} else if (window.localStorage.getItem('auth') == '2') {
-		$('#profile-link').attr('href', './profile.html#club-profile');
+		href = './profile.html#club-profile';
+		// $('#profile-link').attr('href', './profile.html#club-profile');
 	} else if (window.localStorage.getItem('auth') == '3') {
-		$('#profile-link').attr('href', './profile.html#jobseeker-profile');
+		href = './profile.html#jobseeker-profile';
+		// $('#profile-link').attr('href', './profile.html#jobseeker-profile');
 	}
+	var panel = '<div data-role="panel" id="menu-panel" data-display="push" data-theme="a" data-position-fixed="true">' + '<div class="ui-panel-inner"><ul data-role="listview" class="ui-listview">' + '<li><a href="./index.html#home" class="ui-btn" data-ajax="false"><div class="menu-icon icon0"></div> 首頁 </a></li>' + '<li><a id="profile-link" href="' + href + '" class="ui-btn" data-ajax="false"><div class="menu-icon icon1"></div> 我的檔案 </a></li>' + '<li><a href="./menu.html#recommend-record" class="ui-btn" data-ajax="false"><div class="menu-icon icon2"></div> 推薦紀錄 </a></li>' + '<li><a href="./menu.html#news" class="ui-btn" data-ajax="false"><div class="menu-icon icon3"></div> 最新消息 </a></li>' + '<li><a href="./menu.html#share" class="ui-btn" data-ajax="false"><div class="menu-icon icon4"></div> 分享好友 </a></li>' + '<li><a href="http://www.kelly-club.com/" class="ui-btn" rel="external" target="_blank"><div class="menu-icon icon5"></div> 連官網 </a></li>' + '<li><a href="./menu.html#setting" class="ui-btn" data-ajax="false"><div class="menu-icon icon6"></div> 設定 </a></li>' + '<li><a id="menu-logout" href="./index.html#login" class="ui-btn" data-ajax="false"><div class="menu-icon icon7"></div> 登出 </a></li>' + admin_li + ' </ul></div></div>';
+	$.mobile.pageContainer.prepend(panel);
+
 	// 登出清掉 localStorage
 	$('#menu-logout').click(function(event) {
-		// console.log(window.localStorage);
 		window.localStorage.clear();
-		// console.log(window.localStorage);
 		// window.localStorage.removeItem('user');
 		// window.localStorage.removeItem('auth');
 		// window.localStorage.removeItem('name');
@@ -81,20 +86,6 @@ $(document).on('pageshow', "#jobseeker-resume, #club-intro, #lifeservice-detail"
 	});
 });
 
-$(document).on('pagebeforeshow', "#club-intro, #club-service", function() {
-	// 沒有權限觀看應徵資訊的提示
-	var mask = '<div style="display:block;" class="page_mask text-center" data-position-to="window" data-dismissible="true"><a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a><p>您不是求職者會員<br>店家應徵資訊僅供求職者會員瀏覽</p></div>';
-	if (window.localStorage.getItem('auth') != '0' && window.localStorage.getItem('auth') != '3') {
-		$("a[href='#club-job-info']").click(function(event) {
-			event.preventDefault();
-			$("[data-role='page']").prepend(mask);
-			$(".page_mask .ui-icon-delete").click(function(event) {
-				$(".page_mask").remove();
-			});
-		});
-	}
-});
-
 $(document).on('pagebeforeshow', "#redeem", function() {
 	// 兌換提示
 	var redeem_item = 'XXXX';
@@ -106,85 +97,5 @@ $(document).on('pagebeforeshow', "#redeem", function() {
 		$(".page_mask .ui-icon-delete").click(function(event) {
 			$(".page_mask").remove();
 		});
-	});
-});
-
-// 改變小區塊 navbar 的 class
-$(document).on('pagebeforeshow', "#club-service", function() {
-	$("#first_tabs").tabs({
-		activate: function(event, ui) {
-			ui.newTab.children('a').addClass('active');
-			ui.oldTab.children('a').removeClass('active');
-		}
-	});
-	$("#second_tabs").tabs({
-		activate: function(event, ui) {
-			ui.newTab.children('a').addClass('active');
-			ui.oldTab.children('a').removeClass('active');
-		}
-	});
-});
-
-$(document).on('pagebeforeshow', "[data-role='page'].admin-page", function() {
-	var page_id = $.mobile.activePage.attr('id');
-	var page_title = $.mobile.activePage.jqmData('title');
-	var index = $('#' + page_id + ' select.navigateToPage option[value$=' + page_title + ']').index();
-	$('#' + page_id + ' select.navigateToPage').prop('selectedIndex', index);
-	var title = $('#' + page_id + ' select.navigateToPage option[value$=' + page_title + ']').text();
-	$('#' + page_id + ' span.navigateToPage').text(title);
-});
-
-// $(".admin-page").ready(function() {
-$(document).on('pagecreate', ".admin-page", function() {
-	$(this).find('select.navigateToPage').change(function() {
-		var page = $(this).val();
-		$.mobile.changePage(page);
-	});
-
-	$('.home-pic-input, .redeem-pic-input, .life-pic-input, .store-pic-input').change(function(event) {
-		if (this.files && this.files[0]) {
-			var input = this;
-			var reader = new FileReader();
-			reader.onload = function(e) {
-				$(input).parent().prev("input[type='image']").attr('src', e.target.result);
-			};
-			reader.readAsDataURL(this.files[0]);
-		}
-	});
-	$("input[type='image']").click(function() {
-		$(this).next('.ui-input-text').find("input[type='file']").click();
-	});
-});
-
-$(document).on('pagebeforeshow', ".profile-pic-page", function() {
-	$('.profile-pic-input').change(function(event) {
-		if (this.files && this.files[0]) {
-			var input = this;
-			var reader = new FileReader();
-			reader.onload = function(e) {
-				$(input).parent().prev("input[type='image']").attr('src', e.target.result);
-			};
-			reader.readAsDataURL(this.files[0]);
-		}
-	});
-	$("input[type='image']").click(function() {
-		$(this).next('.ui-input-text').find("input[type='file']").click();
-	});
-});
-
-$(document).on('pageshow', "#admin-member-detail", function() {
-	$('#member_type').change(function(event) {
-		if ($(this).val() == 'club') {
-			$('#seeker_type_block').hide();
-			$('#club_type_block').show();
-		} else if ($(this).val() == 'seeker') {
-			$('#club_type_block').hide();
-			$('#seeker_type_block').show();
-
-		} else if ($(this).val() == 'normal') {
-			$('#club_type_block').hide();
-			$('#seeker_type_block').hide();
-
-		}
 	});
 });

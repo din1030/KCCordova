@@ -70,5 +70,16 @@
         },
         "is_top_level": false,
         "variables": {}
+    },
+    "cordova-plugin-facebook4": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-facebook4@~1.7.1"
+        },
+        "is_top_level": true,
+        "variables": {
+            "APP_ID": "172865999803545",
+            "APP_NAME": "KellyClub"
+        }
     }
 }

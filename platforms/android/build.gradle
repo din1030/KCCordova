@@ -164,6 +164,7 @@ android {
     }
 
     defaultConfig {
+        multiDexEnabled true
         versionCode cdvVersionCode ?: Integer.parseInt("" + privateHelpers.extractIntFromManifest("versionCode"))
         applicationId privateHelpers.extractStringFromManifest("package")
 
@@ -249,6 +250,7 @@ dependencies {
     // SUB-PROJECT DEPENDENCIES START
     debugCompile project(path: "CordovaLib", configuration: "debug")
     releaseCompile project(path: "CordovaLib", configuration: "release")
+    compile "com.facebook.android:facebook-android-sdk:4.8.+"
     // SUB-PROJECT DEPENDENCIES END
 }
 
