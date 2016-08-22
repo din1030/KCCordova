@@ -1,0 +1,17 @@
+[
+	{
+		"status": 0,
+		"ads": [
+			{
+				"adsName": "Leaf Rake1",
+				"adsUrl": "url1",
+				"adsImage": "image1"
+			},
+			{
+				"adsName": "Leaf Rake2",
+				"adsUrl": "url2",
+				"adsImage": "image2"
+			}
+		]
+	}
+]

@@ -155,3 +155,26 @@ $(document).on('pagecreate', '#app-log-in', function() {
 		// return false; // cancel original event to prevent form submitting
 	});
 });
+
+$(document).on('pagecreate', '#home', function() {
+	$.ajax('/api/getAdsHome.json')
+		.done(function(res) {
+			var result = res[0];
+			// caches
+			var ads1 = $('#ads-home .ui-block-a');
+			var ads2 = $('#ads-home .ui-block-b');
+
+			if(result.status) {
+				console.log('yes');
+				console.log(ads1);
+				ads1.find('a').attr('href', result.ads[0].adsUrl);
+				ads2.find('a').attr('href', result.ads[1].adsUrl);
+
+				ads1.find('img').attr('src', result.ads[0].adsImage);
+				ads2.find('img').attr('src', result.ads[1].adsImage);
+
+				$('#ads-home').show();
+			}
+
+		})
+});
