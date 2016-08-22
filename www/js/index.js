@@ -157,14 +157,14 @@ $(document).on('pagecreate', '#app-log-in', function() {
 });
 
 $(document).on('pagecreate', '#home', function() {
-	$.ajax('/api/getAdsHome.json')
+	$.ajax('/KCCordova/api/getAdsHome.json')
 		.done(function(res) {
 			var result = res[0];
 			// caches
 			var ads1 = $('#ads-home .ui-block-a');
 			var ads2 = $('#ads-home .ui-block-b');
 
-			if(result.status) {
+			if (result.status) {
 				console.log('yes');
 				console.log(ads1);
 				ads1.find('a').attr('href', result.ads[0].adsUrl);
