@@ -164,7 +164,7 @@ $(document).on('pagecreate', '#home', function() {
 			var ads1 = $('#ads-home .ui-block-a');
 			var ads2 = $('#ads-home .ui-block-b');
 
-			if (result.status) {
+			if (result.status == 0) {
 				console.log('yes');
 				console.log(ads1);
 				ads1.find('a').attr('href', result.ads[0].adsUrl);
