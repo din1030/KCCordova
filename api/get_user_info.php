@@ -18,12 +18,13 @@ if ($sql->num_rows > 0) {
         } elseif ($r['gender'] == 2) {
             $r['gender'] = '第三性';
         }
+        $output = $r;
         if ($r['type'] == 2) {
             $plan_string = "SELECT * FROM `club_info`,`plan` WHERE `club_info`.`publish_plan`=`plan`.`id` AND `admin_id`=$user_id LIMIT 1";
-            $sql = $mysqli->query($plan_string);
+            $club_sql = $mysqli->query($plan_string);
+            $club = mysqli_fetch_assoc($club_sql);
+            $output = array_merge($output, $club);
         }
-
-        $output = $r;
     }
     echo json_encode(array('status' => true, 'result' => $output));
 } else {

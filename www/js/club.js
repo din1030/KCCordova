@@ -35,7 +35,7 @@ $(document).on('pagebeforeshow', '#club-intro', function() {
 			var club = data.result[0];
 			$('#club_title').text(club.name);
 			$('#club_address, #map_addr').text('地址：' + club.address);
-			$('#club_tel').text('電話：' + club.tel);
+			$('#club_tel').text('電話：' + club.club_tel);
 			$('#opentime').empty();
 			for (var i = 1; i < 6; i++) {
 				var otindex = 'opentime' + i;
