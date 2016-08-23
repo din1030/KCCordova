@@ -1,6 +1,6 @@
 $(document).on('pagebeforecreate', '#club', function() {
 	$.ajax({
-		url: 'http://52.69.53.255/KellyClub/api/get_club_info.php',
+		url: 'http://52.69.53.255/KCCordova/api/get_club_info.php',
 		dataType: 'json'
 	}).success(function(data) {
 		$.each(data, function(idx, obj) {
@@ -29,7 +29,7 @@ $(document).on('pagebeforeshow', '#club-intro', function() {
 	var get_club_id = window.localStorage.getItem('get_club_id');
 	console.log(get_club_id);
 	$.ajax({
-		url: 'http://52.69.53.255/KellyClub/api/get_club_info.php?club_id=' + get_club_id,
+		url: 'http://52.69.53.255/KCCordova/api/get_club_info.php?club_id=' + get_club_id,
 		dataType: 'json'
 	}).success(function(data) {
 		var club = data[0];
@@ -46,7 +46,7 @@ $(document).on('pagebeforeshow', '#club-intro', function() {
 		$('#website-link').attr('href', club.website);
 		$('#add-fav-btn').click(function(event) {
 			$.ajax({
-				url: 'http://52.69.53.255/KellyClub/api/add_fav.php?user_id=' + window.localStorage.getItem('user_id') + '&type=2&item_id=' + get_club_id,
+				url: 'http://52.69.53.255/KCCordova/api/add_fav.php?user_id=' + window.localStorage.getItem('user_id') + '&type=2&item_id=' + get_club_id,
 				dataType: 'json',
 				success: function(result) {
 					alert(result.message);

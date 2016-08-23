@@ -1,6 +1,6 @@
 $(document).on('pagebeforecreate', function() {
 	$.ajax({
-		url: 'http://52.69.53.255/KellyClub/api/get_user_info.php?user_id=' + window.localStorage.getItem('user_id'),
+		url: 'http://52.69.53.255/KCCordova/api/get_user_info.php?user_id=' + window.localStorage.getItem('user_id'),
 		dataType: 'json'
 	}).success(function(data) {
 		if (data.status) {
@@ -17,7 +17,7 @@ $(document).on('pagebeforecreate', '#member-profile, #club-profile, #jobseeker-p
 if (window.localStorage.getItem('auth') == '3') {
 	$(document).on('pagebeforecreate', '#jobseeker-resume, #jobseeker-resume-modify', function() {
 		$.ajax({
-			url: 'http://52.69.53.255/KellyClub/api/get_seeker_info.php?user_id=' + window.localStorage.getItem('user_id'),
+			url: 'http://52.69.53.255/KCCordova/api/get_seeker_info.php?user_id=' + window.localStorage.getItem('user_id'),
 			dataType: 'json'
 		}).success(function(data) {
 			if (data.status) {

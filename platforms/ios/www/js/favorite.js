@@ -1,6 +1,6 @@
 $(document).on('pagebeforecreate', '#favorite', function() {
 	$.ajax({
-		url: 'http://52.69.53.255/KellyClub/api/get_fav.php?user_id=' + window.localStorage.getItem('user_id'),
+		url: 'http://52.69.53.255/KCCordova/api/get_fav.php?user_id=' + window.localStorage.getItem('user_id'),
 		dataType: 'json'
 	}).success(function(data) {
 		if (data.status) {
