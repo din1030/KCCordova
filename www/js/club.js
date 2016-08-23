@@ -107,7 +107,7 @@ $(document).on('pagebeforeshow', '#club-job-info', function() {
 	}).success(function(data) {
 		if (data.status) {
 			var club = data.result[0];
-			$('#interviewer').text(club.name);
+			$('#interviewer').html(club.interviewer);
 			$('#tel').text(club.tel);
 			$('#line').text(club.line);
 			if (typeof(club.offer_content) !== 'undefined') {
