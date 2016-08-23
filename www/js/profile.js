@@ -9,6 +9,10 @@ $(document).on('pagebeforeshow', '#member-profile, #club-profile, #jobseeker-pro
 			$('.birth-input').val(data.result.birth);
 			$('.tel-input').val(data.result.tel);
 			$('.mobile-input').val(data.result.mobile);
+			if (data.result.type == 2) {
+				$('#plan-input').val(data.result.plan_title);
+				$('#plan-during-input').val(data.result.publish_start + '-' + data.result.publish_due);
+			}
 		}
 	});
 });
