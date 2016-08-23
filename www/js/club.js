@@ -3,21 +3,24 @@ $(document).on('pagebeforecreate', '#club', function() {
 		url: 'http://52.69.53.255/KCCordova/api/get_club_info.php',
 		dataType: 'json'
 	}).success(function(data) {
-		$.each(data, function(idx, obj) {
-			var club_li = $('<li></li>').attr('data-icon', 'false').attr('data-admin-id', obj.admin_id)
-				.append('<a href="" data-admin-id="' + obj.admin_id + '" data-ajax="false"><img src="./img/square_img.jpg"><h2>' + obj.name + '</h2><p>' + obj.country + ' ' + obj.area + '｜</p><div class="slogan">' + obj.slogan + '</div><p class="update-time">更新時間 ' + obj.updated + '</p></a>');
-			$(club_li).appendTo($('#club_list'));
-		});
-		$('#club_list').listview('refresh');
-		$('#club_list li').click(function(event) {
-			var admin_id = $(this).jqmData("admin-id");
-			window.localStorage.setItem('get_club_id', admin_id);
-			$.mobile.changePage($('#club-intro'), {
-				reloadPage: true,
-				changeHash: true
+		if (data.status) {
+			var clubs = data.result;
+			$.each(clubs, function(idx, obj) {
+				var club_li = $('<li></li>').attr('data-icon', 'false').attr('data-admin-id', obj.admin_id)
+					.append('<a href="" data-admin-id="' + obj.admin_id + '" data-ajax="false"><img src="./img/square_img.jpg"><h2>' + obj.name + '</h2><p>' + obj.country + ' ' + obj.area + '｜</p><div class="slogan">' + obj.slogan + '</div><p class="update-time">更新時間 ' + obj.updated + '</p></a>');
+				$(club_li).appendTo($('#club_list'));
 			});
+			$('#club_list').listview('refresh');
+			$('#club_list li').click(function(event) {
+				var admin_id = $(this).jqmData("admin-id");
+				window.localStorage.setItem('get_club_id', admin_id);
+				$.mobile.changePage($('#club-intro'), {
+					reloadPage: true,
+					changeHash: true
+				});
 
-		});
+			});
+		}
 	});
 });
 
@@ -130,11 +133,11 @@ $(document).on('pagebeforeshow', '#club-job-info', function() {
 				});
 			});
 		} else {
-			$('#interviewer').text(data.message);
-			$('#tel').text(data.message);
-			$('#line').text(data.message);
-			$('#offer_content').html(data.message);
-			$('#offer_welfare').html(data.message);
+			// $('#interviewer').text(data.message);
+			// $('#tel').text(data.message);
+			// $('#line').text(data.message);
+			// $('#offer_content').html(data.message);
+			// $('#offer_welfare').html(data.message);
 		}
 	});
 });
