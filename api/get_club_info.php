@@ -17,8 +17,8 @@ if (mysqli_num_rows($result) > 0) {
     while ($r = mysqli_fetch_assoc($result)) {
         $output[] = $r;
     }
-    echo json_encode($output);
+    echo json_encode(array('status' => true, 'result' => $output));
 } else {
-    $output[] = array('id' => 0, 'club_name' => '暫無資料！');
+    $output[] = array('status' => false, 'club_name' => '暫無資料！');
     echo json_encode($output);
 }

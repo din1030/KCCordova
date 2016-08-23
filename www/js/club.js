@@ -1,6 +1,6 @@
 $(document).on('pagebeforecreate', '#club', function() {
 	$.ajax({
-		url: 'http://52.69.53.255/KellyClub/api/get_club_info.php',
+		url: 'http://52.69.53.255/KCCordova/api/get_club_info.php',
 		dataType: 'json'
 	}).success(function(data) {
 		$.each(data, function(idx, obj) {
@@ -25,39 +25,41 @@ $(document).on('pagebeforeshow', '#club-intro', function() {
 	var get_club_id = window.localStorage.getItem('get_club_id');
 	console.log(get_club_id);
 	$.ajax({
-		url: 'http://52.69.53.255/KellyClub/api/get_club_info.php?club_id=' + get_club_id,
+		url: 'http://52.69.53.255/KCCordova/api/get_club_info.php?club_id=' + get_club_id,
 		dataType: 'json'
 	}).success(function(data) {
-		var club = data[0];
-		$('#club_title').text(club.name);
-		$('#club_address, #map_addr').text('地址：' + club.address);
-		$('#club_tel').text('電話：' + club.tel);
-		$('#opentime').empty();
-		for (var i = 1; i < 6; i++) {
-			var otindex = 'opentime' + i;
-			if ($.trim(club[otindex].length) > 0) {
-				$('#opentime').append(club[otindex] + '<br>');
-			}
-		}
-		$('#website-link').attr('href', club.website);
-		$('#club-intro .add-fav-btn').click(function(event) {
-			$.ajax({
-				url: 'http://52.69.53.255/KellyClub/api/add_fav.php?user_id=' + window.localStorage.getItem('user_id') + '&type=2&item_id=' + get_club_id,
-				dataType: 'json',
-				success: function(result) {
-					alert(result.message);
+		if (data.status) {
+			var club = data.result[0];
+			$('#club_title').text(club.name);
+			$('#club_address, #map_addr').text('地址：' + club.address);
+			$('#club_tel').text('電話：' + club.tel);
+			$('#opentime').empty();
+			for (var i = 1; i < 6; i++) {
+				var otindex = 'opentime' + i;
+				if ($.trim(club[otindex].length) > 0) {
+					$('#opentime').append(club[otindex] + '<br>');
 				}
-			});
-		});
-		if (club.publish_plan == 0) {
-			$('#brief_block, #map_block').hide();
-		} else {
-			$('#brief_block, #map_block').show();
-			$('#intro_content').text(club.description);
-			if (club.video_url.length > 0) {
-				$('#intro_content').append('<div><iframe id="video-player" type="text/html" width="100%" height="350" src="' + club.video_url + '" frameborder="0"></iframe></div>');
 			}
-			initialize(club.address);
+			$('#website-link').attr('href', club.website);
+			$('#club-intro .add-fav-btn').click(function(event) {
+				$.ajax({
+					url: 'http://52.69.53.255/KCCordova/api/add_fav.php?user_id=' + window.localStorage.getItem('user_id') + '&type=2&item_id=' + get_club_id,
+					dataType: 'json',
+					success: function(result) {
+						alert(result.message);
+					}
+				});
+			});
+			if (club.publish_plan == 0) {
+				$('#brief_block, #map_block').hide();
+			} else {
+				$('#brief_block, #map_block').show();
+				$('#intro_content').text(club.description);
+				if (club.video_url.length > 0) {
+					$('#intro_content').append('<div><iframe id="video-player" type="text/html" width="100%" height="350" src="' + club.video_url + '" frameborder="0"></iframe></div>');
+				}
+				initialize(club.address);
+			}
 		}
 	});
 });
@@ -102,7 +104,7 @@ $(document).on('pagebeforeshow', '#club-job-info', function() {
 	var get_club_id = window.localStorage.getItem('get_club_id');
 	console.log(get_club_id);
 	$.ajax({
-		url: 'http://52.69.53.255/KellyClub/api/get_club_offer.php?club_id=' + get_club_id,
+		url: 'http://52.69.53.255/KCCordova/api/get_club_offer.php?club_id=' + get_club_id,
 		dataType: 'json'
 	}).success(function(data) {
 		if (data.status) {
@@ -120,7 +122,7 @@ $(document).on('pagebeforeshow', '#club-job-info', function() {
 			$('#offer_welfare').html(club.welfare);
 			$('#club-job-info .add-fav-btn').click(function(event) {
 				$.ajax({
-					url: 'http://52.69.53.255/KellyClub/api/add_fav.php?user_id=' + window.localStorage.getItem('user_id') + '&type=2&item_id=' + get_club_id,
+					url: 'http://52.69.53.255/KCCordova/api/add_fav.php?user_id=' + window.localStorage.getItem('user_id') + '&type=2&item_id=' + get_club_id,
 					dataType: 'json',
 					success: function(result) {
 						alert(result.message);
@@ -157,6 +159,26 @@ $(document).on('pagebeforehide', '#club-intro', function() {
 
 // 改變小區塊 navbar 的 class
 $(document).on('pagebeforeshow', "#club-service", function() {
+	var get_club_id = window.localStorage.getItem('get_club_id');
+	console.log(get_club_id);
+	$.ajax({
+		url: 'http://52.69.53.255/KCCordova/api/get_club_consume.php?club_id=' + get_club_id,
+		dataType: 'json'
+	}).success(function(data) {
+		if (data.status) {
+			var club = data.result[0];
+			$('#contact_name').html(club.contact_name);
+			$('#contact_tel').text(club.contact_tel);
+			$('#contact_line').text(club.contact_line);
+
+		} else {
+			$('#interviewer').text(data.message);
+			$('#tel').text(data.message);
+			$('#line').text(data.message);
+			$('#offer_content').html(data.message);
+			$('#offer_welfare').html(data.message);
+		}
+	});
 	$("#first_tabs").tabs({
 		activate: function(event, ui) {
 			ui.newTab.children('a').addClass('active');

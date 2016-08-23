@@ -2,7 +2,7 @@ $(document).on('pagecreate', '#app-reg', function() {
 	$('#app-reg-form').validate({
 		submitHandler: function(form) {
 			$('#app-reg-form').ajaxSubmit({
-				url: 'http://52.69.53.255/KellyClub/api/user_action.php',
+				url: 'http://52.69.53.255/KCCordova/api/user_action.php',
 				data: {
 					action: 'reg',
 					formData: $('#app-reg-form').serialize()
@@ -97,7 +97,7 @@ $(document).on('pagecreate', '#app-log-in', function() {
 	$('#app-log-form').validate({
 		submitHandler: function(form) {
 			$('#app-log-form').ajaxSubmit({
-				url: 'http://52.69.53.255/KellyClub/api/user_action.php',
+				url: 'http://52.69.53.255/KCCordova/api/user_action.php',
 				data: {
 					action: 'log',
 					formData: $('#app-log-form').serialize()

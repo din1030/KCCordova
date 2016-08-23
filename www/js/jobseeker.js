@@ -1,6 +1,6 @@
 $(document).on('pagebeforecreate', '#jobseeker', function() {
 	$.ajax({
-		url: 'http://52.69.53.255/KellyClub/api/get_seeker_info.php',
+		url: 'http://52.69.53.255/KCCordova/api/get_seeker_info.php',
 		dataType: 'json'
 	}).success(function(data) {
 		if (data.status) {
@@ -33,7 +33,7 @@ $(document).on('pagebeforeshow', '#jobseeker-resume', function() {
 	var get_seeker_id = window.localStorage.getItem('get_seeker_id');
 	console.log(get_seeker_id);
 	$.ajax({
-		url: 'http://52.69.53.255/KellyClub/api/get_seeker_info.php?user_id=' + get_seeker_id,
+		url: 'http://52.69.53.255/KCCordova/api/get_seeker_info.php?user_id=' + get_seeker_id,
 		dataType: 'json'
 	}).success(function(data) {
 		if (data.status) {
@@ -122,7 +122,7 @@ $(document).on('pagebeforeshow', '#jobseeker-resume', function() {
 			$('#content-span').html(data.result[0].job_content.replace(/\n/g, "<br>"));
 			$('#add-fav-btn').click(function(event) {
 				$.ajax({
-					url: 'http://52.69.53.255/KellyClub/api/add_fav.php?user_id=' + window.localStorage.getItem('user_id') + '&type=3&item_id=' + get_seeker_id,
+					url: 'http://52.69.53.255/KCCordova/api/add_fav.php?user_id=' + window.localStorage.getItem('user_id') + '&type=3&item_id=' + get_seeker_id,
 					dataType: 'json',
 					success: function(result) {
 						alert(result.message);
