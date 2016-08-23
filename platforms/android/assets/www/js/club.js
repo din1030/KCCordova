@@ -3,25 +3,24 @@ $(document).on('pagebeforecreate', '#club', function() {
 		url: 'http://52.69.53.255/KCCordova/api/get_club_info.php',
 		dataType: 'json'
 	}).success(function(data) {
-		$.each(data, function(idx, obj) {
-			var club_li = $('<li></li>').attr('data-icon', 'false').attr('data-admin-id', obj.admin_id)
-				.append('<a href="" data-admin-id="' + obj.admin_id + '" data-ajax="false"><img src="./img/square_img.jpg"><h2>' + obj.name + '</h2><p>' + obj.country + ' ' + obj.area + '｜</p><div class="slogan">' + obj.slogan + '</div><p class="update-time">更新時間 ' + obj.updated + '</p></a>');
-			$(club_li).appendTo($('#club_list'));
-		});
-		$('#club_list').listview('refresh');
-		$('#club_list li').click(function(event) {
-			var admin_id = $(this).jqmData("admin-id");
-			window.localStorage.setItem('get_club_id', admin_id);
-			$.mobile.changePage($('#club-intro'), {
-				// dataUrl: "#club-intro?id=" + admin_id,
-				// data: {
-				// 	'admin_id': admin_id
-				// },
-				reloadPage: true,
-				changeHash: true
+		if (data.status) {
+			var clubs = data.result;
+			$.each(clubs, function(idx, obj) {
+				var club_li = $('<li></li>').attr('data-icon', 'false').attr('data-admin-id', obj.admin_id)
+					.append('<a href="" data-admin-id="' + obj.admin_id + '" data-ajax="false"><img src="./img/square_img.jpg"><h2>' + obj.name + '</h2><p>' + obj.country + ' ' + obj.area + '｜</p><div class="slogan">' + obj.slogan + '</div><p class="update-time">更新時間 ' + obj.updated + '</p></a>');
+				$(club_li).appendTo($('#club_list'));
 			});
+			$('#club_list').listview('refresh');
+			$('#club_list li').click(function(event) {
+				var admin_id = $(this).jqmData("admin-id");
+				window.localStorage.setItem('get_club_id', admin_id);
+				$.mobile.changePage($('#club-intro'), {
+					reloadPage: true,
+					changeHash: true
+				});
 
-		});
+			});
+		}
 	});
 });
 
@@ -32,36 +31,38 @@ $(document).on('pagebeforeshow', '#club-intro', function() {
 		url: 'http://52.69.53.255/KCCordova/api/get_club_info.php?club_id=' + get_club_id,
 		dataType: 'json'
 	}).success(function(data) {
-		var club = data[0];
-		$('#club_title').text(club.name);
-		$('#club_address, #map_addr').text('地址：' + club.address);
-		$('#club_tel').text('電話：' + club.tel);
-		$('#opentime').empty();
-		for (var i = 1; i < 6; i++) {
-			var otindex = 'opentime' + i;
-			if ($.trim(club[otindex].length) > 0) {
-				$('#opentime').append(club[otindex] + '<br>');
-			}
-		}
-		$('#website-link').attr('href', club.website);
-		$('#add-fav-btn').click(function(event) {
-			$.ajax({
-				url: 'http://52.69.53.255/KCCordova/api/add_fav.php?user_id=' + window.localStorage.getItem('user_id') + '&type=2&item_id=' + get_club_id,
-				dataType: 'json',
-				success: function(result) {
-					alert(result.message);
+		if (data.status) {
+			var club = data.result[0];
+			$('#club_title').text(club.name);
+			$('#club_address, #map_addr').text('地址：' + club.address);
+			$('#club_tel').text('電話：' + club.club_tel);
+			$('#opentime').empty();
+			for (var i = 1; i < 6; i++) {
+				var otindex = 'opentime' + i;
+				if ($.trim(club[otindex].length) > 0) {
+					$('#opentime').append(club[otindex] + '<br>');
 				}
-			});
-		});
-		if (club.publish_plan == 0) {
-			$('#brief_block, #map_block').hide();
-		} else {
-			$('#brief_block, #map_block').show();
-			$('#intro_content').text(club.description);
-			if (club.video_url.length > 0) {
-				$('#intro_content').append('<div><iframe id="video-player" type="text/html" width="100%" height="350" src="' + club.video_url + '" frameborder="0"></iframe></div>');
 			}
-			initialize(club.address);
+			$('#website-link').attr('href', club.website);
+			$('#club-intro .add-fav-btn').click(function(event) {
+				$.ajax({
+					url: 'http://52.69.53.255/KCCordova/api/add_fav.php?user_id=' + window.localStorage.getItem('user_id') + '&type=2&item_id=' + get_club_id,
+					dataType: 'json',
+					success: function(result) {
+						alert(result.message);
+					}
+				});
+			});
+			if (club.publish_plan == 0) {
+				$('#brief_block, #map_block').hide();
+			} else {
+				$('#brief_block, #map_block').show();
+				$('#intro_content').text(club.description);
+				if (club.video_url.length > 0) {
+					$('#intro_content').append('<div><iframe id="video-player" type="text/html" width="100%" height="350" src="' + club.video_url + '" frameborder="0"></iframe></div>');
+				}
+				initialize(club.address);
+			}
 		}
 	});
 });
@@ -100,25 +101,136 @@ function initialize(address) {
 			marker.setTitle(address); //重新設定標記點的title
 		}
 	});
-
 }
 
-$(document).on('pagebeforehide', '#club-intro', function() {
-	window.localStorage.removeItem('get_club_id');
-});
-
-// 改變小區塊 navbar 的 class
-$(document).on('pagebeforeshow', "#club-service", function() {
-	$("#first_tabs").tabs({
-		activate: function(event, ui) {
-			ui.newTab.children('a').addClass('active');
-			ui.oldTab.children('a').removeClass('active');
+$(document).on('pagebeforeshow', '#club-job-info', function() {
+	var get_club_id = window.localStorage.getItem('get_club_id');
+	console.log(get_club_id);
+	$.ajax({
+		url: 'http://52.69.53.255/KCCordova/api/get_club_offer.php?club_id=' + get_club_id,
+		dataType: 'json'
+	}).success(function(data) {
+		if (data.status) {
+			var club = data.result[0];
+			$('#interviewer').html(club.interviewer);
+			$('#tel').text(club.tel);
+			$('#line').text(club.line);
+			if (typeof(club.offer_content) !== 'undefined') {
+				club.offer_content = club.offer_content.replace(/\n/g, "<br>")
+			}
+			if (typeof(club.welfare) !== 'undefined') {
+				club.welfare = club.welfare.replace(/\n/g, "<br>")
+			}
+			$('#offer_content').html(club.offer_content);
+			$('#offer_welfare').html(club.welfare);
+			$('#club-job-info .add-fav-btn').click(function(event) {
+				$.ajax({
+					url: 'http://52.69.53.255/KCCordova/api/add_fav.php?user_id=' + window.localStorage.getItem('user_id') + '&type=2&item_id=' + get_club_id,
+					dataType: 'json',
+					success: function(result) {
+						alert(result.message);
+					}
+				});
+			});
+		} else {
+			// $('#interviewer').text(data.message);
+			// $('#tel').text(data.message);
+			// $('#line').text(data.message);
+			// $('#offer_content').html(data.message);
+			// $('#offer_welfare').html(data.message);
 		}
 	});
-	$("#second_tabs").tabs({
-		activate: function(event, ui) {
-			ui.newTab.children('a').addClass('active');
-			ui.oldTab.children('a').removeClass('active');
+});
+
+$(document).on('pagebeforeshow', "#club-intro, #club-service", function() {
+	// 沒有權限觀看應徵資訊的提示
+	var mask = '<div style="display:block;" class="page_mask text-center" data-position-to="window" data-dismissible="true"><a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a><p>您不是求職者會員<br>店家應徵資訊僅供求職者會員瀏覽</p></div>';
+	if (window.localStorage.getItem('auth') != '0' && window.localStorage.getItem('auth') != '3') {
+		$("a[href='#club-job-info']").click(function(event) {
+			event.preventDefault();
+			$("[data-role='page']").prepend(mask);
+			$(".page_mask .ui-icon-delete").click(function(event) {
+				$(".page_mask").remove();
+			});
+		});
+	}
+});
+
+$(document).on('pagebeforehide', '#club-intro', function() {
+	// window.localStorage.removeItem('get_club_id');
+});
+
+$(document).on('pagebeforeshow', "#club-service", function() {
+	var get_club_id = window.localStorage.getItem('get_club_id');
+	console.log(get_club_id);
+	$.ajax({
+		url: 'http://52.69.53.255/KCCordova/api/get_club_consume.php?club_id=' + get_club_id,
+		dataType: 'json'
+	}).success(function(data) {
+		if (data.status) {
+			var club = data.result[0];
+			$('#contact_name').html(club.contact_name);
+			$('#contact_tel').text(club.contact_tel);
+			$('#contact_line').text(club.contact_line);
+			if (typeof(club.promo_content) !== 'undefined') {
+				club.promo_content = club.promo_content.replace(/\n/g, "<br>");
+			}
+			$('#promo_content').html(club.promo_content);
+			var week = [0, '星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日'];
+			if (club.title1 != null) {
+				var tabs = ['<div data-role="tabs" id="first_tabs" class="service-tabs"><div data-role="navbar"><ul>'];
+				var tab_content = [];
+				$('#consume_first > .ui-bar > h3').text(club.title1);
+				for (var no = 1; no < 6; no++) {
+					var day = 'day1' + no;
+					var content = 'content1' + no;
+					if (club[day] != null) {
+						// var li = $('<li></li>').append('<a href="#' + day + '" data-ajax="false">' + club[day] + '</a>');
+						tabs.push('<li><a href="#' + day + '" data-ajax="false">' + week[club[day]] + '</a></li>')
+							// $('#first_tabs ul').append(li);
+						var tab_div = '<div id="' + day + '" class="ui-body-d ui-content">' + club[content] + '</div>';
+						tab_content.push(tab_div);
+					}
+				}
+				tabs.push('</ul></div>');
+				$.merge(tabs, tab_content);
+				$('#consume_first .tab_wrap_block').html(tabs.join('')).trigger('create');
+				$("#first_tabs").tabs({
+					active: 0,
+					activate: function(event, ui) {
+						ui.newTab.children('a').addClass('active');
+						ui.oldTab.children('a').removeClass('active');
+					}
+				});
+			}
+			if (club.title2 != null) {
+				var tabs = ['<div data-role="tabs" id="second_tabs" class="service-tabs"><div data-role="navbar"><ul>'];
+				var tab_content = [];
+				$('#consume_second > .ui-bar > h3').text(club.title2);
+				for (var no = 1; no < 6; no++) {
+					var day = 'day2' + no;
+					var content = 'content2' + no;
+					if (club[day] != null) {
+						tabs.push('<li><a href="#' + day + '" data-ajax="false">' + week[club[day]] + '</a></li>')
+						var tab_div = '<div id="' + day + '" class="ui-body-d ui-content">' + club[content] + '</div>';
+						tab_content.push(tab_div);
+					}
+				}
+				tabs.push('</ul></div>');
+				$.merge(tabs, tab_content);
+				$('#consume_second .tab_wrap_block').html(tabs.join('')).trigger('create');
+				$("#second_tabs").tabs({
+					active: 0,
+					activate: function(event, ui) {
+						ui.newTab.children('a').addClass('active');
+						ui.oldTab.children('a').removeClass('active');
+					}
+				});
+			}
+			$('[data-role="tabs"] li:first-child a').each(function() {
+				$(this).addClass('active');
+			});
+			$('[data-role="tabs"] a:first').click();
 		}
 	});
 });

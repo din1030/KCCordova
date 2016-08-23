@@ -157,7 +157,7 @@ $(document).on('pagecreate', '#app-log-in', function() {
 });
 
 $(document).on('pagecreate', '#home', function() {
-	$.ajax('/KCCordova/api/getAdsHome.json')
+	$.ajax('http://52.69.53.255/KCCordova/api/getAdsHome.json')
 		.done(function(res) {
 			var result = res[0];
 			// caches

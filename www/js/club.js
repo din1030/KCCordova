@@ -44,7 +44,7 @@ $(document).on('pagebeforeshow', '#club-intro', function() {
 				}
 			}
 			$('#website-link').attr('href', club.website);
-			$(this).find('#club-intro .add-fav-btn').click(function(event) {
+			$('#club-intro .add-fav-btn').click(function(event) {
 				$.ajax({
 					url: 'http://52.69.53.255/KCCordova/api/add_fav.php?user_id=' + window.localStorage.getItem('user_id') + '&type=2&item_id=' + get_club_id,
 					dataType: 'json',
@@ -123,7 +123,7 @@ $(document).on('pagebeforeshow', '#club-job-info', function() {
 			}
 			$('#offer_content').html(club.offer_content);
 			$('#offer_welfare').html(club.welfare);
-			$(this).find('#club-job-info .add-fav-btn').click(function(event) {
+			$('#club-job-info .add-fav-btn').click(function(event) {
 				$.ajax({
 					url: 'http://52.69.53.255/KCCordova/api/add_fav.php?user_id=' + window.localStorage.getItem('user_id') + '&type=2&item_id=' + get_club_id,
 					dataType: 'json',
@@ -160,8 +160,7 @@ $(document).on('pagebeforehide', '#club-intro', function() {
 	// window.localStorage.removeItem('get_club_id');
 });
 
-// 改變小區塊 navbar 的 class
-$(document).on('pagecreate', "#club-service", function() {
+$(document).on('pagebeforeshow', "#club-service", function() {
 	var get_club_id = window.localStorage.getItem('get_club_id');
 	console.log(get_club_id);
 	$.ajax({

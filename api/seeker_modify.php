@@ -56,11 +56,11 @@ if ($type == 'profile') {
         $insert_string .= " VALUES ('$u_id','$seeker_category','$country_id','$area_id','$nickname','$height','$weight','$measurements','$singing','$dancing','$drinking','$marital','$cooperation','$languages','$education','$worktime','$pay','$job_content', NULL)";
 
         if (!$mysqli->query($insert_string)) {
-            $output = array('status' => false, 'message' => '操作錯誤，請稍後再試！', 'sql' => $sql_string);
+            $output = array('status' => false, 'message' => '操作錯誤，請稍後再試！');
             echo json_encode($output);
             exit;
         } else {
-            $output = array('status' => true, 'message' => '資料已修改！', 'sql' => $sql_string);
+            $output = array('status' => true, 'message' => '資料已修改！');
             echo json_encode($output);
 
             return;

@@ -33,17 +33,17 @@
                     <div class="clearfix"></div>
                 </div>
                 <ul id="club_list" class="store_list" data-role="listview" data-inset="true">
-                    <li data-icon="false">
-                        <a href="#club-intro" data-ajax="false">
-                            <img src="./img/square_img.jpg">
-                            <h2>898 Music Talking</h2>
-                            <p>台中市 西屯區｜</p>
-                            <div class="slogan">
-                                店家標語
-                            </div>
-                            <p class="update-time">更新時間 2016/05/20</p>
-                        </a>
-                    </li>
+                    <!--<li data-icon="false">-->
+                    <!--<a href="#club-intro" data-ajax="false">-->
+                    <!--<img src="./img/square_img.jpg">-->
+                    <!--<h2>898 Music Talking</h2>-->
+                    <!--<p>台中市 西屯區｜</p>-->
+                    <!--<div class="slogan">-->
+                    <!--店家標語-->
+                    <!--</div>-->
+                    <!--<p class="update-time">更新時間 2016/05/20</p>-->
+                    <!--</a>-->
+                    <!--</li>-->
                 </ul>
             </div>
         </div>
@@ -110,8 +110,8 @@
                 <div data-role="navbar">
                     <ul class="page-content-nav">
                         <li><a href="#club-intro" data-ajax="false" class="active">店家介紹</a></li>
-                        <li><a href="#club-service">消費服務</a></li>
-                        <li><a href="#club-job-info">應徵資訊</a></li>
+                        <li><a href="#club-service" data-ajax="false">消費服務</a></li>
+                        <li><a href="#club-job-info" data-ajax="false">應徵資訊</a></li>
                     </ul>
                 </div>
             </div>
@@ -153,7 +153,7 @@
                             <a id="website-link" href="#" class="ui-btn ui-btn-inline no-bg-bd" rel="external" data-ajax="false">
                                 <img src="./img/icons/official_site.png" alt="" />
                             </a>
-                            <button id="add-fav-btn" type="button" class="ui-btn ui-btn-inline no-bg-bd">
+                            <button id="add-fav-btn" type="button" class="ui-btn ui-btn-inline no-bg-bd add-fav-btn">
                                 <img src="./img/icons/fav_gray.png" alt="" />
                             </button>
                         </div>
@@ -175,9 +175,6 @@
                         <p id="map_addr">台北市信義區松壽路18號B1</p>
                         <div id="map_canvas" style="width:100%; height:300px;">
                         </div>
-                        <!-- <div style="width:82vw; height:60vw; margin: 0 auto; border:1px solid; text-align:center; background-color:#DDD">
-                            (GOOGLE MAP)
-                        </div> -->
                     </div>
                 </div>
             </div>
@@ -198,8 +195,8 @@
                 <div data-role="navbar">
                     <ul class="page-content-nav">
                         <li><a href="#club-intro" data-ajax="false">店家介紹</a></li>
-                        <li><a href="#club-service" class="active">消費服務</a></li>
-                        <li><a href="#club-job-info">應徵資訊</a></li>
+                        <li><a href="#club-service" data-ajax="false" class="active">消費服務</a></li>
+                        <li><a href="#club-job-info" data-ajax="false">應徵資訊</a></li>
                     </ul>
                 </div>
             </div>
@@ -212,17 +209,17 @@
                     <div class="ui-body ui-body-a">
                         <div class="avatar float-left">
                         </div>
-                        <strong>公關 Larmar</strong>&nbsp;<small>客服專員</small>
-                        <br> 電話：0912-345678
-                        <br> LINE: kabc1230
+                        <strong id="contact_name">（暫無資訊）</strong>&nbsp;<small>客服專員</small>
+                        <br>電話：<span id="contact_tel">（暫無資訊）</span>
+                        <br> LINE: <span id="contact_line">（暫無資訊）</span>
                     </div>
                 </div>
-                <div class="detail_block">
+                <div id="consume_first" class="detail_block">
                     <div class="ui-bar ui-bar-a">
                         <h3>消費介紹（門票）</h3>
                     </div>
                     <div class="ui-body ui-body-a tab_wrap_block">
-                        <div data-role="tabs" id="first_tabs" class="service-tabs">
+                        <!-- <div data-role="tabs" id="first_tabs" class="service-tabs">
                             <div data-role="navbar">
                                 <ul>
                                     <li><a href="#one" data-ajax="false" class="active">星期三</a></li>
@@ -247,15 +244,15 @@
                             <div id="five" class="ui-body-d ui-content">
                                 星期日
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
-                <div class="detail_block">
+                <div id="consume_second" class="detail_block">
                     <div class="ui-bar ui-bar-a">
                         <h3>消費介紹（包廂）</h3>
                     </div>
                     <div class="ui-body ui-body-a tab_wrap_block">
-                        <div data-role="tabs" id="second_tabs" class="service-tabs">
+                        <!-- <div data-role="tabs" id="second_tabs" class="service-tabs">
                             <div data-role="navbar">
                                 <ul>
                                     <li><a href="#one" data-ajax="false" class="active">星期三</a></li>
@@ -280,16 +277,15 @@
                             <div id="five" class="ui-body-d ui-content">
                                 星期日
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <div id="map_block" class="detail_block">
                     <div class="ui-bar ui-bar-a">
                         <h3>優惠活動訊息</h3>
                     </div>
-                    <div class="ui-body ui-body-a">
-                        SHOT 暢飲、免排隊換酒、免排隊入場、壽星生日免費入場
-                        <br>提前一週定位並登記壽星可帶兩位女生免費
+                    <div id="promo_content" class="ui-body ui-body-a">
+                        （暫無資訊）
                     </div>
                 </div>
             </div>
@@ -311,8 +307,8 @@
                 <div data-role="navbar">
                     <ul class="page-content-nav">
                         <li><a href="#club-intro" data-ajax="false">店家介紹</a></li>
-                        <li><a href="#club-service">消費服務</a></li>
-                        <li><a href="#club-job-info" class="active">應徵資訊</a></li>
+                        <li><a href="#club-service" data-ajax="false">消費服務</a></li>
+                        <li><a href="#club-job-info" data-ajax="false" class="active">應徵資訊</a></li>
                     </ul>
                 </div>
             </div>
@@ -326,36 +322,33 @@
                         <div class="avatar float-left">
                             <!-- <img src="./img/seeker-a.jpg" alt="" /> -->
                         </div>
-                        <strong>經理 Larmar </strong>&nbsp;<small>面試人</small>
-                        <br> 電話：0912-345678
-                        <br> LINE: kabc1230
+                        <strong id="interviewer">（暫無資訊）</strong>&nbsp;<small>面試人</small>
+                        <br> 電話：<span id="tel">（暫無資訊）</span>
+                        <br> LINE: <span id="line">（暫無資訊）</span>
                         <div id="action_block" class="text-right">
                             <a href="#msg_to_jobseeker" class="ui-btn ui-btn-inline no-bg-bd msg-btn" data-rel="popup">
                                 <img src="./img/icons/message.png" alt="" />
                             </a>
-                            <button type="button" class="ui-btn ui-btn-inline no-bg-bd">
+                            <button id="add-fav-btn" type="button" class="ui-btn ui-btn-inline no-bg-bd add-fav-btn">
                                 <img src="./img/icons/fav_gray.png" alt="" />
                             </button>
                         </div>
                     </div>
                 </div>
-                <div id="map_block" class="detail_block">
+                <div id="offer_content_block" class="detail_block">
                     <div class="ui-bar ui-bar-a">
                         <h3>上班時段 / 服務內容</h3>
                     </div>
                     <div class="ui-body ui-body-a">
-                        <p>下午2點起～凌晨6點，時段彈性</p>
-                        <p>服務生/櫃檯/兼差/模特兒
-                            <br>服務生/櫃檯/兼差/模特兒
-                        </p>
+                        <div id="offer_content">（暫無資訊）</div>
                     </div>
                 </div>
-                <div id="map_block" class="detail_block">
+                <div id="welfare_block" class="detail_block">
                     <div class="ui-bar ui-bar-a">
                         <h3>公司福利與制度</h3>
                     </div>
                     <div class="ui-body ui-body-a">
-                        <p>專人接待/經濟紓困/福利豐富/員工旅遊/提供宿舍津貼</p>
+                        <div id="offer_welfare">（暫無資訊）</div>
                     </div>
                 </div>
             </div>
@@ -401,8 +394,5 @@
         <script src="./js/main.js"></script>
         <script src="./js/club.js"></script>
     </body>
-
-</html>
-</body>
 
 </html>
