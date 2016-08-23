@@ -170,11 +170,11 @@ $(document).on('pagecreate', '#home', function() {
 				ads1.find('a').attr('href', result.ads[0].adsUrl);
 				ads2.find('a').attr('href', result.ads[1].adsUrl);
 
-				ads1.find('img').attr('src', result.ads[0].adsImage);
-				ads2.find('img').attr('src', result.ads[1].adsImage);
+				ads1.find('img').attr('src', './img/' + result.ads[0].adsImage);
+				ads2.find('img').attr('src', './img/' + result.ads[1].adsImage);
 
 				$('#ads-home').show();
 			}
 
 		})
-});
+});;
