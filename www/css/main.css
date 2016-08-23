@@ -943,3 +943,6 @@ div[id|=admin] .category-block {
 .category-block {
   padding: 0 10px;
 }
+.ui-navbar {
+	z-index: 1001;
+}

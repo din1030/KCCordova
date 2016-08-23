@@ -1,0 +1,191 @@
+[
+	{
+		"_id": 1,
+		"_name": "分類一",
+		"_imgSrc": "./img/service.jpg",
+		"_shop": [
+			{
+				"img": "./img/square_img.jpg",
+				"name": "Divas 美甲美睫概念館11",
+				"shop_id": 1,
+				"shop_location": "台中市 西屯區",
+				"shop_slogan": "slogan1"
+			},
+			{
+				"img": "./img/square_img.jpg",
+				"name": "Divas 美甲美睫概念館12",
+				"shop_id": 2,
+				"shop_location": "台中市 西屯區",
+				"shop_slogan": "slogan2"
+			},
+			{
+				"img": "./img/square_img.jpg",
+				"name": "Divas 美甲美睫概念館13",
+				"shop_id": 3,
+				"shop_location": "台中市 西屯區",
+				"shop_slogan": "slogan3"
+			},
+			{
+				"img": "./img/square_img.jpg",
+				"name": "Divas 美甲美睫概念館14",
+				"shop_id": 4,
+				"shop_location": "台中市 西屯區",
+				"shop_slogan": "slogan4"
+			},
+			{
+				"img": "./img/square_img.jpg",
+				"name": "Divas 美甲美睫概念館15",
+				"shop_id": 5,
+				"shop_location": "台中市 西屯區",
+				"shop_slogan": "slogan5"
+			}
+		]
+	},
+	{
+		"_id": 2,
+		"_name": "分類二",
+		"_imgSrc": "./img/service.jpg",
+		"_shop": [
+			{
+				"img": "./img/square_img.jpg",
+				"name": "Divas 美甲美睫概念館21",
+				"shop_id": 6,
+				"shop_location": "台中市 西屯區",
+				"shop_slogan": "slogan1"
+			},
+			{
+				"img": "./img/square_img.jpg",
+				"name": "Divas 美甲美睫概念館22",
+				"shop_id": 7,
+				"shop_location": "台中市 西屯區",
+				"shop_slogan": "slogan2"
+			},
+			{
+				"img": "./img/square_img.jpg",
+				"name": "Divas 美甲美睫概念館23",
+				"shop_id": 8,
+				"shop_location": "台中市 西屯區",
+				"shop_slogan": "slogan3"
+			},
+			{
+				"img": "./img/square_img.jpg",
+				"name": "Divas 美甲美睫概念館24",
+				"shop_id": 9,
+				"shop_location": "台中市 西屯區",
+				"shop_slogan": "slogan4"
+			},
+			{
+				"img": "./img/square_img.jpg",
+				"name": "Divas 美甲美睫概念館25",
+				"shop_id": 10,
+				"shop_location": "台中市 西屯區",
+				"shop_slogan": "slogan5"
+			}
+		]
+	},
+	{
+		"_id": 3,
+		"_name": "分類三",
+		"_imgSrc": "./img/service.jpg",
+		"_shop": [
+			{
+				"img": "./img/square_img.jpg",
+				"name": "Divas 美甲美睫概念館31",
+				"shop_id": 11,
+				"shop_location": "台中市 西屯區",
+				"shop_slogan": "slogan1"
+			},
+			{
+				"img": "./img/square_img.jpg",
+				"name": "Divas 美甲美睫概念館32",
+				"shop_id": 12,
+				"shop_location": "台中市 西屯區",
+				"shop_slogan": "slogan2"
+			},
+			{
+				"img": "./img/square_img.jpg",
+				"name": "Divas 美甲美睫概念館33",
+				"shop_id": 13,
+				"shop_location": "台中市 西屯區",
+				"shop_slogan": "slogan3"
+			},
+			{
+				"img": "./img/square_img.jpg",
+				"name": "Divas 美甲美睫概念館34",
+				"shop_id": 14,
+				"shop_location": "台中市 西屯區",
+				"shop_slogan": "slogan4"
+			},
+			{
+				"img": "./img/square_img.jpg",
+				"name": "Divas 美甲美睫概念館35",
+				"shop_id": 15,
+				"shop_location": "台中市 西屯區",
+				"shop_slogan": "slogan5"
+			}
+		]
+	},
+	{
+		"_id": 4,
+		"_name": "分類四",
+		"_imgSrc": "./img/service.jpg",
+		"_shop": [
+			{
+				"img": "./img/square_img.jpg",
+				"name": "Divas 美甲美睫概念館41",
+				"shop_id": 16,
+				"shop_location": "台中市 西屯區",
+				"shop_slogan": "slogan1"
+			},
+			{
+				"img": "./img/square_img.jpg",
+				"name": "Divas 美甲美睫概念館42",
+				"shop_id": 17,
+				"shop_location": "台中市 西屯區",
+				"shop_slogan": "slogan2"
+			},
+			{
+				"img": "./img/square_img.jpg",
+				"name": "Divas 美甲美睫概念館43",
+				"shop_id": 18,
+				"shop_location": "台中市 西屯區",
+				"shop_slogan": "slogan3"
+			},
+			{
+				"img": "./img/square_img.jpg",
+				"name": "Divas 美甲美睫概念館44",
+				"shop_id": 19,
+				"shop_location": "台中市 西屯區",
+				"shop_slogan": "slogan4"
+			},
+			{
+				"img": "./img/square_img.jpg",
+				"name": "Divas 美甲美睫概念館45",
+				"shop_id": 20,
+				"shop_location": "台中市 西屯區",
+				"shop_slogan": "slogan5"
+			}
+		]
+	},
+	{
+		"_id": 5,
+		"_name": "分類五",
+		"_imgSrc": "./img/service.jpg",
+		"_shop": [
+			{
+				"img": "./img/square_img.jpg",
+				"name": "Divas 美甲美睫概念館51",
+				"shop_id": 21,
+				"shop_location": "台中市 西屯區",
+				"shop_slogan": "slogan1"
+			},
+			{
+				"img": "./img/square_img.jpg",
+				"name": "Divas 美甲美睫概念館52",
+				"shop_id": 22,
+				"shop_location": "台中市 西屯區",
+				"shop_slogan": "slogan2"
+			}
+		]
+	}
+]
