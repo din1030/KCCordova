@@ -44,7 +44,7 @@ $(document).on('pagebeforeshow', '#club-intro', function() {
 				}
 			}
 			$('#website-link').attr('href', club.website);
-			$('#club-intro .add-fav-btn').click(function(event) {
+			$(this).find('#club-intro .add-fav-btn').click(function(event) {
 				$.ajax({
 					url: 'http://52.69.53.255/KCCordova/api/add_fav.php?user_id=' + window.localStorage.getItem('user_id') + '&type=2&item_id=' + get_club_id,
 					dataType: 'json',
@@ -123,7 +123,7 @@ $(document).on('pagebeforeshow', '#club-job-info', function() {
 			}
 			$('#offer_content').html(club.offer_content);
 			$('#offer_welfare').html(club.welfare);
-			$('#club-job-info .add-fav-btn').click(function(event) {
+			$(this).find('#club-job-info .add-fav-btn').click(function(event) {
 				$.ajax({
 					url: 'http://52.69.53.255/KCCordova/api/add_fav.php?user_id=' + window.localStorage.getItem('user_id') + '&type=2&item_id=' + get_club_id,
 					dataType: 'json',
@@ -197,14 +197,8 @@ $(document).on('pagecreate', "#club-service", function() {
 				$.merge(tabs, tab_content);
 				$('#consume_first .tab_wrap_block').html(tabs.join('')).trigger('create');
 				$("#first_tabs").tabs({
-					// active: 0,
-					create: function(event, ui) {
-						console.log(ui);
-						ui.tab.children('a').addClass('ui-btn-active active');
-						ui.newTab.children('a').addClass('ui-btn-active active');
-					},
+					active: 0,
 					activate: function(event, ui) {
-						console.log(ui);
 						ui.newTab.children('a').addClass('active');
 						ui.oldTab.children('a').removeClass('active');
 					}
