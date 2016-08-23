@@ -2,7 +2,7 @@
 	{
 		"_id": 1,
 		"_name": "分類一",
-		"_imgSrc": "./img/service.jpg",
+		"_imgSrc": "./img/service1.png",
 		"_shop": [
 			{
 				"img": "./img/square_img.jpg",
@@ -44,7 +44,7 @@
 	{
 		"_id": 2,
 		"_name": "分類二",
-		"_imgSrc": "./img/service.jpg",
+		"_imgSrc": "./img/service2.png",
 		"_shop": [
 			{
 				"img": "./img/square_img.jpg",
@@ -86,7 +86,7 @@
 	{
 		"_id": 3,
 		"_name": "分類三",
-		"_imgSrc": "./img/service.jpg",
+		"_imgSrc": "./img/service3.png",
 		"_shop": [
 			{
 				"img": "./img/square_img.jpg",
@@ -128,7 +128,7 @@
 	{
 		"_id": 4,
 		"_name": "分類四",
-		"_imgSrc": "./img/service.jpg",
+		"_imgSrc": "./img/service4.png",
 		"_shop": [
 			{
 				"img": "./img/square_img.jpg",
@@ -170,7 +170,7 @@
 	{
 		"_id": 5,
 		"_name": "分類五",
-		"_imgSrc": "./img/service.jpg",
+		"_imgSrc": "./img/service5.png",
 		"_shop": [
 			{
 				"img": "./img/square_img.jpg",
