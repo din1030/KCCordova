@@ -161,7 +161,7 @@ $(document).on('pagebeforehide', '#club-intro', function() {
 });
 
 // 改變小區塊 navbar 的 class
-$(document).on('pagebeforeshow', "#club-service", function() {
+$(document).on('pagecreate', "#club-service", function() {
 	var get_club_id = window.localStorage.getItem('get_club_id');
 	console.log(get_club_id);
 	$.ajax({
@@ -173,25 +173,71 @@ $(document).on('pagebeforeshow', "#club-service", function() {
 			$('#contact_name').html(club.contact_name);
 			$('#contact_tel').text(club.contact_tel);
 			$('#contact_line').text(club.contact_line);
-
-		} else {
-			$('#interviewer').text(data.message);
-			$('#tel').text(data.message);
-			$('#line').text(data.message);
-			$('#offer_content').html(data.message);
-			$('#offer_welfare').html(data.message);
-		}
-	});
-	$("#first_tabs").tabs({
-		activate: function(event, ui) {
-			ui.newTab.children('a').addClass('active');
-			ui.oldTab.children('a').removeClass('active');
-		}
-	});
-	$("#second_tabs").tabs({
-		activate: function(event, ui) {
-			ui.newTab.children('a').addClass('active');
-			ui.oldTab.children('a').removeClass('active');
+			if (typeof(club.promo_content) !== 'undefined') {
+				club.promo_content = club.promo_content.replace(/\n/g, "<br>");
+			}
+			$('#promo_content').html(club.promo_content);
+			var week = [0, '星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日'];
+			if (club.title1 != null) {
+				var tabs = ['<div data-role="tabs" id="first_tabs" class="service-tabs"><div data-role="navbar"><ul>'];
+				var tab_content = [];
+				$('#consume_first > .ui-bar > h3').text(club.title1);
+				for (var no = 1; no < 6; no++) {
+					var day = 'day1' + no;
+					var content = 'content1' + no;
+					if (club[day] != null) {
+						// var li = $('<li></li>').append('<a href="#' + day + '" data-ajax="false">' + club[day] + '</a>');
+						tabs.push('<li><a href="#' + day + '" data-ajax="false">' + week[club[day]] + '</a></li>')
+							// $('#first_tabs ul').append(li);
+						var tab_div = '<div id="' + day + '" class="ui-body-d ui-content">' + club[content] + '</div>';
+						tab_content.push(tab_div);
+					}
+				}
+				tabs.push('</ul></div>');
+				$.merge(tabs, tab_content);
+				$('#consume_first .tab_wrap_block').html(tabs.join('')).trigger('create');
+				$("#first_tabs").tabs({
+					// active: 0,
+					create: function(event, ui) {
+						console.log(ui);
+						ui.tab.children('a').addClass('ui-btn-active active');
+						ui.newTab.children('a').addClass('ui-btn-active active');
+					},
+					activate: function(event, ui) {
+						console.log(ui);
+						ui.newTab.children('a').addClass('active');
+						ui.oldTab.children('a').removeClass('active');
+					}
+				});
+			}
+			if (club.title2 != null) {
+				var tabs = ['<div data-role="tabs" id="second_tabs" class="service-tabs"><div data-role="navbar"><ul>'];
+				var tab_content = [];
+				$('#consume_second > .ui-bar > h3').text(club.title2);
+				for (var no = 1; no < 6; no++) {
+					var day = 'day2' + no;
+					var content = 'content2' + no;
+					if (club[day] != null) {
+						tabs.push('<li><a href="#' + day + '" data-ajax="false">' + week[club[day]] + '</a></li>')
+						var tab_div = '<div id="' + day + '" class="ui-body-d ui-content">' + club[content] + '</div>';
+						tab_content.push(tab_div);
+					}
+				}
+				tabs.push('</ul></div>');
+				$.merge(tabs, tab_content);
+				$('#consume_second .tab_wrap_block').html(tabs.join('')).trigger('create');
+				$("#second_tabs").tabs({
+					active: 0,
+					activate: function(event, ui) {
+						ui.newTab.children('a').addClass('active');
+						ui.oldTab.children('a').removeClass('active');
+					}
+				});
+			}
+			$('[data-role="tabs"] li:first-child a').each(function() {
+				$(this).addClass('active');
+			});
+			$('[data-role="tabs"] a:first').click();
 		}
 	});
 });
