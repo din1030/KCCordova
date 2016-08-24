@@ -53,9 +53,6 @@ $(document).on('pagebeforeshow', '#lifeservice-list', function () {
 		// print all type
 		$.each(dataJson, function (idx, obj) {
 			list += '<option value="' + obj._id + '">' + obj._name + '</option>';
-			if (obj._id === currentViewId) {
-				classListRefresh(obj._shop);
-			}
 		});
 
 		$('#select-choice-1').html(list);
@@ -176,46 +173,7 @@ $(document).on('pagebeforeshow', '#lifeservice-search', function () {
 					// })
 					// 		.done(function (data) {
 					// 			//return data as single object
-					// 			// searchJson = data;
-					// 			searchJson = {
-					// 				"_shop": [
-					// 					{
-					// 						"img": "./img/square_img.jpg",
-					// 						"name": "Divas 美甲美睫概念館11",
-					// 						"shop_id": 1,
-					// 						"shop_location": "台中市 西屯區",
-					// 						"shop_slogan": "slogan1"
-					// 					},
-					// 					{
-					// 						"img": "./img/square_img.jpg",
-					// 						"name": "Divas 美甲美睫概念館12",
-					// 						"shop_id": 2,
-					// 						"shop_location": "台中市 西屯區",
-					// 						"shop_slogan": "slogan2"
-					// 					},
-					// 					{
-					// 						"img": "./img/square_img.jpg",
-					// 						"name": "Divas 美甲美睫概念館13",
-					// 						"shop_id": 3,
-					// 						"shop_location": "台中市 西屯區",
-					// 						"shop_slogan": "slogan3"
-					// 					},
-					// 					{
-					// 						"img": "./img/square_img.jpg",
-					// 						"name": "Divas 美甲美睫概念館14",
-					// 						"shop_id": 4,
-					// 						"shop_location": "台中市 西屯區",
-					// 						"shop_slogan": "slogan4"
-					// 					},
-					// 					{
-					// 						"img": "./img/square_img.jpg",
-					// 						"name": "Divas 美甲美睫概念館15",
-					// 						"shop_id": 5,
-					// 						"shop_location": "台中市 西屯區",
-					// 						"shop_slogan": "slogan5"
-					// 					}
-					// 				]
-					// 			}
+					// 			searchJson = data;
 					// 			searchState = true;
 					//
 					// 			$.mobile.changePage($('#lifeservice-list'), {
@@ -225,7 +183,7 @@ $(document).on('pagebeforeshow', '#lifeservice-search', function () {
 					// 		})
 
 
-					// dummy DATA
+					// dummy DATA and will remove later
 					searchJson = {
 						"_shop": [
 							{
