@@ -1,0 +1,33 @@
+{
+  "_state": [{
+    "name": "台北市",
+    "value": "state2"
+  }, {
+    "name": "台北1",
+    "value": "state3"
+  }, {
+    "name": "台北2",
+    "value": "state4"
+  }],
+  "_classification": [{
+    "name": "分類1",
+    "id": 1,
+    "value": "class1"
+  }, {
+    "name": "分類2",
+    "id": 2,
+    "value": "class2"
+  }, {
+    "name": "分類3",
+    "id": 3,
+    "value": "class3"
+  }, {
+    "name": "分類4",
+    "id": 4,
+    "value": "class4"
+  }, {
+    "name": "分類5",
+    "id": 5,
+    "value": "class5"
+  }]
+}
