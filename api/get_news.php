@@ -15,7 +15,7 @@ if (!empty($news_id)) {
 $sql = $mysqli->query($sql_string);
 if ($sql->num_rows > 0) {
     while ($r = mysqli_fetch_assoc($sql)) {
-        $r['updated'] = date('Y/m/d', $r['updated']);
+        $r['updated'] = date('Y/m/d', strtotime($r['updated']));
         $output[] = $r;
     }
     echo json_encode(array('status' => true, 'result' => $output));
