@@ -1,0 +1,25 @@
+{
+	"status": 1,
+	"userId": 12321,
+	"msg": [
+		{
+			"_userType": 1,
+			"_msgId": 1,
+			"_msgTitle": "This is msg title",
+			"_msgBody": "This is msg body",
+			"_msgDate": "2016/05/20"
+		}, {
+			"_userType": 1,
+			"_msgId": 2,
+			"_msgTitle": "This is msg title2",
+			"_msgBody": "This is msg body2",
+			"_msgDate": "2016/05/21"
+		}, {
+			"_userType": 1,
+			"_msgId": 3,
+			"_msgTitle": "This is msg title3",
+			"_msgBody": "This is msg body3",
+			"_msgDate": "2016/05/22"
+		}
+	]
+}

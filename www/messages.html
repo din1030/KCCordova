@@ -30,58 +30,63 @@
                     </div>
                     <div class="clearfix"></div>
                 </div>
-                <div id="" class="detail_block msg_block offcial_msg_block">
+                <div class="detail_block msg_block offcial_msg_block" data-official="true">
                     <div class="ui-bar ui-bar-a">
                         <sapn class="float-left">【官方】留言</sapn>
-                        <sapn class="float-right" style="margin-right: 20px;">2016/05/20</sapn>
+                        <sapn class="float-right" id="official_msg_date" style="margin-right: 20px;"></sapn>
                         <button class="ui-btn ui-corner-all ui-btn-inline ui-mini ui-btn-right ui-icon-delete ui-btn-icon-notext del-fav-btn" type="button" name="button" data-shadow="false">x</button>
                     </div>
-                    <a href="#messages-detail">
+                    <a href="" class="msg-open">
                         <div class="ui-body ui-body-a">
                             <!-- <div class="avatar msg-avatar float-left">
                             </div> -->
-                            <strong>下載 APP 送禮券活動</strong>
-                            <br>活動時間：即日起至2016/10/31
-                            <br>推薦求職者就送禮券
-                            <br>
-                            <br>活動辦法
+                            <!--<strong>下載 APP 送禮券活動</strong>-->
+                            <!--<br>活動時間：即日起至2016/10/31-->
+                            <!--<br>推薦求職者就送禮券-->
+                            <!--<br>-->
+                            <!--<br>活動辦法-->
                         </div>
                     </a>
                 </div>
-                <div id="" class="detail_block msg_block">
-                    <div class="ui-bar ui-bar-a">
-                        <sapn class="float-left">【求職者】留言</sapn>
-                        <sapn class="float-right" style="margin-right: 20px;">2016/05/20</sapn>
-                        <button class="ui-btn ui-corner-all ui-btn-inline ui-mini ui-btn-right ui-icon-delete ui-btn-icon-notext del-fav-btn" type="button" name="button" data-shadow="false">x</button>
-                    </div>
-                    <a href="#messages-detail">
-                        <div class="ui-body ui-body-a">
-                            <div class="avatar msg-avatar float-left">
-                            </div>
-                            <strong>翁水蘭</strong>
-                            <br> 藝名：水噹噹
-                            <br> 應徵地區：台中市｜南屯區
-                            <div class="float-right msg-badge"><span class="">4</span></div>
-                        </div>
-                    </a>
-                </div>
-                <div id="" class="detail_block msg_block">
-                    <div class="ui-bar ui-bar-a">
-                        <sapn class="float-left">【店家】留言</sapn>
-                        <sapn class="float-right" style="margin-right: 20px;">2016/05/20</sapn>
-                        <button class="ui-btn ui-corner-all ui-btn-inline ui-mini ui-btn-right ui-icon-delete ui-btn-icon-notext del-fav-btn" type="button" name="button" data-shadow="false">x</button>
-                    </div>
-                    <a href="#messages-detail">
-                        <div class="ui-body ui-body-a">
-                            <div class="avatar msg-avatar float-left">
-                            </div>
-                            <strong>LOBBY</strong>
-                            <br> 台中市｜南屯區
-                            <br> 公關 Larmar 客服專員
-                            <div class="float-right msg-badge"><span class="">1</span></div>
-                        </div>
-                    </a>
-                </div>
+	              <div id="personal_msg"></div>
+
+                <!--<div id="" class="detail_block msg_block seeker_msg">-->
+                    <!--<div class="ui-bar ui-bar-a">-->
+                        <!--<sapn class="float-left">【求職者】留言</sapn>-->
+                        <!--<sapn class="float-right" style="margin-right: 20px;">2016/05/20</sapn>-->
+                        <!--<button class="ui-btn ui-corner-all ui-btn-inline ui-mini ui-btn-right ui-icon-delete ui-btn-icon-notext del-fav-btn" type="button" name="button" data-shadow="false">x</button>-->
+                    <!--</div>-->
+                    <!--<a href="#messages-detail">-->
+                        <!--<div class="ui-body ui-body-a">-->
+                            <!--<div class="avatar msg-avatar float-left">-->
+	                            <!--<img src="img/seeker-a.jpg" style="width: 70px; height: 70px; border-radius: 50%;" alt="">-->
+                            <!--</div>-->
+                            <!--<strong>翁水蘭</strong>-->
+                            <!--<br> 藝名：水噹噹-->
+                            <!--<br> 應徵地區：台中市｜南屯區-->
+                            <!--<div class="float-right msg-badge"><span class="">4</span></div>-->
+                        <!--</div>-->
+                    <!--</a>-->
+                <!--</div>-->
+
+                <!--<div id="" class="detail_block msg_block shop_msg">-->
+                    <!--<div class="ui-bar ui-bar-a">-->
+                        <!--<sapn class="float-left">【店家】留言</sapn>-->
+                        <!--<sapn class="float-right" style="margin-right: 20px;">2016/05/20</sapn>-->
+                        <!--<button class="ui-btn ui-corner-all ui-btn-inline ui-mini ui-btn-right ui-icon-delete ui-btn-icon-notext del-fav-btn" type="button" name="button" data-shadow="false">x</button>-->
+                    <!--</div>-->
+                    <!--<a href="#messages-detail">-->
+                        <!--<div class="ui-body ui-body-a">-->
+                            <!--<div class="avatar msg-avatar float-left">-->
+	                            <!--<img src="img/seeker-a.jpg" style="width: 70px; height: 70px; border-radius: 50%;" alt="">-->
+                            <!--</div>-->
+                            <!--<strong>LOBBY</strong>-->
+                            <!--<br> 台中市｜南屯區-->
+                            <!--<br> 公關 Larmar 客服專員-->
+                            <!--<div class="float-right msg-badge"><span class="">1</span></div>-->
+                        <!--</div>-->
+                    <!--</a>-->
+                <!--</div>-->
                 <!-- <a href="#messages-detail">
                     <div id="" class="detail_block msg_block">
                         <div class="ui-bar ui-bar-a">
@@ -120,38 +125,39 @@
                     </div>
                     <div class="clearfix"></div>
                 </div>
-                <div id="conversation_block" class="detail_block">
-                    <div class="ui-bar ui-bar-a">
-                        <h3>【求職者】留言</h3>
-                    </div>
-                    <div class="ui-body ui-body-a">
-                        <div class="msg_wrapper">
-                            <div class="msg_title">
-                                <span class="msg_sender">求職者</span>
-                                <span class="msg_time float-right">2016/05/20 15:20</span>
-                            </div>
-                            <div class="msg_body text-justify">
-                                您好，我是水噹噹，想知道你們的薪資待遇如何.....
-                            </div>
-                        </div>
-                        <div class="msg_wrapper">
-                            <div class="msg_title">
-                                <span class="msg_me">我</span>
-                                <span class="msg_time float-right">2016/05/20 18:27</span>
-                            </div>
-                            <div class="msg_body text-justify">
-                                您好，關於薪資.....
-                            </div>
-                        </div>
-                        <div id="reply_lock">
-                            <h3>留言</h3>
-                            <form class="" action="index.html" method="post">
-                                <textarea name="msg_reply" rows="4" cols="40"></textarea>
-                                <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn send-btn">送出</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+	            <div id="msg-holder"></div>
+                <!--<div class="detail_block conversation_block">-->
+                    <!--<div class="ui-bar ui-bar-a">-->
+                        <!--<h3>【求職者】留言</h3>-->
+                    <!--</div>-->
+                    <!--<div class="ui-body ui-body-a">-->
+                        <!--<div class="msg_wrapper">-->
+                            <!--<div class="msg_title">-->
+                                <!--<span class="msg_sender">求職者</span>-->
+                                <!--<span class="msg_time float-right">2016/05/20 15:20</span>-->
+                            <!--</div>-->
+                            <!--<div class="msg_body text-justify">-->
+                                <!--您好，我是水噹噹，想知道你們的薪資待遇如何.....-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="msg_wrapper">-->
+                            <!--<div class="msg_title">-->
+                                <!--<span class="msg_me">我</span>-->
+                                <!--<span class="msg_time float-right">2016/05/20 18:27</span>-->
+                            <!--</div>-->
+                            <!--<div class="msg_body text-justify">-->
+                                <!--您好，關於薪資.....-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div id="reply_lock">-->
+                            <!--<h3>留言</h3>-->
+                            <!--<form class="" action="index.html" method="post">-->
+                                <!--<textarea name="msg_reply" rows="4" cols="40"></textarea>-->
+                                <!--<button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn send-btn">送出</button>-->
+                            <!--</form>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
             </div>
         </div>
 
@@ -193,6 +199,7 @@
         <script src="./js/flex-slider/jquery.flexslider-min.js"></script>
 
         <script src="js/main.js"></script>
+        <script src="js/messages.js"></script>
     </body>
 
 </html>
