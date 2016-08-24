@@ -16,6 +16,11 @@
         "cordova-plugin-dialogs": {
             "PACKAGE_NAME": "com.supercordova.hello"
         },
+        "cordova-plugin-facebook4": {
+            "APP_ID": "172865999803545",
+            "APP_NAME": "KellyClub",
+            "PACKAGE_NAME": "com.supercordova.hello"
+        },
         "cordova-plugin-inappbrowser": {
             "PACKAGE_NAME": "com.supercordova.hello"
         },
@@ -26,11 +31,6 @@
             "PACKAGE_NAME": "com.supercordova.hello"
         },
         "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "com.supercordova.hello"
-        },
-        "cordova-plugin-facebook4": {
-            "APP_ID": "172865999803545",
-            "APP_NAME": "KellyClub",
             "PACKAGE_NAME": "com.supercordova.hello"
         }
     },

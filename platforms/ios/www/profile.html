@@ -3,6 +3,7 @@
 
     <head>
         <title>Kelly Club 全省八大行業資訊專用APP平台</title>
+    <meta charset='UTF-8'>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="./js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.css" />
         <link rel="stylesheet" href="./css/font-awesome.css" />
@@ -86,27 +87,29 @@
                 <div class="clearfix"></div>
                 <hr>
                 <div class="">
-                    <div class="ui-field-contain ui-disabled">
-                        <label class="item_title" for="textinput-1">身分</label>
-                        <input type="text" name="textinput-1" class="ui-disabled" id="textinput-1" value="一般會員">
-                    </div>
-                    <div class="ui-field-contain ui-disabled">
-                        <label class="item_title" for="textinput-2">性別</label>
-                        <input type="text" name="gender-input" class="ui-disabled gender-input" id="gender-input" value="女">
-                    </div>
-                    <div class="ui-field-contain ui-disabled">
-                        <label class="item_title" for="textinput-3 ui-disabled">生日</label>
-                        <input type="text" name="birth-input" class="ui-disabled birth-input" id="birth-input" value="1999-12-31">
-                    </div>
-                    <div class="ui-field-contain">
-                        <label class="item_title" for="textinput-4">電話</label>
-                        <input type="tel" name="tel-input" class="tel-input" id="tel-input" value="04-2221323">
-                    </div>
-                    <div class="ui-field-contain">
-                        <label class="item_title" for="textinput-5">手機</label>
-                        <input type="tel" name="mobile-input" class="mobile-input" id="mobile-input" value="0912345678">
-                    </div>
-                    <button id="member-submit-btn" class="ui-shadow ui-btn ui-corner-all" type="submit">送出</button>
+                    <form method="post">
+                        <div class="ui-field-contain ui-disabled">
+                            <label class="item_title" for="textinput-1">身分</label>
+                            <input type="text" name="textinput-1" class="ui-disabled" id="textinput-1" value="一般會員">
+                        </div>
+                        <div class="ui-field-contain ui-disabled">
+                            <label class="item_title" for="textinput-2">性別</label>
+                            <input type="text" name="gender-input" class="ui-disabled gender-input" id="gender-input" value="女">
+                        </div>
+                        <div class="ui-field-contain ui-disabled">
+                            <label class="item_title" for="textinput-3 ui-disabled">生日</label>
+                            <input type="text" name="birth-input" class="ui-disabled birth-input" id="birth-input" value="1999-12-31">
+                        </div>
+                        <div class="ui-field-contain">
+                            <label class="item_title" for="tel-input">電話</label>
+                            <input type="tel" name="tel-input" class="tel-input" id="tel-input" value="04-2221323">
+                        </div>
+                        <div class="ui-field-contain">
+                            <label class="item_title" for="mobile-input">手機</label>
+                            <input type="tel" name="mobile-input" class="mobile-input" id="mobile-input" value="0912345678">
+                        </div>
+                        <button class="ui-shadow ui-btn ui-corner-all profile-submit-btn" data-backpage="#jobseeker-profile" type="button">送出</button>
+                    </form>
                 </div>
             </div>
             <!-- /main -->
@@ -175,6 +178,9 @@
                         <div id="menu-btn" class="header-btn header-link left-link"></div>
                     </a>
                     <span class="page-title">我的檔案</span>
+                    <a href="#jobseeker-profile" class="ui-link" data-ajax="false">
+                        <div class="header-btn header-link right-link" style="width:auto">返回</div>
+                    </a>
                 </div>
                 <div data-role="navbar">
                     <ul class="page-content-nav">
@@ -199,27 +205,29 @@
                 <div class="clearfix"></div>
                 <hr>
                 <div class="">
-                    <div class="ui-field-contain ui-disabled">
-                        <label class="item_title" for="textinput-1">身分</label>
-                        <input type="text" name="textinput-1" class="ui-disabled" id="textinput-1" value="求職者">
-                    </div>
-                    <div class="ui-field-contain ui-disabled">
-                        <label class="item_title" for="gender-input">性別</label>
-                        <input type="text" name="gender-input" class="ui-disabled gender-input" id="gender-input" value="女">
-                    </div>
-                    <div class="ui-field-contain ui-disabled">
-                        <label class="item_title" for="birth-input">生日</label>
-                        <input type="date" name="birth-input" class="ui-disabled birth-input" id="birth-input" value="1985-11-12">
-                    </div>
-                    <div class="ui-field-contain">
-                        <label class="item_title" for="tel-input">電話</label>
-                        <input type="tel" name="tel-input" class="tel-input" id="tel-input" value="02-77777777">
-                    </div>
-                    <div class="ui-field-contain">
-                        <label class="item_title" for="mobile-input">手機</label>
-                        <input type="tel" name="mobile-input" class="mobile-input" id="mobile-input" value="0912345678">
-                    </div>
-                    <button id="member-submit-btn" class="ui-shadow ui-btn ui-corner-all" type="submit">送出</button>
+                    <form cmethod="post">
+                        <div class="ui-field-contain ui-disabled">
+                            <label class="item_title" for="textinput-1">身分</label>
+                            <input type="text" name="textinput-1" class="ui-disabled" id="textinput-1" value="求職者">
+                        </div>
+                        <div class="ui-field-contain ui-disabled">
+                            <label class="item_title" for="gender-input">性別</label>
+                            <input type="text" name="gender-input" class="ui-disabled gender-input" id="gender-input" value="女">
+                        </div>
+                        <div class="ui-field-contain ui-disabled">
+                            <label class="item_title" for="birth-input">生日</label>
+                            <input type="date" name="birth-input" class="ui-disabled birth-input" id="birth-input" value="1985-11-12">
+                        </div>
+                        <div class="ui-field-contain">
+                            <label class="item_title" for="tel-input">電話</label>
+                            <input type="tel" name="tel-input" class="tel-input" id="tel-input" value="02-77777777">
+                        </div>
+                        <div class="ui-field-contain">
+                            <label class="item_title" for="mobile-input">手機</label>
+                            <input type="tel" name="mobile-input" class="mobile-input" id="mobile-input" value="0912345678">
+                        </div>
+                        <button class="ui-shadow ui-btn ui-corner-all profile-submit-btn" data-backpage="#jobseeker-profile" type="button">送出</button>
+                    </form>
                 </div>
             </div>
             <!-- /main -->
@@ -283,6 +291,9 @@
                         <div id="menu-btn" class="header-btn header-link left-link"></div>
                     </a>
                     <span class="page-title">我的檔案</span>
+                    <a href="#jobseeker-resume" class="ui-link" data-ajax="false">
+                        <div class="header-btn header-link right-link" style="width:auto">返回</div>
+                    </a>
                 </div>
                 <div data-role="navbar">
                     <ul class="page-content-nav">
@@ -293,143 +304,154 @@
             </div>
             <!-- /header -->
             <div data-role="main" class="ui-content profile-main" id="jobseeker-resume-modify-main">
-                <div class="">
-                    <div class="ui-field-contain">
-                        <label class="item_title" for="nickname-input">藝名</label>
-                        <input type="text" name="nickname-input" class="nickname-input" id="nickname-input" value="水噹噹">
-                    </div>
-                    <div class="ui-field-contain">
-                        <label class="item_title" for="textinput-1">應徵地區</label>
-                        <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
-                            <select name="seeker_country" id="seeker_country">
-                                <option value="1">台灣</option>
-                                <option value="2">中國</option>
-                                <option value="3">日本</option>
-                            </select>
-                            <select name="seeker_area" id="seeker_area">
-                                <option value="1">台北</option>
-                                <option value="2">台南</option>
-                                <option value="3">高雄</option>
-                            </select>
-                        </fieldset>
-                    </div>
-                    <!-- <div class="ui-field-contain">
+                <form id="jobseeker-resume-modify-form" method="post">
+                    <div class="">
+                        <div class="ui-field-contain">
+                            <label class="item_title" for="nickname-input">藝名</label>
+                            <input type="text" name="nickname-input" class="nickname-input" id="nickname-input" value="">
+                        </div>
+                        <div class="ui-field-contain">
+                            <label class="item_title" for="textinput-1">應徵類別</label>
+                            <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                                <select name="seeker_category" id="seeker_category">
+                                    <option value="1">種類一</option>
+                                    <option value="2">種類二</option>
+                                    <option value="3">種類三</option>
+                                </select>
+                            </fieldset>
+                        </div>
+                        <div class="ui-field-contain">
+                            <label class="item_title" for="textinput-1">應徵地區</label>
+                            <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                                <select name="seeker_country" id="seeker_country">
+                                    <option value="1">台灣</option>
+                                    <option value="2">中國</option>
+                                    <option value="3">日本</option>
+                                </select>
+                                <select name="seeker_area" id="seeker_area">
+                                    <option value="1">台北</option>
+                                    <option value="2">台南</option>
+                                    <option value="3">高雄</option>
+                                </select>
+                            </fieldset>
+                        </div>
+                        <!-- <div class="ui-field-contain">
                         <label class="item_title" for="birth-input">生日</label>
                         <input type="date" name="birth-input" class="" id="birth-input" value="1989-01-10">
-                    </div> -->
-                    <div class="ui-field-contain">
-                        <label class="item_title" for="mobile-input">手機</label>
-                        <input type="tel" name="mobile-input" class="" id="mobile-input" value="0988-166691">
+                        </div> -->
+                        <!-- <div class="ui-field-contain">
+                            <label class="item_title" for="mobile-input">手機</label>
+                            <input type="tel" name="mobile-input" class="mobile-input" id="mobile-input" value="0988-166691">
+                        </div> -->
+                        <div class="ui-field-contain">
+                            <label class="item_title" for="height-input">身高</label>
+                            <input type="number" name="height-input" class="" id="height-input" value="">
+                            <span>公分</span>
+                        </div>
+                        <div class="ui-field-contain">
+                            <label class="item_title" for="weight-input">體重</label>
+                            <input type="number" name="weight-input" class="" id="weight-input" value="">
+                            <span>公斤</span>
+                        </div>
                     </div>
                     <div class="ui-field-contain">
-                        <label class="item_title" for="height-input">身高</label>
-                        <input type="number" name="height-input" class="" id="height-input" value="165">
-                        <span>公分</span>
+                        <label class="item_title" for="measurements-input">三圍</label>
+                        <input type="text" name="measurements-input" class="" id="measurements-input" value="" placeholder="例：32D、24、35">
                     </div>
                     <div class="ui-field-contain">
-                        <label class="item_title" for="weight-input">體重</label>
-                        <input type="number" name="weight-input" class="" id="weight-input" value="51">
-                        <span>公斤</span>
+                        <label class="item_title" for="sing">歌唱能力</label>
+                        <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                            <input type="radio" name="singing" id="singinga" value="great">
+                            <label for="singinga">很棒</label>
+                            <input type="radio" name="singing" id="singingb" value="soso">
+                            <label for="singingb">普通</label>
+                            <input type="radio" name="singing" id="singingc" value="bad">
+                            <label for="singingc">不佳</label>
+                        </fieldset>
                     </div>
-                </div>
-                <div class="ui-field-contain">
-                    <label class="item_title" for="measurements-input">三圍</label>
-                    <input type="text" name="measurements-input" class="" id="measurements-input" value="32D、24、35" placeholder="例：32D、24、35">
-                </div>
-                <div class="ui-field-contain">
-                    <label class="item_title" for="sing">歌唱能力</label>
-                    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
-                        <input type="radio" name="singing" id="singinga" value="great">
-                        <label for="singinga">很棒</label>
-                        <input type="radio" name="singing" id="singingb" value="soso">
-                        <label for="singingb">普通</label>
-                        <input type="radio" name="singing" id="singingc" value="bad">
-                        <label for="singingc">不佳</label>
-                    </fieldset>
-                </div>
-                <div class="ui-field-contain">
-                    <label class="item_title" for="textinput-1">舞蹈能力</label>
-                    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
-                        <input type="radio" name="dancing" id="dancinga" value="great">
-                        <label for="dancinga">很棒</label>
-                        <input type="radio" name="dancing" id="dancingb" value="soso">
-                        <label for="dancingb">普通</label>
-                        <input type="radio" name="dancing" id="dancingc" value="bad">
-                        <label for="dancingc">不佳</label>
-                    </fieldset>
-                </div>
-                <div class="ui-field-contain">
-                    <label class="item_title" for="textinput-1">酒量</label>
-                    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
-                        <input type="radio" name="drinking" id="drinkinga" value="great">
-                        <label for="drinkinga">很棒</label>
-                        <input type="radio" name="drinking" id="drinkingb" value="soso">
-                        <label for="drinkingb">普通</label>
-                        <input type="radio" name="drinking" id="drinkingc" value="bad">
-                        <label for="drinkingc">不佳</label>
-                    </fieldset>
-                </div>
-                <div class="ui-field-contain">
-                    <label class="item_title" for="textinput-1">配合度</label>
-                    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
-                        <input type="radio" name="cooperation" id="cooperationa" value="great">
-                        <label for="cooperationa">很棒</label>
-                        <input type="radio" name="cooperation" id="cooperationb" value="soso">
-                        <label for="cooperationb">普通</label>
-                        <input type="radio" name="cooperation" id="cooperationc" value="bad">
-                        <label for="cooperationc">不佳</label>
-                    </fieldset>
-                </div>
-                <div class="ui-field-contain">
-                    <label class="item_title" for="lang-input">語言能力</label>
-                    <input type="text" name="lang-input" class="" id="lang-input" placeholder="例：國語、台語" value="國語、台語">
-                </div>
-                <div class="ui-field-contain">
-                    <label class="item_title" for="marital">婚姻狀況</label>
-                    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
-                        <input type="radio" name="marital" id="maritala" value="married">
-                        <label for="maritala">已婚</label>
-                        <input type="radio" name="marital" id="maritalb" value="single">
-                        <label for="maritalb">未婚</label>
-                        <input type="radio" name="marital" id="maritalc" value="divorced">
-                        <label for="maritalc">離異</label>
-                    </fieldset>
-                </div>
-                <div class="ui-field-contain">
-                    <label class="item_title" for="education">最高學歷</label>
-                    <input type="text" name="education" class="" id="education" value="高中">
-                </div>
-                <div class="ui-field-contain">
-                    <label class="item_title" for="worktime">可上班時段</label>
-                    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
-                        <input type="radio" name="worktime" id="worktimea" value="afternoon">
-                        <label for="worktimea">午場</label>
-                        <input type="radio" name="worktime" id="worktimeb" value="night">
-                        <label for="worktimeb">晚場</label>
-                        <input type="radio" name="worktime" id="worktimec" value="PT">
-                        <label for="worktimec">PT</label>
-                    </fieldset>
-                </div>
-                <div class="ui-field-contain">
-                    <label class="item_title" for="pay-input">希望待遇</label>
-                    <fieldset data-role="controlgroup" data-type="horizontal">
-                        <input type="text" name="pay-input" class="" id="pay-input" value="">
-                        <input type="checkbox" name="msg_talk" id="msg_talk">
-                        <label for="msg_talk">站內訊息談</label>
-                    </fieldset>
-                </div>
-                <div>
-                    <label class="item_title" for="job_content">應徵內容</label>
-                    <textarea wrap="virtual" id="job_content" name="job_content" rows="4" cols="40">應徵內容：酒店小姐、助理。&#13;&#10;應徵尺度：可陪酒、聊天等。&#13;&#10;希望條件：不出場 站內詳談。
-                    </textarea>
-                </div>
-                <br><span class="item_title">上傳圖片：</span>
-                <input type="file" data-clear-btn="true" name="file-2" id="file-2" value="">
-                <input type="file" data-clear-btn="true" name="file-2" id="file-2" value="">
-                <input type="file" data-clear-btn="true" name="file-2" id="file-2" value="">
-                <input type="file" data-clear-btn="true" name="file-2" id="file-2" value="">
-                <input type="file" data-clear-btn="true" name="file-2" id="file-2" value="">
-                <button id="member-submit-btn" class="ui-shadow ui-btn ui-corner-all" type="submit">送出</button>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="textinput-1">舞蹈能力</label>
+                        <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                            <input type="radio" name="dancing" id="dancinga" value="great">
+                            <label for="dancinga">很棒</label>
+                            <input type="radio" name="dancing" id="dancingb" value="soso">
+                            <label for="dancingb">普通</label>
+                            <input type="radio" name="dancing" id="dancingc" value="bad">
+                            <label for="dancingc">不佳</label>
+                        </fieldset>
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="textinput-1">酒量</label>
+                        <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                            <input type="radio" name="drinking" id="drinkinga" value="great">
+                            <label for="drinkinga">很棒</label>
+                            <input type="radio" name="drinking" id="drinkingb" value="soso">
+                            <label for="drinkingb">普通</label>
+                            <input type="radio" name="drinking" id="drinkingc" value="bad">
+                            <label for="drinkingc">不佳</label>
+                        </fieldset>
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="textinput-1">配合度</label>
+                        <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                            <input type="radio" name="cooperation" id="cooperationa" value="great">
+                            <label for="cooperationa">很棒</label>
+                            <input type="radio" name="cooperation" id="cooperationb" value="soso">
+                            <label for="cooperationb">普通</label>
+                            <input type="radio" name="cooperation" id="cooperationc" value="bad">
+                            <label for="cooperationc">不佳</label>
+                        </fieldset>
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="lang-input">語言能力</label>
+                        <input type="text" name="lang-input" class="" id="lang-input" placeholder="例：國語、台語" value="">
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="marital">婚姻狀況</label>
+                        <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                            <input type="radio" name="marital" id="maritala" value="married">
+                            <label for="maritala">已婚</label>
+                            <input type="radio" name="marital" id="maritalb" value="single">
+                            <label for="maritalb">未婚</label>
+                            <input type="radio" name="marital" id="maritalc" value="divorced">
+                            <label for="maritalc">離異</label>
+                        </fieldset>
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="education">最高學歷</label>
+                        <input type="text" name="education" class="" id="education-input" value="">
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="worktime">可上班時段</label>
+                        <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                            <input type="radio" name="worktime" id="worktimea" value="afternoon">
+                            <label for="worktimea">午場</label>
+                            <input type="radio" name="worktime" id="worktimeb" value="night">
+                            <label for="worktimeb">晚場</label>
+                            <input type="radio" name="worktime" id="worktimec" value="PT">
+                            <label for="worktimec">PT</label>
+                        </fieldset>
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="pay-input">希望待遇</label>
+                        <fieldset data-role="controlgroup" data-type="horizontal">
+                            <input type="text" name="pay-input" class="" id="pay-input" value="">
+                            <input type="checkbox" name="msg_talk" id="msg_talk">
+                            <label for="msg_talk">站內訊息談</label>
+                        </fieldset>
+                    </div>
+                    <div>
+                        <label class="item_title" for="job_content">應徵內容</label>
+                        <textarea wrap="virtual" id="job_content" name="job_content" rows="4" cols="40"></textarea>
+                    </div>
+                    <br><span class="item_title">上傳圖片：</span>
+                    <input type="file" data-clear-btn="true" name="file-2" id="file-2" value="">
+                    <input type="file" data-clear-btn="true" name="file-2" id="file-2" value="">
+                    <input type="file" data-clear-btn="true" name="file-2" id="file-2" value="">
+                    <input type="file" data-clear-btn="true" name="file-2" id="file-2" value="">
+                    <input type="file" data-clear-btn="true" name="file-2" id="file-2" value="">
+                    <button id="seeker-resume-send-btn" class="ui-shadow ui-btn ui-corner-all" type="button">送出</button>
+                </form>
             </div>
         </div>
         <!-- /main -->
@@ -475,24 +497,24 @@
                         <input type="text" name="textinput-2" class="ui-disabled" id="textinput-2" value="男">
                     </div>
                     <div class="ui-field-contain ui-disabled">
-                        <label class="item_title" for="textinput-3">生日</label>
-                        <input type="text" name="textinput-3" class="ui-disabled birth-input" id="birth-input" value="1999/12/31">
+                        <label class="item_title" for="birth-input">生日</label>
+                        <input type="text" name="birth-input" class="ui-disabled birth-input" id="birth-input" value="1999-12-31">
                     </div>
                     <div class="ui-field-contain ui-disabled">
-                        <label class="item_title" for="textinput-4">手機</label>
-                        <input type="tel" name="textinput-4" class="ui-disabled mobile-input" id="mobile-input" value="0912345678">
+                        <label class="item_title" for="mobile-input">手機</label>
+                        <input type="tel" name="mobile-input" class="ui-disabled mobile-input" id="mobile-input" value="0912345678">
                     </div>
                     <div class="ui-field-contain ui-disabled">
-                        <label class="item_title" for="textinput-5">電話</label>
-                        <input type="tel" name="textinput-5" class="ui-disabled" id="textinput-5" value="02-77777777">
+                        <label class="item_title" for="tel-input">電話</label>
+                        <input type="tel" name="tel-input" class="ui-disabled tel-input" id="tel-input" value="02-77777777">
                     </div>
                     <div class="ui-field-contain ui-disabled">
-                        <label class="item_title" for="textinput-6">刊登時間</label>
-                        <input type="text" name="textinput-6" class="ui-disabled" id="textinput-6" value="2016-06/30-2017/06/30">
+                        <label class="item_title" for="plan-during-input">刊登時間</label>
+                        <input type="text" name="plan-during-input" class="ui-disabled" id="plan-during-input" value="2016-06/30-2017/06/30">
                     </div>
                     <div class="ui-field-contain ui-disabled">
-                        <label class="item_title" for="textinput-7">刊登類型</label>
-                        <input type="text" name="textinput-7" class="ui-disabled" id="textinput-7" value="A方案一年">
+                        <label class="item_title" for="plan-input">刊登類型</label>
+                        <input type="text" name="plan-input" class="ui-disabled" id="plan-input" value="A方案一年">
                     </div>
                     <a href="./plan.html" class="ui-btn ui-corner-all" data-ajax="false" style="color:white;background-color:#AE53C9;">刊登續約</a>
                     <a href="#club-profile-modify" class="ui-btn ui-corner-all">編輯資料</a>
@@ -510,6 +532,9 @@
                         <div id="menu-btn" class="header-btn header-link left-link"></div>
                     </a>
                     <span class="page-title">我的檔案</span>
+                    <a href="#club-profile" class="ui-link" data-ajax="false">
+                        <div class="header-btn header-link right-link" style="width:auto">返回</div>
+                    </a>
                 </div>
                 <div data-role="navbar">
                     <ul class="page-content-nav club-page-nav">
@@ -557,14 +582,14 @@
                         <input type="tel" name="tel-input" class="tel-input" id="tel-input" value="02-77777777">
                     </div>
                     <div class="ui-field-contain  ui-disabled">
-                        <label class="item_title" for="textinput-6">刊登時間</label>
-                        <input type="text" name="textinput-6" class="ui-disabled" id="textinput-6" value="2016-06/30-2016/11/30">
+                        <label class="item_title" for="publishtime-input">刊登時間</label>
+                        <input type="text" name="publishtime-input" class="ui-disabled" id="publishtime-input" value="2016-06/30-2016/11/30">
                     </div>
                     <div class="ui-field-contain ui-disabled">
-                        <label class="item_title" for="textinput-7">刊登類型</label>
-                        <input type="text" name="textinput-7" class="ui-disabled" id="textinput-7" value="A方案一年">
+                        <label class="item_title" for="plan-input">刊登類型</label>
+                        <input type="text" name="plan-input" class="ui-disabled" id="plan-input" value="A方案一年">
                     </div>
-                    <button id="member-submit-btn" class="ui-shadow ui-btn ui-corner-all" type="submit">送出</button>
+                    <button class="ui-shadow ui-btn ui-corner-all profile-submit-btn" data-backpage="#jobseeker-profile" type="button">送出</button>
                 </div>
             </div>
             <!-- /main -->
@@ -1169,6 +1194,7 @@
         <script src="./js/jquery-1.12.4.min.js"></script>
         <script src="./js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
         <script src="./js/flex-slider/jquery.flexslider-min.js"></script>
+        <script src="./js/jquery.form.min.js"></script>
         <script src="./js/main.js"></script>
         <script src="./js/profile.js"></script>
     </body>

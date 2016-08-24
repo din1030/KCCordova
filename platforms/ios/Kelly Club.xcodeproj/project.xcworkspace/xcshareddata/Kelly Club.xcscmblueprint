@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "76E59158A51B4B8AC73E56CEB2E9DAD4618665D0",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "76E59158A51B4B8AC73E56CEB2E9DAD4618665D0" : 0,
+    "6AC3C5D7971CE12095B021C0ABCED995DCCDB65F" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "71E0DC6B-C1F8-48A9-AEEB-825D3ECEDBB2",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "76E59158A51B4B8AC73E56CEB2E9DAD4618665D0" : "Cordova\/",
+    "6AC3C5D7971CE12095B021C0ABCED995DCCDB65F" : ""
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Kelly Club",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "platforms\/ios\/Kelly Club.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/bitbucket.org\/kellyclub\/kelly-club.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6AC3C5D7971CE12095B021C0ABCED995DCCDB65F"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/din1030\/KCCordova.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "76E59158A51B4B8AC73E56CEB2E9DAD4618665D0"
+    }
+  ]
+}

@@ -3,6 +3,7 @@
 
     <head>
         <title>Kelly Club 全省八大行業資訊專用APP平台</title>
+    <meta charset='UTF-8'>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="./js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.css" />
         <link rel="stylesheet" href="./css/font-awesome.css" />
@@ -35,8 +36,8 @@
                     </div>
                     <div class="clearfix"></div>
                 </div>
-                <div class="ui-grid-b">
-                    <div class="ui-block-a">
+                <div id="seeker-grid" class="ui-grid-b">
+                    <!-- <div class="ui-block-a">
                         <div class="seeker_list_item">
                             <a href="#jobseeker-resume" data-ajax="false"><img src="./img/seeker-a.jpg" alt="" /></a>
                         </div>
@@ -50,52 +51,7 @@
                         <div class="seeker_list_item">
                             <a href="#jobseeker-resume" data-ajax="false"><img src="./img/seeker-c.jpg" alt="" /></a>
                         </div>
-                    </div>
-                    <div class="ui-block-a">
-                        <div class="seeker_list_item">
-                            <a href="#jobseeker-resume" data-ajax="false"><img src="./img/seeker-a.jpg" alt="" /></a>
-                        </div>
-                    </div>
-                    <div class="ui-block-b">
-                        <div class="seeker_list_item">
-                            <a href="#jobseeker-resume" data-ajax="false"><img src="./img/seeker-b.jpg" alt="" /></a>
-                        </div>
-                    </div>
-                    <div class="ui-block-c">
-                        <div class="seeker_list_item">
-                            <a href="#jobseeker-resume" data-ajax="false"><img src="./img/seeker-c.jpg" alt="" /></a>
-                        </div>
-                    </div>
-                    <div class="ui-block-a">
-                        <div class="seeker_list_item">
-                            <a href="#jobseeker-resume" data-ajax="false"><img src="./img/seeker-a.jpg" alt="" /></a>
-                        </div>
-                    </div>
-                    <div class="ui-block-b">
-                        <div class="seeker_list_item">
-                            <a href="#jobseeker-resume" data-ajax="false"><img src="./img/seeker-b.jpg" alt="" /></a>
-                        </div>
-                    </div>
-                    <div class="ui-block-c">
-                        <div class="seeker_list_item">
-                            <a href="#jobseeker-resume" data-ajax="false"><img src="./img/seeker-c.jpg" alt="" /></a>
-                        </div>
-                    </div>
-                    <div class="ui-block-a">
-                        <div class="seeker_list_item">
-                            <a href="#jobseeker-resume" data-ajax="false"><img src="./img/seeker-a.jpg" alt="" /></a>
-                        </div>
-                    </div>
-                    <div class="ui-block-b">
-                        <div class="seeker_list_item">
-                            <a href="#jobseeker-resume" data-ajax="false"><img src="./img/seeker-b.jpg" alt="" /></a>
-                        </div>
-                    </div>
-                    <div class="ui-block-c">
-                        <div class="seeker_list_item">
-                            <a href="#jobseeker-resume" data-ajax="false"><img src="./img/seeker-c.jpg" alt="" /></a>
-                        </div>
-                    </div>
+                    </div> -->
                 </div>
                 <!-- /grid-b -->
             </div>
@@ -205,27 +161,29 @@
                     </div>
                     <div class="ui-body ui-body-a">
                         <div id="club_title">翁水蘭</div>
-                        藝名：水噹噹
-                        <br>應徵地區：台中市｜南屯區
-                        <br>生日：1989/01/10
-                        <br>手機：0988-166691
-                        <br>身高：165公分
-                        <br>體重：51公斤
-                        <br>三圍：32d、24、35
-                        <br>歌唱能力：很棒
-                        <br>舞蹈能力：普通
-                        <br>酒量：普通
-                        <br>配合度：良好
-                        <br>語言能力：國語、台語
-                        <br>婚姻狀況：未婚
-                        <br>最高學歷：高中
-                        <br>可上班時段：晚場
-                        <br>希望待遇：站內詳談
+                        <span class="item_title">藝名：</span>
+                        <sapn id="nickname-span"></sapn>
+                        <br><span class="item_title">應徵地區：</span><span id="country-span"></span>
+                        <br><span class="item_title">生日：</span><span id="birth-span"></span>
+                        <br><span class="item_title">手機：</span><span id="mobile-span"></span>
+                        <br><span class="item_title">身高：</span><span id="height-span"></span>公分
+                        <br><span class="item_title">體重：</span><span id="weight-span"></span>公斤
+                        <br><span class="item_title">三圍：</span><span id="measurements-span"></span>
+                        <br><span class="item_title">歌唱能力：</span><span id="singing-span"></span>
+                        <br><span class="item_title">舞蹈能力：</span><span id="dancing-span"></span>
+                        <br><span class="item_title">酒量：</span><span id="drinking-span"></span>
+                        <br><span class="item_title">配合度：</span><span id="cooperation-span"></span>
+                        <br><span class="item_title">語言能力：</span><span id="languages-span"></span>
+                        <br><span class="item_title">婚姻狀況：</span><span id="marital-span"></span>
+                        <br><span class="item_title">最高學歷：</span><span id="education-span"></span>
+                        <br><span class="item_title">可上班時段：</span><span id="workingtime-span"></span>
+                        <br><span class="item_title">希望待遇：</span><span id="pay-span"></span>
+                        <br>
                         <div id="action_block" class="text-right">
                             <a href="#msg_to_jobseeker" class="ui-btn ui-btn-inline no-bg-bd msg-btn" data-rel="popup">
                                 <img src="./img/icons/message.png" alt="" />
                             </a>
-                            <button type="button" class="ui-btn ui-btn-inline no-bg-bd">
+                            <button id="add-fav-btn" type="button" class="ui-btn ui-btn-inline no-bg-bd">
                                 <img src="./img/icons/fav_gray.png" alt="" />
                             </button>
                         </div>
@@ -246,10 +204,7 @@
                         <h3>應徵內容</h3>
                     </div>
                     <div class="ui-body ui-body-a text-justify">
-                        應徵內容：酒店小姐、助理
-                        <br>應徵尺度：可陪酒、聊天等
-                        <br>希望條件：不出場
-                        <br>站內詳談。
+                        <span id="content-span"></span>
                     </div>
                 </div>
             </div>
@@ -293,6 +248,7 @@
         <script src="./js/flex-slider/jquery.flexslider-min.js"></script>
         <script src="./js/tw-city-selector/jquery.tw-city-selector.js"></script>
         <script src="./js/main.js"></script>
+        <script src="./js/jobseeker.js"></script>
     </body>
 
 </html>

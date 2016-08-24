@@ -34,6 +34,10 @@ textarea {
 .clearfix {
   clear: both;
 }
+#ads-home {
+	display: none;
+}
+
 #lang_title {
   padding: 10px 0;
   margin: 0 20px;
@@ -938,4 +942,7 @@ div[id|=admin] .category-block {
 }
 .category-block {
   padding: 0 10px;
+}
+.ui-navbar {
+	z-index: 1001;
 }
