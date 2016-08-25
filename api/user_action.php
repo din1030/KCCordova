@@ -156,7 +156,7 @@ if ($action == 'reg') { // For Register
                 echo json_encode($output);
                 exit;
             } else {
-                $output = array('status' => true, 'message' => '註冊成功，請使用帳號登入!', 'user_id' => $user['id'], 'user' => $email, 'auth' => $user['type'], 'name' => $user['name']);
+                $output = array('status' => true, 'message' => 'FB 註冊成功!', 'user_id' => $last_id, 'user' => $email, 'auth' => $type, 'name' => $name);
                 echo json_encode($output);
 
                 return;
