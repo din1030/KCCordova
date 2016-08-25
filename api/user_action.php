@@ -54,10 +54,7 @@ if ($action == 'reg') { // For Register
             "VALUES ('$type','$email','$password','$name','$gender','$country','$location','$birth','$tel','$mobile','$ref', NULL)";
         $mysqli->query($sql_string);
         if ($mysqli->affected_rows > 0) {
-            $output = array('status' => false, 'message' => '操作錯誤，請稍後再試！', 'sql' => $sql_string);
-            echo json_encode($output);
-            exit;
-        } else { // 資料送出，更新會員編號
+            // 資料送出，更新會員編號
             $last_id = $mysqli->insert_id;
             $m_id = str_pad($last_id, 5, '0', STR_PAD_LEFT);
             switch ($type) {
@@ -76,15 +73,19 @@ if ($action == 'reg') { // For Register
             $update_string = "UPDATE `user` SET `member_id`=$m_id WHERE `id`=$last_id";
             $mysqli->query($update_string);
             if ($mysqli->affected_rows > 0) {
+                $output = array('status' => true, 'message' => '註冊成功，請使用帳號登入!', 'sql' => $sql_string);
+                echo json_encode($output);
+
+                return;
+            } else {
                 $output = array('status' => false, 'message' => '操作錯誤，請稍後再試！', 'sql' => $sql_string);
                 echo json_encode($output);
                 exit;
-            } else {
-                $output = array('status' => true, 'message' => '註冊成功，請使用帳號登入!', 'sql' => $sql_string);
-                echo json_encode($output);
             }
-
-            return;
+        } else {
+            $output = array('status' => false, 'message' => '操作錯誤，請稍後再試！', 'sql' => $sql_string);
+            echo json_encode($output);
+            exit;
         }
     }
 } elseif ($action == 'fb_reg') { // For Register
@@ -133,10 +134,7 @@ if ($action == 'reg') { // For Register
             "VALUES('$fb_id','$type','$email','$name','$gender','$country','$location','$birth','$tel','$mobile','$ref', NULL)";
         $mysqli->query($sql_string);
         if ($mysqli->affected_rows > 0) {
-            $output = array('status' => false, 'message' => '操作錯誤，請稍後再試！', 'sql' => $sql_string);
-            echo json_encode($output);
-            exit;
-        } else { // 資料送出，更新會員編號
+            // 資料送出，更新會員編號
             $last_id = $mysqli->insert_id;
             $m_id = str_pad($last_id, 5, '0', STR_PAD_LEFT);
             switch ($type) {
@@ -155,15 +153,19 @@ if ($action == 'reg') { // For Register
             $update_string = "UPDATE `user` SET `member_id`=$m_id WHERE `id`=$last_id";
             $mysqli->query($update_string);
             if ($mysqli->affected_rows > 0) {
-                $output = array('status' => false, 'message' => '操作錯誤，請稍後再試！', 'sql' => $sql_string);
-                echo json_encode($output);
-                exit;
-            } else {
                 $output = array('status' => true, 'message' => 'FB 註冊成功!', 'user_id' => $last_id, 'user' => $email, 'auth' => $type, 'name' => $name);
                 echo json_encode($output);
 
                 return;
+            } else {
+                $output = array('status' => false, 'message' => '操作錯誤，請稍後再試！', 'sql' => $sql_string);
+                echo json_encode($output);
+                exit;
             }
+        } else {
+            $output = array('status' => false, 'message' => '操作錯誤，請稍後再試！', 'sql' => $sql_string);
+            echo json_encode($output);
+            exit;
         }
     }
 } elseif ($action == 'log') {
