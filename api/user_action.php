@@ -127,8 +127,8 @@ if ($action == 'reg') { // For Register
         }
 
         // 儲存資料
-        $sql_string = 'INSERT INTO `user`(`type`,`email`,`name`,`gender`,`country`,`location`,`birth`,`tel`,`mobile`,`ref_id`,`created`) '.
-            "VALUES('$type','$email','$name','$gender','$country','$location','$birth','$tel','$mobile','$ref', NULL)";
+        $sql_string = 'INSERT INTO `user`(`fb_id`,`type`,`email`,`name`,`gender`,`country`,`location`,`birth`,`tel`,`mobile`,`ref_id`,`created`) '.
+            "VALUES('$fb_id','$type','$email','$name','$gender','$country','$location','$birth','$tel','$mobile','$ref', NULL)";
         if (!$mysqli->query($sql_string)) {
             $output = array('status' => false, 'message' => '操作錯誤，請稍後再試！', 'sql' => $sql_string);
             echo json_encode($output);
@@ -197,7 +197,7 @@ if ($action == 'reg') { // For Register
         exit;
     } else {
         $user = $sql->fetch_assoc();
-        $output = array('status' => true, 'message' => '登入成功！', 'user_id' => $user['id'], 'user' => $email, 'auth' => $user['type'], 'name' => $user['name']);
+        $output = array('status' => true, 'message' => '登入成功！', 'user_id' => $user['id'], 'fb_id' => $user['fb_id'], 'user' => $email, 'auth' => $user['type'], 'name' => $user['name']);
         echo json_encode($output);
 
         return;
