@@ -70,15 +70,15 @@ if ($action == 'reg') { // For Register
                 default:
                     break;
             }
-            $update_string = "UPDATE `user` SET `member_id`=$m_id WHERE `id`=$last_id";
+            $update_string = "UPDATE `user` SET `member_id`='$m_id' WHERE `id`=$last_id";
             $mysqli->query($update_string);
             if ($mysqli->affected_rows > 0) {
-                $output = array('status' => true, 'message' => '註冊成功，請使用帳號登入!', 'sql' => $sql_string);
+                $output = array('status' => true, 'message' => '註冊成功，請使用帳號登入!');
                 echo json_encode($output);
 
                 return;
             } else {
-                $output = array('status' => false, 'message' => '操作錯誤，請稍後再試！', 'sql' => $sql_string);
+                $output = array('status' => false, 'message' => '操作錯誤，請稍後再試！', 'sql' => $update_string);
                 echo json_encode($output);
                 exit;
             }
@@ -150,7 +150,7 @@ if ($action == 'reg') { // For Register
                     default:
                         break;
                 }
-            $update_string = "UPDATE `user` SET `member_id`=$m_id WHERE `id`=$last_id";
+            $update_string = "UPDATE `user` SET `member_id`='$m_id' WHERE `id`=$last_id";
             $mysqli->query($update_string);
             if ($mysqli->affected_rows > 0) {
                 $output = array('status' => true, 'message' => 'FB 註冊成功!', 'user_id' => $last_id, 'user' => $email, 'auth' => $type, 'name' => $name);
