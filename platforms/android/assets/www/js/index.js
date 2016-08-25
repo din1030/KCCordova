@@ -183,6 +183,7 @@ $(document).on('pagecreate', '#fb-reg', function() {
 						alert(window.localStorage.getItem('name') + ' ' + window.localStorage.getItem('user') + '(' + window.localStorage.getItem('auth') + ')');
 						$.mobile.changePage("#home");
 					} else {
+						alert(result.message + '/' + result.sql);
 						facebookConnectPlugin.logout(function() {}, function() {});
 
 					}

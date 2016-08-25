@@ -120,14 +120,14 @@ if ($action == 'reg') { // For Register
             $sql_string = "SELECT * FROM `user` WHERE `member_id` = '$ref' LIMIT 1";
             $sql = $mysqli->query($sql_string);
             if ($sql->num_rows == 0) {
-                $output = array('status' => false, 'message' => '推薦人帳號不存在！');
+                $output = array('status' => false, 'message' => '推薦人編號不存在！');
                 echo json_encode($output);
                 exit;
             }
         }
 
         // 儲存資料
-        $sql_string = 'INSERT INTO `user`(`type`,`email`,`name`,`gender`,`country`,`location`,`birth`,`tel`,`mobile`,`ref`,`created`) '.
+        $sql_string = 'INSERT INTO `user`(`type`,`email`,`name`,`gender`,`country`,`location`,`birth`,`tel`,`mobile`,`ref_id`,`created`) '.
             "VALUES('$type','$email','$name','$gender','$country','$location','$birth','$tel','$mobile','$ref', NULL)";
         if (!$mysqli->query($sql_string)) {
             $output = array('status' => false, 'message' => '操作錯誤，請稍後再試！', 'sql' => $sql_string);
