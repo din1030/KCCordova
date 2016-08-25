@@ -88,6 +88,9 @@ $(document).on('pagecreate', function() {
 
 
 $(document).on('pageshow', "#jobseeker-resume, #club-intro, #lifeservice-detail", function() {
+	console.log('hit slide reload');
+	console.log($('.flexslider'));
+	$('.flexslider').unbind().removeData();
 	$('.flexslider').flexslider({
 		animation: 'slide'
 	});

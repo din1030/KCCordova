@@ -5,6 +5,7 @@ var shopId;
 var baseApi = 'http://52.69.53.255/KVCordova/api/lifeservice.json';
 var searchState = false;
 
+
 $(document).on('pagebeforecreate', '#lifeservice', function () {
 	$.ajax({
 		url: '../api/lifeservice.json',
@@ -17,6 +18,7 @@ $(document).on('pagebeforecreate', '#lifeservice', function () {
 		});
 		// $('#service-category-block').listview('refresh');
 		$('#service-category-block a').click(function (event) {
+			console.log('called click!');
 			var id = $(this).jqmData("id");
 			currentViewId = id;
 			// window.localStorage.setItem('get_club_id', admin_id);
@@ -29,9 +31,15 @@ $(document).on('pagebeforecreate', '#lifeservice', function () {
 	});
 });
 
+$(document).on('pagebeforshow', '#lifeservice', function(e) {
+	// event off!!
+});
+
 
 $(document).on('pagebeforeshow', '#lifeservice-list', function () {
 	var list = '';
+
+	$('#select-choice-1').off();
 
 	//if referrer come from search before all json been fetch
 	if (dataJson === null || typeof dataJson === 'undefined') {
@@ -93,6 +101,7 @@ $(document).on('pagebeforeshow', '#lifeservice-list', function () {
 
 	//event handler
 	$('#select-choice-1').on('change', function (e) {
+		console.log($(this).val());
 		currentViewId = parseInt($(this).val());
 		_init();
 	});
@@ -109,37 +118,68 @@ $(document).on('pagebeforeshow', '#lifeservice-list', function () {
 });
 
 $(document).on('pagebeforeshow', '#lifeservice-detail', function () {
-	console.log(shopId);
-	$('#lifeservice-list-main').off('click', '.store_list a'); // remove event delegation from other pages
+	$('#lifeservice-list-main').off(); // remove event delegation from other pages
+	$('#lifeservice-detail-main').off(); // remove event delegation from other pages
+
 	$.ajax({
 		url: '../api/lifeservicedetails.json', //&id=' + shopId,
 		dataType: 'json'
 	}).success(function (data) {
 		var details = '<div id="club_title">' + data._name + '</div>位置: ' + data._address + '<br>電話: ' + data._tel + '<br>營業時間: <br>';
+		var contactInfo = '<div class="avatar float-left"><img src="' + data["_contact-thumb"] + '" alt="" style="width: 70px; height: 70px; border-radius: 50%;"></div><strong>' + data["_contact-person"] + '</strong><small>預約窗口</small><br>電話: ' + data["_contact-tel"] + '<br> Line:' + data["_contact-line"];
+		var detailsProduct = '';
+		var slideContainer = '<ul class="slides">';
+
 
 		$.each(data._time, function (i, v) {
 			details += v + '<br>';
 		});
 
-		details += '<div id="action_block" class="text-right"><a href="' + data._website + '" class="ui-btn ui-btn-inline no-bg-bd" rel="external" data-ajax="false"><img src="./img/icons/official_site.png" alt=""></a>	<button type="button" class="no-bg-bd ui-btn ui-btn-inline"><img src="./img/icons/fav_gray.png" alt=""></button></div>'
-
-		var contactInfo = '<div class="avatar float-left"><img src="' + data["_contact-thumb"] + '" alt="" style="width: 70px; height: 70px; border-radius: 50%;"></div><strong>' + data["_contact-person"] + '</strong><small>預約窗口</small><br>電話: ' + data["_contact-tel"] + '<br> Line:' + data["_contact-line"];
-
-		var detailsProduct = '';
+		details += '<div id="action_block" class="text-right"><a href="' + data._website + '" class="ui-btn ui-btn-inline no-bg-bd" rel="external" data-ajax="false"><img src="./img/icons/official_site.png" alt=""></a>	<button type="button" id="addFv" data-id="' + data._id + '" class="no-bg-bd ui-btn ui-btn-inline"><img src="./img/icons/fav_gray.png" alt=""></button></div>'
 
 		$.each(data["_product-info"], function (i, v) {
 			detailsProduct += '<p>' + v + '</p>'
 		});
-		// console.log(details);
+
+		$.each(data['_imgSrc'], function(i, v) {
+			slideContainer += '<li><img src="'+ v +'"></li>'
+		});
+
+		slideContainer += '</ul>';
+
+		$('.flexslider').html(slideContainer);
 		$('#info_block .ui-body-a').html(details);
 		$('#contact_block .ui-body-a').html(contactInfo);
 		$('#details_block .ui-body-a').html(detailsProduct);
 		$('#compaign_block .ui-body-a').html(data._promotion);
 	});
+
+	$('#lifeservice-detail-main').on('click', '#addFv', function(e) {
+		var id = $(this).jqmData('id');
+
+		// $.ajax({
+		// 	url: 'addFv.php',
+		// 	method: 'POST',
+		// 	data: {
+		// 		memberId: memberId,
+		// 		id: id
+		// 	}
+		// }).done(function(e) {
+		// 	// add style?
+		// 	alert(e);
+		// })
+
+		console.log(id, memberId);
+
+	});
 });
 
 
 $(document).on('pagebeforeshow', '#lifeservice-search', function () {
+	//off any unwanted event  place to garbage collector
+	$('#lifeservice-detail-main').off();
+	$('#club_type').off();
+
 	$.ajax('../api/get_lifeservice_list.json')
 			.done(function (data) {
 				console.log(data);
@@ -162,6 +202,7 @@ $(document).on('pagebeforeshow', '#lifeservice-search', function () {
 				$('#club_type').on('change', function () {
 					var state = $('#county').val();
 					var type = $('#club_type').val();
+					console.log('club_type changed');
 
 					// $.ajax({
 					// 	method: "POST",

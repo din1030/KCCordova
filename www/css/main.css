@@ -11,6 +11,8 @@ body,
 }
 textarea {
   height: inherit !important;
+  box-sizing: border-box;
+  width: 100%;
 }
 .no-bg-bd {
   background: none !important;

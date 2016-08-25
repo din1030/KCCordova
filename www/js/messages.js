@@ -66,14 +66,14 @@ $(document).on("pagebeforeshow", '#messages', function () {
 
 
 		function seekerMarkup(data) {
-			var markup = '<div class="detail_block msg_block seeker_msg" id="msg-' + data._msgId + '" data-msg-id="' + data._msgId + '" data-official="false"><div class="ui-bar ui-bar-a"><span class="float-left">【求職者】留言</span><span class="float-right" style="margin-right: 20px;">' + data._msgDate + '</span><button class="ui-btn ui-corner-all ui-btn-inline ui-mini ui-btn-right ui-icon-delete ui-btn-icon-notext del-fav-btn" type="button" name="button" data-shadow="false">x</button></div><a class="msg-open" href=""><div class="ui-body ui-body-a"><div class="avatar msg-avatar float-left"><img src="' + data._userImg + '" style="width: 70px; height: 70px; border-radius: 50%;" alt=""></div><strong>' + data._userName + '</strong><br> ' + data._nickName + '	<br> 應徵地區：' + data._place + '<div class="float-right msg-badge"><span class="">' + data._lengthUnread + '</span></div></div></a></div>';
+			var markup = '<div class="detail_block msg_block seeker_msg" data-msg-type="'+ data._msgType +'" id="msg-' + data._msgId + '" data-msg-id="' + data._msgId + '" data-official="false"><div class="ui-bar ui-bar-a"><span class="float-left">【求職者】留言</span><span class="float-right" style="margin-right: 20px;">' + data._msgDate + '</span><button class="ui-btn ui-corner-all ui-btn-inline ui-mini ui-btn-right ui-icon-delete ui-btn-icon-notext del-fav-btn" type="button" name="button" data-shadow="false">x</button></div><a class="msg-open" href=""><div class="ui-body ui-body-a"><div class="avatar msg-avatar float-left"><img src="' + data._userImg + '" style="width: 70px; height: 70px; border-radius: 50%;" alt=""></div><strong>' + data._userName + '</strong><br> ' + data._nickName + '	<br> 應徵地區：' + data._place + '<div class="float-right msg-badge"><span class="">' + data._lengthUnread + '</span></div></div></a></div>';
 
 			return markup;
 		}
 
 
 		function shopMarkup(data) {
-			var markup = '<div class="detail_block msg_block shop_msg" id="msg-' + data._msgId + '" data-msg-id="' + data._msgId + '" data-official="false"><div class="ui-bar ui-bar-a"><span class="float-left">【店家】留言</span><span class="float-right" style="margin-right: 20px;">' + data._msgDate + '</span><button class="ui-btn ui-corner-all ui-btn-inline ui-mini ui-btn-right ui-icon-delete ui-btn-icon-notext del-fav-btn" type="button" name="button" data-shadow="false">x</button></div><a class="msg-open" href=""><div class="ui-body ui-body-a"><div class="avatar msg-avatar float-left">	<img src="' + data._userImg + '" style="width: 70px; height: 70px; border-radius: 50%;" alt=""></div><strong>' + data._userName + '</strong><br> ' + data._place + '<br> ' + data._job + '	<div class="float-right msg-badge"><span class="">' + data._lengthUnread + '</span></div></div></a></div>';
+			var markup = '<div class="detail_block msg_block shop_msg" data-msg-type="'+ data._msgType +'" id="msg-' + data._msgId + '" data-msg-id="' + data._msgId + '" data-official="false"><div class="ui-bar ui-bar-a"><span class="float-left">【店家】留言</span><span class="float-right" style="margin-right: 20px;">' + data._msgDate + '</span><button class="ui-btn ui-corner-all ui-btn-inline ui-mini ui-btn-right ui-icon-delete ui-btn-icon-notext del-fav-btn" type="button" name="button" data-shadow="false">x</button></div><a class="msg-open" href=""><div class="ui-body ui-body-a"><div class="avatar msg-avatar float-left">	<img src="' + data._userImg + '" style="width: 70px; height: 70px; border-radius: 50%;" alt=""></div><strong>' + data._userName + '</strong><br> ' + data._place + '<br> ' + data._job + '	<div class="float-right msg-badge"><span class="">' + data._lengthUnread + '</span></div></div></a></div>';
 
 			return markup;
 		}
@@ -87,12 +87,14 @@ $(document).on("pagebeforeshow", '#messages', function () {
 		var findParent = $(this).parent();
 		var official = findParent.jqmData('official');
 		var msgId = findParent.jqmData('msg-id');
+		var type = findParent.jqmData('msg-type')
 
 		if (official) {
 			officialState = true;
 		} else {
 			officialState = false;
 			currentMsg = msgId;
+			msgType = type;
 		}
 
 		$.mobile.changePage($('#messages-detail'), {
@@ -102,6 +104,8 @@ $(document).on("pagebeforeshow", '#messages', function () {
 	});
 
 	$('#messages-main').on('click', '.ui-icon-delete', function() {
+		console.log('hit delete!');
+
 		var id = $(this).parent().parent().jqmData('msg-id');
 		if(confirm('Delete?') === true) {
 			// $.ajax({
@@ -123,8 +127,7 @@ $(document).on("pagebeforeshow", '#messages', function () {
 });
 
 
-$(document).on("pagebeforeshow", '#messages-detail', function () {
-	console.log(memberType);
+$(document).on("pagebeforeshow", '#messages-detail', function (e, d) {
 	$('#msg-holder').empty();
 	$('#messages-main').off('click');
 	$('#msg-holder').off('click');
@@ -147,7 +150,7 @@ $(document).on("pagebeforeshow", '#messages-detail', function () {
 		var markup = '';
 		$.each(items, function(i, v) {
 			markup += '' +
-				'<div class="detail_block msg_block" data-official="true" id="msg-'+ v._msgId +'">' +
+				'<div class="detail_block msg_block" data-official="true" id="officialmsg-'+ v._msgId +'">' +
 				'<div class="ui-bar ui-bar-a" style="background-color: #71bb06;">' +
 				'<span class="float-left">【官方】留言 '+ (i+1) + '</span>' +
 				'<span class="float-right" id="official_msg_date" style="margin-right: 20px;"></span>' +
@@ -163,7 +166,7 @@ $(document).on("pagebeforeshow", '#messages-detail', function () {
 
 
 	function conversationMarkup(data) {
-		var markup = '<div class="detail_block conversation_block"><div class="ui-bar ui-bar-a"><h3>【求職者】留言</h3></div><div class="ui-body ui-body-a">';
+		var markup = '<div class="detail_block conversation_block"><div class="ui-bar ui-bar-a"><h3>'+ msgTypeText() +'</h3></div><div class="ui-body ui-body-a">';
 		var myId = data.userId;
 
 		$.each(data.msg_log, function(i, v) {
@@ -179,9 +182,19 @@ $(document).on("pagebeforeshow", '#messages-detail', function () {
 		return markup;
 	}
 
+	function msgTypeText() {
+		if (msgType === 0) {
+			return '【求職者】留言'
+		} else if (msgType === 1) {
+			return '【店家】留言'
+		}
+		return 'ERROR!'
+	}
+
 	//event handler
 
 	$('#msg-holder').on('click', '.delete-btn', function() {
+		console.log('hit delete!');
 		var id = $(this).jqmData('msg-id');
 		if(confirm('Delete?') === true) {
 			// $.ajax({
@@ -192,7 +205,7 @@ $(document).on("pagebeforeshow", '#messages-detail', function () {
 			// 	//rmv view
 			// 	$('#msg-' + id ).remove();
 			// })
-			$('#msg-' + id ).remove();
+			$('#officialmsg-' + id ).remove();
 		}
 
 		console.log(id);
@@ -200,6 +213,8 @@ $(document).on("pagebeforeshow", '#messages-detail', function () {
 	});
 
 	$('#msg-holder').on('click', '#sendMsg', function(e) {
+		console.log('hit sendmsg!');
+
 		var id = $(this).jqmData('msg-id');
 		var val = $(this).prev().val();
 
