@@ -150,7 +150,8 @@ if ($action == 'reg') { // For Register
                         break;
                 }
             $update_string = "UPDATE `user` SET `member_id`=$m_id WHERE `id`=$last_id";
-            if (!$mysqli->query($update_string)) {
+            $mysqli->query($update_string);
+            if ($mysqli->affected_rows > 0) {
                 $output = array('status' => false, 'message' => '操作錯誤，請稍後再試！', 'sql' => $sql_string);
                 echo json_encode($output);
                 exit;
