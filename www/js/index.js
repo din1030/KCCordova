@@ -174,6 +174,16 @@ $(document).on('pagecreate', '#app-log-in', function() {
 });
 
 $(document).on('pagecreate', '#home', function() {
+	$.ajax('http://52.69.53.255/KCCordova/api/get_home_setting.php')
+		.done(function(data) {
+			if (result.status) {
+				var setting = data.result;
+				var home_img = $('.home-img');
+				$.each(setting, function(idx, obj) {
+					home_img.eq(idx).attr('src', './img/' + obj.pic);
+				});
+			}
+		});
 	$.ajax('http://52.69.53.255/KCCordova/api/getAdsHome.json')
 		.done(function(res) {
 			var result = res[0];
@@ -192,6 +202,5 @@ $(document).on('pagecreate', '#home', function() {
 
 				$('#ads-home').show();
 			}
-
 		})
-});;
+});

@@ -53,58 +53,55 @@ $(document).on('pageshow', "#admin-member-detail", function() {
 $(document).on('pagebeforeshow', "#admin-home", function() {
 	// console.log('test');
 	var adminHomeStatus;
+	$.ajax('http://52.69.53.255/KCCordova/api/get_home_setting.json')
+		.done(function(data) {
+			if (data.status) {
+				var setting = data.result;
+				$('#home-upper-left-link').val(setting[0].link);
+				$('#home-upper-left-link').prev().text(textSwitch(setting[0].link));
 
-	$.ajax('/KCCordova/api/homeAdminStatus.json')
-		.done(function(e) {
-			console.log(e);
+				$('#home-upper-right-link').val(setting[1].link);
+				$('#home-upper-right-link').prev().text(textSwitch(setting[1].link));
 
-			$('#home-upper-left-link').val(e[0].value);
-			$('#home-upper-left-link').prev().text(textSwitch(e[0].value));
-
-			$('#home-upper-right-link').val(e[1].value);
-			$('#home-upper-right-link').prev().text(textSwitch(e[1].value));
-
-			$('#home-middle-link').val(e[2].value);
-			$('#home-middle-link').prev().text(textSwitch(e[2].value));
-
-
-			$('#home-lower-left-link').val(e[3].value);
-			$('#home-lower-left-link').prev().text(textSwitch(e[3].value));
+				$('#home-middle-link').val(setting[2].link);
+				$('#home-middle-link').prev().text(textSwitch(setting[2].link));
 
 
-			$('#home-lower-right-link').val(e[4].value);
-			$('#home-lower-right-link').prev().text(textSwitch(e[4].value));
+				$('#home-lower-left-link').val(setting[3].link);
+				$('#home-lower-left-link').prev().text(textSwitch(setting[3].link));
+
+
+				$('#home-lower-right-link').val(setting[4].link);
+				$('#home-lower-right-link').prev().text(textSwitch(setting[4].link));
+			}
 
 			function textSwitch(text) {
 				switch (text) {
-					case 'hotel':
+					case 'club':
 						return '酒店系統'
 						break;
-					case 'recruit':
+					case 'seeker':
 						return "求職者";
 						break;
-					case 'live':
+					case 'life':
 						return '生活服務'
 						break;
 					case 'news':
 						return "最新消息";
 						break;
 					case 'homepages':
-						return 'Kelly Club 官網'
+						return '連結官網'
 						break;
 					default:
-						return "求職者";
+						return "酒店系統";
 						break;
 				}
 			}
-
-
-
-			$('#pic1').attr('src', e[0].url);
-			$('#pic2').attr('src', e[1].url);
-			$('#pic3').attr('src', e[2].url);
-			$('#pic4').attr('src', e[3].url);
-			$('#pic5').attr('src', e[4].url);
+			$('#pic1').attr('src', setting[0].pic);
+			$('#pic2').attr('src', setting[1].pic);
+			$('#pic3').attr('src', setting[2].pic);
+			$('#pic4').attr('src', setting[3].pic);
+			$('#pic5').attr('src', setting[4].pic);
 		});
 
 
