@@ -78,9 +78,9 @@ if ($action == 'reg') { // For Register
                 echo json_encode($output);
                 exit;
             } else {
+                $output = array('status' => true, 'message' => '註冊成功，請使用帳號登入!', 'sql' => $sql_string);
+                echo json_encode($output);
             }
-            $output = array('status' => true, 'message' => '註冊成功，請使用帳號登入!', 'sql' => $sql_string);
-            echo json_encode($output);
 
             return;
         }
@@ -128,7 +128,7 @@ if ($action == 'reg') { // For Register
 
         // 儲存資料
         $sql_string = 'INSERT INTO `user`(`type`,`email`,`name`,`gender`,`country`,`location`,`birth`,`tel`,`mobile`,`ref`,`created`) '.
-            "VALUES ('$type','$email','$name','$gender','$country','$location','$birth','$tel','$mobile','$ref', NULL)";
+            "VALUES('$type','$email','$name','$gender','$country','$location','$birth','$tel','$mobile','$ref', NULL)";
         if (!$mysqli->query($sql_string)) {
             $output = array('status' => false, 'message' => '操作錯誤，請稍後再試！', 'sql' => $sql_string);
             echo json_encode($output);
@@ -155,11 +155,11 @@ if ($action == 'reg') { // For Register
                 echo json_encode($output);
                 exit;
             } else {
-            }
-            $output = array('status' => true, 'message' => '註冊成功，請使用帳號登入!', 'sql' => $sql_string);
-            echo json_encode($output);
+                $output = array('status' => true, 'message' => '註冊成功，請使用帳號登入!', 'user_id' => $user['id'], 'user' => $email, 'auth' => $user['type'], 'name' => $user['name']);
+                echo json_encode($output);
 
-            return;
+                return;
+            }
         }
     }
 } elseif ($action == 'log') {

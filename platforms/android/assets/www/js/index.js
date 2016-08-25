@@ -32,7 +32,9 @@ $(document).on('pagecreate', '#login', function() {
 								alert(window.localStorage.getItem('name') + ' ' + window.localStorage.getItem('user') + '(' + window.localStorage.getItem('auth') + ')');
 								$.mobile.changePage("#home");
 							} else {
-								alert(result.message);
+								alert(result.message + '/' + result.sql);
+								facebookConnectPlugin.logout(function() {}, function() {});
+
 							}
 						});
 				} else {
@@ -173,9 +175,16 @@ $(document).on('pagecreate', '#fb-reg', function() {
 				success: function(result) {
 					if (result.status) {
 						alert(result.message);
+						window.localStorage.setItem('user_id', result.user_id);
+						window.localStorage.setItem('user', result.user);
+						window.localStorage.setItem('auth', result.auth);
+						window.localStorage.setItem('name', result.name);
+						window.localStorage.setItem('user_info', result.user_info);
+						alert(window.localStorage.getItem('name') + ' ' + window.localStorage.getItem('user') + '(' + window.localStorage.getItem('auth') + ')');
 						$.mobile.changePage("#home");
 					} else {
-						alert(result.message);
+						facebookConnectPlugin.logout(function() {}, function() {});
+
 					}
 				},
 				error: function(request, error) {
@@ -299,7 +308,7 @@ $(document).on('pagecreate', '#home', function() {
 		url: 'http://52.69.53.255/KCCordova/api/get_home_setting.php',
 		dataType: 'json'
 	}).done(function(data) {
-		if (data.status === true) {
+		if (data.status) {
 			var setting = data.result;
 			var home_img = $('.home-img');
 			$.each(setting, function(idx, obj) {

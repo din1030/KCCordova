@@ -101,8 +101,10 @@ textarea {
 }
 #app-log-in-main #logo,
 #app-reg #logo,
+#fb-reg #logo,
 #app-log-in-main #login-form-block,
-#app-reg #login-form-block {
+#app-reg #login-form-block,
+#fb-reg #login-form-block {
   margin: 70px auto;
 }
 .pink-bg .ui-panel-wrapper {
