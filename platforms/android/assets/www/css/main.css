@@ -11,6 +11,8 @@ body,
 }
 textarea {
   height: inherit !important;
+  width: 100%;
+  box-sizing: border-box;
 }
 .no-bg-bd {
   background: none !important;
@@ -34,10 +36,6 @@ textarea {
 .clearfix {
   clear: both;
 }
-#ads-home {
-	display: none;
-}
-
 #lang_title {
   padding: 10px 0;
   margin: 0 20px;
@@ -121,7 +119,7 @@ textarea {
   width: 50%;
 }
 .pink-bg #logo #subtitle {
-  margin-bottom: 100px;
+  margin-bottom: 50px;
 }
 .pink-bg #login-block * {
   margin: 10px 0;
@@ -279,6 +277,9 @@ textarea {
 }
 #news-main .news-content-bolck {
   margin-top: 15px;
+}
+#news_pic {
+  max-height: 250px;
 }
 #share-main {
   padding: 15px 30px;
@@ -829,10 +830,9 @@ div[id|=admin] .category-block {
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
   border-radius: 50%;
-  /*background-image: url("../img/seeker-a.jpg");*/
-  /*background-size: contain;*/
-  /*background-position: center center;*/
-  /*background-repeat: no-repeat;*/
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
   margin: 0 15px 0 0;
 }
 .detail_block .ui-body .avatar.msg-avatar {
@@ -944,9 +944,11 @@ div[id|=admin] .category-block {
   padding: 0 10px;
 }
 .ui-navbar {
-	z-index: 1001;
+  z-index: 1001;
 }
 .offcial_msg_block {
-	display: none;
+  display: none;
 }
-
+.ads-home {
+  display: none;
+}

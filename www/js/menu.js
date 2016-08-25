@@ -47,6 +47,45 @@ $(document).on('pagebeforecreate', '#news', function() {
 	});
 });
 
-$(document).on('pagebeforeshow', '#jobseeker-resume', function() {
+$(document).on('pagebeforecreate', '#share', function() {
+	$('#fb_share_btn').click(function(event) {
+		// me.logged_in = true;
+		// alert('logged in successfully');
+		// alert(JSON.stringify(response.authResponse));
+		facebookConnectPlugin.getLoginStatus(
+			function(response) {
+				alert("current status: " + JSON.stringify(response));
+				if (response.status === 'connected') {
+					share_kelly();
+					// } else if (response.status === 'not_authorized') {
+					// the user is logged in to Facebook,
+					// but has not authenticated your app
+				} else {
+					// the user isn't logged in to Facebook.
+					facebookConnectPlugin.login(['email', 'public_profile'], function(response) {
+						share_kelly();
+					}, function(err) {
+						alert('error:' + JSON.stringify(err));
+					});
 
+				}
+
+			}
+		);
+
+		function share_kelly() {
+			var options = {
+				method: "share",
+				href: "http://www.kelly-club.com",
+				caption: "Kelly Club 全省八大行業資訊專用APP平台"
+			};
+			facebookConnectPlugin.showDialog(options, function(result) {
+					alert("Posted. " + JSON.stringify(result));
+				},
+				function(err) {
+					alert("Failed: " + JSON.stringify(err));
+				});
+
+		}
+	});
 });

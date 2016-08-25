@@ -119,7 +119,7 @@ textarea {
   width: 50%;
 }
 .pink-bg #logo #subtitle {
-  margin-bottom: 100px;
+  margin-bottom: 50px;
 }
 .pink-bg #login-block * {
   margin: 10px 0;
@@ -277,6 +277,9 @@ textarea {
 }
 #news-main .news-content-bolck {
   margin-top: 15px;
+}
+#news_pic {
+  max-height: 250px;
 }
 #share-main {
   padding: 15px 30px;

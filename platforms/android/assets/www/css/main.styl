@@ -26,6 +26,8 @@ html, body, [data-role=page], [data-role=content]
     margin: 0
 textarea
     height: inherit !important
+    width: 100%
+    box-sizing: border-box
 
 .no-bg-bd
     background:none !important
@@ -116,7 +118,7 @@ textarea
         img
             width: 50%
     #logo #subtitle
-        margin-bottom: 100px
+        margin-bottom: 50px
     #login-block *
         margin: 10px 0
 
@@ -278,6 +280,8 @@ textarea
         margin: 0
     .news-content-bolck
         margin-top: 15px
+#news_pic
+    max-height: 250px
 
 // --- news style ---
 
@@ -842,7 +846,10 @@ for tab in 1..5
 // overwrite
 
 .ui-navbar
-	z-index 1001
+	z-index: 1001
 
-#offcial_msg_block
-	display none;
+.offcial_msg_block
+	display: none
+
+.ads-home
+	display: none

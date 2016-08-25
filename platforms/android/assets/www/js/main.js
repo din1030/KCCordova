@@ -82,12 +82,16 @@ $(document).on('pagecreate', function() {
 		// window.localStorage.removeItem('user');
 		// window.localStorage.removeItem('auth');
 		// window.localStorage.removeItem('name');
+		facebookConnectPlugin.logout(function() {}, function() {});
 	});
 	$("#menu-panel").panel();
 });
 
 
 $(document).on('pageshow', "#jobseeker-resume, #club-intro, #lifeservice-detail", function() {
+	console.log('hit slide reload');
+	console.log($('.flexslider'));
+	$('.flexslider').unbind().removeData();
 	$('.flexslider').flexslider({
 		animation: 'slide'
 	});

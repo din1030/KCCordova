@@ -1,17 +1,41 @@
+$(document).on('pagecreate', "[data-role='page']", function() {
+	if (window.localStorage.getItem('user_id') != null) {
+		console.log(window.localStorage.getItem('user_id'));
+		$.mobile.changePage("#home");
+	}
+});
+
 $(document).on('pagecreate', '#login', function() {
+
 	$('#fb_login_btn').click(function(event) {
-		facebookConnectPlugin.login(['email'], function(response) {
+		facebookConnectPlugin.login(['email', 'public_profile'], function(response) {
 			// me.logged_in = true;
 			alert('logged in successfully');
 			alert(JSON.stringify(response.authResponse));
-			RequestsService.sendData(response.authResponse);
-
-			localStorageService.set('user.id', response.authResponse.userID);
-			localStorageService.set('user.access_token', response.authResponse.accessToken);
+			// facebookConnectPlugin.getLoginStatus(
+			// 	function(status) {
+			// 		alert("current status: " + JSON.stringify(status));
+			// 		var options = {
+			// 			method: "feed",
+			// 			link: "http://example.com",
+			// 			caption: "Such caption, very feed."
+			// 		};
+			// 		facebookConnectPlugin.showDialog(options, function(result) {
+			// 				alert("Posted. " + JSON.stringify(result));
+			// 			},
+			// 			function(e) {
+			// 				alert("Failed: " + e);
+			// 			});
+			// 	}
+			// );
+			$.mobile.changePage("#home");
+			// $.mobile.changePage("#app-reg");
 		}, function(err) {
-			RequestsService.sendData(err);
+			// RequestsService.sendData(err);
+			alert(err);
 			alert('an error occured while trying to login. please try again.');
 		});
+
 	});
 });
 
@@ -174,24 +198,60 @@ $(document).on('pagecreate', '#app-log-in', function() {
 });
 
 $(document).on('pagecreate', '#home', function() {
-	$.ajax('http://52.69.53.255/KCCordova/api/getAdsHome.json')
-		.done(function(res) {
-			var result = res[0];
-			// caches
-			var ads1 = $('#ads-home .ui-block-a');
-			var ads2 = $('#ads-home .ui-block-b');
+	$('#home-main').hide();
+	$.ajax({
+		url: 'http://52.69.53.255/KCCordova/api/get_home_setting.php',
+		dataType: 'json'
+	}).done(function(data) {
+		if (data.status === true) {
+			var setting = data.result;
+			var home_img = $('.home-img');
+			$.each(setting, function(idx, obj) {
+				$(home_img).eq(idx).attr('src', 'http://52.69.53.255/KCCordova/www/img/' + obj.pic);
+				$(home_img).eq(idx).parent('a').attr('href', link_to_url(obj.link));
+			});
+		}
+		$('#home-main').show();
+	});
 
-			if (result.status) {
-				console.log('yes');
-				console.log(ads1);
-				ads1.find('a').attr('href', result.ads[0].adsUrl);
-				ads2.find('a').attr('href', result.ads[1].adsUrl);
-
-				ads1.find('img').attr('src', './img/' + result.ads[0].adsImage);
-				ads2.find('img').attr('src', './img/' + result.ads[1].adsImage);
-
-				$('#ads-home').show();
-			}
-
-		})
-});;
+	function link_to_url(link) {
+		switch (link) {
+			case 'club':
+				return './club.html'
+				break;
+			case 'seeker':
+				return "./jobseeker.html";
+				break;
+			case 'life':
+				return './lifeservice.html'
+				break;
+			case 'news':
+				return "./menu.html#news";
+				break;
+			case 'homepages':
+				return 'http://www.kelly-club.com/'
+				break;
+			default:
+				return "#";
+				break;
+		}
+	}
+	// $.ajax('http://52.69.53.255/KCCordova/api/getAdsHome.json')
+	// 	.done(function(res) {
+	// 		var result = res[0];
+	// 		// caches
+	// 		var ads1 = $('#ads-home .ui-block-a');
+	// 		var ads2 = $('#ads-home .ui-block-b');
+	//
+	// 		if (result.status) {
+	// 			// console.log('yes');
+	// 			// console.log(ads1);
+	// 			ads1.find('a').attr('href', result.ads[0].adsUrl);
+	// 			ads2.find('a').attr('href', result.ads[1].adsUrl);
+	// 			ads1.find('img').attr('src', 'http://52.69.53.255/KCCordova/www/img/' + result.ads[0].adsImage);
+	// 			ads2.find('img').attr('src', 'http://52.69.53.255/KCCordova/www/img/' + result.ads[1].adsImage);
+	//
+	// 			$('#ads-home').show();
+	// 		}
+	// 	})
+});

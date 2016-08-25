@@ -82,6 +82,7 @@ $(document).on('pagecreate', function() {
 		// window.localStorage.removeItem('user');
 		// window.localStorage.removeItem('auth');
 		// window.localStorage.removeItem('name');
+		facebookConnectPlugin.logout(function() {}, function() {});
 	});
 	$("#menu-panel").panel();
 });
