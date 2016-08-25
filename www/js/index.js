@@ -11,7 +11,6 @@ $(document).on('pagecreate', '#login', function() {
 			function(response) {
 				alert("current status: " + JSON.stringify(response));
 				if (response.status === 'connected') {
-					// alert('already logged, ID: ' + response.authResponse.userID);
 					$.ajax({
 							url: 'http://52.69.53.255/KCCordova/api/user_action.php',
 							dataType: 'json',
@@ -47,7 +46,32 @@ $(document).on('pagecreate', '#login', function() {
 						// alert('logged in successfully');
 						alert('now logged, ID: ' + response.authResponse.userID);
 						window.localStorage.setItem('fb_id', response.authResponse.userID);
-						$.mobile.changePage("#fb-reg");
+						$.ajax({
+								url: 'http://52.69.53.255/KCCordova/api/user_action.php',
+								dataType: 'json',
+								type: 'POST',
+								data: {
+									action: 'fb_log',
+									fb_id: response.authResponse.userID
+								}
+							})
+							.done(function(result) {
+								if (result.status) {
+									window.localStorage.setItem('user_id', result.user_id);
+									window.localStorage.setItem('fb_id', response.authResponse.userID);
+									window.localStorage.setItem('user', result.user);
+									window.localStorage.setItem('auth', result.auth);
+									window.localStorage.setItem('name', result.name);
+									window.localStorage.setItem('user_info', result.user_info);
+									alert(window.localStorage.getItem('name') + ' ' + window.localStorage.getItem('user') + '(' + window.localStorage.getItem('auth') + ')');
+									$.mobile.changePage("#home");
+								} else {
+									alert(result.message + '/' + result.sql);
+									facebookConnectPlugin.logout(function() {}, function() {});
+									$.mobile.changePage("#fb-reg");
+
+								}
+							});
 
 					}, function(err) {
 						alert('log in error:' + JSON.stringify(err));

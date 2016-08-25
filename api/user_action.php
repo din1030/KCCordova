@@ -52,7 +52,8 @@ if ($action == 'reg') { // For Register
         // 儲存資料
         $sql_string = 'INSERT INTO `user`(`type`,`email`,`password`,`name`,`gender`,`country`,`location`,`birth`,`tel`,`mobile`,`ref`,`created`) '.
             "VALUES ('$type','$email','$password','$name','$gender','$country','$location','$birth','$tel','$mobile','$ref', NULL)";
-        if (!$mysqli->query($sql_string)) {
+        $mysqli->query($sql_string);
+        if ($mysqli->affected_rows > 0) {
             $output = array('status' => false, 'message' => '操作錯誤，請稍後再試！', 'sql' => $sql_string);
             echo json_encode($output);
             exit;
@@ -73,7 +74,8 @@ if ($action == 'reg') { // For Register
                     break;
             }
             $update_string = "UPDATE `user` SET `member_id`=$m_id WHERE `id`=$last_id";
-            if (!$mysqli->query($update_string)) {
+            $mysqli->query($update_string);
+            if ($mysqli->affected_rows > 0) {
                 $output = array('status' => false, 'message' => '操作錯誤，請稍後再試！', 'sql' => $sql_string);
                 echo json_encode($output);
                 exit;
@@ -129,7 +131,8 @@ if ($action == 'reg') { // For Register
         // 儲存資料
         $sql_string = 'INSERT INTO `user`(`fb_id`,`type`,`email`,`name`,`gender`,`country`,`location`,`birth`,`tel`,`mobile`,`ref_id`,`created`) '.
             "VALUES('$fb_id','$type','$email','$name','$gender','$country','$location','$birth','$tel','$mobile','$ref', NULL)";
-        if (!$mysqli->query($sql_string)) {
+        $mysqli->query($sql_string);
+        if ($mysqli->affected_rows > 0) {
             $output = array('status' => false, 'message' => '操作錯誤，請稍後再試！', 'sql' => $sql_string);
             echo json_encode($output);
             exit;
@@ -192,12 +195,12 @@ if ($action == 'reg') { // For Register
     $sql_string = "SELECT * FROM `user` WHERE `fb_id` = $fb_id LIMIT 1";
     $sql = $mysqli->query($sql_string);
     if ($sql->num_rows == 0) { // 找不到帳號
-        $output = array('status' => false, 'message' => 'Facebook 登入錯誤！');
+        $output = array('status' => false, 'message' => '此 Facebook ID 尚未註冊！');
         echo json_encode($output);
         exit;
     } else {
         $user = $sql->fetch_assoc();
-        $output = array('status' => true, 'message' => '登入成功！', 'user_id' => $user['id'], 'fb_id' => $user['fb_id'], 'user' => $email, 'auth' => $user['type'], 'name' => $user['name']);
+        $output = array('status' => true, 'message' => '登入成功！', 'user_id' => $user['id'], 'fb_id' => $user['fb_id'], 'user' => $user['email'], 'auth' => $user['type'], 'name' => $user['name']);
         echo json_encode($output);
 
         return;
