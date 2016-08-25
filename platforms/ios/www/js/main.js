@@ -1,6 +1,12 @@
+var memberType = 1;
+var memberId;
+
 $(document).ready(function() {
 	$("[data-role='navbar']:not(.internal)").navbar();
 	$("[data-role='footer']:not(.internal)").toolbar();
+
+	memberType = parseInt(window.localStorage.getItem('auth'));
+	memberId = parseInt(window.localStorage.getItem('user_id'))
 
 	// 沒有權限觀看求職者的提示
 	var mask = '<div style="display:block;" class="page_mask text-center" data-position-to="window" data-dismissible="true"><a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a><p>您不是店家管理者<br>求職者資訊僅供店家管理者瀏覽</p></div>';
@@ -54,6 +60,7 @@ $(document).on('pagecreate', function() {
 	if (window.localStorage.getItem('auth') == '0') {
 		// Admin 才會有後台選項
 		admin_li = '<li><a href="./admin.html" class="ui-btn" data-ajax="false"><div class="menu-icon icon8"></div> 管理者後台 </a></li>';
+
 		// $('#profile-link').attr('href', './profile.html#member-profile');
 		href = './profile.html#member-profile';
 	} else if (window.localStorage.getItem('auth') == '1') {

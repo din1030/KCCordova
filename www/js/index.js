@@ -1,3 +1,20 @@
+$(document).on('pagecreate', '#login', function() {
+	$('#fb_login_btn').click(function(event) {
+		facebookConnectPlugin.login(['email'], function(response) {
+			// me.logged_in = true;
+			alert('logged in successfully');
+			alert(JSON.stringify(response.authResponse));
+			RequestsService.sendData(response.authResponse);
+
+			localStorageService.set('user.id', response.authResponse.userID);
+			localStorageService.set('user.access_token', response.authResponse.accessToken);
+		}, function(err) {
+			RequestsService.sendData(err);
+			alert('an error occured while trying to login. please try again.');
+		});
+	});
+});
+
 $(document).on('pagecreate', '#app-reg', function() {
 	$('#app-reg-form').validate({
 		submitHandler: function(form) {

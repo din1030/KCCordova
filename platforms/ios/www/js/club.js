@@ -123,6 +123,9 @@ $(document).on('pagebeforeshow', '#club-job-info', function() {
 			}
 			$('#offer_content').html(club.offer_content);
 			$('#offer_welfare').html(club.welfare);
+			$('.no_data').hide();
+			$('#club-job-info-main').show();
+
 			$('#club-job-info .add-fav-btn').click(function(event) {
 				$.ajax({
 					url: 'http://52.69.53.255/KCCordova/api/add_fav.php?user_id=' + window.localStorage.getItem('user_id') + '&type=2&item_id=' + get_club_id,
@@ -133,11 +136,8 @@ $(document).on('pagebeforeshow', '#club-job-info', function() {
 				});
 			});
 		} else {
-			// $('#interviewer').text(data.message);
-			// $('#tel').text(data.message);
-			// $('#line').text(data.message);
-			// $('#offer_content').html(data.message);
-			// $('#offer_welfare').html(data.message);
+			$('.no_data').show();
+			$('#club-job-info-main').hide();
 		}
 	});
 });
@@ -231,6 +231,12 @@ $(document).on('pagebeforeshow', "#club-service", function() {
 				$(this).addClass('active');
 			});
 			$('[data-role="tabs"] a:first').click();
+			$('.no_data').hide();
+			$('#club-service-main').show();
+
+		} else {
+			$('.no_data').show();
+			$('#club-service-main').hide();
 		}
 	});
 });

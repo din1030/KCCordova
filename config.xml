@@ -2,11 +2,12 @@
 <widget android-versionCode="1" id="com.supercordova.hello" ios-CFBundleVersion="1.0" version="1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Kelly Club</name>
     <description>
-        A sample Apache Cordova application that responds to the deviceready event.
+        Kelly Club 八大行業資訊平台
     </description>
-    <author email="dev@cordova.apache.org" href="http://cordova.io">
-        Cordova Training Team
+    <author email="din1030@gmail.com" href="http://cordova.io">
+        Din Chia-Ting Cheng
     </author>
+    <icon src="www/img/app_icon.png" />
     <content src="index.html" />
     <preference name="Orientation" value="portrait" />
     <plugin name="cordova-plugin-whitelist" version="1" />

@@ -1,19 +1,22 @@
 var currentViewId;
 var dataJson;
+var searchJson;
 var shopId;
+var baseApi = 'http://52.69.53.255/KVCordova/api/lifeservice.json';
+var searchState = false;
 
-$(document).on('pagebeforecreate', '#lifeservice', function() {
+$(document).on('pagebeforecreate', '#lifeservice', function () {
 	$.ajax({
-		url: 'http://52.69.53.255/KCCordova/api/lifeservice.json',
+		url: '../api/lifeservice.json',
 		dataType: 'json'
-	}).success(function(data) {
+	}).success(function (data) {
 		dataJson = data;
-		$.each(data, function(idx, obj) {
+		$.each(data, function (idx, obj) {
 			var classification_li = $('<div></div>').append('<a href="" data-id="' + obj._id + '" data-ajax="false"><img src="' + obj._imgSrc + '"></a>');
 			$(classification_li).appendTo($('#service-category-block'));
 		});
 		// $('#service-category-block').listview('refresh');
-		$('#service-category-block a').click(function(event) {
+		$('#service-category-block a').click(function (event) {
 			var id = $(this).jqmData("id");
 			currentViewId = id;
 			// window.localStorage.setItem('get_club_id', admin_id);
@@ -27,24 +30,51 @@ $(document).on('pagebeforecreate', '#lifeservice', function() {
 });
 
 
-$(document).on('pagebeforeshow', '#lifeservice-list', function() {
+$(document).on('pagebeforeshow', '#lifeservice-list', function () {
 	var list = '';
-	$.each(dataJson, function(idx, obj) {
-		list += '<option value="' + obj._id + '">' + obj._name + '</option>';
-		if (obj._id === currentViewId) {
-			classListRefresh(obj._shop);
-		}
-	});
 
-	$('#select-choice-1').html(list);
-	$('#select-choice-1')[0].selectedIndex = currentViewId - 1;
-	$('#select-choice-1').selectmenu('refresh');
+	//if referrer come from search before all json been fetch
+	if (dataJson === null || typeof dataJson === 'undefined') {
+		$.ajax({
+			url: '../api/lifeservice.json',
+			dataType: 'json'
+		}).success(function (data) {
+			dataJson = data;
+			// print all type
+			$.each(dataJson, function (idx, obj) {
+				list += '<option value="' + obj._id + '">' + obj._name + '</option>';
+			});
 
-	_init();
+			$('#select-choice-1').html(list);
+			$('#select-choice-1')[0].selectedIndex =  0;
+			$('#select-choice-1').selectmenu('refresh');
+		});
+	} else {
+		// print all type
+		$.each(dataJson, function (idx, obj) {
+			list += '<option value="' + obj._id + '">' + obj._name + '</option>';
+		});
+
+		$('#select-choice-1').html(list);
+		$('#select-choice-1')[0].selectedIndex = currentViewId - 1;
+		$('#select-choice-1').selectmenu('refresh');
+	}
+
+
+
+	// check if it come from search state
+	if (searchState) {
+		classListRefresh(searchJson._shop);
+		searchState = false;
+	} else {
+		_init();
+	}
+
+
 
 	function classListRefresh(val) {
 		var shopList = '';
-		$.each(val, function(i, data) {
+		$.each(val, function (i, data) {
 			shopList += '<li data-icon="false"><a href="" data-shop-id="' + data.shop_id + '" data-ajax="false"><img src="' + data.img + '"><h2>' + data.name + '</h2><p>' + data.shop_location + '</p><div class="slogan">' + data.shop_slogan + '</div></a></li>';
 		})
 
@@ -53,7 +83,7 @@ $(document).on('pagebeforeshow', '#lifeservice-list', function() {
 	}
 
 	function _init() {
-		$.each(dataJson, function(idx, obj) {
+		$.each(dataJson, function (idx, obj) {
 			if (obj._id === currentViewId) {
 				classListRefresh(obj._shop);
 			}
@@ -62,12 +92,12 @@ $(document).on('pagebeforeshow', '#lifeservice-list', function() {
 
 
 	//event handler
-	$('#select-choice-1').on('change', function(e) {
+	$('#select-choice-1').on('change', function (e) {
 		currentViewId = parseInt($(this).val());
 		_init();
 	});
 
-	$('#lifeservice-list-main').on('click', '.store_list a', function() { // to be review for delegation
+	$('#lifeservice-list-main').on('click', '.store_list a', function () { // to be review for delegation
 		shopId = $(this).jqmData("shop-id");
 
 		$.mobile.changePage($('#lifeservice-detail'), {
@@ -78,16 +108,16 @@ $(document).on('pagebeforeshow', '#lifeservice-list', function() {
 
 });
 
-$(document).on('pagebeforeshow', '#lifeservice-detail', function() {
+$(document).on('pagebeforeshow', '#lifeservice-detail', function () {
 	console.log(shopId);
 	$('#lifeservice-list-main').off('click', '.store_list a'); // remove event delegation from other pages
 	$.ajax({
-		url: 'http://52.69.53.255/KCCordova/api/lifeservicedetails.json', //&id=' + shopId,
+		url: '../api/lifeservicedetails.json', //&id=' + shopId,
 		dataType: 'json'
-	}).success(function(data) {
+	}).success(function (data) {
 		var details = '<div id="club_title">' + data._name + '</div>位置: ' + data._address + '<br>電話: ' + data._tel + '<br>營業時間: <br>';
 
-		$.each(data._time, function(i, v) {
+		$.each(data._time, function (i, v) {
 			details += v + '<br>';
 		});
 
@@ -97,7 +127,7 @@ $(document).on('pagebeforeshow', '#lifeservice-detail', function() {
 
 		var detailsProduct = '';
 
-		$.each(data["_product-info"], function(i, v) {
+		$.each(data["_product-info"], function (i, v) {
 			detailsProduct += '<p>' + v + '</p>'
 		});
 		// console.log(details);
@@ -109,7 +139,100 @@ $(document).on('pagebeforeshow', '#lifeservice-detail', function() {
 });
 
 
+$(document).on('pagebeforeshow', '#lifeservice-search', function () {
+	$.ajax('../api/get_lifeservice_list.json')
+			.done(function (data) {
+				console.log(data);
+				var list = '';
+				var classificationList = '';
 
-$(document).on('pagebeforeshow', '#lifeservice-search', function() {
+				$.each(data._state, function (i, v) {
+					list += '<option value="' + v.value + '">' + v.name + '</option>';
+				});
 
+				$.each(data._classification, function (i, v) {
+					classificationList += '<option value="' + v.id + '">' + v.name + '</option>';
+				});
+
+				$('#county').html(list);
+				$('#county').selectmenu('refresh');
+				$('#club_type').html(classificationList);
+				$('#club_type').selectmenu('refresh');
+
+				$('#club_type').on('change', function () {
+					var state = $('#county').val();
+					var type = $('#club_type').val();
+
+					// $.ajax({
+					// 	method: "POST",
+					// 	url: '../searchLifeService.php',
+					// 	data: {
+					// 		state: state,
+					// 		type: type
+					// 	}
+					// })
+					// 		.done(function (data) {
+					// 			//return data as single object
+					// 			searchJson = data;
+					// 			searchState = true;
+					//
+					// 			$.mobile.changePage($('#lifeservice-list'), {
+					// 				reloadPage: true,
+					// 				changeHash: true
+					// 			});
+					// 		})
+
+
+					// dummy DATA and will remove later
+					searchJson = {
+						"_shop": [
+							{
+								"img": "./img/square_img.jpg",
+								"name": "Search",
+								"shop_id": 1,
+								"shop_location": "台中市 西屯區",
+								"shop_slogan": "slogan1"
+							},
+							{
+								"img": "./img/square_img.jpg",
+								"name": "Search",
+								"shop_id": 2,
+								"shop_location": "台中市 西屯區",
+								"shop_slogan": "slogan2"
+							},
+							{
+								"img": "./img/square_img.jpg",
+								"name": "Divas 美甲美睫概念館13",
+								"shop_id": 3,
+								"shop_location": "台中市 西屯區",
+								"shop_slogan": "slogan3"
+							},
+							{
+								"img": "./img/square_img.jpg",
+								"name": "Divas 美甲美睫概念館14",
+								"shop_id": 4,
+								"shop_location": "台中市 西屯區",
+								"shop_slogan": "slogan4"
+							},
+							{
+								"img": "./img/square_img.jpg",
+								"name": "Divas 美甲美睫概念館15",
+								"shop_id": 5,
+								"shop_location": "台中市 西屯區",
+								"shop_slogan": "slogan5"
+							}
+						]
+					}
+					searchState = true;
+
+					$.mobile.changePage($('#lifeservice-list'), {
+						reloadPage: true,
+						changeHash: true
+					});
+
+
+				});
+
+
+			})
 });

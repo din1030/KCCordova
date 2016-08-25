@@ -38,11 +38,12 @@
     </feature>
     <name>Kelly Club</name>
     <description>
-        A sample Apache Cordova application that responds to the deviceready event.
+        Kelly Club 八大行業資訊平台
     </description>
-    <author email="dev@cordova.apache.org" href="http://cordova.io">
-        Cordova Training Team
+    <author email="din1030@gmail.com" href="http://cordova.io">
+        Din Chia-Ting Cheng
     </author>
+    <icon src="res/icon.png" />
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />

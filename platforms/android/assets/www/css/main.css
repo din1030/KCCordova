@@ -829,10 +829,10 @@ div[id|=admin] .category-block {
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
   border-radius: 50%;
-  background-image: url("../img/seeker-a.jpg");
-  background-size: contain;
-  background-position: center center;
-  background-repeat: no-repeat;
+  /*background-image: url("../img/seeker-a.jpg");*/
+  /*background-size: contain;*/
+  /*background-position: center center;*/
+  /*background-repeat: no-repeat;*/
   margin: 0 15px 0 0;
 }
 .detail_block .ui-body .avatar.msg-avatar {
@@ -946,3 +946,7 @@ div[id|=admin] .category-block {
 .ui-navbar {
 	z-index: 1001;
 }
+.offcial_msg_block {
+	display: none;
+}
+

@@ -40,7 +40,7 @@ if ($action == 'reg') { // For Register
         }
         // 判斷推薦人帳號是否存在
         if (!empty($ref)) {
-            $sql_string = "SELECT * FROM `user` WHERE `email` = '$ref' LIMIT 1";
+            $sql_string = "SELECT * FROM `user` WHERE `member_id` = '$ref' LIMIT 1";
             $sql = $mysqli->query($sql_string);
             if ($sql->num_rows == 0) {
                 $output = array('status' => false, 'message' => '推薦人帳號不存在！');
@@ -48,15 +48,37 @@ if ($action == 'reg') { // For Register
                 exit;
             }
         }
+
         // 儲存資料
-        // $photo = ($gender) ? 'nonamem.jpg' : 'nonamef.jpg';
         $sql_string = 'INSERT INTO `user`(`type`,`email`,`password`,`name`,`gender`,`country`,`location`,`birth`,`tel`,`mobile`,`ref`,`created`) '.
             "VALUES ('$type','$email','$password','$name','$gender','$country','$location','$birth','$tel','$mobile','$ref', NULL)";
         if (!$mysqli->query($sql_string)) {
             $output = array('status' => false, 'message' => '操作錯誤，請稍後再試！', 'sql' => $sql_string);
             echo json_encode($output);
             exit;
-        } else {
+        } else { // 資料送出，更新會員編號
+            $last_id = $mysqli->insert_id;
+            $m_id = str_pad($last_id, 5, '0', STR_PAD_LEFT);
+            switch ($type) {
+                case '1':
+                    $m_id = 'A'.$m_id;
+                    break;
+                case '2':
+                    $m_id = 'B'.$m_id;
+                    break;
+                case '3':
+                    $m_id = 'C'.$m_id;
+                    break;
+                default:
+                    break;
+            }
+            $update_string = "UPDATE `user` SET `member_id`=$m_id WHERE `id`=$last_id";
+            if (!$mysqli->query($update_string)) {
+                $output = array('status' => false, 'message' => '操作錯誤，請稍後再試！', 'sql' => $sql_string);
+                echo json_encode($output);
+                exit;
+            } else {
+            }
             $output = array('status' => true, 'message' => '註冊成功，請使用帳號登入!', 'sql' => $sql_string);
             echo json_encode($output);
 
