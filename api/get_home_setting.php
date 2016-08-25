@@ -5,7 +5,7 @@ header('Access-Control-Allow-Methods: GET, POST');
 
 include 'db_setting.php';
 
-$sql_string = 'SSELECT * FROM `home_setting` ORDER BY `position`';
+$sql_string = 'SELECT * FROM `home_setting` ORDER BY `position`';
 $sql = $mysqli->query($sql_string);
 if ($sql->num_rows > 0) {
     while ($r = mysqli_fetch_assoc($sql)) {

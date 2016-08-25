@@ -180,10 +180,34 @@ $(document).on('pagecreate', '#home', function() {
 				var setting = data.result;
 				var home_img = $('.home-img');
 				$.each(setting, function(idx, obj) {
-					home_img.eq(idx).attr('src', './img/' + obj.pic);
+					home_img.eq(idx).attr('src', 'http://52.69.53.255/KCCordova/www/img/' + obj.pic);
+					home_img.eq(idx).parent('a').attr('href', link_to_url(obj.link));
 				});
 			}
 		});
+
+	function link_to_url(link) {
+		switch (link) {
+			case 'club':
+				return './club.html'
+				break;
+			case 'seeker':
+				return "./jobseeker.html";
+				break;
+			case 'life':
+				return './lifeservice.html'
+				break;
+			case 'news':
+				return "./menu.html#news";
+				break;
+			case 'homepages':
+				return 'http://www.kelly-club.com/'
+				break;
+			default:
+				return "#";
+				break;
+		}
+	}
 	$.ajax('http://52.69.53.255/KCCordova/api/getAdsHome.json')
 		.done(function(res) {
 			var result = res[0];
@@ -196,9 +220,8 @@ $(document).on('pagecreate', '#home', function() {
 				console.log(ads1);
 				ads1.find('a').attr('href', result.ads[0].adsUrl);
 				ads2.find('a').attr('href', result.ads[1].adsUrl);
-
-				ads1.find('img').attr('src', './img/' + result.ads[0].adsImage);
-				ads2.find('img').attr('src', './img/' + result.ads[1].adsImage);
+				ads1.find('img').attr('src', 'http://52.69.53.255/KCCordova/www/img/' + result.ads[0].adsImage);
+				ads2.find('img').attr('src', 'http://52.69.53.255/KCCordova/www/img/' + result.ads[1].adsImage);
 
 				$('#ads-home').show();
 			}
