@@ -65,9 +65,7 @@ $(document).on('pagebeforecreate', '#share', function() {
 					facebookConnectPlugin.login(['email', 'public_profile'], function(response) {
 						share_kelly();
 					}, function(err) {
-						// RequestsService.sendData(err);
-						alert(err);
-						alert('an error occured while trying to login. please try again.');
+						alert('error:' + JSON.stringify(err));
 					});
 
 				}
@@ -84,8 +82,8 @@ $(document).on('pagebeforecreate', '#share', function() {
 			facebookConnectPlugin.showDialog(options, function(result) {
 					alert("Posted. " + JSON.stringify(result));
 				},
-				function(e) {
-					alert("Failed: " + e);
+				function(err) {
+					alert("Failed: " + JSON.stringify(err));
 				});
 
 		}

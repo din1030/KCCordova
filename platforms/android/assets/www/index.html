@@ -133,7 +133,7 @@
             </div>
         </div>
 
-        <!-- in app log in -->
+        <!-- in app reg -->
         <div data-role="page" id="app-reg" data-theme="a" class="pink-bg">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
@@ -141,9 +141,6 @@
                         取消
                     </a>
                     <span class="page-title">填寫註冊資料</span>
-                    <!-- <button id="login-btn" class="float-right no-bg-bd">
-                        送出
-                    </button> -->
                 </div>
             </div>
             <div data-role="main" class="ui-content log-operation" id="app-reg-main">
@@ -182,7 +179,7 @@
                         <!-- 大頭 -->
                         <div class="ui-field-contain">
                             <label for="rg_ref">推薦人編號</label>
-                            <input type="text" name="rg_ref" id="rg_ref" placeholder="" class="" value="">
+                            <input type="text" name="rg_ref" id="rg_ref" placeholder="例：A00001" class="" value="">
                             <!-- <div class="form-hint">請填寫推薦人之帳號(Email)</div> -->
                         </div>
                         <div class="ui-field-contain">
@@ -246,6 +243,121 @@
                     <div class="log-info">
                         只要註冊並登入 Kelly Club
                         <br>即可使用 APP專屬身分優質服務
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- fb reg -->
+        <div data-role="page" id="fb-reg" data-theme="a" class="pink-bg">
+            <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
+                <div style="width:100%; text-align:center;">
+                    <a href="#login" class="ui-link float-left header-link left-link">
+                        取消
+                    </a>
+                    <span class="page-title">填寫資料</span>
+                </div>
+            </div>
+            <div data-role="main" class="ui-content log-operation" id="fb-reg-main">
+                <div id="logo">
+                    <img src="./img/logo_color.png" alt="" />
+                    <div id="subtitle">
+                        全省八大行業
+                        <br> 資訊專用APP平台
+                    </div>
+                </div>
+                <div id="login-form-block">
+                    <form id="fb-reg-form" data-ajax="false">
+                        <div class="ui-field-contain">
+                            <label for="member_type">註冊身分</label>
+                            <select name="member_type" id="member_type">
+                                <option value="1" selected>一般會員</option>
+                                <option value="2">店家管理員</option>
+                                <option value="3">求職者</option>
+                            </select>
+                        </div>
+                        <div class="ui-field-contain">
+                            <label for="rg_email">帳號</label>
+                            <input type="email" name="rg_email" id="rg_email" placeholder="請填寫您的 E-mail" class="required email" value="">
+                            <!-- <div class="form-hint">請填寫有效 E-mail 格式</div> -->
+                        </div>
+                        <!-- <div class="ui-field-contain">
+                            <label for="rg_pswd">密碼</label>
+                            <input type="password" name="rg_pswd" id="rg_pswd" placeholder="請填寫4-16字元英數字" class="required" minlength="4" maxlength="16" value="">
+                            <div class="form-hint">密碼無效</div>
+                        </div>
+                        <div class="ui-field-contain">
+                            <label for="rg_pswd_chk">密碼確認</label>
+                            <input type="password" name="rg_pswd_chk" id="rg_pswd_chk" placeholder="再次輸入密碼" class="required" value="">
+                            <div class="form-hint">密碼不一致</div>
+                        </div> -->
+                        <!-- 大頭 -->
+                        <div class="ui-field-contain">
+                            <label for="rg_ref">推薦人編號</label>
+                            <input type="text" name="rg_ref" id="rg_ref" class="" value="" placeholder="例：A00001">
+                            <!-- <div class="form-hint">請填寫推薦人之帳號(Email)</div> -->
+                        </div>
+                        <div class="ui-field-contain">
+                            <label for="rg_name">姓名</label>
+                            <input type="text" name="rg_name" id="rg_name" placeholder="" class="required" value="">
+                            <!-- <div class="form-hint">請填寫您的姓名</div> -->
+                        </div>
+                        <div class="ui-field-contain">
+                            <label>性別</label>
+                            <fieldset data-role="controlgroup" data-type="horizontal">
+                                <label for="genderb">
+                                    <input type="radio" name="rg_gender" id="genderb" value="0"> 女
+                                </label>
+                                <label for="gendera">
+                                    <input type="radio" name="rg_gender" id="gendera" value="1"> 男
+                                </label>
+                                <label for="genderc">
+                                    <input type="radio" name="rg_gender" id="genderc" value="2"> 第三性
+                                </label>
+                            </fieldset>
+                        </div>
+                        <div class="ui-field-contain">
+                            <label for="rg_country">所在國家</label>
+                            <select name="rg_country" id="rg_country">
+                                <option value="TW" selected>台灣</option>
+                                <option value="TH">日本</option>
+                                <option value="CN">中國</option>
+                            </select>
+                        </div>
+                        <div class="ui-field-contain">
+                            <label for="rg_location">所在區域</label>
+                            <select name="rg_location" id="rg_location">
+                                <option value="1" selected>基隆</option>
+                                <option value="2">台北</option>
+                                <option value="3">桃園</option>
+                                <option value="4">新竹</option>
+                            </select>
+                        </div>
+                        <div class="ui-field-contain">
+                            <label for="rg_birthday">生日</label>
+                            <input type="date" name="rg_birthday" id="rg_birthday" class="required">
+                        </div>
+                        <div class="ui-field-contain">
+                            <label for="rg_tel">電話</label>
+                            <input type="tel" name="rg_tel" id="rg_tel" placeholder="" class="required" value="">
+                        </div>
+                        <div class="ui-field-contain">
+                            <label for="rg_mobile">手機</label>
+                            <input type="tel" name="rg_mobile" id="rg_mobile" placeholder="" class="required" value="">
+                        </div>
+                        <!-- <div class="ui-field-contain">
+                            <label for="rg_codes">驗證碼</label>
+                            <input type="text" name="rg_codes" id="rg_codes" placeholder="" class="required" value="">
+                            <div class="form-hint">驗證碼不正確</div>
+                        </div> -->
+                        <p style="font-size:0.8em; text-align:justify;">
+                            當您同意註冊本服務，表示您已年滿18歲，必已了解並同意接受<a href="">服務條款</a>，「店家」及「求職者」註冊需經管理者審核身分確認，審核通過後將通知您並開通APP功能。
+                        </p>
+                        <button id="fb-reg-submit-btn" class="ui-btn ui-corner-all" type="submit">送出註冊資料</button>
+                    </form>
+                    <div class="log-info">
+                        只要註冊並登入 Kelly Club
+                        <br>即可使用 APP 專屬身分優質服務
                     </div>
                 </div>
             </div>

@@ -6,36 +6,53 @@ $(document).on('pagecreate', "[data-role='page']", function() {
 });
 
 $(document).on('pagecreate', '#login', function() {
-
 	$('#fb_login_btn').click(function(event) {
-		facebookConnectPlugin.login(['email', 'public_profile'], function(response) {
-			// me.logged_in = true;
-			alert('logged in successfully');
-			alert(JSON.stringify(response.authResponse));
-			// facebookConnectPlugin.getLoginStatus(
-			// 	function(status) {
-			// 		alert("current status: " + JSON.stringify(status));
-			// 		var options = {
-			// 			method: "feed",
-			// 			link: "http://example.com",
-			// 			caption: "Such caption, very feed."
-			// 		};
-			// 		facebookConnectPlugin.showDialog(options, function(result) {
-			// 				alert("Posted. " + JSON.stringify(result));
-			// 			},
-			// 			function(e) {
-			// 				alert("Failed: " + e);
-			// 			});
-			// 	}
-			// );
-			$.mobile.changePage("#home");
-			// $.mobile.changePage("#app-reg");
-		}, function(err) {
-			// RequestsService.sendData(err);
-			alert(err);
-			alert('an error occured while trying to login. please try again.');
-		});
+		facebookConnectPlugin.getLoginStatus(
+			function(response) {
+				alert("current status: " + JSON.stringify(response));
+				if (response.status === 'connected') {
+					// alert('already logged, ID: ' + response.authResponse.userID);
+					$.ajax({
+							url: 'http://52.69.53.255/KCCordova/api/user_action.php',
+							dataType: 'json',
+							type: 'POST',
+							data: {
+								action: 'fb_log',
+								fb_id: response.authResponse.userID
+							}
+						})
+						.done(function(result) {
+							if (result.status) {
+								window.localStorage.setItem('user_id', result.user_id);
+								window.localStorage.setItem('fb_id', response.authResponse.userID);
+								window.localStorage.setItem('user', result.user);
+								window.localStorage.setItem('auth', result.auth);
+								window.localStorage.setItem('name', result.name);
+								window.localStorage.setItem('user_info', result.user_info);
+								alert(window.localStorage.getItem('name') + ' ' + window.localStorage.getItem('user') + '(' + window.localStorage.getItem('auth') + ')');
+								$.mobile.changePage("#home");
+							} else {
+								alert(result.message);
+							}
+						});
+				} else {
+					// the user isn't logged in to Facebook.
+					fbLogin();
+				}
 
+				function fbLogin() {
+					facebookConnectPlugin.login(['email', 'public_profile'], function(response) {
+						// alert('logged in successfully');
+						alert('now logged, ID: ' + response.authResponse.userID);
+						window.localStorage.setItem('fb_id', response.authResponse.userID);
+						$.mobile.changePage("#fb-reg");
+
+					}, function(err) {
+						alert('log in error:' + JSON.stringify(err));
+					});
+				}
+			}
+		);
 	});
 });
 
@@ -130,6 +147,85 @@ $(document).on('pagecreate', '#app-reg', function() {
 
 	$('#reg-submit-btn').click(function() {
 		$('#app-reg-form').valid();
+		// return false; // cancel original event to prevent form submitting
+	});
+});
+
+$(document).on('pagecreate', '#fb-reg', function() {
+	$('#fb-reg-form').validate({
+		submitHandler: function(form) {
+			$('#fb-reg-form').ajaxSubmit({
+				url: 'http://52.69.53.255/KCCordova/api/user_action.php',
+				data: {
+					action: 'fb_reg',
+					formData: $('#fb-reg-form').serialize(),
+					fb_id: window.localStorage.getItem('fb_id')
+				},
+				type: 'POST',
+				async: 'true',
+				dataType: 'json',
+				beforeSend: function() {
+					$.mobile.loading('show');
+				},
+				complete: function() {
+					$.mobile.loading('hide');
+				},
+				success: function(result) {
+					if (result.status) {
+						alert(result.message);
+						$.mobile.changePage("#home");
+					} else {
+						alert(result.message);
+					}
+				},
+				error: function(request, error) {
+					alert('請確認您的網路連線狀態！');
+				}
+			});
+		},
+		rules: {
+			rg_gender: {
+				required: true
+			}
+		},
+		messages: {
+			rg_email: {
+				required: "請填寫您的 E-mail",
+				email: "請填寫有效 E-mail 格式"
+			},
+			rg_recommend: {
+				required: "請填寫推薦人之會員編號",
+			},
+			rg_name: {
+				required: "請填寫您的姓名"
+			},
+			rg_gender: {
+				required: "請選擇您的性別"
+			},
+			rg_birthday: {
+				required: "請填寫您的生日"
+			},
+			rg_tel: {
+				required: "請填寫您的電話"
+			},
+			rg_mobile: {
+				required: "請填寫您的手機號碼"
+			}
+		},
+		errorElement: "div",
+		errorClass: "form-hint",
+		errorPlacement: function(error, element) {
+			if (element.is(':radio') || element.is(':checkbox')) {
+				var eid = element.attr('name');
+				error.appendTo($('input[name=' + eid + ']:last').parents('.ui-field-contain'));
+			} else {
+				error.appendTo(element.parents('.ui-field-contain'));
+			}
+		}
+	});
+
+	$('#fb-reg-submit-btn').click(function() {
+		$('#fb-reg-form').valid();
 		// return false; // cancel original event to prevent form submitting
 	});
 });
