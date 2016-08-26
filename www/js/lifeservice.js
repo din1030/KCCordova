@@ -78,8 +78,11 @@ $(document).on('pagebeforeshow', '#lifeservice-list', function() {
 	}
 
 	function _init() {
-		$.each(dataJson, function(idx, obj) {
-			if (obj.id === currentViewId) {
+		// console.log(dataJson.result);
+		$.each(dataJson.result, function(idx, obj) {
+			if (obj.id == currentViewId) {
+				console.log(obj.id + '/' + currentViewId);
+				console.log(obj.store);
 				classListRefresh(obj.store);
 			}
 		});
@@ -87,8 +90,8 @@ $(document).on('pagebeforeshow', '#lifeservice-list', function() {
 
 	function classListRefresh(store) {
 		var store_list = '';
-		$.each(store, function(i, data) {
-			store_list += '<li data-icon="false"><a href="" data-shop-id="' + data.shop_id + '" data-ajax="false"><img src="' + data.img + '"><h2>' + data.name + '</h2><p>' + data.shop_location + '</p><div class="slogan">' + data.shop_slogan + '</div></a></li>';
+		$.each(store, function(idx, obj) {
+			store_list += '<li obj-icon="false"><a  obj-shop-id="' + obj.id + '" obj-ajax="false"><img src="' + obj.pic1 + '"><h2>' + obj.name + '</h2><p>' + obj.country + ' ' + obj.area + '</p><div class="slogan">' + obj.slogan + '</div></a></li>';
 		})
 
 		$('#lifeservice-list-main ul').html(store_list);

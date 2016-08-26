@@ -15,6 +15,7 @@ if ($sql->num_rows > 0) {
         }
         $r['store'] = $store;
         $output[] = $r;
+        unset($store);
     }
     echo json_encode(array('status' => true, 'result' => $output));
 } else {
