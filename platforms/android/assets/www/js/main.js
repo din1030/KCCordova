@@ -2,6 +2,7 @@ var memberType = 1;
 var memberId;
 
 $(document).ready(function() {
+	alert($(window).width());
 	$("[data-role='navbar']:not(.internal)").navbar();
 	$("[data-role='footer']:not(.internal)").toolbar();
 

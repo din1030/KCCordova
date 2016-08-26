@@ -10,8 +10,13 @@ $(document).on('pagebeforeshow', '#member-profile, #club-profile, #jobseeker-pro
 			$('.tel-input').val(data.result.tel);
 			$('.mobile-input').val(data.result.mobile);
 			if (data.result.type == 2) {
-				$('#plan-input').val(data.result.plan_title);
-				$('#plan-during-input').val(data.result.publish_start + '-' + data.result.publish_due);
+				if (data.result.plan_title != null) {
+					$('#plan-input').val(data.result.plan_title);
+					$('#plan-during-input').val(data.result.publish_start + '-' + data.result.publish_due);
+					$('#plan-during-input').parent().parent().show();
+				} else {
+					$('#plan-during-input').parent().parent().hide();
+				}
 			}
 		}
 	});
