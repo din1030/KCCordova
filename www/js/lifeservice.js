@@ -50,6 +50,7 @@ $(document).on('pagebeforeshow', '#lifeservice-list', function() {
 			dataType: 'json'
 		}).success(function(data) {
 			if (data.status) {
+				console.log('list ajax call');
 				dataJson = data;
 				$.each(data.result, function(idx, obj) {
 					list += '<option value="' + obj.id + '">' + obj.title + '</option>';
@@ -64,13 +65,9 @@ $(document).on('pagebeforeshow', '#lifeservice-list', function() {
 		$.each(dataJson.result, function(idx, obj) {
 			list += '<option value="' + obj.id + '">' + obj.title + '</option>';
 		});
-
 		$('#lifeservice-category-select').html(list);
-		$('#lifeservice-category-select')[0].selectedIndex = currentViewId - 1;
-		$('#lifeservice-category-select').selectmenu('refresh');
+		$('#lifeservice-category-select').val(currentViewId).selectmenu('refresh');
 	}
-
-
 
 	// check if it come from search state
 	if (searchState) {
@@ -80,25 +77,25 @@ $(document).on('pagebeforeshow', '#lifeservice-list', function() {
 		_init();
 	}
 
-
-
-	function classListRefresh(val) {
-		var shopList = '';
-		$.each(val, function(i, data) {
-			shopList += '<li data-icon="false"><a href="" data-shop-id="' + data.shop_id + '" data-ajax="false"><img src="' + data.img + '"><h2>' + data.name + '</h2><p>' + data.shop_location + '</p><div class="slogan">' + data.shop_slogan + '</div></a></li>';
-		})
-
-		$('#lifeservice-list-main ul').html(shopList);
-		$('#lifeservice-list-main ul').listview('refresh');
-	}
-
 	function _init() {
 		$.each(dataJson, function(idx, obj) {
-			if (obj._id === currentViewId) {
-				classListRefresh(obj._shop);
+			if (obj.id === currentViewId) {
+				classListRefresh(obj.store);
 			}
 		});
 	}
+
+	function classListRefresh(store) {
+		var store_list = '';
+		$.each(store, function(i, data) {
+			store_list += '<li data-icon="false"><a href="" data-shop-id="' + data.shop_id + '" data-ajax="false"><img src="' + data.img + '"><h2>' + data.name + '</h2><p>' + data.shop_location + '</p><div class="slogan">' + data.shop_slogan + '</div></a></li>';
+		})
+
+		$('#lifeservice-list-main ul').html(store_list);
+		$('#lifeservice-list-main ul').listview('refresh');
+	}
+
+
 
 
 	//event handler
