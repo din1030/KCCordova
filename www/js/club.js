@@ -202,6 +202,9 @@ $(document).on('pagebeforeshow', "#club-service", function() {
 						ui.oldTab.children('a').removeClass('active');
 					}
 				});
+				$('#consume_first').show();
+			} else {
+				$('#consume_first').hide();
 			}
 			if (club.title2 != null) {
 				var tabs = ['<div data-role="tabs" id="second_tabs" class="service-tabs"><div data-role="navbar"><ul>'];
@@ -226,6 +229,9 @@ $(document).on('pagebeforeshow', "#club-service", function() {
 						ui.oldTab.children('a').removeClass('active');
 					}
 				});
+				$('#consume_second').show();
+			} else {
+				$('#consume_second').hide();
 			}
 			$('[data-role="tabs"] li:first-child a').each(function() {
 				$(this).addClass('active');
