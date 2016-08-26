@@ -201,6 +201,10 @@ textarea {
 #lifeservice-list .ui-listview > .ui-li-has-thumb > .ui-btn {
   padding-left: 7em;
 }
+#lifeservice-list .life-thumbnail {
+  height: 100%;
+  max-width: calc(7em - 10px);
+}
 .msg_block .msg-badge {
   background: #ae53c9;
   color: #fff;
