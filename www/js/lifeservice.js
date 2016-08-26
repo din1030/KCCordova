@@ -116,42 +116,44 @@ $(document).on('pagebeforeshow', '#lifeservice-list', function() {
 $(document).on('pagebeforeshow', '#lifeservice-detail', function() {
 	$('#lifeservice-list-main').off(); // remove event delegation from other pages
 	$('#lifeservice-detail-main').off(); // remove event delegation from other pages
+	console.log(store_id);
+	if (store_id != null && store_id != 0) {
+		$.ajax({
+			url: 'http://52.69.53.255/KCCordova/api/get_lifeservice_detail.php?store_id=' + store_id,
+			dataType: 'json'
+		}).success(function(data) {
+			if (data.status) {
+				var service = data.result[0];
+				var details = '<div id="club_title">' + service.name + '</div>地址：' + service.address + '<br>電話：' + service.tel + '<br>營業時間：<br>';
+				var contactInfo = '<div class="avatar float-left"><img src="http://52.69.53.255/KCCordova/www/img/' + service.contact_pic + '" alt="" style="width: 70px; height: 70px; border-radius: 50%;"></div><strong>' + service.contact_name + '</strong><small>預約窗口</small><br> Line:' + service.contact_line;
+				var consume_content = service.consume_content;
+				var slideContainer = '<ul class="slides">';
 
-	$.ajax({
-		url: 'http://52.69.53.255/KCCordova/api/get_lifeservice_detail.php?store_id=' + store_id,
-		dataType: 'json'
-	}).success(function(data) {
-		if (data.status) {
-			var service = data.result;
-			var details = '<div id="club_title">' + service.name + '</div>地址：' + service.address + '<br>電話：' + service.tel + '<br>營業時間：<br>';
-			var contactInfo = '<div class="avatar float-left"><img src="http://52.69.53.255/KCCordova/www/img/' + service.contact_pic + '" alt="" style="width: 70px; height: 70px; border-radius: 50%;"></div><strong>' + service.contact_name + '</strong><small>預約窗口</small><br> Line:' + service.contact_line;
-			var consume_content = service.consume_content;
-			var slideContainer = '<ul class="slides">';
+				$.each(service.opentime, function(idx, obj) {
+					details += obj + '<br>';
+				});
 
-			$.each(service.opentime, function(idx, obj) {
-				details += obj + '<br>';
-			});
+				details += '<div id="action_block" class="text-right"><a href="' + service.website + '" class="ui-btn ui-btn-inline no-bg-bd" rel="external" data-ajax="false"><img src="./img/icons/official_site.png" alt=""></a>	<button type="button" id="addFv" data-id="' + service.id + '" class="no-bg-bd ui-btn ui-btn-inline"><img src="./img/icons/fav_gray.png" alt=""></button></div>'
 
-			details += '<div id="action_block" class="text-right"><a href="' + service.website + '" class="ui-btn ui-btn-inline no-bg-bd" rel="external" data-ajax="false"><img src="./img/icons/official_site.png" alt=""></a>	<button type="button" id="addFv" data-id="' + service.id + '" class="no-bg-bd ui-btn ui-btn-inline"><img src="./img/icons/fav_gray.png" alt=""></button></div>'
+				$.each(service.pic, function(idx, pic) {
+					slideContainer += '<li><img src="http://52.69.53.255/KCCordova/www/img/' + pic + '"></li>'
+				});
 
-			// $.each(service.consume_content, function(i, v) {
-			// 	detailsProduct += '<p>' + v + '</p>'
-			// });
+				slideContainer += '</ul>';
 
-			$.each(service.pic, function(idx, pic) {
-				slideContainer += '<li><img src="http://52.69.53.255/KCCordova/www/img/' + pic + '"></li>'
-			});
-
-			slideContainer += '</ul>';
-
-			$('.flexslider').html(slideContainer);
-			$('#info_block .ui-body-a').html(details);
-			$('#contact_block .ui-body-a').html(contactInfo);
-			$('#details_block .ui-body-a').html(consume_content);
-			$('#compaign_block .ui-body-a').html(data.promo_content);
-		}
-
-	});
+				$('.flexslider').html(slideContainer);
+				$('#info_block .ui-body-a').html(details);
+				$('#contact_block .ui-body-a').html(contactInfo);
+				$('#details_block .ui-body-a').html(consume_content);
+				$('#compaign_block .ui-body-a').html(service.promo_content);
+			}
+		});
+	} else {
+		$.mobile.changePage($('#lifeservice'), {
+			reloadPage: true,
+			changeHash: true
+		});
+	}
 
 	$('#lifeservice-detail-main').on('click', '#addFv', function(e) {
 		var id = $(this).jqmData('id');

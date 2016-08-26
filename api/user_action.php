@@ -20,7 +20,7 @@ if ($action == 'reg') { // For Register
     $name = $params['rg_name'];
     $gender = $params['rg_gender'];
     $country = $params['rg_country'];
-    $location = $params['rg_location'];
+    $area = $params['rg_area'];
     $birth = $params['rg_birthday'];
     $tel = $params['rg_tel'];
     $mobile = $params['rg_mobile'];
@@ -50,8 +50,8 @@ if ($action == 'reg') { // For Register
         }
 
         // 儲存資料
-        $sql_string = 'INSERT INTO `user`(`type`,`email`,`password`,`name`,`gender`,`country`,`location`,`birth`,`tel`,`mobile`,`ref`,`created`) '.
-            "VALUES ('$type','$email','$password','$name','$gender','$country','$location','$birth','$tel','$mobile','$ref', NULL)";
+        $sql_string = 'INSERT INTO `user`(`type`,`email`,`password`,`name`,`gender`,`country`,`area`,`birth`,`tel`,`mobile`,`ref`,`created`) '.
+            "VALUES ('$type','$email','$password','$name','$gender','$country','$area','$birth','$tel','$mobile','$ref', NULL)";
         $mysqli->query($sql_string);
         if ($mysqli->affected_rows > 0) {
             // 資料送出，更新會員編號
@@ -101,7 +101,7 @@ if ($action == 'reg') { // For Register
     $name = $params['rg_name'];
     $gender = $params['rg_gender'];
     $country = $params['rg_country'];
-    $location = $params['rg_location'];
+    $area = $params['rg_area'];
     $birth = $params['rg_birthday'];
     $tel = $params['rg_tel'];
     $mobile = $params['rg_mobile'];
@@ -130,8 +130,8 @@ if ($action == 'reg') { // For Register
         }
 
         // 儲存資料
-        $sql_string = 'INSERT INTO `user`(`fb_id`,`type`,`email`,`name`,`gender`,`country`,`location`,`birth`,`tel`,`mobile`,`ref_id`,`created`) '.
-            "VALUES('$fb_id','$type','$email','$name','$gender','$country','$location','$birth','$tel','$mobile','$ref', NULL)";
+        $sql_string = 'INSERT INTO `user`(`fb_id`,`type`,`email`,`name`,`gender`,`country`,`area`,`birth`,`tel`,`mobile`,`ref_id`,`created`) '.
+            "VALUES('$fb_id','$type','$email','$name','$gender','$country','$area','$birth','$tel','$mobile','$ref', NULL)";
         $mysqli->query($sql_string);
         if ($mysqli->affected_rows > 0) {
             // 資料送出，更新會員編號
