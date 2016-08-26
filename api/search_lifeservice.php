@@ -17,6 +17,6 @@ if ($sql->num_rows > 0) {
     }
     echo json_encode(array('status' => true, 'result' => $output));
 } else {
-    $output = array('status' => false, 'message' => '請重新操作');
+    $output = array('status' => false, 'message' => '沒有符合的結果，請重新查詢。');
     echo json_encode($output);
 }

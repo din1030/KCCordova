@@ -7,7 +7,7 @@ $(document).on('pagebeforecreate', '#club', function() {
 			var clubs = data.result;
 			$.each(clubs, function(idx, obj) {
 				var club_li = $('<li></li>').attr('data-icon', 'false').attr('data-admin-id', obj.admin_id)
-					.append('<a href="" data-admin-id="' + obj.admin_id + '" data-ajax="false"><img src="./img/square_img.jpg"><h2>' + obj.name + '</h2><p>' + obj.country + ' ' + obj.area + '｜</p><div class="slogan">' + obj.slogan + '</div><p class="update-time">更新時間 ' + obj.updated + '</p></a>');
+					.append('<a href="" data-admin-id="' + obj.admin_id + '" data-ajax="false"><img class="club-thumbnail" src="http://52.69.53.255/KCCordova/www/img/' + obj.pic1 + '"><h2>' + obj.name + '</h2><p>' + obj.country + ' ' + obj.area + '｜</p><div class="slogan">' + obj.slogan + '</div><p class="update-time">更新時間 ' + obj.updated + '</p></a>');
 				$(club_li).appendTo($('#club_list'));
 			});
 			$('#club_list').listview('refresh');
@@ -44,6 +44,14 @@ $(document).on('pagebeforeshow', '#club-intro', function() {
 				}
 			}
 			$('#website-link').attr('href', club.website);
+			var slideContainer = '<ul class="slides">';
+			$.each(club.pic, function(idx, pic) {
+				slideContainer += '<li><img src="http://52.69.53.255/KCCordova/www/img/' + pic + '"></li>'
+			});
+
+			slideContainer += '</ul>';
+
+			$('.flexslider').html(slideContainer);
 			$('#club-intro .add-fav-btn').click(function(event) {
 				$.ajax({
 					url: 'http://52.69.53.255/KCCordova/api/add_fav.php?user_id=' + window.localStorage.getItem('user_id') + '&type=2&item_id=' + get_club_id,
