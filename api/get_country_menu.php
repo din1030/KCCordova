@@ -14,15 +14,12 @@ if ($sql->num_rows > 0) {
     $country = array();
     foreach ($sql as $row) {
         if ($row['c_id'] == $c_id) {
-            array_push($country[$c_id]['area'], array($row['a_id'], $row['area']));
+            array_push($country[$c_id]['area'], array('a_id' => $row['a_id'], 'name' => $row['area']));
         } else {
-            // if ($c_id != 0) {
-                // $output[] = $country;
-            // }
             $c_id = $row['c_id'];
             $country[$c_id]['country'] = $row['country'];
             $country[$c_id]['area'] = array();
-            array_push($country[$c_id]['area'], array($row['a_id'], $row['area']));
+            array_push($country[$c_id]['area'], array('a_id' => $row['a_id'], 'name' => $row['area']));
         }
     }
     // $output[] = $country;

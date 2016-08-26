@@ -87,18 +87,25 @@ $(document).on('pagecreate', function() {
 	$("#menu-panel").panel();
 
 	$.ajax({
-			url: 'http://52.69.53.255/KCCordova/api/get_country_menu.php',
-			dataType: 'json'
-		})
-		.done(function() {
-			console.log("success");
-		})
-		.fail(function() {
-			console.log("error");
-		})
-		.always(function() {
-			console.log("complete");
-		});
+		url: 'http://52.69.53.255/KCCordova/api/get_country_menu.php',
+		dataType: 'json'
+	}).done(function(data) {
+		if (data.status) {
+			var c_list = '';
+			$.each(data.result, function(idx, obj) {
+				c_list += '<option value="' + idx + '">' + obj.country + '</option>';
+			});
+			$('select.country-select').html(c_list);
+			$('select.country-select').selectmenu('refresh');
+
+			var a_list = '';
+			$.each(data.result[], function(idx, obj) {
+				a_list += '<option value="' + obj.a_id + '">' + obj.name + '</option>';
+			});
+			$('select.area-select').html(a_list);
+			$('select.area-select').selectmenu('refresh');
+		}
+	});
 
 });
 
