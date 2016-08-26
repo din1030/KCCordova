@@ -11,16 +11,19 @@ if ($sql->num_rows > 0) {
     //     $output[] = $r;
     // }
     $c_id = 0;
+    $country = array();
     foreach ($sql as $row) {
         if ($row['c_id'] == $c_id) {
             array_push($country[$c_id]['area'], array($row['a_id'], $row['area']));
         } else {
+            if ($c_id != 0) {
+                $output[] = $country;
+            }
             $c_id = $row['c_id'];
             $country[$c_id]['country'] = $row['country'];
             $country[$c_id]['area'] = array();
             array_push($country[$c_id]['area'], array($row['a_id'], $row['area']));
         }
-        $output[] = $country;
     }
     echo json_encode(array('status' => true, 'result' => $output));
 } else {
