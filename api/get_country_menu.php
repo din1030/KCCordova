@@ -25,6 +25,7 @@ if ($sql->num_rows > 0) {
             array_push($country[$c_id]['area'], array($row['a_id'], $row['area']));
         }
     }
+    $output[] = $country;
     echo json_encode(array('status' => true, 'result' => $output));
 } else {
     $output = array('status' => false, 'message' => '請重新操作');
