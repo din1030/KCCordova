@@ -96,10 +96,10 @@ $(document).on('pagecreate', function() {
 				c_list += '<option value="' + idx + '">' + obj.country + '</option>';
 			});
 			$('select.country-select').html(c_list);
-			$('select.country-select').selectmenu('refresh');
+			$('select.country-select').val('1').selectmenu('refresh');
 
 			var a_list = '';
-			$.each(data.result[], function(idx, obj) {
+			$.each(data.result[1].area, function(idx, obj) {
 				a_list += '<option value="' + obj.a_id + '">' + obj.name + '</option>';
 			});
 			$('select.area-select').html(a_list);
