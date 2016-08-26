@@ -93,17 +93,36 @@ $(document).on('pagecreate', function() {
 		if (data.status) {
 			var c_list = '';
 			$.each(data.result, function(idx, obj) {
-				c_list += '<option value="' + idx + '">' + obj.country + '</option>';
+				c_list += '<option value="' + obj.id + '">' + obj.country + '</option>';
 			});
-			$('select.country-select').html(c_list);
-			$('select.country-select').val('1').selectmenu('refresh');
+			var page_id = $.mobile.activePage.attr('id');
+			$('#' + page_id + ' select.country-select').html(c_list);
+			$('#' + page_id + ' select.country-select').selectmenu('refresh');
 
 			var a_list = '';
-			$.each(data.result[1].area, function(idx, obj) {
+			$.each(data.result[0].area, function(idx, obj) {
 				a_list += '<option value="' + obj.a_id + '">' + obj.name + '</option>';
 			});
-			$('select.area-select').html(a_list);
-			$('select.area-select').selectmenu('refresh');
+			$('#' + page_id + ' select.area-select').html(a_list);
+			$('#' + page_id + ' select.area-select').selectmenu('refresh');
+
+			$('#' + page_id + ' select.country-select').change(function(event) {
+				a_list = '';
+				var c_id = $(this).val();
+				console.log(c_id);
+				$.each(data.result, function(idx, obj) {
+					// console.log(obj.id);
+					if (obj.id == c_id) {
+						// console.log(obj.id);
+						$.each(obj.area, function(idx, area) {
+							// console.log(obj.id);
+							a_list += '<option value="' + area.a_id + '">' + area.name + '</option>';
+							$('#' + page_id + ' select.area-select').html(a_list);
+							$('#' + page_id + ' select.area-select').selectmenu('refresh');
+						});
+					}
+				});
+			});
 		}
 	});
 

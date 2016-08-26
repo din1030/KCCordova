@@ -179,99 +179,82 @@ $(document).on('pagebeforeshow', '#lifeservice-detail', function() {
 $(document).on('pagebeforeshow', '#lifeservice-search', function() {
 	//off any unwanted event  place to garbage collector
 	$('#lifeservice-detail-main').off();
-	$('#club_type').off();
 
 	$.ajax({
-		url: 'http://52.69.53.255/KCCordova/api/get_lifeservice_list.json',
+		url: 'http://52.69.53.255/KCCordova/api/get_form_content.php?action=get_category&type=life',
 		dataType: 'json'
 	}).done(function(data) {
 		console.log(data);
-		var list = '';
 		var classificationList = '';
-
-		$.each(data._state, function(i, v) {
-			list += '<option value="' + v.value + '">' + v.name + '</option>';
+		$.each(data, function(idx, obj) {
+			classificationList += '<option value="' + obj.id + '">' + obj.title + '</option>';
 		});
-
-		$.each(data._classification, function(i, v) {
-			classificationList += '<option value="' + v.id + '">' + v.name + '</option>';
-		});
-
-		$('#county').html(list);
-		$('#county').selectmenu('refresh');
 		$('#club_type').html(classificationList);
 		$('#club_type').selectmenu('refresh');
 
-		$('#club_type').on('change', function() {
-			var state = $('#county').val();
-			var type = $('#club_type').val();
-			console.log('club_type changed');
+		$('#lifeservice-search-btn').on('click', function() {
+			var area = $('#county').val();
+			var type = $('#life_type').val();
+			console.log('life_type changed');
 
-			// $.ajax({
-			// 	method: "POST",
-			// 	url: '../searchLifeService.php',
-			// 	data: {
-			// 		state: state,
-			// 		type: type
-			// 	}
-			// })
-			// 		.done(function (data) {
-			// 			//return data as single object
-			// 			searchJson = data;
-			// 			searchState = true;
-			//
-			// 			$.mobile.changePage($('#lifeservice-list'), {
-			// 				reloadPage: true,
-			// 				changeHash: true
-			// 			});
-			// 		})
-
-
-			// dummy DATA and will remove later
-			searchJson = {
-				"_shop": [
-					{
-						"img": "./img/square_img.jpg",
-						"name": "Search",
-						"shop_id": 1,
-						"shop_location": "台中市 西屯區",
-						"shop_slogan": "slogan1"
-							},
-					{
-						"img": "./img/square_img.jpg",
-						"name": "Search",
-						"shop_id": 2,
-						"shop_location": "台中市 西屯區",
-						"shop_slogan": "slogan2"
-							},
-					{
-						"img": "./img/square_img.jpg",
-						"name": "Divas 美甲美睫概念館13",
-						"shop_id": 3,
-						"shop_location": "台中市 西屯區",
-						"shop_slogan": "slogan3"
-							},
-					{
-						"img": "./img/square_img.jpg",
-						"name": "Divas 美甲美睫概念館14",
-						"shop_id": 4,
-						"shop_location": "台中市 西屯區",
-						"shop_slogan": "slogan4"
-							},
-					{
-						"img": "./img/square_img.jpg",
-						"name": "Divas 美甲美睫概念館15",
-						"shop_id": 5,
-						"shop_location": "台中市 西屯區",
-						"shop_slogan": "slogan5"
-							}
-						]
-			}
-			searchState = true;
-			$.mobile.changePage($('#lifeservice-list'), {
-				reloadPage: true,
-				changeHash: true
-			});
+			$.ajax({
+					url: 'http://52.69.53.255/KCCordova/api/search_lifeservice.php?area_id=' + area + '&type=' + type,
+					dataType: 'json'
+				}).done(function(data) {
+					if (data.status) {
+						searchJson = data.result;
+						searchState = true;
+						$.mobile.changePage($('#lifeservice-list'), {
+							reloadPage: true,
+							changeHash: true
+						});
+					}
+				})
+				// dummy DATA and will remove later
+				// searchJson = {
+				// 	"_shop": [
+				// 		{
+				// 			"img": "./img/square_img.jpg",
+				// 			"name": "Search",
+				// 			"shop_id": 1,
+				// 			"shop_location": "台中市 西屯區",
+				// 			"shop_slogan": "slogan1"
+				// 				},
+				// 		{
+				// 			"img": "./img/square_img.jpg",
+				// 			"name": "Search",
+				// 			"shop_id": 2,
+				// 			"shop_location": "台中市 西屯區",
+				// 			"shop_slogan": "slogan2"
+				// 				},
+				// 		{
+				// 			"img": "./img/square_img.jpg",
+				// 			"name": "Divas 美甲美睫概念館13",
+				// 			"shop_id": 3,
+				// 			"shop_location": "台中市 西屯區",
+				// 			"shop_slogan": "slogan3"
+				// 				},
+				// 		{
+				// 			"img": "./img/square_img.jpg",
+				// 			"name": "Divas 美甲美睫概念館14",
+				// 			"shop_id": 4,
+				// 			"shop_location": "台中市 西屯區",
+				// 			"shop_slogan": "slogan4"
+				// 				},
+				// 		{
+				// 			"img": "./img/square_img.jpg",
+				// 			"name": "Divas 美甲美睫概念館15",
+				// 			"shop_id": 5,
+				// 			"shop_location": "台中市 西屯區",
+				// 			"shop_slogan": "slogan5"
+				// 				}
+				// 			]
+				// }
+				// searchState = true;
+				// $.mobile.changePage($('#lifeservice-list'), {
+				// 	reloadPage: true,
+				// 	changeHash: true
+				// });
 		});
 	});
 });
