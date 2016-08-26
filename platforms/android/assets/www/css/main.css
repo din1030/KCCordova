@@ -282,6 +282,7 @@ textarea {
 }
 #news_pic {
   max-height: 250px;
+  max-width: 100%;
 }
 #share-main {
   padding: 15px 30px;
