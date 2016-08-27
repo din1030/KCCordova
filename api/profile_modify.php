@@ -9,22 +9,6 @@ $user_id = $_POST['user_id'];
 $u_id = $_POST['u_id'];
 $tel = $_POST['tel-input'];
 $mobile = $_POST['mobile-input'];
-// foreach ($_FILES as $file) {
-//     $n = $file['name'];
-//     $s = $file['size'];
-//     if (!$n) {
-//         continue;
-//     }
-//     echo "File: $n ($s bytes)";
-// }
-// if ($_FILES['profile_photo']['error'] > 0) {
-//     echo 'Error: '.$_FILES['profile_photo']['error'];
-// } else {
-//     echo '檔案名稱: '.$_FILES['profile_photo']['name'].'<br/>';
-//     echo '檔案類型: '.$_FILES['profile_photo']['type'].'<br/>';
-//     echo '檔案大小: '.($_FILES['profile_photo']['size'] / 1024).' Kb<br />';
-//     echo '暫存名稱: '.$_FILES['profile_photo']['tmp_name'];
-// }
 
 // 判斷是否已有資料
 $sql_string = "SELECT * FROM `user` WHERE `id` = '$u_id' LIMIT 1";
@@ -32,9 +16,10 @@ $sql = $mysqli->query($sql_string);
 if ($sql->num_rows > 0) {
     $pic_string = '';
     $target_dir = '../www/img/';
-    $target_file = $target_dir.basename($_FILES['profile_photo']['name']);
+    $new_filename = $u_id.'_'.basename($_FILES['profile_photo']['name']);
+    $target_file = $target_dir.$new_filename;
     if (move_uploaded_file($_FILES['profile_photo']['tmp_name'], $target_file)) {
-        $pic_string = ",`pic`='".basename($_FILES['profile_photo']['name'])."'";
+        $pic_string = ",`pic`='".$new_filename."'";
     }
     $update_string = "UPDATE `user` SET `tel`='$tel',`mobile`='$mobile'".$pic_string." WHERE `id` = '$u_id'";
     $sql = $mysqli->query($update_string);
