@@ -29,7 +29,7 @@ $(document).on('pagebeforeshow', '#member-profile, #club-profile, #jobseeker-pro
 	});
 });
 $(document).on('pagebeforecreate', '#member-modify, #club-profile-modify, #jobseeker-profile-modify', function() {
-	$('.profile-submit-btn').off();
+	// $('.profile-submit-btn').off();
 	$('.profile-submit-btn').click(function(event) {
 		var backpage = $(this).jqmData("backpage");
 		$(this).parent('form').ajaxSubmit({
