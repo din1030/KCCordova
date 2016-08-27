@@ -45,10 +45,8 @@ $(document).on('pagebeforeshow', '#lifeservice-list', function() {
 	if (searchState) {
 		console.log(searchJson);
 		classListRefresh(searchJson);
-		// $('#lifeservice-category-select').listview("option", "disabled", true);
 		searchState = false;
 	} else {
-		// $('#lifeservice-category-select').show();
 		//if referrer come from search before all json been fetch
 		if (dataJson != '') {
 			// print all type
@@ -136,10 +134,10 @@ $(document).on('pagebeforeshow', '#lifeservice-detail', function() {
 					details += obj + '<br>';
 				});
 
-				details += '<div id="action_block" class="text-right"><a href="' + service.website + '" class="ui-btn ui-btn-inline no-bg-bd" rel="external" data-ajax="false"><img src="./img/icons/official_site.png" alt=""></a>	<button type="button" id="addFv" data-id="' + service.id + '" class="no-bg-bd ui-btn ui-btn-inline"><img src="./img/icons/fav_gray.png" alt=""></button></div>'
+				details += '<div id="action_block" class="text-right"><a href="' + service.website + '" class="ui-btn ui-btn-inline no-bg-bd" rel="external" data-ajax="false"><img src="./img/icons/official_site.png" alt=""></a>	<button type="button" id="addFv" data-id="' + service.id + '" class="no-bg-bd ui-btn ui-btn-inline add-fav-btn"><img src="./img/icons/fav_gray.png" alt=""></button></div>';
 
 				$.each(service.pic, function(idx, pic) {
-					slideContainer += '<li><img src="http://52.69.53.255/KCCordova/www/img/' + pic + '"></li>'
+					slideContainer += '<li><img src="http://52.69.53.255/KCCordova/www/img/' + pic + '"></li>';
 				});
 
 				slideContainer += '</ul>';
@@ -149,6 +147,15 @@ $(document).on('pagebeforeshow', '#lifeservice-detail', function() {
 				$('#contact_block .ui-body-a').html(contactInfo);
 				$('#details_block .ui-body-a').html(consume_content);
 				$('#compaign_block .ui-body-a').html(service.promo_content);
+				$('#lifeservice-detail-main .add-fav-btn').click(function(event) {
+					$.ajax({
+						url: 'http://52.69.53.255/KCCordova/api/add_fav.php?user_id=' + window.localStorage.getItem('user_id') + '&type=4&item_id=' + $(this).jqmData('id'),
+						dataType: 'json',
+						success: function(result) {
+							alert(result.message);
+						}
+					});
+				});
 			}
 		});
 	} else {
@@ -158,24 +165,6 @@ $(document).on('pagebeforeshow', '#lifeservice-detail', function() {
 		});
 	}
 
-	$('#lifeservice-detail-main').on('click', '#addFv', function(e) {
-		var id = $(this).jqmData('id');
-
-		// $.ajax({
-		// 	url: 'addFv.php',
-		// 	method: 'POST',
-		// 	data: {
-		// 		memberId: memberId,
-		// 		id: id
-		// 	}
-		// }).done(function(e) {
-		// 	// add style?
-		// 	alert(e);
-		// })
-
-		console.log(id, memberId);
-
-	});
 });
 
 

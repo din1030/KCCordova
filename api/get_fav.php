@@ -24,7 +24,7 @@ if ($sql->num_rows > 0) {
             $detail['type'] = 3;
             $output[] = $detail;
         } elseif ($r['type'] == 4) { //life service
-            $sql_string4 = 'SELECT `lifeservice_info`.`u_id`,`lifeservice_info`.`name`,`lifeservice_info`.`pic1`,`country`.`country`,`area`.`area` FROM `lifeservice_info`,`country`,`area` WHERE `lifeservice_info`.`country_id` = `country`.`id` AND `lifeservice_info`.`area_id` = `area`.`id` AND `lifeservice_info`.`id`='.$r['item_id'];
+            $sql_string4 = 'SELECT `lifeservice_info`.`id`,`lifeservice_info`.`name`,`lifeservice_info`.`pic1`,`country`.`country`,`area`.`area` FROM `lifeservice_info`,`country`,`area` WHERE `lifeservice_info`.`country_id` = `country`.`id` AND `lifeservice_info`.`area_id` = `area`.`id` AND `lifeservice_info`.`id`='.$r['item_id'];
             $sql4 = $mysqli->query($sql_string4);
             $detail = mysqli_fetch_assoc($sql4);
             $detail['type'] = 4;
