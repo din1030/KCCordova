@@ -30,7 +30,9 @@ $(document).on('pagebeforeshow', '#member-profile, #club-profile, #jobseeker-pro
 });
 $(document).on('pagebeforecreate', '#member-modify, #club-profile-modify, #jobseeker-profile-modify', function() {
 	// $('.profile-submit-btn').off();
-	$('.profile-submit-btn').click(function(event) {
+	var page_id = '#' + $.mobile.activePage.attr('id');
+
+	$(page_id + ' .profile-submit-btn').click(function(event) {
 		var backpage = $(this).jqmData("backpage");
 		$(this).parent('form').ajaxSubmit({
 			url: api_base + 'profile_modify.php',
