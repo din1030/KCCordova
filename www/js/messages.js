@@ -1,8 +1,6 @@
 var officialMsg;
 var officialState;
-
 var currentMsg;
-
 
 $(document).on("pagebeforeshow", '#messages', function() {
 	console.log(memberType);
@@ -14,16 +12,16 @@ $(document).on("pagebeforeshow", '#messages', function() {
 	$.ajax({
 		url: "http://52.69.53.255/KCCordova/api/get_official_message.php",
 		method: "GET", //should be post?
+		dataType: 'json',
 		data: {
-			type: parseInt(window.localStorage.getItem('auth')),
-			id: parseInt(window.localStorage.getItem('user_id'))
+			type: parseInt(window.localStorage.getItem('auth'))
 		}
 	}).done(function(data) {
 		//cache as global
 		officialMsg = data;
-
 		//show only if have msg
 		if (data.msg != null) {
+			console.log(data.msg);
 			var lastLength = data.msg.length - 1; //last array as latest msg
 			var lastOfficialMsg = data.msg[lastLength];
 
@@ -41,37 +39,35 @@ $(document).on("pagebeforeshow", '#messages', function() {
 	$.ajax({
 		url: "http://52.69.53.255/KCCordova/api/get_personal_message.php",
 		method: "GET", //should be post?
-		data: parseInt(window.localStorage.getItem('user_id'))
-	}).done(function(e) {
+		dataType: 'json',
+		data: {
+			id: parseInt(window.localStorage.getItem('user_id'))
+		}
+	}).done(function(data) {
 		var markup = '';
-
-		$.each(e.msg, function(i, v) {
-			switch (v._msgType) {
-				case 0:
-					markup += seekerMarkup(v);
+		$.each(data.msg, function(idx, obj) {
+			switch (obj.from_type) {
+				case 2:
+					markup += clubMarkup(obj);
 					break;
-				case 1:
-					markup += shopMarkup(v);
+				case 3:
+					markup += seekerMarkup(obj);
 					break;
 				default:
 					console.error('Error!')
 			}
-
 		});
-
-
 		$('#personal_msg').html(markup);
 
-
 		function seekerMarkup(data) {
-			var markup = '<div class="detail_block msg_block seeker_msg" data-msg-type="' + data._msgType + '" id="msg-' + data.id + '" data-msg-id="' + data.id + '" data-official="false"><div class="ui-bar ui-bar-a"><span class="float-left">【求職者】留言</span><span class="float-right" style="margin-right: 20px;">' + data._msgDate + '</span><button class="ui-btn ui-corner-all ui-btn-inline ui-mini ui-btn-right ui-icon-delete ui-btn-icon-notext del-fav-btn" type="button" name="button" data-shadow="false">x</button></div><a class="msg-open" href=""><div class="ui-body ui-body-a"><div class="avatar msg-avatar float-left"><img src="' + data._userImg + '" style="width: 70px; height: 70px; border-radius: 50%;" alt=""></div><strong>' + data._userName + '</strong><br> ' + data._nickName + '	<br> 應徵地區：' + data._place + '<div class="float-right msg-badge"><span class="">' + data._lengthUnread + '</span></div></div></a></div>';
+			var markup = '<div class="detail_block msg_block seeker_msg" data-msg-type="' + data.from_type + '" id="msg-' + data.id + '" data-msg-id="' + data.id + '" data-official="false"><div class="ui-bar ui-bar-a"><span class="float-left">【求職者】留言</span><span class="float-right" style="margin-right: 20px;">' + data.time + '</span><button class="ui-btn ui-corner-all ui-btn-inline ui-mini ui-btn-right ui-icon-delete ui-btn-icon-notext del-fav-btn" type="button" name="button" data-shadow="false">x</button></div><a class="msg-open" href=""><div class="ui-body ui-body-a"><div class="avatar msg-avatar float-left"><img src="http://52.69.53.255/KCCordova/www/img/' + data.pic1 + '" style="width: 70px; height: 70px; border-radius: 50%;" alt=""></div><strong>' + data.name + '</strong><br> ' + data._nickName + '	<br> 應徵地區：' + data.country + ' ' + data.area + '<div class="float-right msg-badge"><span class="">' + data._lengthUnread + '</span></div></div></a></div>';
 
 			return markup;
 		}
 
 
-		function shopMarkup(data) {
-			var markup = '<div class="detail_block msg_block shop_msg" data-msg-type="' + data._msgType + '" id="msg-' + data.id + '" data-msg-id="' + data.id + '" data-official="false"><div class="ui-bar ui-bar-a"><span class="float-left">【店家】留言</span><span class="float-right" style="margin-right: 20px;">' + data._msgDate + '</span><button class="ui-btn ui-corner-all ui-btn-inline ui-mini ui-btn-right ui-icon-delete ui-btn-icon-notext del-fav-btn" type="button" name="button" data-shadow="false">x</button></div><a class="msg-open" href=""><div class="ui-body ui-body-a"><div class="avatar msg-avatar float-left">	<img src="' + data._userImg + '" style="width: 70px; height: 70px; border-radius: 50%;" alt=""></div><strong>' + data._userName + '</strong><br> ' + data._place + '<br> ' + data._job + '	<div class="float-right msg-badge"><span class="">' + data._lengthUnread + '</span></div></div></a></div>';
+		function clubMarkup(data) {
+			var markup = '<div class="detail_block msg_block shop_msg" data-msg-type="' + data.from_type + '" id="msg-' + data.id + '" data-msg-id="' + data.id + '" data-official="false"><div class="ui-bar ui-bar-a"><span class="float-left">【店家】留言</span><span class="float-right" style="margin-right: 20px;">' + data.time + '</span><button class="ui-btn ui-corner-all ui-btn-inline ui-mini ui-btn-right ui-icon-delete ui-btn-icon-notext del-fav-btn" type="button" name="button" data-shadow="false">x</button></div><a class="msg-open" href=""><div class="ui-body ui-body-a"><div class="avatar msg-avatar float-left">	<img src="http://52.69.53.255/KCCordova/www/img/' + data.pic1 + '" style="width: 70px; height: 70px; border-radius: 50%;" alt=""></div><strong>' + data.name + '</strong><br> ' + data.country + ' ' + data.area + '<br> ' + data._job + '	<div class="float-right msg-badge"><span class="">' + data._lengthUnread + '</span></div></div></a></div>';
 
 			return markup;
 		}
