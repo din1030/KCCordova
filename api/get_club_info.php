@@ -16,6 +16,7 @@ $result = $mysqli->query($sql_string);
 if (mysqli_num_rows($result) > 0) {
     while ($r = mysqli_fetch_assoc($result)) {
         $r['pic'] = array($r['pic1'], $r['pic2'], $r['pic3'], $r['pic4'], $r['pic5']);
+        $r['updated'] = date('Y/m/d H:i', strtotime($r['updated']));
         unset($r['pic1']);
         unset($r['pic2']);
         unset($r['pic3']);

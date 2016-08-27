@@ -27,7 +27,8 @@ $(document).on('pagecreate', '#login', function() {
 								window.localStorage.setItem('user', result.user);
 								window.localStorage.setItem('auth', result.auth);
 								window.localStorage.setItem('name', result.name);
-								window.localStorage.setItem('user_info', result.user_info);
+								window.localStorage.setItem('country_id', result.country_id);
+								window.localStorage.setItem('area_id', result.area_id);
 								alert(window.localStorage.getItem('name') + ' ' + window.localStorage.getItem('user') + '(' + window.localStorage.getItem('auth') + ')');
 								$.mobile.changePage("#home");
 							} else {
@@ -185,7 +186,8 @@ $(document).on('pagecreate', '#fb-reg', function() {
 						window.localStorage.setItem('user', result.user);
 						window.localStorage.setItem('auth', result.auth);
 						window.localStorage.setItem('name', result.name);
-						window.localStorage.setItem('user_info', result.user_info);
+						window.localStorage.setItem('country_id', result.country_id);
+						window.localStorage.setItem('area_id', result.area_id);
 						alert(window.localStorage.getItem('name') + ' ' + window.localStorage.getItem('user') + '(' + window.localStorage.getItem('auth') + ')');
 						$.mobile.changePage("#home");
 					} else {
@@ -271,7 +273,8 @@ $(document).on('pagecreate', '#app-log-in', function() {
 						window.localStorage.setItem('user', result.user);
 						window.localStorage.setItem('auth', result.auth);
 						window.localStorage.setItem('name', result.name);
-						window.localStorage.setItem('user_info', result.user_info);
+						window.localStorage.setItem('country_id', result.country_id);
+						window.localStorage.setItem('area_id', result.area_id);
 						alert(window.localStorage.getItem('name') + ' ' + window.localStorage.getItem('user') + '(' + window.localStorage.getItem('auth') + ')');
 						$.mobile.changePage("#home");
 					} else {
@@ -391,7 +394,8 @@ function fbLogin() {
 					window.localStorage.setItem('user', result.user);
 					window.localStorage.setItem('auth', result.auth);
 					window.localStorage.setItem('name', result.name);
-					window.localStorage.setItem('user_info', result.user_info);
+					window.localStorage.setItem('country_id', result.country_id);
+					window.localStorage.setItem('area_id', result.area_id);
 					alert(window.localStorage.getItem('name') + ' ' + window.localStorage.getItem('user') + '(' + window.localStorage.getItem('auth') + ')');
 					$.mobile.changePage("#home");
 				} else {

@@ -168,7 +168,7 @@ $(document).on('pagebeforeshow', '#jobseeker-resume', function() {
 
 $(document).on('pagebeforeshow', '#jobseeker-search', function() {
 	$.ajax({
-		url: 'http://52.69.53.255/KCCordova/api/get_form_content.php?action=get_category&type=life',
+		url: 'http://52.69.53.255/KCCordova/api/get_form_content.php?action=get_category&type=job',
 		dataType: 'json'
 	}).done(function(data) {
 		console.log(data);
@@ -176,13 +176,13 @@ $(document).on('pagebeforeshow', '#jobseeker-search', function() {
 		$.each(data, function(idx, obj) {
 			classificationList += '<option value="' + obj.id + '">' + obj.title + '</option>';
 		});
-		$('#life_type').html(classificationList);
-		$('#life_type').selectmenu('refresh');
+		$('#jobseeker_type').html(classificationList);
+		$('#jobseeker_type').selectmenu('refresh');
 
-		$('#lifeservice-search-btn').on('click', function() {
+		$('#jobseeker-search-btn').on('click', function() {
 			var area = $('#county').val();
-			var type = $('#life_type').val();
-			console.log('life_type changed');
+			var type = $('#jobseeker_type').val();
+			console.log('jobseeker_type changed');
 
 			$.ajax({
 				url: 'http://52.69.53.255/KCCordova/api/search_lifeservice.php?area_id=' + area + '&type=' + type,

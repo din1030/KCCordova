@@ -3,6 +3,7 @@ var dataJson = '';
 var searchJson;
 var baseApi = 'http://52.69.53.255/KVCordova/api/lifeservice.json';
 var searchState = false;
+
 $(document).on('pagebeforecreate', '#lifeservice', function() {
 	$.ajax({
 		url: 'http://52.69.53.255/KCCordova/api/get_lifeservice.php',
