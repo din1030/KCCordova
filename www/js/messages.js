@@ -171,13 +171,13 @@ $(document).on("pagebeforeshow", '#messages-detail', function(e, d) {
 
 		$.each(result.msg, function(i, v) {
 			if (v.from_id == myId) {
-				markup += '<div class="msg_wrapper"><div class="msg_title"><span class="msg_me">我</span><span class="msg_time float-right">' + v.created + '</span></div><div class="msg_body text-justify">' + v.content + '</div>	</div>';
+				markup += '<div class="msg_wrapper"><div class="msg_title"><span class="msg_me">我</span><span class="msg_time float-right">' + v.time + '</span></div><div class="msg_body text-justify">' + v.content + '</div>	</div>';
 			} else {
-				markup += '<div class="msg_wrapper"> <div class="msg_title"><span class="msg_sender">' + v.name + '</span><span class="msg_time float-right">' + v.created + '</span></div><div class="msg_body text-justify">' + v.content + '</div></div>';
+				markup += '<div class="msg_wrapper"> <div class="msg_title"><span class="msg_sender">' + v.name + '</span><span class="msg_time float-right">' + v.time + '</span></div><div class="msg_body text-justify">' + v.content + '</div></div>';
 			}
 		})
 
-		markup += '</div><div id="reply_lock"><h3>留言</h3>	<textarea name="msg_reply" rows="4" cols="40"></textarea><button type="submit" id="sendMsg" class="ui-btn ui-corner-all no-bg-bd purple-btn send-btn" data-msg-id="' + result.talk_id + '">送出</button></div></div>';
+		markup += '</div><div id="reply_block"><h3>留言</h3>	<textarea id="msg_reply" name="msg_reply" rows="4" cols="40"></textarea><button type="submit" id="sendMsg" class="ui-btn ui-corner-all no-bg-bd purple-btn send-btn" data-to-id="' + result.talk_id + '">送出</button></div></div>';
 
 		return markup;
 	}
@@ -215,23 +215,24 @@ $(document).on("pagebeforeshow", '#messages-detail', function(e, d) {
 	$('#msg-holder').on('click', '#sendMsg', function(e) {
 		console.log('hit sendmsg!');
 
-		var id = $(this).jqmData('msg-id');
-		var val = $(this).prev().val();
+		var to_id = $(this).jqmData('to-id');
+		var msg_content = $('#msg_reply').val();
 
-		// $.ajax({
-		// 	method: "POST",
-		// 	url: "create.php",
-		// 	data: {
-		// 		userId: userId,
-		// 		from_id: id
-		// 	}
-		// }).done(function(){
-		// 	//append
-		//
-		// 	$('.conversation_block .ui-body-a').append(chatMarkup(val));
-		// })
+		$.ajax({
+			url: "http://52.69.53.255/KCCordova/api/send_message.php",
+			dataType: "json"
+			method: "POST",
+			data: {
+				self_id: parseInt(window.localStorage.getItem('user_id')),
+				self_type: parseInt(window.localStorage.getItem('auth'));,
+				talk_id: to_id,
+				content: msg_content
+			}
+		}).done(function(data) {
+			$('.conversation_block .ui-body-a').append(chatMarkup(data.msg));
+		})
 
-		$('.conversation_block .ui-body-a').append(chatMarkup(val));
+		// $('.conversation_block .ui-body-a').append(chatMarkup(val));
 
 
 		function chatMarkup(v) {
@@ -239,11 +240,13 @@ $(document).on("pagebeforeshow", '#messages-detail', function(e, d) {
 			function formatDate(date) {
 				var hours = date.getHours();
 				var minutes = date.getMinutes();
-				return date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate() + " " + hours + ':' + minutes;
+				var month = date.getMonth() + 1;
+				month = (month < 10) ? '0' + month : '' + month;
+				return date.getFullYear() + "/" + month + "/" + date.getDate() + " " + hours + ':' + minutes;
 			}
 
 			var date = formatDate(new Date());
-			var markup = '<div class="msg_wrapper"><div class="msg_title"><span class="msg_me">我</span><span class="msg_time float-right">' + date + '</span></div><div class="msg_body text-justify">' + v + '</div>	</div>';
+			var markup = '<div class="msg_wrapper"><div class="msg_title"><span class="msg_me">我</span><span class="msg_time float-right">' + date + '</span></div><div class="msg_body text-justify">' + v.content + '</div>	</div>';
 
 			return markup;
 		}
