@@ -2,25 +2,26 @@ var api_base = 'http://52.69.53.255/KCCordova/api/';
 var img_base = 'http://52.69.53.255/KCCordova/www/img/';
 
 $(document).on('pagebeforeshow', '#member-profile, #club-profile, #jobseeker-profile', function() {
+	var page_id = '#' + $.mobile.activePage.attr('id');
 	$.ajax({
 		url: api_base + 'get_user_info.php?user_id=' + window.localStorage.getItem('user_id'),
 		dataType: 'json'
 	}).success(function(data) {
 		if (data.status) {
-			$('.upper_block > img, .upper_block >  input[type="image"]').attr('src', img_base + data.result.pic);
-			$('.name_div').html(data.result.name);
-			$('.member-id-input').val(data.result.member_id);
-			$('.gender-input').val(data.result.gender);
-			$('.birth-input').val(data.result.birth);
-			$('.tel-input').val(data.result.tel);
-			$('.mobile-input').val(data.result.mobile);
+			$(page_id + ' .upper_block > img, .upper_block >  input[type="image"]').attr('src', img_base + data.result.pic);
+			$(page_id + ' .name_div').html(data.result.name);
+			$(page_id + ' .member-id-input').val(data.result.member_id);
+			$(page_id + ' .gender-input').val(data.result.gender);
+			$(page_id + ' .birth-input').val(data.result.birth);
+			$(page_id + ' .tel-input').val(data.result.tel);
+			$(page_id + ' .mobile-input').val(data.result.mobile);
 			if (data.result.type == 2) {
 				if (data.result.plan_title != null) {
-					$('#plan-input').val(data.result.plan_title);
-					$('#plan-during-input').val(data.result.publish_start + '-' + data.result.publish_due);
-					$('#plan-during-input').parent().parent().show();
+					$(page_id + ' #plan-input').val(data.result.plan_title);
+					$(page_id + ' #plan-during-input').val(data.result.publish_start + '-' + data.result.publish_due);
+					$(page_id + ' #plan-during-input').parent().parent().show();
 				} else {
-					$('#plan-during-input').parent().parent().hide();
+					$(page_id + ' #plan-during-input').parent().parent().hide();
 				}
 			}
 		}
