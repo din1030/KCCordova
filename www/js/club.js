@@ -123,6 +123,7 @@ $(document).on('pagebeforeshow', '#club-job-info', function() {
 			$('#interviewer').html(club.interviewer);
 			$('#tel').text(club.tel);
 			$('#line').text(club.line);
+			$('#interviewer_pic').attr('src', 'http://52.69.53.255/KCCordova/www/img/' + club.interviewer_pic);
 			if (typeof(club.offer_content) !== 'undefined') {
 				club.offer_content = club.offer_content.replace(/\n/g, "<br>")
 			}
@@ -180,6 +181,7 @@ $(document).on('pagebeforeshow', "#club-service", function() {
 			$('#contact_name').html(club.contact_name);
 			$('#contact_tel').text(club.contact_tel);
 			$('#contact_line').text(club.contact_line);
+			$('#contact_pic').attr('src', 'http://52.69.53.255/KCCordova/www/img/' + club.contact_pic);
 			if (typeof(club.promo_content) !== 'undefined') {
 				club.promo_content = club.promo_content.replace(/\n/g, "<br>");
 			}

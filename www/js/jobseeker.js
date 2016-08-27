@@ -8,16 +8,13 @@ $(document).on('pagebeforecreate', '#jobseeker', function() {
 				var block_class, img;
 				if ((idx % 3) == 0) {
 					block_class = 'ui-block-a';
-					img = 'seeker-a.jpg';
 				} else if ((idx % 3) == 1) {
 					block_class = 'ui-block-b';
-					img = 'seeker-b.jpg';
 				} else if ((idx % 3) == 2) {
 					block_class = 'ui-block-c';
-					img = 'seeker-c.jpg';
 				}
 				var seeker_div = $('<div></div>').attr('data-seeker-id', obj.u_id).addClass(block_class + ' seeker_div')
-					.append('<div class="seeker_list_item"><a data-ajax="false"><img src="./img/' + img + '" alt="" /></a></div>');
+					.append('<div class="seeker_list_item"><a data-ajax="false"><img src="http://52.69.53.255/KCCordova/www/img/' + obj.pic[0] + '" alt="" /></a></div>');
 				$(seeker_div).appendTo($('#seeker-grid'));
 			});
 			// $('#club_list').listview('refresh');
