@@ -10,18 +10,18 @@ $u_id = $_POST['u_id'];
 $tel = $_POST['tel-input'];
 $mobile = $_POST['mobile-input'];
 
-if ($_FILES['profile-pic']['error'] > 0) {
-    echo 'Error: '.$_FILES['profile-pic']['error'];
+if ($_FILES['profile_photo']['error'] > 0) {
+    echo 'Error: '.$_FILES['profile_photo']['error'];
 } else {
-    echo '檔案名稱: '.$_FILES['profile-pic']['name'].'<br/>';
-    echo '檔案類型: '.$_FILES['profile-pic']['type'].'<br/>';
-    echo '檔案大小: '.($_FILES['profile-pic']['size'] / 1024).' Kb<br />';
-    echo '暫存名稱: '.$_FILES['profile-pic']['tmp_name'];
+    echo '檔案名稱: '.$_FILES['profile_photo']['name'].'<br/>';
+    echo '檔案類型: '.$_FILES['profile_photo']['type'].'<br/>';
+    echo '檔案大小: '.($_FILES['profile_photo']['size'] / 1024).' Kb<br />';
+    echo '暫存名稱: '.$_FILES['profile_photo']['tmp_name'];
 }
-$target_dir = '/KCCordova/www/img/';
-$target_file = $target_dir.basename($_FILES['profile-pic']['name']);
-if (move_uploaded_file($_FILES['profile-pic']['tmp_name'], $target_file)) {
-    echo 'The file '.basename($_FILES['profile-pic']['name']).' has been uploaded.';
+$target_dir = '../www/img/';
+$target_file = $target_dir.basename($_FILES['profile_photo']['name']);
+if (move_uploaded_file($_FILES['profile_photo']['tmp_name'], $target_file)) {
+    echo 'The file '.basename($_FILES['profile_photo']['name']).' has been uploaded.';
 } else {
     echo 'Sorry, there was an error uploading your file.';
 }
