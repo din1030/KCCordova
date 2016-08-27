@@ -22,7 +22,6 @@ if (mysqli_num_rows($result) > 0) {
         unset($r['pic4']);
         unset($r['pic5']);
         $output[] = $r;
-        $output[] = $r;
     }
     echo json_encode(array('status' => true, 'result' => $output));
 } else {
