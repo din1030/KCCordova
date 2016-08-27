@@ -161,6 +161,7 @@ $(document).on('pagebeforeshow', '#lifeservice-detail', function() {
 $(document).on('pagebeforeshow', '#lifeservice-search', function() {
 	//off any unwanted event  place to garbage collector
 	$('#lifeservice-detail-main').off();
+	$('#lifeservice-search-btn').off();
 	$.ajax({
 		url: 'http://52.69.53.255/KCCordova/api/get_form_content.php?action=get_category&type=life',
 		dataType: 'json'

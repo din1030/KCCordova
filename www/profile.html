@@ -37,6 +37,10 @@
                 <hr>
                 <div class="">
                     <div class="ui-field-contain ui-disabled">
+                        <label class="item_title" for="member-id-input">會員編號</label>
+                        <input type="text" name="member-id-input" class="ui-disabled member-id-input" id="member-id-input" value="">
+                    </div>
+                    <div class="ui-field-contain ui-disabled">
                         <label class="item_title" for="textinput-1">身分</label>
                         <input type="text" name="textinput-1" class="ui-disabled" id="textinput-1" value="一般會員">
                     </div>
@@ -76,7 +80,7 @@
             <div data-role="main" class="ui-content profile-main" id="member-modify-main">
                 <div class="upper_block">
                     <input type="image" class="profile-pic" src="./img/seeker-a.jpg" />
-                    <input type="file" class="profile-pic-input" />
+                    <input name="profile-pic" type="file" class="profile-pic-input" accept="image/*" />
                     <div class="name_block">
                         <div class="name_div">
                             翁水蘭
@@ -89,6 +93,10 @@
                 <hr>
                 <div class="">
                     <form method="post">
+                        <div class="ui-field-contain ui-disabled">
+                            <label class="item_title" for="member-id-input">會員編號</label>
+                            <input type="text" name="member-id-input" class="ui-disabled member-id-input" id="member-id-input" value="">
+                        </div>
                         <div class="ui-field-contain ui-disabled">
                             <label class="item_title" for="textinput-1">身分</label>
                             <input type="text" name="textinput-1" class="ui-disabled" id="textinput-1" value="一般會員">
@@ -146,6 +154,10 @@
                 <hr>
                 <div class="">
                     <div class="ui-field-contain ui-disabled">
+                        <label class="item_title" for="member-id-input">會員編號</label>
+                        <input type="text" name="member-id-input" class="ui-disabled member-id-input" id="member-id-input" value="">
+                    </div>
+                    <div class="ui-field-contain ui-disabled">
                         <label class="item_title" for="textinput-1">身分</label>
                         <input type="text" name="textinput-1" class="ui-disabled" id="textinput-1" value="求職者">
                     </div>
@@ -192,21 +204,25 @@
             </div>
             <!-- /header -->
             <div data-role="main" class="ui-content profile-main" id="jobseeker-profile-modify-main">
-                <div class="upper_block">
-                    <input type="image" class="profile-pic" src="./img/seeker-a.jpg" />
-                    <input type="file" class="profile-pic-input" />
-                    <div class="name_block">
-                        <div class="name_div">
-                            翁水蘭
+                <form id="seeker-profile-form" method="post" enctype="multipart/form-data">
+                    <div class="upper_block">
+                        <input type="image" class="profile-pic" src="./img/seeker-a.jpg" />
+                        <input name="profile-pic" type="file" class="profile-pic-input" accept="image/*" />
+                        <div class="name_block">
+                            <div class="name_div">
+                                翁水蘭
+                            </div>
+                            <!-- <br> -->
+                            <div>可更換大頭圖</div>
                         </div>
-                        <!-- <br> -->
-                        <div>可更換大頭圖</div>
                     </div>
-                </div>
-                <div class="clearfix"></div>
-                <hr>
-                <div class="">
-                    <form cmethod="post">
+                    <div class="clearfix"></div>
+                    <hr>
+                    <div class="">
+                        <div class="ui-field-contain ui-disabled">
+                            <label class="item_title" for="member-id-input">會員編號</label>
+                            <input type="text" name="member-id-input" class="ui-disabled member-id-input" id="member-id-input" value="">
+                        </div>
                         <div class="ui-field-contain ui-disabled">
                             <label class="item_title" for="textinput-1">身分</label>
                             <input type="text" name="textinput-1" class="ui-disabled" id="textinput-1" value="求職者">
@@ -228,7 +244,7 @@
                             <input type="tel" name="mobile-input" class="mobile-input" id="mobile-input" value="0912345678">
                         </div>
                         <button class="ui-shadow ui-btn ui-corner-all profile-submit-btn" data-backpage="#jobseeker-profile" type="button">送出</button>
-                    </form>
+                </form>
                 </div>
             </div>
             <!-- /main -->
@@ -490,6 +506,10 @@
                 <hr>
                 <div class="">
                     <div class="ui-field-contain ui-disabled">
+                        <label class="item_title" for="member-id-input">會員編號</label>
+                        <input type="text" name="member-id-input" class="ui-disabled member-id-input" id="member-id-input" value="">
+                    </div>
+                    <div class="ui-field-contain ui-disabled">
                         <label class="item_title" for="textinput-1">身分</label>
                         <input type="text" name="textinput-1" class="ui-disabled" id="textinput-1" value="店家管理員">
                     </div>
@@ -550,7 +570,7 @@
             <div data-role="main" class="ui-content profile-main" id="club-profile-modify-main">
                 <div class="upper_block">
                     <input type="image" class="profile-pic" src="./img/seeker-a.jpg" />
-                    <input type="file" class="profile-pic-input" />
+                    <input name="profile-pic" type="file" class="profile-pic-input" accept="image/*" />
                     <div class="name_block">
                         <div class="name_div">
                             翁水蘭
@@ -563,6 +583,10 @@
                 <hr>
                 <div class="">
                     <div class="ui-field-contain ui-disabled">
+                        <div class="ui-field-contain ui-disabled">
+                            <label class="item_title" for="member-id-input">會員編號</label>
+                            <input type="text" name="member-id-input" class="ui-disabled member-id-input" id="member-id-input" value="">
+                        </div>
                         <label class="item_title" for="textinput-1">身分</label>
                         <input type="text" name="textinput-1" class="ui-disabled" id="textinput-1" value="店家管理者">
                     </div>

@@ -6,15 +6,13 @@ header('Access-Control-Allow-Methods: GET, POST');
 include 'db_setting.php';
 
 $user_id = $_POST['user_id'];
-// $formData = $_POST['formData'];
-
-// $params = array();
-// parse_str($formData, $params);
-// print_r($params);
-
 $u_id = $_POST['u_id'];
 $tel = $_POST['tel-input'];
 $mobile = $_POST['mobile-input'];
+
+$target_dir = '../www/img/';
+$target_file = $target_dir.basename($_FILES['profile-pic']['name']);
+move_uploaded_file($_FILES['profile-pic']['tmp_name'], $target_file);
 
 // 判斷是否已有資料
 $sql_string = "SELECT * FROM `user` WHERE `id` = '$u_id' LIMIT 1";
@@ -25,7 +23,6 @@ if ($sql->num_rows > 0) {
     if ($mysqli->affected_rows > 0) {
         $output = array('status' => true, 'message' => '資料已修改！');
         echo json_encode($output);
-        exit;
     } else {
         $output = array('status' => false, 'message' => '操作錯誤，請稍後再試！');
         echo json_encode($output);

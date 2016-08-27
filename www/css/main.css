@@ -183,17 +183,22 @@ textarea {
   height: 100%;
   max-width: calc(8em - 10px);
 }
-#jobseeker-main .ui-grid-b {
+#jobseeker-main .ui-grid-b,
+#jobseeker-result-main .ui-grid-b {
   margin: 0 4px 10px 4px;
 }
 #jobseeker-main .ui-block-a,
+#jobseeker-result-main .ui-block-a,
 #jobseeker-main .ui-block-b,
-#jobseeker-main .ui-block-c {
+#jobseeker-result-main .ui-block-b,
+#jobseeker-main .ui-block-c,
+#jobseeker-result-main .ui-block-c {
   margin: 4px;
   width: calc(33.33vw - 11px);
   height: calc(33.33vw - 11px);
 }
-#jobseeker-main .seeker_list_item img {
+#jobseeker-main .seeker_list_item img,
+#jobseeker-result-main .seeker_list_item img {
   width: 100%;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;

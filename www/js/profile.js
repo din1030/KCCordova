@@ -1,10 +1,15 @@
+var api_base = 'http://52.69.53.255/KCCordova/api/';
+var img_base = 'http://52.69.53.255/KCCordova/www/img/';
+
 $(document).on('pagebeforeshow', '#member-profile, #club-profile, #jobseeker-profile', function() {
 	$.ajax({
-		url: 'http://52.69.53.255/KCCordova/api/get_user_info.php?user_id=' + window.localStorage.getItem('user_id'),
+		url: api_base + 'get_user_info.php?user_id=' + window.localStorage.getItem('user_id'),
 		dataType: 'json'
 	}).success(function(data) {
 		if (data.status) {
+			$('.upper_block >img').attr('src', img_base + data.result.pic);
 			$('.name_div').html(data.result.name);
+			$('.member-id-input').val(data.result.member_id);
 			$('.gender-input').val(data.result.gender);
 			$('.birth-input').val(data.result.birth);
 			$('.tel-input').val(data.result.tel);

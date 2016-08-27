@@ -200,6 +200,7 @@ $(document).on('pagebeforeshow', '#jobseeker-search', function() {
 				if (data.status) {
 					seekerSearchJson = data;
 					seekerSearchState = true;
+					console.log('get result', seekerSearchJson);
 					$.mobile.changePage($('#jobseeker-result'), {
 						reloadPage: true,
 						changeHash: true
@@ -212,7 +213,7 @@ $(document).on('pagebeforeshow', '#jobseeker-search', function() {
 	});
 });
 
-$(document).on('pagebeforecreate', '#jobseeker-result', function() {
+$(document).on('pagebeforeshow', '#jobseeker-result', function() {
 	console.log(seekerSearchState, seekerSearchJson);
 	if (seekerSearchState && seekerSearchJson != '') {
 		console.log(seekerSearchState, seekerSearchJson);
@@ -227,10 +228,10 @@ $(document).on('pagebeforecreate', '#jobseeker-result', function() {
 				block_class = 'ui-block-c';
 			}
 			var seeker_div = $('<div></div>').attr('data-seeker-id', obj.u_id).addClass(block_class + ' seeker_div')
-				.append('<div class="seeker_list_item"><a data-ajax="false"><img src="http://52.69.53.255/KCCordova/www/img/' + obj.pic[0] + '" alt="" /></a></div>');
+				.append('<div class="seeker_list_item"><a data-ajax="false"><img src="http://52.69.53.255/KCCordova/www/img/' + obj.pic1 + '" alt="" /></a></div>');
 			$(seeker_div).appendTo($('#seeker-result-grid'));
 		});
-		$('#seeker-grid .seeker_div').click(function(event) {
+		$('#seeker-result-grid .seeker_div').click(function(event) {
 			var seeker_id = $(this).jqmData("seeker-id");
 			window.localStorage.setItem('get_seeker_id', seeker_id);
 			$.mobile.changePage($('#jobseeker-resume'), {
