@@ -175,6 +175,7 @@ if (window.localStorage.getItem('auth') == '3') {
 		}).fail(function() {
 			alert('請確認您的網路連線狀態！');
 		});
+		$('#seeker-resume-send-btn').off();
 		$('#seeker-resume-send-btn').click(function(event) {
 			$('#jobseeker-resume-modify-form').ajaxSubmit({
 				url: 'http://52.69.53.255/KCCordova/api/seeker_modify.php',
@@ -213,6 +214,7 @@ if (window.localStorage.getItem('auth') == '3') {
 }
 
 $(document).on('pagebeforeshow', ".profile-pic-page", function() {
+	$('.profile-pic-input').off();
 	$('.profile-pic-input').change(function(event) {
 		if (this.files && this.files[0]) {
 			var input = this;
@@ -223,6 +225,7 @@ $(document).on('pagebeforeshow', ".profile-pic-page", function() {
 			reader.readAsDataURL(this.files[0]);
 		}
 	});
+	$("input[type='image']").off();
 	$("input[type='image']").click(function() {
 		$(this).next('.ui-input-text').find("input[type='file']").click();
 	});

@@ -12,8 +12,11 @@ $mobile = $_POST['mobile-input'];
 
 $target_dir = '../www/img/';
 $target_file = $target_dir.basename($_FILES['profile-pic']['name']);
-move_uploaded_file($_FILES['profile-pic']['tmp_name'], $target_file);
-
+if (move_uploaded_file($_FILES['profile-pic']['tmp_name'], $target_file)) {
+    echo 'The file '.basename($_FILES['profile-pic']['name']).' has been uploaded.';
+} else {
+    echo 'Sorry, there was an error uploading your file.';
+}
 // 判斷是否已有資料
 $sql_string = "SELECT * FROM `user` WHERE `id` = '$u_id' LIMIT 1";
 $sql = $mysqli->query($sql_string);
@@ -23,6 +26,8 @@ if ($sql->num_rows > 0) {
     if ($mysqli->affected_rows > 0) {
         $output = array('status' => true, 'message' => '資料已修改！');
         echo json_encode($output);
+
+        return;
     } else {
         $output = array('status' => false, 'message' => '操作錯誤，請稍後再試！');
         echo json_encode($output);
