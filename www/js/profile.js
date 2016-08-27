@@ -29,10 +29,11 @@ $(document).on('pagebeforeshow', '#member-profile, #club-profile, #jobseeker-pro
 	});
 });
 $(document).on('pagebeforecreate', '#member-modify, #club-profile-modify, #jobseeker-profile-modify', function() {
+	$('.profile-submit-btn').off();
 	$('.profile-submit-btn').click(function(event) {
 		var backpage = $(this).jqmData("backpage");
 		$(this).parent('form').ajaxSubmit({
-			url: 'http://52.69.53.255/KCCordova/api/profile_modify.php',
+			url: api_base + 'profile_modify.php',
 			data: {
 				u_id: window.localStorage.getItem('user_id'),
 			},
@@ -66,7 +67,7 @@ $(document).on('pagebeforecreate', '#member-modify, #club-profile-modify, #jobse
 if (window.localStorage.getItem('auth') == '3') {
 	$(document).on('pagebeforeshow', '#jobseeker-resume, #jobseeker-resume-modify', function() {
 		$.ajax({
-			url: 'http://52.69.53.255/KCCordova/api/get_seeker_info.php?user_id=' + window.localStorage.getItem('user_id'),
+			url: api_base + 'get_seeker_info.php?user_id=' + window.localStorage.getItem('user_id'),
 			dataType: 'json'
 		}).success(function(data) {
 			if (data.status) {
@@ -178,7 +179,7 @@ if (window.localStorage.getItem('auth') == '3') {
 		$('#seeker-resume-send-btn').off();
 		$('#seeker-resume-send-btn').click(function(event) {
 			$('#jobseeker-resume-modify-form').ajaxSubmit({
-				url: 'http://52.69.53.255/KCCordova/api/seeker_modify.php',
+				url: api_base + 'seeker_modify.php',
 				data: {
 					u_id: window.localStorage.getItem('user_id'),
 					type: 'resume',

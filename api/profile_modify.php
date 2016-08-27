@@ -10,7 +10,7 @@ $u_id = $_POST['u_id'];
 $tel = $_POST['tel-input'];
 $mobile = $_POST['mobile-input'];
 
-$target_dir = '../www/img/';
+$target_dir = '/KCCordova/www/img/';
 $target_file = $target_dir.basename($_FILES['profile-pic']['name']);
 if (move_uploaded_file($_FILES['profile-pic']['tmp_name'], $target_file)) {
     echo 'The file '.basename($_FILES['profile-pic']['name']).' has been uploaded.';
