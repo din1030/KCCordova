@@ -125,9 +125,7 @@ $(document).on('pagecreate', function() {
 			});
 		}
 	});
-
 });
-
 
 $(document).on('pageshow', "#jobseeker-resume, #club-intro, #lifeservice-detail", function() {
 	console.log('hit slide reload');
