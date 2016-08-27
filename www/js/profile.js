@@ -38,7 +38,6 @@ $(document).on('pagebeforecreate', '#member-modify, #club-profile-modify, #jobse
 				u_id: window.localStorage.getItem('user_id'),
 			},
 			type: 'POST',
-			async: 'true',
 			dataType: 'json',
 			beforeSend: function() {
 				$.mobile.loading('show');

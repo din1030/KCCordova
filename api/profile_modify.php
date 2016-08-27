@@ -9,7 +9,14 @@ $user_id = $_POST['user_id'];
 $u_id = $_POST['u_id'];
 $tel = $_POST['tel-input'];
 $mobile = $_POST['mobile-input'];
-
+foreach ($_FILES as $file) {
+    $n = $file['name'];
+    $s = $file['size'];
+    if (!$n) {
+        continue;
+    }
+    echo "File: $n ($s bytes)";
+}
 if ($_FILES['profile_photo']['error'] > 0) {
     echo 'Error: '.$_FILES['profile_photo']['error'];
 } else {
