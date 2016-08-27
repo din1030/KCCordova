@@ -9,7 +9,7 @@ $type = $_GET['type'];
 $gender = $_GET['gender'];
 $area_id = $_GET['area_id'];
 
-$sql_string = "SELECT `seeker_info`.`u_id`,`seeker_info`.`nickname`,`seeker_info`.`pic1` FROM `seeker_info`,`user` WHERE `seeker_info`.`u_id` = `user`.`id` AND `seeker_info`.`category` ='.$type.' AND `seeker_info`.`area_id`='.$area_id.' AND gender='".$gender."'";
+$sql_string = "SELECT `seeker_info`.`u_id`,`seeker_info`.`nickname`,`seeker_info`.`pic1` FROM `seeker_info`,`user` WHERE `seeker_info`.`u_id` = `user`.`id` AND `seeker_info`.`seek_category` ='.$type.' AND `seeker_info`.`area_id`='.$area_id.' AND `gender`='".$gender."'";
 
 $sql = $mysqli->query($sql_string);
 if ($sql->num_rows > 0) {

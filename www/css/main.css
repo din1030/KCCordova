@@ -170,13 +170,16 @@ textarea {
   background-color: #fff !important;
   border-bottom: 6px solid #aa3c89;
 }
-#club .ui-listview li h2 {
+#club-main .ui-listview li h2,
+#club-result-main .ui-listview li h2 {
   margin: 0;
 }
-#club .ui-listview > .ui-li-has-thumb > .ui-btn {
+#club-main .ui-listview > .ui-li-has-thumb > .ui-btn,
+#club-result-main .ui-listview > .ui-li-has-thumb > .ui-btn {
   padding-left: 8em;
 }
-#club .club-thumbnail {
+#club-main .club-thumbnail,
+#club-result-main .club-thumbnail {
   height: 100%;
   max-width: calc(8em - 10px);
 }

@@ -1,50 +1,32 @@
 var clubSearchJson = '';
 var clubSearchState = false;
 
-$(document).on('pagebeforecreate', '#club', function() {
-	if (clubSearchState && clubSearchJson != '') {
-		$.each(clubSearchJson.result, function(idx, obj) {
-			var club_li = $('<li></li>').attr('data-icon', 'false').attr('data-admin-id', obj.admin_id)
-				.append('<a href="" data-admin-id="' + obj.admin_id + '" data-ajax="false"><img class="club-thumbnail" src="http://52.69.53.255/KCCordova/www/img/' + obj.pic1 + '"><h2>' + obj.name + '</h2><p>' + obj.country + ' ' + obj.area + '｜</p><div class="slogan">' + obj.slogan + '</div><p class="update-time">更新時間 ' + obj.updated + '</p></a>');
-			$(club_li).appendTo($('#club_list'));
-		});
-		$('#club_list').listview('refresh');
-		$('#club_list li').click(function(event) {
-			var admin_id = $(this).jqmData("admin-id");
-			window.localStorage.setItem('get_club_id', admin_id);
-			$.mobile.changePage($('#club-intro'), {
-				reloadPage: true,
-				changeHash: true
+$(document).on('pagebeforeshow', '#club', function() {
+	$.ajax({
+		url: 'http://52.69.53.255/KCCordova/api/get_club_info.php',
+		dataType: 'json'
+	}).success(function(data) {
+		if (data.status) {
+			var clubs = data.result;
+			$('#club_list').empty();
+			$.each(clubs, function(idx, obj) {
+				var club_li = $('<li></li>').attr('data-icon', 'false').attr('data-admin-id', obj.admin_id)
+					.append('<a href="" data-admin-id="' + obj.admin_id + '" data-ajax="false"><img class="club-thumbnail" src="http://52.69.53.255/KCCordova/www/img/' + obj.pic[0] + '"><h2>' + obj.name + '</h2><p>' + obj.country + ' ' + obj.area + '｜</p><div class="slogan">' + obj.slogan + '</div><p class="update-time">更新時間 ' + obj.updated + '</p></a>');
+				$(club_li).appendTo($('#club_list'));
 			});
-		});
-		// classListRefresh(searchJson);
-		searchState = false;
-	} else {
-		$.ajax({
-			url: 'http://52.69.53.255/KCCordova/api/get_club_info.php',
-			dataType: 'json'
-		}).success(function(data) {
-			if (data.status) {
-				var clubs = data.result;
-				$.each(clubs, function(idx, obj) {
-					var club_li = $('<li></li>').attr('data-icon', 'false').attr('data-admin-id', obj.admin_id)
-						.append('<a href="" data-admin-id="' + obj.admin_id + '" data-ajax="false"><img class="club-thumbnail" src="http://52.69.53.255/KCCordova/www/img/' + obj.pic[0] + '"><h2>' + obj.name + '</h2><p>' + obj.country + ' ' + obj.area + '｜</p><div class="slogan">' + obj.slogan + '</div><p class="update-time">更新時間 ' + obj.updated + '</p></a>');
-					$(club_li).appendTo($('#club_list'));
+			$('#club_list').listview('refresh');
+			$('#club_list li').click(function(event) {
+				var admin_id = $(this).jqmData("admin-id");
+				window.localStorage.setItem('get_club_id', admin_id);
+				$.mobile.changePage($('#club-intro'), {
+					reloadPage: true,
+					changeHash: true
 				});
-				$('#club_list').listview('refresh');
-				$('#club_list li').click(function(event) {
-					var admin_id = $(this).jqmData("admin-id");
-					window.localStorage.setItem('get_club_id', admin_id);
-					$.mobile.changePage($('#club-intro'), {
-						reloadPage: true,
-						changeHash: true
-					});
-				});
-			}
-		}).fail(function() {
-			alert('請確認您的網路連線狀態！');
-		});
-	}
+			});
+		}
+	}).fail(function() {
+		alert('請確認您的網路連線狀態！');
+	});
 });
 
 $(document).on('pagebeforeshow', '#club-intro', function() {
@@ -331,9 +313,10 @@ $(document).on('pagebeforeshow', '#club-search', function() {
 				dataType: 'json'
 			}).done(function(data) {
 				if (data.status) {
-					clubSearchJson = data.result;
+					clubSearchJson = data;
 					clubSearchState = true;
-					$.mobile.changePage($('#club'), {
+					console.log(clubSearchState, clubSearchJson);
+					$.mobile.changePage($('#club-result'), {
 						reloadPage: true,
 						changeHash: true
 					});
@@ -345,4 +328,32 @@ $(document).on('pagebeforeshow', '#club-search', function() {
 			});
 		});
 	});
+});
+
+$(document).on('pagebeforeshow', '#club-result', function() {
+	console.log(clubSearchState, clubSearchJson);
+	if (clubSearchState && clubSearchJson != '') {
+		console.log(clubSearchState, clubSearchJson);
+		$('#club_result_list').empty();
+		$.each(clubSearchJson.result, function(idx, obj) {
+			var club_li = $('<li></li>').attr('data-icon', 'false').attr('data-admin-id', obj.admin_id)
+				.append('<a href="" data-admin-id="' + obj.admin_id + '" data-ajax="false"><img class="club-thumbnail" src="http://52.69.53.255/KCCordova/www/img/' + obj.pic1 + '"><h2>' + obj.name + '</h2><p>' + obj.country + ' ' + obj.area + '｜</p><div class="slogan">' + obj.slogan + '</div><p class="update-time">更新時間 ' + obj.updated + '</p></a>');
+			$(club_li).appendTo($('#club_result_list'));
+		});
+		$('#club_result_list').listview('refresh');
+		$('#club_result_list li').click(function(event) {
+			var admin_id = $(this).jqmData("admin-id");
+			window.localStorage.setItem('get_club_id', admin_id);
+			$.mobile.changePage($('#club-intro'), {
+				reloadPage: true,
+				changeHash: true
+			});
+		});
+		clubSearchState = false;
+	} else {
+		$.mobile.changePage($('#club'), {
+			reloadPage: true,
+			changeHash: true
+		});
+	}
 });

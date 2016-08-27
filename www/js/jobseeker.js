@@ -1,3 +1,6 @@
+var seekerSearchJson = '';
+var seekerSearchState = false;
+
 $(document).on('pagebeforecreate', '#jobseeker', function() {
 	$.ajax({
 		url: 'http://52.69.53.255/KCCordova/api/get_seeker_info.php',
@@ -13,6 +16,7 @@ $(document).on('pagebeforecreate', '#jobseeker', function() {
 				} else if ((idx % 3) == 2) {
 					block_class = 'ui-block-c';
 				}
+				$('#seeker-grid').empty();
 				var seeker_div = $('<div></div>').attr('data-seeker-id', obj.u_id).addClass(block_class + ' seeker_div')
 					.append('<div class="seeker_list_item"><a data-ajax="false"><img src="http://52.69.53.255/KCCordova/www/img/' + obj.pic[0] + '" alt="" /></a></div>');
 				$(seeker_div).appendTo($('#seeker-grid'));
@@ -180,18 +184,23 @@ $(document).on('pagebeforeshow', '#jobseeker-search', function() {
 		$('#jobseeker_type').selectmenu('refresh');
 
 		$('#jobseeker-search-btn').on('click', function() {
-			var area = $('#county').val();
+			var area = $('#area-select').val();
+			var gender = $('[name="gender"]:checked').val();
 			var type = $('#jobseeker_type').val();
 			console.log('jobseeker_type changed');
-
 			$.ajax({
-				url: 'http://52.69.53.255/KCCordova/api/search_lifeservice.php?area_id=' + area + '&type=' + type,
-				dataType: 'json'
+				url: 'http://52.69.53.255/KCCordova/api/search_seeker.php',
+				dataType: 'json',
+				data: {
+					area: area,
+					gender: gender,
+					type: type
+				}
 			}).done(function(data) {
 				if (data.status) {
-					searchJson = data.result;
-					searchState = true;
-					$.mobile.changePage($('#lifeservice-list'), {
+					seekerSearchJson = data;
+					seekerSearchState = true;
+					$.mobile.changePage($('#jobseeker'), {
 						reloadPage: true,
 						changeHash: true
 					});
@@ -201,4 +210,33 @@ $(document).on('pagebeforeshow', '#jobseeker-search', function() {
 			});
 		});
 	});
+});
+
+$(document).on('pagebeforecreate', '#jobseeker-result', function() {
+	console.log(seekerSearchState, seekerSearchJson);
+	if (seekerSearchState && seekerSearchJson != '') {
+		console.log(seekerSearchState, seekerSearchJson);
+		$('#seeker-result-grid').empty();
+		$.each(seekerSearchJson.result, function(idx, obj) {
+			var block_class, img;
+			if ((idx % 3) == 0) {
+				block_class = 'ui-block-a';
+			} else if ((idx % 3) == 1) {
+				block_class = 'ui-block-b';
+			} else if ((idx % 3) == 2) {
+				block_class = 'ui-block-c';
+			}
+			var seeker_div = $('<div></div>').attr('data-seeker-id', obj.u_id).addClass(block_class + ' seeker_div')
+				.append('<div class="seeker_list_item"><a data-ajax="false"><img src="http://52.69.53.255/KCCordova/www/img/' + obj.pic[0] + '" alt="" /></a></div>');
+			$(seeker_div).appendTo($('#seeker-result-grid'));
+		});
+		$('#seeker-grid .seeker_div').click(function(event) {
+			var seeker_id = $(this).jqmData("seeker-id");
+			window.localStorage.setItem('get_seeker_id', seeker_id);
+			$.mobile.changePage($('#jobseeker-resume'), {
+				reloadPage: true,
+				changeHash: true
+			});
+		});
+	}
 });
