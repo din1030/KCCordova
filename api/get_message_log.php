@@ -16,7 +16,7 @@ if ($sql->num_rows > 0) {
         $r['created'] = date('Y/m/d H:i', strtotime($r['created']));
         $output[] = $r;
     }
-    echo json_encode(array('status' => true, 'msg' => $output));
+    echo json_encode(array('status' => true, 'talk_id' => $talk_id, 'msg' => $output));
 
     return;
 } else {

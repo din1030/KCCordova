@@ -133,7 +133,7 @@ $(document).on("pagebeforeshow", '#messages-detail', function(e, d) {
 				self_id: parseInt(window.localStorage.getItem('user_id')),
 				talk_id: currentMsg
 			},
-			url: "http://52.69.53.255/KCCordova/api/messagelog.json"
+			url: "http://52.69.53.255/KCCordova/api/get_message_log.php"
 		}).done(function(data) {
 			console.log(data);
 			$('#msg-holder').html(conversationMarkup(data.msg));
@@ -166,7 +166,7 @@ $(document).on("pagebeforeshow", '#messages-detail', function(e, d) {
 		var markup = '<div class="detail_block conversation_block"><div class="ui-bar ui-bar-a"><h3>' + msgTypeText() + '</h3></div><div class="ui-body ui-body-a">';
 		var myId = parseInt(window.localStorage.getItem('user_id'));
 
-		$.each(data.msg, function(i, v) {
+		$.each(data, function(i, v) {
 			if (v.from_id === myId) {
 				markup += '<div class="msg_wrapper"><div class="msg_title"><span class="msg_me">我</span><span class="msg_time float-right">' + v.created + '</span></div><div class="msg_body text-justify">' + v.content + '</div>	</div>';
 			} else {
@@ -174,7 +174,7 @@ $(document).on("pagebeforeshow", '#messages-detail', function(e, d) {
 			}
 		})
 
-		markup += '</div><div id="reply_lock"><h3>留言</h3>	<textarea name="msg_reply" rows="4" cols="40"></textarea><button type="submit" id="sendMsg" class="ui-btn ui-corner-all no-bg-bd purple-btn send-btn" data-msg-id="' + data.from_id + '">送出</button></div></div>';
+		markup += '</div><div id="reply_lock"><h3>留言</h3>	<textarea name="msg_reply" rows="4" cols="40"></textarea><button type="submit" id="sendMsg" class="ui-btn ui-corner-all no-bg-bd purple-btn send-btn" data-msg-id="' + data.talk_id + '">送出</button></div></div>';
 
 		return markup;
 	}
