@@ -28,10 +28,9 @@ $(document).on('pagebeforeshow', '#member-profile, #club-profile, #jobseeker-pro
 		alert('請確認您的網路連線狀態！');
 	});
 });
-$(document).on('pagebeforecreate', '#member-modify, #club-profile-modify, #jobseeker-profile-modify', function() {
-	// $('.profile-submit-btn').off();
+$(document).on('pagebeforeshow', '#member-modify, #club-profile-modify, #jobseeker-profile-modify', function() {
+	$('.profile-submit-btn').off();
 	var page_id = '#' + $.mobile.activePage.attr('id');
-
 	$(page_id + ' .profile-submit-btn').click(function(event) {
 		var backpage = $(this).jqmData("backpage");
 		$(this).parent('form').ajaxSubmit({
@@ -217,7 +216,8 @@ if (window.localStorage.getItem('auth') == '3') {
 
 $(document).on('pagebeforeshow', ".profile-pic-page", function() {
 	$('.profile-pic-input').off();
-	$('.profile-pic-input').change(function(event) {
+	var page_id = '#' + $.mobile.activePage.attr('id');
+	$(page_id + ' .profile-pic-input').change(function(event) {
 		if (this.files && this.files[0]) {
 			var input = this;
 			var reader = new FileReader();
