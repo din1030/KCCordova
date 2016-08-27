@@ -13,7 +13,7 @@ $sql_string = "(SELECT `messages`.*, `club_info`.`name` name FROM `messages`,`cl
 $sql = $mysqli->query($sql_string);
 if ($sql->num_rows > 0) {
     while ($r = mysqli_fetch_assoc($sql)) {
-        $r['created'] = date('Y/m/d H:i', strtotime($r['created']));
+        $r['time'] = date('Y/m/d H:i', strtotime($r['time']));
         $output[] = $r;
     }
     echo json_encode(array('status' => true, 'talk_id' => $talk_id, 'msg' => $output));
