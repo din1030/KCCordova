@@ -7,7 +7,7 @@ include 'db_setting.php';
 
 $type = $_GET['type'];
 $gender = $_GET['gender'];
-$area_id = $_GET['area_id'];
+$area_id = $_GET['area'];
 
 $sql_string = "SELECT `seeker_info`.`u_id`,`seeker_info`.`nickname`,`seeker_info`.`pic1` FROM `seeker_info`,`user` WHERE `seeker_info`.`u_id` = `user`.`id` AND `seeker_info`.`seek_category` ='.$type.' AND `seeker_info`.`area_id`='.$area_id.' AND `gender`='".$gender."'";
 

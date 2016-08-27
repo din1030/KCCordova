@@ -7,6 +7,7 @@ $(document).on('pagebeforecreate', '#jobseeker', function() {
 		dataType: 'json'
 	}).success(function(data) {
 		if (data.status) {
+			$('#seeker-grid').empty();
 			$.each(data.result, function(idx, obj) {
 				var block_class, img;
 				if ((idx % 3) == 0) {
@@ -16,7 +17,6 @@ $(document).on('pagebeforecreate', '#jobseeker', function() {
 				} else if ((idx % 3) == 2) {
 					block_class = 'ui-block-c';
 				}
-				$('#seeker-grid').empty();
 				var seeker_div = $('<div></div>').attr('data-seeker-id', obj.u_id).addClass(block_class + ' seeker_div')
 					.append('<div class="seeker_list_item"><a data-ajax="false"><img src="http://52.69.53.255/KCCordova/www/img/' + obj.pic[0] + '" alt="" /></a></div>');
 				$(seeker_div).appendTo($('#seeker-grid'));
@@ -237,6 +237,11 @@ $(document).on('pagebeforecreate', '#jobseeker-result', function() {
 				reloadPage: true,
 				changeHash: true
 			});
+		});
+	} else {
+		$.mobile.changePage($('#jobseeker'), {
+			reloadPage: true,
+			changeHash: true
 		});
 	}
 });
