@@ -7,7 +7,7 @@ $(document).on('pagebeforeshow', '#member-profile, #club-profile, #jobseeker-pro
 		dataType: 'json'
 	}).success(function(data) {
 		if (data.status) {
-			$('.upper_block >img').attr('src', img_base + data.result.pic);
+			$('.upper_block > img, .upper_block >  input[type="image"]').attr('src', img_base + data.result.pic);
 			$('.name_div').html(data.result.name);
 			$('.member-id-input').val(data.result.member_id);
 			$('.gender-input').val(data.result.gender);

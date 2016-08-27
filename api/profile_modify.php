@@ -10,6 +10,14 @@ $u_id = $_POST['u_id'];
 $tel = $_POST['tel-input'];
 $mobile = $_POST['mobile-input'];
 
+if ($_FILES['profile-pic']['error'] > 0) {
+    echo 'Error: '.$_FILES['profile-pic']['error'];
+} else {
+    echo '檔案名稱: '.$_FILES['profile-pic']['name'].'<br/>';
+    echo '檔案類型: '.$_FILES['profile-pic']['type'].'<br/>';
+    echo '檔案大小: '.($_FILES['profile-pic']['size'] / 1024).' Kb<br />';
+    echo '暫存名稱: '.$_FILES['profile-pic']['tmp_name'];
+}
 $target_dir = '/KCCordova/www/img/';
 $target_file = $target_dir.basename($_FILES['profile-pic']['name']);
 if (move_uploaded_file($_FILES['profile-pic']['tmp_name'], $target_file)) {
