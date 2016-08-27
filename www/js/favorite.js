@@ -29,20 +29,22 @@ $(document).on('pagebeforecreate', '#favorite', function() {
 
 			});
 			$('.del-fav-btn').click(function(event) {
+				var btn = $(this);
 				var fav_id = $(this).jqmData('fav-id');
-				$.ajax({
-					url: 'http://52.69.53.255/KCCordova/api/remove_fav.php',
-					type: 'POST',
-					dataType: 'json',
-					data: {
-						fav_id: fav_id
-					}
-				}).done(function() {
-					$(this).parents('.detail_block').remove();
-				}).fail(function() {
-					alert('請確認您的網路連線狀態！');
-				});
-
+				if (confirm('確定刪除此收藏？') === true) {
+					$.ajax({
+						url: 'http://52.69.53.255/KCCordova/api/remove_fav.php',
+						type: 'POST',
+						dataType: 'json',
+						data: {
+							fav_id: fav_id
+						}
+					}).done(function() {
+						$(btn).parents('.detail_block').remove();
+					}).fail(function() {
+						alert('請確認您的網路連線狀態！');
+					});
+				}
 			});
 		} else {
 			$('<div>' + data.message + '</div>').appendTo($('[data-role="main"]'));

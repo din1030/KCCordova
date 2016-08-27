@@ -182,14 +182,14 @@
                         </div>
                     </div>
                     <div id="msg_to_jobseeker" class="msg-popup ui-corner-all" data-role="popup" data-position-to="window" data-transition="pop" data-theme="none" data-shadow="false" data-overlay-theme="b" data-dismissible="false">
-                        <form>
-                            <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
-                            <div style="padding:10px 20px;">
-                                <h3>留言</h3>
-                                <textarea name="message" rows="8" data-theme="a"></textarea>
-                                <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn send-btn">送出</button>
-                            </div>
-                        </form>
+                        <!-- <form> -->
+                        <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+                        <div style="padding:10px 20px;">
+                            <h3>留言</h3>
+                            <textarea id="msg_content" name="message" rows="8" data-theme="a"></textarea>
+                            <button id="msg-seeker-btn" type="button" class="ui-btn ui-corner-all no-bg-bd purple-btn send-btn">送出</button>
+                        </div>
+                        <!-- </form> -->
                     </div>
                 </div>
                 <div id="brief_block" class="detail_block">

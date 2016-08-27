@@ -77,8 +77,8 @@
                 <div class="search-block">
                     <form class="" action="index.html" method="post">
                         <div class="ui-field-contain">
-                            <label for="county">區域</label>
-                            <select name="county" id="county" class="area-select">
+                            <label for="area-select">區域</label>
+                            <select name="area-select" id="area-select" class="area-select">
                                 <!-- <option value="small">台北市</option>
                                 <option value="medium">新北市</option>
                                 <option value="large">台中市</option> -->
@@ -87,9 +87,9 @@
                         <div class="ui-field-contain">
                             <label for="club_type">店家類別</label>
                             <select name="club_type" id="club_type">
-                                <option value="small">類別一</option>
+                                <!-- <option value="small">類別一</option>
                                 <option value="medium">類別二</option>
-                                <option value="large">類別三</option>
+                                <option value="large">類別三</option> -->
                             </select>
                         </div>
                         <button type="button" name="button" id="club-search-btn">搜尋</button>
@@ -332,13 +332,23 @@
                         <br> 電話：<span id="tel">（暫無資訊）</span>
                         <br> LINE: <span id="line">（暫無資訊）</span>
                         <div id="action_block" class="text-right">
-                            <a href="#msg_to_jobseeker" class="ui-btn ui-btn-inline no-bg-bd msg-btn" data-rel="popup">
+                            <a href="#msg_to_club" class="ui-btn ui-btn-inline no-bg-bd msg-btn" data-rel="popup">
                                 <img src="./img/icons/message.png" alt="" />
                             </a>
                             <button id="add-fav-btn" type="button" class="ui-btn ui-btn-inline no-bg-bd add-fav-btn">
                                 <img src="./img/icons/fav_gray.png" alt="" />
                             </button>
                         </div>
+                    </div>
+                    <div id="msg_to_club" class="msg-popup ui-corner-all" data-role="popup" data-position-to="window" data-transition="pop" data-theme="none" data-shadow="false" data-overlay-theme="b" data-dismissible="false">
+                        <!-- <form> -->
+                        <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+                        <div style="padding:10px 20px;">
+                            <h3>留言</h3>
+                            <textarea id="msg_content" name="msg_content" rows="8" data-theme="a"></textarea>
+                            <button id="msg-club-btn" type="button" class="ui-btn ui-corner-all no-bg-bd purple-btn send-btn">送出</button>
+                        </div>
+                        <!-- </form> -->
                     </div>
                 </div>
                 <div id="offer_content_block" class="detail_block">

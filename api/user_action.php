@@ -50,7 +50,7 @@ if ($action == 'reg') { // For Register
         }
 
         // 儲存資料
-        $sql_string = 'INSERT INTO `user`(`type`,`email`,`password`,`name`,`gender`,`country`,`area`,`birth`,`tel`,`mobile`,`ref`,`created`) '.
+        $sql_string = 'INSERT INTO `user`(`type`,`email`,`password`,`name`,`gender`,`country`,`area`,`birth`,`tel`,`mobile`,`ref_id`,`created`) '.
             "VALUES ('$type','$email','$password','$name','$gender','$country','$area','$birth','$tel','$mobile','$ref', NULL)";
         $mysqli->query($sql_string);
         if ($mysqli->affected_rows > 0) {

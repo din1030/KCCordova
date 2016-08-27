@@ -132,6 +132,27 @@ $(document).on('pagebeforeshow', '#jobseeker-resume', function() {
 			$('#languages-span').html(data.result[0].languages);
 			$('#pay-span').html(data.result[0].pay);
 			$('#content-span').html(data.result[0].job_content.replace(/\n/g, "<br>"));
+			$('#msg-seeker-btn').click(function(event) {
+				// var to_id = $(this).jqmData('to-id');
+				var msg_content = $('#msg_content').val();
+				$.ajax({
+					url: "http://52.69.53.255/KCCordova/api/send_message.php",
+					dataType: "json",
+					method: "POST",
+					data: {
+						self_id: parseInt(window.localStorage.getItem('user_id')),
+						self_type: parseInt(window.localStorage.getItem('auth')),
+						talk_id: parseInt(window.localStorage.getItem('get_seeker_id')),
+						content: msg_content
+					}
+				}).done(function(data) {
+					$('#msg_content').val('');
+					$("#msg_to_jobseeker").popup("close");
+
+				}).fail(function() {
+					alert('請確認您的網路連線狀態！');
+				});
+			});
 			$('#add-fav-btn').click(function(event) {
 				$.ajax({
 					url: 'http://52.69.53.255/KCCordova/api/add_fav.php?user_id=' + window.localStorage.getItem('user_id') + '&type=3&item_id=' + get_seeker_id,

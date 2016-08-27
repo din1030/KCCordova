@@ -18,9 +18,10 @@ $(document).on('pagebeforecreate', '#club', function() {
 					reloadPage: true,
 					changeHash: true
 				});
-
 			});
 		}
+	}).fail(function() {
+		alert('請確認您的網路連線狀態！');
 	});
 });
 
@@ -46,14 +47,12 @@ $(document).on('pagebeforeshow', '#club-intro', function() {
 			$('#website-link').attr('href', club.website);
 			var slideContainer = '<ul class="slides">';
 			$.each(club.pic, function(idx, pic) {
-				console.log(pic);
 				if (pic != null && pic != '') {
 					slideContainer += '<li><img src="http://52.69.53.255/KCCordova/www/img/' + pic + '"></li>'
 				}
 			});
 
 			slideContainer += '</ul>';
-
 			$('.flexslider').html(slideContainer);
 			$('#club-intro .add-fav-btn').click(function(event) {
 				$.ajax({
@@ -127,10 +126,10 @@ $(document).on('pagebeforeshow', '#club-job-info', function() {
 			$('#tel').text(club.tel);
 			$('#line').text(club.line);
 			$('#interviewer_pic').attr('src', 'http://52.69.53.255/KCCordova/www/img/' + club.interviewer_pic);
-			if (typeof(club.offer_content) !== 'undefined') {
+			if (club.offer_content != null) {
 				club.offer_content = club.offer_content.replace(/\n/g, "<br>")
 			}
-			if (typeof(club.welfare) !== 'undefined') {
+			if (club.welfare != null) {
 				club.welfare = club.welfare.replace(/\n/g, "<br>")
 			}
 			$('#offer_content').html(club.offer_content);
@@ -138,6 +137,27 @@ $(document).on('pagebeforeshow', '#club-job-info', function() {
 			$('.no_data').hide();
 			$('#club-job-info-main').show();
 
+			$('#club-job-info #msg-club-btn').click(function(event) {
+				// var to_id = $(this).jqmData('to-id');
+				var msg_content = $('#msg_content').val();
+				$.ajax({
+					url: "http://52.69.53.255/KCCordova/api/send_message.php",
+					dataType: "json",
+					method: "POST",
+					data: {
+						self_id: parseInt(window.localStorage.getItem('user_id')),
+						self_type: parseInt(window.localStorage.getItem('auth')),
+						talk_id: parseInt(window.localStorage.getItem('get_club_id')),
+						content: msg_content
+					}
+				}).done(function(data) {
+					$('#msg_content').val('');
+					$("#msg_to_club").popup("close");
+
+				}).fail(function() {
+					alert('請確認您的網路連線狀態！');
+				});
+			});
 			$('#club-job-info .add-fav-btn').click(function(event) {
 				$.ajax({
 					url: 'http://52.69.53.255/KCCordova/api/add_fav.php?user_id=' + window.localStorage.getItem('user_id') + '&type=2&item_id=' + get_club_id,
@@ -151,7 +171,10 @@ $(document).on('pagebeforeshow', '#club-job-info', function() {
 			$('.no_data').show();
 			$('#club-job-info-main').hide();
 		}
+	}).fail(function() {
+		alert('請確認您的網路連線狀態！');
 	});
+
 });
 
 $(document).on('pagebeforeshow', "#club-intro, #club-service", function() {
@@ -257,12 +280,15 @@ $(document).on('pagebeforeshow', "#club-service", function() {
 			$('.no_data').show();
 			$('#club-service-main').hide();
 		}
+	}).fail(function() {
+		alert('請確認您的網路連線狀態！');
 	});
+
 });
 
 $(document).on('pagebeforeshow', '#club-search', function() {
 	$.ajax({
-		url: 'http://52.69.53.255/KCCordova/api/get_form_content.php?action=get_category&type=life',
+		url: 'http://52.69.53.255/KCCordova/api/get_form_content.php?action=get_category&type=club',
 		dataType: 'json'
 	}).done(function(data) {
 		console.log(data);
@@ -270,13 +296,13 @@ $(document).on('pagebeforeshow', '#club-search', function() {
 		$.each(data, function(idx, obj) {
 			classificationList += '<option value="' + obj.id + '">' + obj.title + '</option>';
 		});
-		$('#life_type').html(classificationList);
-		$('#life_type').selectmenu('refresh');
+		$('#club_type').html(classificationList);
+		$('#club_type').selectmenu('refresh');
 
-		$('#lifeservice-search-btn').on('click', function() {
-			var area = $('#county').val();
-			var type = $('#life_type').val();
-			console.log('life_type changed');
+		$('#club-search-btn').on('click', function() {
+			var area = $('#area-select').val();
+			var type = $('#club_type').val();
+			console.log('club_type changed');
 
 			$.ajax({
 				url: 'http://52.69.53.255/KCCordova/api/search_lifeservice.php?area_id=' + area + '&type=' + type,
@@ -285,13 +311,15 @@ $(document).on('pagebeforeshow', '#club-search', function() {
 				if (data.status) {
 					searchJson = data.result;
 					searchState = true;
-					$.mobile.changePage($('#lifeservice-list'), {
+					$.mobile.changePage($('#club'), {
 						reloadPage: true,
 						changeHash: true
 					});
 				} else {
 					alert(data.message);
 				}
+			}).fail(function() {
+				alert('請確認您的網路連線狀態！');
 			});
 		});
 	});
