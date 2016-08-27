@@ -1,7 +1,7 @@
 var api_base = 'http://52.69.53.255/KCCordova/api/';
 var img_base = 'http://52.69.53.255/KCCordova/www/img/';
 
-$(document).on('pagebeforeshow', '#member-profile, #club-profile, #jobseeker-profile', function() {
+$(document).on('pagebeforeshow', '#member-profile, #club-profile, #jobseeker-profile,#member-profile-modify, #club-profile-modify, #jobseeker-profile-modify', function() {
 	var page_id = '#' + $.mobile.activePage.attr('id');
 	$.ajax({
 		url: api_base + 'get_user_info.php?user_id=' + window.localStorage.getItem('user_id'),
@@ -29,6 +29,7 @@ $(document).on('pagebeforeshow', '#member-profile, #club-profile, #jobseeker-pro
 		alert('請確認您的網路連線狀態！');
 	});
 });
+
 $(document).on('pagebeforeshow', '#member-modify, #club-profile-modify, #jobseeker-profile-modify', function() {
 	$('.profile-submit-btn').off();
 	var page_id = '#' + $.mobile.activePage.attr('id');

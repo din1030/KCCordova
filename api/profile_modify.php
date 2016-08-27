@@ -25,15 +25,18 @@ $mobile = $_POST['mobile-input'];
 //     echo '檔案大小: '.($_FILES['profile_photo']['size'] / 1024).' Kb<br />';
 //     echo '暫存名稱: '.$_FILES['profile_photo']['tmp_name'];
 // }
-$target_dir = '../www/img/';
-$target_file = $target_dir.basename($_FILES['profile_photo']['name']);
-move_uploaded_file($_FILES['profile_photo']['tmp_name'], $target_file);
 
 // 判斷是否已有資料
 $sql_string = "SELECT * FROM `user` WHERE `id` = '$u_id' LIMIT 1";
 $sql = $mysqli->query($sql_string);
 if ($sql->num_rows > 0) {
-    $update_string = "UPDATE `user` SET `tel`='$tel',`mobile`='$mobile' WHERE `id` = '$u_id'";
+    $pic_string = '';
+    $target_dir = '../www/img/';
+    $target_file = $target_dir.basename($_FILES['profile_photo']['name']);
+    if (move_uploaded_file($_FILES['profile_photo']['tmp_name'], $target_file)) {
+        $pic_string = ",`pic`='".basename($_FILES['profile_photo']['name'])."'";
+    }
+    $update_string = "UPDATE `user` SET `tel`='$tel',`mobile`='$mobile'".$pic_string." WHERE `id` = '$u_id'";
     $sql = $mysqli->query($update_string);
     if ($mysqli->affected_rows > 0) {
         $output = array('status' => true, 'message' => '資料已修改！');

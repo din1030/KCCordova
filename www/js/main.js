@@ -64,13 +64,13 @@ $(document).on('pagecreate', function() {
 		// $('#profile-link').attr('href', './profile.html#member-profile');
 		href = './profile.html#member-profile';
 	} else if (window.localStorage.getItem('auth') == '1') {
-		href = './profile.html#member-profile';
+		href = './profile.html';
 		// $('#profile-link').attr('href', './profile.html#member-profile');
 	} else if (window.localStorage.getItem('auth') == '2') {
-		href = './profile.html#club-profile';
+		href = './profile_club.html';
 		// $('#profile-link').attr('href', './profile.html#club-profile');
 	} else if (window.localStorage.getItem('auth') == '3') {
-		href = './profile.html#jobseeker-profile';
+		href = './profile_seeker.html';
 		// $('#profile-link').attr('href', './profile.html#jobseeker-profile');
 	}
 	var panel = '<div data-role="panel" id="menu-panel" data-display="push" data-theme="a" data-position-fixed="true">' + '<div class="ui-panel-inner"><ul data-role="listview" class="ui-listview">' + '<li><a href="./index.html#home" class="ui-btn" data-ajax="false"><div class="menu-icon icon0"></div> 首頁 </a></li>' + '<li><a id="profile-link" href="' + href + '" class="ui-btn" data-ajax="false"><div class="menu-icon icon1"></div> 我的檔案 </a></li>' + '<li><a href="./menu.html#recommend-record" class="ui-btn" data-ajax="false"><div class="menu-icon icon2"></div> 推薦紀錄 </a></li>' + '<li><a href="./menu.html#news" class="ui-btn" data-ajax="false"><div class="menu-icon icon3"></div> 最新消息 </a></li>' + '<li><a href="./menu.html#share" class="ui-btn" data-ajax="false"><div class="menu-icon icon4"></div> 分享好友 </a></li>' + '<li><a href="http://www.kelly-club.com/" class="ui-btn" rel="external" target="_blank"><div class="menu-icon icon5"></div> 連官網 </a></li>' + '<li><a href="./menu.html#setting" class="ui-btn" data-ajax="false"><div class="menu-icon icon6"></div> 設定 </a></li>' + '<li><a id="menu-logout" href="./index.html#login" class="ui-btn" data-ajax="false"><div class="menu-icon icon7"></div> 登出 </a></li>' + admin_li + ' </ul></div></div>';
