@@ -78,21 +78,21 @@
             </div>
             <!-- /header -->
             <div data-role="main" class="ui-content profile-main" id="member-modify-main">
-                <div class="upper_block">
-                    <input type="image" class="profile-pic" src="./img/seeker-a.jpg" />
-                    <input id="profile-pic" name="profile-pic" type="file" class="profile-pic-input" accept="image/*" />
-                    <div class="name_block">
-                        <div class="name_div">
-                            翁水蘭
+                <form method="post">
+                    <div class="upper_block">
+                        <input type="image" class="profile-pic" src="./img/seeker-a.jpg" />
+                        <input id="profile-pic" name="profile-pic" type="file" class="profile-pic-input" accept="image/*" />
+                        <div class="name_block">
+                            <div class="name_div">
+                                翁水蘭
+                            </div>
+                            <!-- <br> -->
+                            <div>可更換大頭圖</div>
                         </div>
-                        <!-- <br> -->
-                        <div>可更換大頭圖</div>
                     </div>
-                </div>
-                <div class="clearfix"></div>
-                <hr>
-                <div class="">
-                    <form method="post">
+                    <div class="clearfix"></div>
+                    <hr>
+                    <div class="">
                         <div class="ui-field-contain ui-disabled">
                             <label class="item_title" for="member-id-input">會員編號</label>
                             <input type="text" name="member-id-input" class="ui-disabled member-id-input" id="member-id-input" value="">
@@ -118,7 +118,7 @@
                             <input type="tel" name="mobile-input" class="mobile-input" id="mobile-input" value="0912345678">
                         </div>
                         <button class="ui-shadow ui-btn ui-corner-all profile-submit-btn" data-backpage="#jobseeker-profile" type="button">送出</button>
-                    </form>
+                </form>
                 </div>
             </div>
             <!-- /main -->
@@ -1027,54 +1027,55 @@
                             <option value="w7">星期日</option>
                         </select>
                     </div>
-                    <textarea wrap="virtual" name="job_content" rows="4" cols="40">消費資訊消費資訊消費資訊消費資訊消費資訊消費資訊消費資訊消費資訊消費資訊消費資訊</textarea>
-                    <div class="ui-field-contain">
-                        <label class="item_title">欄位三</label>
-                        <select name="select-choice-1" id="select-choice-1">
-                            <option value="w1">星期一</option>
-                            <option value="w2">星期二</option>
-                            <option value="w3">星期三</option>
-                            <option value="w4">星期四</option>
-                            <option value="w5">星期五</option>
-                            <option value="w6">星期六</option>
-                            <option value="w7">星期日</option>
-                        </select>
-                    </div>
-                    <textarea wrap="virtual" name="job_content" rows="4" cols="40">消費資訊消費資訊消費資訊消費資訊消費資訊消費資訊消費資訊消費資訊消費資訊消費資訊</textarea>
-                    <div class="ui-field-contain">
-                        <label class="item_title">欄位四</label>
-                        <select name="select-choice-1" id="select-choice-1">
-                            <option value="w1">星期一</option>
-                            <option value="w2">星期二</option>
-                            <option value="w3">星期三</option>
-                            <option value="w4">星期四</option>
-                            <option value="w5">星期五</option>
-                            <option value="w6">星期六</option>
-                            <option value="w7">星期日</option>
-                        </select>
-                    </div>
-                    <textarea wrap="virtual" name="job_content" rows="4" cols="40">消費資訊消費資訊消費資訊消費資訊消費資訊消費資訊消費資訊消費資訊消費資訊消費資訊</textarea>
-                    <div class="ui-field-contain">
-                        <label class="item_title">欄位五</label>
-                        <select name="select-choice-1" id="select-choice-1">
-                            <option value="w1">星期一</option>
-                            <option value="w2">星期二</option>
-                            <option value="w3">星期三</option>
-                            <option value="w4">星期四</option>
-                            <option value="w5">星期五</option>
-                            <option value="w6">星期六</option>
-                            <option value="w7">星期日</option>
-                        </select>
-                    </div>
-                    <textarea wrap="virtual" name="job_content" rows="4" cols="40">消費資訊消費資訊消費資訊消費資訊消費資訊消費資訊消費資訊消費資訊消費資訊消費資訊</textarea>
-                    <div>
-                        <label class="item_title" for="job_content">優惠活動訊息</label>
-                        <textarea wrap="virtual" name="job_content" rows="4" cols="40">優惠活動訊息優惠活動訊息優惠活動訊息優惠活動訊息優惠活動訊息</textarea>
-                    </div>
-                    <button id="member-submit-btn" class="ui-shadow ui-btn ui-corner-all" type="submit">送出</button>
                 </div>
+                <textarea wrap="virtual" name="job_content" rows="4" cols="40">消費資訊消費資訊消費資訊消費資訊消費資訊消費資訊消費資訊消費資訊消費資訊消費資訊</textarea>
+                <div class="ui-field-contain">
+                    <label class="item_title">欄位三</label>
+                    <select name="select-choice-1" id="select-choice-1">
+                        <option value="w1">星期一</option>
+                        <option value="w2">星期二</option>
+                        <option value="w3">星期三</option>
+                        <option value="w4">星期四</option>
+                        <option value="w5">星期五</option>
+                        <option value="w6">星期六</option>
+                        <option value="w7">星期日</option>
+                    </select>
+                </div>
+                <textarea wrap="virtual" name="job_content" rows="4" cols="40">消費資訊消費資訊消費資訊消費資訊消費資訊消費資訊消費資訊消費資訊消費資訊消費資訊</textarea>
+                <div class="ui-field-contain">
+                    <label class="item_title">欄位四</label>
+                    <select name="select-choice-1" id="select-choice-1">
+                        <option value="w1">星期一</option>
+                        <option value="w2">星期二</option>
+                        <option value="w3">星期三</option>
+                        <option value="w4">星期四</option>
+                        <option value="w5">星期五</option>
+                        <option value="w6">星期六</option>
+                        <option value="w7">星期日</option>
+                    </select>
+                </div>
+                <textarea wrap="virtual" name="job_content" rows="4" cols="40">消費資訊消費資訊消費資訊消費資訊消費資訊消費資訊消費資訊消費資訊消費資訊消費資訊</textarea>
+                <div class="ui-field-contain">
+                    <label class="item_title">欄位五</label>
+                    <select name="select-choice-1" id="select-choice-1">
+                        <option value="w1">星期一</option>
+                        <option value="w2">星期二</option>
+                        <option value="w3">星期三</option>
+                        <option value="w4">星期四</option>
+                        <option value="w5">星期五</option>
+                        <option value="w6">星期六</option>
+                        <option value="w7">星期日</option>
+                    </select>
+                </div>
+                <textarea wrap="virtual" name="job_content" rows="4" cols="40">消費資訊消費資訊消費資訊消費資訊消費資訊消費資訊消費資訊消費資訊消費資訊消費資訊</textarea>
+                <div>
+                    <label class="item_title" for="job_content">優惠活動訊息</label>
+                    <textarea wrap="virtual" name="job_content" rows="4" cols="40">優惠活動訊息優惠活動訊息優惠活動訊息優惠活動訊息優惠活動訊息</textarea>
+                </div>
+                <button id="member-submit-btn" class="ui-shadow ui-btn ui-corner-all" type="submit">送出</button>
             </div>
-            <!-- /main -->
+        </div>
+        <!-- /main -->
         </div>
 
         <!-- club hire -->

@@ -32,8 +32,9 @@ $(document).on('pagebeforeshow', '#member-modify, #club-profile-modify, #jobseek
 	$('.profile-submit-btn').off();
 	var page_id = '#' + $.mobile.activePage.attr('id');
 	$(page_id + ' .profile-submit-btn').click(function(event) {
+		console.log(page_id);
 		var backpage = $(this).jqmData("backpage");
-		$(this).parent('form').ajaxSubmit({
+		$(this).parents('form').ajaxSubmit({
 			url: api_base + 'profile_modify.php',
 			data: {
 				u_id: window.localStorage.getItem('user_id'),
@@ -182,11 +183,9 @@ if (window.localStorage.getItem('auth') == '3') {
 				url: api_base + 'seeker_modify.php',
 				data: {
 					u_id: window.localStorage.getItem('user_id'),
-					type: 'resume',
-					// formData: $('#jobseeker-resume-modify-form').serialize()
+					type: 'resume'
 				},
 				type: 'POST',
-				async: 'true',
 				dataType: 'json',
 				beforeSend: function() {
 					$.mobile.loading('show');
