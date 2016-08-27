@@ -229,6 +229,7 @@ $(document).on('pagebeforeshow', ".profile-pic-page", function() {
 	});
 	$("input[type='image']").off();
 	$(page_id + " input[type='image']").click(function() {
+		console.log(page_id);
 		$(this).next('.ui-input-text').find("input[type='file']").click();
 	});
 });
