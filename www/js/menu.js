@@ -44,6 +44,8 @@ $(document).on('pagebeforecreate', '#news', function() {
 		} else {
 			$('#news_updated').text(news.today);
 		}
+	}).fail(function() {
+		alert('請確認您的網路連線狀態！');
 	});
 });
 

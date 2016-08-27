@@ -324,6 +324,8 @@ $(document).on('pagecreate', '#home', function() {
 			});
 		}
 		$('#home-main').show();
+	}).fail(function() {
+		alert('請確認您的網路連線狀態！');
 	});
 
 	function link_to_url(link) {

@@ -34,7 +34,9 @@ $(document).on("pagebeforeshow", '#messages', function() {
 			$('.offcial_msg_block').attr('id', 'msg-' + lastOfficialMsg.id);
 			$('.offcial_msg_block').show();
 		}
-	})
+	}).fail(function() {
+		alert('請確認您的網路連線狀態！');
+	});
 
 	$.ajax({
 		url: "http://52.69.53.255/KCCordova/api/get_personal_message.php",
@@ -71,9 +73,9 @@ $(document).on("pagebeforeshow", '#messages', function() {
 
 			return markup;
 		}
+	}).fail(function() {
+		alert('請確認您的網路連線狀態！');
 	});
-
-
 	//event handler
 
 	$('#messages-main').on('click', '.msg-open', function(e) {
@@ -116,10 +118,7 @@ $(document).on("pagebeforeshow", '#messages', function() {
 		console.log(id);
 
 	});
-
-
 });
-
 
 $(document).on("pagebeforeshow", '#messages-detail', function(e, d) {
 	$('#msg-holder').empty();
@@ -128,17 +127,19 @@ $(document).on("pagebeforeshow", '#messages-detail', function(e, d) {
 
 	if (!officialState) {
 		$.ajax({
+			url: "http://52.69.53.255/KCCordova/api/get_message_log.php",
 			method: "GET", //should be post
 			dataType: 'json',
 			data: {
 				self_id: parseInt(window.localStorage.getItem('user_id')),
 				talk_id: currentMsg
-			},
-			url: "http://52.69.53.255/KCCordova/api/get_message_log.php"
+			}
 		}).done(function(data) {
 			console.log(data);
 			$('#msg-holder').html(conversationMarkup(data));
-		})
+		}).fail(function() {
+			alert('請確認您的網路連線狀態！');
+		});
 	} else {
 		$('#msg-holder').html(officialMarkup(officialMsg.msg));
 	}

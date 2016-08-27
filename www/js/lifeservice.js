@@ -1,11 +1,8 @@
 var currentViewId;
 var dataJson = '';
 var searchJson;
-var store_id;
 var baseApi = 'http://52.69.53.255/KVCordova/api/lifeservice.json';
 var searchState = false;
-
-
 $(document).on('pagebeforecreate', '#lifeservice', function() {
 	$.ajax({
 		url: 'http://52.69.53.255/KCCordova/api/get_lifeservice.php',
@@ -13,14 +10,12 @@ $(document).on('pagebeforecreate', '#lifeservice', function() {
 	}).success(function(data) {
 		if (data.status) {
 			dataJson = data;
-			console.log(dataJson);
+			// console.log(dataJson);
 			$.each(data.result, function(idx, obj) {
 				var classification_li = $('<div></div>').append('<a href="" data-id="' + obj.id + '" data-ajax="false"><img src="http://52.69.53.255/KCCordova/www/img/' + obj.pic + '"></a>');
 				$(classification_li).appendTo($('#service-category-block'));
 			});
-			// $('#service-category-block').listview('refresh');
 			$('#service-category-block a').click(function(event) {
-				console.log('called click!');
 				var id = $(this).jqmData("id");
 				currentViewId = id;
 				$.mobile.changePage($('#lifeservice-list'), {
@@ -32,25 +27,20 @@ $(document).on('pagebeforecreate', '#lifeservice', function() {
 	});
 });
 
-$(document).on('pagebeforeshow', '#lifeservice', function(e) {
-	// event off!!
-});
-
-
 $(document).on('pagebeforeshow', '#lifeservice-list', function() {
 	var list = '';
 	$('#lifeservice-category-select').off();
 
 	// check if it come from search state
 	if (searchState) {
-		console.log(searchJson);
+		// console.log(searchJson);
 		classListRefresh(searchJson);
 		searchState = false;
 	} else {
 		//if referrer come from search before all json been fetch
 		if (dataJson != '') {
 			// print all type
-			console.log(dataJson.result);
+			// console.log(dataJson.result);
 			$.each(dataJson.result, function(idx, obj) {
 				list += '<option value="' + obj.id + '">' + obj.title + '</option>';
 				if (obj.id == currentViewId) {
@@ -66,7 +56,7 @@ $(document).on('pagebeforeshow', '#lifeservice-list', function() {
 			}).success(function(data) {
 				if (data.status) {
 					dataJson = data.result;
-					console.log(dataJson);
+					// console.log(dataJson);
 					currentViewId = data.result[0].id;
 					$.each(data.result, function(idx, obj) {
 						list += '<option value="' + obj.id + '">' + obj.title + '</option>';
@@ -94,9 +84,9 @@ $(document).on('pagebeforeshow', '#lifeservice-list', function() {
 
 	//event handler
 	$('#lifeservice-category-select').on('change', function(e) {
-		console.log($(this).val());
+		// console.log($(this).val());
 		currentViewId = parseInt($(this).val());
-		console.log(dataJson.result);
+		// console.log(dataJson.result);
 		$.each(dataJson.result, function(idx, obj) {
 			if (obj.id == currentViewId) {
 				classListRefresh(obj.store);
@@ -105,7 +95,7 @@ $(document).on('pagebeforeshow', '#lifeservice-list', function() {
 	});
 
 	$('#lifeservice-list-main').on('click', '.store_list a', function() { // to be review for delegation
-		store_id = $(this).jqmData("store-id");
+		window.localStorage.setItem('get_life_id', $(this).jqmData("store-id"));
 		$.mobile.changePage($('#lifeservice-detail'), {
 			reloadPage: true,
 			changeHash: true
@@ -117,10 +107,11 @@ $(document).on('pagebeforeshow', '#lifeservice-list', function() {
 $(document).on('pagebeforeshow', '#lifeservice-detail', function() {
 	$('#lifeservice-list-main').off(); // remove event delegation from other pages
 	$('#lifeservice-detail-main').off(); // remove event delegation from other pages
-	console.log(store_id);
-	if (store_id != null && store_id != 0) {
+	var get_life_id = window.localStorage.getItem('get_life_id');
+	// console.log(get_life_id);
+	if (get_life_id != null && get_life_id != 0) {
 		$.ajax({
-			url: 'http://52.69.53.255/KCCordova/api/get_lifeservice_detail.php?store_id=' + store_id,
+			url: 'http://52.69.53.255/KCCordova/api/get_lifeservice_detail.php?store_id=' + get_life_id,
 			dataType: 'json'
 		}).success(function(data) {
 			if (data.status) {
@@ -164,19 +155,16 @@ $(document).on('pagebeforeshow', '#lifeservice-detail', function() {
 			changeHash: true
 		});
 	}
-
 });
-
 
 $(document).on('pagebeforeshow', '#lifeservice-search', function() {
 	//off any unwanted event  place to garbage collector
 	$('#lifeservice-detail-main').off();
-
 	$.ajax({
 		url: 'http://52.69.53.255/KCCordova/api/get_form_content.php?action=get_category&type=life',
 		dataType: 'json'
 	}).done(function(data) {
-		console.log(data);
+		// console.log(data);
 		var classificationList = '';
 		$.each(data, function(idx, obj) {
 			classificationList += '<option value="' + obj.id + '">' + obj.title + '</option>';
@@ -187,7 +175,7 @@ $(document).on('pagebeforeshow', '#lifeservice-search', function() {
 		$('#lifeservice-search-btn').on('click', function() {
 			var area = $('#county').val();
 			var type = $('#life_type').val();
-			console.log('life_type changed');
+			// console.log('life_type changed');
 
 			$.ajax({
 				url: 'http://52.69.53.255/KCCordova/api/search_lifeservice.php?area_id=' + area + '&type=' + type,
@@ -205,5 +193,7 @@ $(document).on('pagebeforeshow', '#lifeservice-search', function() {
 				}
 			});
 		});
+	}).fail(function() {
+		alert('請確認您的網路連線狀態！');
 	});
 });

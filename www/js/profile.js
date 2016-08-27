@@ -19,6 +19,8 @@ $(document).on('pagebeforeshow', '#member-profile, #club-profile, #jobseeker-pro
 				}
 			}
 		}
+	}).fail(function() {
+		alert('請確認您的網路連線狀態！');
 	});
 });
 $(document).on('pagebeforecreate', '#member-modify, #club-profile-modify, #jobseeker-profile-modify', function() {
@@ -165,6 +167,8 @@ if (window.localStorage.getItem('auth') == '3') {
 				$("[name='worktime'][value='" + data.result[0].workingtime + "']").prop("checked", true).checkboxradio("refresh");
 				$('#job_content').val(data.result[0].job_content);
 			}
+		}).fail(function() {
+			alert('請確認您的網路連線狀態！');
 		});
 		$('#seeker-resume-send-btn').click(function(event) {
 			$('#jobseeker-resume-modify-form').ajaxSubmit({
