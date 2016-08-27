@@ -8,7 +8,7 @@ include 'db_setting.php';
 $self_id = $_GET['self_id'];
 $talk_id = $_GET['talk_id'];
 
-$sql_string = "(SELECT `messages`.*, `club_info`.`name` name FROM `messages`,`club_info` WHERE ((`from_id`=$self_id AND `to_id`=$talk_id) OR (`from_id`=$talk_id AND `to_id`=$self_id)) AND `from_type`=2 AND `messages`.`from_id`=`club_info`.`admin_id`) UNION (SELECT `messages`.*, `seeker_info`.`nickname` name FROM `messages`,`seeker_info` WHERE ((`from_id`=$self_id AND `to_id`=$talk_id) OR (`from_id`=$talk_id AND `to_id`=$self_id)) AND `from_type`=3 AND `messages`.`from_id`=`seeker_info`.`u_id`) ";
+$sql_string = "(SELECT `messages`.*, `club_info`.`name` name FROM `messages`,`club_info` WHERE ((`from_id`=$self_id AND `to_id`=$talk_id) OR (`from_id`=$talk_id AND `to_id`=$self_id)) AND `from_type`=2 AND `messages`.`from_id`=`club_info`.`admin_id`) UNION (SELECT `messages`.*, `seeker_info`.`nickname` name FROM `messages`,`seeker_info` WHERE ((`from_id`=$self_id AND `to_id`=$talk_id) OR (`from_id`=$talk_id AND `to_id`=$self_id)) AND `from_type`=3 AND `messages`.`from_id`=`seeker_info`.`u_id`) ORDER BY `time`";
 
 $sql = $mysqli->query($sql_string);
 if ($sql->num_rows > 0) {
