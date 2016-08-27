@@ -46,7 +46,10 @@ $(document).on('pagebeforeshow', '#club-intro', function() {
 			$('#website-link').attr('href', club.website);
 			var slideContainer = '<ul class="slides">';
 			$.each(club.pic, function(idx, pic) {
-				slideContainer += '<li><img src="http://52.69.53.255/KCCordova/www/img/' + pic + '"></li>'
+				console.log(pic);
+				if (pic != null && pic != '') {
+					slideContainer += '<li><img src="http://52.69.53.255/KCCordova/www/img/' + pic + '"></li>'
+				}
 			});
 
 			slideContainer += '</ul>';
@@ -254,5 +257,42 @@ $(document).on('pagebeforeshow', "#club-service", function() {
 			$('.no_data').show();
 			$('#club-service-main').hide();
 		}
+	});
+});
+
+$(document).on('pagebeforeshow', '#club-search', function() {
+	$.ajax({
+		url: 'http://52.69.53.255/KCCordova/api/get_form_content.php?action=get_category&type=life',
+		dataType: 'json'
+	}).done(function(data) {
+		console.log(data);
+		var classificationList = '';
+		$.each(data, function(idx, obj) {
+			classificationList += '<option value="' + obj.id + '">' + obj.title + '</option>';
+		});
+		$('#life_type').html(classificationList);
+		$('#life_type').selectmenu('refresh');
+
+		$('#lifeservice-search-btn').on('click', function() {
+			var area = $('#county').val();
+			var type = $('#life_type').val();
+			console.log('life_type changed');
+
+			$.ajax({
+				url: 'http://52.69.53.255/KCCordova/api/search_lifeservice.php?area_id=' + area + '&type=' + type,
+				dataType: 'json'
+			}).done(function(data) {
+				if (data.status) {
+					searchJson = data.result;
+					searchState = true;
+					$.mobile.changePage($('#lifeservice-list'), {
+						reloadPage: true,
+						changeHash: true
+					});
+				} else {
+					alert(data.message);
+				}
+			});
+		});
 	});
 });

@@ -215,51 +215,6 @@ $(document).on('pagebeforeshow', '#lifeservice-search', function() {
 					alert(data.message);
 				}
 			});
-			// dummy DATA and will remove later
-			// searchJson = {
-			// 	"_shop": [
-			// 		{
-			// 			"img": "./img/square_img.jpg",
-			// 			"name": "Search",
-			// 			"shop_id": 1,
-			// 			"shop_location": "台中市 西屯區",
-			// 			"shop_slogan": "slogan1"
-			// 				},
-			// 		{
-			// 			"img": "./img/square_img.jpg",
-			// 			"name": "Search",
-			// 			"shop_id": 2,
-			// 			"shop_location": "台中市 西屯區",
-			// 			"shop_slogan": "slogan2"
-			// 				},
-			// 		{
-			// 			"img": "./img/square_img.jpg",
-			// 			"name": "Divas 美甲美睫概念館13",
-			// 			"shop_id": 3,
-			// 			"shop_location": "台中市 西屯區",
-			// 			"shop_slogan": "slogan3"
-			// 				},
-			// 		{
-			// 			"img": "./img/square_img.jpg",
-			// 			"name": "Divas 美甲美睫概念館14",
-			// 			"shop_id": 4,
-			// 			"shop_location": "台中市 西屯區",
-			// 			"shop_slogan": "slogan4"
-			// 				},
-			// 		{
-			// 			"img": "./img/square_img.jpg",
-			// 			"name": "Divas 美甲美睫概念館15",
-			// 			"shop_id": 5,
-			// 			"shop_location": "台中市 西屯區",
-			// 			"shop_slogan": "slogan5"
-			// 				}
-			// 			]
-			// }
-			// searchState = true;
-			// $.mobile.changePage($('#lifeservice-list'), {
-			// 	reloadPage: true,
-			// 	changeHash: true
-			// });
 		});
 	});
 });

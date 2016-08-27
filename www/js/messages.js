@@ -4,7 +4,7 @@ var officialState;
 var currentMsg;
 
 
-$(document).on("pagebeforeshow", '#messages', function () {
+$(document).on("pagebeforeshow", '#messages', function() {
 	console.log(memberType);
 
 	$('#messages-main').off('click');
@@ -12,42 +12,40 @@ $(document).on("pagebeforeshow", '#messages', function () {
 
 	// post memberType and userId from main.js global variable - OFFICIAL MSG
 	$.ajax({
-		url: "../api/officialmessage.json",
+		url: "http://52.69.53.255/KCCordova/api/get_official_message.php",
 		method: "GET", //should be post?
 		data: {
-			type: memberType,
-			id: memberId
+			type: parseInt(window.localStorage.getItem('auth')),
+			id: parseInt(window.localStorage.getItem('user_id'))
 		}
-	}).done(function (e) {
+	}).done(function(data) {
 		//cache as global
-		officialMsg = e;
+		officialMsg = data;
 
 		//show only if have msg
-		if (e.status) {
-			var lastLength = e.msg.length - 1; //last array as latest msg
-			var lastOfficialMsg = e.msg[lastLength];
+		if (data.msg != null) {
+			var lastLength = data.msg.length - 1; //last array as latest msg
+			var lastOfficialMsg = data.msg[lastLength];
 
-			$('#official_msg_date').text(lastOfficialMsg._msgDate);
+			$('#official_msg_date').text(lastOfficialMsg.created);
 
-			var msgBox = '<strong>' + lastOfficialMsg._msgTitle + '</strong><br>' + lastOfficialMsg._msgBody;
+			var msgBox = '<strong>' + lastOfficialMsg.title + '</strong><br>' + lastOfficialMsg.content;
 
 			$('.offcial_msg_block .ui-body-a').html(msgBox);
-			$('.offcial_msg_block').attr('data-msg-id', lastOfficialMsg._msgId);
-			$('.offcial_msg_block').attr('id', 'msg-' + lastOfficialMsg._msgId);
+			$('.offcial_msg_block').attr('data-msg-id', lastOfficialMsg.id);
+			$('.offcial_msg_block').attr('id', 'msg-' + lastOfficialMsg.id);
 			$('.offcial_msg_block').show();
 		}
-
-
 	})
 
 	$.ajax({
-		url: "../api/personalmessage.json",
+		url: "http://52.69.53.255/KCCordova/api/get_personal_message.php",
 		method: "GET", //should be post?
-		data: memberId
-	}).done(function (e) {
+		data: parseInt(window.localStorage.getItem('user_id'))
+	}).done(function(e) {
 		var markup = '';
 
-		$.each(e.msg, function (i, v) {
+		$.each(e.msg, function(i, v) {
 			switch (v._msgType) {
 				case 0:
 					markup += seekerMarkup(v);
@@ -66,14 +64,14 @@ $(document).on("pagebeforeshow", '#messages', function () {
 
 
 		function seekerMarkup(data) {
-			var markup = '<div class="detail_block msg_block seeker_msg" data-msg-type="'+ data._msgType +'" id="msg-' + data._msgId + '" data-msg-id="' + data._msgId + '" data-official="false"><div class="ui-bar ui-bar-a"><span class="float-left">【求職者】留言</span><span class="float-right" style="margin-right: 20px;">' + data._msgDate + '</span><button class="ui-btn ui-corner-all ui-btn-inline ui-mini ui-btn-right ui-icon-delete ui-btn-icon-notext del-fav-btn" type="button" name="button" data-shadow="false">x</button></div><a class="msg-open" href=""><div class="ui-body ui-body-a"><div class="avatar msg-avatar float-left"><img src="' + data._userImg + '" style="width: 70px; height: 70px; border-radius: 50%;" alt=""></div><strong>' + data._userName + '</strong><br> ' + data._nickName + '	<br> 應徵地區：' + data._place + '<div class="float-right msg-badge"><span class="">' + data._lengthUnread + '</span></div></div></a></div>';
+			var markup = '<div class="detail_block msg_block seeker_msg" data-msg-type="' + data._msgType + '" id="msg-' + data.id + '" data-msg-id="' + data.id + '" data-official="false"><div class="ui-bar ui-bar-a"><span class="float-left">【求職者】留言</span><span class="float-right" style="margin-right: 20px;">' + data._msgDate + '</span><button class="ui-btn ui-corner-all ui-btn-inline ui-mini ui-btn-right ui-icon-delete ui-btn-icon-notext del-fav-btn" type="button" name="button" data-shadow="false">x</button></div><a class="msg-open" href=""><div class="ui-body ui-body-a"><div class="avatar msg-avatar float-left"><img src="' + data._userImg + '" style="width: 70px; height: 70px; border-radius: 50%;" alt=""></div><strong>' + data._userName + '</strong><br> ' + data._nickName + '	<br> 應徵地區：' + data._place + '<div class="float-right msg-badge"><span class="">' + data._lengthUnread + '</span></div></div></a></div>';
 
 			return markup;
 		}
 
 
 		function shopMarkup(data) {
-			var markup = '<div class="detail_block msg_block shop_msg" data-msg-type="'+ data._msgType +'" id="msg-' + data._msgId + '" data-msg-id="' + data._msgId + '" data-official="false"><div class="ui-bar ui-bar-a"><span class="float-left">【店家】留言</span><span class="float-right" style="margin-right: 20px;">' + data._msgDate + '</span><button class="ui-btn ui-corner-all ui-btn-inline ui-mini ui-btn-right ui-icon-delete ui-btn-icon-notext del-fav-btn" type="button" name="button" data-shadow="false">x</button></div><a class="msg-open" href=""><div class="ui-body ui-body-a"><div class="avatar msg-avatar float-left">	<img src="' + data._userImg + '" style="width: 70px; height: 70px; border-radius: 50%;" alt=""></div><strong>' + data._userName + '</strong><br> ' + data._place + '<br> ' + data._job + '	<div class="float-right msg-badge"><span class="">' + data._lengthUnread + '</span></div></div></a></div>';
+			var markup = '<div class="detail_block msg_block shop_msg" data-msg-type="' + data._msgType + '" id="msg-' + data.id + '" data-msg-id="' + data.id + '" data-official="false"><div class="ui-bar ui-bar-a"><span class="float-left">【店家】留言</span><span class="float-right" style="margin-right: 20px;">' + data._msgDate + '</span><button class="ui-btn ui-corner-all ui-btn-inline ui-mini ui-btn-right ui-icon-delete ui-btn-icon-notext del-fav-btn" type="button" name="button" data-shadow="false">x</button></div><a class="msg-open" href=""><div class="ui-body ui-body-a"><div class="avatar msg-avatar float-left">	<img src="' + data._userImg + '" style="width: 70px; height: 70px; border-radius: 50%;" alt=""></div><strong>' + data._userName + '</strong><br> ' + data._place + '<br> ' + data._job + '	<div class="float-right msg-badge"><span class="">' + data._lengthUnread + '</span></div></div></a></div>';
 
 			return markup;
 		}
@@ -82,7 +80,7 @@ $(document).on("pagebeforeshow", '#messages', function () {
 
 	//event handler
 
-	$('#messages-main').on('click', '.msg-open', function (e) {
+	$('#messages-main').on('click', '.msg-open', function(e) {
 		e.preventDefault();
 		var findParent = $(this).parent();
 		var official = findParent.jqmData('official');
@@ -107,7 +105,7 @@ $(document).on("pagebeforeshow", '#messages', function () {
 		console.log('hit delete!');
 
 		var id = $(this).parent().parent().jqmData('msg-id');
-		if(confirm('Delete?') === true) {
+		if (confirm('Delete?') === true) {
 			// $.ajax({
 			// 	method: "DELETE",
 			// 	url: "delete.php",
@@ -116,7 +114,7 @@ $(document).on("pagebeforeshow", '#messages', function () {
 			// 	//rmv view
 			// 	$('#msg-' + id ).remove();
 			// })
-			$('#msg-' + id ).remove();
+			$('#msg-' + id).remove();
 		}
 
 		console.log(id);
@@ -127,7 +125,7 @@ $(document).on("pagebeforeshow", '#messages', function () {
 });
 
 
-$(document).on("pagebeforeshow", '#messages-detail', function (e, d) {
+$(document).on("pagebeforeshow", '#messages-detail', function(e, d) {
 	$('#msg-holder').empty();
 	$('#messages-main').off('click');
 	$('#msg-holder').off('click');
@@ -137,7 +135,7 @@ $(document).on("pagebeforeshow", '#messages-detail', function (e, d) {
 			method: "GET", //should be post
 			data: currentMsg,
 			url: "../api/messagelog.json"
-		}).done(function (e) {
+		}).done(function(e) {
 			console.log(e);
 			$('#msg-holder').html(conversationMarkup(e));
 		})
@@ -150,34 +148,34 @@ $(document).on("pagebeforeshow", '#messages-detail', function (e, d) {
 		var markup = '';
 		$.each(items, function(i, v) {
 			markup += '' +
-				'<div class="detail_block msg_block" data-official="true" id="officialmsg-'+ v._msgId +'">' +
+				'<div class="detail_block msg_block" data-official="true" id="officialmsg-' + v.id + '">' +
 				'<div class="ui-bar ui-bar-a" style="background-color: #71bb06;">' +
-				'<span class="float-left">【官方】留言 '+ (i+1) + '</span>' +
+				'<span class="float-left">【官方】留言 ' + (i + 1) + '</span>' +
 				'<span class="float-right" id="official_msg_date" style="margin-right: 20px;"></span>' +
-				'<button data-msg-id="' + v._msgId + '" class="delete-btn ui-btn ui-corner-all ui-btn-inline ui-mini ui-btn-right ui-icon-delete ui-btn-icon-notext del-fav-btn" type="button" name="button" data-shadow="false">x</button>' +
+				'<button data-msg-id="' + v.id + '" class="delete-btn ui-btn ui-corner-all ui-btn-inline ui-mini ui-btn-right ui-icon-delete ui-btn-icon-notext del-fav-btn" type="button" name="button" data-shadow="false">x</button>' +
 				'</div>' +
 				'<a href="" class="msg-open">' +
-				'<div class="ui-body ui-body-a">' + '<strong>' + v._msgTitle + '</strong><br>' + v._msgBody +'</div>' +
-			'</a>' +
-			'</div>';
+				'<div class="ui-body ui-body-a">' + '<strong>' + v.title + '</strong><br>' + v.content + '</div>' +
+				'</a>' +
+				'</div>';
 		})
 		return markup;
 	}
 
 
 	function conversationMarkup(data) {
-		var markup = '<div class="detail_block conversation_block"><div class="ui-bar ui-bar-a"><h3>'+ msgTypeText() +'</h3></div><div class="ui-body ui-body-a">';
+		var markup = '<div class="detail_block conversation_block"><div class="ui-bar ui-bar-a"><h3>' + msgTypeText() + '</h3></div><div class="ui-body ui-body-a">';
 		var myId = data.userId;
 
 		$.each(data.msg_log, function(i, v) {
-			if(v._userId === myId) {
-				markup += '<div class="msg_wrapper"><div class="msg_title"><span class="msg_me">我</span><span class="msg_time float-right">'+ v._date +'</span></div><div class="msg_body text-justify">'+ v._msg +'</div>	</div>';
+			if (v._userId === myId) {
+				markup += '<div class="msg_wrapper"><div class="msg_title"><span class="msg_me">我</span><span class="msg_time float-right">' + v._date + '</span></div><div class="msg_body text-justify">' + v._msg + '</div>	</div>';
 			} else {
-				markup += '<div class="msg_wrapper"> <div class="msg_title">	<span class="msg_sender">'+ v._username +'</span>	<span class="msg_time float-right">'+ v._date +'</span></div><div class="msg_body text-justify">	'+ v._msg +'	</div></div>';
+				markup += '<div class="msg_wrapper"> <div class="msg_title">	<span class="msg_sender">' + v._username + '</span>	<span class="msg_time float-right">' + v._date + '</span></div><div class="msg_body text-justify">	' + v._msg + '	</div></div>';
 			}
 		})
 
-		markup += '</div><div id="reply_lock"><h3>留言</h3>	<textarea name="msg_reply" rows="4" cols="40"></textarea><button type="submit" id="sendMsg" class="ui-btn ui-corner-all no-bg-bd purple-btn send-btn" data-msg-id="'+ data.msgId +'">送出</button></div></div>';
+		markup += '</div><div id="reply_lock"><h3>留言</h3>	<textarea name="msg_reply" rows="4" cols="40"></textarea><button type="submit" id="sendMsg" class="ui-btn ui-corner-all no-bg-bd purple-btn send-btn" data-msg-id="' + data.msgId + '">送出</button></div></div>';
 
 		return markup;
 	}
@@ -196,7 +194,7 @@ $(document).on("pagebeforeshow", '#messages-detail', function (e, d) {
 	$('#msg-holder').on('click', '.delete-btn', function() {
 		console.log('hit delete!');
 		var id = $(this).jqmData('msg-id');
-		if(confirm('Delete?') === true) {
+		if (confirm('Delete?') === true) {
 			// $.ajax({
 			// 	method: "DELETE",
 			// 	url: "delete.php",
@@ -205,7 +203,7 @@ $(document).on("pagebeforeshow", '#messages-detail', function (e, d) {
 			// 	//rmv view
 			// 	$('#msg-' + id ).remove();
 			// })
-			$('#officialmsg-' + id ).remove();
+			$('#officialmsg-' + id).remove();
 		}
 
 		console.log(id);
@@ -239,11 +237,11 @@ $(document).on("pagebeforeshow", '#messages-detail', function (e, d) {
 			function formatDate(date) {
 				var hours = date.getHours();
 				var minutes = date.getMinutes();
-				return date.getFullYear() + "/" + (date.getMonth()+1) + "/" + date.getDate() + " " + hours + ':' + minutes;
+				return date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate() + " " + hours + ':' + minutes;
 			}
 
 			var date = formatDate(new Date());
-			var markup = '<div class="msg_wrapper"><div class="msg_title"><span class="msg_me">我</span><span class="msg_time float-right">' + date + '</span></div><div class="msg_body text-justify">' + v +'</div>	</div>';
+			var markup = '<div class="msg_wrapper"><div class="msg_title"><span class="msg_me">我</span><span class="msg_time float-right">' + date + '</span></div><div class="msg_body text-justify">' + v + '</div>	</div>';
 
 			return markup;
 		}
