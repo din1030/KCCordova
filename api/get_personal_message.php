@@ -7,9 +7,9 @@ include 'db_setting.php';
 $id = $_GET['id'];
 $sql_string = '(SELECT `messages`.*, `club_info`.`name` name, `club_info`.`pic1`, `country`.`country`,`area`.`area` FROM `messages`,`club_info`,`country`,`area` WHERE `to_id`='.$id.' AND `from_type`=2 AND `club_info`.`country_id` = `country`.`id` AND `club_info`.`area_id` = `area`.`id` AND `messages`.`from_id`=`club_info`.`admin_id`)
 UNION
-(SELECT `messages`.*, `seeker_info`.`nickname` name, `seeker_info`.`pic1`, `country`.`country`,`area`.`area` FROM `messages`,`seeker_info`,`country`,`area` WHERE `to_id`='.$id.' AND `from_type`=3 AND `seeker_info`.`country_id` = `country`.`id` AND `seeker_info`.`area_id` = `area`.`id` AND `messages`.`from_id`=`seeker_info`.`u_id`);
-$sql = $mysqli->query($sql_string)';
+(SELECT `messages`.*, `seeker_info`.`nickname` name, `seeker_info`.`pic1`, `country`.`country`,`area`.`area` FROM `messages`,`seeker_info`,`country`,`area` WHERE `to_id`='.$id.' AND `from_type`=3 AND `seeker_info`.`country_id` = `country`.`id` AND `seeker_info`.`area_id` = `area`.`id` AND `messages`.`from_id`=`seeker_info`.`u_id`)';
 
+$sql = $mysqli->query($sql_string);
 if ($sql->num_rows > 0) {
     while ($r = mysqli_fetch_assoc($sql)) {
         $output[] = $r;
