@@ -26,6 +26,7 @@
                     <ul class="page-content-nav">
                         <li><a href="#jobseeker-profile" data-ajax="false" class="active">個人資料</a></li>
                         <li><a href="#jobseeker-resume">求職資料</a></li>
+                        <li><a href="#jobseeker-resume-pic">上傳圖片</a></li>
                     </ul>
                 </div>
             </div>
@@ -88,6 +89,7 @@
                     <ul class="page-content-nav">
                         <li><a href="#jobseeker-profile" data-ajax="false" class="active">個人資料</a></li>
                         <li><a href="#jobseeker-resume">求職資料</a></li>
+                        <li><a href="#jobseeker-resume-pic">上傳圖片</a></li>
                     </ul>
                 </div>
             </div>
@@ -152,6 +154,7 @@
                     <ul class="page-content-nav">
                         <li><a href="#jobseeker-profile">個人資料</a></li>
                         <li><a href="#jobseeker-resume" data-ajax="false" class="active">求職資料</a></li>
+                        <li><a href="#jobseeker-resume-pic">上傳圖片</a></li>
                     </ul>
                 </div>
             </div>
@@ -206,6 +209,7 @@
                     <ul class="page-content-nav">
                         <li><a href="#jobseeker-profile">個人資料</a></li>
                         <li><a href="#jobseeker-resume" data-ajax="false" class="active">求職資料</a></li>
+                        <li><a href="#jobseeker-resume-pic">上傳圖片</a></li>
                     </ul>
                 </div>
             </div>
@@ -351,11 +355,44 @@
                         <label class="item_title" for="job_content">應徵內容</label>
                         <textarea wrap="virtual" id="job_content" name="job_content" rows="4" cols="40"></textarea>
                     </div>
-                    <br><span class="item_title">上傳圖片：</span>
+                    <!-- <br><span class="item_title">上傳圖片：</span>
                     <input type="file" data-clear-btn="true" name="file-2" id="file-2" value="">
                     <input type="file" data-clear-btn="true" name="file-2" id="file-2" value="">
                     <input type="file" data-clear-btn="true" name="file-2" id="file-2" value="">
                     <input type="file" data-clear-btn="true" name="file-2" id="file-2" value="">
+                    <input type="file" data-clear-btn="true" name="file-2" id="file-2" value=""> -->
+                    <button id="seeker-resume-send-btn" class="ui-shadow ui-btn ui-corner-all" type="button">送出</button>
+                </form>
+            </div>
+            <!-- main -->
+        </div>
+
+        <!-- jobseeker resume pic -->
+        <div data-role="page" id="jobseeker-resume-pic" data-theme="a" data-title="jobseeker-resume-pic">
+            <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
+                <div style="width:100%; text-align:center;">
+                    <a href="#menu-panel" class="ui-link">
+                        <div id="menu-btn" class="header-btn header-link left-link"></div>
+                    </a>
+                    <span class="page-title">我的檔案</span>
+                </div>
+                <div data-role="navbar">
+                    <ul class="page-content-nav">
+                        <li><a href="#jobseeker-profile">個人資料</a></li>
+                        <li><a href="#jobseeker-resume" data-ajax="false">求職資料</a></li>
+                        <li><a href="#jobseeker-resume-pic" class="active">上傳圖片</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /header -->
+            <div data-role="main" class="ui-content profile-main" id="jobseeker-resume-pic-main">
+                <form id="jobseeker-resume-pic-form" method="post">
+                    <div class="item_title">上傳圖片：</div>
+                    圖一
+                    <input type="file" data-clear-btn="true" name="file-2" id="file-2" value=""> 圖二
+                    <input type="file" data-clear-btn="true" name="file-2" id="file-2" value=""> 圖三
+                    <input type="file" data-clear-btn="true" name="file-2" id="file-2" value=""> 圖四
+                    <input type="file" data-clear-btn="true" name="file-2" id="file-2" value=""> 圖五
                     <input type="file" data-clear-btn="true" name="file-2" id="file-2" value="">
                     <button id="seeker-resume-send-btn" class="ui-shadow ui-btn ui-corner-all" type="button">送出</button>
                 </form>

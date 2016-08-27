@@ -245,6 +245,7 @@
                         </div>
                     </div>
                     <a href="#club-info-modify" class="ui-btn ui-corner-all">編輯資料</a>
+                    <a href="#club-pic" class="ui-btn ui-corner-all">上傳圖片</a>
                 </div>
             </div>
             <!-- /main -->
@@ -313,12 +314,12 @@
                         <label class="item_title" for="textinput-9">店家小圖</label>
                         <input type="file" data-clear-btn="true" name="file-1" id="file-1" value="">
                     </div>
-                    <span class="item_title">上傳圖片</span>
+                    <!-- <span class="item_title">上傳圖片</span>
                     <input type="file" data-clear-btn="true" name="file-2" id="file-2" value="">
                     <input type="file" data-clear-btn="true" name="file-2" id="file-2" value="">
                     <input type="file" data-clear-btn="true" name="file-2" id="file-2" value="">
                     <input type="file" data-clear-btn="true" name="file-2" id="file-2" value="">
-                    <input type="file" data-clear-btn="true" name="file-2" id="file-2" value="">
+                    <input type="file" data-clear-btn="true" name="file-2" id="file-2" value=""> -->
                     <div class="ui-field-contain ">
                         <label class="item_title" for="video">影片連結</label>
                         <input type="url" name="video" class="" id="video" value="https://wwww.youtube.com">
@@ -720,6 +721,40 @@
                 </div>
             </div>
             <!-- /main -->
+        </div>
+
+        <!-- jobseeker resume pic -->
+        <div data-role="page" id="club-pic" data-theme="a" data-title="club-pic">
+            <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
+                <div style="width:100%; text-align:center;">
+                    <a href="#menu-panel" class="ui-link">
+                        <div id="menu-btn" class="header-btn header-link left-link"></div>
+                    </a>
+                    <span class="page-title">我的檔案</span>
+                    <a href="#club-info" class="ui-link" data-ajax="false">
+                        <div class="header-btn header-link right-link" style="width:auto">返回</div>
+                    </a>
+                </div>
+                <div data-role="navbar">
+                    <ul class="page-content-nav">
+                        <li><a href="#club-pic" class="active">上傳圖片</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /header -->
+            <div data-role="main" class="ui-content profile-main" id="club-pic-main">
+                <form id="club-pic-form" method="post">
+                    <div class="item_title">上傳圖片：</div>
+                    圖一
+                    <input type="file" data-clear-btn="true" name="file-2" id="file-2" value=""> 圖二
+                    <input type="file" data-clear-btn="true" name="file-2" id="file-2" value=""> 圖三
+                    <input type="file" data-clear-btn="true" name="file-2" id="file-2" value=""> 圖四
+                    <input type="file" data-clear-btn="true" name="file-2" id="file-2" value=""> 圖五
+                    <input type="file" data-clear-btn="true" name="file-2" id="file-2" value="">
+                    <button id="seeker-resume-send-btn" class="ui-shadow ui-btn ui-corner-all" type="button">送出</button>
+                </form>
+            </div>
+            <!-- main -->
         </div>
 
         <!-- external footer -->
