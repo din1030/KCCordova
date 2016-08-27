@@ -10,7 +10,7 @@ $sql_string = 'SELECT * FROM `official_message` WHERE `type`=0 OR `type`='.$type
 $sql = $mysqli->query($sql_string);
 if ($sql->num_rows > 0) {
     while ($r = mysqli_fetch_assoc($sql)) {
-        $r['created'] = date('Y/m/d', strtotime($r['created']));
+        $r['created'] = date('Y/m/d H:i', strtotime($r['created']));
         $output[] = $r;
     }
     echo json_encode(array('status' => true, 'msg' => $output));

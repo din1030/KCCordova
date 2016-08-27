@@ -46,7 +46,7 @@ $(document).on("pagebeforeshow", '#messages', function() {
 	}).done(function(data) {
 		var markup = '';
 		$.each(data.msg, function(idx, obj) {
-			switch (obj.from_type) {
+			switch (parseInt(obj.from_type)) {
 				case 2:
 					markup += clubMarkup(obj);
 					break;
@@ -60,14 +60,14 @@ $(document).on("pagebeforeshow", '#messages', function() {
 		$('#personal_msg').html(markup);
 
 		function seekerMarkup(data) {
-			var markup = '<div class="detail_block msg_block seeker_msg" data-msg-type="' + data.from_type + '" id="msg-' + data.id + '" data-msg-id="' + data.id + '" data-official="false"><div class="ui-bar ui-bar-a"><span class="float-left">【求職者】留言</span><span class="float-right" style="margin-right: 20px;">' + data.time + '</span><button class="ui-btn ui-corner-all ui-btn-inline ui-mini ui-btn-right ui-icon-delete ui-btn-icon-notext del-fav-btn" type="button" name="button" data-shadow="false">x</button></div><a class="msg-open" href=""><div class="ui-body ui-body-a"><div class="avatar msg-avatar float-left"><img src="http://52.69.53.255/KCCordova/www/img/' + data.pic1 + '" style="width: 70px; height: 70px; border-radius: 50%;" alt=""></div><strong>' + data.name + '</strong><br> ' + data._nickName + '	<br> 應徵地區：' + data.country + ' ' + data.area + '<div class="float-right msg-badge"><span class="">' + data._lengthUnread + '</span></div></div></a></div>';
+			var markup = '<div class="detail_block msg_block seeker_msg" data-msg-type="' + data.from_type + '" id="msg-' + data.id + '" data-from-id="' + data.from_id + '" data-official="false"><div class="ui-bar ui-bar-a"><span class="float-left">【求職者】留言</span><span class="float-right" style="margin-right: 20px;">' + data.time + '</span><button class="ui-btn ui-corner-all ui-btn-inline ui-mini ui-btn-right ui-icon-delete ui-btn-icon-notext del-fav-btn" type="button" name="button" data-shadow="false">x</button></div><a class="msg-open" href=""><div class="ui-body ui-body-a"><div class="avatar msg-avatar float-left"><img src="http://52.69.53.255/KCCordova/www/img/' + data.pic1 + '" style="width: 70px; height: 70px; border-radius: 50%;" alt=""></div><strong>' + data.name + '</strong><br> 應徵地區：' + data.country + ' ' + data.area + '</div></a></div>';
 
 			return markup;
 		}
 
 
 		function clubMarkup(data) {
-			var markup = '<div class="detail_block msg_block shop_msg" data-msg-type="' + data.from_type + '" id="msg-' + data.id + '" data-msg-id="' + data.id + '" data-official="false"><div class="ui-bar ui-bar-a"><span class="float-left">【店家】留言</span><span class="float-right" style="margin-right: 20px;">' + data.time + '</span><button class="ui-btn ui-corner-all ui-btn-inline ui-mini ui-btn-right ui-icon-delete ui-btn-icon-notext del-fav-btn" type="button" name="button" data-shadow="false">x</button></div><a class="msg-open" href=""><div class="ui-body ui-body-a"><div class="avatar msg-avatar float-left">	<img src="http://52.69.53.255/KCCordova/www/img/' + data.pic1 + '" style="width: 70px; height: 70px; border-radius: 50%;" alt=""></div><strong>' + data.name + '</strong><br> ' + data.country + ' ' + data.area + '<br> ' + data._job + '	<div class="float-right msg-badge"><span class="">' + data._lengthUnread + '</span></div></div></a></div>';
+			var markup = '<div class="detail_block msg_block shop_msg" data-msg-type="' + data.from_type + '" id="msg-' + data.id + '" data-from-id="' + data.from_id + '" data-official="false"><div class="ui-bar ui-bar-a"><span class="float-left">【店家】留言</span><span class="float-right" style="margin-right: 20px;">' + data.time + '</span><button class="ui-btn ui-corner-all ui-btn-inline ui-mini ui-btn-right ui-icon-delete ui-btn-icon-notext del-fav-btn" type="button" name="button" data-shadow="false">x</button></div><a class="msg-open" href=""><div class="ui-body ui-body-a"><div class="avatar msg-avatar float-left">	<img src="http://52.69.53.255/KCCordova/www/img/' + data.pic1 + '" style="width: 70px; height: 70px; border-radius: 50%;" alt=""></div><strong>' + data.name + '</strong><br> ' + data.country + ' ' + data.area + '</div></a></div>';
 
 			return markup;
 		}
@@ -80,14 +80,14 @@ $(document).on("pagebeforeshow", '#messages', function() {
 		e.preventDefault();
 		var findParent = $(this).parent();
 		var official = findParent.jqmData('official');
-		var msgId = findParent.jqmData('msg-id');
+		var from_id = findParent.jqmData('from-id');
 		var type = findParent.jqmData('msg-type')
 
 		if (official) {
 			officialState = true;
 		} else {
 			officialState = false;
-			currentMsg = msgId;
+			currentMsg = from_id;
 			msgType = type;
 		}
 
@@ -105,7 +105,7 @@ $(document).on("pagebeforeshow", '#messages', function() {
 			// $.ajax({
 			// 	method: "DELETE",
 			// 	url: "delete.php",
-			// 	data: { msgId: id, userId: userId"
+			// 	data: { from_id: id, userId: userId"
 			// }).done(function() {
 			// 	//rmv view
 			// 	$('#msg-' + id ).remove();
@@ -129,11 +129,14 @@ $(document).on("pagebeforeshow", '#messages-detail', function(e, d) {
 	if (!officialState) {
 		$.ajax({
 			method: "GET", //should be post
-			data: currentMsg,
-			url: "../api/messagelog.json"
-		}).done(function(e) {
-			console.log(e);
-			$('#msg-holder').html(conversationMarkup(e));
+			data: {
+				self_id: parseInt(window.localStorage.getItem('user_id')),
+				talk_id: currentMsg
+			},
+			url: "http://52.69.53.255/KCCordova/api/messagelog.json"
+		}).done(function(data) {
+			console.log(data);
+			$('#msg-holder').html(conversationMarkup(data.msg));
 		})
 	} else {
 		$('#msg-holder').html(officialMarkup(officialMsg.msg));
@@ -161,17 +164,17 @@ $(document).on("pagebeforeshow", '#messages-detail', function(e, d) {
 
 	function conversationMarkup(data) {
 		var markup = '<div class="detail_block conversation_block"><div class="ui-bar ui-bar-a"><h3>' + msgTypeText() + '</h3></div><div class="ui-body ui-body-a">';
-		var myId = data.userId;
+		var myId = parseInt(window.localStorage.getItem('user_id'));
 
-		$.each(data.msg_log, function(i, v) {
-			if (v._userId === myId) {
-				markup += '<div class="msg_wrapper"><div class="msg_title"><span class="msg_me">我</span><span class="msg_time float-right">' + v._date + '</span></div><div class="msg_body text-justify">' + v._msg + '</div>	</div>';
+		$.each(data.msg, function(i, v) {
+			if (v.from_id === myId) {
+				markup += '<div class="msg_wrapper"><div class="msg_title"><span class="msg_me">我</span><span class="msg_time float-right">' + v.created + '</span></div><div class="msg_body text-justify">' + v.content + '</div>	</div>';
 			} else {
-				markup += '<div class="msg_wrapper"> <div class="msg_title">	<span class="msg_sender">' + v._username + '</span>	<span class="msg_time float-right">' + v._date + '</span></div><div class="msg_body text-justify">	' + v._msg + '	</div></div>';
+				markup += '<div class="msg_wrapper"> <div class="msg_title">	<span class="msg_sender">' + v.name + '</span>	<span class="msg_time float-right">' + v.created + '</span></div><div class="msg_body text-justify">	' + v.content + '	</div></div>';
 			}
 		})
 
-		markup += '</div><div id="reply_lock"><h3>留言</h3>	<textarea name="msg_reply" rows="4" cols="40"></textarea><button type="submit" id="sendMsg" class="ui-btn ui-corner-all no-bg-bd purple-btn send-btn" data-msg-id="' + data.msgId + '">送出</button></div></div>';
+		markup += '</div><div id="reply_lock"><h3>留言</h3>	<textarea name="msg_reply" rows="4" cols="40"></textarea><button type="submit" id="sendMsg" class="ui-btn ui-corner-all no-bg-bd purple-btn send-btn" data-msg-id="' + data.from_id + '">送出</button></div></div>';
 
 		return markup;
 	}
@@ -194,7 +197,7 @@ $(document).on("pagebeforeshow", '#messages-detail', function(e, d) {
 			// $.ajax({
 			// 	method: "DELETE",
 			// 	url: "delete.php",
-			// 	data: { msgId: id, userId: userId"
+			// 	data: { from_id: id, userId: userId"
 			// }).done(function() {
 			// 	//rmv view
 			// 	$('#msg-' + id ).remove();
@@ -217,7 +220,7 @@ $(document).on("pagebeforeshow", '#messages-detail', function(e, d) {
 		// 	url: "create.php",
 		// 	data: {
 		// 		userId: userId,
-		// 		msgId: id
+		// 		from_id: id
 		// 	}
 		// }).done(function(){
 		// 	//append
@@ -242,7 +245,4 @@ $(document).on("pagebeforeshow", '#messages-detail', function(e, d) {
 			return markup;
 		}
 	})
-
-
-
 });

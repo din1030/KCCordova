@@ -6,7 +6,7 @@ $(document).ready(function() {
 	$("[data-role='footer']:not(.internal)").toolbar();
 
 	memberType = parseInt(window.localStorage.getItem('auth'));
-	memberId = parseInt(window.localStorage.getItem('user_id'))
+	memberId = parseInt(window.localStorage.getItem('user_id'));
 
 	// 沒有權限觀看求職者的提示
 	var mask = '<div style="display:block;" class="page_mask text-center" data-position-to="window" data-dismissible="true"><a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a><p>您不是店家管理者<br>求職者資訊僅供店家管理者瀏覽</p></div>';
