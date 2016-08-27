@@ -200,7 +200,7 @@ $(document).on('pagebeforeshow', '#jobseeker-search', function() {
 				if (data.status) {
 					seekerSearchJson = data;
 					seekerSearchState = true;
-					$.mobile.changePage($('#jobseeker'), {
+					$.mobile.changePage($('#jobseeker-result'), {
 						reloadPage: true,
 						changeHash: true
 					});
