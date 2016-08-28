@@ -54,7 +54,7 @@ if ($sql->num_rows > 0) {
 
         return;
     } else {
-        $output = array('status' => false, 'message' => '操作錯誤，請稍後再試！', 'sql' => $update_string);
+        $output = array('status' => false, 'message' => '操作錯誤，請稍後再試！', 'sql' => $insert_string);
         echo json_encode($output);
         exit;
     }
