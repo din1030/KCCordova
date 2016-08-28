@@ -25,10 +25,11 @@ if ($sql->num_rows < 1) {
     $sql = $mysqli->query($insert_string);
     if ($mysqli->affected_rows < 1) {
         echo json_encode(array('新增使用者資料失敗'));
+        exit;
     }
 }
 
-    $target_dir = '../www/img/';
+$target_dir = '../www/img/';
 
 $new_filename1 = $user_id.'_'.basename($_FILES['pic_1']['name']);
 $target_file1 = $target_dir.$new_filename1;
