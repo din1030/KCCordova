@@ -5,9 +5,9 @@ header('Access-Control-Allow-Methods: GET, POST');
 
 include 'db_setting.php';
 
-$member_id = $_GET['member_id'];
+$user_id = $_GET['user_id'];
 
-$sql_string = "SELECT `name`, `created` FROM `user` WHERE `ref_id`='$member_id' ORDER BY `created` DESC";
+$sql_string = "SELECT rec.`name`,rec.`created` FROM `user` ref JOIN `user` rec ON ref.`member_id`= rec.`ref_id` WHERE ref.`id`= $user_id ORDER BY rec.`created` DESC";
 
 $sql = $mysqli->query($sql_string);
 if ($sql->num_rows > 0) {
@@ -15,7 +15,7 @@ if ($sql->num_rows > 0) {
         $r['created'] = date('Y/m/d', strtotime($r['created']));
         $output[] = $r;
     }
-    echo json_encode(array('status' => true, 'result' => $output));
+    echo json_encode(array('status' => true, 'total' => $sql->num_rows, 'result' => $output));
 
     return;
 } else {

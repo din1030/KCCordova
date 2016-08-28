@@ -1,3 +1,35 @@
+$(document).on('pagebeforeshow', "#recommend-record", function() {
+	$.ajax({
+		url: api_base + 'get_recommend_list.php?user_id=' + window.localStorage.getItem('user_id'),
+		dataType: 'json'
+	}).done(function(data) {
+		if (data.status) {
+			var list = '';
+			$('#recommend_total').html(data.total);
+			$.each(data.result, function(idx, obj) {
+				list += '<li>' + obj.name + '<span class="float-right">' + obj.created + '</span></li>';
+			});
+			$('#recommend_list').html(list);
+		}
+	}).fail(function() {
+		alert('請確認您的網路連線狀態！');
+	});
+});
+
+$(document).on('pagebeforeshow', "#redeem", function() {
+	// 兌換提示
+	var redeem_item = 'XXXX';
+	var success_mask = '<div style="display:block;" class="page_mask text-center" data-position-to="window" data-dismissible="true"><a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a><p>恭喜您成功兌換【' + redeem_item + '】！<br>感謝您推薦朋友使用 Kelly Club!</p></div>';
+	var fail_mask = '<div style="display:block;" class="page_mask text-center" data-position-to="window" data-dismissible="true"><a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a><p>很抱歉！<br>您的點數不足，快推薦朋友使用 Kelly Club 獲取點數吧！</p></div>';
+	$(".redeem-btn").click(function(event) {
+		event.preventDefault();
+		$("[data-role='page']").prepend(fail_mask);
+		$(".page_mask .ui-icon-delete").click(function(event) {
+			$(".page_mask").remove();
+		});
+	});
+});
+
 $(document).on('pagebeforecreate', '#news', function() {
 	$.ajax({
 		url: 'http://52.69.53.255/KCCordova/api/get_news.php',
@@ -89,19 +121,5 @@ $(document).on('pagebeforecreate', '#share', function() {
 				});
 
 		}
-	});
-});
-
-$(document).on('pagebeforeshow', "#redeem", function() {
-	// 兌換提示
-	var redeem_item = 'XXXX';
-	var success_mask = '<div style="display:block;" class="page_mask text-center" data-position-to="window" data-dismissible="true"><a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a><p>恭喜您成功兌換【' + redeem_item + '】！<br>感謝您推薦朋友使用 Kelly Club!</p></div>';
-	var fail_mask = '<div style="display:block;" class="page_mask text-center" data-position-to="window" data-dismissible="true"><a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a><p>很抱歉！<br>您的點數不足，快推薦朋友使用 Kelly Club 獲取點數吧！</p></div>';
-	$(".redeem-btn").click(function(event) {
-		event.preventDefault();
-		$("[data-role='page']").prepend(fail_mask);
-		$(".page_mask .ui-icon-delete").click(function(event) {
-			$(".page_mask").remove();
-		});
 	});
 });

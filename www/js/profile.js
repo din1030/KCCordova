@@ -1,7 +1,4 @@
-var api_base = 'http://52.69.53.255/KCCordova/api/';
-var img_base = 'http://52.69.53.255/KCCordova/www/img/';
-
-$(document).on('pagebeforeshow', '#member-profile, #club-profile, #jobseeker-profile,#member-profile-modify, #club-profile-modify, #jobseeker-profile-modify', function() {
+$(document).on('pagebeforeshow', '#member-profile, #club-profile, #jobseeker-profile ,#member-profile-modify, #club-profile-modify, #jobseeker-profile-modify', function() {
 	var page_id = '#' + $.mobile.activePage.attr('id');
 	$.ajax({
 		url: api_base + 'get_user_info.php?user_id=' + window.localStorage.getItem('user_id'),
@@ -17,11 +14,11 @@ $(document).on('pagebeforeshow', '#member-profile, #club-profile, #jobseeker-pro
 			$(page_id + ' .mobile-input').val(data.result.mobile);
 			if (data.result.type == 2) {
 				if (data.result.plan_title != null) {
-					$(page_id + ' #plan-input').val(data.result.plan_title);
-					$(page_id + ' #plan-during-input').val(data.result.publish_start + '-' + data.result.publish_due);
-					$(page_id + ' #plan-during-input').parent().parent().show();
+					$(page_id + ' .plan-input').val(data.result.plan_title);
+					$(page_id + ' .plan-during-input').val(data.result.publish_start + '-' + data.result.publish_due);
+					$(page_id + ' .plan-during-input').parent().parent().show();
 				} else {
-					$(page_id + ' #plan-during-input').parent().parent().hide();
+					$(page_id + ' .plan-during-input').parent().parent().hide();
 				}
 			}
 		}

@@ -70,11 +70,11 @@
                     </div>
                     <div class="ui-field-contain ui-disabled">
                         <label class="item_title" for="plan-input">刊登方案</label>
-                        <input type="text" name="plan-input" class="ui-disabled" id="plan-input" value="未購買刊登方案">
+                        <input type="text" name="plan-input" class="ui-disabled plan-input" id="plan-input" value="未購買刊登方案">
                     </div>
                     <div class="ui-field-contain ui-disabled">
                         <label class="item_title" for="plan-during-input">刊登時間</label>
-                        <input type="text" name="plan-during-input" class="ui-disabled" id="plan-during-input" value="未刊登">
+                        <input type="text" name="plan-during-input" class="ui-disabled plan-during-input" id="plan-during-input" value="未刊登">
                     </div>
                     <a href="./plan.html" class="ui-btn ui-corner-all" data-ajax="false" style="color:white;background-color:#AE53C9;">刊登續約</a>
                     <a href="#club-profile-modify" class="ui-btn ui-corner-all">編輯資料</a>
@@ -109,7 +109,7 @@
                 <form id="club-profile-modify-from" method="post" enctype="multipart/form-data">
                     <div class="upper_block">
                         <input type="image" class="profile-pic" src="./img/seeker-a.jpg" />
-                        <input id="profile-pic" name="profile-pic" type="file" class="profile-pic-input" accept="image/*" />
+                        <input id="profile-pic" name="profile_photo" type="file" class="profile-pic-input" accept="image/*" />
                         <div class="name_block">
                             <div class="name_div">
                                 翁水蘭
@@ -131,27 +131,27 @@
                         </div>
                         <div class="ui-field-contain ui-disabled">
                             <label class="item_title" for="textinput-2">性別</label>
-                            <input type="text" name="gender-input" class="ui-disabled gender-input" id="gender-input" value="男">
+                            <input type="text" name="gender-input" class="ui-disabled gender-input" id="gender-input" value="">
                         </div>
                         <div class="ui-field-contain ui-disabled">
                             <label class="item_title" for="textinput-3">生日</label>
-                            <input type="date" name="birth-input" class="ui-disabled birth-input" id="birth-input" value="1977-07-10">
-                        </div>
-                        <div class="ui-field-contain">
-                            <label class="item_title" for="mobile-input">手機</label>
-                            <input type="tel" name="birth-input" class="mobile-input" id="mobile-input" value="0912345678">
+                            <input type="date" name="birth-input" class="ui-disabled birth-input" id="birth-input" value="">
                         </div>
                         <div class="ui-field-contain">
                             <label class="item_title" for="tel-input">電話</label>
-                            <input type="tel" name="tel-input" class="tel-input" id="tel-input" value="02-77777777">
+                            <input type="tel" name="tel-input" class="tel-input" id="tel-input" value="">
                         </div>
-                        <div class="ui-field-contain  ui-disabled">
-                            <label class="item_title" for="publishtime-input">刊登時間</label>
-                            <input type="text" name="publishtime-input" class="ui-disabled" id="publishtime-input" value="2016-06/30-2016/11/30">
+                        <div class="ui-field-contain">
+                            <label class="item_title" for="mobile-input">手機</label>
+                            <input type="tel" name="mobile-input" class="mobile-input" id="mobile-input" value="">
                         </div>
                         <div class="ui-field-contain ui-disabled">
-                            <label class="item_title" for="plan-input">刊登類型</label>
-                            <input type="text" name="plan-input" class="ui-disabled" id="plan-input" value="A方案一年">
+                            <label class="item_title" for="plan-input">刊登方案</label>
+                            <input type="text" name="plan-input" class="ui-disabled plan-input" id="plan-input" value="">
+                        </div>
+                        <div class="ui-field-contain  ui-disabled">
+                            <label class="item_title" for="plan-during-input">刊登時間</label>
+                            <input type="text" name="plan-during-input" class="ui-disabled plan-during-input" id="plan-during-input" value="">
                         </div>
                         <button class="ui-shadow ui-btn ui-corner-all profile-submit-btn" data-backpage="#jobseeker-profile" type="button">送出</button>
                     </div>

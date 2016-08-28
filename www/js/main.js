@@ -1,3 +1,6 @@
+var api_base = 'http://52.69.53.255/KCCordova/api/';
+var img_base = 'http://52.69.53.255/KCCordova/www/img/';
+
 var memberType = 1;
 var memberId;
 
