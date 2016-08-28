@@ -35,7 +35,7 @@ if ($sql->num_rows > 0) {
 
         return;
     } else {
-        $output = array('status' => false, 'message' => '操作錯誤，請稍後再試！');
+        $output = array('status' => false, 'message' => '操作錯誤，請稍後再試！', 'sql' => $update_string);
         echo json_encode($output);
         exit;
     }
@@ -54,7 +54,7 @@ if ($sql->num_rows > 0) {
 
         return;
     } else {
-        $output = array('status' => false, 'message' => '操作錯誤，請稍後再試！');
+        $output = array('status' => false, 'message' => '操作錯誤，請稍後再試！', 'sql' => $update_string);
         echo json_encode($output);
         exit;
     }
