@@ -15,7 +15,7 @@ $welfare = $_POST['welfare'];
 
 $pic_string = '';
 $target_dir = '../www/img/';
-$new_filename = $u_id.'_'.basename($_FILES['interviewer_pic']['name']);
+$new_filename = $admin_id.'_'.basename($_FILES['interviewer_pic']['name']);
 $target_file = $target_dir.$new_filename;
 
 // 判斷是否已有資料
