@@ -231,3 +231,67 @@ $(document).on('pagebeforeshow', ".profile-pic-page", function() {
 		$(this).next('.ui-input-text').find("input[type='file']").click();
 	});
 });
+
+$(document).on('pagebeforeshow', "#jobseeker-resume-pic", function() {
+	$('#jobseeker-resume-pic-form').on('submit', function(e) {
+		e.preventDefault(); // prevent native submit
+		$(this).ajaxSubmit({
+			url: api_base + '/upload_pic.php',
+			data: {
+				user_id: window.localStorage.getItem('user_id'),
+				type: 'seeker'
+			},
+			type: 'POST',
+			dataType: 'json',
+			beforeSend: function() {
+				$.mobile.loading('show');
+			},
+			complete: function() {
+				// This callback function will trigger on data sent/received complete
+				$.mobile.loading('hide');
+			},
+			success: function(result) {
+				if (result.status) {
+					alert(result.message);
+				} else {
+					alert(result.message);
+				}
+			},
+			error: function(request, error) {
+				alert('請確認您的網路連線狀態！');
+			}
+		})
+	});
+});
+
+$(document).on('pagebeforeshow', "#club-pic", function() {
+	$('#club-pic-form').on('submit', function(e) {
+		e.preventDefault(); // prevent native submit
+		$(this).ajaxSubmit({
+			url: api_base + '/upload_pic.php',
+			data: {
+				user_id: window.localStorage.getItem('user_id'),
+				type: 'club'
+			},
+			type: 'POST',
+			dataType: 'json',
+			beforeSend: function() {
+				$.mobile.loading('show');
+			},
+			complete: function() {
+				// This callback function will trigger on data sent/received complete
+				$.mobile.loading('hide');
+			},
+			success: function(result) {
+				if (result.status) {
+					alert(result.message);
+				} else {
+					alert(result.message);
+				}
+			},
+			error: function(request, error) {
+				alert('請確認您的網路連線狀態！');
+			}
+		})
+	});
+});
