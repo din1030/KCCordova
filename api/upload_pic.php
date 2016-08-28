@@ -40,6 +40,7 @@ if (move_uploaded_file($_FILES['pic_1']['tmp_name'], $target_file1)) {
         $output['pic1'] = '上傳成功、資料更新';
     } else {
         $output['pic1'] = '上傳成功、資料未更新';
+        $output['sql1'] = $update_string;
     }
 } else {
     $output['pic1'] = '上傳失敗、資料未更新';
@@ -54,6 +55,7 @@ if (move_uploaded_file($_FILES['pic_2']['tmp_name'], $target_file2)) {
         $output['pic2'] = '上傳成功、資料更新';
     } else {
         $output['pic2'] = '上傳成功、資料未更新';
+        $output['sql2'] = $update_string;
     }
 } else {
     $output['pic2'] = '上傳失敗、資料未更新';
