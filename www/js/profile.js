@@ -66,7 +66,6 @@ $(document).on('pagebeforeshow', '#member-modify, #club-profile-modify, #jobseek
 
 if (window.localStorage.getItem('auth') == '3') {
 	$(document).on('pagebeforeshow', '#jobseeker-resume, #jobseeker-resume-modify', function() {
-
 		$.ajax({
 			url: 'http://52.69.53.255/KCCordova/api/get_form_content.php?action=get_category&type=job',
 			dataType: 'json'
@@ -301,3 +300,19 @@ $(document).on('pagebeforeshow', "#club-pic", function() {
 		})
 	});
 });
+
+if (window.localStorage.getItem('auth') == '2') {
+	$(document).on('pagebeforeshow', '#jobseeker-resume, #jobseeker-resume-modify', function() {
+
+		$.ajax({
+			url: api_base + 'get_club_offer.php?admin_id=' + window.localStorage.getItem('user_id'),
+			dataType: 'json'
+		}).success(function(data) {
+			if (data.status) {
+
+			}
+		});
+
+	});
+
+}
