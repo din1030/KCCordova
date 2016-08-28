@@ -23,8 +23,7 @@ $sql_string = "SELECT * FROM `club_offer` WHERE `admin_id` = '$admin_id' LIMIT 1
 $sql = $mysqli->query($sql_string);
 if ($sql->num_rows > 0) {
     $update_string = "UPDATE `club_offer` SET `interviewer`='$interviewer',`tel`='$tel',`line`='$line',`offer_content`='$offer_content',`welfare`='$welfare' WHERE `admin_id` = '$admin_id'";
-    $sql = $mysqli->query($update_string);
-    if ($mysqli->affected_rows > 0) {
+    if ($mysqli->query($update_string)) {
         if (move_uploaded_file($_FILES['interviewer_pic']['tmp_name'], $target_file)) {
             $pic_string = "UPDATE `club_offer` SET `interviewer_pic` =  '$new_filename' WHERE `admin_id` = $admin_id";
             $mysqli->query($pic_string);
