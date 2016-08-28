@@ -1,6 +1,8 @@
+var remain_point = 0;
+var used_point = 0;
+var total_point = 0;
+
 $(document).on('pagebeforeshow', "#recommend-record", function() {
-	var used_point = 0;
-	var total_point = 0;
 	$.ajax({
 		url: api_base + 'get_recommend_list.php?user_id=' + window.localStorage.getItem('user_id'),
 		dataType: 'json'
@@ -12,7 +14,7 @@ $(document).on('pagebeforeshow', "#recommend-record", function() {
 			$.each(data.result, function(idx, obj) {
 				rec_list += '<li>' + obj.name + '<span class="float-right">' + obj.created + '</span></li>';
 			});
-			$('#recommend_list').html(list);
+			$('#recommend_list').html(rec_list);
 		}
 	}).fail(function() {
 		alert('請確認您的網路連線狀態！');
@@ -24,11 +26,12 @@ $(document).on('pagebeforeshow', "#recommend-record", function() {
 		if (data.status) {
 			var redeem_list = '';
 			used_point = parseInt(data.used_point);
-			$('#recommend_count').html(total_point - used_point);
+			remain_point = total_point - used_point;
+			$('.recommend_count').html((remain_point > 0) ? remain_point : 0);
 			$.each(data.result, function(idx, obj) {
 				redeem_list += '<li>(' + obj.point + ')' + obj.title + obj.description + '<span class="float-right">' + obj.created + '</span></li>';
 			});
-			$('#redeem_list').html(list);
+			$('#redeem_list').html(redeem_list);
 		}
 	}).fail(function() {
 		alert('請確認您的網路連線狀態！');
@@ -36,17 +39,56 @@ $(document).on('pagebeforeshow', "#recommend-record", function() {
 });
 
 $(document).on('pagebeforeshow', "#redeem", function() {
-	// 兌換提示
-	var redeem_item = 'XXXX';
-	var success_mask = '<div style="display:block;" class="page_mask text-center" data-position-to="window" data-dismissible="true"><a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a><p>恭喜您成功兌換【' + redeem_item + '】！<br>感謝您推薦朋友使用 Kelly Club!</p></div>';
-	var fail_mask = '<div style="display:block;" class="page_mask text-center" data-position-to="window" data-dismissible="true"><a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a><p>很抱歉！<br>您的點數不足，快推薦朋友使用 Kelly Club 獲取點數吧！</p></div>';
-	$(".redeem-btn").click(function(event) {
-		event.preventDefault();
-		$("[data-role='page']").prepend(fail_mask);
-		$(".page_mask .ui-icon-delete").click(function(event) {
-			$(".page_mask").remove();
-		});
+	$.ajax({
+		url: api_base + 'get_redeem_item.php',
+		dataType: 'json'
+	}).done(function(data) {
+		if (data.status) {
+			var redeem_block = '';
+			$('.redeem_item_block').remove();
+			$('.recommend_count').html((remain_point > 0) ? remain_point : 0);
+			$.each(data.result, function(idx, obj) {
+				redeem_block = '<div class="detail_block redeem_item_block"><div class="ui-bar ui-bar-a"><h3>' + obj.title + '</h3></div><div class="ui-body ui-body-a"><div class="float-left text-center"><button type="button" class="ui-btn ui-corner-all no-bg-bd purple-btn redeem-btn" data-item-id="' + obj.id + '" data-point="' + obj.point + '">確定兌換</button>' + obj.description + '<br> (' + obj.point + ')</div><div class="redeem_pic float-right" style="background-image:url(' + img_base + obj.photo + ')"></div></div></div>';
+				$('#redeem-main').append(redeem_block);
+			});
+			// 兌換提示
+			var redeem_item = 'XXXX';
+			var success_mask = '<div style="display:block;" class="page_mask text-center" data-position-to="window" data-dismissible="true"><a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a><p>兌換成功！<br>感謝您推薦朋友使用 Kelly Club!</p></div>';
+			var fail_mask = '<div style="display:block;" class="page_mask text-center" data-position-to="window" data-dismissible="true"><a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a><p>很抱歉！<br>您的點數不足，快推薦朋友使用 Kelly Club 獲取點數吧！</p></div>';
+			remain_point = 15;
+			$(".redeem-btn").click(function(event) {
+				var item_id = $(this).jqmData('item-id');
+				if ($(this).jqmData('point') > remain_point) {
+					$("[data-role='page']").prepend(fail_mask);
+					$(".page_mask .ui-icon-delete").click(function(event) {
+						$(".page_mask").remove();
+					});
+				} else {
+					$.ajax({
+						url: api_base + 'add_redeem_record.php',
+						type: 'POST',
+						dataType: 'json',
+						data: {
+							user_id: window.localStorage.getItem('user_id'),
+							item_id: item_id,
+						}
+					}).done(function(data) {
+						if (data.status) {
+							$("[data-role='page']").prepend(success_mask);
+							$(".page_mask .ui-icon-delete").click(function(event) {
+								$(".page_mask").remove();
+							});
+						}
+					}).fail(function() {
+						alert('請確認您的網路連線狀態！');
+					});
+				}
+			});
+		}
+	}).fail(function() {
+		alert('請確認您的網路連線狀態！');
 	});
+
 });
 
 $(document).on('pagebeforecreate', '#news', function() {
@@ -120,9 +162,7 @@ $(document).on('pagebeforecreate', '#share', function() {
 					}, function(err) {
 						alert('error:' + JSON.stringify(err));
 					});
-
 				}
-
 			}
 		);
 
@@ -138,7 +178,6 @@ $(document).on('pagebeforecreate', '#share', function() {
 				function(err) {
 					alert("Failed: " + JSON.stringify(err));
 				});
-
 		}
 	});
 });
