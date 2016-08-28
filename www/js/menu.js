@@ -1,15 +1,34 @@
 $(document).on('pagebeforeshow', "#recommend-record", function() {
+	var used_point = 0;
+	var total_point = 0;
 	$.ajax({
 		url: api_base + 'get_recommend_list.php?user_id=' + window.localStorage.getItem('user_id'),
 		dataType: 'json'
 	}).done(function(data) {
 		if (data.status) {
-			var list = '';
+			var rec_list = '';
+			total_point = parseInt(data.total);
 			$('#recommend_total').html(data.total);
 			$.each(data.result, function(idx, obj) {
-				list += '<li>' + obj.name + '<span class="float-right">' + obj.created + '</span></li>';
+				rec_list += '<li>' + obj.name + '<span class="float-right">' + obj.created + '</span></li>';
 			});
 			$('#recommend_list').html(list);
+		}
+	}).fail(function() {
+		alert('請確認您的網路連線狀態！');
+	});
+	$.ajax({
+		url: api_base + 'get_redeem_record.php?user_id=' + window.localStorage.getItem('user_id'),
+		dataType: 'json'
+	}).done(function(data) {
+		if (data.status) {
+			var redeem_list = '';
+			used_point = parseInt(data.used_point);
+			$('#recommend_count').html(total_point - used_point);
+			$.each(data.result, function(idx, obj) {
+				redeem_list += '<li>(' + obj.point + ')' + obj.title + obj.description + '<span class="float-right">' + obj.created + '</span></li>';
+			});
+			$('#redeem_list').html(list);
 		}
 	}).fail(function() {
 		alert('請確認您的網路連線狀態！');
