@@ -14,7 +14,9 @@ $(document).on('pagebeforeshow', "#recommend-record", function() {
 			$.each(data.result, function(idx, obj) {
 				rec_list += '<li>' + obj.name + '<span class="float-right">' + obj.created + '</span></li>';
 			});
-			$('#recommend_list').html(rec_list);
+			$('#recommend_list').css('padding-left', '1.5em').html(rec_list);
+		} else {
+			$('#recommend_list').css('padding-left', '0').html(data.message);
 		}
 	}).fail(function() {
 		alert('請確認您的網路連線狀態！');
@@ -33,6 +35,8 @@ $(document).on('pagebeforeshow', "#recommend-record", function() {
 				redeem_list += '<li>(' + obj.point + ')' + obj.title + obj.description + '<span class="float-right">' + obj.created + '</span></li>';
 			});
 			$('#redeem_list').html(redeem_list);
+		} else {
+			$('#redeem_list').html(data.message);
 		}
 	}).fail(function() {
 		alert('請確認您的網路連線狀態！');

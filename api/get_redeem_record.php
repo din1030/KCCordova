@@ -21,7 +21,7 @@ if ($sql->num_rows > 0) {
 
     return;
 } else {
-    $output = array('status' => false, 'message' => '您目前沒有推薦記錄，快邀請朋友使用 Kelly Club 吧！');
+    $output = array('status' => false, 'message' => '您目前沒有兌換記錄，推薦朋友使用 Kelly Club 來獲得點數吧！');
     echo json_encode($output);
     exit;
 }

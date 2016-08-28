@@ -66,6 +66,20 @@ $(document).on('pagebeforeshow', '#member-modify, #club-profile-modify, #jobseek
 
 if (window.localStorage.getItem('auth') == '3') {
 	$(document).on('pagebeforeshow', '#jobseeker-resume, #jobseeker-resume-modify', function() {
+
+		$.ajax({
+			url: 'http://52.69.53.255/KCCordova/api/get_form_content.php?action=get_category&type=job',
+			dataType: 'json'
+		}).done(function(data) {
+			console.log(data);
+			var classificationList = '';
+			$.each(data, function(idx, obj) {
+				classificationList += '<option value="' + obj.id + '">' + obj.title + '</option>';
+			});
+			$('#seeker_category').html(classificationList);
+			$('#seeker_category').selectmenu('refresh');
+		});
+
 		$.ajax({
 			url: api_base + 'get_seeker_info.php?user_id=' + window.localStorage.getItem('user_id'),
 			dataType: 'json'
