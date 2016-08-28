@@ -42,6 +42,7 @@ $(document).on('pagebeforeshow', '#jobseeker-resume', function() {
 		dataType: 'json'
 	}).success(function(data) {
 		if (data.status) {
+			$('#name-div').html(data.result[0].name);
 			$('#nickname-span').html(data.result[0].nickname);
 			$('#country-span').html(data.result[0].country + ' ' + data.result[0].area);
 			$('#birth-span').html(data.result[0].birth);
