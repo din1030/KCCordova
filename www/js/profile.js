@@ -323,6 +323,7 @@ if (window.localStorage.getItem('auth') == '2') {
 				$('.opentime5').val(club.opentime5);
 				$('.website-input').val(club.website);
 				$('.slogan-input').val(club.slogan);
+				$('#pic_block').empty();
 				$.each(club.pic, function(idx, obj) {
 					if (obj != null && obj != '') {
 						$('#pic_block').append('<div>' + obj + '</div>');
