@@ -302,14 +302,20 @@ $(document).on('pagebeforeshow', "#club-pic", function() {
 });
 
 if (window.localStorage.getItem('auth') == '2') {
-	$(document).on('pagebeforeshow', '#jobseeker-resume, #jobseeker-resume-modify', function() {
-
+	$(document).on('pagebeforeshow', '#club-hire, #club-hire-modify', function() {
+		var page_id = '#' + $(this).attr('id');
+		console.log(page_id);
 		$.ajax({
-			url: api_base + 'get_club_offer.php?admin_id=' + window.localStorage.getItem('user_id'),
+			url: api_base + 'get_club_offer.php?club_id=' + window.localStorage.getItem('user_id'),
 			dataType: 'json'
 		}).success(function(data) {
 			if (data.status) {
-
+				var offer = data.result;
+				$('.interviewer-input').val(offer.interviewer);
+				$('.interviewer-pic-input').val(offer.interviewer_pic);
+				$('.interciew-tel-input').val(offer.tel);
+				$('.offer_content').val(offer.offer_content);
+				$('.welfare').val(offer.welfare);
 			}
 		});
 
