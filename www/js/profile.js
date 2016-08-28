@@ -311,10 +311,11 @@ if (window.localStorage.getItem('auth') == '2') {
 		}).success(function(data) {
 			if (data.status) {
 				var club = data.result[0];
-				$('.name-input').val(club.interviewer);
+				$('.name-input').val(club.name);
 				$('.category-input').val(club.cat_title);
-				$('.tel-input').val(club.tel);
-				$('.adrress-input').val(club.adrress);
+				$('.category-id-input').val(club.category);
+				$('.tel-input').val(club.club_tel);
+				$('.address-input').val(club.address);
 				$('.opentime1').val(club.opentime1);
 				$('.opentime2').val(club.opentime2);
 				$('.opentime3').val(club.opentime3);
@@ -324,22 +325,42 @@ if (window.localStorage.getItem('auth') == '2') {
 				$('.slogan-input').val(club.slogan);
 				$.each(club.pic, function(idx, obj) {
 					if (obj != null && obj != '') {
-						$('#pic_div').append('<div>obj</div>');
+						$('#pic_block').append('<div>' + obj + '</div>');
 					}
 				});
 				$('.video-input').val(club.video_url);
-				$('.description').val(club.description);
-
-				if (page_id == '#club-hire') {
-					club.club_content = club.club_content.replace(/\n/g, "<br>");
-					club.welfare = club.welfare.replace(/\n/g, "<br>")
+				if (page_id == '#club-info') {
+					club.description = club.description.replace(/\n/g, "<br>");
 				}
-				$('.club_content').html(club.club_content);
-				$('.welfare').html(club.welfare);
+				$('.description').html(club.description);
 			}
 		});
 	});
-
+	$(document).on('pagebeforeshow', '#club-info-modify', function() {
+		$('#club-info-form').on('submit', function(e) {
+			e.preventDefault(); // prevent native submit
+			$(this).ajaxSubmit({
+				url: api_base + 'club_info_modify.php',
+				data: {
+					admin_id: window.localStorage.getItem('user_id'),
+				},
+				type: 'POST',
+				dataType: 'json',
+				beforeSend: function() {
+					$.mobile.loading('show');
+				},
+				complete: function() {
+					$.mobile.loading('hide');
+				},
+				success: function(result) {
+					alert(result.message);
+				},
+				error: function(request, error) {
+					alert('請確認您的網路連線狀態！');
+				}
+			})
+		});
+	});
 
 	$(document).on('pagebeforeshow', '#club-hire, #club-hire-modify', function() {
 		var page_id = '#' + $(this).attr('id');

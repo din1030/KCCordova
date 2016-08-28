@@ -194,8 +194,8 @@
                         <input type="tel" name="tel-input" class="ui-disabled tel-input" id="tel-input" value="">
                     </div>
                     <div class="ui-field-contain ui-disabled">
-                        <label class="item_title" for="adrress-input">地址</label>
-                        <input type="text" name="adrress-input" class="ui-disabled adrress-input" id="adrress-input" value="">
+                        <label class="item_title" for="address-input">地址</label>
+                        <input type="text" name="address-input" class="ui-disabled address-input" id="address-input" value="">
                     </div>
                     <div class="ui-field-contain ui-disabled">
                         <div class="">
@@ -223,7 +223,7 @@
                         <div class="">
                             <label class="item_title">照片</label>
                         </div>
-                        <div class="pic_block">
+                        <div id="pic_block">
                         </div>
                     </div>
                     <div class="ui-field-contain ui-disabled">
@@ -265,68 +265,72 @@
             </div>
             <!-- /header -->
             <div data-role="main" class="ui-content profile-main" id="club-info-modify-main">
-                <div class="">
-                    <div class="ui-field-contain">
-                        <label class="item_title" for="textinput-1">店名</label>
-                        <input type="text" name="textinput-1" class="" id="textinput-1" value="紐吧">
-                    </div>
-                    <div class="ui-field-contain">
-                        <label class="item_title" for="textinput-2">聯絡人</label>
-                        <input type="text" name="textinput-2" class="" id="textinput-2" value="ＸＸＸ">
-                    </div>
-                    <div class="ui-field-contain">
-                        <label class="item_title" for="textinput-3">店家類別</label>
-                        <input type="text" name="textinput-3" class="" id="textinput-3" value="夜店酒吧">
-                    </div>
-                    <div class="ui-field-contain">
-                        <label class="item_title" for="tel-input">電話</label>
-                        <input type="tel" name="tel-input" class="" id="tel-input" value="02-28569754">
-                    </div>
-                    <div class="ui-field-contain">
-                        <label class="item_title" for="textinput-5">地址</label>
-                        <input type="text" name="textinput-5" class="" id="textinput-5" value="台中市北屯區安順東九街221號5F">
-                    </div>
-                    <div class="ui-field-contain">
-                        <div class="">
-                            <label class="item_title">營業時間</label>
+                <form id="club-hire-form" method="post">
+                    <div class="">
+                        <div class="ui-field-contain">
+                            <label class="item_title" for="name-input">店名</label>
+                            <input type="text" name="name-input" class="name-input" id="name-input" value="">
                         </div>
-                        <input type="text" name="opentime1" class="opentime1" id="opentime1" value="星期三 22:00-04:00">
-                        <input type="text" name="opentime2" class="opentime2" id="opentime2" value="星期四 22:00-04:00">
-                        <input type="text" name="opentime3" class="opentime3" id="opentime3" value="星期五 22:00-04:00">
-                        <input type="text" name="opentime4" class="opentime4" id="opentime4" value="星期六 22:00-04:00">
-                        <input type="text" name="opentime5" class="opentime5" id="opentime5" value="星期日 22:00-04:00">
-                    </div>
-                    <div class="ui-field-contain">
-                        <label class="item_title" for="textinput-7">官方網站</label>
-                        <input type="url" name="textinput-7" class="" id="textinput-7" value="http://wwww.test.com.tw">
-                    </div>
-                    <div class="ui-field-contain">
-                        <label class="item_title" for="textinput-8">店家標語</label>
-                        <input type="text" name="textinput-8" class="" id="textinput-8" value="歡迎前來紐吧">
-                    </div>
-                    <div class="ui-field-contain">
+                        <!-- <div class="ui-field-contain">
+                        <label class="item_title" for="textinput-2">聯絡人</label>
+                        <input type="text" name="textinput-2" class="" id="textinput-2" value="">
+                    </div> -->
+                        <div class="ui-field-contain">
+                            <label class="item_title" for="category-input">店家類別</label>
+                            <input type="text" name="category-input" class="category-input" id="category-input" value="">
+                            <input type="hidden" name="category-id-input" class="category-id-input" id="category-id-input" value="">
+
+                        </div>
+                        <div class="ui-field-contain">
+                            <label class="item_title" for="tel-input">電話</label>
+                            <input type="tel" name="tel-input" class=tel-input "" id="tel-input" value="">
+                        </div>
+                        <div class="ui-field-contain">
+                            <label class="item_title" for="address-input">地址</label>
+                            <input type="text" name="address-input" class="" id="address-input" value="">
+                        </div>
+                        <div class="ui-field-contain">
+                            <div class="">
+                                <label class="item_title">營業時間</label>
+                            </div>
+                            <input type="text" name="opentime1" class="opentime1" id="opentime1" value="星期三 22:00-04:00">
+                            <input type="text" name="opentime2" class="opentime2" id="opentime2" value="星期四 22:00-04:00">
+                            <input type="text" name="opentime3" class="opentime3" id="opentime3" value="星期五 22:00-04:00">
+                            <input type="text" name="opentime4" class="opentime4" id="opentime4" value="星期六 22:00-04:00">
+                            <input type="text" name="opentime5" class="opentime5" id="opentime5" value="星期日 22:00-04:00">
+                        </div>
+                        <div class="ui-field-contain">
+                            <label class="item_title" for="website-input">官方網站</label>
+                            <input type="url" name="website-input" class="website-input" id="website-input" value="">
+                        </div>
+                        <div class="ui-field-contain">
+                            <label class="item_title" for="slogan-input">店家標語</label>
+                            <input type="text" name="slogan-input" class="slogan-input" id="slogan-input" value="歡迎前來紐吧">
+                        </div>
+                        <!-- <div class="ui-field-contain">
                         <label class="item_title" for="textinput-9">店家小圖</label>
                         <input type="file" data-clear-btn="true" name="file-1" id="file-1" value="">
-                    </div>
-                    <!-- <span class="item_title">上傳圖片</span>
+                    </div> -->
+                        <!-- <span class="item_title">上傳圖片</span>
                     <input type="file" data-clear-btn="true" name="file-2" id="file-2" value="">
                     <input type="file" data-clear-btn="true" name="file-2" id="file-2" value="">
                     <input type="file" data-clear-btn="true" name="file-2" id="file-2" value="">
                     <input type="file" data-clear-btn="true" name="file-2" id="file-2" value="">
                     <input type="file" data-clear-btn="true" name="file-2" id="file-2" value=""> -->
-                    <div class="ui-field-contain">
-                        <label class="item_title" for="video">影片連結</label>
-                        <input type="url" name="video" class="" id="video" value="https://wwww.youtube.com">
-                    </div>
-                    <small style="color:#BE0800;">（請先上傳至 Youtube 或 Vimeo 影音平台再將網址貼於本欄位）</small>
-                    <div class="ui-field-contain">
-                        <div class="">
-                            <label class="item_title">店家介紹</label>
+                        <div class="ui-field-contain">
+                            <label class="item_title" for="video-input">影片連結</label>
+                            <input type="url" name="video-input" class="video-input" id="video-input" value="">
                         </div>
-                        <textarea wrap="virtual" name="job_content" rows="4" cols="40">店家介紹店家介紹店家介紹店家介紹店家介紹店家介紹店家介紹店家介紹店家介紹店家介紹店家介紹</textarea>
+                        <small style="color:#BE0800;">（請先上傳至 Youtube 或 Vimeo 影音平台再將網址貼於本欄位）</small>
+                        <div class="ui-field-contain">
+                            <div class="">
+                                <label class="item_title">店家介紹</label>
+                            </div>
+                            <textarea wrap="virtual" name="description" class="description" rows="4" cols="40">店家介紹店家介紹店家介紹店家介紹店家介紹店家介紹店家介紹店家介紹店家介紹店家介紹店家介紹</textarea>
+                        </div>
+                        <button id="member-submit-btn" class="ui-shadow ui-btn ui-corner-all" type="submit">送出</button>
                     </div>
-                    <button id="member-submit-btn" class="ui-shadow ui-btn ui-corner-all" type="submit">送出</button>
-                </div>
+                </form>
             </div>
             <!-- /main -->
         </div>
