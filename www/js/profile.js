@@ -306,19 +306,48 @@ if (window.localStorage.getItem('auth') == '2') {
 		var page_id = '#' + $(this).attr('id');
 		console.log(page_id);
 		$.ajax({
-			url: api_base + 'get_club_offer.php?club_id=' + window.localStorage.getItem('user_id'),
+			url: api_base + 'get_club_offer.php?admin_id=' + window.localStorage.getItem('user_id'),
 			dataType: 'json'
 		}).success(function(data) {
 			if (data.status) {
-				var offer = data.result;
+				var offer = data.result[0];
 				$('.interviewer-input').val(offer.interviewer);
 				$('.interviewer-pic-input').val(offer.interviewer_pic);
-				$('.interciew-tel-input').val(offer.tel);
-				$('.offer_content').val(offer.offer_content);
-				$('.welfare').val(offer.welfare);
+				$('.interview-tel-input').val(offer.tel);
+				$('.interview-line-input').val(offer.line);
+				if (page_id == '#club-hire') {
+					offer.offer_content = offer.offer_content.replace(/\n/g, "<br>");
+					offer.welfare = offer.welfare.replace(/\n/g, "<br>")
+				}
+				$('.offer_content').html(offer.offer_content);
+				$('.welfare').html(offer.welfare);
 			}
 		});
-
+	});
+	$(document).on('pagebeforeshow', '#club-hire-modify', function() {
+		$('#club-hire-form').on('submit', function(e) {
+			e.preventDefault(); // prevent native submit
+			$(this).ajaxSubmit({
+				url: api_base + 'club_offer_modify.php',
+				data: {
+					admin_id: window.localStorage.getItem('user_id'),
+				},
+				type: 'POST',
+				dataType: 'json',
+				beforeSend: function() {
+					$.mobile.loading('show');
+				},
+				complete: function() {
+					$.mobile.loading('hide');
+				},
+				success: function(result) {
+					alert(result.message);
+				},
+				error: function(request, error) {
+					alert('請確認您的網路連線狀態！');
+				}
+			})
+		});
 	});
 
 }
