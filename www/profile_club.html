@@ -78,7 +78,6 @@
                     </div>
                     <a href="./plan.html" class="ui-btn ui-corner-all" data-ajax="false" style="color:white;background-color:#AE53C9;">刊登續約</a>
                     <a href="#club-profile-modify" class="ui-btn ui-corner-all">編輯資料</a>
-                    <!-- <button id="member-submit-btn" class="ui-shadow ui-btn ui-corner-all" type="submit">編輯資料</button> -->
                 </div>
             </div>
             <!-- /main -->
@@ -107,54 +106,56 @@
             </div>
             <!-- /header -->
             <div data-role="main" class="ui-content profile-main" id="club-profile-modify-main">
-                <div class="upper_block">
-                    <input type="image" class="profile-pic" src="./img/seeker-a.jpg" />
-                    <input id="profile-pic" name="profile-pic" type="file" class="profile-pic-input" accept="image/*" />
-                    <div class="name_block">
-                        <div class="name_div">
-                            翁水蘭
+                <form id="club-profile-modify-from" method="post" enctype="multipart/form-data">
+                    <div class="upper_block">
+                        <input type="image" class="profile-pic" src="./img/seeker-a.jpg" />
+                        <input id="profile-pic" name="profile-pic" type="file" class="profile-pic-input" accept="image/*" />
+                        <div class="name_block">
+                            <div class="name_div">
+                                翁水蘭
+                            </div>
+                            <!-- <br> -->
+                            <div>可更換大頭圖</div>
                         </div>
-                        <!-- <br> -->
-                        <div>可更換大頭圖</div>
                     </div>
-                </div>
-                <div class="clearfix"></div>
-                <hr>
-                <div class="">
-                    <div class="ui-field-contain ui-disabled">
+                    <div class="clearfix"></div>
+                    <hr>
+                    <div class="">
                         <div class="ui-field-contain ui-disabled">
-                            <label class="item_title" for="member-id-input">會員編號</label>
-                            <input type="text" name="member-id-input" class="ui-disabled member-id-input" id="member-id-input" value="">
+                            <div class="ui-field-contain ui-disabled">
+                                <label class="item_title" for="member-id-input">會員編號</label>
+                                <input type="text" name="member-id-input" class="ui-disabled member-id-input" id="member-id-input" value="">
+                            </div>
+                            <label class="item_title" for="textinput-1">身分</label>
+                            <input type="text" name="textinput-1" class="ui-disabled" id="textinput-1" value="店家管理者">
                         </div>
-                        <label class="item_title" for="textinput-1">身分</label>
-                        <input type="text" name="textinput-1" class="ui-disabled" id="textinput-1" value="店家管理者">
+                        <div class="ui-field-contain ui-disabled">
+                            <label class="item_title" for="textinput-2">性別</label>
+                            <input type="text" name="gender-input" class="ui-disabled gender-input" id="gender-input" value="男">
+                        </div>
+                        <div class="ui-field-contain ui-disabled">
+                            <label class="item_title" for="textinput-3">生日</label>
+                            <input type="date" name="birth-input" class="ui-disabled birth-input" id="birth-input" value="1977-07-10">
+                        </div>
+                        <div class="ui-field-contain">
+                            <label class="item_title" for="mobile-input">手機</label>
+                            <input type="tel" name="birth-input" class="mobile-input" id="mobile-input" value="0912345678">
+                        </div>
+                        <div class="ui-field-contain">
+                            <label class="item_title" for="tel-input">電話</label>
+                            <input type="tel" name="tel-input" class="tel-input" id="tel-input" value="02-77777777">
+                        </div>
+                        <div class="ui-field-contain  ui-disabled">
+                            <label class="item_title" for="publishtime-input">刊登時間</label>
+                            <input type="text" name="publishtime-input" class="ui-disabled" id="publishtime-input" value="2016-06/30-2016/11/30">
+                        </div>
+                        <div class="ui-field-contain ui-disabled">
+                            <label class="item_title" for="plan-input">刊登類型</label>
+                            <input type="text" name="plan-input" class="ui-disabled" id="plan-input" value="A方案一年">
+                        </div>
+                        <button class="ui-shadow ui-btn ui-corner-all profile-submit-btn" data-backpage="#jobseeker-profile" type="button">送出</button>
                     </div>
-                    <div class="ui-field-contain ui-disabled">
-                        <label class="item_title" for="textinput-2">性別</label>
-                        <input type="text" name="gender-input" class="ui-disabled gender-input" id="gender-input" value="男">
-                    </div>
-                    <div class="ui-field-contain ui-disabled">
-                        <label class="item_title" for="textinput-3">生日</label>
-                        <input type="date" name="birth-input" class="ui-disabled birth-input" id="birth-input" value="1977-07-10">
-                    </div>
-                    <div class="ui-field-contain">
-                        <label class="item_title" for="mobile-input">手機</label>
-                        <input type="tel" name="birth-input" class="mobile-input" id="mobile-input" value="0912345678">
-                    </div>
-                    <div class="ui-field-contain">
-                        <label class="item_title" for="tel-input">電話</label>
-                        <input type="tel" name="tel-input" class="tel-input" id="tel-input" value="02-77777777">
-                    </div>
-                    <div class="ui-field-contain  ui-disabled">
-                        <label class="item_title" for="publishtime-input">刊登時間</label>
-                        <input type="text" name="publishtime-input" class="ui-disabled" id="publishtime-input" value="2016-06/30-2016/11/30">
-                    </div>
-                    <div class="ui-field-contain ui-disabled">
-                        <label class="item_title" for="plan-input">刊登類型</label>
-                        <input type="text" name="plan-input" class="ui-disabled" id="plan-input" value="A方案一年">
-                    </div>
-                    <button class="ui-shadow ui-btn ui-corner-all profile-submit-btn" data-backpage="#jobseeker-profile" type="button">送出</button>
-                </div>
+                </form>
             </div>
             <!-- /main -->
         </div>

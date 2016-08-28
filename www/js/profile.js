@@ -52,7 +52,7 @@ $(document).on('pagebeforeshow', '#member-modify, #club-profile-modify, #jobseek
 			success: function(result) {
 				if (result.status) {
 					alert(result.message);
-					$.mobile.changePage($(backpage), {
+					$.mobile.changePage($(page_id), {
 						reloadPage: true,
 						changeHash: true
 					});

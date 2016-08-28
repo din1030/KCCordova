@@ -6,15 +6,7 @@ header('Access-Control-Allow-Methods: GET, POST');
 include 'db_setting.php';
 
 $type = $_POST['type'];
-// $formData = $_POST['formData'];
-
-// $params = array();
-// parse_str($formData, $params);
-// print_r($params);
-
-if ($type == 'profile') {
-    //
-} elseif ($type == 'resume') {
+if ($type == 'resume') {
     $u_id = $_POST['u_id'];
     $nickname = $_POST['nickname-input'];
     $seeker_category = $_POST['seeker_category'];
@@ -44,7 +36,8 @@ if ($type == 'profile') {
         if ($mysqli->affected_rows > 0) {
             $output = array('status' => true, 'message' => '資料已修改！');
             echo json_encode($output);
-            exit;
+
+            return;
         } else {
             $output = array('status' => false, 'message' => '操作錯誤，請稍後再試！');
             echo json_encode($output);

@@ -29,7 +29,10 @@ if ($sql->num_rows > 0) {
         }
     }
     echo json_encode(array('status' => true, 'result' => $output));
+
+    return;
 } else {
     $output = array('status' => false, 'message' => '請重新操作！');
     echo json_encode($output);
+    exit;
 }

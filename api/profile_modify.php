@@ -5,7 +5,6 @@ header('Access-Control-Allow-Methods: GET, POST');
 
 include 'db_setting.php';
 
-$user_id = $_POST['user_id'];
 $u_id = $_POST['u_id'];
 $tel = $_POST['tel-input'];
 $mobile = $_POST['mobile-input'];
@@ -29,7 +28,7 @@ if ($sql->num_rows > 0) {
 
         return;
     } else {
-        $output = array('status' => false, 'message' => '操作錯誤，請稍後再試！');
+        $output = array('status' => false, 'message' => '更新失敗，請稍後再試！');
         echo json_encode($output);
         exit;
     }
