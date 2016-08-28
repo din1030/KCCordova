@@ -302,6 +302,45 @@ $(document).on('pagebeforeshow', "#club-pic", function() {
 });
 
 if (window.localStorage.getItem('auth') == '2') {
+	$(document).on('pagebeforeshow', '#club-info, #club-info-modify', function() {
+		var page_id = '#' + $(this).attr('id');
+		console.log(page_id);
+		$.ajax({
+			url: api_base + 'get_club_info.php?club_id=' + window.localStorage.getItem('user_id'),
+			dataType: 'json'
+		}).success(function(data) {
+			if (data.status) {
+				var club = data.result[0];
+				$('.name-input').val(club.interviewer);
+				$('.category-input').val(club.cat_title);
+				$('.tel-input').val(club.tel);
+				$('.adrress-input').val(club.adrress);
+				$('.opentime1').val(club.opentime1);
+				$('.opentime2').val(club.opentime2);
+				$('.opentime3').val(club.opentime3);
+				$('.opentime4').val(club.opentime4);
+				$('.opentime5').val(club.opentime5);
+				$('.website-input').val(club.website);
+				$('.slogan-input').val(club.slogan);
+				$.each(club.pic, function(idx, obj) {
+					if (obj != null && obj != '') {
+						$('#pic_div').append('<div>obj</div>');
+					}
+				});
+				$('.video-input').val(club.video_url);
+				$('.description').val(club.description);
+
+				if (page_id == '#club-hire') {
+					club.club_content = club.club_content.replace(/\n/g, "<br>");
+					club.welfare = club.welfare.replace(/\n/g, "<br>")
+				}
+				$('.club_content').html(club.club_content);
+				$('.welfare').html(club.welfare);
+			}
+		});
+	});
+
+
 	$(document).on('pagebeforeshow', '#club-hire, #club-hire-modify', function() {
 		var page_id = '#' + $(this).attr('id');
 		console.log(page_id);

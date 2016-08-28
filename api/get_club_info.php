@@ -7,7 +7,7 @@ include 'db_setting.php';
 
 $club_id = $_GET['club_id'];
 
-$sql_string = 'SELECT `club_info`.*,`country`.`country`,`area`.`area` FROM `club_info`,`country`,`area` WHERE `club_info`.`country_id` = `country`.`id` AND `club_info`.`area_id` = `area`.`id`';
+$sql_string = 'SELECT `club_info`.*,`category`.`title` cat_title,`country`.`country`,`area`.`area` FROM `club_info`,`country`,`area`,`category` WHERE `club_info`.`country_id` = `country`.`id` AND `club_info`.`area_id` = `area`.`id`AND `category`.`id`=`club_info`.`category`';
 if (!empty($club_id)) { // 有指定 ID
     $sql_string .=  " AND `club_info`.`admin_id`='$club_id'";
 }
