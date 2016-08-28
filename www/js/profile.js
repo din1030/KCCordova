@@ -1,4 +1,4 @@
-$(document).on('pagebeforeshow', '#member-profile, #club-profile, #jobseeker-profile ,#member-profile-modify, #club-profile-modify, #jobseeker-profile-modify', function() {
+$(document).on('pagebeforeshow', '#member-profile, #club-profile, #jobseeker-profile ,#member-modify, #club-profile-modify, #jobseeker-profile-modify', function() {
 	var page_id = '#' + $.mobile.activePage.attr('id');
 	$.ajax({
 		url: api_base + 'get_user_info.php?user_id=' + window.localStorage.getItem('user_id'),
