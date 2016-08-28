@@ -32,8 +32,7 @@ if ($type == 'resume') {
     $sql = $mysqli->query($sql_string);
     if ($sql->num_rows > 0) {
         $update_string = "UPDATE `seeker_info` SET `seek_category`='$seeker_category',`country_id`='$country_id',`area_id`='$area_id',`nickname`='$nickname',`height`='$height',`weight`='$weight',`measurements`='$measurements',`singing`='$singing',`dancing`='$dancing',`drinking`='$drinking',`marital`='$marital',`cooperation`='$cooperation',`languages`='$languages',`education`='$education',`workingtime`='$worktime',`pay`='$pay',`job_content`='$job_content' WHERE `u_id` = '$u_id'";
-        $sql = $mysqli->query($update_string);
-        if ($mysqli->affected_rows > 0) {
+        if ($mysqli->query($update_string)) {
             $output = array('status' => true, 'message' => '資料已修改！');
             echo json_encode($output);
 

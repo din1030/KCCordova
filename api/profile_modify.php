@@ -21,8 +21,7 @@ if ($sql->num_rows > 0) {
         $pic_string = ",`pic`='".$new_filename."'";
     }
     $update_string = "UPDATE `user` SET `tel`='$tel',`mobile`='$mobile'".$pic_string." WHERE `id` = '$u_id'";
-    $sql = $mysqli->query($update_string);
-    if ($mysqli->affected_rows > 0) {
+    if ($mysqli->query($update_string)) {
         $output = array('status' => true, 'message' => '資料已修改！');
         echo json_encode($output);
 
