@@ -251,11 +251,7 @@ $(document).on('pagebeforeshow', "#jobseeker-resume-pic", function() {
 				$.mobile.loading('hide');
 			},
 			success: function(result) {
-				if (result.status) {
-					alert(result.message);
-				} else {
-					alert(result.message);
-				}
+				console.log(result);
 			},
 			error: function(request, error) {
 				alert('請確認您的網路連線狀態！');
@@ -283,11 +279,7 @@ $(document).on('pagebeforeshow', "#club-pic", function() {
 				$.mobile.loading('hide');
 			},
 			success: function(result) {
-				if (result.status) {
-					alert(result.message);
-				} else {
-					alert(result.message);
-				}
+				console.log(result);
 			},
 			error: function(request, error) {
 				alert('請確認您的網路連線狀態！');

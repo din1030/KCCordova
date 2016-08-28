@@ -8,11 +8,14 @@ include 'db_setting.php';
 $user_id = $_POST['user_id'];
 $type = $_POST['type'];
 $table = '';
+$id_column = '';
 
 if ($type == 'seeker') {
-    $table == '`seeker_info`';
+    $table = '`seeker_info`';
+    $id_column = '`u_id`';
 } elseif ($type == 'club') {
-    $table == '`club_info`';
+    $table = '`club_info`';
+    $id_column = '`admin_id`';
 }
 
 $target_dir = '../www/img/';
@@ -20,7 +23,7 @@ $target_dir = '../www/img/';
 $new_filename1 = $u_id.'_'.basename($_FILES['pic_1']['name']);
 $target_file1 = $target_dir.$new_filename1;
 if (move_uploaded_file($_FILES['pic_1']['tmp_name'], $target_file1)) {
-    $update_string = "UPDATE $table SET `pic1`='$new_filename1' WHERE `u_id` = '$user_id'";
+    $update_string = "UPDATE $table SET `pic1`='$new_filename1' WHERE $id_column = '$user_id'";
     $sql = $mysqli->query($update_string);
     if ($mysqli->affected_rows > 0) {
         $output['pic1'] = '上傳成功、資料更新';
