@@ -10,9 +10,7 @@ $state = $_POST['state'];
 
 $update_string = "UPDATE `seeker_info` SET `active`='$state' WHERE `u_id`=$u_id";
 if ($mysqli->query($update_string)) {
-    while ($r = mysqli_fetch_assoc($sql)) {
-        $output = $state;
-    }
+    $output = $state;
     echo json_encode(array('status' => true, 'result' => $output));
 } else {
     $output = array('status' => false, 'message' => '請重新操作！');

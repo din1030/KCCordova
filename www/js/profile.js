@@ -228,9 +228,9 @@ if (window.localStorage.getItem('auth') == '3') {
 			});
 		});
 	});
-	$(document).on('pagebecreate', "#jobseeker-resume", function() {
+	$(document).on('pagecreate', "#jobseeker-resume", function() {
 		$('#open-resume').change(function() {
-			var state = ($('#open-resume').prop('checked')) ? 1 : 0;
+			var state = (($('#open-resume').prop('checked')) ? 1 : 0);
 			$.ajax({
 				url: api_base + 'update_seeker_state.php',
 				type: 'POST',
