@@ -5,7 +5,7 @@ $(document).on('pagebeforeshow', '#member-profile, #club-profile, #jobseeker-pro
 		dataType: 'json'
 	}).success(function(data) {
 		if (data.status) {
-			$(page_id + ' .upper_block > img, .upper_block >  input[type="image"]').attr('src', img_base + data.result.pic);
+			$(page_id + ' .upper_block > img, .upper_block >  input[type="image"]').attr('src', img_base + data.result.avatar);
 			$(page_id + ' .name_div').html(data.result.name);
 			$(page_id + ' .member-id-input').val(data.result.member_id);
 			$(page_id + ' .gender-input').val(data.result.gender);
