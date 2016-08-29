@@ -236,8 +236,8 @@ if (window.localStorage.getItem('auth') == '3') {
 				type: 'POST',
 				dataType: 'json',
 				data: {
-					u_id: window.localStorage.getItem('user_id')
-					state:
+					u_id: window.localStorage.getItem('user_id'),
+					state: state
 				}
 			}).done(function(data) {
 				if (data.status) {
