@@ -457,5 +457,3 @@ if (window.localStorage.getItem('auth') == '2') {
 	});
 
 };
-
-}

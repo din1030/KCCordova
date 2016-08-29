@@ -4,7 +4,10 @@ var seekerSearchState = false;
 $(document).on('pagebeforecreate', '#jobseeker', function() {
 	$.ajax({
 		url: 'http://52.69.53.255/KCCordova/api/get_seeker_info.php',
-		dataType: 'json'
+		dataType: 'json',
+		data: {
+			only_active: true
+		}
 	}).success(function(data) {
 		if (data.status) {
 			$('#seeker-grid').empty();
