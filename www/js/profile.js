@@ -243,7 +243,7 @@ if (window.localStorage.getItem('auth') == '3') {
 				if (data.status) {
 					if (data.result == 1) {
 						alert('已公開您的求職資料');
-					} else(data.result == 0) {
+					} else if (data.result == 0) {
 						alert('已關閉您的求職資料');
 					} else {
 						alert('請重新操作！');
@@ -455,5 +455,7 @@ if (window.localStorage.getItem('auth') == '2') {
 			})
 		});
 	});
+
+};
 
 }
