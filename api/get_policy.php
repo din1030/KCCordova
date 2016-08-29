@@ -14,6 +14,9 @@ $sql_string = 'SELECT * FROM `policy`';
 $sql = $mysqli->query($sql_string);
 if ($sql->num_rows > 0) {
     while ($r = mysqli_fetch_assoc($sql)) {
+        $r[$r['item']] = $r['content'];
+        unset($r['item']);
+        unset($r['content']);
         $output[] = $r;
     }
     echo json_encode(array('status' => true, 'result' => $output));
