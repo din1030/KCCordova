@@ -32,32 +32,15 @@
                     <div class="float-right">
                         <span class="member">（未知使用者）</span>
                     </div>
-                    <div class="float-left">
-                        <span>台灣地區｜台中</span>
-                    </div>
                     <div class="clearfix"></div>
                 </div>
                 <div id="seeker-grid" class="ui-grid-b">
-                    <!-- <div class="ui-block-a">
-                        <div class="seeker_list_item">
-                            <a href="#jobseeker-resume" data-ajax="false"><img src="./img/seeker-a.jpg" alt="" /></a>
-                        </div>
-                    </div>
-                    <div class="ui-block-b">
-                        <div class="seeker_list_item">
-                            <a href="#jobseeker-resume" data-ajax="false"><img src="./img/seeker-b.jpg" alt="" /></a>
-                        </div>
-                    </div>
-                    <div class="ui-block-c">
-                        <div class="seeker_list_item">
-                            <a href="#jobseeker-resume" data-ajax="false"><img src="./img/seeker-c.jpg" alt="" /></a>
-                        </div>
-                    </div> -->
+                    <!-- * dynamic content here * -->
                 </div>
-                <!-- /grid-b -->
             </div>
             <!-- /main -->
         </div>
+
         <!-- jobseeker search -->
         <div data-role="page" id="jobseeker-search" data-theme="a" data-title="jobseeker">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
@@ -85,9 +68,17 @@
                 <div class="search-block">
                     <form class="" action="index.html" method="post">
                         <div class="ui-field-contain">
+                            <label for="area-select">區域</label>
+                            <select name="area-select" id="area-select" class="area-select">
+                                <!-- <option value="small">台北市</option>
+                                <option value="medium">新北市</option>
+                                <option value="large">台中市</option> -->
+                            </select>
+                        </div>
+                        <div class="ui-field-contain">
                             <label>搜尋性別</label>
                             <fieldset data-role="controlgroup" data-type="horizontal">
-                                <input type="radio" name="gender" id="genderb" value="0">
+                                <input type="radio" name="gender" id="genderb" value="0" checked>
                                 <label for="genderb">女</label>
                                 <input type="radio" name="gender" id="gendera" value="1">
                                 <label for="gendera">男</label>
@@ -96,33 +87,45 @@
                             </fieldset>
                         </div>
                         <div class="ui-field-contain">
-                            <label for="county">區域</label>
-                            <select name="county" id="county">
-                                <option value="small">台北市</option>
-                                <option value="medium">新北市</option>
-                                <option value="large">台中市</option>
-                            </select>
-                        </div>
-                        <!-- <div class="ui-field-contain">
-                            <label for="district">市/區</label>
-                            <select name="district" id="district">
-                                <option value="small">中山區</option>
-                                <option value="medium">大安區</option>
-                                <option value="large">信義區</option>
-                            </select>
-                        </div> -->
-                        <input id="zip" name="zip" value="" type="hidden">
-                        <div class="ui-field-contain">
                             <label for="jobseeker_type">求職者</label>
                             <select name="jobseeker_type" id="jobseeker_type">
-                                <option value="small">類別一</option>
+                                <!-- <option value="small">類別一</option>
                                 <option value="medium">類別二</option>
-                                <option value="large">類別三</option>
+                                <option value="large">類別三</option> -->
                             </select>
                         </div>
+                        <button type="button" name="button" id="jobseeker-search-btn">搜尋</button>
                     </form>
                 </div>
             </div>
+        </div>
+
+        <!-- job seeker result-->
+        <div data-role="page" id="jobseeker-result" data-theme="a" data-title="jobseeker">
+            <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
+                <div style="width:100%; text-align:center;">
+                    <a href="#menu-panel" class="ui-link">
+                        <div id="menu-btn" class="header-btn header-link left-link"></div>
+                    </a>
+                    <span class="page-title">求職者</span>
+                    <a href="#jobseeker-search" class="ui-link">
+                        <div id="search-btn" class="header-btn header-link right-link"></div>
+                    </a>
+                </div>
+            </div>
+            <!-- /header -->
+            <div data-role="main" class="ui-content" id="jobseeker-result-main">
+                <div class="member-info">
+                    <div class="float-right">
+                        <span class="member">（未知使用者）</span>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div id="seeker-result-grid" class="ui-grid-b">
+                    <!-- * dynamic content here * -->
+                </div>
+            </div>
+            <!-- /main -->
         </div>
 
         <!-- job seeker resume -->
@@ -141,20 +144,7 @@
             <!-- /header -->
             <div data-role="main" class="ui-content" id="jobseeker-resume-main">
                 <div class="flexslider">
-                    <ul class="slides">
-                        <li>
-                            <img src="./img/slide1.jpg" />
-                        </li>
-                        <li>
-                            <img src="./img/slide2.jpg" />
-                        </li>
-                        <li>
-                            <img src="./img/slide3.jpg" />
-                        </li>
-                        <li>
-                            <img src="./img/slide4.jpg" />
-                        </li>
-                    </ul>
+                    <!-- * dynamic content here * -->
                 </div>
                 <div id="info_block" class="detail_block">
                     <div class="ui-bar ui-bar-a">
@@ -190,14 +180,14 @@
                         </div>
                     </div>
                     <div id="msg_to_jobseeker" class="msg-popup ui-corner-all" data-role="popup" data-position-to="window" data-transition="pop" data-theme="none" data-shadow="false" data-overlay-theme="b" data-dismissible="false">
-                        <form>
-                            <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
-                            <div style="padding:10px 20px;">
-                                <h3>留言</h3>
-                                <textarea name="message" rows="8" data-theme="a"></textarea>
-                                <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn send-btn">送出</button>
-                            </div>
-                        </form>
+                        <!-- <form> -->
+                        <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+                        <div style="padding:10px 20px;">
+                            <h3>留言</h3>
+                            <textarea id="msg_content" name="message" rows="8" data-theme="a"></textarea>
+                            <button id="msg-seeker-btn" type="button" class="ui-btn ui-corner-all no-bg-bd purple-btn send-btn">送出</button>
+                        </div>
+                        <!-- </form> -->
                     </div>
                 </div>
                 <div id="brief_block" class="detail_block">
@@ -247,7 +237,6 @@
         <script src="./js/jquery-1.12.4.min.js"></script>
         <script src="./js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
         <script src="./js/flex-slider/jquery.flexslider-min.js"></script>
-        <script src="./js/tw-city-selector/jquery.tw-city-selector.js"></script>
         <script type="text/javascript" src="cordova.js"></script>
         <script src="./js/main.js"></script>
         <script src="./js/jobseeker.js"></script>

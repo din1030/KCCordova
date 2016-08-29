@@ -77,23 +77,50 @@
                 <div class="search-block">
                     <form class="" action="index.html" method="post">
                         <div class="ui-field-contain">
-                            <label for="county">區域</label>
-                            <select name="county" id="county">
-                                <option value="small">台北市</option>
+                            <label for="area-select">區域</label>
+                            <select name="area-select" id="area-select" class="area-select">
+                                <!-- <option value="small">台北市</option>
                                 <option value="medium">新北市</option>
-                                <option value="large">台中市</option>
+                                <option value="large">台中市</option> -->
                             </select>
                         </div>
                         <div class="ui-field-contain">
                             <label for="club_type">店家類別</label>
                             <select name="club_type" id="club_type">
-                                <option value="small">類別一</option>
+                                <!-- <option value="small">類別一</option>
                                 <option value="medium">類別二</option>
-                                <option value="large">類別三</option>
+                                <option value="large">類別三</option> -->
                             </select>
                         </div>
+                        <button type="button" name="button" id="club-search-btn">搜尋</button>
                     </form>
                 </div>
+            </div>
+        </div>
+        <!-- club result-->
+        <div data-role="page" id="club-result" data-theme="a" data-title="club">
+            <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
+                <div style="width:100%; text-align:center;">
+                    <a href="#menu-panel" class="ui-link">
+                        <div id="menu-btn" class="header-btn header-link left-link"></div>
+                    </a>
+                    <span class="page-title">酒店系統</span>
+                    <a href="#club-search" class="ui-link">
+                        <div id="search-btn" class="header-btn header-link right-link"></div>
+                    </a>
+                </div>
+            </div>
+            <!-- /header -->
+            <div data-role="main" class="ui-content" id="club-result-main">
+                <div class="member-info">
+                    <div class="float-left">
+                        <span class="member">（未知使用者）</span>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <ul id="club_result_list" class="store_list" data-role="listview" data-inset="true">
+                    <!-- * dynamic content here * -->
+                </ul>
             </div>
         </div>
 
@@ -120,20 +147,7 @@
             <!-- /header -->
             <div data-role="main" class="ui-content" id="club-intro-main">
                 <div class="flexslider">
-                    <ul class="slides">
-                        <li>
-                            <img src="./img/slide1.jpg" />
-                        </li>
-                        <li>
-                            <img src="./img/slide2.jpg" />
-                        </li>
-                        <li>
-                            <img src="./img/slide3.jpg" />
-                        </li>
-                        <li>
-                            <img src="./img/slide4.jpg" />
-                        </li>
-                    </ul>
+                    <!-- * dynamic content here * -->
                 </div>
                 <div id="info_block" class="detail_block">
                     <div class="ui-bar ui-bar-a">
@@ -211,6 +225,7 @@
                     </div>
                     <div class="ui-body ui-body-a">
                         <div class="avatar float-left">
+                            <img id="contact_pic" src="http://52.69.53.255/KCCordova/www/img/seeker-b.jpg" alt="" style="width: 70px; height: 70px; border-radius: 50%;">
                         </div>
                         <strong id="contact_name">（暫無資訊）</strong>&nbsp;<small>客服專員</small>
                         <br>電話：<span id="contact_tel">（暫無資訊）</span>
@@ -222,32 +237,7 @@
                         <h3>消費介紹（門票）</h3>
                     </div>
                     <div class="ui-body ui-body-a tab_wrap_block">
-                        <!-- <div data-role="tabs" id="first_tabs" class="service-tabs">
-                            <div data-role="navbar">
-                                <ul>
-                                    <li><a href="#one" data-ajax="false" class="active">星期三</a></li>
-                                    <li><a href="#two" data-ajax="false">星期四</a></li>
-                                    <li><a href="#three" data-ajax="false">星期五</a></li>
-                                    <li><a href="#four" data-ajax="false">星期六</a></li>
-                                    <li><a href="#five" data-ajax="false">星期日</a></li>
-                                </ul>
-                            </div>
-                            <div id="one" class="ui-body-d ui-content">
-                                星期三
-                            </div>
-                            <div id="two" class="ui-body-d ui-content">
-                                星期四
-                            </div>
-                            <div id="three" class="ui-body-d ui-content">
-                                星期五
-                            </div>
-                            <div id="four" class="ui-body-d ui-content">
-                                星期六
-                            </div>
-                            <div id="five" class="ui-body-d ui-content">
-                                星期日
-                            </div>
-                        </div> -->
+                        <!-- * dynamic content here * -->
                     </div>
                 </div>
                 <div id="consume_second" class="detail_block">
@@ -255,32 +245,7 @@
                         <h3>消費介紹（包廂）</h3>
                     </div>
                     <div class="ui-body ui-body-a tab_wrap_block">
-                        <!-- <div data-role="tabs" id="second_tabs" class="service-tabs">
-                            <div data-role="navbar">
-                                <ul>
-                                    <li><a href="#one" data-ajax="false" class="active">星期三</a></li>
-                                    <li><a href="#two" data-ajax="false">星期四</a></li>
-                                    <li><a href="#three" data-ajax="false">星期五</a></li>
-                                    <li><a href="#four" data-ajax="false">星期六</a></li>
-                                    <li><a href="#five" data-ajax="false">星期日</a></li>
-                                </ul>
-                            </div>
-                            <div id="one" class="ui-body-d ui-content">
-                                星期三
-                            </div>
-                            <div id="two" class="ui-body-d ui-content">
-                                星期四
-                            </div>
-                            <div id="three" class="ui-body-d ui-content">
-                                星期五
-                            </div>
-                            <div id="four" class="ui-body-d ui-content">
-                                星期六
-                            </div>
-                            <div id="five" class="ui-body-d ui-content">
-                                星期日
-                            </div>
-                        </div> -->
+                        <!-- * dynamic content here * -->
                     </div>
                 </div>
                 <div id="map_block" class="detail_block">
@@ -324,19 +289,29 @@
                     </div>
                     <div class="ui-body ui-body-a">
                         <div class="avatar float-left">
-                            <!-- <img src="./img/seeker-a.jpg" alt="" /> -->
+                            <img id="interviewer_pic" src="http://52.69.53.255/KCCordova/www/img/seeker-b.jpg" alt="" style="width: 70px; height: 70px; border-radius: 50%;">
                         </div>
                         <strong id="interviewer">（暫無資訊）</strong>&nbsp;<small>面試人</small>
                         <br> 電話：<span id="tel">（暫無資訊）</span>
                         <br> LINE: <span id="line">（暫無資訊）</span>
                         <div id="action_block" class="text-right">
-                            <a href="#msg_to_jobseeker" class="ui-btn ui-btn-inline no-bg-bd msg-btn" data-rel="popup">
+                            <a href="#msg_to_club" class="ui-btn ui-btn-inline no-bg-bd msg-btn" data-rel="popup">
                                 <img src="./img/icons/message.png" alt="" />
                             </a>
                             <button id="add-fav-btn" type="button" class="ui-btn ui-btn-inline no-bg-bd add-fav-btn">
                                 <img src="./img/icons/fav_gray.png" alt="" />
                             </button>
                         </div>
+                    </div>
+                    <div id="msg_to_club" class="msg-popup ui-corner-all" data-role="popup" data-position-to="window" data-transition="pop" data-theme="none" data-shadow="false" data-overlay-theme="b" data-dismissible="false">
+                        <!-- <form> -->
+                        <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+                        <div style="padding:10px 20px;">
+                            <h3>留言</h3>
+                            <textarea id="msg_content" name="msg_content" rows="8" data-theme="a"></textarea>
+                            <button id="msg-club-btn" type="button" class="ui-btn ui-corner-all no-bg-bd purple-btn send-btn">送出</button>
+                        </div>
+                        <!-- </form> -->
                     </div>
                 </div>
                 <div id="offer_content_block" class="detail_block">

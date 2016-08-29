@@ -1,23 +1,24 @@
+var seekerSearchJson = '';
+var seekerSearchState = false;
+
 $(document).on('pagebeforecreate', '#jobseeker', function() {
 	$.ajax({
 		url: 'http://52.69.53.255/KCCordova/api/get_seeker_info.php',
 		dataType: 'json'
 	}).success(function(data) {
 		if (data.status) {
+			$('#seeker-grid').empty();
 			$.each(data.result, function(idx, obj) {
 				var block_class, img;
 				if ((idx % 3) == 0) {
 					block_class = 'ui-block-a';
-					img = 'seeker-a.jpg';
 				} else if ((idx % 3) == 1) {
 					block_class = 'ui-block-b';
-					img = 'seeker-b.jpg';
 				} else if ((idx % 3) == 2) {
 					block_class = 'ui-block-c';
-					img = 'seeker-c.jpg';
 				}
 				var seeker_div = $('<div></div>').attr('data-seeker-id', obj.u_id).addClass(block_class + ' seeker_div')
-					.append('<div class="seeker_list_item"><a data-ajax="false"><img src="./img/' + img + '" alt="" /></a></div>');
+					.append('<div class="seeker_list_item"><a data-ajax="false"><img src="http://52.69.53.255/KCCordova/www/img/' + obj.pic[0] + '" alt="" /></a></div>');
 				$(seeker_div).appendTo($('#seeker-grid'));
 			});
 			// $('#club_list').listview('refresh');
@@ -41,6 +42,7 @@ $(document).on('pagebeforeshow', '#jobseeker-resume', function() {
 		dataType: 'json'
 	}).success(function(data) {
 		if (data.status) {
+			$('#club_title').html(data.result[0].name);
 			$('#nickname-span').html(data.result[0].nickname);
 			$('#country-span').html(data.result[0].country + ' ' + data.result[0].area);
 			$('#birth-span').html(data.result[0].birth);
@@ -49,6 +51,17 @@ $(document).on('pagebeforeshow', '#jobseeker-resume', function() {
 			$('#weight-span').html(data.result[0].weight);
 			$('#measurements-span').html(data.result[0].measurements);
 			$('#education-span').html(data.result[0].education);
+
+			var slideContainer = '<ul class="slides">';
+			$.each(data.result[0].pic, function(idx, pic) {
+				if (pic != null && pic != '') {
+					slideContainer += '<li><img src="http://52.69.53.255/KCCordova/www/img/' + pic + '"></li>'
+				}
+			});
+
+			slideContainer += '</ul>';
+
+			$('.flexslider').html(slideContainer);
 			switch (data.result[0].singing) {
 				case 'great':
 				default:
@@ -124,6 +137,27 @@ $(document).on('pagebeforeshow', '#jobseeker-resume', function() {
 			$('#languages-span').html(data.result[0].languages);
 			$('#pay-span').html(data.result[0].pay);
 			$('#content-span').html(data.result[0].job_content.replace(/\n/g, "<br>"));
+			$('#msg-seeker-btn').click(function(event) {
+				// var to_id = $(this).jqmData('to-id');
+				var msg_content = $('#msg_content').val();
+				$.ajax({
+					url: "http://52.69.53.255/KCCordova/api/send_message.php",
+					dataType: "json",
+					method: "POST",
+					data: {
+						self_id: parseInt(window.localStorage.getItem('user_id')),
+						self_type: parseInt(window.localStorage.getItem('auth')),
+						talk_id: parseInt(window.localStorage.getItem('get_seeker_id')),
+						content: msg_content
+					}
+				}).done(function(data) {
+					$('#msg_content').val('');
+					$("#msg_to_jobseeker").popup("close");
+
+				}).fail(function() {
+					alert('請確認您的網路連線狀態！');
+				});
+			});
 			$('#add-fav-btn').click(function(event) {
 				$.ajax({
 					url: 'http://52.69.53.255/KCCordova/api/add_fav.php?user_id=' + window.localStorage.getItem('user_id') + '&type=3&item_id=' + get_seeker_id,
@@ -135,4 +169,81 @@ $(document).on('pagebeforeshow', '#jobseeker-resume', function() {
 			});
 		}
 	});
+});
+
+$(document).on('pagebeforeshow', '#jobseeker-search', function() {
+	$.ajax({
+		url: 'http://52.69.53.255/KCCordova/api/get_form_content.php?action=get_category&type=job',
+		dataType: 'json'
+	}).done(function(data) {
+		console.log(data);
+		var classificationList = '';
+		$.each(data, function(idx, obj) {
+			classificationList += '<option value="' + obj.id + '">' + obj.title + '</option>';
+		});
+		$('#jobseeker_type').html(classificationList);
+		$('#jobseeker_type').selectmenu('refresh');
+
+		$('#jobseeker-search-btn').on('click', function() {
+			var area = $('#area-select').val();
+			var gender = $('[name="gender"]:checked').val();
+			var type = $('#jobseeker_type').val();
+			console.log('jobseeker_type changed');
+			$.ajax({
+				url: 'http://52.69.53.255/KCCordova/api/search_seeker.php',
+				dataType: 'json',
+				data: {
+					area: area,
+					gender: gender,
+					type: type
+				}
+			}).done(function(data) {
+				if (data.status) {
+					seekerSearchJson = data;
+					seekerSearchState = true;
+					console.log('get result', seekerSearchJson);
+					$.mobile.changePage($('#jobseeker-result'), {
+						reloadPage: true,
+						changeHash: true
+					});
+				} else {
+					alert(data.message);
+				}
+			});
+		});
+	});
+});
+
+$(document).on('pagebeforeshow', '#jobseeker-result', function() {
+	console.log(seekerSearchState, seekerSearchJson);
+	if (seekerSearchState && seekerSearchJson != '') {
+		console.log(seekerSearchState, seekerSearchJson);
+		$('#seeker-result-grid').empty();
+		$.each(seekerSearchJson.result, function(idx, obj) {
+			var block_class, img;
+			if ((idx % 3) == 0) {
+				block_class = 'ui-block-a';
+			} else if ((idx % 3) == 1) {
+				block_class = 'ui-block-b';
+			} else if ((idx % 3) == 2) {
+				block_class = 'ui-block-c';
+			}
+			var seeker_div = $('<div></div>').attr('data-seeker-id', obj.u_id).addClass(block_class + ' seeker_div')
+				.append('<div class="seeker_list_item"><a data-ajax="false"><img src="http://52.69.53.255/KCCordova/www/img/' + obj.pic1 + '" alt="" /></a></div>');
+			$(seeker_div).appendTo($('#seeker-result-grid'));
+		});
+		$('#seeker-result-grid .seeker_div').click(function(event) {
+			var seeker_id = $(this).jqmData("seeker-id");
+			window.localStorage.setItem('get_seeker_id', seeker_id);
+			$.mobile.changePage($('#jobseeker-resume'), {
+				reloadPage: true,
+				changeHash: true
+			});
+		});
+	} else {
+		$.mobile.changePage($('#jobseeker'), {
+			reloadPage: true,
+			changeHash: true
+		});
+	}
 });

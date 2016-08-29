@@ -341,12 +341,12 @@ textarea {
   background-color: #fff;
 }
 .policy-page-content h4 {
+  font-size: 18px;
   text-align: center;
   color: #aa3c89;
   margin: 10px auto;
 }
-.policy-page-content p {
-  font-size: 12px;
+.policy-page-content .policy-text {
   padding-bottom: 15px;
 }
 .profile-main {

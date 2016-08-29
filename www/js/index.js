@@ -9,7 +9,7 @@ $(document).on('pagecreate', '#login', function() {
 	$('#fb_login_btn').click(function(event) {
 		facebookConnectPlugin.getLoginStatus(
 			function(response) {
-				alert("login current status: " + JSON.stringify(response));
+				// alert("login current status: " + JSON.stringify(response));
 				if (response.status === 'connected') {
 					$.ajax({
 							url: 'http://52.69.53.255/KCCordova/api/user_action.php',
@@ -29,10 +29,10 @@ $(document).on('pagecreate', '#login', function() {
 								window.localStorage.setItem('name', result.name);
 								window.localStorage.setItem('country_id', result.country_id);
 								window.localStorage.setItem('area_id', result.area_id);
-								alert(window.localStorage.getItem('name') + ' ' + window.localStorage.getItem('user') + '(' + window.localStorage.getItem('auth') + ')');
+								// alert(window.localStorage.getItem('name') + ' ' + window.localStorage.getItem('user') + '(' + window.localStorage.getItem('auth') + ')');
 								$.mobile.changePage("#home");
 							} else {
-								alert(result.message + '(login)' + result.sql);
+								// alert(result.message + '(login)' + result.sql);
 								facebookConnectPlugin.logout(function() {}, function() {});
 
 							}
@@ -144,11 +144,11 @@ $(document).on('pagecreate', '#app-reg', function() {
 $(document).on('pagecreate', '#fb-reg', function() {
 	facebookConnectPlugin.getLoginStatus(
 		function(response) {
-			alert("fb-reg current status: " + JSON.stringify(response));
+			// alert("fb-reg current status: " + JSON.stringify(response));
 			if (response.status === 'connected') {
 				facebookConnectPlugin.api("/me?fields=name,email", null,
 					function(result) {
-						alert("Result: " + JSON.stringify(result));
+						// alert("Result: " + JSON.stringify(result));
 						$('#fb-reg-form #rg_email').val(result.email);
 						$('#fb-reg-form #rg_name').val(result.name);
 					},
@@ -188,7 +188,7 @@ $(document).on('pagecreate', '#fb-reg', function() {
 						window.localStorage.setItem('name', result.name);
 						window.localStorage.setItem('country_id', result.country_id);
 						window.localStorage.setItem('area_id', result.area_id);
-						alert(window.localStorage.getItem('name') + ' ' + window.localStorage.getItem('user') + '(' + window.localStorage.getItem('auth') + ')');
+						// alert(window.localStorage.getItem('name') + ' ' + window.localStorage.getItem('user') + '(' + window.localStorage.getItem('auth') + ')');
 						$.mobile.changePage("#home");
 					} else {
 						alert(result.message + '(fb-reg)' + result.sql);
@@ -275,7 +275,7 @@ $(document).on('pagecreate', '#app-log-in', function() {
 						window.localStorage.setItem('name', result.name);
 						window.localStorage.setItem('country_id', result.country_id);
 						window.localStorage.setItem('area_id', result.area_id);
-						alert(window.localStorage.getItem('name') + ' ' + window.localStorage.getItem('user') + '(' + window.localStorage.getItem('auth') + ')');
+						// alert(window.localStorage.getItem('name') + ' ' + window.localStorage.getItem('user') + '(' + window.localStorage.getItem('auth') + ')');
 						$.mobile.changePage("#home");
 					} else {
 						alert(result.message);
@@ -376,7 +376,7 @@ $(document).on('pagecreate', '#home', function() {
 function fbLogin() {
 	facebookConnectPlugin.login(['email', 'public_profile'], function(response) {
 		// alert('logged in successfully');
-		alert('now logged, ID: ' + response.authResponse.userID);
+		// alert('now logged, ID: ' + response.authResponse.userID);
 		window.localStorage.setItem('fb_id', response.authResponse.userID);
 		$.ajax({
 				url: 'http://52.69.53.255/KCCordova/api/user_action.php',
@@ -396,10 +396,10 @@ function fbLogin() {
 					window.localStorage.setItem('name', result.name);
 					window.localStorage.setItem('country_id', result.country_id);
 					window.localStorage.setItem('area_id', result.area_id);
-					alert(window.localStorage.getItem('name') + ' ' + window.localStorage.getItem('user') + '(' + window.localStorage.getItem('auth') + ')');
+					// alert(window.localStorage.getItem('name') + ' ' + window.localStorage.getItem('user') + '(' + window.localStorage.getItem('auth') + ')');
 					$.mobile.changePage("#home");
 				} else {
-					alert(result.message + '/' + result.sql);
+					// alert(result.message + '/' + result.sql);
 					// facebookConnectPlugin.logout(function() {}, function() {});
 					$.mobile.changePage("#fb-reg");
 

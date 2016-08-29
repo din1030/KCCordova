@@ -1,13 +1,17 @@
-$(document).on('pagebeforecreate', '#club', function() {
+var clubSearchJson = '';
+var clubSearchState = false;
+
+$(document).on('pagebeforeshow', '#club', function() {
 	$.ajax({
 		url: 'http://52.69.53.255/KCCordova/api/get_club_info.php',
 		dataType: 'json'
 	}).success(function(data) {
 		if (data.status) {
 			var clubs = data.result;
+			$('#club_list').empty();
 			$.each(clubs, function(idx, obj) {
 				var club_li = $('<li></li>').attr('data-icon', 'false').attr('data-admin-id', obj.admin_id)
-					.append('<a href="" data-admin-id="' + obj.admin_id + '" data-ajax="false"><img src="./img/square_img.jpg"><h2>' + obj.name + '</h2><p>' + obj.country + ' ' + obj.area + '｜</p><div class="slogan">' + obj.slogan + '</div><p class="update-time">更新時間 ' + obj.updated + '</p></a>');
+					.append('<a href="" data-admin-id="' + obj.admin_id + '" data-ajax="false"><img class="club-thumbnail" src="http://52.69.53.255/KCCordova/www/img/' + obj.pic[0] + '"><h2>' + obj.name + '</h2><p>' + obj.country + ' ' + obj.area + '｜</p><div class="slogan">' + obj.slogan + '</div><p class="update-time">更新時間 ' + obj.updated + '</p></a>');
 				$(club_li).appendTo($('#club_list'));
 			});
 			$('#club_list').listview('refresh');
@@ -18,9 +22,10 @@ $(document).on('pagebeforecreate', '#club', function() {
 					reloadPage: true,
 					changeHash: true
 				});
-
 			});
 		}
+	}).fail(function() {
+		alert('請確認您的網路連線狀態！');
 	});
 });
 
@@ -44,6 +49,15 @@ $(document).on('pagebeforeshow', '#club-intro', function() {
 				}
 			}
 			$('#website-link').attr('href', club.website);
+			var slideContainer = '<ul class="slides">';
+			$.each(club.pic, function(idx, pic) {
+				if (pic != null && pic != '') {
+					slideContainer += '<li><img src="http://52.69.53.255/KCCordova/www/img/' + pic + '"></li>'
+				}
+			});
+
+			slideContainer += '</ul>';
+			$('.flexslider').html(slideContainer);
 			$('#club-intro .add-fav-btn').click(function(event) {
 				$.ajax({
 					url: 'http://52.69.53.255/KCCordova/api/add_fav.php?user_id=' + window.localStorage.getItem('user_id') + '&type=2&item_id=' + get_club_id,
@@ -115,10 +129,11 @@ $(document).on('pagebeforeshow', '#club-job-info', function() {
 			$('#interviewer').html(club.interviewer);
 			$('#tel').text(club.tel);
 			$('#line').text(club.line);
-			if (typeof(club.offer_content) !== 'undefined') {
+			$('#interviewer_pic').attr('src', 'http://52.69.53.255/KCCordova/www/img/' + club.interviewer_pic);
+			if (club.offer_content != null) {
 				club.offer_content = club.offer_content.replace(/\n/g, "<br>")
 			}
-			if (typeof(club.welfare) !== 'undefined') {
+			if (club.welfare != null) {
 				club.welfare = club.welfare.replace(/\n/g, "<br>")
 			}
 			$('#offer_content').html(club.offer_content);
@@ -126,6 +141,27 @@ $(document).on('pagebeforeshow', '#club-job-info', function() {
 			$('.no_data').hide();
 			$('#club-job-info-main').show();
 
+			$('#club-job-info #msg-club-btn').click(function(event) {
+				// var to_id = $(this).jqmData('to-id');
+				var msg_content = $('#msg_content').val();
+				$.ajax({
+					url: "http://52.69.53.255/KCCordova/api/send_message.php",
+					dataType: "json",
+					method: "POST",
+					data: {
+						self_id: parseInt(window.localStorage.getItem('user_id')),
+						self_type: parseInt(window.localStorage.getItem('auth')),
+						talk_id: parseInt(window.localStorage.getItem('get_club_id')),
+						content: msg_content
+					}
+				}).done(function(data) {
+					$('#msg_content').val('');
+					$("#msg_to_club").popup("close");
+
+				}).fail(function() {
+					alert('請確認您的網路連線狀態！');
+				});
+			});
 			$('#club-job-info .add-fav-btn').click(function(event) {
 				$.ajax({
 					url: 'http://52.69.53.255/KCCordova/api/add_fav.php?user_id=' + window.localStorage.getItem('user_id') + '&type=2&item_id=' + get_club_id,
@@ -139,7 +175,10 @@ $(document).on('pagebeforeshow', '#club-job-info', function() {
 			$('.no_data').show();
 			$('#club-job-info-main').hide();
 		}
+	}).fail(function() {
+		alert('請確認您的網路連線狀態！');
 	});
+
 });
 
 $(document).on('pagebeforeshow', "#club-intro, #club-service", function() {
@@ -172,6 +211,7 @@ $(document).on('pagebeforeshow', "#club-service", function() {
 			$('#contact_name').html(club.contact_name);
 			$('#contact_tel').text(club.contact_tel);
 			$('#contact_line').text(club.contact_line);
+			$('#contact_pic').attr('src', 'http://52.69.53.255/KCCordova/www/img/' + club.contact_pic);
 			if (typeof(club.promo_content) !== 'undefined') {
 				club.promo_content = club.promo_content.replace(/\n/g, "<br>");
 			}
@@ -202,6 +242,9 @@ $(document).on('pagebeforeshow', "#club-service", function() {
 						ui.oldTab.children('a').removeClass('active');
 					}
 				});
+				$('#consume_first').show();
+			} else {
+				$('#consume_first').hide();
 			}
 			if (club.title2 != null) {
 				var tabs = ['<div data-role="tabs" id="second_tabs" class="service-tabs"><div data-role="navbar"><ul>'];
@@ -226,6 +269,9 @@ $(document).on('pagebeforeshow', "#club-service", function() {
 						ui.oldTab.children('a').removeClass('active');
 					}
 				});
+				$('#consume_second').show();
+			} else {
+				$('#consume_second').hide();
 			}
 			$('[data-role="tabs"] li:first-child a').each(function() {
 				$(this).addClass('active');
@@ -238,5 +284,76 @@ $(document).on('pagebeforeshow', "#club-service", function() {
 			$('.no_data').show();
 			$('#club-service-main').hide();
 		}
+	}).fail(function() {
+		alert('請確認您的網路連線狀態！');
 	});
+
+});
+
+$(document).on('pagebeforeshow', '#club-search', function() {
+	$.ajax({
+		url: 'http://52.69.53.255/KCCordova/api/get_form_content.php?action=get_category&type=club',
+		dataType: 'json'
+	}).done(function(data) {
+		console.log(data);
+		var classificationList = '';
+		$.each(data, function(idx, obj) {
+			classificationList += '<option value="' + obj.id + '">' + obj.title + '</option>';
+		});
+		$('#club_type').html(classificationList);
+		$('#club_type').selectmenu('refresh');
+
+		$('#club-search-btn').on('click', function() {
+			var area = $('#area-select').val();
+			var type = $('#club_type').val();
+			console.log('club_type changed');
+
+			$.ajax({
+				url: 'http://52.69.53.255/KCCordova/api/search_club.php?area_id=' + area + '&type=' + type,
+				dataType: 'json'
+			}).done(function(data) {
+				if (data.status) {
+					clubSearchJson = data;
+					clubSearchState = true;
+					console.log(clubSearchState, clubSearchJson);
+					$.mobile.changePage($('#club-result'), {
+						reloadPage: true,
+						changeHash: true
+					});
+				} else {
+					alert(data.message);
+				}
+			}).fail(function() {
+				alert('請確認您的網路連線狀態！');
+			});
+		});
+	});
+});
+
+$(document).on('pagebeforeshow', '#club-result', function() {
+	console.log(clubSearchState, clubSearchJson);
+	if (clubSearchState && clubSearchJson != '') {
+		console.log(clubSearchState, clubSearchJson);
+		$('#club_result_list').empty();
+		$.each(clubSearchJson.result, function(idx, obj) {
+			var club_li = $('<li></li>').attr('data-icon', 'false').attr('data-admin-id', obj.admin_id)
+				.append('<a href="" data-admin-id="' + obj.admin_id + '" data-ajax="false"><img class="club-thumbnail" src="http://52.69.53.255/KCCordova/www/img/' + obj.pic1 + '"><h2>' + obj.name + '</h2><p>' + obj.country + ' ' + obj.area + '｜</p><div class="slogan">' + obj.slogan + '</div><p class="update-time">更新時間 ' + obj.updated + '</p></a>');
+			$(club_li).appendTo($('#club_result_list'));
+		});
+		$('#club_result_list').listview('refresh');
+		$('#club_result_list li').click(function(event) {
+			var admin_id = $(this).jqmData("admin-id");
+			window.localStorage.setItem('get_club_id', admin_id);
+			$.mobile.changePage($('#club-intro'), {
+				reloadPage: true,
+				changeHash: true
+			});
+		});
+		clubSearchState = false;
+	} else {
+		$.mobile.changePage($('#club'), {
+			reloadPage: true,
+			changeHash: true
+		});
+	}
 });

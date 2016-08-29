@@ -170,17 +170,35 @@ textarea {
   background-color: #fff !important;
   border-bottom: 6px solid #aa3c89;
 }
-#jobseeker-main .ui-grid-b {
+#club-main .ui-listview li h2,
+#club-result-main .ui-listview li h2 {
+  margin: 0;
+}
+#club-main .ui-listview > .ui-li-has-thumb > .ui-btn,
+#club-result-main .ui-listview > .ui-li-has-thumb > .ui-btn {
+  padding-left: 8em;
+}
+#club-main .club-thumbnail,
+#club-result-main .club-thumbnail {
+  height: 100%;
+  max-width: calc(8em - 10px);
+}
+#jobseeker-main .ui-grid-b,
+#jobseeker-result-main .ui-grid-b {
   margin: 0 4px 10px 4px;
 }
 #jobseeker-main .ui-block-a,
+#jobseeker-result-main .ui-block-a,
 #jobseeker-main .ui-block-b,
-#jobseeker-main .ui-block-c {
+#jobseeker-result-main .ui-block-b,
+#jobseeker-main .ui-block-c,
+#jobseeker-result-main .ui-block-c {
   margin: 4px;
   width: calc(33.33vw - 11px);
   height: calc(33.33vw - 11px);
 }
-#jobseeker-main .seeker_list_item img {
+#jobseeker-main .seeker_list_item img,
+#jobseeker-result-main .seeker_list_item img {
   width: 100%;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
@@ -200,6 +218,10 @@ textarea {
 }
 #lifeservice-list .ui-listview > .ui-li-has-thumb > .ui-btn {
   padding-left: 7em;
+}
+#lifeservice-list .life-thumbnail {
+  height: 100%;
+  max-width: calc(7em - 10px);
 }
 .msg_block .msg-badge {
   background: #ae53c9;

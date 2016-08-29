@@ -171,9 +171,19 @@ textarea
             background-color: #FFF !important
             border-bottom: 6px solid #AA3C89
 
+#club-main , #club-result-main
+    .ui-listview
+        li h2
+            margin: 0
+        & > .ui-li-has-thumb > .ui-btn
+            padding-left: 8em
+    .club-thumbnail
+        height: 100%
+        max-width: calc(8em - 10px)
+
 //  --- end club style ---
 // job seeker
-#jobseeker-main
+#jobseeker-main, #jobseeker-result-main
     .ui-grid-b
         margin: 0 4px 10px 4px
     // .seeker_list_item
@@ -202,6 +212,9 @@ textarea
             margin: 0
         & > .ui-li-has-thumb > .ui-btn
             padding-left: 7em
+    .life-thumbnail
+        height: 100%
+        max-width: calc(7em - 10px)
 // --- life service style---
 
 // messages
