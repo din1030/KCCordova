@@ -18,7 +18,7 @@ $(document).on('pagebeforecreate', '#jobseeker', function() {
 					block_class = 'ui-block-c';
 				}
 				var seeker_div = $('<div></div>').attr('data-seeker-id', obj.u_id).addClass(block_class + ' seeker_div')
-					.append('<div class="seeker_list_item"><a data-ajax="false"><img src="http://52.69.53.255/KCCordova/www/img/' + obj.pic[0] + '" alt="" /></a></div>');
+					.append('<div class="seeker_list_item"><a data-ajax="false"><img src="http://52.69.53.255/KCCordova/www/img/' + obj.avatar + '" alt="" /></a></div>');
 				$(seeker_div).appendTo($('#seeker-grid'));
 			});
 			// $('#club_list').listview('refresh');

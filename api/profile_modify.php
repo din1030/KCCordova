@@ -18,7 +18,7 @@ if ($sql->num_rows > 0) {
     $new_filename = $u_id.'_'.basename($_FILES['profile_photo']['name']);
     $target_file = $target_dir.$new_filename;
     if (move_uploaded_file($_FILES['profile_photo']['tmp_name'], $target_file)) {
-        $pic_string = ",`pic`='".$new_filename."'";
+        $pic_string = ",`avatar`='".$new_filename."'";
     }
     $update_string = "UPDATE `user` SET `tel`='$tel',`mobile`='$mobile'".$pic_string." WHERE `id` = '$u_id'";
     if ($mysqli->query($update_string)) {
