@@ -197,9 +197,14 @@ textarea {
   width: calc(33.33vw - 11px);
   height: calc(33.33vw - 11px);
 }
+#jobseeker-main .seeker_list_item,
+#jobseeker-result-main .seeker_list_item {
+  height: 100%;
+}
 #jobseeker-main .seeker_list_item img,
 #jobseeker-result-main .seeker_list_item img {
   width: 100%;
+  max-height: 100%;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
@@ -341,12 +346,12 @@ textarea {
   background-color: #fff;
 }
 .policy-page-content h4 {
+  font-size: 18px;
   text-align: center;
   color: #aa3c89;
   margin: 10px auto;
 }
-.policy-page-content p {
-  font-size: 12px;
+.policy-page-content .policy-text {
   padding-bottom: 15px;
 }
 .profile-main {

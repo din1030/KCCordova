@@ -1,6 +1,7 @@
 var remain_point = 0;
 var used_point = 0;
 var total_point = 0;
+var policy = {};
 
 $(document).on('pagebeforeshow', "#recommend-record", function() {
 	$.ajax({
@@ -190,4 +191,24 @@ $(document).on('pagebeforecreate', '#share', function() {
 				});
 		}
 	});
+});
+
+$(document).on('pagebeforeshow', "#setting", function() {
+	$.ajax({
+		url: api_base + 'get_policy.php',
+		dataType: 'json'
+	}).done(function(data) {
+		if (data.result) {
+			policy = data.result;
+		}
+	}).fail(function() {
+		alert('請確認您的網路連線狀態！');
+	});
+
+});
+
+$(document).on('pagebeforeshow', ".policy-page", function() {
+	var page_id = $(this).attr('id');
+	console.log(page_id);
+	$('#' + page_id + ' .policy-text').html(policy[page_id]);
 });

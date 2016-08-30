@@ -337,7 +337,18 @@ $(document).on('pagebeforeshow', "#club-pic", function() {
 				$.mobile.loading('hide');
 			},
 			success: function(result) {
-				console.log(result);
+				var has_error = false;
+				$.each(result, function(idx, obj) {
+					if (!obj.pic) {
+						has_error = true;
+						return false;
+					}
+				});
+				if (has_error) {
+					alert('圖片上傳有誤，請重新操作！');
+				} else {
+					alert('上傳成功！');
+				}
 			},
 			error: function(request, error) {
 				alert('請確認您的網路連線狀態！');

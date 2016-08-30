@@ -84,6 +84,11 @@ if (window.localStorage.getItem('auth') == '3') {
 			dataType: 'json'
 		}).success(function(data) {
 			if (data.status) {
+				if (data.result[0].active == 1) {
+					$('#open-resume').prop('checked', 'checked').flipswitch("refresh");
+				} else {
+					$('#open-resume').removeProp('checked').flipswitch("refresh");
+				}
 				$('#nickname-span').html(data.result[0].nickname);
 				$('#country-span').html(data.result[0].country + ' ' + data.result[0].area);
 				$('#birth-span').html(data.result[0].birth);
@@ -223,6 +228,34 @@ if (window.localStorage.getItem('auth') == '3') {
 			});
 		});
 	});
+	$(document).on('pagecreate', "#jobseeker-resume", function() {
+		$('#open-resume').change(function() {
+			var state = (($('#open-resume').prop('checked')) ? 1 : 0);
+			$.ajax({
+				url: api_base + 'update_seeker_state.php',
+				type: 'POST',
+				dataType: 'json',
+				data: {
+					u_id: window.localStorage.getItem('user_id'),
+					state: state
+				}
+			}).done(function(data) {
+				if (data.status) {
+					if (data.result == 1) {
+						alert('已公開您的求職資料');
+					} else if (data.result == 0) {
+						alert('已關閉您的求職資料');
+					} else {
+						alert('請重新操作！');
+					}
+				} else {
+					alert('請重新操作！');
+				}
+			}).fail(function() {
+				alert('請確認您的網路連線狀態！');
+			});
+		});
+	});
 }
 
 $(document).on('pagebeforeshow', ".profile-pic-page", function() {
@@ -239,7 +272,8 @@ $(document).on('pagebeforeshow', ".profile-pic-page", function() {
 		}
 	});
 	$("input[type='image']").off();
-	$(page_id + " input[type='image']").click(function() {
+	$(page_id + " input[type='image']").click(function(e) {
+		e.preventDefault();
 		console.log(page_id);
 		$(this).next('.ui-input-text').find("input[type='file']").click();
 	});
@@ -264,7 +298,18 @@ $(document).on('pagebeforeshow', "#jobseeker-resume-pic", function() {
 				$.mobile.loading('hide');
 			},
 			success: function(result) {
-				console.log(result);
+				var has_error = false;
+				$.each(result, function(idx, obj) {
+					if (!obj.pic) {
+						has_error = true;
+						return false;
+					}
+				});
+				if (has_error) {
+					alert('圖片上傳有誤，請重新操作！');
+				} else {
+					alert('上傳成功！');
+				}
 			},
 			error: function(request, error) {
 				alert('請確認您的網路連線狀態！');
@@ -292,7 +337,18 @@ $(document).on('pagebeforeshow', "#club-pic", function() {
 				$.mobile.loading('hide');
 			},
 			success: function(result) {
-				console.log(result);
+				var has_error = false;
+				$.each(result, function(idx, obj) {
+					if (!obj.pic) {
+						has_error = true;
+						return false;
+					}
+				});
+				if (has_error) {
+					alert('圖片上傳有誤，請重新操作！');
+				} else {
+					alert('上傳成功！');
+				}
 			},
 			error: function(request, error) {
 				alert('請確認您的網路連線狀態！');
@@ -411,4 +467,4 @@ if (window.localStorage.getItem('auth') == '2') {
 		});
 	});
 
-}
+};
