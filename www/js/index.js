@@ -110,9 +110,9 @@ $(document).on('pagecreate', '#app-reg', function() {
 			rg_gender: {
 				required: "請選擇您的性別"
 			},
-			rg_birthday: {
-				required: "請填寫您的生日"
-			},
+			// rg_birthday: {
+			// 	required: "請填寫您的生日"
+			// },
 			rg_tel: {
 				required: "請填寫您的電話"
 			},
@@ -220,9 +220,9 @@ $(document).on('pagecreate', '#fb-reg', function() {
 			rg_gender: {
 				required: "請選擇您的性別"
 			},
-			rg_birthday: {
-				required: "請填寫您的生日"
-			},
+			// rg_birthday: {
+			// 	required: "請填寫您的生日"
+			// },
 			rg_tel: {
 				required: "請填寫您的電話"
 			},
