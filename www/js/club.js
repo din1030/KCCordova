@@ -1,10 +1,10 @@
 var clubSearchJson = '';
 var clubSearchState = false;
 
-$(document).on("pagebeforeshow", "[data-role='page']", function() {
+$(document).one("pagebeforeshow", "[data-role='page']", function() {
 	if (window.localStorage.getItem('auth') == null || window.localStorage.getItem('user_id') == null) {
 		alert('您尚未登入！');
-		$.mobile.changePage('index.html', {
+		$.mobile.changePage('./index.html', {
 			reloadPage: true,
 			changeHash: true
 		});
