@@ -1,8 +1,17 @@
 var currentViewId;
 var dataJson = '';
 var searchJson;
-var baseApi = 'http://52.69.53.255/KVCordova/api/lifeservice.json';
 var searchState = false;
+
+$(document).on("pagebeforeshow", "[data-role='page']", function() {
+	if (window.localStorage.getItem('auth') == null || window.localStorage.getItem('user_id') == null) {
+		alert('您尚未登入！');
+		$.mobile.changePage('index.html', {
+			reloadPage: true,
+			changeHash: true
+		});
+	}
+});
 
 $(document).on('pagebeforecreate', '#lifeservice', function() {
 	$.ajax({

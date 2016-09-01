@@ -1,5 +1,5 @@
 $(document).on('pagecreate', "[data-role='page']", function() {
-	if (window.localStorage.getItem('user_id') != null) {
+	if (window.localStorage.getItem('user_id') != null && window.localStorage.getItem('auth') != null) {
 		console.log(window.localStorage.getItem('user_id'));
 		$.mobile.changePage("#home");
 	}

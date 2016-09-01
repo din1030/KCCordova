@@ -1,6 +1,16 @@
 var clubSearchJson = '';
 var clubSearchState = false;
 
+$(document).on("pagebeforeshow", "[data-role='page']", function() {
+	if (window.localStorage.getItem('auth') == null || window.localStorage.getItem('user_id') == null) {
+		alert('您尚未登入！');
+		$.mobile.changePage('index.html', {
+			reloadPage: true,
+			changeHash: true
+		});
+	}
+});
+
 $(document).on('pagebeforeshow', '#club', function() {
 	$.ajax({
 		url: 'http://52.69.53.255/KCCordova/api/get_club_info.php',
