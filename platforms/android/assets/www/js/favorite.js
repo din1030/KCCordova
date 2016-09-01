@@ -1,3 +1,13 @@
+$(document).one("pagebeforeshow", "[data-role='page']", function() {
+	if (window.localStorage.getItem('auth') == null || window.localStorage.getItem('user_id') == null) {
+		alert('您尚未登入！');
+		$.mobile.changePage('./index.html', {
+			reloadPage: true,
+			changeHash: true
+		});
+	}
+});
+
 $(document).on('pagebeforecreate', '#favorite', function() {
 	$.ajax({
 		url: 'http://52.69.53.255/KCCordova/api/get_fav.php?user_id=' + window.localStorage.getItem('user_id'),

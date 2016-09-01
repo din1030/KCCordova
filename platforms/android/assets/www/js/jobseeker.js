@@ -1,6 +1,16 @@
 var seekerSearchJson = '';
 var seekerSearchState = false;
 
+$(document).one("pagebeforeshow", "[data-role='page']", function() {
+	if (window.localStorage.getItem('auth') == null || window.localStorage.getItem('user_id') == null) {
+		alert('您尚未登入！');
+		$.mobile.changePage('./index.html', {
+			reloadPage: true,
+			changeHash: true
+		});
+	}
+});
+
 $(document).on('pagebeforecreate', '#jobseeker', function() {
 	$.ajax({
 		url: 'http://52.69.53.255/KCCordova/api/get_seeker_info.php',
