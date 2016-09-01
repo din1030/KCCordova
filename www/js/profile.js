@@ -279,7 +279,8 @@ $(document).on('pagebeforeshow', ".profile-pic-page", function() {
 	});
 });
 
-$(document).on('pagebeforeshow', "#jobseeker-resume-pic", function() {
+$(document).on('pagecreate', "#jobseeker-resume-pic", function() {
+	// $('#jobseeker-resume-pic-form').off();
 	$('#jobseeker-resume-pic-form').on('submit', function(e) {
 		e.preventDefault(); // prevent native submit
 		$(this).ajaxSubmit({
@@ -294,7 +295,6 @@ $(document).on('pagebeforeshow', "#jobseeker-resume-pic", function() {
 				$.mobile.loading('show');
 			},
 			complete: function() {
-				// This callback function will trigger on data sent/received complete
 				$.mobile.loading('hide');
 			},
 			success: function(result) {
@@ -318,7 +318,8 @@ $(document).on('pagebeforeshow', "#jobseeker-resume-pic", function() {
 	});
 });
 
-$(document).on('pagebeforeshow', "#club-pic", function() {
+$(document).on('pagecreate', "#club-pic", function() {
+	// $('#club-pic-form').off();
 	$('#club-pic-form').on('submit', function(e) {
 		e.preventDefault(); // prevent native submit
 		$(this).ajaxSubmit({

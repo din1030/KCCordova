@@ -42,7 +42,7 @@ if (file_exists($_FILES['thumb']['tmp_name']) && is_uploaded_file($_FILES['thumb
         } else {
             $output['thumb'] = array('pic' => true, 'data' => false);
             // $output['thumb'] = '上傳成功、資料未更新';
-            $output['sql1'] = $update_string;
+            $output['sql_thumb'] = $update_string;
         }
     } else {
         $output['thumb'] = array('pic' => false, 'data' => false);
