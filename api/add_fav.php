@@ -22,7 +22,8 @@ if ($sql->num_rows > 0) {
     if ($mysqli->affected_rows > 0) {
         $output = array('status' => true, 'message' => '已加入收藏夾！');
         echo json_encode($output);
-        exit;
+
+        return;
     } else {
         $output = array('status' => false, 'message' => '請重新操作！');
         echo json_encode($output);

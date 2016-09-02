@@ -1,3 +1,7 @@
+var adminLifeJson = '';
+var currentCatId;
+var currentStoreId;
+
 $(document).one("pagebeforeshow", "[data-role='page']", function() {
 	if (window.localStorage.getItem('auth') == null || window.localStorage.getItem('user_id') == null) {
 		alert('您尚未登入！');
@@ -63,10 +67,13 @@ $(document).on('pageshow', "#admin-member-detail", function() {
 $(document).on('pagebeforeshow', "#admin-home", function() {
 	// console.log('test');
 	var adminHomeStatus;
-	$.ajax('http://52.69.53.255/KCCordova/api/get_home_setting.json')
+	$.ajax({
+			url: 'http://52.69.53.255/KCCordova/api/get_home_setting.php',
+			dataType: 'json'
+		})
 		.done(function(data) {
+			var setting = data.result;
 			if (data.status) {
-				var setting = data.result;
 				$('#home-upper-left-link').val(setting[0].link);
 				$('#home-upper-left-link').prev().text(textSwitch(setting[0].link));
 
@@ -84,6 +91,11 @@ $(document).on('pagebeforeshow', "#admin-home", function() {
 				$('#home-lower-right-link').val(setting[4].link);
 				$('#home-lower-right-link').prev().text(textSwitch(setting[4].link));
 			}
+			$('#pic1').attr('src', img_base + setting[0].pic);
+			$('#pic2').attr('src', img_base + setting[1].pic);
+			$('#pic3').attr('src', img_base + setting[2].pic);
+			$('#pic4').attr('src', img_base + setting[3].pic);
+			$('#pic5').attr('src', img_base + setting[4].pic);
 
 			function textSwitch(text) {
 				switch (text) {
@@ -107,11 +119,6 @@ $(document).on('pagebeforeshow', "#admin-home", function() {
 						break;
 				}
 			}
-			$('#pic1').attr('src', setting[0].pic);
-			$('#pic2').attr('src', setting[1].pic);
-			$('#pic3').attr('src', setting[2].pic);
-			$('#pic4').attr('src', setting[3].pic);
-			$('#pic5').attr('src', setting[4].pic);
 		});
 
 
@@ -208,4 +215,129 @@ $(document).on('pagebeforeshow', "#admin-home", function() {
 	//
 	// });
 
+});
+
+$(document).on('pagebeforeshow', "#admin-lifeservice", function() {
+	$.ajax({
+		url: 'http://52.69.53.255/KCCordova/api/get_lifeservice.php',
+		dataType: 'json'
+	}).success(function(data) {
+		if (data.status) {
+			adminLifeJson = data;
+			// console.log(dataJson);
+			$.each(data.result, function(idx, obj) {
+				var life_category_block = $('<div class="life_category_block"></div>').append('<div> <strong class="item_title">分類名稱：</strong><span class="cat_title">' + obj.title + '</span></div>');
+				var life_pic_block = $('<div class="life-pic-block"></div>').append('<div class="left-block text-center"> <a href="#edit_life_category" class="ui-btn ui-btn-inline ui-corner-all green-btn" data-rel="popup" data-life-cat="' + obj.id + '"> 編輯分類 </a> <br> <a class="ui-btn ui-btn-inline ui-corner-all green-btn store-btn" data-life-cat="' + obj.id + '"> 分類店家清單 </a> </div> <div class="img-block"> <input type="image" class="life-pic" src="' +
+					img_base + obj.pic + '" /> <input type="file" class="life-pic-input" /> </div> <div class="clearfix"></div>');
+				$(life_category_block).append(life_pic_block);
+				$(life_category_block).append('<button id="life-cate-del-btn" class="ui-btn ui-corner-all ui-btn-inline orange-btn float-right" type="button" data-life-cat="' + obj.id + '">刪除</button><div class="clearfix"></div>');
+				$(life_category_block).appendTo($('#admin-lifeservice-main'));
+				$('[type="file"]').textinput();
+			});
+			$('.life_category_block a.store-btn').click(function(event) {
+				var cat_id = $(this).jqmData("life-cat");
+				console.log(cat_id);
+				currentCatId = cat_id;
+				$.mobile.changePage($('#admin-lifeservice-store'), {
+					reloadPage: true,
+					changeHash: true
+				});
+			});
+		}
+	}).fail(function() {
+		alert('請確認您的網路連線狀態！');
+	});
+});
+$(document).on('pagebeforeshow', "#admin-lifeservice-store", function() {
+	if (adminLifeJson != '') {
+		console.log(adminLifeJson);
+		console.log(currentCatId);
+		$('.life_store_block').remove();
+		$.each(adminLifeJson.result, function(idx, obj) {
+			if (obj.id == currentCatId) {
+				$.each(obj.store, function(idx, store) {
+					var life_store_block = $('<div class="life_store_block"></div>').append('<div> <strong class="item_title">店家名稱：</strong><span class="store_title">' + store.name + '</span></div>');
+					var store_pic_block = $('<div class="store-pic-block"></div>').append('<div class="left-block"><a class="ui-btn ui-corner-all green-btn store-info-btn" data-store-id="' + store.id + '"> 編輯店家資訊 </a> <button class="ui-btn ui-corner-all orange-btn store-del-btn" type="button" data-store-id="' + store.id + '">刪除</button> </div> <div class="img-block"> <input type="image" class="store-pic" src="' + img_base + store.pic1 + '" /></div> <div class="clearfix"></div>');
+					$(life_store_block).append(store_pic_block);
+					$(life_store_block).appendTo($('#admin-lifeservice-store-main'));
+				});
+			}
+		});
+		$('.life_store_block a.store-info-btn').click(function(event) {
+			var store_id = $(this).jqmData("store-id");
+			console.log(store_id);
+			currentStoreId = store_id;
+			$.mobile.changePage($('#admin-lifeservice-store-info'), {
+				reloadPage: true,
+				changeHash: true
+			});
+		});
+	} else {
+		$.mobile.changePage($('#admin-lifeservice'), {
+			reloadPage: true,
+			changeHash: true
+		});
+	}
+});
+$(document).on('pagebeforeshow', "#admin-lifeservice-store-info", function() {
+	if (currentStoreId != null && currentStoreId != 0) {
+		$.ajax({
+			url: 'http://52.69.53.255/KCCordova/api/get_lifeservice_detail.php?store_id=' + currentStoreId,
+			dataType: 'json'
+		}).success(function(data) {
+			if (data.status) {
+				var service = data.result[0];
+				$('#name-input').val(service.name);
+				$('#tel-input').val(service.tel);
+				$('#address-input').val(service.address);
+				$('#contact-input').val(service.contact_name);
+				$('#contact-line-input').val(service.contact_line);
+				$('#opentime1').val(service.opentime[0]);
+				$('#opentime2').val(service.opentime[1]);
+				$('#consume_content').html(service.consume_content);
+				$('#promo_content').html(service.promo_content);
+			}
+		}).fail(function() {
+			alert('請確認您的網路連線狀態！');
+		});
+	} else {
+		$.mobile.changePage($('#admin-lifeservice'), {
+			reloadPage: true,
+			changeHash: true
+		});
+	}
+});
+
+$(document).on('pagebeforeshow', "#admin-lifeservice-store-info", function() {
+	$('#add-lifeservice-form').on('submit', function(e) {
+		e.preventDefault(); // prevent native submit
+		$(this).ajaxSubmit({
+			url: api_base + 'add_lifeservice.php',
+			data: {
+				life_category: currentCatId,
+			},
+			type: 'POST',
+			dataType: 'json',
+			beforeSend: function() {
+				$.mobile.loading('show');
+			},
+			complete: function() {
+				$.mobile.loading('hide');
+			},
+			success: function(data) {
+				if (data.status) {
+					alert(data.message);
+					$.mobile.changePage($("#admin-lifeservice-store"), {
+						reloadPage: true,
+						changeHash: true
+					});
+				} else {
+					alert(data.message);
+				}
+			},
+			error: function(request, error) {
+				alert('請確認您的網路連線狀態！');
+			}
+		})
+	});
 });

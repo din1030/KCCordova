@@ -598,7 +598,7 @@
                         </div>
                         <div class="clearfix"></div>
                     </div>
-                    <button type="submit" id="image-home" class="ui-btn ui-corner-all no-bg-bd send-btn purple-btn">完成</button>
+                    <button type="submit" id="image-home" class="ui-btn ui-corner-all no-bg-bd send-btn purple-btn">送出</button>
                 </form>
             </div>
         </div>
@@ -631,16 +631,16 @@
                 <div class="area_block">
                     <div class="ui-field-contain">
                         <label class="area_title" for="select-native-1">國家</label>
-                        <select name="select-native-1" id="select-native-1" data-inline="true" data-mini="true">
-                            <option value="">台灣</option>
+                        <select class="country-select" name="select-native-1" id="select-native-1" data-inline="true" data-mini="true">
+                            <!-- <option value="">台灣</option>
                             <option value="">中國</option>
-                            <option value="">日本</option>
+                            <option value="">日本</option> -->
                         </select>
                         <label class="area_title" for="select-native-2">地區</label>
-                        <select name="select-native-2" id="select-native-2" data-inline="true" data-mini="true">
-                            <option value="">台北</option>
+                        <select class="area-select" name="select-native-2" id="select-native-2" data-inline="true" data-mini="true">
+                            <!-- <option value="">台北</option>
                             <option value="">台南</option>
-                            <option value="">高雄</option>
+                            <option value="">高雄</option> -->
                         </select>
                     </div>
                 </div>
@@ -648,15 +648,19 @@
                     新增分類
                 </a>
                 <div class="clearfix"></div>
-                <div class="life_category_block">
-                    <div class="ui-field-contain ">
-                        <label class="item_title" for="life_category"><strong>分類名稱：</strong></label>
-                        <input type="text" name="life_category" class="" id="life_category" value="美睫美甲">
+                <!-- <div class="life_category_block">
+                    <div>
+                        <strong class="item_title">分類名稱：</strong>
+                        <span class="cat_title">美睫美甲</span>
                     </div>
                     <div class="life-pic-block">
                         <div class="left-block text-center">
-                            <a href="#admin-lifeservice-store" class="ui-btn ui-btn-inline ui-corner-all green-btn">
-                                編輯分類店家
+                            <a href="#edit_life_category" class="ui-btn ui-btn-inline ui-corner-all green-btn" data-rel="popup" data-life-cat="">
+                                編輯分類
+                            </a>
+                            <br>
+                            <a href="#admin-lifeservice-store" class="ui-btn ui-btn-inline ui-corner-all green-btn" data-life-cat="">
+                                分類店家清單
                             </a>
                         </div>
                         <div class="img-block">
@@ -665,36 +669,32 @@
                         </div>
                         <div class="clearfix"></div>
                     </div>
-                    <button id="msg-submit-btn" class="ui-btn ui-corner-all ui-btn-inline orange-btn float-right" type="button">刪除</button>
+                    <button id="life-cate-del-btn" class="ui-btn ui-corner-all ui-btn-inline orange-btn float-right" type="button">刪除</button>
                     <div class="clearfix"></div>
-                </div>
-                <div class="life_category_block">
-                    <div class="ui-field-contain ">
-                        <label class="item_title" for="life_category"><strong>分類名稱：</strong></label>
-                        <input type="text" name="life_category" class="" id="life_category" value="禮服租賃">
-                    </div>
-                    <div class="life-pic-block">
-                        <div class="left-block text-center">
-                            <a href="#admin-lifeservice-store" class="ui-btn ui-btn-inline ui-corner-all green-btn">
-                                編輯分類店家
-                            </a>
-                        </div>
-                        <div class="img-block">
-                            <input type="image" class="life-pic" src="./img/service.jpg" />
-                            <input type="file" class="life-pic-input" />
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <button id="msg-submit-btn" class="ui-btn ui-corner-all ui-btn-inline orange-btn float-right" type="button">刪除</button>
-                    <div class="clearfix"></div>
-                </div>
-                <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn">完成</button>
+                </div> -->
             </div>
             <div id="add_life_category" class="msg-popup ui-corner-all" data-role="popup" data-position-to="window" data-transition="pop" data-theme="none" data-shadow="false" data-overlay-theme="b" data-dismissible="false">
                 <form>
                     <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
                     <div style="padding:10px 20px;">
                         <h3>新增分類</h3>
+                        <div style="color:white;">
+                            分類名稱：
+                        </div>
+                        <input type="text" name="club_cat" class="" id="club_cat" value="">
+                        <div style="color:white;">
+                            圖片：
+                        </div>
+                        <input type="file" name="name" value="">
+                        <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn send-btn">送出</button>
+                    </div>
+                </form>
+            </div>
+            <div id="edit_life_category" class="msg-popup ui-corner-all" data-role="popup" data-position-to="window" data-transition="pop" data-theme="none" data-shadow="false" data-overlay-theme="b" data-dismissible="false">
+                <form>
+                    <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+                    <div style="padding:10px 20px;">
+                        <h3>編輯分類</h3>
                         <div style="color:white;">
                             分類名稱：
                         </div>
@@ -737,14 +737,14 @@
                         <option value="./admin.html#admin-category">分類管理</option>
                     </select>
                 </div>
-                <a href="#admin-lifeservice-store-info" class="ui-btn ui-btn-inline purple-btn ui-corner-all float-right">
+                <a href="#admin-add-lifeservice-store" class="ui-btn ui-btn-inline purple-btn ui-corner-all float-right">
                     新增店家
                 </a>
                 <div class="clearfix"></div>
-                <div class="life_store_block">
-                    <div class="ui-field-contain ">
-                        <label class="item_title" for="life_category"><strong>店家名稱：</strong></label>
-                        <input type="text" name="life_category" class="" id="life_category" value="美甲概念館">
+                <!-- <div class="life_store_block">
+                    <div>
+                        <strong class="item_title">店家名稱：</strong>
+                        <span class="store_title">美甲概念館</span>
                     </div>
                     <div class="store-pic-block">
                         <div class="left-block">
@@ -760,28 +760,7 @@
                         <div class="clearfix"></div>
                     </div>
                     <div class="clearfix"></div>
-                </div>
-                <div class="life_store_block">
-                    <div class="ui-field-contain ">
-                        <label class="item_title" for="life_category"><strong>店家名稱：</strong></label>
-                        <input type="text" name="life_category" class="" id="life_category" value="美甲概念館">
-                    </div>
-                    <div class="store-pic-block">
-                        <div class="left-block">
-                            <a href="#admin-lifeservice-store-info" class="ui-btn ui-corner-all green-btn">
-                                編輯店家資訊
-                            </a>
-                            <button id="msg-submit-btn" class="ui-btn ui-corner-all orange-btn" type="button">刪除</button>
-                        </div>
-                        <div class="img-block">
-                            <input type="image" class="store-pic" src="./img/service.jpg" />
-                            <input type="file" class="store-pic-input" />
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-                <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn">完成</button>
+                </div> -->
             </div>
         </div>
 
@@ -802,47 +781,135 @@
             <div data-role="main" class="ui-content" id="admin-lifeservice-store-info-main">
                 <br>
                 <span class="item_title">上傳圖片：</span>
-                <input type="file" data-clear-btn="true" name="file-2" id="file-2" value="">
-                <input type="file" data-clear-btn="true" name="file-2" id="file-2" value="">
-                <input type="file" data-clear-btn="true" name="file-2" id="file-2" value="">
-                <input type="file" data-clear-btn="true" name="file-2" id="file-2" value="">
-                <input type="file" data-clear-btn="true" name="file-2" id="file-2" value="">
-                <div class="ui-field-contain ">
-                    <label class="item_title" for="textinput-1">店名</label>
-                    <input type="text" name="textinput-1" class="" id="textinput-1" value="紐吧">
+                <input type="file" data-clear-btn="true" name="pic1" id="pic1" value="">
+                <input type="file" data-clear-btn="true" name="pic2" id="pic2" value="">
+                <input type="file" data-clear-btn="true" name="pic3" id="pic3" value="">
+                <input type="file" data-clear-btn="true" name="pic4" id="pic4" value="">
+                <input type="file" data-clear-btn="true" name="pic5" id="pic5" value="">
+                <div class="ui-field-contain">
+                    <label class="item_title" for="name-input">店名</label>
+                    <input type="text" name="name-input" class="" id="name-input" value="">
                 </div>
-                <div class="ui-field-contain ">
-                    <label class="item_title" for="textinput-4">電話</label>
-                    <input type="tel" name="textinput-4" class="" id="textinput-4" value="02-28569754">
+                <div class="ui-field-contain">
+                    <label class="item_title" for="tel-input">電話</label>
+                    <input type="tel" name="tel-input" class="" id="tel-input" value="">
                 </div>
-                <div class="ui-field-contain ">
-                    <label class="item_title" for="textinput-5">地址</label>
-                    <input type="text" name="textinput-5" class="" id="textinput-5" value="台中市北屯區安順東九街221號5F">
+                <div class="ui-field-contain">
+                    <label class="item_title" for="address-input">地址</label>
+                    <input type="text" name="address-input" class="" id="address-input" value="">
+                </div>
+                <div class="ui-field-contain">
+                    <label class="item_title" for="textinput-9">大頭圖</label>
+                    <input type="file" data-clear-btn="true" name="contact_pic" id="contact_pic">
+                </div>
+                <div class="ui-field-contain">
+                    <label class="item_title" for="contact-input">預約人</label>
+                    <input type="text" name="contact-input" class="" id="contact-input" value="">
+                </div>
+                <div class="ui-field-contain">
+                    <label class="item_title" for="contact-line-input">LINE</label>
+                    <input type="text" name="contact-line-input" class="" id="contact-line-input" value="">
                 </div>
                 <span class="item_title">營業時間：</span>
-                <div class="ui-field-contain ">
-                    <label class="item_title" for="textinput-2">第一行</label>
-                    <input type="text" name="textinput-2" class="" id="textinput-2" value="ＸＸＸ">
-                    <label class="item_title" for="textinput-2">第二行</label>
-                    <input type="text" name="textinput-2" class="" id="textinput-2" value="ＸＸＸ">
+                <div class="ui-field-contain">
+                    <label class="item_title" for="opentime1">第一行</label>
+                    <input type="text" name="opentime1" class="" id="opentime1" value="">
+                    <label class="item_title" for="opentime2">第二行</label>
+                    <input type="text" name="opentime2" class="" id="opentime2" value="">
                 </div>
-                <div class="ui-field-contain ">
-                    <label class="item_title" for="textinput-2">預約人</label>
-                    <input type="text" name="textinput-2" class="" id="textinput-2" value="ＸＸＸ">
-                </div>
-                <div class="ui-field-contain ">
-                    <label class="item_title" for="textinput-9">大頭圖</label>
-                    <input type="file" data-clear-btn="true" name="file-1" id="file-1" value="">
-                </div>
-                <div class="ui-field-contain ">
-                    <label class="item_title" for="textinput-5">LINE</label>
-                    <input type="text" name="textinput-5" class="" id="textinput-5" value="aaa123">
-                </div>
-                <label class="item_title" for="news_content">消費介紹：</label>
-                <textarea wrap="virtual" name="news_content" rows="8" cols="40"></textarea>
-                <label class="item_title" for="news_content">優惠活動：</label>
-                <textarea wrap="virtual" name="news_content" rows="8" cols="40"></textarea>
+                <label class="item_title" for="consume_content">消費介紹：</label>
+                <textarea wrap="virtual" name="consume_content" id="consume_content" rows="8" cols="40"></textarea>
+                <label class="item_title" for="promo_content">優惠活動：</label>
+                <textarea wrap="virtual" name="promo_content" id="promo_content" rows="8" cols="40"></textarea>
                 <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn">完成</button>
+            </div>
+        </div>
+
+        <!-- admin lifeservice store info -->
+        <div data-role="page" id="admin-add-lifeservice-store" data-theme="a" data-title="admin-lifeservice" class="admin-page">
+            <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
+                <div style="width:100%; text-align:center;">
+                    <a href="#menu-panel" class="ui-link">
+                        <div id="menu-btn" class="header-btn header-link left-link"></div>
+                    </a>
+                    <span class="page-title">管理者後台</span>
+                    <a href="#admin-lifeservice-store" class="ui-link">
+                        <div class="header-btn header-link right-link" style="width:auto">取消</div>
+                    </a>
+                </div>
+            </div>
+            <!-- /header -->
+            <div data-role="main" class="ui-content" id="admin-lifeservice-store-info-main">
+                <br>
+                <form id="add-lifeservice-form" method="post" enctype="multipart/form-data">
+                    <span class="item_title">上傳圖片：</span>
+                    <input type="file" data-clear-btn="true" name="pic1" id="pic1" value="">
+                    <input type="file" data-clear-btn="true" name="pic2" id="pic2" value="">
+                    <input type="file" data-clear-btn="true" name="pic3" id="pic3" value="">
+                    <input type="file" data-clear-btn="true" name="pic4" id="pic4" value="">
+                    <input type="file" data-clear-btn="true" name="pic5" id="pic5" value="">
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="name-input">店名</label>
+                        <input type="text" name="name-input" class="" id="name-input" value="">
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="tel-input">電話</label>
+                        <input type="tel" name="tel-input" class="" id="tel-input" value="">
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="country-select">所在國家</label>
+                        <select name="country-select" id="country-select" class="country-select">
+                            <!-- <option value="1" selected>台灣</option>
+                            <option value="2">日本</option>
+                            <option value="3">中國</option> -->
+                        </select>
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="area-select">所在區域</label>
+                        <select name="area-select" id="area-select" class="area-select">
+                            <!-- <option value="1" selected>基隆</option>
+                            <option value="2">台北</option>
+                            <option value="3">桃園</option>
+                            <option value="4">新竹</option> -->
+                        </select>
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="address-input">地址</label>
+                        <input type="text" name="address-input" class="" id="address-input" value="">
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="website-input">官方網站</label>
+                        <input type="text" name="website-input" class="" id="website-input" value="">
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="slogan-input">店家標語</label>
+                        <input type="text" name="slogan-input" class="" id="slogan-input" value="">
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="textinput-9">大頭圖</label>
+                        <input type="file" data-clear-btn="true" name="contact_pic" id="contact_pic">
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="contact-input">預約人</label>
+                        <input type="text" name="contact-input" class="" id="contact-input" value="">
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="contact-line-input">LINE</label>
+                        <input type="text" name="contact-line-input" class="" id="contact-line-input" value="">
+                    </div>
+                    <span class="item_title">營業時間：</span>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="opentime1">第一行</label>
+                        <input type="text" name="opentime1" class="" id="opentime1" value="">
+                        <label class="item_title" for="opentime2">第二行</label>
+                        <input type="text" name="opentime2" class="" id="opentime2" value="">
+                    </div>
+                    <label class="item_title" for="consume_content">消費介紹：</label>
+                    <textarea wrap="virtual" name="consume_content" id="consume_content" rows="8" cols="40"></textarea>
+                    <label class="item_title" for="promo_content">優惠活動：</label>
+                    <textarea wrap="virtual" name="promo_content" id="promo_content" rows="8" cols="40"></textarea>
+                    <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn">完成</button>
+                </form>
             </div>
         </div>
 
@@ -1096,13 +1163,13 @@
                 </a>
                 <div class="clearfix"></div>
                 <div class="redeem_item_block">
-                    <div class="ui-field-contain ">
+                    <div class="ui-field-contain">
                         <label class="item_title" for="redeem_item"><strong>禮品名稱：</strong></label>
                         <input type="text" name="redeem_item" class="" id="redeem_item" value="全聯禮券100元">
                     </div>
                     <div class="redeem-pic-block">
                         <div class="left-block">
-                            <div class="ui-field-contain ">
+                            <div class="ui-field-contain">
                                 <label class="item_title" for=""><strong>扣除點數：</strong></label>
                                 <input type="text" name="" class="" id="" value="10">
                             </div>
@@ -1115,13 +1182,13 @@
                     </div>
                 </div>
                 <div class="redeem_item_block">
-                    <div class="ui-field-contain ">
+                    <div class="ui-field-contain">
                         <label class="item_title" for="redeem_item"><strong>禮品名稱：</strong></label>
                         <input type="text" name="redeem_item" class="" id="redeem_item" value="全聯禮券100元">
                     </div>
                     <div class="redeem-pic-block">
                         <div class="left-block">
-                            <div class="ui-field-contain ">
+                            <div class="ui-field-contain">
                                 <label class="item_title" for=""><strong>扣除點數：</strong></label>
                                 <input type="text" name="" class="" id="" value="15">
                             </div>
@@ -1134,13 +1201,13 @@
                     </div>
                 </div>
                 <div class="redeem_item_block">
-                    <div class="ui-field-contain ">
+                    <div class="ui-field-contain">
                         <label class="item_title" for="redeem_item"><strong>禮品名稱：</strong></label>
                         <input type="text" name="redeem_item" class="" id="redeem_item" value="全聯禮券100元">
                     </div>
                     <div class="redeem-pic-block">
                         <div class="left-block">
-                            <div class="ui-field-contain ">
+                            <div class="ui-field-contain">
                                 <label class="item_title" for=""><strong>扣除點數：</strong></label>
                                 <input type="text" name="" class="" id="" value="20">
                             </div>
@@ -1153,13 +1220,13 @@
                     </div>
                 </div>
                 <div class="redeem_item_block">
-                    <div class="ui-field-contain ">
+                    <div class="ui-field-contain">
                         <label class="item_title" for="redeem_item"><strong>禮品名稱：</strong></label>
                         <input type="text" name="redeem_item" class="" id="redeem_item" value="全聯禮券100元">
                     </div>
                     <div class="redeem-pic-block">
                         <div class="left-block">
-                            <div class="ui-field-contain ">
+                            <div class="ui-field-contain">
                                 <label class="item_title" for=""><strong>扣除點數：</strong></label>
                                 <input type="text" name="" class="" id="" value="20">
                             </div>
@@ -1351,7 +1418,7 @@
                     新增方案
                 </a>
                 <div class="plan_block">
-                    <div class="ui-field-contain ">
+                    <div class="ui-field-contain">
                         <label class="item_title" for="video"><strong>方案名稱：</strong></label>
                         <input type="text" name="video" class="" id="video" value="A 方案">
                     </div>
@@ -1363,7 +1430,7 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="plan_block">
-                    <div class="ui-field-contain ">
+                    <div class="ui-field-contain">
                         <label class="item_title" for="video"><strong>方案名稱：</strong></label>
                         <input type="text" name="video" class="" id="video" value="B 方案">
                     </div>
