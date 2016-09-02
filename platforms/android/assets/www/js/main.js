@@ -104,9 +104,16 @@ $(document).on('pagecreate', function() {
 			$('#' + page_id + ' select.country-select').html(c_list);
 			$('#' + page_id + ' select.country-select').selectmenu('refresh');
 
+			var current_country_id = (window.localStorage.getItem('country_id') != null) ? window.localStorage.getItem('country_id') : 1;
 			var a_list = '';
-			$.each(data.result[0].area, function(idx, obj) {
-				a_list += '<option value="' + obj.a_id + '">' + obj.name + '</option>';
+			$.each(data.result, function(idx, obj) {
+				if (obj.id == current_country_id) {
+					$.each(obj.area, function(idx, area) {
+						a_list += '<option value="' + area.a_id + '">' + area.name + '</option>';
+						$('#' + page_id + ' select.area-select').html(a_list);
+						$('#' + page_id + ' select.area-select').selectmenu('refresh');
+					});
+				}
 			});
 			$('#' + page_id + ' select.area-select').html(a_list);
 			$('#' + page_id + ' select.area-select').selectmenu('refresh');
