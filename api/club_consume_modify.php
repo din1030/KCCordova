@@ -31,7 +31,7 @@ $content22 = $_POST['content22'];
 $day23 = $_POST['select23'];
 $content23 = $_POST['content23'];
 $day24 = $_POST['select24'];
-$content25 = $_POST['content24'];
+$content24 = $_POST['content24'];
 $day25 = $_POST['select25'];
 $content25 = $_POST['content25'];
 
