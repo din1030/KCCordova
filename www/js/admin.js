@@ -308,7 +308,7 @@ $(document).on('pagebeforeshow', "#admin-lifeservice-store-info", function() {
 	}
 });
 
-$(document).on('pagebeforeshow', "#admin-lifeservice-store-info", function() {
+$(document).on('pagebeforeshow', "#admin-add-lifeservice-store", function() {
 	$('#add-lifeservice-form').on('submit', function(e) {
 		e.preventDefault(); // prevent native submit
 		$(this).ajaxSubmit({
