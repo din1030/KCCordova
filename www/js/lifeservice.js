@@ -135,7 +135,9 @@ $(document).on('pagebeforeshow', '#lifeservice-detail', function() {
 				details += '<div id="action_block" class="text-right"><a href="' + service.website + '" class="ui-btn ui-btn-inline no-bg-bd" rel="external" data-ajax="false"><img src="./img/icons/official_site.png" alt=""></a>	<button type="button" id="addFv" data-id="' + service.id + '" class="no-bg-bd ui-btn ui-btn-inline add-fav-btn"><img src="./img/icons/fav_gray.png" alt=""></button></div>';
 
 				$.each(service.pic, function(idx, pic) {
-					slideContainer += '<li><img src="http://52.69.53.255/KCCordova/www/img/' + pic + '"></li>';
+					if (pic != null && pic != '') {
+						slideContainer += '<li><img src="http://52.69.53.255/KCCordova/www/img/' + pic + '"></li>';
+					}
 				});
 
 				slideContainer += '</ul>';
