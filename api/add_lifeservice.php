@@ -25,7 +25,7 @@ $target_dir = '../www/img/';
 $new_filename = basename($_FILES['contact_pic']['name']);
 $target_file = $target_dir.$new_filename;
 
-$sql_string = 'INSERT INTO `lifeservice_info`(`life_category`, `name`, `country_id`, `area_id`, `address`, `tel`, `slogan`, `website`, `opentime1`, `opentime2`, `contact_name`, `contact_line`, `consume_content`, `promo_content`, `created`, ) '."VALUES ('$life_category','$name','$country_id','$area_id','$address','$tel','$slogan','$website','$opentime1','$opentime2','$contact_name','$contact_line','$consume_content','$promo_content',NULL)";
+$sql_string = 'INSERT INTO `lifeservice_info`(`life_category`, `name`, `country_id`, `area_id`, `address`, `tel`, `slogan`, `website`, `opentime1`, `opentime2`, `contact_name`, `contact_line`, `consume_content`, `promo_content`, `created`) '."VALUES ('$life_category','$name','$country_id','$area_id','$address','$tel','$slogan','$website','$opentime1','$opentime2','$contact_name','$contact_line','$consume_content','$promo_content',NULL)";
 $result = $mysqli->query($sql_string);
 if ($mysqli->affected_rows > 0) {
     $last_id = $mysqli->insert_id;
