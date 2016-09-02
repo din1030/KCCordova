@@ -33,12 +33,12 @@ if ($mysqli->affected_rows > 0) {
         $pic_string = "UPDATE `lifeservice_info` SET `contact_pic` =  '$new_filename' WHERE `id` = $last_id";
         $mysqli->query($pic_string);
     }
-    $output = array('status' => true, 'message' => '已新增生活服務店家！', 'sql' => $sql_string);
+    $output = array('status' => true, 'message' => '已新增生活服務店家！');
     echo json_encode($output);
 
     return;
 } else {
-    $output = array('status' => false, 'message' => '請重新操作！');
+    $output = array('status' => false, 'message' => '請重新操作！', 'sql' => $sql_string);
     echo json_encode($output);
     exit;
 }
