@@ -874,11 +874,14 @@ div[id|=admin] .category-block {
   width: 80%;
 }
 [id$=popup].ui-popup-container .msg-popup h3,
-[id$=popup].ui-popup-container .msg-popup button {
+[id$=popup].ui-popup-container .cat-popup h3,
+[id$=popup].ui-popup-container .msg-popup button,
+[id$=popup].ui-popup-container .cat-popup button {
   color: #fff;
   font-weight: normal;
 }
-[id$=popup].ui-popup-container .msg-popup h3 {
+[id$=popup].ui-popup-container .msg-popup h3,
+[id$=popup].ui-popup-container .cat-popup h3 {
   margin: 5px 0;
 }
 .ui-popup-screen.in {

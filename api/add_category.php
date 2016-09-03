@@ -5,10 +5,10 @@ header('Access-Control-Allow-Methods: GET, POST');
 
 include 'db_setting.php';
 
-$type = $_GET['type'];
-$title = $_GET['title'];
+$type = $_POST['type'];
+$title = $_POST['title'];
 
-$sql_string = "INSERT INTO `category`(`type`, `title`) VALUES('$type','$title')";
+$sql_string = "INSERT INTO `category`(`type`, `title`,`created`) VALUES('$type','$title',NOW())";
 $result = $mysqli->query($sql_string);
 if ($mysqli->affected_rows > 0) {
     $output = array('status' => true, 'message' => '已新增分類！');
