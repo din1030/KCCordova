@@ -1,4 +1,4 @@
 .idea
 node_modules
 
-./api/db_setting.php
+*/api/db_setting.php
