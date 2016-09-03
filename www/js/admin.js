@@ -400,8 +400,29 @@ $(document).on('pagebeforeshow', "#admin-category", function() {
 		dataType: 'json'
 	}).success(function(data) {
 		$.each(data, function(idx, obj) {
-			var cat_list_item = $('<div class="cat_list_item"></div>').append('<span class="cat_title">' + obj.title + '</span><button id="plan-del-btn" class="ui-btn ui-btn-inline ui-corner-all orange-btn float-right" type="button" data-cat-id="' + obj.id + '">刪除</button><div class="clearfix"></div>');
-			$(cat_list_item).appendTo($('#club_cat_List'));
+			var cat_list_item = $('<div class="cat_list_item"></div>').append('<span class="cat_title">' + obj.title + '</span><button id="plan-del-btn" class="ui-btn ui-btn-inline ui-corner-all orange-btn float-right cat-del-btn" type="button" data-cat-id="' + obj.id + '">刪除</button><div class="clearfix"></div>');
+			$(cat_list_item).appendTo($('#club_cat_list'));
+			$('.cat_list_item .cat-del-btn').click(function(event) {
+				var btn = $(this);
+				var cat_id = $(this).jqmData("cat-id");
+				console.log(cat_id);
+				if (confirm('確定刪除此分類？') === true) {
+					$.ajax({
+						url: 'http://52.69.53.255/KCCordova/api/remove_category.php',
+						type: 'POST',
+						dataType: 'json',
+						data: {
+							cat_id: cat_id
+						}
+					}).done(function(data) {
+						if (data.status) {
+							$(btn).parents('.cat_list_item').remove();
+						}
+					}).fail(function() {
+						alert('請確認您的網路連線狀態！');
+					});
+				}
+			});
 		});
 	}).fail(function() {
 		alert('請確認您的網路連線狀態！');
@@ -411,8 +432,29 @@ $(document).on('pagebeforeshow', "#admin-category", function() {
 		dataType: 'json'
 	}).success(function(data) {
 		$.each(data, function(idx, obj) {
-			var cat_list_item = $('<div class="cat_list_item"></div>').append('<span class="cat_title">' + obj.title + '</span><button id="plan-del-btn" class="ui-btn ui-btn-inline ui-corner-all orange-btn float-right" type="button" data-cat-id="' + obj.id + '">刪除</button><div class="clearfix"></div>');
+			var cat_list_item = $('<div class="cat_list_item"></div>').append('<span class="cat_title">' + obj.title + '</span><button id="plan-del-btn" class="ui-btn ui-btn-inline ui-corner-all orange-btn float-right cat-del-btn" type="button" data-cat-id="' + obj.id + '">刪除</button><div class="clearfix"></div>');
 			$(cat_list_item).appendTo($('#job_cat_list'));
+			$('.cat_list_item .cat-del-btn').click(function(event) {
+				var btn = $(this);
+				var cat_id = $(this).jqmData("cat-id");
+				console.log(cat_id);
+				if (confirm('確定刪除此分類？') === true) {
+					$.ajax({
+						url: 'http://52.69.53.255/KCCordova/api/remove_category.php',
+						type: 'POST',
+						dataType: 'json',
+						data: {
+							cat_id: cat_id
+						}
+					}).done(function(data) {
+						if (data.status) {
+							$(btn).parents('.cat_list_item').remove();
+						}
+					}).fail(function() {
+						alert('請確認您的網路連線狀態！');
+					});
+				}
+			});
 		});
 	}).fail(function() {
 		alert('請確認您的網路連線狀態！');
@@ -440,7 +482,28 @@ $(document).on('pagebeforeshow', "#admin-category", function() {
 					alert(data.message);
 					$(".cat-popup").popup("close");
 					var cat_list_item = $('<div class="cat_list_item"></div>').append('<span class="cat_title">' + title + '</span><button id="plan-del-btn" class="ui-btn ui-btn-inline ui-corner-all orange-btn float-right" type="button" data-cat-id="' + data.insert_id + '">刪除</button><div class="clearfix"></div>');
-					$(cat_list_item).appendTo($('#job_' + type + '_list'));
+					$(cat_list_item).appendTo($('#' + type + '_cat_list'));
+					$('.cat_list_item .cat-del-btn').click(function(event) {
+						var btn = $(this);
+						var cat_id = $(this).jqmData("cat-id");
+						console.log(cat_id);
+						if (confirm('確定刪除此分類？') === true) {
+							$.ajax({
+								url: 'http://52.69.53.255/KCCordova/api/remove_category.php',
+								type: 'POST',
+								dataType: 'json',
+								data: {
+									cat_id: cat_id
+								}
+							}).done(function(data) {
+								if (data.status) {
+									$(btn).parents('.cat_list_item').remove();
+								}
+							}).fail(function() {
+								alert('請確認您的網路連線狀態！');
+							});
+						}
+					});
 				} else {
 					alert(data.message);
 					$(".cat-popup").popup("close");
