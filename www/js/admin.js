@@ -272,6 +272,26 @@ $(document).on('pagebeforeshow', "#admin-lifeservice-store", function() {
 				changeHash: true
 			});
 		});
+		$('.life_store_block .store-del-btn').click(function(event) {
+			var btn = $(this);
+			var store_id = $(this).jqmData("store-id");
+			console.log(store_id);
+			currentStoreId = store_id;
+			if (confirm('確定刪除此店家？') === true) {
+				$.ajax({
+					url: 'http://52.69.53.255/KCCordova/api/remove_lifeservice.php',
+					type: 'POST',
+					dataType: 'json',
+					data: {
+						store_id: currentStoreId
+					}
+				}).done(function() {
+					$(btn).parents('.life_store_block').remove();
+				}).fail(function() {
+					alert('請確認您的網路連線狀態！');
+				});
+			}
+		});
 	} else {
 		$.mobile.changePage($('#admin-lifeservice'), {
 			reloadPage: true,
