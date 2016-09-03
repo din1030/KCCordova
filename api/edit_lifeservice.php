@@ -27,8 +27,7 @@ $new_filename = basename($_FILES['contact_pic']['name']);
 $target_file = $target_dir.$new_filename;
 
 $sql_string = "UPDATE `lifeservice_info` SET `name`='$name',`country_id`='$country_id',`area_id`='$area_id',`address`='$address',`tel`='$tel',`slogan`='$slogan',`website`='$website',"."`opentime1`='$opentime1',`opentime2`='$opentime2',`contact_name`='$contact_name',`contact_line`='$contact_line',`consume_content`='$consume_content',`promo_content`='$promo_content' WHERE `id`='$store_id'";
-$result = $mysqli->query($sql_string);
-if ($mysqli->affected_rows > 0) {
+if ($mysqli->query($sql_string)) {
     $last_id = $mysqli->insert_id;
     if (move_uploaded_file($_FILES['contact_pic']['tmp_name'], $target_file)) {
         $pic_string = "UPDATE `lifeservice_info` SET `contact_pic` =  '$new_filename' WHERE `id` = $last_id";

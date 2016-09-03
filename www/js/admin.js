@@ -309,6 +309,8 @@ $(document).on('pagebeforeshow', "#admin-lifeservice-store-info", function() {
 				var service = data.result[0];
 				$('#name-input').val(service.name);
 				$('#tel-input').val(service.tel);
+				$('#life_country').val(service.country_id).selectmenu('refresh');
+				$('#life_area').val(service.area_id).selectmenu('refresh');
 				$('#address-input').val(service.address);
 				$('#contact-input').val(service.contact_name);
 				$('#contact-line-input').val(service.contact_line);
@@ -384,6 +386,61 @@ $(document).on('pagebeforeshow', "#admin-add-lifeservice-store", function() {
 					});
 				} else {
 					alert(data.message);
+				}
+			},
+			error: function(request, error) {
+				alert('請確認您的網路連線狀態！');
+			}
+		})
+	});
+});
+$(document).on('pagebeforeshow', "#admin-category", function() {
+	$.ajax({
+		url: api_base + 'get_form_content.php?action=get_category&type=club',
+		dataType: 'json'
+	}).success(function(data) {
+		$.each(data, function(idx, obj) {
+			var cat_list_item = $('<div class="cat_list_item"></div>').append('<span class="cat_title">' + obj.title + '</span><button id="plan-del-btn" class="ui-btn ui-btn-inline ui-corner-all orange-btn float-right" type="button" data-cat-id="' + obj.id + '">刪除</button><div class="clearfix"></div>');
+			$(cat_list_item).appendTo($('#club_cat_List'));
+		});
+	}).fail(function() {
+		alert('請確認您的網路連線狀態！');
+	});
+	$.ajax({
+		url: api_base + 'get_form_content.php?action=get_category&type=job',
+		dataType: 'json'
+	}).success(function(data) {
+		$.each(data, function(idx, obj) {
+			var cat_list_item = $('<div class="cat_list_item"></div>').append('<span class="cat_title">' + obj.title + '</span><button id="plan-del-btn" class="ui-btn ui-btn-inline ui-corner-all orange-btn float-right" type="button" data-cat-id="' + obj.id + '">刪除</button><div class="clearfix"></div>');
+			$(cat_list_item).appendTo($('#job_cat_list'));
+		});
+	}).fail(function() {
+		alert('請確認您的網路連線狀態！');
+	});
+	$('form.cat-form').on('submit', function(e) {
+		e.preventDefault(); // prevent native submit
+		var type = $(this).jqmData("type");
+		console.log(type);
+		$(this).ajaxSubmit({
+			url: api_base + 'add_category.php',
+			data: {
+				type: type,
+			},
+			type: 'POST',
+			dataType: 'json',
+			beforeSend: function() {
+				$.mobile.loading('show');
+			},
+			complete: function() {
+				$.mobile.loading('hide');
+			},
+			success: function(data) {
+				if (data.status) {
+					alert(data.message);
+					$(".cat-popup").popup("close");
+				} else {
+					alert(data.message);
+					$(".cat-popup").popup("close");
 				}
 			},
 			error: function(request, error) {

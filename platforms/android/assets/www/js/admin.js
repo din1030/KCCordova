@@ -272,6 +272,26 @@ $(document).on('pagebeforeshow', "#admin-lifeservice-store", function() {
 				changeHash: true
 			});
 		});
+		$('.life_store_block .store-del-btn').click(function(event) {
+			var btn = $(this);
+			var store_id = $(this).jqmData("store-id");
+			console.log(store_id);
+			currentStoreId = store_id;
+			if (confirm('確定刪除此店家？') === true) {
+				$.ajax({
+					url: 'http://52.69.53.255/KCCordova/api/remove_lifeservice.php',
+					type: 'POST',
+					dataType: 'json',
+					data: {
+						store_id: currentStoreId
+					}
+				}).done(function() {
+					$(btn).parents('.life_store_block').remove();
+				}).fail(function() {
+					alert('請確認您的網路連線狀態！');
+				});
+			}
+		});
 	} else {
 		$.mobile.changePage($('#admin-lifeservice'), {
 			reloadPage: true,
@@ -289,6 +309,8 @@ $(document).on('pagebeforeshow', "#admin-lifeservice-store-info", function() {
 				var service = data.result[0];
 				$('#name-input').val(service.name);
 				$('#tel-input').val(service.tel);
+				$('#life_country').val(service.country_id).selectmenu('refresh');
+				$('#life_area').val(service.area_id).selectmenu('refresh');
 				$('#address-input').val(service.address);
 				$('#contact-input').val(service.contact_name);
 				$('#contact-line-input').val(service.contact_line);
@@ -299,6 +321,37 @@ $(document).on('pagebeforeshow', "#admin-lifeservice-store-info", function() {
 			}
 		}).fail(function() {
 			alert('請確認您的網路連線狀態！');
+		});
+		$('#edit-lifeservice-form').on('submit', function(e) {
+			e.preventDefault(); // prevent native submit
+			$(this).ajaxSubmit({
+				url: api_base + 'edit_lifeservice.php',
+				data: {
+					store_id: currentStoreId,
+				},
+				type: 'POST',
+				dataType: 'json',
+				beforeSend: function() {
+					$.mobile.loading('show');
+				},
+				complete: function() {
+					$.mobile.loading('hide');
+				},
+				success: function(data) {
+					if (data.status) {
+						alert(data.message);
+						$.mobile.changePage($("#admin-lifeservice-store"), {
+							reloadPage: true,
+							changeHash: true
+						});
+					} else {
+						alert(data.message);
+					}
+				},
+				error: function(request, error) {
+					alert('請確認您的網路連線狀態！');
+				}
+			})
 		});
 	} else {
 		$.mobile.changePage($('#admin-lifeservice'), {

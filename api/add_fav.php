@@ -15,7 +15,8 @@ $sql = $mysqli->query($sql_string);
 if ($sql->num_rows > 0) {
     $output = array('status' => false, 'message' => '已收藏過本項目！');
     echo json_encode($output);
-    exit;
+
+    return;
 } else {
     $sql_string = "INSERT INTO `favorite`(`u_id`, `type`, `item_id`) VALUES($user_id,$type,$item_id)";
     $result = $mysqli->query($sql_string);

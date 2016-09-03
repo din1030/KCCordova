@@ -780,48 +780,68 @@
             <!-- /header -->
             <div data-role="main" class="ui-content" id="admin-lifeservice-store-info-main">
                 <br>
-                <span class="item_title">上傳圖片：</span>
-                <input type="file" data-clear-btn="true" name="pic1" id="pic1" value="">
-                <input type="file" data-clear-btn="true" name="pic2" id="pic2" value="">
-                <input type="file" data-clear-btn="true" name="pic3" id="pic3" value="">
-                <input type="file" data-clear-btn="true" name="pic4" id="pic4" value="">
-                <input type="file" data-clear-btn="true" name="pic5" id="pic5" value="">
-                <div class="ui-field-contain">
-                    <label class="item_title" for="name-input">店名</label>
-                    <input type="text" name="name-input" class="" id="name-input" value="">
-                </div>
-                <div class="ui-field-contain">
-                    <label class="item_title" for="tel-input">電話</label>
-                    <input type="tel" name="tel-input" class="" id="tel-input" value="">
-                </div>
-                <div class="ui-field-contain">
-                    <label class="item_title" for="address-input">地址</label>
-                    <input type="text" name="address-input" class="" id="address-input" value="">
-                </div>
-                <div class="ui-field-contain">
-                    <label class="item_title" for="textinput-9">大頭圖</label>
-                    <input type="file" data-clear-btn="true" name="contact_pic" id="contact_pic">
-                </div>
-                <div class="ui-field-contain">
-                    <label class="item_title" for="contact-input">預約人</label>
-                    <input type="text" name="contact-input" class="" id="contact-input" value="">
-                </div>
-                <div class="ui-field-contain">
-                    <label class="item_title" for="contact-line-input">LINE</label>
-                    <input type="text" name="contact-line-input" class="" id="contact-line-input" value="">
-                </div>
-                <span class="item_title">營業時間：</span>
-                <div class="ui-field-contain">
-                    <label class="item_title" for="opentime1">第一行</label>
-                    <input type="text" name="opentime1" class="" id="opentime1" value="">
-                    <label class="item_title" for="opentime2">第二行</label>
-                    <input type="text" name="opentime2" class="" id="opentime2" value="">
-                </div>
-                <label class="item_title" for="consume_content">消費介紹：</label>
-                <textarea wrap="virtual" name="consume_content" id="consume_content" rows="8" cols="40"></textarea>
-                <label class="item_title" for="promo_content">優惠活動：</label>
-                <textarea wrap="virtual" name="promo_content" id="promo_content" rows="8" cols="40"></textarea>
-                <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn">完成</button>
+                <form id="edit-lifeservice-form" method="post" enctype="multipart/form-data">
+                    <span class="item_title">上傳圖片：</span>
+                    <input type="file" data-clear-btn="true" name="pic1" id="pic1" value="">
+                    <input type="file" data-clear-btn="true" name="pic2" id="pic2" value="">
+                    <input type="file" data-clear-btn="true" name="pic3" id="pic3" value="">
+                    <input type="file" data-clear-btn="true" name="pic4" id="pic4" value="">
+                    <input type="file" data-clear-btn="true" name="pic5" id="pic5" value="">
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="name-input">店名</label>
+                        <input type="text" name="name-input" class="" id="name-input" value="">
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="tel-input">電話</label>
+                        <input type="tel" name="tel-input" class="" id="tel-input" value="">
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="country-select">所在國家</label>
+                        <select name="country-select" id="life_country" class="country-select">
+                            <!-- <option value="1" selected>台灣</option>
+                            <option value="2">日本</option>
+                            <option value="3">中國</option> -->
+                        </select>
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="area-select">所在區域</label>
+                        <select name="area-select" id="life_area" class="area-select">
+                            <!-- <option value="1" selected>基隆</option>
+                            <option value="2">台北</option>
+                            <option value="3">桃園</option>
+                            <option value="4">新竹</option> -->
+                        </select>
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="address-input">地址</label>
+                        <input type="text" name="address-input" class="" id="address-input" value="">
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="textinput-9">大頭圖</label>
+                        <input type="file" data-clear-btn="true" name="contact_pic" id="contact_pic">
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="contact-input">預約人</label>
+                        <input type="text" name="contact-input" class="" id="contact-input" value="">
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="contact-line-input">LINE</label>
+                        <input type="text" name="contact-line-input" class="" id="contact-line-input" value="">
+                    </div>
+                    <span class="item_title">營業時間：</span>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="opentime1">第一行</label>
+                        <input type="text" name="opentime1" class="" id="opentime1" value="">
+                        <label class="item_title" for="opentime2">第二行</label>
+                        <input type="text" name="opentime2" class="" id="opentime2" value="">
+                    </div>
+                    <label class="item_title" for="consume_content">消費介紹：</label>
+                    <textarea wrap="virtual" name="consume_content" id="consume_content" rows="8" cols="40"></textarea>
+                    <label class="item_title" for="promo_content">優惠活動：</label>
+                    <textarea wrap="virtual" name="promo_content" id="promo_content" rows="8" cols="40"></textarea>
+                    <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn">完成</button>
+                </form>
+
             </div>
         </div>
 
@@ -1417,35 +1437,43 @@
                 <a href="#add_plan" class="ui-btn ui-btn-inline purple-btn ui-corner-all float-right" data-rel="popup">
                     新增方案
                 </a>
+                <div class="clearfix"></div>
                 <div class="plan_block">
-                    <div class="ui-field-contain">
-                        <label class="item_title" for="video"><strong>方案名稱：</strong></label>
-                        <input type="text" name="video" class="" id="video" value="A 方案">
-                    </div>
+                    <p>
+                        <strong class="item_title">方案名稱：</strong>
+                        <span class="plan_title">A 方案</span>
+                    </p>
                     <label class="item_title"><strong>方案內容：</strong></label>
-                    <textarea wrap="virtual" name="job_content" rows="4" cols="40" class="text-justify">優惠價： NT$10,000(原價 $12,000)。刊登店家介紹廣告、與求職者站內訊息聯絡、可刊登生活服務訊息三則。
-                    </textarea>
+                    <div class="">
+                        優惠價： NT$10,000(原價 $12,000)。刊登店家介紹廣告、與求職者站內訊息聯絡、可刊登生活服務訊息三則。
+                    </div>
                     <hr>
                     <button id="plan-del-btn" class="ui-btn ui-btn-inline ui-corner-all orange-btn float-right" type="button">刪除</button>
+                    <a href="#edit_plan" class="ui-btn ui-btn-inline purple-btn ui-corner-all float-right" data-rel="popup">
+                        編輯
+                    </a>
                     <div class="clearfix"></div>
                 </div>
-                <div class="plan_block">
-                    <div class="ui-field-contain">
-                        <label class="item_title" for="video"><strong>方案名稱：</strong></label>
-                        <input type="text" name="video" class="" id="video" value="B 方案">
-                    </div>
-                    <label class="item_title"><strong>方案內容：</strong></label>
-                    <textarea wrap="virtual" name="job_content" rows="4" cols="40" class="text-justify">優惠價： NT$10,000(原價 $12,000)。刊登店家介紹廣告、與求職者站內訊息聯絡、可刊登生活服務訊息三則。</textarea>
-                    <hr>
-                    <button id="plan-del-btn" class="ui-btn ui-btn-inline ui-corner-all orange-btn float-right" type="button">刪除</button>
-                    <div class="clearfix"></div>
+                <form id="pay-method-form" method="post">
                     <label class="item_title"><strong>付款方式編輯：</strong></label>
-                    <textarea name="job_content" rows="4" cols="40" class="text-justify">一、請加入 Kelly Club 官方 Line，告知服務人員您的身分與店家， 如第一次刊登者，本公司會派專員到府拜訪，解說 APP 使用方式，如有任何疑問可在 Line 詢問或來電 0981-529246 全國服務專線，奔公司服務人員會為您解說。&#13;&#10; 二、選擇您想要之刊登方案並透過 Line 告知服務人員您的繳費帳號末四碼及匯款時間，審核後將立即開通刊登與使用權限。 銀行：合作金庫大里分行（006 &#13;&#10;戶名：賴鳳茹 &#13;&#10;帳號：1025872310343</textarea>
-                </div>
-                <button id="plan-submit-btn" class="ui-btn ui-corner-all" type="submit">送出</button>
+                    <textarea name="job_content" rows="4" cols="40" class="text-justify">一、請加入 Kelly Club 官方 Line，告知服務人員您的身分與店家， 如第一次刊登者，本公司會派專員到府拜訪，解說 APP 使用方式，如有任何疑問可在 Line 詢問或來電 0981-529246 全國服務專線，奔公司服務人員會為您解說。&#13;&#10; 二、選擇您想要之刊登方案並透過 Line 告知服務人員您的繳費帳號末四碼及匯款時間，審核後將立即開通刊登與使用權限。 &#13;&#10;銀行：合作金庫大里分行（006） &#13;&#10;戶名：賴鳳茹 &#13;&#10;帳號：1025872310343</textarea>
+                    <button id="plan-submit-btn" class="ui-btn ui-corner-all" type="submit">修改付款方式</button>
+                </form>
             </div>
             <div id="add_plan" class="msg-popup ui-corner-all" data-role="popup" data-position-to="window" data-transition="pop" data-theme="none" data-shadow="false" data-overlay-theme="b" data-dismissible="false">
-                <form>
+                <form id="add-plan-form">
+                    <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+                    <div style="padding:10px 20px;">
+                        <h3>方案名稱</h3>
+                        <input type="text" name="plan_title" class="" id="textinput" value="">
+                        <h3>方案內容</h3>
+                        <textarea name="plan_content" rows="8" data-theme="a"></textarea>
+                        <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn send-btn">送出</button>
+                    </div>
+                </form>
+            </div>
+            <div id="edit_plan" class="msg-popup ui-corner-all" data-role="popup" data-position-to="window" data-transition="pop" data-theme="none" data-shadow="false" data-overlay-theme="b" data-dismissible="false">
+                <form id="edit-plan-form">
                     <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
                     <div style="padding:10px 20px;">
                         <h3>方案名稱</h3>

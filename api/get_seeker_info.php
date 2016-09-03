@@ -9,7 +9,7 @@ $user_id = $_GET['user_id'];
 $only_active = $_GET['only_active'];
 $sql_string = 'SELECT `seeker_info`.*,`user`.`name`,`user`.`birth`,`user`.`mobile`,`user`.`avatar`,`country`.`country`,`area`.`area` FROM `seeker_info`,`user`,`country`,`area` WHERE `seeker_info`.`u_id`=`user`.`id` AND `seeker_info`.`country_id`=`country`.`id` AND `seeker_info`.`area_id`=`area`.`id`';
 if (isset($only_active)) {
-    $sql_string .= "  AND `active`='1'";
+    $sql_string .= " AND `active`='1'";
 }
 if (!empty($user_id)) {
     $sql_string .= " AND `u_id`=$user_id LIMIT 1";
