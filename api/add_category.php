@@ -11,7 +11,7 @@ $title = $_POST['title'];
 $sql_string = "INSERT INTO `category`(`type`, `title`,`created`) VALUES('$type','$title',NOW())";
 $result = $mysqli->query($sql_string);
 if ($mysqli->affected_rows > 0) {
-    $output = array('status' => true, 'message' => '已新增分類！');
+    $output = array('status' => true, 'message' => '已新增分類！', 'insert_id' => $mysqli->insert_id);
     echo json_encode($output);
 
     return;

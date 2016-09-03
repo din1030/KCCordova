@@ -420,6 +420,7 @@ $(document).on('pagebeforeshow', "#admin-category", function() {
 	$('form.cat-form').on('submit', function(e) {
 		e.preventDefault(); // prevent native submit
 		var type = $(this).jqmData("type");
+		var title = $(this).find('input[name="title"]').val();
 		console.log(type);
 		$(this).ajaxSubmit({
 			url: api_base + 'add_category.php',
@@ -438,6 +439,8 @@ $(document).on('pagebeforeshow', "#admin-category", function() {
 				if (data.status) {
 					alert(data.message);
 					$(".cat-popup").popup("close");
+					var cat_list_item = $('<div class="cat_list_item"></div>').append('<span class="cat_title">' + title + '</span><button id="plan-del-btn" class="ui-btn ui-btn-inline ui-corner-all orange-btn float-right" type="button" data-cat-id="' + data.insert_id + '">刪除</button><div class="clearfix"></div>');
+					$(cat_list_item).appendTo($('#job_' + type + '_list'));
 				} else {
 					alert(data.message);
 					$(".cat-popup").popup("close");
