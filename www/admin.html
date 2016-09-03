@@ -780,48 +780,51 @@
             <!-- /header -->
             <div data-role="main" class="ui-content" id="admin-lifeservice-store-info-main">
                 <br>
-                <span class="item_title">上傳圖片：</span>
-                <input type="file" data-clear-btn="true" name="pic1" id="pic1" value="">
-                <input type="file" data-clear-btn="true" name="pic2" id="pic2" value="">
-                <input type="file" data-clear-btn="true" name="pic3" id="pic3" value="">
-                <input type="file" data-clear-btn="true" name="pic4" id="pic4" value="">
-                <input type="file" data-clear-btn="true" name="pic5" id="pic5" value="">
-                <div class="ui-field-contain">
-                    <label class="item_title" for="name-input">店名</label>
-                    <input type="text" name="name-input" class="" id="name-input" value="">
-                </div>
-                <div class="ui-field-contain">
-                    <label class="item_title" for="tel-input">電話</label>
-                    <input type="tel" name="tel-input" class="" id="tel-input" value="">
-                </div>
-                <div class="ui-field-contain">
-                    <label class="item_title" for="address-input">地址</label>
-                    <input type="text" name="address-input" class="" id="address-input" value="">
-                </div>
-                <div class="ui-field-contain">
-                    <label class="item_title" for="textinput-9">大頭圖</label>
-                    <input type="file" data-clear-btn="true" name="contact_pic" id="contact_pic">
-                </div>
-                <div class="ui-field-contain">
-                    <label class="item_title" for="contact-input">預約人</label>
-                    <input type="text" name="contact-input" class="" id="contact-input" value="">
-                </div>
-                <div class="ui-field-contain">
-                    <label class="item_title" for="contact-line-input">LINE</label>
-                    <input type="text" name="contact-line-input" class="" id="contact-line-input" value="">
-                </div>
-                <span class="item_title">營業時間：</span>
-                <div class="ui-field-contain">
-                    <label class="item_title" for="opentime1">第一行</label>
-                    <input type="text" name="opentime1" class="" id="opentime1" value="">
-                    <label class="item_title" for="opentime2">第二行</label>
-                    <input type="text" name="opentime2" class="" id="opentime2" value="">
-                </div>
-                <label class="item_title" for="consume_content">消費介紹：</label>
-                <textarea wrap="virtual" name="consume_content" id="consume_content" rows="8" cols="40"></textarea>
-                <label class="item_title" for="promo_content">優惠活動：</label>
-                <textarea wrap="virtual" name="promo_content" id="promo_content" rows="8" cols="40"></textarea>
-                <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn">完成</button>
+                <form id="edit-lifeservice-form" method="post" enctype="multipart/form-data">
+                    <span class="item_title">上傳圖片：</span>
+                    <input type="file" data-clear-btn="true" name="pic1" id="pic1" value="">
+                    <input type="file" data-clear-btn="true" name="pic2" id="pic2" value="">
+                    <input type="file" data-clear-btn="true" name="pic3" id="pic3" value="">
+                    <input type="file" data-clear-btn="true" name="pic4" id="pic4" value="">
+                    <input type="file" data-clear-btn="true" name="pic5" id="pic5" value="">
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="name-input">店名</label>
+                        <input type="text" name="name-input" class="" id="name-input" value="">
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="tel-input">電話</label>
+                        <input type="tel" name="tel-input" class="" id="tel-input" value="">
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="address-input">地址</label>
+                        <input type="text" name="address-input" class="" id="address-input" value="">
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="textinput-9">大頭圖</label>
+                        <input type="file" data-clear-btn="true" name="contact_pic" id="contact_pic">
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="contact-input">預約人</label>
+                        <input type="text" name="contact-input" class="" id="contact-input" value="">
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="contact-line-input">LINE</label>
+                        <input type="text" name="contact-line-input" class="" id="contact-line-input" value="">
+                    </div>
+                    <span class="item_title">營業時間：</span>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="opentime1">第一行</label>
+                        <input type="text" name="opentime1" class="" id="opentime1" value="">
+                        <label class="item_title" for="opentime2">第二行</label>
+                        <input type="text" name="opentime2" class="" id="opentime2" value="">
+                    </div>
+                    <label class="item_title" for="consume_content">消費介紹：</label>
+                    <textarea wrap="virtual" name="consume_content" id="consume_content" rows="8" cols="40"></textarea>
+                    <label class="item_title" for="promo_content">優惠活動：</label>
+                    <textarea wrap="virtual" name="promo_content" id="promo_content" rows="8" cols="40"></textarea>
+                    <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn">完成</button>
+                </form>
+
             </div>
         </div>
 

@@ -320,6 +320,37 @@ $(document).on('pagebeforeshow', "#admin-lifeservice-store-info", function() {
 		}).fail(function() {
 			alert('請確認您的網路連線狀態！');
 		});
+		$('#edit-lifeservice-form').on('submit', function(e) {
+			e.preventDefault(); // prevent native submit
+			$(this).ajaxSubmit({
+				url: api_base + 'edit_lifeservice.php',
+				data: {
+					store_id: currentStoreId,
+				},
+				type: 'POST',
+				dataType: 'json',
+				beforeSend: function() {
+					$.mobile.loading('show');
+				},
+				complete: function() {
+					$.mobile.loading('hide');
+				},
+				success: function(data) {
+					if (data.status) {
+						alert(data.message);
+						$.mobile.changePage($("#admin-lifeservice-store"), {
+							reloadPage: true,
+							changeHash: true
+						});
+					} else {
+						alert(data.message);
+					}
+				},
+				error: function(request, error) {
+					alert('請確認您的網路連線狀態！');
+				}
+			})
+		});
 	} else {
 		$.mobile.changePage($('#admin-lifeservice'), {
 			reloadPage: true,
