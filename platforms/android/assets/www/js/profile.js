@@ -56,15 +56,15 @@ $(document).on('pagebeforeshow', '#member-modify, #club-profile-modify, #jobseek
 			complete: function() {
 				$.mobile.loading('hide');
 			},
-			success: function(result) {
-				if (result.status) {
-					alert(result.message);
+			success: function(data) {
+				if (data.status) {
+					alert(data.message);
 					$.mobile.changePage($(page_id), {
 						reloadPage: true,
 						changeHash: true
 					});
 				} else {
-					alert(result.message);
+					alert(data.message);
 				}
 			},
 			error: function(request, error) {
@@ -221,15 +221,15 @@ if (window.localStorage.getItem('auth') == '3') {
 					// This callback function will trigger on data sent/received complete
 					$.mobile.loading('hide');
 				},
-				success: function(result) {
-					if (result.status) {
-						alert(result.message);
+				success: function(data) {
+					if (data.status) {
+						alert(data.message);
 						$.mobile.changePage($("#jobseeker-resume"), {
 							reloadPage: true,
 							changeHash: true
 						});
 					} else {
-						alert(result.message);
+						alert(data.message);
 					}
 				},
 				error: function(request, error) {
@@ -420,8 +420,15 @@ if (window.localStorage.getItem('auth') == '2') {
 				complete: function() {
 					$.mobile.loading('hide');
 				},
-				success: function(result) {
-					alert(result.message);
+				success: function(data) {
+					if (data.status) {
+						$.mobile.changePage($("#club-info"), {
+							reloadPage: true,
+							changeHash: true
+						});
+					} else {
+						alert(data.message);
+					}
 				},
 				error: function(request, error) {
 					alert('請確認您的網路連線狀態！');
@@ -468,8 +475,15 @@ if (window.localStorage.getItem('auth') == '2') {
 				complete: function() {
 					$.mobile.loading('hide');
 				},
-				success: function(result) {
-					alert(result.message);
+				success: function(data) {
+					if (data.status) {
+						$.mobile.changePage($("#club-hire"), {
+							reloadPage: true,
+							changeHash: true
+						});
+					} else {
+						alert(data.message);
+					}
 				},
 				error: function(request, error) {
 					alert('請確認您的網路連線狀態！');
@@ -477,6 +491,7 @@ if (window.localStorage.getItem('auth') == '2') {
 			})
 		});
 	});
+
 	$(document).on('pagebeforeshow', '#club-consume, #club-consume-modify', function() {
 		var page_id = $(this).attr('id');
 		console.log(page_id);
@@ -544,6 +559,38 @@ if (window.localStorage.getItem('auth') == '2') {
 					$('.promo_content').html(consume.promo_content);
 				}
 			}
+		});
+	});
+	$(document).on('pagebeforeshow', '#club-consume-modify', function() {
+		$('#club-consume-form').on('submit', function(e) {
+			e.preventDefault(); // prevent native submit
+			$(this).ajaxSubmit({
+				url: api_base + 'club_consume_modify.php',
+				data: {
+					admin_id: window.localStorage.getItem('user_id'),
+				},
+				type: 'POST',
+				dataType: 'json',
+				beforeSend: function() {
+					$.mobile.loading('show');
+				},
+				complete: function() {
+					$.mobile.loading('hide');
+				},
+				success: function(data) {
+					if (data.status) {
+						$.mobile.changePage($("#club-consume"), {
+							reloadPage: true,
+							changeHash: true
+						});
+					} else {
+						alert(data.message);
+					}
+				},
+				error: function(request, error) {
+					alert('請確認您的網路連線狀態！');
+				}
+			})
 		});
 	});
 }

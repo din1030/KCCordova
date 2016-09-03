@@ -803,7 +803,7 @@ div[id|=admin] .category-block {
   color: #000;
   border-bottom: 6px solid #aa3c89;
 }
-@media screen and (max-width: 500px) {
+@media (max-width: 550px) {
   [data-role="navbar"].ui-navbar ul.page-content-nav li > a {
     font-size: 1em;
   }
