@@ -68,7 +68,7 @@ $(document).on('pagebeforeshow', "#admin-home", function() {
 	// console.log('test');
 	var adminHomeStatus;
 	$.ajax({
-			url: 'http://52.69.53.255/KCCordova/api/get_home_setting.php',
+			url: api_base + 'get_home_setting.php',
 			dataType: 'json'
 		})
 		.done(function(data) {
@@ -219,7 +219,7 @@ $(document).on('pagebeforeshow', "#admin-home", function() {
 
 $(document).on('pagebeforeshow', "#admin-lifeservice", function() {
 	$.ajax({
-		url: 'http://52.69.53.255/KCCordova/api/get_lifeservice.php',
+		url: api_base + 'get_lifeservice.php',
 		dataType: 'json'
 	}).success(function(data) {
 		if (data.status) {
@@ -279,7 +279,7 @@ $(document).on('pagebeforeshow', "#admin-lifeservice-store", function() {
 			currentStoreId = store_id;
 			if (confirm('確定刪除此店家？') === true) {
 				$.ajax({
-					url: 'http://52.69.53.255/KCCordova/api/remove_lifeservice.php',
+					url: api_base + 'remove_lifeservice.php',
 					type: 'POST',
 					dataType: 'json',
 					data: {
@@ -302,7 +302,7 @@ $(document).on('pagebeforeshow', "#admin-lifeservice-store", function() {
 $(document).on('pagebeforeshow', "#admin-lifeservice-store-info", function() {
 	if (currentStoreId != null && currentStoreId != 0) {
 		$.ajax({
-			url: 'http://52.69.53.255/KCCordova/api/get_lifeservice_detail.php?store_id=' + currentStoreId,
+			url: api_base + 'get_lifeservice_detail.php?store_id=' + currentStoreId,
 			dataType: 'json'
 		}).success(function(data) {
 			if (data.status) {
@@ -400,7 +400,7 @@ $(document).on('pagebeforeshow', "#admin-category", function() {
 		dataType: 'json'
 	}).success(function(data) {
 		$.each(data, function(idx, obj) {
-			var cat_list_item = $('<div class="cat_list_item"></div>').append('<span class="cat_title">' + obj.title + '</span><button id="plan-del-btn" class="ui-btn ui-btn-inline ui-corner-all orange-btn float-right cat-del-btn" type="button" data-cat-id="' + obj.id + '">刪除</button><div class="clearfix"></div>');
+			var cat_list_item = $('<div class="cat_list_item"></div>').append('<span class="cat_title">' + obj.title + '</span><button class="ui-btn ui-btn-inline ui-corner-all orange-btn float-right cat-del-btn" type="button" data-cat-id="' + obj.id + '">刪除</button><div class="clearfix"></div>');
 			$(cat_list_item).appendTo($('#club_cat_list'));
 			$('.cat_list_item .cat-del-btn').click(function(event) {
 				var btn = $(this);
@@ -408,7 +408,7 @@ $(document).on('pagebeforeshow', "#admin-category", function() {
 				console.log(cat_id);
 				if (confirm('確定刪除此分類？') === true) {
 					$.ajax({
-						url: 'http://52.69.53.255/KCCordova/api/remove_category.php',
+						url: api_base + 'remove_category.php',
 						type: 'POST',
 						dataType: 'json',
 						data: {
@@ -432,7 +432,7 @@ $(document).on('pagebeforeshow', "#admin-category", function() {
 		dataType: 'json'
 	}).success(function(data) {
 		$.each(data, function(idx, obj) {
-			var cat_list_item = $('<div class="cat_list_item"></div>').append('<span class="cat_title">' + obj.title + '</span><button id="plan-del-btn" class="ui-btn ui-btn-inline ui-corner-all orange-btn float-right cat-del-btn" type="button" data-cat-id="' + obj.id + '">刪除</button><div class="clearfix"></div>');
+			var cat_list_item = $('<div class="cat_list_item"></div>').append('<span class="cat_title">' + obj.title + '</span><button class="ui-btn ui-btn-inline ui-corner-all orange-btn float-right cat-del-btn" type="button" data-cat-id="' + obj.id + '">刪除</button><div class="clearfix"></div>');
 			$(cat_list_item).appendTo($('#job_cat_list'));
 			$('.cat_list_item .cat-del-btn').click(function(event) {
 				var btn = $(this);
@@ -440,7 +440,7 @@ $(document).on('pagebeforeshow', "#admin-category", function() {
 				console.log(cat_id);
 				if (confirm('確定刪除此分類？') === true) {
 					$.ajax({
-						url: 'http://52.69.53.255/KCCordova/api/remove_category.php',
+						url: api_base + 'remove_category.php',
 						type: 'POST',
 						dataType: 'json',
 						data: {
@@ -481,7 +481,7 @@ $(document).on('pagebeforeshow', "#admin-category", function() {
 				if (data.status) {
 					alert(data.message);
 					$(".cat-popup").popup("close");
-					var cat_list_item = $('<div class="cat_list_item"></div>').append('<span class="cat_title">' + title + '</span><button id="plan-del-btn" class="ui-btn ui-btn-inline ui-corner-all orange-btn float-right" type="button" data-cat-id="' + data.insert_id + '">刪除</button><div class="clearfix"></div>');
+					var cat_list_item = $('<div class="cat_list_item"></div>').append('<span class="cat_title">' + title + '</span><button class="ui-btn ui-btn-inline ui-corner-all orange-btn float-right cat-del-btn" type="button" data-cat-id="' + data.insert_id + '">刪除</button><div class="clearfix"></div>');
 					$(cat_list_item).appendTo($('#' + type + '_cat_list'));
 					$('.cat_list_item .cat-del-btn').click(function(event) {
 						var btn = $(this);
@@ -489,7 +489,7 @@ $(document).on('pagebeforeshow', "#admin-category", function() {
 						console.log(cat_id);
 						if (confirm('確定刪除此分類？') === true) {
 							$.ajax({
-								url: 'http://52.69.53.255/KCCordova/api/remove_category.php',
+								url: api_base + 'remove_category.php',
 								type: 'POST',
 								dataType: 'json',
 								data: {
