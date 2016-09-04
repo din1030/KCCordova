@@ -32,7 +32,7 @@ if ($sql->num_rows < 1) {
 $target_dir = '../www/img/';
 
 if (file_exists($_FILES['thumb']['tmp_name']) && is_uploaded_file($_FILES['thumb']['tmp_name'])) {
-    $new_filename_thumb = $user_id.'_'.basename($_FILES['thumb']['name']);
+    $new_filename_thumb = $user_id.'_thumb_'.basename($_FILES['thumb']['name']);
     $target_file_thumb = $target_dir.$new_filename_thumb;
     if (move_uploaded_file($_FILES['thumb']['tmp_name'], $target_file_thumb)) {
         $update_string = "UPDATE $table SET `thumb`='$new_filename_thumb' WHERE $id_column = '$user_id'";
@@ -51,7 +51,7 @@ if (file_exists($_FILES['thumb']['tmp_name']) && is_uploaded_file($_FILES['thumb
 }
 
 if (file_exists($_FILES['pic_1']['tmp_name']) && is_uploaded_file($_FILES['pic_1']['tmp_name'])) {
-    $new_filename1 = $user_id.'_'.basename($_FILES['pic_1']['name']);
+    $new_filename1 = $user_id.'_1_'.basename($_FILES['pic_1']['name']);
     $target_file1 = $target_dir.$new_filename1;
     if (move_uploaded_file($_FILES['pic_1']['tmp_name'], $target_file1)) {
         $update_string = "UPDATE $table SET `pic1`='$new_filename1' WHERE $id_column = '$user_id'";
@@ -70,7 +70,7 @@ if (file_exists($_FILES['pic_1']['tmp_name']) && is_uploaded_file($_FILES['pic_1
 }
 
 if (file_exists($_FILES['pic_2']['tmp_name']) && is_uploaded_file($_FILES['pic_2']['tmp_name'])) {
-    $new_filename2 = $user_id.'_'.basename($_FILES['pic_2']['name']);
+    $new_filename2 = $user_id.'_2_'.basename($_FILES['pic_2']['name']);
     $target_file2 = $target_dir.$new_filename2;
     if (move_uploaded_file($_FILES['pic_2']['tmp_name'], $target_file2)) {
         $update_string = "UPDATE $table SET `pic2`='$new_filename2' WHERE $id_column = '$user_id'";
@@ -89,7 +89,7 @@ if (file_exists($_FILES['pic_2']['tmp_name']) && is_uploaded_file($_FILES['pic_2
 }
 
 if (file_exists($_FILES['pic_3']['tmp_name']) && is_uploaded_file($_FILES['pic_3']['tmp_name'])) {
-    $new_filename3 = $user_id.'_'.basename($_FILES['pic_3']['name']);
+    $new_filename3 = $user_id.'_3_'.basename($_FILES['pic_3']['name']);
     $target_file3 = $target_dir.$new_filename3;
     if (move_uploaded_file($_FILES['pic_3']['tmp_name'], $target_file3)) {
         $update_string = "UPDATE $table SET `pic3`='$new_filename3' WHERE $id_column = '$user_id'";
@@ -108,7 +108,7 @@ if (file_exists($_FILES['pic_3']['tmp_name']) && is_uploaded_file($_FILES['pic_3
 }
 
 if (file_exists($_FILES['pic_4']['tmp_name']) && is_uploaded_file($_FILES['pic_4']['tmp_name'])) {
-    $new_filename4 = $user_id.'_'.basename($_FILES['pic_4']['name']);
+    $new_filename4 = $user_id.'_4_'.basename($_FILES['pic_4']['name']);
     $target_file4 = $target_dir.$new_filename4;
     if (move_uploaded_file($_FILES['pic_4']['tmp_name'], $target_file4)) {
         $update_string = "UPDATE $table SET `pic4`='$new_filename4' WHERE $id_column = '$user_id'";
@@ -127,7 +127,7 @@ if (file_exists($_FILES['pic_4']['tmp_name']) && is_uploaded_file($_FILES['pic_4
 }
 
 if (file_exists($_FILES['pic_5']['tmp_name']) && is_uploaded_file($_FILES['pic_5']['tmp_name'])) {
-    $new_filename5 = $user_id.'_'.basename($_FILES['pic_5']['name']);
+    $new_filename5 = $user_id.'_5_'.basename($_FILES['pic_5']['name']);
     $target_file5 = $target_dir.$new_filename5;
     if (move_uploaded_file($_FILES['pic_5']['tmp_name'], $target_file5)) {
         $update_string = "UPDATE $table SET `pic5`='$new_filename5' WHERE $id_column = '$user_id'";
