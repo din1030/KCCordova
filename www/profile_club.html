@@ -589,197 +589,198 @@
                         <textarea wrap="virtual" id="content25" name="content25" rows="4" cols="40"></textarea>
                         <div>
                             <label class="item_title" for="promo_content">優惠活動訊息</label>
-                            <textarea wrap="virtual" name="promo_content" class="promo_content" rows="4" cols="40">優惠活動訊息優惠活動訊息優惠活動訊息優惠活動訊息優惠活動訊息</textarea>
+                            <textarea wrap="virtual" name="promo_content" class="promo_content" rows="4" cols="40"></textarea>
                         </div>
                         <button id="consume-submit-btn" class="ui-shadow ui-btn ui-corner-all" type="submit">送出</button>
                     </form>
                 </div>
                 <!-- /main -->
             </div>
+        </div>
 
-            <!-- club hire -->
-            <div data-role="page" id="club-hire" data-theme="a" data-title="club-hire">
-                <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
-                    <div style="width:100%; text-align:center;">
-                        <a href="#menu-panel" class="ui-link">
-                            <div id="menu-btn" class="header-btn header-link left-link"></div>
-                        </a>
-                        <span class="page-title">我的檔案</span>
-                    </div>
-                    <div data-role="navbar">
-                        <ul class="page-content-nav club-page-nav">
-                            <li><a href="#club-profile">個人資料</a></li>
-                            <li><a href="#club-info">店家資料</a></li>
-                            <li><a href="#club-consume">店家消費</a></li>
-                            <li><a href="#club-hire" class="active">應徵資訊</a></li>
-                        </ul>
-                    </div>
+        <!-- club hire -->
+        <div data-role="page" id="club-hire" data-theme="a" data-title="club-hire">
+            <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
+                <div style="width:100%; text-align:center;">
+                    <a href="#menu-panel" class="ui-link">
+                        <div id="menu-btn" class="header-btn header-link left-link"></div>
+                    </a>
+                    <span class="page-title">我的檔案</span>
                 </div>
-                <!-- /header -->
-                <div data-role="main" class="ui-content profile-main" id="club-hire-main">
-                    <div class="">
-                        <div class="ui-field-contain ui-disabled">
+                <div data-role="navbar">
+                    <ul class="page-content-nav club-page-nav">
+                        <li><a href="#club-profile">個人資料</a></li>
+                        <li><a href="#club-info">店家資料</a></li>
+                        <li><a href="#club-consume">店家消費</a></li>
+                        <li><a href="#club-hire" class="active">應徵資訊</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /header -->
+            <div data-role="main" class="ui-content profile-main" id="club-hire-main">
+                <div class="">
+                    <div class="ui-field-contain ui-disabled">
+                        <label class="item_title" for="interviewer-input">經理面試人</label>
+                        <input type="text" name="interviewer-input" class="interviewer-input" value="">
+                    </div>
+                    <div class="ui-field-contain ui-disabled">
+                        <label class="item_title" for="interviewer-pic-input">經理大頭圖</label>
+                        <input type="text" name="interviewer-pic-input" class="interviewer-pic-input">
+                    </div>
+                    <div class="ui-field-contain ui-disabled">
+                        <label class="item_title" for="interview-tel-input">經理電話</label>
+                        <input type="tel" name="interview-tel-input" class="interview-tel-input" id="interview-tel-input" value="">
+                    </div>
+                    <div class="ui-field-contain ui-disabled">
+                        <label class="item_title" for="interview-line-input">經理 LINE</label>
+                        <input type="text" name="interview-line-input" class="interview-line-input" value="">
+                    </div>
+                    <div class="ui-disabled">
+                        <label class="item_title" for="offer_content">上班時段/服務內容</label>
+                        <div id="offer_content" class="offer_content">
+                            上班時段/服務內容上班時段/服務內容上班時段/服務內容上班時段/服務內容上班時段/服務內容上班時段/服務內容
+                        </div>
+                    </div>
+                    <div class="ui-disabled">
+                        <label class="item_title" for="welfare">公司制度與福利</label>
+                        <div class=welfare "" id="welfare">
+                            公司制度與福利公司制度與福利公司制度與福利公司制度與福利公司制度與福利公司制度與福利公司制度與福利公司制度與福利公司制度與福利
+                        </div>
+                    </div>
+                    <a href="#club-hire-modify" class="ui-btn ui-corner-all">編輯資料</a>
+                </div>
+            </div>
+            <!-- /main -->
+        </div>
+
+        <!-- club hire -->
+        <div data-role="page" id="club-hire-modify" data-theme="a" data-title="club-hire-modify">
+            <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
+                <div style="width:100%; text-align:center;">
+                    <a href="#menu-panel" class="ui-link">
+                        <div id="menu-btn" class="header-btn header-link left-link"></div>
+                    </a>
+                    <span class="page-title">我的檔案</span>
+                </div>
+                <div data-role="navbar">
+                    <ul class="page-content-nav club-page-nav">
+                        <li><a href="#club-profile">個人資料</a></li>
+                        <li><a href="#club-info">店家資料</a></li>
+                        <li><a href="#club-consume">店家消費</a></li>
+                        <li><a href="#club-hire" class="active">應徵資訊</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /header -->
+            <div data-role="main" class="ui-content profile-main" id="club-hire-modify-main">
+                <div class="">
+                    <form id="club-hire-form" method="post" enctype="multipart/form-data">
+                        <div class="ui-field-contain">
                             <label class="item_title" for="interviewer-input">經理面試人</label>
-                            <input type="text" name="interviewer-input" class="interviewer-input" value="">
+                            <input type="text" name="interviewer-input" class="interviewer-input" value="Larmar">
                         </div>
-                        <div class="ui-field-contain ui-disabled">
-                            <label class="item_title" for="interviewer-pic-input">經理大頭圖</label>
-                            <input type="text" name="interviewer-pic-input" class="interviewer-pic-input">
+                        <div class="ui-field-contain">
+                            <label class="item_title" for="interviewer_pic">經理大頭圖</label>
+                            <input type="file" name="interviewer_pic" id="interviewer_pic">
                         </div>
-                        <div class="ui-field-contain ui-disabled">
+                        <div class="ui-field-contain">
                             <label class="item_title" for="interview-tel-input">經理電話</label>
-                            <input type="tel" name="interview-tel-input" class="interview-tel-input" id="interview-tel-input" value="">
+                            <input type="tel" name="interview-tel-input" class="interview-tel-input" value="">
                         </div>
-                        <div class="ui-field-contain ui-disabled">
+                        <div class="ui-field-contain">
                             <label class="item_title" for="interview-line-input">經理 LINE</label>
                             <input type="text" name="interview-line-input" class="interview-line-input" value="">
                         </div>
-                        <div class="ui-disabled">
+                        <div class="">
                             <label class="item_title" for="offer_content">上班時段/服務內容</label>
-                            <div id="offer_content" class="offer_content">
-                                上班時段/服務內容上班時段/服務內容上班時段/服務內容上班時段/服務內容上班時段/服務內容上班時段/服務內容
-                            </div>
+                            <textarea wrap="virtual" class="offer_content" name="offer_content" rows="4" cols="40">上班時段/服務內容&#13;&#10;上班時段/服務內容&#13;&#10;上班時段/服務內容&#13;&#10;上班時段/服務內容&#13;&#10;上班時段/服務內容上班時段/服務內容</textarea>
                         </div>
-                        <div class="ui-disabled">
+                        <div class="">
                             <label class="item_title" for="welfare">公司制度與福利</label>
-                            <div class=welfare "" id="welfare">
-                                公司制度與福利公司制度與福利公司制度與福利公司制度與福利公司制度與福利公司制度與福利公司制度與福利公司制度與福利公司制度與福利
-                            </div>
+                            <textarea wrap="virtual" class="welfare" name="welfare" rows="4" cols="40">公司制度與福利公司制度與福利公司制度與福利公司制度與福利公司制度與福利公司制度與福利公司制度與福利公司制度與福利公司制度與福利</textarea>
                         </div>
-                        <a href="#club-hire-modify" class="ui-btn ui-corner-all">編輯資料</a>
-                    </div>
-                </div>
-                <!-- /main -->
-            </div>
-
-            <!-- club hire -->
-            <div data-role="page" id="club-hire-modify" data-theme="a" data-title="club-hire-modify">
-                <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
-                    <div style="width:100%; text-align:center;">
-                        <a href="#menu-panel" class="ui-link">
-                            <div id="menu-btn" class="header-btn header-link left-link"></div>
-                        </a>
-                        <span class="page-title">我的檔案</span>
-                    </div>
-                    <div data-role="navbar">
-                        <ul class="page-content-nav club-page-nav">
-                            <li><a href="#club-profile">個人資料</a></li>
-                            <li><a href="#club-info">店家資料</a></li>
-                            <li><a href="#club-consume">店家消費</a></li>
-                            <li><a href="#club-hire" class="active">應徵資訊</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- /header -->
-                <div data-role="main" class="ui-content profile-main" id="club-hire-modify-main">
-                    <div class="">
-                        <form id="club-hire-form" method="post" enctype="multipart/form-data">
-                            <div class="ui-field-contain">
-                                <label class="item_title" for="interviewer-input">經理面試人</label>
-                                <input type="text" name="interviewer-input" class="interviewer-input" value="Larmar">
-                            </div>
-                            <div class="ui-field-contain">
-                                <label class="item_title" for="interviewer_pic">經理大頭圖</label>
-                                <input type="file" name="interviewer_pic" id="interviewer_pic">
-                            </div>
-                            <div class="ui-field-contain">
-                                <label class="item_title" for="interview-tel-input">經理電話</label>
-                                <input type="tel" name="interview-tel-input" class="interview-tel-input" value="">
-                            </div>
-                            <div class="ui-field-contain">
-                                <label class="item_title" for="interview-line-input">經理 LINE</label>
-                                <input type="text" name="interview-line-input" class="interview-line-input" value="">
-                            </div>
-                            <div class="">
-                                <label class="item_title" for="offer_content">上班時段/服務內容</label>
-                                <textarea wrap="virtual" class="offer_content" name="offer_content" rows="4" cols="40">上班時段/服務內容&#13;&#10;上班時段/服務內容&#13;&#10;上班時段/服務內容&#13;&#10;上班時段/服務內容&#13;&#10;上班時段/服務內容上班時段/服務內容</textarea>
-                            </div>
-                            <div class="">
-                                <label class="item_title" for="welfare">公司制度與福利</label>
-                                <textarea wrap="virtual" class="welfare" name="welfare" rows="4" cols="40">公司制度與福利公司制度與福利公司制度與福利公司制度與福利公司制度與福利公司制度與福利公司制度與福利公司制度與福利公司制度與福利</textarea>
-                            </div>
-                            <button id="club-offer-submit-btn" class="ui-shadow ui-btn ui-corner-all" type="submit">送出</button>
-                        </form>
-                    </div>
-                </div>
-                <!-- /main -->
-            </div>
-
-            <!-- jobseeker resume pic -->
-            <div data-role="page" id="club-pic" data-theme="a" data-title="club-pic">
-                <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
-                    <div style="width:100%; text-align:center;">
-                        <a href="#menu-panel" class="ui-link">
-                            <div id="menu-btn" class="header-btn header-link left-link"></div>
-                        </a>
-                        <span class="page-title">我的檔案</span>
-                        <a href="#club-info" class="ui-link" data-ajax="false">
-                            <div class="header-btn header-link right-link" style="width:auto">返回</div>
-                        </a>
-                    </div>
-                    <div data-role="navbar">
-                        <ul class="page-content-nav">
-                            <li><a href="#club-pic" class="active">上傳圖片</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- /header -->
-                <div data-role="main" class="ui-content profile-main" id="club-pic-main">
-                    <form id="club-pic-form" method="post" enctype="multipart/form-data">
-                        <div class="item_title">上傳圖片：</div>
-                        列表縮圖
-                        <input type="file" data-clear-btn="true" name="thumb" id="thumb" value=""> 圖一
-                        <input type="file" data-clear-btn="true" name="pic_1" id="pic_1" value=""> 圖二
-                        <input type="file" data-clear-btn="true" name="pic_2" id="pic_2" value=""> 圖三
-                        <input type="file" data-clear-btn="true" name="pic_3" id="pic_3" value=""> 圖四
-                        <input type="file" data-clear-btn="true" name="pic_4" id="pic_4" value=""> 圖五
-                        <input type="file" data-clear-btn="true" name="pic_5" id="pic_5" value="">
-                        <button id="club-send-btn" class="ui-shadow ui-btn ui-corner-all" type="submit">送出</button>
+                        <button id="club-offer-submit-btn" class="ui-shadow ui-btn ui-corner-all" type="submit">送出</button>
                     </form>
                 </div>
-                <!-- main -->
             </div>
+            <!-- /main -->
+        </div>
 
-            <!-- external footer -->
-            <div data-role="footer" data-position="fixed" data-theme="a" data-tap-toggle="false">
+        <!-- jobseeker resume pic -->
+        <div data-role="page" id="club-pic" data-theme="a" data-title="club-pic">
+            <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
+                <div style="width:100%; text-align:center;">
+                    <a href="#menu-panel" class="ui-link">
+                        <div id="menu-btn" class="header-btn header-link left-link"></div>
+                    </a>
+                    <span class="page-title">我的檔案</span>
+                    <a href="#club-info" class="ui-link" data-ajax="false">
+                        <div class="header-btn header-link right-link" style="width:auto">返回</div>
+                    </a>
+                </div>
                 <div data-role="navbar">
-                    <ul>
-                        <li>
-                            <a href="./club.html" data-ajax="false">
-                                <div class="footer-tab tab1" data-title="club"></div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="./jobseeker.html" data-ajax="false">
-                                <div class="footer-tab tab2 active" data-title="jobseeker"></div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="./lifeservice.html" data-ajax="false">
-                                <div class="footer-tab tab3"></div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="./messages.html" data-ajax="false">
-                                <div class="footer-tab tab4"></div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="./favorite.html" data-ajax="false">
-                                <div class="footer-tab tab5" data-title="favorite"></div>
-                            </a>
-                        </li>
+                    <ul class="page-content-nav">
+                        <li><a href="#club-pic" class="active">上傳圖片</a></li>
                     </ul>
                 </div>
-                <!-- /footer -->
             </div>
-            <script src="./js/jquery-1.12.4.min.js"></script>
-            <script src="./js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
-            <script src="./js/flex-slider/jquery.flexslider-min.js"></script>
-            <script src="./js/jquery.form.min.js"></script>
-            <script type="text/javascript" src="cordova.js"></script>
-            <script src="./js/main.js"></script>
-            <script src="./js/profile.js"></script>
+            <!-- /header -->
+            <div data-role="main" class="ui-content profile-main" id="club-pic-main">
+                <form id="club-pic-form" method="post" enctype="multipart/form-data">
+                    <div class="item_title">上傳圖片：</div>
+                    列表縮圖
+                    <input type="file" data-clear-btn="true" name="thumb" id="thumb" value=""> 圖一
+                    <input type="file" data-clear-btn="true" name="pic_1" id="pic_1" value=""> 圖二
+                    <input type="file" data-clear-btn="true" name="pic_2" id="pic_2" value=""> 圖三
+                    <input type="file" data-clear-btn="true" name="pic_3" id="pic_3" value=""> 圖四
+                    <input type="file" data-clear-btn="true" name="pic_4" id="pic_4" value=""> 圖五
+                    <input type="file" data-clear-btn="true" name="pic_5" id="pic_5" value="">
+                    <button id="club-send-btn" class="ui-shadow ui-btn ui-corner-all" type="submit">送出</button>
+                </form>
+            </div>
+            <!-- main -->
+        </div>
+
+        <!-- external footer -->
+        <div data-role="footer" data-position="fixed" data-theme="a" data-tap-toggle="false">
+            <div data-role="navbar">
+                <ul>
+                    <li>
+                        <a href="./club.html" data-ajax="false">
+                            <div class="footer-tab tab1" data-title="club"></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./jobseeker.html" data-ajax="false">
+                            <div class="footer-tab tab2 active" data-title="jobseeker"></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./lifeservice.html" data-ajax="false">
+                            <div class="footer-tab tab3"></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./messages.html" data-ajax="false">
+                            <div class="footer-tab tab4"></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./favorite.html" data-ajax="false">
+                            <div class="footer-tab tab5" data-title="favorite"></div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /footer -->
+        </div>
+        <script src="./js/jquery-1.12.4.min.js"></script>
+        <script src="./js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
+        <script src="./js/flex-slider/jquery.flexslider-min.js"></script>
+        <script src="./js/jquery.form.min.js"></script>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script src="./js/main.js"></script>
+        <script src="./js/profile.js"></script>
     </body>
 
 </html>
