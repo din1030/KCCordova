@@ -181,6 +181,7 @@ if (window.localStorage.getItem('auth') == '3') {
 						$('#workingtime-span').html('PT');
 						break;
 				}
+				$('#pic_div').empty();
 				$.each(seeker.pic, function(idx, obj) {
 					$('#pic_div').append('<div>' + obj + '</div>')
 				});
@@ -190,8 +191,8 @@ if (window.localStorage.getItem('auth') == '3') {
 				// modify
 				$('.nickname-input').val(seeker.nickname);
 				$('#seeker_category').val(seeker.category);
-				$('select#seeker_country').val(seeker.country_id).selectmenu('refresh');
-				$('select#seeker_area').val(seeker.area_id).selectmenu('refresh');
+				// $('select#seeker_country').val(seeker.country_id).selectmenu('refresh');
+				// $('select#seeker_area').val(seeker.area_id).selectmenu('refresh');
 				$('.mobile-input').val(seeker.mobile);
 				$('#height-input').val(seeker.height);
 				$('#weight-input').val(seeker.weight);
@@ -206,6 +207,49 @@ if (window.localStorage.getItem('auth') == '3') {
 				$("[name='marital'][value='" + seeker.marital + "']").prop("checked", true).checkboxradio("refresh");
 				$("[name='worktime'][value='" + seeker.workingtime + "']").prop("checked", true).checkboxradio("refresh");
 				$('#job_content').val(seeker.job_content);
+				$.ajax({
+					url: 'http://52.69.53.255/KCCordova/api/get_country_menu.php',
+					dataType: 'json'
+				}).done(function(data) {
+					if (data.status) {
+						var c_list = '';
+						$.each(data.result, function(idx, obj) {
+							c_list += '<option value="' + obj.id + '">' + obj.country + '</option>';
+						});
+						var page_id = $.mobile.activePage.attr('id');
+						$('#' + page_id + ' select.country-select').html(c_list);
+						$('#' + page_id + ' select.country-select').val(seeker.country_id).selectmenu('refresh');
+
+						var a_list = '';
+						$.each(data.result, function(idx, obj) {
+							if (obj.id == seeker.country_id) {
+								$.each(obj.area, function(idx, area) {
+									a_list += '<option value="' + area.a_id + '">' + area.name + '</option>';
+								});
+							}
+						});
+						$('#' + page_id + ' select.area-select').html(a_list);
+						$('#' + page_id + ' select.area-select').val(seeker.area_id).selectmenu('refresh');
+
+						$('#' + page_id + ' select.country-select').change(function(event) {
+							a_list = '';
+							var c_id = $(this).val();
+							console.log(c_id);
+							$.each(data.result, function(idx, obj) {
+								// console.log(obj.id);
+								if (obj.id == c_id) {
+									// console.log(obj.id);
+									$.each(obj.area, function(idx, area) {
+										// console.log(obj.id);
+										a_list += '<option value="' + area.a_id + '">' + area.name + '</option>';
+										$('#' + page_id + ' select.area-select').html(a_list);
+										$('#' + page_id + ' select.area-select').selectmenu('refresh');
+									});
+								}
+							});
+						});
+					}
+				});
 				$.ajax({
 					url: api_base + 'get_form_content.php?action=get_category&type=job',
 					dataType: 'json'
@@ -408,6 +452,49 @@ if (window.localStorage.getItem('auth') == '2') {
 				$('.opentime5').val(club.opentime5);
 				$('.website-input').val(club.website);
 				$('.slogan-input').val(club.slogan);
+				$.ajax({
+					url: 'http://52.69.53.255/KCCordova/api/get_country_menu.php',
+					dataType: 'json'
+				}).done(function(data) {
+					if (data.status) {
+						var c_list = '';
+						$.each(data.result, function(idx, obj) {
+							c_list += '<option value="' + obj.id + '">' + obj.country + '</option>';
+						});
+						var page_id = $.mobile.activePage.attr('id');
+						$('#' + page_id + ' select.country-select').html(c_list);
+						$('#' + page_id + ' select.country-select').val(club.country_id).selectmenu('refresh');
+
+						var a_list = '';
+						$.each(data.result, function(idx, obj) {
+							if (obj.id == club.country_id) {
+								$.each(obj.area, function(idx, area) {
+									a_list += '<option value="' + area.a_id + '">' + area.name + '</option>';
+								});
+							}
+						});
+						$('#' + page_id + ' select.area-select').html(a_list);
+						$('#' + page_id + ' select.area-select').val(club.area_id).selectmenu('refresh');
+
+						$('#' + page_id + ' select.country-select').change(function(event) {
+							a_list = '';
+							var c_id = $(this).val();
+							console.log(c_id);
+							$.each(data.result, function(idx, obj) {
+								// console.log(obj.id);
+								if (obj.id == c_id) {
+									// console.log(obj.id);
+									$.each(obj.area, function(idx, area) {
+										// console.log(obj.id);
+										a_list += '<option value="' + area.a_id + '">' + area.name + '</option>';
+										$('#' + page_id + ' select.area-select').html(a_list);
+										$('#' + page_id + ' select.area-select').selectmenu('refresh');
+									});
+								}
+							});
+						});
+					}
+				});
 				$('#pic_block').empty();
 				$.each(club.pic, function(idx, obj) {
 					if (obj != null && obj != '') {

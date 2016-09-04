@@ -9,6 +9,8 @@ $admin_id = $_POST['admin_id'];
 
 $name = $_POST['name-input'];
 $category = $_POST['club_type'];
+$country_id = $_POST['club_country'];
+$area_id = $_POST['club_area'];
 $tel = $_POST['tel-input'];
 $address = $_POST['address-input'];
 
@@ -27,7 +29,7 @@ $description = $_POST['description'];
 $sql_string = "SELECT * FROM `club_info` WHERE `admin_id` = '$admin_id' LIMIT 1";
 $sql = $mysqli->query($sql_string);
 if ($sql->num_rows > 0) {
-    $update_string = "UPDATE `club_info` SET `name`='$name',`category`='$category',`club_tel`='$tel',`address`='$address',`opentime1`='$opentime1',`opentime2`='$opentime2',`opentime3`='$opentime3',`opentime4`='$opentime4',`opentime5`='$opentime5',`website`='$website',`slogan`='$slogan',`video_url`='$video',`description`='$description' WHERE `admin_id` = '$admin_id'";
+    $update_string = "UPDATE `club_info` SET `name`='$name',`category`='$category',`country_id`='$country_id',`area_id`='$area_id',`club_tel`='$tel',`address`='$address',`opentime1`='$opentime1',`opentime2`='$opentime2',`opentime3`='$opentime3',`opentime4`='$opentime4',`opentime5`='$opentime5',`website`='$website',`slogan`='$slogan',`video_url`='$video',`description`='$description' WHERE `admin_id` = '$admin_id'";
     if ($mysqli->query($update_string)) {
         $output = array('status' => true, 'message' => '資料已修改！');
         echo json_encode($output);
@@ -40,7 +42,7 @@ if ($sql->num_rows > 0) {
     }
 } else {
     // 儲存資料
-    $insert_string = 'INSERT INTO `club_info`(`admin_id`, `category`, `name`, `address`,`club_tel`, `slogan`, `video_url`, `website`, `opentime1`, `opentime2`, `opentime3`, `opentime4`, `opentime5`, `description` `created`) VALUES'." ('$admin_id',$category,'$name','$address','$tel','$slogan','$video','$websiten','$opentime1','$opentime2','$opentime3','$opentime4','$opentime5','$description', NOW())";
+    $insert_string = 'INSERT INTO `club_info`(`admin_id`, `category`,`country_id`,`area_id`,`name`,`address`,`club_tel`, `slogan`,`video_url`,`website`,`opentime1`,`opentime2`,`opentime3`,`opentime4`,`opentime5`,`description`,`created`) VALUES'." ('$admin_id',$category,'$country_id','$area_id','$name','$address','$tel','$slogan','$video','$websiten','$opentime1','$opentime2','$opentime3','$opentime4','$opentime5','$description', NOW())";
 
     if ($mysqli->query($insert_string)) {
         $output = array('status' => true, 'message' => '資料已新增！');
