@@ -71,7 +71,7 @@ if ($sql->num_rows > 0) {
     }
 } else {
     // 儲存資料
-    $insert_string = "INSERT INTO `club_consume`(`admin_id`, `contact_name`, `contact_tel`, `contact_line`, `promo_content`,  `created`) VALUES ('$admin_id','$contact_name','$contact_tel','$contact_line','$promo_content', NULL)";
+    $insert_string = "INSERT INTO `club_consume`(`admin_id`, `contact_name`, `contact_tel`, `contact_line`, `promo_content`, `created`) VALUES ('$admin_id','$contact_name','$contact_tel','$contact_line','$promo_content', NOW())";
     $mysqli->query($insert_string);
     if ($mysqli->affected_rows > 0) {
         if (move_uploaded_file($_FILES['contact-pic-input']['tmp_name'], $target_file)) {
@@ -79,10 +79,19 @@ if ($sql->num_rows > 0) {
             $mysqli->query($pic_string);
         }
 
-        $output = array('status' => true, 'message' => '資料已修改！');
-        echo json_encode($output);
+        $insert_string = 'INSERT INTO `club_consume_detail`(`admin_id`, `title1`, `day11`, `content11`, `day12`, `content12`, `day13`, `content13`, `day14`, `content14`, `day15`, `content15`, `title2`, `day21`, `content21`, `day22`, `content22`, `day23`, `content23`, `day24`, `content24`, `day25`, `content25`) '."VALUES ('$admin_id','$title1','$day11','$content11','$day12','$content12','$day13','$content13','$day14','$content14','$day15','$content15','$title2','$day21','$content21','$day22','$content22','$day23','$content23','$day24','$content24','$day25','$content25')";
+        $detail_string = "UPDATE `club_consume_detail` SET `title1`='$title1',`day11`='$day11',`content11`='$content11',`day12`='$day12',`content12`='$content12',`day13`='$day13',`content13`='$content13',`day14`='$day14',`content14`='$content14',`day15`='$day15',`content15`='$content15'";
 
-        return;
+        if ($mysqli->query($insert_string)) {
+            $output = array('status' => true, 'message' => '資料已修改！');
+            echo json_encode($output);
+
+            return;
+        } else {
+            $output = array('status' => false, 'message' => '操作錯誤，請稍後再試！', 'sql' => $update_string);
+            echo json_encode($output);
+            exit;
+        }
     } else {
         $output = array('status' => false, 'message' => '操作錯誤，請稍後再試！', 'sql' => $insert_string);
         echo json_encode($output);
