@@ -540,7 +540,7 @@ $(document).on('pagebeforeshow', "#admin-authority", function() {
 		$(this).ajaxSubmit({
 			url: api_base + 'update_policy.php',
 			data: {
-				policy: policy,
+				policy: policy
 			},
 			type: 'POST',
 			dataType: 'json',
