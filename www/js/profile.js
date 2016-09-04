@@ -100,6 +100,7 @@ if (window.localStorage.getItem('auth') == '3') {
 					$('#open-resume').removeProp('checked').flipswitch("refresh");
 				}
 				$('#nickname-span').html(data.result[0].nickname);
+				$('#caregory-span').html(data.result[0].job_title);
 				$('#country-span').html(data.result[0].country + ' ' + data.result[0].area);
 				$('#birth-span').html(data.result[0].birth);
 				$('#mobile-span').html(data.result[0].mobile);
@@ -184,6 +185,7 @@ if (window.localStorage.getItem('auth') == '3') {
 				$('#content-span').html(data.result[0].job_content.replace(/\n/g, "<br>"));
 				// modify
 				$('.nickname-input').val(data.result[0].nickname);
+				$('#seeker_category').val(data.result[0].category);
 				$('select#seeker_country').val(data.result[0].country_id).selectmenu('refresh');
 				$('select#seeker_area').val(data.result[0].area_id).selectmenu('refresh');
 				$('.mobile-input').val(data.result[0].mobile);
@@ -200,6 +202,18 @@ if (window.localStorage.getItem('auth') == '3') {
 				$("[name='marital'][value='" + data.result[0].marital + "']").prop("checked", true).checkboxradio("refresh");
 				$("[name='worktime'][value='" + data.result[0].workingtime + "']").prop("checked", true).checkboxradio("refresh");
 				$('#job_content').val(data.result[0].job_content);
+				$.ajax({
+					url: api_base + 'get_form_content.php?action=get_category&type=job',
+					dataType: 'json'
+				}).done(function(data) {
+					console.log(data);
+					var classificationList = '';
+					$.each(data, function(idx, obj) {
+						classificationList += '<option value="' + obj.id + '">' + obj.title + '</option>';
+					});
+					$('#seeker_category').html(classificationList);
+					$('#seeker_category').val(data.result[0].seek_category).selectmenu('refresh');
+				});
 			}
 		}).fail(function() {
 			alert('請確認您的網路連線狀態！');

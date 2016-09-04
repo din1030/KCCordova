@@ -164,6 +164,8 @@
                     </fieldset>
                     <span class="item_title">藝名：</span>
                     <sapn id="nickname-span"></sapn>
+                    <span class="item_title">應徵類別：</span>
+                    <sapn id="caregory-span"></sapn>
                     <br><span class="item_title">應徵地區：</span><span id="country-span"></span>
                     <br><span class="item_title">生日：</span><span id="birth-span"></span>
                     <br><span class="item_title">手機：</span><span id="mobile-span"></span>
@@ -219,14 +221,13 @@
                             <input type="text" name="nickname-input" class="nickname-input" id="nickname-input" value="">
                         </div>
                         <div class="ui-field-contain">
-                            <label class="item_title" for="textinput-1">應徵類別</label>
-                            <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
-                                <select name="seeker_category" id="seeker_category">
-                                    <option value="1">種類一</option>
-                                    <option value="2">種類二</option>
-                                    <option value="3">種類三</option>
-                                </select>
-                            </fieldset>
+                            <label class="item_title" for="seeker_category">店家類別</label>
+                            <select name="seeker_category" id="seeker_category">
+                                <!-- <option value="1">The 1st Option</option>
+                                <option value="2">The 2nd Option</option>
+                                <option value="3">The 3rd Option</option>
+                                <option value="4">The 4th Option</option> -->
+                            </select>
                         </div>
                         <div class="ui-field-contain">
                             <label class="item_title" for="textinput-1">應徵地區</label>
