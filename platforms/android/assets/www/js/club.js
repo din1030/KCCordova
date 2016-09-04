@@ -13,8 +13,11 @@ $(document).one("pagebeforeshow", "[data-role='page']", function() {
 
 $(document).on('pagebeforeshow', '#club', function() {
 	$.ajax({
-		url: 'http://52.69.53.255/KCCordova/api/get_club_info.php',
-		dataType: 'json'
+		url: api_base + 'get_club_info.php',
+		dataType: 'json',
+		// data: {
+		// 	published: 'published'
+		// }
 	}).success(function(data) {
 		if (data.status) {
 			var clubs = data.result;
@@ -234,7 +237,7 @@ $(document).on('pagebeforeshow', "#club-service", function() {
 				for (var no = 1; no < 6; no++) {
 					var day = 'day1' + no;
 					var content = 'content1' + no;
-					if (club[day] != null) {
+					if (club[day] != null && club[day] != 0) {
 						// var li = $('<li></li>').append('<a href="#' + day + '" data-ajax="false">' + club[day] + '</a>');
 						tabs.push('<li><a href="#' + day + '" data-ajax="false">' + week[club[day]] + '</a></li>')
 							// $('#first_tabs ul').append(li);
@@ -263,7 +266,7 @@ $(document).on('pagebeforeshow', "#club-service", function() {
 				for (var no = 1; no < 6; no++) {
 					var day = 'day2' + no;
 					var content = 'content2' + no;
-					if (club[day] != null) {
+					if (club[day] != null && club[day] != 0) {
 						tabs.push('<li><a href="#' + day + '" data-ajax="false">' + week[club[day]] + '</a></li>')
 						var tab_div = '<div id="' + day + '" class="ui-body-d ui-content">' + club[content] + '</div>';
 						tab_content.push(tab_div);

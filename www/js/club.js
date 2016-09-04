@@ -134,7 +134,7 @@ $(document).on('pagebeforeshow', '#club-job-info', function() {
 	var get_club_id = window.localStorage.getItem('get_club_id');
 	console.log(get_club_id);
 	$.ajax({
-		url: 'http://52.69.53.255/KCCordova/api/get_club_offer.php?club_id=' + get_club_id,
+		url: api_base + 'get_club_offer.php?club_id=' + get_club_id,
 		dataType: 'json'
 	}).success(function(data) {
 		if (data.status) {
@@ -142,7 +142,7 @@ $(document).on('pagebeforeshow', '#club-job-info', function() {
 			$('#interviewer').html(club.interviewer);
 			$('#tel').text(club.tel);
 			$('#line').text(club.line);
-			$('#interviewer_pic').attr('src', 'http://52.69.53.255/KCCordova/www/img/' + club.interviewer_pic);
+			$('#interviewer_pic').attr('src', img_base + club.interviewer_pic);
 			if (club.offer_content != null) {
 				club.offer_content = club.offer_content.replace(/\n/g, "<br>")
 			}
@@ -158,7 +158,7 @@ $(document).on('pagebeforeshow', '#club-job-info', function() {
 				// var to_id = $(this).jqmData('to-id');
 				var msg_content = $('#msg_content').val();
 				$.ajax({
-					url: "http://52.69.53.255/KCCordova/api/send_message.php",
+					url: api_base + 'send_message.php',
 					dataType: "json",
 					method: "POST",
 					data: {
@@ -177,7 +177,7 @@ $(document).on('pagebeforeshow', '#club-job-info', function() {
 			});
 			$('#club-job-info .add-fav-btn').click(function(event) {
 				$.ajax({
-					url: 'http://52.69.53.255/KCCordova/api/add_fav.php?user_id=' + window.localStorage.getItem('user_id') + '&type=2&item_id=' + get_club_id,
+					url: api_base + 'add_fav.php?user_id=' + window.localStorage.getItem('user_id') + '&type=2&item_id=' + get_club_id,
 					dataType: 'json',
 					success: function(result) {
 						alert(result.message);
@@ -216,7 +216,7 @@ $(document).on('pagebeforeshow', "#club-service", function() {
 	var get_club_id = window.localStorage.getItem('get_club_id');
 	console.log(get_club_id);
 	$.ajax({
-		url: 'http://52.69.53.255/KCCordova/api/get_club_consume.php?club_id=' + get_club_id,
+		url: api_base + 'get_club_consume.php?club_id=' + get_club_id,
 		dataType: 'json'
 	}).success(function(data) {
 		if (data.status) {
@@ -224,7 +224,7 @@ $(document).on('pagebeforeshow', "#club-service", function() {
 			$('#contact_name').html(club.contact_name);
 			$('#contact_tel').text(club.contact_tel);
 			$('#contact_line').text(club.contact_line);
-			$('#contact_pic').attr('src', 'http://52.69.53.255/KCCordova/www/img/' + club.contact_pic);
+			$('#contact_pic').attr('src', img_base + club.contact_pic);
 			if (typeof(club.promo_content) !== 'undefined') {
 				club.promo_content = club.promo_content.replace(/\n/g, "<br>");
 			}
@@ -305,7 +305,7 @@ $(document).on('pagebeforeshow', "#club-service", function() {
 
 $(document).on('pagebeforeshow', '#club-search', function() {
 	$.ajax({
-		url: 'http://52.69.53.255/KCCordova/api/get_form_content.php?action=get_category&type=club',
+		url: api_base + 'get_form_content.php?action=get_category&type=club',
 		dataType: 'json'
 	}).done(function(data) {
 		console.log(data);
