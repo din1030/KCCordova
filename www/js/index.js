@@ -356,7 +356,7 @@ $(document).on('pagebeforeshow', '#home', function() {
 			case 'news':
 				return "./menu.html#news";
 				break;
-			case 'homepages':
+			case 'website':
 				return 'http://www.kelly-club.com/'
 				break;
 			default:

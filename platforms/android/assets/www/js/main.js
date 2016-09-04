@@ -68,9 +68,10 @@ $(document).on("pagebeforeshow", "[data-role='page']", function() {
 			});
 			var page_id = $.mobile.activePage.attr('id');
 			$('#' + page_id + ' select.country-select').html(c_list);
-			$('#' + page_id + ' select.country-select').selectmenu('refresh');
 
 			var current_country_id = (window.localStorage.getItem('country_id') != null) ? window.localStorage.getItem('country_id') : 1;
+			$('#' + page_id + ' select.country-select').val(current_country_id).selectmenu('refresh');
+
 			var a_list = '';
 			$.each(data.result, function(idx, obj) {
 				if (obj.id == current_country_id) {

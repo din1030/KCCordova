@@ -42,7 +42,7 @@ if ($sql->num_rows > 0) {
     }
 } else {
     // 儲存資料
-    $insert_string = 'INSERT INTO `club_info`(`admin_id`, `category`,`country_id`,`area_id`,`name`,`address`,`club_tel`, `slogan`,`video_url`,`website`,`opentime1`,`opentime2`,`opentime3`,`opentime4`,`opentime5`,`description`,`created`) VALUES'." ('$admin_id',$category,'$country_id','$area_id','$name','$address','$tel','$slogan','$video','$websiten','$opentime1','$opentime2','$opentime3','$opentime4','$opentime5','$description', NOW())";
+    $insert_string = 'INSERT INTO `club_info`(`admin_id`, `category`,`country_id`,`area_id`,`name`,`address`,`club_tel`, `slogan`,`video_url`,`website`,`opentime1`,`opentime2`,`opentime3`,`opentime4`,`opentime5`,`description`,`created`) VALUES'." ('$admin_id',$category,'$country_id','$area_id','$name','$address','$tel','$slogan','$video','$website','$opentime1','$opentime2','$opentime3','$opentime4','$opentime5','$description', NOW())";
 
     if ($mysqli->query($insert_string)) {
         $output = array('status' => true, 'message' => '資料已新增！');
