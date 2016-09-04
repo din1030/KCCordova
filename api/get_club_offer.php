@@ -6,7 +6,14 @@ header('Access-Control-Allow-Methods: GET, POST');
 include 'db_setting.php';
 
 $admin_id = $_GET['admin_id'];
-$sql_string = "SELECT `club_offer`.*, `club_info`.`publish_plan` FROM `club_offer` JOIN `club_info` USING(`admin_id`) WHERE `club_offer`.`admin_id`= '$admin_id' AND (NOW() BETWEEN `publish_start` AND `publish_due`)";
+$published = $_GET['published'];
+
+$sql_string = "SELECT `club_offer`.*, `club_info`.`publish_plan` FROM `club_offer` JOIN `club_info` USING(`admin_id`) WHERE `club_offer`.`admin_id`= '$admin_id'";
+
+if (isset($published)) {
+    $sql_string .= ' AND (NOW() BETWEEN `club_info`.`publish_start` AND `club_info`.`publish_due`)';
+}
+
 $result = $mysqli->query($sql_string);
 if (mysqli_num_rows($result) > 0) {
     while ($r = mysqli_fetch_assoc($result)) {

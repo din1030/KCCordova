@@ -13,8 +13,11 @@ $(document).one("pagebeforeshow", "[data-role='page']", function() {
 
 $(document).on('pagebeforeshow', '#club', function() {
 	$.ajax({
-		url: 'http://52.69.53.255/KCCordova/api/get_club_info.php',
-		dataType: 'json'
+		url: api_base + 'get_club_info.php',
+		dataType: 'json',
+		// data: {
+		// 	published: 'published'
+		// }
 	}).success(function(data) {
 		if (data.status) {
 			var clubs = data.result;

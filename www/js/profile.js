@@ -638,55 +638,63 @@ if (window.localStorage.getItem('auth') == '2') {
 				$('.contact-line-input').val(consume.contact_line);
 				var week = [0, '星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日'];
 				if (page_id == 'club-consume') {
-					$('label.title1').text('1. ' + consume.title1);
-					$('label.day11').text(week[consume.day11]);
-					$('.content11').html(consume.content11);
-					$('label.day12').text(week[consume.day12]);
-					$('.content12').html(consume.content12);
-					$('label.day13').text(week[consume.day13]);
-					$('.content13').html(consume.content13);
-					$('label.day14').text(week[consume.day14]);
-					$('.content14').html(consume.content14);
-					$('label.day15').text(week[consume.day15]);
-					$('.content15').html(consume.content15);
-
-					$('label.title2').text('2. ' + consume.title2);
-					$('label.day21').text(week[consume.day21]);
-					$('.content21').html(consume.content21);
-					$('label.day22').text(week[consume.day22]);
-					$('.content22').html(consume.content22);
-					$('label.day23').text(week[consume.day23]);
-					$('.content23').html(consume.content23);
-					$('label.day24').text(week[consume.day24]);
-					$('.content24').html(consume.content24);
-					$('label.day25').text(week[consume.day25]);
-					$('.content25').html(consume.content25);
-					$('.promo_content').html(consume.promo_content);
+					if (consume.title1 != null && consume.title1 != '') {
+						$('label.title1').text('1. ' + consume.title1);
+						$('label.day11').text(week[consume.day11]);
+						$('.content11').html(consume.content11);
+						$('label.day12').text(week[consume.day12]);
+						$('.content12').html(consume.content12);
+						$('label.day13').text(week[consume.day13]);
+						$('.content13').html(consume.content13);
+						$('label.day14').text(week[consume.day14]);
+						$('.content14').html(consume.content14);
+						$('label.day15').text(week[consume.day15]);
+						$('.content15').html(consume.content15);
+					}
+					if (consume.title2 != null && consume.title2 != '') {
+						$('label.title2').text('2. ' + consume.title2);
+						$('label.day21').text(week[consume.day21]);
+						$('.content21').html(consume.content21);
+						$('label.day22').text(week[consume.day22]);
+						$('.content22').html(consume.content22);
+						$('label.day23').text(week[consume.day23]);
+						$('.content23').html(consume.content23);
+						$('label.day24').text(week[consume.day24]);
+						$('.content24').html(consume.content24);
+						$('label.day25').text(week[consume.day25]);
+						$('.content25').html(consume.content25);
+						$('.promo_content').html(consume.promo_content);
+					}
 					consume.promo_content = consume.promo_content.replace(/\n/g, "<br>");
 				} else if (page_id == 'club-consume-modify') {
-					$('#title1').val(consume.title1);
-					$('#select11').val(consume.day11).selectmenu('refresh');
-					$('#content11').text(consume.content11);
-					$('#select12').val(consume.day12).selectmenu('refresh');
-					$('#content12').text(consume.content12);
-					$('#select13').val(consume.day13).selectmenu('refresh');
-					$('#content13').text(consume.content13);
-					$('#select14').val(consume.day14).selectmenu('refresh');
-					$('#content14').text(consume.content14);
-					$('#select15').val(consume.day15).selectmenu('refresh');
-					$('#content15').text(consume.content15);
+					if (consume.title1 != null && consume.title1 != '') {
 
-					$('#title2').val(consume.title2);
-					$('#select21').val(consume.day21).selectmenu('refresh');
-					$('#content21').text(consume.content21);
-					$('#select22').val(consume.day22).selectmenu('refresh');
-					$('#content22').text(consume.content22);
-					$('#select23').val(consume.day23).selectmenu('refresh');
-					$('#content23').text(consume.content23);
-					$('#select24').val(consume.day24).selectmenu('refresh');
-					$('#content24').text(consume.content24);
-					$('#select25').val(consume.day25).selectmenu('refresh');
-					$('#content25').text(consume.content25);
+						$('#title1').val(consume.title1);
+						$('#select11').val(consume.day11).selectmenu('refresh');
+						$('#content11').text(consume.content11);
+						$('#select12').val(consume.day12).selectmenu('refresh');
+						$('#content12').text(consume.content12);
+						$('#select13').val(consume.day13).selectmenu('refresh');
+						$('#content13').text(consume.content13);
+						$('#select14').val(consume.day14).selectmenu('refresh');
+						$('#content14').text(consume.content14);
+						$('#select15').val(consume.day15).selectmenu('refresh');
+						$('#content15').text(consume.content15);
+					}
+					if (consume.title2 != null && consume.title2 != '') {
+
+						$('#title2').val(consume.title2);
+						$('#select21').val(consume.day21).selectmenu('refresh');
+						$('#content21').text(consume.content21);
+						$('#select22').val(consume.day22).selectmenu('refresh');
+						$('#content22').text(consume.content22);
+						$('#select23').val(consume.day23).selectmenu('refresh');
+						$('#content23').text(consume.content23);
+						$('#select24').val(consume.day24).selectmenu('refresh');
+						$('#content24').text(consume.content24);
+						$('#select25').val(consume.day25).selectmenu('refresh');
+						$('#content25').text(consume.content25);
+					}
 					$('.promo_content').html(consume.promo_content);
 				}
 			}
