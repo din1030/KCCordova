@@ -380,7 +380,7 @@ if (window.localStorage.getItem('auth') == '2') {
 				var club = data.result[0];
 				$('.name-input').val(club.name);
 				$('.category-input').val(club.cat_title);
-				$('.category-id-input').val(club.category);
+				// $('.category-id-input').val(club.category);
 				$('.tel-input').val(club.club_tel);
 				$('.address-input').val(club.address);
 				$('.opentime1').val(club.opentime1);
@@ -401,6 +401,19 @@ if (window.localStorage.getItem('auth') == '2') {
 					club.description = club.description.replace(/\n/g, "<br>");
 				}
 				$('.description').html(club.description);
+
+				$.ajax({
+					url: api_base + 'get_form_content.php?action=get_category&type=club',
+					dataType: 'json'
+				}).done(function(data) {
+					console.log(data);
+					var classificationList = '';
+					$.each(data, function(idx, obj) {
+						classificationList += '<option value="' + obj.id + '">' + obj.title + '</option>';
+					});
+					$('#club_type').html(classificationList);
+					$('#club_type').val(club.category).selectmenu('refresh');
+				});
 			}
 		});
 	});

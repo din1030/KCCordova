@@ -8,7 +8,7 @@ include 'db_setting.php';
 $admin_id = $_POST['admin_id'];
 
 $name = $_POST['name-input'];
-$category = 1;
+$category = $_POST['club_type'];
 $tel = $_POST['tel-input'];
 $address = $_POST['address-input'];
 

@@ -600,6 +600,9 @@ div[id|=admin] .category-block {
 .redeem-pic-block > div:nth-child(2) [type='image'] + .ui-input-text {
   display: none;
 }
+.news_title {
+  font-size: 1.2em;
+}
 .news_operation {
   margin-bottom: 15px;
   border-bottom: 1px solid;

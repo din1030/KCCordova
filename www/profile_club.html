@@ -51,8 +51,8 @@
                         <input type="text" name="textinput-1" class="ui-disabled" id="textinput-1" value="店家管理員">
                     </div>
                     <div class="ui-field-contain ui-disabled">
-                        <label class="item_title" for="textinput-2">性別</label>
-                        <input type="text" name="textinput-2" class="ui-disabled" id="textinput-2" value="男">
+                        <label class="item_title" for="gender-input">性別</label>
+                        <input type="text" name="gender-input" class="ui-disabled gender-input" id="gender-input" value="男">
                     </div>
                     <div class="ui-field-contain ui-disabled">
                         <label class="item_title" for="birth-input">生日</label>
@@ -141,14 +141,6 @@
                             <label class="item_title" for="mobile-input">手機</label>
                             <input type="tel" name="mobile-input" class="mobile-input" id="mobile-input" value="">
                         </div>
-                        <div class="ui-field-contain ui-disabled">
-                            <label class="item_title" for="plan-input">刊登方案</label>
-                            <input type="text" name="plan-input" class="ui-disabled plan-input" id="plan-input" value="">
-                        </div>
-                        <div class="ui-field-contain  ui-disabled">
-                            <label class="item_title" for="plan-during-input">刊登時間</label>
-                            <input type="text" name="plan-during-input" class="ui-disabled plan-during-input" id="plan-during-input" value="">
-                        </div>
                         <button class="ui-shadow ui-btn ui-corner-all profile-submit-btn" data-backpage="#jobseeker-profile" type="button">送出</button>
                     </div>
                 </form>
@@ -179,10 +171,10 @@
                 <div class="">
                     <div class="ui-field-contain ui-disabled">
                         <label class="item_title" for="name-input">店名</label>
-                        <input type="text" name="name-input" class="ui-disabled name-input" id="name-input" value="紐吧">
+                        <input type="text" name="name-input" class="ui-disabled name-input" id="name-input" value="">
                     </div>
                     <div class="ui-field-contain ui-disabled">
-                        <label class="item_title" for="textinput-3">店家類別</label>
+                        <label class="item_title" for="category-input">店家類別</label>
                         <input type="text" name="category-input" class="ui-disabled category-input" id="category-input" value="夜店酒吧">
                     </div>
                     <div class="ui-field-contain ui-disabled">
@@ -272,9 +264,14 @@
                         <input type="text" name="textinput-2" class="" id="textinput-2" value="">
                     </div> -->
                         <div class="ui-field-contain">
-                            <label class="item_title" for="category-input">店家類別</label>
-                            <input type="text" name="category-input" class="category-input" id="category-input" value="">
-                            <input type="hidden" name="category-id-input" class="category-id-input" id="category-id-input" value=""></div>
+                            <label class="item_title" for="club_type">店家類別</label>
+                            <select name="club_type" id="club_type">
+                                <!-- <option value="1">The 1st Option</option>
+                                <option value="2">The 2nd Option</option>
+                                <option value="3">The 3rd Option</option>
+                                <option value="4">The 4th Option</option> -->
+                            </select>
+                        </div>
                         <div class="ui-field-contain">
                             <label class="item_title" for="tel-input">電話</label>
                             <input type="tel" name="tel-input" class=tel-input "" id="tel-input" value="">

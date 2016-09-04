@@ -402,6 +402,7 @@ $(document).on('pagebeforeshow', "#admin-category", function() {
 		$.each(data, function(idx, obj) {
 			var cat_list_item = $('<div class="cat_list_item"></div>').append('<span class="cat_title">' + obj.title + '</span><button class="ui-btn ui-btn-inline ui-corner-all orange-btn float-right cat-del-btn" type="button" data-cat-id="' + obj.id + '">刪除</button><div class="clearfix"></div>');
 			$(cat_list_item).appendTo($('#club_cat_list'));
+			$('.cat_list_item .cat-del-btn').off();
 			$('.cat_list_item .cat-del-btn').click(function(event) {
 				var btn = $(this);
 				var cat_id = $(this).jqmData("cat-id");
@@ -434,6 +435,7 @@ $(document).on('pagebeforeshow', "#admin-category", function() {
 		$.each(data, function(idx, obj) {
 			var cat_list_item = $('<div class="cat_list_item"></div>').append('<span class="cat_title">' + obj.title + '</span><button class="ui-btn ui-btn-inline ui-corner-all orange-btn float-right cat-del-btn" type="button" data-cat-id="' + obj.id + '">刪除</button><div class="clearfix"></div>');
 			$(cat_list_item).appendTo($('#job_cat_list'));
+			$('.cat_list_item .cat-del-btn').off();
 			$('.cat_list_item .cat-del-btn').click(function(event) {
 				var btn = $(this);
 				var cat_id = $(this).jqmData("cat-id");
@@ -483,6 +485,7 @@ $(document).on('pagebeforeshow', "#admin-category", function() {
 					$(".cat-popup").popup("close");
 					var cat_list_item = $('<div class="cat_list_item"></div>').append('<span class="cat_title">' + title + '</span><button class="ui-btn ui-btn-inline ui-corner-all orange-btn float-right cat-del-btn" type="button" data-cat-id="' + data.insert_id + '">刪除</button><div class="clearfix"></div>');
 					$(cat_list_item).appendTo($('#' + type + '_cat_list'));
+					$('.cat_list_item .cat-del-btn').off();
 					$('.cat_list_item .cat-del-btn').click(function(event) {
 						var btn = $(this);
 						var cat_id = $(this).jqmData("cat-id");
