@@ -506,7 +506,6 @@ if (window.localStorage.getItem('auth') == '2') {
 					club.description = club.description.replace(/\n/g, "<br>");
 				}
 				$('.description').html(club.description);
-
 				$.ajax({
 					url: api_base + 'get_form_content.php?action=get_category&type=club',
 					dataType: 'json'
@@ -519,7 +518,21 @@ if (window.localStorage.getItem('auth') == '2') {
 					$('#club_type').html(classificationList);
 					$('#club_type').val(club.category).selectmenu('refresh');
 				});
+			} else {
+				$.ajax({
+					url: api_base + 'get_form_content.php?action=get_category&type=club',
+					dataType: 'json'
+				}).done(function(data) {
+					console.log(data);
+					var classificationList = '';
+					$.each(data, function(idx, obj) {
+						classificationList += '<option value="' + obj.id + '">' + obj.title + '</option>';
+					});
+					$('#club_type').html(classificationList);
+					$('#club_type').selectmenu('refresh');
+				});
 			}
+
 		});
 	});
 	$(document).on('pagebeforeshow', '#club-info-modify', function() {

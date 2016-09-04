@@ -33,24 +33,24 @@
                         <option value="./admin.html#admin-news">發佈消息</option>
                         <option value="./admin.html#admin-plan">刊登方案管理</option>
                         <option value="./admin.html#admin-authority">管理者權限</option>
-                        <option value="./admin.html#admin-messages">站內消息</option>
+                        <option value="./admin.html#admin-messages">發送站內訊息</option>
                         <option value="./admin.html#admin-category">分類管理</option>
                     </select>
                 </div>
                 <hr>
                 <div class="area_block">
                     <div class="ui-field-contain">
-                        <label class="area_title" for="select-native-1">國家</label>
-                        <select name="select-native-1" id="select-native-1" data-inline="true" data-mini="true">
-                            <option value="small">台灣</option>
+                        <label class="area_title" for="country-select">國家</label>
+                        <select name="country-select" class="country-select" id="country-select" data-inline="true" data-mini="true">
+                            <!-- <option value="small">台灣</option>
                             <option value="medium">中國</option>
-                            <option value="large">日本</option>
+                            <option value="large">日本</option> -->
                         </select>
-                        <label class="area_title" for="select-native-2">地區</label>
-                        <select name="select-native-2" id="select-native-2" data-inline="true" data-mini="true">
-                            <option value="small">台北</option>
+                        <label class="area_title" for="area-select">地區</label>
+                        <select name="area-select" class="area-select" id="area-select" data-inline="true" data-mini="true">
+                            <!-- <option value="small">台北</option>
                             <option value="medium">台南</option>
-                            <option value="large">高雄</option>
+                            <option value="large">高雄</option> -->
                         </select>
                     </div>
                 </div>
@@ -493,7 +493,7 @@
                         <option value="./admin.html#admin-news">發佈消息</option>
                         <option value="./admin.html#admin-plan">刊登方案管理</option>
                         <option value="./admin.html#admin-authority">管理者權限</option>
-                        <option value="./admin.html#admin-messages">站內消息</option>
+                        <option value="./admin.html#admin-messages">發送站內訊息</option>
                         <option value="./admin.html#admin-category">分類管理</option>
                     </select>
                 </div>
@@ -624,7 +624,7 @@
                         <option value="./admin.html#admin-news">發佈消息</option>
                         <option value="./admin.html#admin-plan">刊登方案管理</option>
                         <option value="./admin.html#admin-authority">管理者權限</option>
-                        <option value="./admin.html#admin-messages">站內消息</option>
+                        <option value="./admin.html#admin-messages">發送站內訊息</option>
                         <option value="./admin.html#admin-category">分類管理</option>
                     </select>
                 </div>
@@ -733,7 +733,7 @@
                         <option value="./admin.html#admin-news">發佈消息</option>
                         <option value="./admin.html#admin-plan">刊登方案管理</option>
                         <option value="./admin.html#admin-authority">管理者權限</option>
-                        <option value="./admin.html#admin-messages">站內消息</option>
+                        <option value="./admin.html#admin-messages">發送站內訊息</option>
                         <option value="./admin.html#admin-category">分類管理</option>
                     </select>
                 </div>
@@ -954,7 +954,7 @@
                         <option value="./admin.html#admin-news">發佈消息</option>
                         <option value="./admin.html#admin-plan">刊登方案管理</option>
                         <option value="./admin.html#admin-authority">管理者權限</option>
-                        <option value="./admin.html#admin-messages">站內消息</option>
+                        <option value="./admin.html#admin-messages">發送站內訊息</option>
                         <option value="./admin.html#admin-category">分類管理</option>
                     </select>
                 </div>
@@ -1078,7 +1078,7 @@
                         <option value="./admin.html#admin-news">發佈消息</option>
                         <option value="./admin.html#admin-plan">刊登方案管理</option>
                         <option value="./admin.html#admin-authority">管理者權限</option>
-                        <option value="./admin.html#admin-messages">站內消息</option>
+                        <option value="./admin.html#admin-messages">發送站內訊息</option>
                         <option value="./admin.html#admin-category">分類管理</option>
                     </select>
                 </div>
@@ -1152,7 +1152,7 @@
                         <option value="./admin.html#admin-news">發佈消息</option>
                         <option value="./admin.html#admin-plan">刊登方案管理</option>
                         <option value="./admin.html#admin-authority">管理者權限</option>
-                        <option value="./admin.html#admin-messages">站內消息</option>
+                        <option value="./admin.html#admin-messages">發送站內訊息</option>
                         <option value="./admin.html#admin-category">分類管理</option>
                     </select>
                 </div>
@@ -1304,73 +1304,29 @@
                         <option value="./admin.html#admin-news" selected>發佈消息</option>
                         <option value="./admin.html#admin-plan">刊登方案管理</option>
                         <option value="./admin.html#admin-authority">管理者權限</option>
-                        <option value="./admin.html#admin-messages">站內消息</option>
+                        <option value="./admin.html#admin-messages">發送站內訊息</option>
                         <option value="./admin.html#admin-category">分類管理</option>
                     </select>
                 </div>
                 <a href="#admin-news-edit" class="ui-btn ui-corner-all ui-btn-inline purple-btn float-right">新增消息</a>
                 <div class="clearfix"></div>
                 <div class="news_info_block">
-                    <div class="news_title">(最新消息標題)</div>
+                    <p class="news_title">推薦朋友送禮券</p>
                     <div class="news_during">
-                        <div class="ui-field-contain">
-                            <label class="area_title" for="select-native-1">上架時間</label>
-                            <input type="date" name="news_start" class="" id="news_start" value="2016-01-01">
+                        <div>
+                            <span class="item_title">上架時間：</span>
+                            <span>2016-07-01</span>
                         </div>
-                        <div class="ui-field-contain">
-                            <label class="area_title" for="select-native-2">下架時間</label>
-                            <input type="date" name="news_end" class="" id="news_end" value="2016-12-31">
+                        <div>
+                            <span class="item_title">下架時間：</span>
+                            <span>2016-10-31</span>
                         </div>
                     </div>
                     <div class="news_operation">
-                        <div class="ui-field-contain">
-                            <label class="area_title" for="select-native-1">排序</label>
-                            <input type="number" name="news_order" class="" id="news_order" value="1">
-                            <button type="button" class="ui-btn ui-corner-all ui-btn-inline">刪除</button>
-                            <a href="#admin-news-edit" class="ui-btn ui-corner-all ui-btn-inline">編輯</a>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="news_info_block">
-                    <div class="news_title">推薦朋友送禮券</div>
-                    <div class="news_during">
-                        <div class="ui-field-contain">
-                            <label class="area_title" for="select-native-1">上架時間</label>
-                            <input type="date" name="news_start" class="" id="news_start" value="2016-07-01">
-                        </div>
-                        <div class="ui-field-contain">
-                            <label class="area_title" for="select-native-2">下架時間</label>
-                            <input type="date" name="news_end" class="" id="news_end" value="2016-10-31">
-                        </div>
-                    </div>
-                    <div class="news_operation">
-                        <div class="ui-field-contain">
-                            <label class="area_title" for="select-native-1">排序</label>
-                            <input type="number" name="news_order" class="" id="news_order" value="2">
-                            <button type="button" class="ui-btn ui-corner-all ui-btn-inline">刪除</button>
-                            <a href="#admin-news-edit" class="ui-btn ui-corner-all ui-btn-inline">編輯</a>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="news_info_block">
-                    <div class="news_title">推薦朋友送禮券</div>
-                    <div class="news_during">
-                        <div class="ui-field-contain">
-                            <label class="area_title" for="select-native-1">上架時間</label>
-                            <input type="date" name="news_start" class="" id="news_start" value="2016-01-01">
-                        </div>
-                        <div class="ui-field-contain">
-                            <label class="area_title" for="select-native-2">下架時間</label>
-                            <input type="date" name="news_end" class="" id="news_end" value="2016-01-31">
-                        </div>
-                    </div>
-                    <div class="news_operation">
-                        <div class="ui-field-contain">
-                            <label class="area_title" for="select-native-1">排序</label>
-                            <input type="number" name="news_order" class="" id="news_order" value="3">
-                            <button type="button" class="ui-btn ui-corner-all ui-btn-inline">刪除</button>
+                        <div>
+                            <span class="item_title">排序：</span>
+                            <span>2</span>
+                            <button type="button" class="ui-btn ui-corner-all ui-btn-inline news-del-btn">刪除</button>
                             <a href="#admin-news-edit" class="ui-btn ui-corner-all ui-btn-inline">編輯</a>
                             <div class="clearfix"></div>
                         </div>
@@ -1398,6 +1354,18 @@
                 <div class="ui-field-contain">
                     <label class="item_title" for="news_title"><strong>標題：</strong></label>
                     <input type="text" name="news_title" class="" id="news_title" value="">
+                </div>
+                <div class="ui-field-contain">
+                    <label class="item_title" for="news_start">上架時間：</label>
+                    <input type="date" name="news_start" class="" id="news_start" value="2016-07-01">
+                </div>
+                <div class="ui-field-contain">
+                    <label class="item_title" for="news_end">下架時間：</label>
+                    <input type="date" name="news_end" class="" id="news_end" value="2016-10-31">
+                </div>
+                <div class="ui-field-contain">
+                    <label class="item_title" for="news_order">排序：</label>
+                    <input type="number" name="news_order" class="" id="news_order" value="0" min="0">
                 </div>
                 <div class="ui-field-contain">
                     <label class="item_title" for="news_pic"><strong>圖片：</strong></label>
@@ -1430,7 +1398,7 @@
                         <option value="./admin.html#admin-news">發佈消息</option>
                         <option value="./admin.html#admin-plan" selected>刊登方案管理</option>
                         <option value="./admin.html#admin-authority">管理者權限</option>
-                        <option value="./admin.html#admin-messages">站內消息</option>
+                        <option value="./admin.html#admin-messages">發送站內訊息</option>
                         <option value="./admin.html#admin-category">分類管理</option>
                     </select>
                 </div>
@@ -1507,7 +1475,7 @@
                         <option value="./admin.html#admin-news">發佈消息</option>
                         <option value="./admin.html#admin-plan">刊登方案管理</option>
                         <option value="./admin.html#admin-authority" selected>管理者權限</option>
-                        <option value="./admin.html#admin-messages">站內消息</option>
+                        <option value="./admin.html#admin-messages">發送站內訊息</option>
                         <option value="./admin.html#admin-category">分類管理</option>
                     </select>
                 </div>
@@ -1661,7 +1629,7 @@
                         <option value="./admin.html#admin-news">發佈消息</option>
                         <option value="./admin.html#admin-plan">刊登方案管理</option>
                         <option value="./admin.html#admin-authority">管理者權限</option>
-                        <option value="./admin.html#admin-messages" selected>站內消息</option>
+                        <option value="./admin.html#admin-messages" selected>發送站內訊息</option>
                         <option value="./admin.html#admin-category">分類管理</option>
                     </select>
                 </div>
@@ -1708,7 +1676,7 @@
                         <option value="./admin.html#admin-news">發佈消息</option>
                         <option value="./admin.html#admin-plan">刊登方案管理</option>
                         <option value="./admin.html#admin-authority">管理者權限</option>
-                        <option value="./admin.html#admin-messages">站內消息</option>
+                        <option value="./admin.html#admin-messages">發送站內訊息</option>
                         <option value="./admin.html#admin-category" selected>分類管理</option>
                     </select>
                 </div>
@@ -1719,25 +1687,12 @@
                     </a>
                     <div class="clearfix"></div>
                 </div>
-                <div class="cat_list_item">
-                    <span class="cat_title">汽車酒店</span>
-                    <button id="plan-del-btn" class="ui-btn ui-btn-inline ui-corner-all orange-btn float-right" type="button">刪除</button>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="cat_list_item">
-                    <span class="cat_title">商務型酒店</span>
-                    <button id="plan-del-btn" class="ui-btn ui-btn-inline ui-corner-all orange-btn float-right" type="button">刪除</button>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="cat_list_item">
-                    <span class="cat_title">城市酒店</span>
-                    <button id="plan-del-btn" class="ui-btn ui-btn-inline ui-corner-all orange-btn float-right" type="button">刪除</button>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="cat_list_item">
-                    <span class="cat_title">高級酒店</span>
-                    <button id="plan-del-btn" class="ui-btn ui-btn-inline ui-corner-all orange-btn float-right" type="button">刪除</button>
-                    <div class="clearfix"></div>
+                <div id="club_cat_list">
+                    <!-- <div class="cat_list_item">
+                        <span class="cat_title">汽車酒店</span>
+                        <button id="plan-del-btn" class="ui-btn ui-btn-inline ui-corner-all orange-btn float-right" type="button">刪除</button>
+                        <div class="clearfix"></div>
+                    </div> -->
                 </div>
                 <br>
                 <div class="cat_title_block">
@@ -1747,43 +1702,31 @@
                     </a>
                     <div class="clearfix"></div>
                 </div>
-                <div class="cat_list_item">
-                    <span class="cat_title">便服小姐</span>
-                    <button id="plan-del-btn" class="ui-btn ui-btn-inline ui-corner-all orange-btn float-right" type="button">刪除</button>
-                    <div class="clearfix"></div>
+                <div id="job_cat_list">
+                    <!-- <div class="cat_list_item">
+                        <span class="cat_title">汽車酒店</span>
+                        <button id="plan-del-btn" class="ui-btn ui-btn-inline ui-corner-all orange-btn float-right" type="button">刪除</button>
+                        <div class="clearfix"></div>
+                    </div> -->
                 </div>
-                <div class="cat_list_item">
-                    <span class="cat_title">禮服小姐</span>
-                    <button id="plan-del-btn" class="ui-btn ui-btn-inline ui-corner-all orange-btn float-right" type="button">刪除</button>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="cat_list_item">
-                    <span class="cat_title">制服酒店</span>
-                    <button id="plan-del-btn" class="ui-btn ui-btn-inline ui-corner-all orange-btn float-right" type="button">刪除</button>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="cat_list_item">
-                    <span class="cat_title">公關</span>
-                    <button id="plan-del-btn" class="ui-btn ui-btn-inline ui-corner-all orange-btn float-right" type="button">刪除</button>
-                    <div class="clearfix"></div>
-                </div>
+                <br>
             </div>
-            <div id="add_club_cat" class="msg-popup ui-corner-all" data-role="popup" data-position-to="window" data-transition="pop" data-theme="none" data-shadow="false" data-overlay-theme="b" data-dismissible="false">
-                <form>
+            <div id="add_club_cat" class="cat-popup ui-corner-all" data-role="popup" data-position-to="window" data-transition="pop" data-theme="none" data-shadow="false" data-overlay-theme="b" data-dismissible="false">
+                <form id="add-club-cat-form" class="cat-form" data-type="club">
                     <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
                     <div style="padding:10px 20px;">
                         <h3>新增酒店分類</h3>
-                        <input type="text" name="club_cat" class="" id="club_cat" value="">
+                        <input type="text" name="title" class="" id="title" value="">
                         <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn send-btn">送出</button>
                     </div>
                 </form>
             </div>
-            <div id="add_job_cat" class="msg-popup ui-corner-all" data-role="popup" data-position-to="window" data-transition="pop" data-theme="none" data-shadow="false" data-overlay-theme="b" data-dismissible="false">
-                <form>
+            <div id="add_job_cat" class="cat-popup ui-corner-all" data-role="popup" data-position-to="window" data-transition="pop" data-theme="none" data-shadow="false" data-overlay-theme="b" data-dismissible="false">
+                <form id="add-job-cat-form" class="cat-form" data-type="job">
                     <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
                     <div style="padding:10px 20px;">
                         <h3>新增求職者分類</h3>
-                        <input type="text" name="job_cat" class="" id="job_cat" value="">
+                        <input type="text" name="title" class="" id="title" value="">
                         <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn send-btn">送出</button>
                     </div>
                 </form>

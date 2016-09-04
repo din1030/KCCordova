@@ -68,7 +68,7 @@ $(document).on('pagebeforeshow', "#admin-home", function() {
 	// console.log('test');
 	var adminHomeStatus;
 	$.ajax({
-			url: 'http://52.69.53.255/KCCordova/api/get_home_setting.php',
+			url: api_base + 'get_home_setting.php',
 			dataType: 'json'
 		})
 		.done(function(data) {
@@ -219,7 +219,7 @@ $(document).on('pagebeforeshow', "#admin-home", function() {
 
 $(document).on('pagebeforeshow', "#admin-lifeservice", function() {
 	$.ajax({
-		url: 'http://52.69.53.255/KCCordova/api/get_lifeservice.php',
+		url: api_base + 'get_lifeservice.php',
 		dataType: 'json'
 	}).success(function(data) {
 		if (data.status) {
@@ -279,7 +279,7 @@ $(document).on('pagebeforeshow', "#admin-lifeservice-store", function() {
 			currentStoreId = store_id;
 			if (confirm('確定刪除此店家？') === true) {
 				$.ajax({
-					url: 'http://52.69.53.255/KCCordova/api/remove_lifeservice.php',
+					url: api_base + 'remove_lifeservice.php',
 					type: 'POST',
 					dataType: 'json',
 					data: {
@@ -302,7 +302,7 @@ $(document).on('pagebeforeshow', "#admin-lifeservice-store", function() {
 $(document).on('pagebeforeshow', "#admin-lifeservice-store-info", function() {
 	if (currentStoreId != null && currentStoreId != 0) {
 		$.ajax({
-			url: 'http://52.69.53.255/KCCordova/api/get_lifeservice_detail.php?store_id=' + currentStoreId,
+			url: api_base + 'get_lifeservice_detail.php?store_id=' + currentStoreId,
 			dataType: 'json'
 		}).success(function(data) {
 			if (data.status) {
@@ -386,6 +386,130 @@ $(document).on('pagebeforeshow', "#admin-add-lifeservice-store", function() {
 					});
 				} else {
 					alert(data.message);
+				}
+			},
+			error: function(request, error) {
+				alert('請確認您的網路連線狀態！');
+			}
+		})
+	});
+});
+$(document).on('pagebeforeshow', "#admin-category", function() {
+	$.ajax({
+		url: api_base + 'get_form_content.php?action=get_category&type=club',
+		dataType: 'json'
+	}).success(function(data) {
+		$.each(data, function(idx, obj) {
+			var cat_list_item = $('<div class="cat_list_item"></div>').append('<span class="cat_title">' + obj.title + '</span><button class="ui-btn ui-btn-inline ui-corner-all orange-btn float-right cat-del-btn" type="button" data-cat-id="' + obj.id + '">刪除</button><div class="clearfix"></div>');
+			$(cat_list_item).appendTo($('#club_cat_list'));
+			$('.cat_list_item .cat-del-btn').off();
+			$('.cat_list_item .cat-del-btn').click(function(event) {
+				var btn = $(this);
+				var cat_id = $(this).jqmData("cat-id");
+				console.log(cat_id);
+				if (confirm('確定刪除此分類？') === true) {
+					$.ajax({
+						url: api_base + 'remove_category.php',
+						type: 'POST',
+						dataType: 'json',
+						data: {
+							cat_id: cat_id
+						}
+					}).done(function(data) {
+						if (data.status) {
+							$(btn).parents('.cat_list_item').remove();
+						}
+					}).fail(function() {
+						alert('請確認您的網路連線狀態！');
+					});
+				}
+			});
+		});
+	}).fail(function() {
+		alert('請確認您的網路連線狀態！');
+	});
+	$.ajax({
+		url: api_base + 'get_form_content.php?action=get_category&type=job',
+		dataType: 'json'
+	}).success(function(data) {
+		$.each(data, function(idx, obj) {
+			var cat_list_item = $('<div class="cat_list_item"></div>').append('<span class="cat_title">' + obj.title + '</span><button class="ui-btn ui-btn-inline ui-corner-all orange-btn float-right cat-del-btn" type="button" data-cat-id="' + obj.id + '">刪除</button><div class="clearfix"></div>');
+			$(cat_list_item).appendTo($('#job_cat_list'));
+			$('.cat_list_item .cat-del-btn').off();
+			$('.cat_list_item .cat-del-btn').click(function(event) {
+				var btn = $(this);
+				var cat_id = $(this).jqmData("cat-id");
+				console.log(cat_id);
+				if (confirm('確定刪除此分類？') === true) {
+					$.ajax({
+						url: api_base + 'remove_category.php',
+						type: 'POST',
+						dataType: 'json',
+						data: {
+							cat_id: cat_id
+						}
+					}).done(function(data) {
+						if (data.status) {
+							$(btn).parents('.cat_list_item').remove();
+						}
+					}).fail(function() {
+						alert('請確認您的網路連線狀態！');
+					});
+				}
+			});
+		});
+	}).fail(function() {
+		alert('請確認您的網路連線狀態！');
+	});
+	$('form.cat-form').on('submit', function(e) {
+		e.preventDefault(); // prevent native submit
+		var type = $(this).jqmData("type");
+		var title = $(this).find('input[name="title"]').val();
+		console.log(type);
+		$(this).ajaxSubmit({
+			url: api_base + 'add_category.php',
+			data: {
+				type: type,
+			},
+			type: 'POST',
+			dataType: 'json',
+			beforeSend: function() {
+				$.mobile.loading('show');
+			},
+			complete: function() {
+				$.mobile.loading('hide');
+			},
+			success: function(data) {
+				if (data.status) {
+					alert(data.message);
+					$(".cat-popup").popup("close");
+					var cat_list_item = $('<div class="cat_list_item"></div>').append('<span class="cat_title">' + title + '</span><button class="ui-btn ui-btn-inline ui-corner-all orange-btn float-right cat-del-btn" type="button" data-cat-id="' + data.insert_id + '">刪除</button><div class="clearfix"></div>');
+					$(cat_list_item).appendTo($('#' + type + '_cat_list'));
+					$('.cat_list_item .cat-del-btn').off();
+					$('.cat_list_item .cat-del-btn').click(function(event) {
+						var btn = $(this);
+						var cat_id = $(this).jqmData("cat-id");
+						console.log(cat_id);
+						if (confirm('確定刪除此分類？') === true) {
+							$.ajax({
+								url: api_base + 'remove_category.php',
+								type: 'POST',
+								dataType: 'json',
+								data: {
+									cat_id: cat_id
+								}
+							}).done(function(data) {
+								if (data.status) {
+									$(btn).parents('.cat_list_item').remove();
+								}
+							}).fail(function() {
+								alert('請確認您的網路連線狀態！');
+							});
+						}
+					});
+				} else {
+					alert(data.message);
+					$(".cat-popup").popup("close");
 				}
 			},
 			error: function(request, error) {

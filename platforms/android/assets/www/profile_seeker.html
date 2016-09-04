@@ -164,6 +164,8 @@
                     </fieldset>
                     <span class="item_title">藝名：</span>
                     <sapn id="nickname-span"></sapn>
+                    <br><span class="item_title">應徵類別：</span>
+                    <sapn id="caregory-span"></sapn>
                     <br><span class="item_title">應徵地區：</span><span id="country-span"></span>
                     <br><span class="item_title">生日：</span><span id="birth-span"></span>
                     <br><span class="item_title">手機：</span><span id="mobile-span"></span>
@@ -179,9 +181,9 @@
                     <br><span class="item_title">最高學歷：</span><span id="education-span"></span>
                     <br><span class="item_title">可上班時段：</span><span id="workingtime-span"></span>
                     <br><span class="item_title">希望待遇：</span><span id="pay-span"></span>
-                    <br><span class="item_title">應徵內容：</span>
+                    <br><span class="item_title">[應徵內容]</span>
                     <br><span id="content-span"></span>
-                    <br><span class="item_title">已上傳圖片：</span>
+                    <span class="item_title">[已上傳圖片]</span>
                     <div id="pic_div"></div>
                     <a href="#jobseeker-resume-modify" class="ui-btn ui-corner-all">編輯資料</a>
                     <!-- <button id="member-submit-btn" class="ui-shadow ui-btn ui-corner-all" type="submit">編輯資料</button> -->
@@ -219,27 +221,23 @@
                             <input type="text" name="nickname-input" class="nickname-input" id="nickname-input" value="">
                         </div>
                         <div class="ui-field-contain">
-                            <label class="item_title" for="textinput-1">應徵類別</label>
-                            <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
-                                <select name="seeker_category" id="seeker_category">
-                                    <option value="1">種類一</option>
-                                    <option value="2">種類二</option>
-                                    <option value="3">種類三</option>
-                                </select>
-                            </fieldset>
+                            <label class="item_title" for="seeker_category">店家類別</label>
+                            <select name="seeker_category" id="seeker_category">
+                                <!-- <option value="1">The 1st Option</option>
+                                <option value="2">The 2nd Option</option>
+                                <option value="3">The 3rd Option</option>
+                                <option value="4">The 4th Option</option> -->
+                            </select>
                         </div>
                         <div class="ui-field-contain">
                             <label class="item_title" for="textinput-1">應徵地區</label>
-                            <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                            <fieldset data-role="controlgroup" data-type="horizontal">
                                 <select class="country-select" name="seeker_country" id="seeker_country">
                                     <!-- <option value="1">台灣</option>
                                     <option value="2">中國</option>
                                     <option value="3">日本</option> -->
                                 </select>
                                 <select class="area-select" name="seeker_area" id="seeker_area">
-                                    <!-- <option value="1">台北</option>
-                                    <option value="2">台南</option>
-                                    <option value="3">高雄</option> -->
                                 </select>
                             </fieldset>
                         </div>
