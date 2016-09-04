@@ -572,7 +572,7 @@ if (window.localStorage.getItem('auth') == '2') {
 		var page_id = '#' + $(this).attr('id');
 		console.log(page_id);
 		$.ajax({
-			url: api_base + 'get_club_offer.php?admin_id=' + window.localStorage.getItem('user_id'),
+			url: api_base + 'get_club_offer.php?club_id=' + window.localStorage.getItem('user_id'),
 			dataType: 'json'
 		}).success(function(data) {
 			if (data.status) {
