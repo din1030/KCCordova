@@ -175,7 +175,7 @@
                     </div>
                     <div class="ui-field-contain ui-disabled">
                         <label class="item_title" for="category-input">店家類別</label>
-                        <input type="text" name="category-input" class="ui-disabled category-input" id="category-input" value="夜店酒吧">
+                        <input type="text" name="category-input" class="ui-disabled category-input" id="category-input" value="">
                     </div>
                     <div class="ui-field-contain ui-disabled">
                         <label class="item_title" for="tel-input">電話</label>
@@ -189,7 +189,7 @@
                         <div class="">
                             <label class="item_title">營業時間</label>
                         </div>
-                        <input type="text" name="opentime1" class="ui-disabled opentime1" id="opentime1" value="">
+                        <input type="text" name="opentime1" class="ui-disabled opentime1" id="opentime1" value="" placeholder="（尚未填寫）">
                         <input type="text" name="opentime2" class="ui-disabled opentime2" id="opentime2" value="">
                         <input type="text" name="opentime3" class="ui-disabled opentime3" id="opentime3" value="">
                         <input type="text" name="opentime4" class="ui-disabled opentime4" id="opentime4" value="">
@@ -223,7 +223,6 @@
                             <label class="item_title">店家介紹</label>
                         </div>
                         <div class="description">
-                            店家介紹店家介紹店家介紹店家介紹店家介紹店家介紹店家介紹店家介紹店家介紹 店家介紹店家介紹店家介紹店家介紹店家介紹店家介紹店家介紹店家介紹店家介紹店家介紹
                         </div>
                     </div>
                     <a href="#club-info-modify" class="ui-btn ui-corner-all">編輯資料</a>
@@ -257,7 +256,7 @@
                     <div class="">
                         <div class="ui-field-contain">
                             <label class="item_title" for="name-input">店名</label>
-                            <input type="text" name="name-input" class="name-input" id="name-input" value="">
+                            <input type="text" name="name-input" class="name-input" id="name-input" value="" required>
                         </div>
                         <!-- <div class="ui-field-contain">
                         <label class="item_title" for="textinput-2">聯絡人</label>
@@ -269,7 +268,7 @@
                             </select>
                         </div>
                         <div class="ui-field-contain">
-                            <label class="item_title" for="textinput-1">地區</label>
+                            <label class="item_title" for="club_country">地區</label>
                             <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
                                 <select class="country-select" name="club_country" id="club_country">
                                     <!-- <option value="1">台灣</option>
@@ -282,7 +281,7 @@
                         </div>
                         <div class="ui-field-contain">
                             <label class="item_title" for="tel-input">電話</label>
-                            <input type="tel" name="tel-input" class=tel-input "" id="tel-input" value="">
+                            <input type="tel" name="tel-input" class=tel-input "" id="tel-input" value="" required>
                         </div>
                         <div class="ui-field-contain">
                             <label class="item_title" for="address-input">地址</label>
@@ -292,11 +291,11 @@
                             <div class="">
                                 <label class="item_title">營業時間</label>
                             </div>
-                            <input type="text" name="opentime1" class="opentime1" id="opentime1" value="星期三 22:00-04:00">
-                            <input type="text" name="opentime2" class="opentime2" id="opentime2" value="星期四 22:00-04:00">
-                            <input type="text" name="opentime3" class="opentime3" id="opentime3" value="星期五 22:00-04:00">
-                            <input type="text" name="opentime4" class="opentime4" id="opentime4" value="星期六 22:00-04:00">
-                            <input type="text" name="opentime5" class="opentime5" id="opentime5" value="星期日 22:00-04:00">
+                            <input type="text" name="opentime1" class="opentime1" id="opentime1" value="" placeholder="(例：星期一 09:00-20:00)" required>
+                            <input type="text" name="opentime2" class="opentime2" id="opentime2" value="" placeholder="(例：星期一 09:00-20:00)">
+                            <input type="text" name="opentime3" class="opentime3" id="opentime3" value="" placeholder="(例：星期一 09:00-20:00)">
+                            <input type="text" name="opentime4" class="opentime4" id="opentime4" value="" placeholder="(例：星期一 09:00-20:00)">
+                            <input type="text" name="opentime5" class="opentime5" id="opentime5" value="" placeholder="(例：星期一 09:00-20:00)">
                         </div>
                         <div class="ui-field-contain">
                             <label class="item_title" for="website-input">官方網站</label>
@@ -304,18 +303,8 @@
                         </div>
                         <div class="ui-field-contain">
                             <label class="item_title" for="slogan-input">店家標語</label>
-                            <input type="text" name="slogan-input" class="slogan-input" id="slogan-input" value="歡迎前來紐吧">
+                            <input type="text" name="slogan-input" class="slogan-input" id="slogan-input" value="歡迎前來紐吧" required>
                         </div>
-                        <!-- <div class="ui-field-contain">
-                        <label class="item_title" for="textinput-9">店家小圖</label>
-                        <input type="file" data-clear-btn="true" name="file-1" id="file-1" value="">
-                    </div> -->
-                        <!-- <span class="item_title">上傳圖片</span>
-                    <input type="file" data-clear-btn="true" name="file-2" id="file-2" value="">
-                    <input type="file" data-clear-btn="true" name="file-2" id="file-2" value="">
-                    <input type="file" data-clear-btn="true" name="file-2" id="file-2" value="">
-                    <input type="file" data-clear-btn="true" name="file-2" id="file-2" value="">
-                    <input type="file" data-clear-btn="true" name="file-2" id="file-2" value=""> -->
                         <div class="ui-field-contain">
                             <label class="item_title" for="video-input">影片連結</label>
                             <input type="url" name="video-input" class="video-input" id="video-input" value="">
