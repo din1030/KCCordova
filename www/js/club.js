@@ -230,7 +230,7 @@ $(document).on('pagebeforeshow', "#club-service", function() {
 			}
 			$('#promo_content').html(club.promo_content);
 			var week = [0, '星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日'];
-			if (club.title1 != null) {
+			if (club.title1 != null && club.title1 != '') {
 				var tabs = ['<div data-role="tabs" id="first_tabs" class="service-tabs"><div data-role="navbar"><ul>'];
 				var tab_content = [];
 				$('#consume_first > .ui-bar > h3').text(club.title1);
@@ -259,7 +259,7 @@ $(document).on('pagebeforeshow', "#club-service", function() {
 			} else {
 				$('#consume_first').hide();
 			}
-			if (club.title2 != null) {
+			if (club.title2 != null && club.title2 != '') {
 				var tabs = ['<div data-role="tabs" id="second_tabs" class="service-tabs"><div data-role="navbar"><ul>'];
 				var tab_content = [];
 				$('#consume_second > .ui-bar > h3').text(club.title2);
