@@ -94,21 +94,22 @@ if (window.localStorage.getItem('auth') == '3') {
 			dataType: 'json'
 		}).success(function(data) {
 			if (data.status) {
-				if (data.result[0].active == 1) {
+				var seeker = data.result[0];
+				if (seeker.active == 1) {
 					$('#open-resume').prop('checked', 'checked').flipswitch("refresh");
 				} else {
 					$('#open-resume').removeProp('checked').flipswitch("refresh");
 				}
-				$('#nickname-span').html(data.result[0].nickname);
-				$('#caregory-span').html(data.result[0].job_title);
-				$('#country-span').html(data.result[0].country + ' ' + data.result[0].area);
-				$('#birth-span').html(data.result[0].birth);
-				$('#mobile-span').html(data.result[0].mobile);
-				$('#height-span').html(data.result[0].height);
-				$('#weight-span').html(data.result[0].weight);
-				$('#measurements-span').html(data.result[0].measurements);
-				$('#education-span').html(data.result[0].education);
-				switch (data.result[0].singing) {
+				$('#nickname-span').html(seeker.nickname);
+				$('#caregory-span').html(seeker.job_title);
+				$('#country-span').html(seeker.country + ' ' + seeker.area);
+				$('#birth-span').html(seeker.birth);
+				$('#mobile-span').html(seeker.mobile);
+				$('#height-span').html(seeker.height);
+				$('#weight-span').html(seeker.weight);
+				$('#measurements-span').html(seeker.measurements);
+				$('#education-span').html(seeker.education);
+				switch (seeker.singing) {
 					case 'great':
 					default:
 						$('#singing-span').html('很好');
@@ -120,7 +121,7 @@ if (window.localStorage.getItem('auth') == '3') {
 						$('#singing-span').html('不佳');
 						break;
 				}
-				switch (data.result[0].dancing) {
+				switch (seeker.dancing) {
 					case 'great':
 					default:
 						$('#dancing-span').html('很好');
@@ -132,7 +133,7 @@ if (window.localStorage.getItem('auth') == '3') {
 						$('#dancing-span').html('不佳');
 						break;
 				}
-				switch (data.result[0].drinking) {
+				switch (seeker.drinking) {
 					case 'great':
 					default:
 						$('#drinking-span').html('很好');
@@ -144,7 +145,7 @@ if (window.localStorage.getItem('auth') == '3') {
 						$('#drinking-span').html('不佳');
 						break;
 				}
-				switch (data.result[0].cooperation) {
+				switch (seeker.cooperation) {
 					case 'great':
 					default:
 						$('#cooperation-span').html('很好');
@@ -156,7 +157,7 @@ if (window.localStorage.getItem('auth') == '3') {
 						$('#cooperation-span').html('不佳');
 						break;
 				}
-				switch (data.result[0].marital) {
+				switch (seeker.marital) {
 					case 'married':
 					default:
 						$('#marital-span').html('已婚');
@@ -168,7 +169,7 @@ if (window.localStorage.getItem('auth') == '3') {
 						$('#marital-span').html('離異');
 						break;
 				}
-				switch (data.result[0].workingtime) {
+				switch (seeker.workingtime) {
 					case 'afternoon':
 					default:
 						$('#workingtime-span').html('午班');
@@ -180,28 +181,31 @@ if (window.localStorage.getItem('auth') == '3') {
 						$('#workingtime-span').html('PT');
 						break;
 				}
-				$('#languages-span').html(data.result[0].languages);
-				$('#pay-span').html(data.result[0].pay);
-				$('#content-span').html(data.result[0].job_content.replace(/\n/g, "<br>"));
+				$.each(seeker.pic, function(idx, obj) {
+					$('#pic_div').append('<div>' + obj + '</div>')
+				});
+				$('#languages-span').html(seeker.languages);
+				$('#pay-span').html(seeker.pay);
+				$('#content-span').html(seeker.job_content.replace(/\n/g, "<br>"));
 				// modify
-				$('.nickname-input').val(data.result[0].nickname);
-				$('#seeker_category').val(data.result[0].category);
-				$('select#seeker_country').val(data.result[0].country_id).selectmenu('refresh');
-				$('select#seeker_area').val(data.result[0].area_id).selectmenu('refresh');
-				$('.mobile-input').val(data.result[0].mobile);
-				$('#height-input').val(data.result[0].height);
-				$('#weight-input').val(data.result[0].weight);
-				$('#education-input').val(data.result[0].education);
-				$('#lang-input').val(data.result[0].languages);
-				$('#measurements-input').val(data.result[0].measurements);
-				$('#pay-input').val(data.result[0].pay);
-				$("[name='singing'][value='" + data.result[0].singing + "']").prop("checked", true).checkboxradio("refresh");
-				$("[name='dancing'][value='" + data.result[0].dancing + "']").prop("checked", true).checkboxradio("refresh");
-				$("[name='drinking'][value='" + data.result[0].drinking + "']").prop("checked", true).checkboxradio("refresh");
-				$("[name='cooperation'][value='" + data.result[0].cooperation + "']").prop("checked", true).checkboxradio("refresh");
-				$("[name='marital'][value='" + data.result[0].marital + "']").prop("checked", true).checkboxradio("refresh");
-				$("[name='worktime'][value='" + data.result[0].workingtime + "']").prop("checked", true).checkboxradio("refresh");
-				$('#job_content').val(data.result[0].job_content);
+				$('.nickname-input').val(seeker.nickname);
+				$('#seeker_category').val(seeker.category);
+				$('select#seeker_country').val(seeker.country_id).selectmenu('refresh');
+				$('select#seeker_area').val(seeker.area_id).selectmenu('refresh');
+				$('.mobile-input').val(seeker.mobile);
+				$('#height-input').val(seeker.height);
+				$('#weight-input').val(seeker.weight);
+				$('#education-input').val(seeker.education);
+				$('#lang-input').val(seeker.languages);
+				$('#measurements-input').val(seeker.measurements);
+				$('#pay-input').val(seeker.pay);
+				$("[name='singing'][value='" + seeker.singing + "']").prop("checked", true).checkboxradio("refresh");
+				$("[name='dancing'][value='" + seeker.dancing + "']").prop("checked", true).checkboxradio("refresh");
+				$("[name='drinking'][value='" + seeker.drinking + "']").prop("checked", true).checkboxradio("refresh");
+				$("[name='cooperation'][value='" + seeker.cooperation + "']").prop("checked", true).checkboxradio("refresh");
+				$("[name='marital'][value='" + seeker.marital + "']").prop("checked", true).checkboxradio("refresh");
+				$("[name='worktime'][value='" + seeker.workingtime + "']").prop("checked", true).checkboxradio("refresh");
+				$('#job_content').val(seeker.job_content);
 				$.ajax({
 					url: api_base + 'get_form_content.php?action=get_category&type=job',
 					dataType: 'json'
@@ -212,7 +216,7 @@ if (window.localStorage.getItem('auth') == '3') {
 						classificationList += '<option value="' + obj.id + '">' + obj.title + '</option>';
 					});
 					$('#seeker_category').html(classificationList);
-					$('#seeker_category').val(data.result[0].seek_category).selectmenu('refresh');
+					$('#seeker_category').val(seeker.seek_category).selectmenu('refresh');
 				});
 			}
 		}).fail(function() {
