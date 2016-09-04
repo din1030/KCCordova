@@ -40,7 +40,7 @@ if ($sql->num_rows > 0) {
     }
 } else {
     // 儲存資料
-    $insert_string = "INSERT INTO `club_offer`(`admin_id`, `interviewer`, `tel`, `line`, `offer_content`, `welfare`, `created`) VALUES ('$admin_id','$interviewer','$tel','$line','$offer_content','$welfare', NULL)";
+    $insert_string = "INSERT INTO `club_offer`(`admin_id`, `interviewer`, `tel`, `line`, `offer_content`, `welfare`, `created`) VALUES ('$admin_id','$interviewer','$tel','$line','$offer_content','$welfare', NOW())";
     $mysqli->query($insert_string);
     if ($mysqli->affected_rows > 0) {
         if (move_uploaded_file($_FILES['interviewer_pic']['tmp_name'], $target_file)) {
