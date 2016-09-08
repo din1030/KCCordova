@@ -24,7 +24,7 @@ if ($mysqli->query($insert_string)) {
         $pic_string = "UPDATE `news` SET `pic`='$new_filename' WHERE `id`=$last_id";
     }
 
-    $output = array('status' => true, 'message' => '最新消息資料已修改！');
+    $output = array('status' => true, 'message' => '已新增最新消息！');
     echo json_encode($output);
 
     return;

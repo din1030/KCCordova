@@ -17,8 +17,10 @@ $target_dir = '../www/img/';
 $new_filename = 'news_'.$news_id.'_'.basename($_FILES['news_edit_pic']['name']);
 $target_file = $target_dir.$new_filename;
 
-if (move_uploaded_file($_FILES['news_edit_pic']['tmp_name'], $target_file)) {
-    $pic_string = ",`pic`='".$new_filename."'";
+if (file_exists($_FILES['thumb']['tmp_name']) && is_uploaded_file($_FILES['thumb']['tmp_name'])) {
+    if (move_uploaded_file($_FILES['news_edit_pic']['tmp_name'], $target_file)) {
+        $pic_string = ",`pic`='".$new_filename."'";
+    }
 }
 
 $update_string = "UPDATE `news` SET `title`='$news_title'".$pic_string.",`content`='$news_content',`start_date`='$news_start',`end_date`='$news_end',`order_no`='$news_order' WHERE `id`='$news_id'";
