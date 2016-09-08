@@ -21,7 +21,7 @@ if (move_uploaded_file($_FILES['news_edit_pic']['tmp_name'], $target_file)) {
     $pic_string = ",`pic`='".$new_filename."'";
 }
 
-$update_string = "UPDATE `news` SET `title`='$news_title'".$pic_string."',`content`='$news_content',`start_date`='$news_start',`end_date`='$news_end',`order_no`='$news_order' WHERE `id`='$news_id'";
+$update_string = "UPDATE `news` SET `title`='$news_title'".$pic_string.",`content`='$news_content',`start_date`='$news_start',`end_date`='$news_end',`order_no`='$news_order' WHERE `id`='$news_id'";
 if ($mysqli->query($update_string)) {
     $output = array('status' => true, 'message' => '最新消息資料已修改！');
     echo json_encode($output);

@@ -651,28 +651,59 @@ $(document).on('pagebeforeshow', "#admin-news-edit", function() {
 	}).fail(function() {
 		alert('請確認您的網路連線狀態！');
 	});
-	$(this).ajaxSubmit({
-		url: api_base + 'edit_news.php',
-		data: {
-			news_id: currentNewsId
-		},
-		type: 'POST',
-		dataType: 'json',
-		beforeSend: function() {
-			$.mobile.loading('show');
-		},
-		complete: function() {
-			$.mobile.loading('hide');
-		},
-		success: function(data) {
-			alert(data.message);
-			$.mobile.changePage($('#admin-news'), {
-				reloadPage: true,
-				changeHash: true
-			});
-		},
-		error: function(request, error) {
-			alert('請確認您的網路連線狀態！');
-		}
+	$('#news-edit-form').off();
+	$('#news-edit-form').on('submit', function(e) {
+		e.preventDefault(); // prevent native submit
+		$(this).ajaxSubmit({
+			url: api_base + 'edit_news.php',
+			data: {
+				news_id: currentNewsId
+			},
+			type: 'POST',
+			dataType: 'json',
+			beforeSend: function() {
+				$.mobile.loading('show');
+			},
+			complete: function() {
+				$.mobile.loading('hide');
+			},
+			success: function(data) {
+				alert(data.message);
+				$.mobile.changePage($('#admin-news'), {
+					reloadPage: true,
+					changeHash: true
+				});
+			},
+			error: function(request, error) {
+				alert('請確認您的網路連線狀態！');
+			}
+		});
+	});
+});
+$(document).on('pagebeforeshow', "#admin-news-add", function() {
+	$('#news-add-form').off();
+	$('#news-add-form').on('submit', function(e) {
+		e.preventDefault(); // prevent native submit
+		$(this).ajaxSubmit({
+			url: api_base + 'add_news.php',
+			type: 'POST',
+			dataType: 'json',
+			beforeSend: function() {
+				$.mobile.loading('show');
+			},
+			complete: function() {
+				$.mobile.loading('hide');
+			},
+			success: function(data) {
+				alert(data.message);
+				$.mobile.changePage($('#admin-news'), {
+					reloadPage: true,
+					changeHash: true
+				});
+			},
+			error: function(request, error) {
+				alert('請確認您的網路連線狀態！');
+			}
+		});
 	});
 });

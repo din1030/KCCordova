@@ -14,15 +14,16 @@ $news_content = $_POST['news_content'];
 
 $pic_string = '';
 $target_dir = '../www/img/';
-$new_filename = 'news_'.$news_id.'_'.basename($_FILES['news_pic']['name']);
-$target_file = $target_dir.$new_filename;
-
-if (move_uploaded_file($_FILES['news_pic']['tmp_name'], $target_file)) {
-    $pic_string = ",`pic`='".$new_filename."'";
-}
 
 $insert_string = "INSERT INTO `news`(`title`, `content`, `start_date`, `end_date`, `order_no`, `created`) VALUES ('$news_title','$news_content','$news_start','$news_end','$news_order',NOW())";
 if ($mysqli->query($insert_string)) {
+    $last_id = $mysqli->insert_id;
+    $new_filename = 'news_'.$last_id.'_'.basename($_FILES['news_pic']['name']);
+    $target_file = $target_dir.$new_filename;
+    if (move_uploaded_file($_FILES['news_pic']['tmp_name'], $target_file)) {
+        $pic_string = "UPDATE `news` SET `pic`='$new_filename' WHERE `id`=$last_id";
+    }
+
     $output = array('status' => true, 'message' => '最新消息資料已修改！');
     echo json_encode($output);
 
