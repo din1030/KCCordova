@@ -707,3 +707,27 @@ $(document).on('pagebeforeshow', "#admin-news-add", function() {
 		});
 	});
 });
+$(document).on('pagebeforeshow', "#admin-messages", function() {
+	$('#admin-msg-form').off();
+	$('#admin-msg-form').on('submit', function(e) {
+		e.preventDefault(); // prevent native submit
+		$(this).ajaxSubmit({
+			url: api_base + 'add_official_msg.php',
+			type: 'POST',
+			dataType: 'json',
+			resetForm: true,
+			beforeSend: function() {
+				$.mobile.loading('show');
+			},
+			complete: function() {
+				$.mobile.loading('hide');
+			},
+			success: function(data) {
+				alert(data.message);
+			},
+			error: function(request, error) {
+				alert('請確認您的網路連線狀態！');
+			}
+		});
+	});
+});
