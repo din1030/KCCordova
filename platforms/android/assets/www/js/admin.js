@@ -515,6 +515,53 @@ $(document).on('pagebeforeshow', "#admin-category", function() {
 			error: function(request, error) {
 				alert('請確認您的網路連線狀態！');
 			}
-		})
+		});
+	});
+});
+$(document).on('pagebeforeshow', "#admin-authority", function() {
+	$.ajax({
+		url: api_base + 'get_policy.php',
+		dataType: 'json'
+	}).done(function(data) {
+		if (data.status) {
+			$('#about_text').html(data.result.about);
+			$('#service_text').html(data.result.service);
+			$('#use_text').html(data.result.use);
+			$('#privacy_text').html(data.result.privacy);
+		}
+	}).fail(function() {
+		alert('請確認您的網路連線狀態！');
+	});
+	$('form.policy-form').on('submit', function(e) {
+		e.preventDefault(); // prevent native submit
+		var policy = $(this).jqmData("policy");
+		console.log(policy);
+		$(this).ajaxSubmit({
+			url: api_base + 'update_policy.php',
+			data: {
+				policy: policy
+			},
+			type: 'POST',
+			dataType: 'json',
+			beforeSend: function() {
+				$.mobile.loading('show');
+			},
+			complete: function() {
+				$.mobile.loading('hide');
+			},
+			success: function(data) {
+				if (data.status) {
+					alert(data.message);
+					$(".policy-popup").popup("close");
+
+				} else {
+					alert(data.message);
+					$(".policy-popup").popup("close");
+				}
+			},
+			error: function(request, error) {
+				alert('請確認您的網路連線狀態！');
+			}
+		});
 	});
 });

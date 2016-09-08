@@ -139,6 +139,18 @@ $(document).on('pagecreate', '#app-reg', function() {
 		$('#app-reg-form').valid();
 		// return false; // cancel original event to prevent form submitting
 	});
+
+	$.ajax({
+		url: api_base + 'get_policy.php',
+		dataType: 'json'
+	}).done(function(data) {
+		if (data.status) {
+			$('#service_policy').html('<p>' + data.result.service + '</p>');
+		}
+	}).fail(function() {
+		alert('請確認您的網路連線狀態！');
+	});
+
 });
 
 $(document).on('pagecreate', '#fb-reg', function() {

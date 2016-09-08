@@ -7,9 +7,11 @@ include 'db_setting.php';
 
 $news_id = $_GET['news_id'];
 
-$sql_string = 'SELECT * FROM `news` WHERE NOW() BETWEEN `start_date` AND `end_date` ORDER BY `order_no`';
+$sql_string = 'SELECT * FROM `news` WHERE NOW() BETWEEN `start_date` AND `end_date`';
 if (!empty($news_id)) {
-    $sql_string .= " AND `id`=$news_id LIMIT 1";
+    $sql_string .= " AND `id`=$news_id ORDER BY `order_no` LIMIT 1";
+} else {
+    $sql_string .= ' ORDER BY `order_no`';
 }
 
 $sql = $mysqli->query($sql_string);

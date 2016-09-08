@@ -4,7 +4,20 @@ $(document).on('pagecreate', "[data-role='page']", function() {
 		$.mobile.changePage("#home");
 	}
 });
+$(document).on('pagebeforeshow', '#disclaimer', function() {
 
+	$.ajax({
+		url: api_base + 'get_policy.php',
+		dataType: 'json'
+	}).done(function(data) {
+		if (data.status) {
+			$('#pre_service_policy').html('<p>' + data.result.service + '</p>');
+			$('#pre_privacy_policy').html('<p>' + data.result.privacy + '</p>');
+		}
+	}).fail(function() {
+		alert('請確認您的網路連線狀態！');
+	});
+});
 $(document).on('pagecreate', '#login', function() {
 	$('#fb_login_btn').click(function(event) {
 		facebookConnectPlugin.getLoginStatus(
@@ -139,6 +152,18 @@ $(document).on('pagecreate', '#app-reg', function() {
 		$('#app-reg-form').valid();
 		// return false; // cancel original event to prevent form submitting
 	});
+
+	$.ajax({
+		url: api_base + 'get_policy.php',
+		dataType: 'json'
+	}).done(function(data) {
+		if (data.status) {
+			$('#service_policy').html('<p>' + data.result.service + '</p>');
+		}
+	}).fail(function() {
+		alert('請確認您的網路連線狀態！');
+	});
+
 });
 
 $(document).on('pagecreate', '#fb-reg', function() {

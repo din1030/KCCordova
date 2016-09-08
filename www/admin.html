@@ -1310,7 +1310,7 @@
                 </div>
                 <a href="#admin-news-edit" class="ui-btn ui-corner-all ui-btn-inline purple-btn float-right">新增消息</a>
                 <div class="clearfix"></div>
-                <div class="news_info_block">
+                <!-- <div class="news_info_block">
                     <p class="news_title">推薦朋友送禮券</p>
                     <div class="news_during">
                         <div>
@@ -1331,8 +1331,51 @@
                             <div class="clearfix"></div>
                         </div>
                     </div>
+                </div> -->
+                <!-- <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn">送出</button> -->
+            </div>
+        </div>
+
+        <!-- admin news add -->
+        <div data-role="page" id="admin-news-add" data-theme="a" data-title="admin-news" class="admin-page">
+            <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
+                <div style="width:100%; text-align:center;">
+                    <a href="#menu-panel" class="ui-link">
+                        <div id="menu-btn" class="header-btn header-link left-link"></div>
+                    </a>
+                    <span class="page-title">管理者後台</span>
+                    <a href="#admin-news" class="ui-link">
+                        <div class="header-btn header-link right-link" style="width:auto">取消</div>
+                    </a>
                 </div>
-                <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn">送出</button>
+            </div>
+            <!-- /header -->
+            <div data-role="main" class="ui-content" id="admin-news-add-main">
+                <form id="news-add-form" enctype="multipart/form-data">
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="news_title"><strong>標題：</strong></label>
+                        <input type="text" name="news_title" class="" id="news_title" value="">
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="news_start">上架時間：</label>
+                        <input type="date" name="news_start" class="" id="news_start" value="2016-07-01">
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="news_end">下架時間：</label>
+                        <input type="date" name="news_end" class="" id="news_end" value="2016-10-31">
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="news_order">排序：</label>
+                        <input type="number" name="news_order" class="" id="news_order" value="0" min="0">
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="news_pic"><strong>圖片：</strong></label>
+                        <input type="file" name="news_pic" class="" id="news_pic" value="">
+                    </div>
+                    <label class="item_title" for="news_content"><strong>內容：</strong></label>
+                    <textarea wrap="virtual" name="news_content" rows="8"></textarea>
+                    <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn">完成</button>
+                </form>
             </div>
         </div>
 
@@ -1351,29 +1394,35 @@
             </div>
             <!-- /header -->
             <div data-role="main" class="ui-content" id="admin-news-edit-main">
-                <div class="ui-field-contain">
-                    <label class="item_title" for="news_title"><strong>標題：</strong></label>
-                    <input type="text" name="news_title" class="" id="news_title" value="">
-                </div>
-                <div class="ui-field-contain">
-                    <label class="item_title" for="news_start">上架時間：</label>
-                    <input type="date" name="news_start" class="" id="news_start" value="2016-07-01">
-                </div>
-                <div class="ui-field-contain">
-                    <label class="item_title" for="news_end">下架時間：</label>
-                    <input type="date" name="news_end" class="" id="news_end" value="2016-10-31">
-                </div>
-                <div class="ui-field-contain">
-                    <label class="item_title" for="news_order">排序：</label>
-                    <input type="number" name="news_order" class="" id="news_order" value="0" min="0">
-                </div>
-                <div class="ui-field-contain">
-                    <label class="item_title" for="news_pic"><strong>圖片：</strong></label>
-                    <input type="file" name="news_pic" class="" id="news_pic" value="">
-                </div>
-                <label class="item_title" for="news_content"><strong>內容：</strong></label>
-                <textarea wrap="virtual" name="news_content" rows="8"></textarea>
-                <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn">完成</button>
+                <form id="news-edit-form" enctype="multipart/form-data">
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="news_title"><strong>標題：</strong></label>
+                        <input type="text" name="news_title" class="" id="news_title" value="">
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="news_start">上架時間：</label>
+                        <input type="date" name="news_start" class="" id="news_start" value="2016-07-01">
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="news_end">下架時間：</label>
+                        <input type="date" name="news_end" class="" id="news_end" value="2016-10-31">
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="news_order">排序：</label>
+                        <input type="number" name="news_order" class="" id="news_order" value="0" min="0">
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="news_pic"><strong>圖片：</strong></label>
+                        <span id="current_pic"></span>
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="news_pic"><strong>圖片：</strong></label>
+                        <input type="file" name="news_pic" class="" id="news_pic" value="">
+                    </div>
+                    <label class="item_title" for="news_content"><strong>內容：</strong></label>
+                    <textarea wrap="virtual" name="news_content" rows="8"></textarea>
+                    <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn">完成</button>
+                </form>
             </div>
         </div>
 
