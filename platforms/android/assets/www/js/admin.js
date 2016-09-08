@@ -1,6 +1,8 @@
 var adminLifeJson = '';
 var currentCatId;
 var currentStoreId;
+var adminNewsJson = '';
+var currentNewsId;
 
 $(document).one("pagebeforeshow", "[data-role='page']", function() {
 	if (window.localStorage.getItem('auth') == null || window.localStorage.getItem('user_id') == null) {
@@ -285,8 +287,12 @@ $(document).on('pagebeforeshow', "#admin-lifeservice-store", function() {
 					data: {
 						store_id: currentStoreId
 					}
-				}).done(function() {
-					$(btn).parents('.life_store_block').remove();
+				}).done(function(data) {
+					if (data.status) {
+						$(btn).parents('.life_store_block').remove();
+					} else {
+						alert('請重新操作！');
+					}
 				}).fail(function() {
 					alert('請確認您的網路連線狀態！');
 				});
@@ -418,6 +424,8 @@ $(document).on('pagebeforeshow', "#admin-category", function() {
 					}).done(function(data) {
 						if (data.status) {
 							$(btn).parents('.cat_list_item').remove();
+						} else {
+							alert('請重新操作！');
 						}
 					}).fail(function() {
 						alert('請確認您的網路連線狀態！');
@@ -451,6 +459,8 @@ $(document).on('pagebeforeshow', "#admin-category", function() {
 					}).done(function(data) {
 						if (data.status) {
 							$(btn).parents('.cat_list_item').remove();
+						} else {
+							alert('請重新操作！');
 						}
 					}).fail(function() {
 						alert('請確認您的網路連線狀態！');
@@ -473,6 +483,7 @@ $(document).on('pagebeforeshow', "#admin-category", function() {
 			},
 			type: 'POST',
 			dataType: 'json',
+			clearForm: true,
 			beforeSend: function() {
 				$.mobile.loading('show');
 			},
@@ -558,6 +569,161 @@ $(document).on('pagebeforeshow', "#admin-authority", function() {
 					alert(data.message);
 					$(".policy-popup").popup("close");
 				}
+			},
+			error: function(request, error) {
+				alert('請確認您的網路連線狀態！');
+			}
+		});
+	});
+});
+$(document).on('pagebeforeshow', "#admin-news", function() {
+	$.ajax({
+		url: api_base + 'get_news.php',
+		dataType: 'json'
+	}).done(function(data) {
+		if (data.status) {
+			$('.news_info_block').remove();
+			$.each(data.result, function(idx, obj) {
+				var news_info_block = $('<div class="news_info_block"></div>').append('<p class="news_title">' + obj.title + '</p>').append('<div class="news_during"><div><span class="item_title">上架時間：</span><span>' + obj.start_date + '</span></div><div><span class="item_title">下架時間：</span><span>' + obj.end_date + '</span></div></div>').append('<div class="news_operation"> <div><span class="item_title">排序：</span><span>' + obj.order_no + '</span><button type="button" class="ui-btn ui-corner-all ui-btn-inline news-del-btn" data-news-id="' + obj.id + '">刪除</button><a class="ui-btn ui-corner-all ui-btn-inline new-edit-btn" data-news-id="' + obj.id + '">編輯</a><div class="clearfix"></div></div> </div>');
+				$(news_info_block).appendTo('#admin-news-main');
+			});
+			$('.news_info_block a.new-edit-btn').click(function(event) {
+				var news_id = $(this).jqmData("news-id");
+				console.log(news_id);
+				currentNewsId = news_id;
+				$.mobile.changePage($('#admin-news-edit'), {
+					reloadPage: true,
+					changeHash: true
+				});
+			});
+			$('.news_info_block .news-del-btn').click(function(event) {
+				var btn = $(this);
+				var news_id = $(this).jqmData("news-id");
+				console.log(news_id);
+				currentNewsId = news_id;
+				if (confirm('確定刪除此消息？') === true) {
+					$.ajax({
+						url: api_base + 'remove_news.php',
+						type: 'POST',
+						dataType: 'json',
+						data: {
+							news_id: currentNewsId
+						}
+					}).done(function(data) {
+						if (data.status) {
+							$(btn).parents('.news_info_block').remove();
+						} else {
+							alert('請重新操作！');
+						}
+					}).fail(function() {
+						alert('請確認您的網路連線狀態！');
+					});
+				}
+			});
+		} else {
+			$('<p>暫無最新消息</p>').appendTo('#admin-news-main');
+		}
+	}).fail(function() {
+		alert('請確認您的網路連線狀態！');
+	});
+});
+
+$(document).on('pagebeforeshow', "#admin-news-edit", function() {
+	$.ajax({
+		url: api_base + 'get_news.php?news_id=' + currentNewsId,
+		dataType: 'json'
+	}).done(function(data) {
+		if (data.status) {
+			var news = data.result[0];
+			$('#news_edit_title').val(news.title);
+			$('#news_edit_start').val(news.start_date);
+			$('#news_edit_end').val(news.end_date);
+			$('#current_pic').text(news.pic);
+			$('#news_edit_order').val(news.order_no);
+			$('#news_edit_content').val(news.content);
+		} else {
+			alert('請重新操作！');
+			$.mobile.changePage($('#admin-news'), {
+				reloadPage: true,
+				changeHash: true
+			});
+		}
+	}).fail(function() {
+		alert('請確認您的網路連線狀態！');
+	});
+	$('#news-edit-form').off();
+	$('#news-edit-form').on('submit', function(e) {
+		e.preventDefault(); // prevent native submit
+		$(this).ajaxSubmit({
+			url: api_base + 'edit_news.php',
+			data: {
+				news_id: currentNewsId
+			},
+			type: 'POST',
+			dataType: 'json',
+			beforeSend: function() {
+				$.mobile.loading('show');
+			},
+			complete: function() {
+				$.mobile.loading('hide');
+			},
+			success: function(data) {
+				alert(data.message);
+				$.mobile.changePage($('#admin-news'), {
+					reloadPage: true,
+					changeHash: true
+				});
+			},
+			error: function(request, error) {
+				alert('請確認您的網路連線狀態！');
+			}
+		});
+	});
+});
+$(document).on('pagebeforeshow', "#admin-news-add", function() {
+	$('#news-add-form').off();
+	$('#news-add-form').on('submit', function(e) {
+		e.preventDefault(); // prevent native submit
+		$(this).ajaxSubmit({
+			url: api_base + 'add_news.php',
+			type: 'POST',
+			dataType: 'json',
+			beforeSend: function() {
+				$.mobile.loading('show');
+			},
+			complete: function() {
+				$.mobile.loading('hide');
+			},
+			success: function(data) {
+				alert(data.message);
+				$.mobile.changePage($('#admin-news'), {
+					reloadPage: true,
+					changeHash: true
+				});
+			},
+			error: function(request, error) {
+				alert('請確認您的網路連線狀態！');
+			}
+		});
+	});
+});
+$(document).on('pagebeforeshow', "#admin-messages", function() {
+	$('#admin-msg-form').off();
+	$('#admin-msg-form').on('submit', function(e) {
+		e.preventDefault(); // prevent native submit
+		$(this).ajaxSubmit({
+			url: api_base + 'add_official_msg.php',
+			type: 'POST',
+			dataType: 'json',
+			resetForm: true,
+			beforeSend: function() {
+				$.mobile.loading('show');
+			},
+			complete: function() {
+				$.mobile.loading('hide');
+			},
+			success: function(data) {
+				alert(data.message);
 			},
 			error: function(request, error) {
 				alert('請確認您的網路連線狀態！');

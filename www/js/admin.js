@@ -5,12 +5,12 @@ var adminNewsJson = '';
 var currentNewsId;
 
 $(document).one("pagebeforeshow", "[data-role='page']", function() {
-	if (window.localStorage.getItem('auth') == null || window.localStorage.getItem('user_id') == null) {
+	if (window.localStorage.getItem('auth') != '0') {
+		alert('您不是系統管理員！');
+		document.location.href = './index.html';
+	} else if (window.localStorage.getItem('auth') == null || window.localStorage.getItem('user_id') == null) {
 		alert('您尚未登入！');
-		$.mobile.changePage('./index.html', {
-			reloadPage: true,
-			changeHash: true
-		});
+		document.location.href = './index.html';
 	}
 });
 
@@ -26,7 +26,6 @@ $(document).on('pagebeforeshow', "[data-role='page'].admin-page", function() {
 	// $('#' + page_id + ' span.navigateToPage').text(title);
 });
 
-// $(".admin-page").ready(function() {
 $(document).on('pagecreate', ".admin-page", function() {
 	$(this).find('select.navigateToPage').change(function() {
 		var page = $(this).val();
@@ -707,6 +706,7 @@ $(document).on('pagebeforeshow', "#admin-news-add", function() {
 		});
 	});
 });
+
 $(document).on('pagebeforeshow', "#admin-messages", function() {
 	$('#admin-msg-form').off();
 	$('#admin-msg-form').on('submit', function(e) {
@@ -716,6 +716,44 @@ $(document).on('pagebeforeshow', "#admin-messages", function() {
 			type: 'POST',
 			dataType: 'json',
 			resetForm: true,
+			beforeSend: function() {
+				$.mobile.loading('show');
+			},
+			complete: function() {
+				$.mobile.loading('hide');
+			},
+			success: function(data) {
+				alert(data.message);
+			},
+			error: function(request, error) {
+				alert('請確認您的網路連線狀態！');
+			}
+		});
+	});
+});
+
+$(document).on('pagebeforeshow', "#admin-plan", function() {
+	$.ajax({
+		url: api_base + 'get_policy.php',
+		dataType: 'json'
+	}).done(function(data) {
+		if (data.status) {
+			$('#pay_method').html(data.result.pay_method);
+		}
+	}).fail(function() {
+		alert('請確認您的網路連線狀態！');
+	});
+	$('form.policy-form').on('submit', function(e) {
+		e.preventDefault(); // prevent native submit
+		var policy = $(this).jqmData("policy");
+		console.log(policy);
+		$(this).ajaxSubmit({
+			url: api_base + 'update_policy.php',
+			data: {
+				policy: policy
+			},
+			type: 'POST',
+			dataType: 'json',
 			beforeSend: function() {
 				$.mobile.loading('show');
 			},

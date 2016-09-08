@@ -6,7 +6,7 @@ header('Access-Control-Allow-Methods: GET, POST');
 include 'db_setting.php';
 
 $type = $_GET['type'];
-$sql_string = 'SELECT * FROM `official_message` WHERE `type`=0 OR `type`='.$type;
+$sql_string = 'SELECT * FROM `official_message` WHERE `type`=0 OR `type`='.$type.' ORDER BY `id` DESC';
 $sql = $mysqli->query($sql_string);
 if ($sql->num_rows > 0) {
     while ($r = mysqli_fetch_assoc($sql)) {

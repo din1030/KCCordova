@@ -12,7 +12,7 @@ $content = $_POST['msg_content'];
 $sql_string = "INSERT INTO `official_message`(`type`,`title`,`content`,`created`) VALUES('$type','$title','$content',NOW())";
 $result = $mysqli->query($sql_string);
 if ($mysqli->affected_rows > 0) {
-    $output = array('status' => true, 'message' => '已新增分類！');
+    $output = array('status' => true, 'message' => '已傳送站內訊息！');
     echo json_encode($output);
 
     return;

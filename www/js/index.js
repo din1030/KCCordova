@@ -4,8 +4,8 @@ $(document).on('pagecreate', "[data-role='page']", function() {
 		$.mobile.changePage("#home");
 	}
 });
-$(document).on('pagebeforeshow', '#disclaimer', function() {
 
+$(document).on('pagebeforeshow', '#disclaimer', function() {
 	$.ajax({
 		url: api_base + 'get_policy.php',
 		dataType: 'json'
@@ -18,6 +18,7 @@ $(document).on('pagebeforeshow', '#disclaimer', function() {
 		alert('請確認您的網路連線狀態！');
 	});
 });
+
 $(document).on('pagecreate', '#login', function() {
 	$('#fb_login_btn').click(function(event) {
 		facebookConnectPlugin.getLoginStatus(
