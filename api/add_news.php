@@ -22,6 +22,7 @@ if ($mysqli->query($insert_string)) {
     $target_file = $target_dir.$new_filename;
     if (move_uploaded_file($_FILES['news_pic']['tmp_name'], $target_file)) {
         $pic_string = "UPDATE `news` SET `pic`='$new_filename' WHERE `id`=$last_id";
+        $mysqli->query($pic_string);
     }
 
     $output = array('status' => true, 'message' => '已新增最新消息！');
