@@ -15,15 +15,14 @@ $sql_string = 'SELECT u.`id`, u.`type`, u.`name`, u.`created` FROM `user` u'.$ty
 $sql = $mysqli->query($sql_string);
 if ($sql->num_rows > 0) {
     while ($r = mysqli_fetch_assoc($sql)) {
-        $r['created'] = date('Y/m/d H:i', strtotime($r['updated']));
+        $r['created'] = date('Y/m/d H:i', strtotime($r['created']));
         $output[] = $r;
     }
     $amt_string = "SELECT `type`, count(*) amt FROM `user` WHERE `type`!='0' GROUP BY `type`";
     $amt_result = $mysqli->query($amt_string);
     while ($r = mysqli_fetch_assoc($amt_result)) {
-        $amount[$r['type']] = $r['amt'];
+        $amount[] = $r;
     }
-
     echo json_encode(array('status' => true, 'result' => $output, 'amount' => $amount));
 
     return;

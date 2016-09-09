@@ -795,15 +795,15 @@ $(document).on('pagebeforeshow', "#admin-member", function() {
 				}
 			});
 			$.each(data.amount, function(idx, obj) {
-				switch (obj.idx) {
+				switch (obj.type) {
 					case '1':
-						$('#normal_num').append(obj);
+						$('#normal_num').append(obj.amt);
 						break;
 					case '2':
-						$('#club_num').append(obj);
+						$('#club_num').append(obj.amt);
 						break;
 					case '3':
-						$('#seeker_num').append(obj);
+						$('#seeker_num').append(obj.amt);
 						break;
 					default:
 						break;
