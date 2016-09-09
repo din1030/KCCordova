@@ -19,7 +19,7 @@ if ($sql->num_rows > 0) {
         $output[] = $r;
     }
     $amt_string = "SELECT `type`, count(*) amt FROM `user` WHERE `type`!='0' GROUP BY `type`";
-    $amt_result = $mysqli->query($sql_string);
+    $amt_result = $mysqli->query($amt_string);
     while ($r = mysqli_fetch_assoc($amt_result)) {
         $amount[$r['type']] = $r['amt'];
     }
