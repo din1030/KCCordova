@@ -3,6 +3,7 @@ var currentCatId;
 var currentStoreId;
 var adminNewsJson = '';
 var currentNewsId;
+var currentUserId;
 
 $(document).one("pagebeforeshow", "[data-role='page']", function() {
 	if (window.localStorage.getItem('auth') != '0') {
@@ -779,7 +780,7 @@ $(document).on('pagebeforeshow', "#admin-member", function() {
 			var user = data.result;
 			$('.list_table tbody').empty();
 			$.each(user, function(idx, obj) {
-				var user_tr = '<tr><td>' + obj.created + '</td><td>' + obj.name + '</td><td><a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn" data-user-id="' + obj.id + '">進入</a></td></tr>';
+				var user_tr = '<tr><td>' + obj.created + '</td><td>' + obj.name + '</td><td><a class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn user-detial-btn" data-user-id="' + obj.id + '">進入</a></td></tr>';
 				switch (obj.type) {
 					case '1':
 						$('#normal-table tbody').append(user_tr);
@@ -793,6 +794,15 @@ $(document).on('pagebeforeshow', "#admin-member", function() {
 					default:
 						break;
 				}
+			});
+			$('.user-detial-btn').off();
+			$('.user-detial-btn').click(function(event) {
+				var user_id = $(this).jqmData("user-id");
+				currentUserId = user_id;
+				$.mobile.changePage($('#admin-member-detail'), {
+					reloadPage: true,
+					changeHash: true
+				});
 			});
 			$.each(data.amount, function(idx, obj) {
 				switch (obj.type) {
@@ -808,6 +818,19 @@ $(document).on('pagebeforeshow', "#admin-member", function() {
 					default:
 						break;
 				}
+			});
+		}
+	}).fail(function() {
+		alert('請確認您的網路連線狀態！');
+	});
+	$.ajax({
+		url: api_base + 'get_not_approved_user.php',
+		dataType: 'json'
+	}).done(function(data) {
+		if (data.status) {
+			$.each(user, function(idx, obj) {
+				var user_tr = '<tr><td>' + obj.created + '</td><td>' + obj.name + '</td><td><a class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn user-detial-btn" data-user-id="' + obj.id + '">進入</a></td></tr>';
+				$('#not-approved-table tbody').append(user_tr);
 			});
 		}
 	}).fail(function() {
