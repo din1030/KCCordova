@@ -12,7 +12,10 @@ $update_string = "UPDATE `seeker_info` SET `active`='$state' WHERE `u_id`=$u_id"
 if ($mysqli->query($update_string)) {
     $output = $state;
     echo json_encode(array('status' => true, 'result' => $output));
+
+    return;
 } else {
     $output = array('status' => false, 'message' => '請重新操作！');
     echo json_encode($output);
+    exit;
 }

@@ -735,11 +735,14 @@ $(document).on('pagebeforeshow', "#admin-messages", function() {
 
 $(document).on('pagebeforeshow', "#admin-plan", function() {
 	$.ajax({
-		url: api_base + 'get_policy.php',
+		url: api_base + 'get_plan.php',
 		dataType: 'json'
 	}).done(function(data) {
 		if (data.status) {
-			$('#pay_method').html(data.result.pay_method);
+			$each(data.result, function(idx, obj) {
+				var plan_block = $('<div class="plan_block"></div>').append('<p><strong class="item_title">方案名稱：</strong><span class="plan_title">' + obj.title + '</span></p>').append('label class="item_title"><strong>方案內容：</strong></label><div class="">' + obj.description + '</div><hr>').append('<button class="ui-btn ui-btn-inline ui-corner-all orange-btn float-right plan-del-btn" type="button" data-plan-id="' + obj.id + '">刪除</button><a href="#edit_plan" class="ui-btn ui-btn-inline purple-btn ui-corner-all float-right" data-rel="popup" data-plan-id="' + obj.id + '">編輯</a><div class="clearfix"></div>');
+				$(plan_block).insertBefore('#pay-method-form')
+			});
 		}
 	}).fail(function() {
 		alert('請確認您的網路連線狀態！');
@@ -778,9 +781,9 @@ $(document).on('pagebeforeshow', "#admin-member", function() {
 	}).done(function(data) {
 		if (data.status) {
 			var user = data.result;
-			$('.list_table tbody').empty();
+			// $('.list_table tbody').empty();
 			$.each(user, function(idx, obj) {
-				var user_tr = '<tr><td>' + obj.created + '</td><td>' + obj.name + '</td><td><a class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn user-detial-btn" data-user-id="' + obj.id + '">進入</a></td></tr>';
+				var user_tr = '<tr><td>' + obj.created + '</td><td>' + obj.name + '</td><td><a class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn user-detail-btn" data-user-id="' + obj.id + '">進入</a></td></tr>';
 				switch (obj.type) {
 					case '1':
 						$('#normal-table tbody').append(user_tr);
@@ -795,8 +798,8 @@ $(document).on('pagebeforeshow', "#admin-member", function() {
 						break;
 				}
 			});
-			$('.user-detial-btn').off();
-			$('.user-detial-btn').click(function(event) {
+			$('.user-detail-btn').off();
+			$('.user-detail-btn').click(function(event) {
 				var user_id = $(this).jqmData("user-id");
 				currentUserId = user_id;
 				$.mobile.changePage($('#admin-member-detail'), {
@@ -828,8 +831,9 @@ $(document).on('pagebeforeshow', "#admin-member", function() {
 		dataType: 'json'
 	}).done(function(data) {
 		if (data.status) {
+			var user = data.result;
 			$.each(user, function(idx, obj) {
-				var user_tr = '<tr><td>' + obj.created + '</td><td>' + obj.name + '</td><td><a class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn user-detial-btn" data-user-id="' + obj.id + '">進入</a></td></tr>';
+				var user_tr = '<tr><td>' + obj.created + '</td><td>' + obj.name + '</td><td><a class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn user-detail-btn" data-user-id="' + obj.id + '">進入</a></td></tr>';
 				$('#not-approved-table tbody').append(user_tr);
 			});
 		}
