@@ -24,7 +24,7 @@ $(document).on("pagebeforeshow", '#messages', function() {
 		//show only if have msg
 		if (data.msg != null) {
 			var lastLength = data.msg.length - 1; //last array as latest msg
-			var lastOfficialMsg = data.msg[lastLength];
+			var lastOfficialMsg = data.msg[0];
 
 			$('#official_msg_date').text(lastOfficialMsg.created);
 			var msgBox = '<strong>' + lastOfficialMsg.title + '</strong><br>' + lastOfficialMsg.content;

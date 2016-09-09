@@ -769,3 +769,33 @@ $(document).on('pagebeforeshow', "#admin-plan", function() {
 		});
 	});
 });
+
+$(document).on('pagebeforeshow', "#admin-member", function() {
+	$.ajax({
+		url: api_base + 'get_userlist.php',
+		dataType: 'json'
+	}).done(function(data) {
+		if (data.status) {
+			var user = data.result;
+			$('.list_table tbody').empty();
+			$.each(user, function(idx, obj) {
+				var user_tr = '<tr><td>' + obj.created + '</td><td>' + obj.name + '</td><td><a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn" data-user-id="' + obj.id + '">進入</a></td></tr>';
+				switch (expression) {
+					case '1':
+						$('#normal-table tbody').append(user_tr);
+						break;
+					case '2':
+						$('#club-table tbody').append(user_tr);
+						break;
+					case '3':
+						$('#seeker-table tbody').append(user_tr);
+						break;
+					default:
+						break;
+				}
+			});
+		}
+	}).fail(function() {
+		alert('請確認您的網路連線狀態！');
+	});
+});
