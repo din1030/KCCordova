@@ -780,7 +780,7 @@ $(document).on('pagebeforeshow', "#admin-member", function() {
 			$('.list_table tbody').empty();
 			$.each(user, function(idx, obj) {
 				var user_tr = '<tr><td>' + obj.created + '</td><td>' + obj.name + '</td><td><a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn" data-user-id="' + obj.id + '">進入</a></td></tr>';
-				switch (expression) {
+				switch (obj.type) {
 					case '1':
 						$('#normal-table tbody').append(user_tr);
 						break;
@@ -789,6 +789,21 @@ $(document).on('pagebeforeshow', "#admin-member", function() {
 						break;
 					case '3':
 						$('#seeker-table tbody').append(user_tr);
+						break;
+					default:
+						break;
+				}
+			});
+			$.each(data.amount, function(idx, obj) {
+				switch (obj.idx) {
+					case '1':
+						$('#normal_num').append(obj);
+						break;
+					case '2':
+						$('#club_num').append(obj);
+						break;
+					case '3':
+						$('#seeker_num').append(obj);
 						break;
 					default:
 						break;
