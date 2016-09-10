@@ -106,22 +106,19 @@ $(document).on('pagebeforeshow', "#redeem", function() {
 	}).fail(function() {
 		alert('請確認您的網路連線狀態！');
 	});
-
 });
 
 $(document).on('pagebeforecreate', '#news', function() {
 	$.ajax({
-		url: 'http://52.69.53.255/KCCordova/api/get_news.php',
+		url: api_base + 'get_news.php',
 		dataType: 'json'
 	}).success(function(data) {
 		if (data.status) {
-			// $.each(data.result, function(idx, obj) {
-			// });
 			var index = 0;
 			var news = data.result[index];
 			$('#news_updated').text(news.updated);
 			$('#news_title').text(news.title);
-			$('#news_pic').attr('src', './img/' + news.pic);
+			$('#news_pic').attr('src', img_base + news.pic);
 			if (typeof(news.content) !== 'undefined') {
 				news.content = news.content.replace(/\n/g, "<br>");
 			}
@@ -146,7 +143,7 @@ $(document).on('pagebeforecreate', '#news', function() {
 				news = data.result[index];
 				$('#news_updated').text(news.updated);
 				$('#news_title').text(news.title);
-				$('#news_pic').attr('src', './img/' + news.pic);
+				$('#news_pic').attr('src', img_base + news.pic);
 				if (typeof(news.content) !== 'undefined') {
 					news.content = news.content.replace(/\n/g, "<br>");
 				}
@@ -162,7 +159,6 @@ $(document).on('pagebeforecreate', '#news', function() {
 
 $(document).on('pagebeforecreate', '#share', function() {
 	$('#fb_share_btn').click(function(event) {
-		// me.logged_in = true;
 		// alert('logged in successfully');
 		// alert(JSON.stringify(response.authResponse));
 		facebookConnectPlugin.getLoginStatus(
@@ -170,9 +166,6 @@ $(document).on('pagebeforecreate', '#share', function() {
 				alert("current status: " + JSON.stringify(response));
 				if (response.status === 'connected') {
 					share_kelly();
-					// } else if (response.status === 'not_authorized') {
-					// the user is logged in to Facebook,
-					// but has not authenticated your app
 				} else {
 					// the user isn't logged in to Facebook.
 					facebookConnectPlugin.login(['email', 'public_profile'], function(response) {
@@ -191,11 +184,10 @@ $(document).on('pagebeforecreate', '#share', function() {
 				caption: "Kelly Club 全省八大行業資訊專用APP平台"
 			};
 			facebookConnectPlugin.showDialog(options, function(result) {
-					alert("Posted. " + JSON.stringify(result));
-				},
-				function(err) {
-					alert("Failed: " + JSON.stringify(err));
-				});
+				alert("Posted. " + JSON.stringify(result));
+			}, function(err) {
+				alert("Failed: " + JSON.stringify(err));
+			});
 		}
 	});
 });

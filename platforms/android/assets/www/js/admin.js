@@ -3,6 +3,8 @@ var currentCatId;
 var currentStoreId;
 var adminNewsJson = '';
 var currentNewsId;
+var currentUserId;
+var currentPlanId;
 
 $(document).one("pagebeforeshow", "[data-role='page']", function() {
 	if (window.localStorage.getItem('auth') != '0') {
@@ -19,14 +21,10 @@ $(document).on('pagebeforeshow', "[data-role='page'].admin-page", function() {
 	var page_title = $.mobile.activePage.jqmData('title');
 
 	$('#' + page_id + ' select.navigateToPage').val('./admin.html#' + page_title).selectmenu('refresh');
-
-	// var index = $('#' + page_id + ' select.navigateToPage option[value$=' + page_title + ']').index();
-	// $('#' + page_id + ' select.navigateToPage').prop('selectedIndex', index);
-	// var title = $('#' + page_id + ' select.navigateToPage option[value$=' + page_title + ']').text();
-	// $('#' + page_id + ' span.navigateToPage').text(title);
 });
 
 $(document).on('pagecreate', ".admin-page", function() {
+	$(this).find('select.navigateToPage').off();
 	$(this).find('select.navigateToPage').change(function() {
 		var page = $(this).val();
 		$.mobile.changePage(page);
@@ -42,6 +40,7 @@ $(document).on('pagecreate', ".admin-page", function() {
 			reader.readAsDataURL(this.files[0]);
 		}
 	});
+	$(this).find("input[type='image']").off();
 	$(this).find("input[type='image']").click(function() {
 		$(this).next('.ui-input-text').find("input[type='file']").click();
 	});
@@ -66,61 +65,59 @@ $(document).on('pageshow', "#admin-member-detail", function() {
 
 
 $(document).on('pagebeforeshow', "#admin-home", function() {
-	// console.log('test');
 	var adminHomeStatus;
 	$.ajax({
-			url: api_base + 'get_home_setting.php',
-			dataType: 'json'
-		})
-		.done(function(data) {
-			var setting = data.result;
-			if (data.status) {
-				$('#home-upper-left-link').val(setting[0].link);
-				$('#home-upper-left-link').prev().text(textSwitch(setting[0].link));
+		url: api_base + 'get_home_setting.php',
+		dataType: 'json'
+	}).done(function(data) {
+		var setting = data.result;
+		if (data.status) {
+			$('#home-upper-left-link').val(setting[0].link);
+			$('#home-upper-left-link').prev().text(textSwitch(setting[0].link));
 
-				$('#home-upper-right-link').val(setting[1].link);
-				$('#home-upper-right-link').prev().text(textSwitch(setting[1].link));
+			$('#home-upper-right-link').val(setting[1].link);
+			$('#home-upper-right-link').prev().text(textSwitch(setting[1].link));
 
-				$('#home-middle-link').val(setting[2].link);
-				$('#home-middle-link').prev().text(textSwitch(setting[2].link));
-
-
-				$('#home-lower-left-link').val(setting[3].link);
-				$('#home-lower-left-link').prev().text(textSwitch(setting[3].link));
+			$('#home-middle-link').val(setting[2].link);
+			$('#home-middle-link').prev().text(textSwitch(setting[2].link));
 
 
-				$('#home-lower-right-link').val(setting[4].link);
-				$('#home-lower-right-link').prev().text(textSwitch(setting[4].link));
+			$('#home-lower-left-link').val(setting[3].link);
+			$('#home-lower-left-link').prev().text(textSwitch(setting[3].link));
+
+
+			$('#home-lower-right-link').val(setting[4].link);
+			$('#home-lower-right-link').prev().text(textSwitch(setting[4].link));
+		}
+		$('#pic1').attr('src', img_base + setting[0].pic);
+		$('#pic2').attr('src', img_base + setting[1].pic);
+		$('#pic3').attr('src', img_base + setting[2].pic);
+		$('#pic4').attr('src', img_base + setting[3].pic);
+		$('#pic5').attr('src', img_base + setting[4].pic);
+
+		function textSwitch(text) {
+			switch (text) {
+				case 'club':
+					return '酒店系統'
+					break;
+				case 'seeker':
+					return "求職者";
+					break;
+				case 'life':
+					return '生活服務'
+					break;
+				case 'news':
+					return "最新消息";
+					break;
+				case 'homepages':
+					return '連結官網'
+					break;
+				default:
+					return "酒店系統";
+					break;
 			}
-			$('#pic1').attr('src', img_base + setting[0].pic);
-			$('#pic2').attr('src', img_base + setting[1].pic);
-			$('#pic3').attr('src', img_base + setting[2].pic);
-			$('#pic4').attr('src', img_base + setting[3].pic);
-			$('#pic5').attr('src', img_base + setting[4].pic);
-
-			function textSwitch(text) {
-				switch (text) {
-					case 'club':
-						return '酒店系統'
-						break;
-					case 'seeker':
-						return "求職者";
-						break;
-					case 'life':
-						return '生活服務'
-						break;
-					case 'news':
-						return "最新消息";
-						break;
-					case 'homepages':
-						return '連結官網'
-						break;
-					default:
-						return "酒店系統";
-						break;
-				}
-			}
-		});
+		}
+	});
 
 
 	$('#adminHomeForm').on('submit', (function(e) {
@@ -235,6 +232,7 @@ $(document).on('pagebeforeshow', "#admin-lifeservice", function() {
 				$(life_category_block).appendTo($('#admin-lifeservice-main'));
 				$('[type="file"]').textinput();
 			});
+			$('.life_category_block a.store-btn').off();
 			$('.life_category_block a.store-btn').click(function(event) {
 				var cat_id = $(this).jqmData("life-cat");
 				console.log(cat_id);
@@ -264,6 +262,7 @@ $(document).on('pagebeforeshow', "#admin-lifeservice-store", function() {
 				});
 			}
 		});
+		$('.life_store_block a.store-info-btn').off();
 		$('.life_store_block a.store-info-btn').click(function(event) {
 			var store_id = $(this).jqmData("store-id");
 			console.log(store_id);
@@ -273,6 +272,7 @@ $(document).on('pagebeforeshow', "#admin-lifeservice-store", function() {
 				changeHash: true
 			});
 		});
+		$('.life_store_block .store-del-btn').off();
 		$('.life_store_block .store-del-btn').click(function(event) {
 			var btn = $(this);
 			var store_id = $(this).jqmData("store-id");
@@ -327,6 +327,7 @@ $(document).on('pagebeforeshow', "#admin-lifeservice-store-info", function() {
 		}).fail(function() {
 			alert('請確認您的網路連線狀態！');
 		});
+		$('#edit-lifeservice-form').off();
 		$('#edit-lifeservice-form').on('submit', function(e) {
 			e.preventDefault(); // prevent native submit
 			$(this).ajaxSubmit({
@@ -367,6 +368,7 @@ $(document).on('pagebeforeshow', "#admin-lifeservice-store-info", function() {
 });
 
 $(document).on('pagebeforeshow', "#admin-add-lifeservice-store", function() {
+	$('#add-lifeservice-form').off();
 	$('#add-lifeservice-form').on('submit', function(e) {
 		e.preventDefault(); // prevent native submit
 		$(this).ajaxSubmit({
@@ -470,6 +472,7 @@ $(document).on('pagebeforeshow', "#admin-category", function() {
 	}).fail(function() {
 		alert('請確認您的網路連線狀態！');
 	});
+	$('form.cat-form').off();
 	$('form.cat-form').on('submit', function(e) {
 		e.preventDefault(); // prevent native submit
 		var type = $(this).jqmData("type");
@@ -542,6 +545,7 @@ $(document).on('pagebeforeshow', "#admin-authority", function() {
 	}).fail(function() {
 		alert('請確認您的網路連線狀態！');
 	});
+	$('form.policy-form').off();
 	$('form.policy-form').on('submit', function(e) {
 		e.preventDefault(); // prevent native submit
 		var policy = $(this).jqmData("policy");
@@ -583,10 +587,10 @@ $(document).on('pagebeforeshow', "#admin-news", function() {
 		if (data.status) {
 			$('.news_info_block').remove();
 			$.each(data.result, function(idx, obj) {
-				var news_info_block = $('<div class="news_info_block"></div>').append('<p class="news_title">' + obj.title + '</p>').append('<div class="news_during"><div><span class="item_title">上架時間：</span><span>' + obj.start_date + '</span></div><div><span class="item_title">下架時間：</span><span>' + obj.end_date + '</span></div></div>').append('<div class="news_operation"> <div><span class="item_title">排序：</span><span>' + obj.order_no + '</span><button type="button" class="ui-btn ui-corner-all ui-btn-inline news-del-btn" data-news-id="' + obj.id + '">刪除</button><a class="ui-btn ui-corner-all ui-btn-inline new-edit-btn" data-news-id="' + obj.id + '">編輯</a><div class="clearfix"></div></div> </div>');
+				var news_info_block = $('<div class="news_info_block"></div>').append('<p class="news_title">' + obj.title + '</p>').append('<div class="news_during"><div><span class="item_title">上架時間：</span><span>' + obj.start_date + '</span></div><div><span class="item_title">下架時間：</span><span>' + obj.end_date + '</span></div></div>').append('<div class="news_operation"> <div><span class="item_title">排序：</span><span>' + obj.order_no + '</span><button type="button" class="ui-btn ui-corner-all ui-btn-inline news-del-btn" data-news-id="' + obj.id + '">刪除</button><a class="ui-btn ui-corner-all ui-btn-inline news-edit-btn" data-news-id="' + obj.id + '">編輯</a><div class="clearfix"></div></div> </div>');
 				$(news_info_block).appendTo('#admin-news-main');
 			});
-			$('.news_info_block a.new-edit-btn').click(function(event) {
+			$('.news_info_block a.news-edit-btn').click(function(event) {
 				var news_id = $(this).jqmData("news-id");
 				console.log(news_id);
 				currentNewsId = news_id;
@@ -743,15 +747,113 @@ $(document).on('pagebeforeshow', "#admin-plan", function() {
 	}).fail(function() {
 		alert('請確認您的網路連線狀態！');
 	});
+	$.ajax({
+		url: api_base + 'get_plan.php',
+		dataType: 'json'
+	}).done(function(data) {
+		if (data.status) {
+			$('.plan_block').remove();
+			$.each(data.result, function(idx, obj) {
+				var plan_block = $('<div class="plan_block"></div>').append('<p><strong class="item_title">方案名稱：</strong><span class="plan_title">' + obj.title + '</span></p>').append('<label class="item_title"><strong>方案內容：</strong></label><div class="">' + obj.description.replace(/\n/g, "<br>") + '</div><hr>').append('<button class="ui-btn ui-btn-inline ui-corner-all orange-btn float-right plan-del-btn" type="button" data-plan-id="' + obj.id + '">刪除</button><a href="#edit_plan" class="ui-btn ui-btn-inline purple-btn ui-corner-all float-right plan-edit-btn" data-rel="popup" data-plan-id="' + obj.id + '">編輯</a><div class="clearfix"></div>');
+				$(plan_block).insertBefore('#pay-method-form');
+			});
+			$('.plan_block a.plan-edit-btn').click(function(event) {
+				currentPlanId = $(this).jqmData("plan-id");
+			});
+			$('.plan_block a.plan-del-btn').click(function(event) {
+				currentPlanId = $(this).jqmData("plan-id");
+			});
+
+			$('.plan_block .plan-del-btn').off();
+			$('.plan_block .plan-del-btn').click(function(event) {
+				var btn = $(this);
+				var plan_id = $(this).jqmData("plan-id");
+				// console.log(plan_id);
+				if (confirm('確定刪除此方案？') === true) {
+					$.ajax({
+						url: api_base + 'remove_plan.php',
+						type: 'POST',
+						dataType: 'json',
+						data: {
+							plan_id: plan_id
+						}
+					}).done(function(data) {
+						if (data.status) {
+							$(btn).parents('.plan_block').remove();
+						} else {
+							alert('請重新操作！');
+						}
+					}).fail(function() {
+						alert('請確認您的網路連線狀態！');
+					});
+				}
+			});
+		}
+	}).fail(function() {
+		alert('請確認您的網路連線狀態！');
+	});
+	$('#add-plan-form').off();
+	$('#add-plan-form').on('submit', function(e) {
+		e.preventDefault(); // prevent native submit
+		$(this).ajaxSubmit({
+			url: api_base + 'add_plan.php',
+			type: 'POST',
+			dataType: 'json',
+			beforeSend: function() {
+				$.mobile.loading('show');
+			},
+			complete: function() {
+				$.mobile.loading('hide');
+			},
+			success: function(data) {
+				alert(data.message);
+				$("#add_plan").popup("close");
+			},
+			error: function(request, error) {
+				alert('請確認您的網路連線狀態！');
+			}
+		});
+	});
+	$('#edit-plan-form').off();
+	$('#edit-plan-form').on('submit', function(e) {
+		e.preventDefault(); // prevent native submit
+		// var plan_id = $(this).jqmData("plan-id");
+		$(this).ajaxSubmit({
+			url: api_base + 'edit_plan.php',
+			data: {
+				plan_id: currentPlanId
+			},
+			type: 'POST',
+			dataType: 'json',
+			beforeSend: function() {
+				$.mobile.loading('show');
+			},
+			complete: function() {
+				$.mobile.loading('hide');
+			},
+			success: function(data) {
+				$("#edit_plan").popup("close");
+				alert(data.message);
+				if (data.status) {
+					$.mobile.changePage($('#admin-plan'), {
+						allowSamePageTransition: true,
+						reloadPage: true,
+						changeHash: true,
+						transition: "none"
+					});
+				}
+			},
+			error: function(request, error) {
+				alert('請確認您的網路連線狀態！');
+			}
+		});
+	});
+	$('form.policy-form').off();
 	$('form.policy-form').on('submit', function(e) {
 		e.preventDefault(); // prevent native submit
 		var policy = $(this).jqmData("policy");
-		console.log(policy);
 		$(this).ajaxSubmit({
 			url: api_base + 'update_policy.php',
-			data: {
-				policy: policy
-			},
 			type: 'POST',
 			dataType: 'json',
 			beforeSend: function() {
@@ -767,5 +869,95 @@ $(document).on('pagebeforeshow', "#admin-plan", function() {
 				alert('請確認您的網路連線狀態！');
 			}
 		});
+	});
+});
+
+$(document).on('pagebeforeshow', "#admin-member", function() {
+	$.ajax({
+		url: api_base + 'get_userlist.php',
+		dataType: 'json'
+	}).done(function(data) {
+		if (data.status) {
+			var user = data.result;
+			// $('.list_table tbody').empty();
+			$.each(user, function(idx, obj) {
+				var user_tr = '<tr><td>' + obj.created + '</td><td>' + obj.name + '</td><td><a class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn user-detail-btn" data-user-id="' + obj.id + '">進入</a></td></tr>';
+				switch (obj.type) {
+					case '1':
+						$('#normal-table tbody').append(user_tr);
+						break;
+					case '2':
+						$('#club-table tbody').append(user_tr);
+						break;
+					case '3':
+						$('#seeker-table tbody').append(user_tr);
+						break;
+					default:
+						break;
+				}
+			});
+			$('.user-detail-btn').off();
+			$('.user-detail-btn').click(function(event) {
+				var user_id = $(this).jqmData("user-id");
+				currentUserId = user_id;
+				$.mobile.changePage($('#admin-member-detail'), {
+					reloadPage: true,
+					changeHash: true
+				});
+			});
+			$.each(data.amount, function(idx, obj) {
+				switch (obj.type) {
+					case '1':
+						$('#normal_num').append(obj.amt);
+						break;
+					case '2':
+						$('#club_num').append(obj.amt);
+						break;
+					case '3':
+						$('#seeker_num').append(obj.amt);
+						break;
+					default:
+						break;
+				}
+			});
+
+			$('.download-list-btn').off();
+			$('.download-list-btn').click(function(event) {
+				var type = $(this).jqmData("type");
+				var list = $(this).parent().next('.list_table').clone(false);
+				$(list).find('tr :nth-child(3)').remove();
+				var table_caption = $(this).parent().next('.list_table').children('caption').text();
+				$.ajax({
+					url: api_base + 'send_userlist.php',
+					dataType: 'json',
+					type: 'POST',
+					data: {
+						receiver: window.localStorage.getItem('user'),
+						subject: table_caption,
+						list_table: list.prop('outerHTML')
+					}
+				}).done(function(data) {
+					alert(data.message);
+				}).fail(function() {
+					alert('請確認您的網路連線狀態！');
+				});
+			});
+		}
+	}).fail(function() {
+		alert('請確認您的網路連線狀態！');
+	});
+	$.ajax({
+		url: api_base + 'get_not_approved_user.php',
+		dataType: 'json'
+	}).done(function(data) {
+		if (data.status) {
+			var user = data.result;
+			$.each(user, function(idx, obj) {
+				var user_tr = '<tr><td>' + obj.created + '</td><td>' + obj.name + '</td><td><a class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn user-detail-btn" data-user-id="' + obj.id + '">進入</a></td></tr>';
+				$('#not-approved-table tbody').append(user_tr);
+			});
+		}
+	}).fail(function() {
+		alert('請確認您的網路連線狀態！');
 	});
 });

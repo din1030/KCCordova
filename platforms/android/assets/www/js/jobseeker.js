@@ -10,7 +10,7 @@ $(document).one("pagebeforeshow", "[data-role='page']", function() {
 
 $(document).on('pagebeforecreate', '#jobseeker', function() {
 	$.ajax({
-		url: 'http://52.69.53.255/KCCordova/api/get_seeker_info.php',
+		url: api_base + 'get_seeker_info.php',
 		dataType: 'json',
 		data: {
 			only_active: true
@@ -28,7 +28,7 @@ $(document).on('pagebeforecreate', '#jobseeker', function() {
 					block_class = 'ui-block-c';
 				}
 				var seeker_div = $('<div></div>').attr('data-seeker-id', obj.u_id).addClass(block_class + ' seeker_div')
-					.append('<div class="seeker_list_item"><a data-ajax="false"><img src="http://52.69.53.255/KCCordova/www/img/' + obj.avatar + '" alt="" /></a></div>');
+					.append('<div class="seeker_list_item"><a data-ajax="false"><img src="' + img_base +  obj.avatar + '" alt="" /></a></div>');
 				$(seeker_div).appendTo($('#seeker-grid'));
 			});
 			// $('#club_list').listview('refresh');
@@ -48,7 +48,7 @@ $(document).on('pagebeforeshow', '#jobseeker-resume', function() {
 	var get_seeker_id = window.localStorage.getItem('get_seeker_id');
 	console.log(get_seeker_id);
 	$.ajax({
-		url: 'http://52.69.53.255/KCCordova/api/get_seeker_info.php?user_id=' + get_seeker_id,
+		url: api_base + 'get_seeker_info.php?user_id=' + get_seeker_id,
 		dataType: 'json'
 	}).success(function(data) {
 		if (data.status) {
@@ -65,7 +65,7 @@ $(document).on('pagebeforeshow', '#jobseeker-resume', function() {
 			var slideContainer = '<ul class="slides">';
 			$.each(data.result[0].pic, function(idx, pic) {
 				if (pic != null && pic != '') {
-					slideContainer += '<li><img src="http://52.69.53.255/KCCordova/www/img/' + pic + '"></li>'
+					slideContainer += '<li><img src="' + img_base +  pic + '"></li>'
 				}
 			});
 
@@ -170,7 +170,7 @@ $(document).on('pagebeforeshow', '#jobseeker-resume', function() {
 			});
 			$('#add-fav-btn').click(function(event) {
 				$.ajax({
-					url: 'http://52.69.53.255/KCCordova/api/add_fav.php?user_id=' + window.localStorage.getItem('user_id') + '&type=3&item_id=' + get_seeker_id,
+					url: api_base + 'add_fav.php?user_id=' + window.localStorage.getItem('user_id') + '&type=3&item_id=' + get_seeker_id,
 					dataType: 'json',
 					success: function(result) {
 						alert(result.message);
@@ -183,7 +183,7 @@ $(document).on('pagebeforeshow', '#jobseeker-resume', function() {
 
 $(document).on('pagebeforeshow', '#jobseeker-search', function() {
 	$.ajax({
-		url: 'http://52.69.53.255/KCCordova/api/get_form_content.php?action=get_category&type=job',
+		url: api_base + 'get_form_content.php?action=get_category&type=job',
 		dataType: 'json'
 	}).done(function(data) {
 		console.log(data);
@@ -200,7 +200,7 @@ $(document).on('pagebeforeshow', '#jobseeker-search', function() {
 			var type = $('#jobseeker_type').val();
 			console.log('jobseeker_type changed');
 			$.ajax({
-				url: 'http://52.69.53.255/KCCordova/api/search_seeker.php',
+				url: api_base + 'search_seeker.php',
 				dataType: 'json',
 				data: {
 					area: area,
@@ -239,7 +239,7 @@ $(document).on('pagebeforeshow', '#jobseeker-result', function() {
 				block_class = 'ui-block-c';
 			}
 			var seeker_div = $('<div></div>').attr('data-seeker-id', obj.u_id).addClass(block_class + ' seeker_div')
-				.append('<div class="seeker_list_item"><a data-ajax="false"><img src="http://52.69.53.255/KCCordova/www/img/' + obj.pic1 + '" alt="" /></a></div>');
+				.append('<div class="seeker_list_item"><a data-ajax="false"><img src="' + img_base +  obj.pic1 + '" alt="" /></a></div>');
 			$(seeker_div).appendTo($('#seeker-result-grid'));
 		});
 		$('#seeker-result-grid .seeker_div').click(function(event) {

@@ -975,6 +975,9 @@ div[id|=admin] .category-block {
 .category-block {
   padding: 0 10px;
 }
+textarea.ui-input-text.ui-textinput-autogrow {
+  overflow: scroll;
+}
 .ui-navbar {
   z-index: 1001;
 }

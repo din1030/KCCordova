@@ -29,7 +29,7 @@ $(document).on("pagebeforeshow", "[data-role='page']", function() {
 		}
 	});
 	// 動態顯示登入使用者
-	var member = '（未知使用者）';
+	var member = '（未登入！）';
 	switch (window.localStorage.getItem('auth')) {
 		case '0':
 			member = '會員：系統管理者｜'.concat(window.localStorage.getItem('name'));

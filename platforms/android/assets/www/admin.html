@@ -65,14 +65,19 @@
                     </div>
                     <div id="normal" class="ui-body-d ui-content member-list">
                         <div class="list_search">
-                            <label class="area_title" for="textinput-1">搜尋名單</label>
-                            <input type="text" name="search" class="" id="search" placeholder="姓名或日期(20160520)" data-inline="true">
-                            <button type="submit" id="submit-1" class="ui-btn ui-corner-all purple-btn">GO</button>
+                            <label class="area_title" for="search">搜尋名單</label>
+                            <form>
+                                <input type="text" name="search" class="" id="normal-search" placeholder="姓名或日期" data-inline="true" data-type="search">
+                            </form>
                         </div>
-                        <button type="button" id="download_list" class="ui-btn ui-btn-inline ui-corner-all purple-btn">下載名單</button>
-                        <span class="member_num">會員總數：21432</span>
                         <div class="clearfix"></div>
-                        <table class="list_table">
+                        <div class="">
+                            <button type="button" class="ui-btn ui-btn-inline ui-corner-all purple-btn download-list-btn" data-type="1">下載名單</button>
+                            <span class="member_num">會員總數：<span id="normal_num"></span></span>
+                            <div class="clearfix"></div>
+                        </div>
+                        <table id="normal-table" class="list_table" data-filter="true" data-input="#normal-search">
+                            <caption>一般會員列表</caption>
                             <thead>
                                 <tr>
                                     <th>註冊時間</th>
@@ -81,75 +86,24 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>2016/07/14 20:15</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2016/07/14 20:15</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2016/07/14 20:15</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2016/07/14 20:15</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2016/07/14 20:15</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2016/07/14 20:15</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2016/07/14 20:15</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2016/07/14 20:15</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
                     <div id="club" class="ui-body-d ui-content member-list">
                         <div class="list_search">
-                            <label class="area_title" for="textinput-1">搜尋名單</label>
-                            <input type="text" name="search" class="" id="search" placeholder="姓名或日期(20160520)" data-inline="true">
-                            <button type="submit" id="submit-1" class="ui-btn ui-corner-all purple-btn">GO</button>
+                            <label class="area_title" for="search">搜尋名單</label>
+                            <form>
+                                <input type="text" name="search" class="" id="club-search" placeholder="姓名或日期" data-inline="true" data-type="search">
+                            </form>
                         </div>
-                        <button type="button" id="download_list" class="ui-btn ui-btn-inline ui-corner-all purple-btn">下載名單</button>
-                        <span class="member_num">會員總數：21432</span>
                         <div class="clearfix"></div>
-                        <table class="list_table">
+                        <div class="">
+                            <button type="button" class="ui-btn ui-btn-inline ui-corner-all purple-btn download-list-btn" data-type="2">下載名單</button>
+                            <span class="member_num">會員總數：<span id="club_num"></span></span>
+                            <div class="clearfix"></div>
+                        </div>
+                        <table id="club-table" class="list_table" data-filter="true" data-input="#club-search">
+                            <caption>店家管理員列表</caption>
                             <thead>
                                 <tr>
                                     <th>註冊時間</th>
@@ -158,75 +112,24 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>2016/07/14 22:19</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2016/07/14 22:19</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2016/07/14 22:19</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2016/07/14 22:19</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2016/07/14 22:19</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2016/07/14 22:19</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2016/07/14 22:19</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2016/07/14 20:15</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
                     <div id="seeker" class="ui-body-d ui-content member-list">
                         <div class="list_search">
-                            <label class="area_title" for="textinput-1">搜尋名單</label>
-                            <input type="text" name="search" class="" id="search" placeholder="姓名或日期(20160520)" data-inline="true">
-                            <button type="submit" id="submit-1" class="ui-btn ui-corner-all purple-btn">GO</button>
+                            <label class="area_title" for="search">搜尋名單</label>
+                            <form>
+                                <input type="text" name="search" class="" id="seeker-search" placeholder="姓名或日期" data-inline="true" data-type="search">
+                            </form>
                         </div>
-                        <button type="button" id="download_list" class="ui-btn ui-btn-inline ui-corner-all purple-btn">下載名單</button>
-                        <span class="member_num">會員總數：21432</span>
                         <div class="clearfix"></div>
-                        <table class="list_table">
+                        <div class="">
+                            <button type="button" class="ui-btn ui-btn-inline ui-corner-all purple-btn download-list-btn" data-type="3">下載名單</button>
+                            <span class="member_num">會員總數：<span id="seeker_num"></span></span>
+                            <div class="clearfix"></div>
+                        </div>
+                        <table id="seeker-table" class="list_table" data-filter="true" data-input="#seeker-search">
+                            <caption>求職者列表</caption>
                             <thead>
                                 <tr>
                                     <th>註冊時間</th>
@@ -235,75 +138,24 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>2016/07/14 18:15</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2016/07/14 18:15</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2016/07/14 18:15</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2016/07/14 18:15</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2016/07/14 18:15</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2016/07/14 18:15</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2016/07/14 18:15</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2016/07/14 18:15</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
                     <div id="authority" class="ui-body-d ui-content member-list">
                         <div class="list_search">
-                            <label class="area_title" for="textinput-1">搜尋名單</label>
-                            <input type="text" name="search" class="" id="search" placeholder="姓名或日期(20160520)" data-inline="true">
-                            <button type="submit" id="submit-1" class="ui-btn ui-corner-all purple-btn">GO</button>
+                            <label class="area_title" for="search">搜尋名單</label>
+                            <form>
+                                <input type="text" name="search" class="" id="approved-search" placeholder="姓名或日期" data-inline="true" data-type="search">
+                            </form>
                         </div>
-                        <button type="button" id="download_list" class="ui-btn ui-btn-inline ui-corner-all purple-btn">下載名單</button>
-                        <span class="member_num">會員總數：21432</span>
                         <div class="clearfix"></div>
-                        <table class="list_table">
+                        <!-- <div class=""> -->
+                        <!-- <button type="button" id="download_list" class="ui-btn ui-btn-inline ui-corner-all purple-btn">下載名單</button> -->
+                        <!-- <span class="member_num">會員總數：<span id="approved_num"></span></span> -->
+                        <!-- <div class="clearfix"></div> -->
+                        <!-- </div> -->
+                        <table id="not-approved-table" class="list_table" data-filter="true" data-input="#approved-search">
+                            <caption>待審核會員列表</caption>
                             <thead>
                                 <tr>
                                     <th>註冊時間</th>
@@ -312,62 +164,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>2016/07/14 18:15</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2016/07/14 18:15</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2016/07/14 18:15</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2016/07/14 20:15</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2016/07/14 20:15</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2016/07/14 20:15</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2016/07/14 20:15</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2016/07/14 20:15</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -1037,7 +833,7 @@
                     </ul>
                 </div>
                 <span class="float-left" style="font-size:20px;font-weight:bold;margin-top:8px;">翁水噹</span>
-                <button type="button" id="download_list" class="ui-btn ui-btn-inline ui-corner-all purple-btn float-right">下載明細</button>
+                <button type="button" id="download_record_list" class="ui-btn ui-btn-inline ui-corner-all purple-btn float-right">下載明細</button>
                 <div class="clearfix"></div>
                 <div id="normal" class="ui-body-d ui-content member-list">
                     <div style="font-size:18px;color:#AA3C89">兌換記錄</div>
@@ -1381,22 +1177,7 @@
                     新增方案
                 </a>
                 <div class="clearfix"></div>
-                <div class="plan_block">
-                    <p>
-                        <strong class="item_title">方案名稱：</strong>
-                        <span class="plan_title">A 方案</span>
-                    </p>
-                    <label class="item_title"><strong>方案內容：</strong></label>
-                    <div class="">
-                        優惠價： NT$10,000(原價 $12,000)。刊登店家介紹廣告、與求職者站內訊息聯絡、可刊登生活服務訊息三則。
-                    </div>
-                    <hr>
-                    <button id="plan-del-btn" class="ui-btn ui-btn-inline ui-corner-all orange-btn float-right" type="button">刪除</button>
-                    <a href="#edit_plan" class="ui-btn ui-btn-inline purple-btn ui-corner-all float-right" data-rel="popup">
-                        編輯
-                    </a>
-                    <div class="clearfix"></div>
-                </div>
+                <!-- dynamic content -->
                 <form id="pay-method-form" class="policy-form" data-policy="pay_method">
                     <label for="pay_method" class="item_title"><strong>付款方式編輯：</strong></label>
                     <textarea name="policy_content" id="pay_method" rows="4" class="text-justify"></textarea>

@@ -74,7 +74,7 @@ $(document).on('pagebeforeshow', '#member-modify, #club-profile-modify, #jobseek
 if (window.localStorage.getItem('auth') == '3') {
 	$(document).on('pagebeforeshow', '#jobseeker-resume, #jobseeker-resume-modify', function() {
 		$.ajax({
-			url: 'http://52.69.53.255/KCCordova/api/get_form_content.php?action=get_category&type=job',
+			url: api_base + 'get_form_content.php?action=get_category&type=job',
 			dataType: 'json'
 		}).done(function(data) {
 			console.log(data);
@@ -205,7 +205,7 @@ if (window.localStorage.getItem('auth') == '3') {
 				$("[name='worktime'][value='" + seeker.workingtime + "']").prop("checked", true).checkboxradio("refresh");
 				$('#job_content').val(seeker.job_content);
 				$.ajax({
-					url: 'http://52.69.53.255/KCCordova/api/get_country_menu.php',
+					url: api_base + 'get_country_menu.php',
 					dataType: 'json'
 				}).done(function(data) {
 					if (data.status) {
@@ -450,7 +450,7 @@ if (window.localStorage.getItem('auth') == '2') {
 				$('.website-input').val(club.website);
 				$('.slogan-input').val(club.slogan);
 				$.ajax({
-					url: 'http://52.69.53.255/KCCordova/api/get_country_menu.php',
+					url: api_base + 'get_country_menu.php',
 					dataType: 'json'
 				}).done(function(data) {
 					if (data.status) {

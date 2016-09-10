@@ -7,7 +7,7 @@ $(document).one("pagebeforeshow", "[data-role='page']", function() {
 
 $(document).on('pagebeforecreate', '#favorite', function() {
 	$.ajax({
-		url: 'http://52.69.53.255/KCCordova/api/get_fav.php?user_id=' + window.localStorage.getItem('user_id'),
+		url: api_base + 'get_fav.php?user_id=' + window.localStorage.getItem('user_id'),
 		dataType: 'json'
 	}).done(function(data) {
 		if (data.status) {
@@ -31,7 +31,7 @@ $(document).on('pagebeforecreate', '#favorite', function() {
 					link = './lifeservice.html#lifeservice-detail';
 				}
 				var fav_div = $('<div></div>').addClass('detail_block msg_block').attr('data-type', obj.type).attr('data-user-id', user_id)
-					.append('<div class="ui-bar ui-bar-a"><sapn>' + type_word + '</sapn><button class="ui-btn ui-corner-all ui-btn-inline ui-mini ui-btn-right ui-icon-delete ui-btn-icon-notext del-fav-btn" type="button" name="button" data-fav-id="' + obj.fav_id + '" data-shadow="false">x</button></div><a href="' + link + '" data-ajax="false"><div class="ui-body ui-body-a"><div class="avatar msg-avatar float-left"><img src="http://52.69.53.255/KCCordova/www/img/' + obj.pic1 + '" style="width: 70px; height: 70px; border-radius: 50%;" alt=""></div><strong>' + name + '</strong><br>' + obj.country + '｜' + obj.area + '</div></a>');
+					.append('<div class="ui-bar ui-bar-a"><sapn>' + type_word + '</sapn><button class="ui-btn ui-corner-all ui-btn-inline ui-mini ui-btn-right ui-icon-delete ui-btn-icon-notext del-fav-btn" type="button" name="button" data-fav-id="' + obj.fav_id + '" data-shadow="false">x</button></div><a href="' + link + '" data-ajax="false"><div class="ui-body ui-body-a"><div class="avatar msg-avatar float-left"><img src="' + img_base +  obj.pic1 + '" style="width: 70px; height: 70px; border-radius: 50%;" alt=""></div><strong>' + name + '</strong><br>' + obj.country + '｜' + obj.area + '</div></a>');
 				$(fav_div).appendTo($('[data-role="main"]'));
 
 			});
@@ -40,7 +40,7 @@ $(document).on('pagebeforecreate', '#favorite', function() {
 				var fav_id = $(this).jqmData('fav-id');
 				if (confirm('確定刪除此收藏？') === true) {
 					$.ajax({
-						url: 'http://52.69.53.255/KCCordova/api/remove_fav.php',
+						url: api_base + 'remove_fav.php',
 						type: 'POST',
 						dataType: 'json',
 						data: {

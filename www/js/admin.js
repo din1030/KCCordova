@@ -856,6 +856,9 @@ $(document).on('pagebeforeshow', "#admin-plan", function() {
 			url: api_base + 'update_policy.php',
 			type: 'POST',
 			dataType: 'json',
+			data: {
+				policy: policy
+			},
 			beforeSend: function() {
 				$.mobile.loading('show');
 			},

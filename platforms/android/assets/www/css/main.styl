@@ -448,13 +448,6 @@ div[id|=admin]
         width: 64px
         padding-top: 5px
         margin-right: 5px
-    .ui-input-text
-        width: calc(100% - 120px - 15px)
-    .ui-btn
-        margin-left: 5px
-        width: 50px
-        float: right
-        padding: 8px
 .member_num
     float: right
     margin-top: 15px
@@ -817,6 +810,7 @@ for num in 0..8
         // width: 25%
 
 .orange-btn
+    border: none !important
     padding: 5px 10px
     color: #FFF !important
     background-color: #ED6615 !important
@@ -824,6 +818,7 @@ for num in 0..8
     // margin: 0 0 10px 0
 
 .green-btn
+    border: none !important
     padding: 5px 10px
     color: #FFF !important
     background-color: #47AA2C !important
@@ -864,7 +859,9 @@ for tab in 1..5
 // --- end shared element style ---
 
 // overwrite
-
+textarea.ui-input-text.ui-textinput-autogrow
+    overflow: scroll
+    
 .ui-navbar
 	z-index: 1001
 
