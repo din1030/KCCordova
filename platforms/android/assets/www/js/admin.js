@@ -4,6 +4,7 @@ var currentStoreId;
 var adminNewsJson = '';
 var currentNewsId;
 var currentUserId;
+var adminPlanJson = '';
 var currentPlanId;
 
 $(document).one("pagebeforeshow", "[data-role='page']", function() {
@@ -752,6 +753,7 @@ $(document).on('pagebeforeshow', "#admin-plan", function() {
 		dataType: 'json'
 	}).done(function(data) {
 		if (data.status) {
+			adminPlanJson = data.result;
 			$('.plan_block').remove();
 			$.each(data.result, function(idx, obj) {
 				var plan_block = $('<div class="plan_block"></div>').append('<p><strong class="item_title">方案名稱：</strong><span class="plan_title">' + obj.title + '</span></p>').append('<label class="item_title"><strong>方案內容：</strong></label><div class="">' + obj.description.replace(/\n/g, "<br>") + '</div><hr>').append('<button class="ui-btn ui-btn-inline ui-corner-all orange-btn float-right plan-del-btn" type="button" data-plan-id="' + obj.id + '">刪除</button><a href="#edit_plan" class="ui-btn ui-btn-inline purple-btn ui-corner-all float-right plan-edit-btn" data-rel="popup" data-plan-id="' + obj.id + '">編輯</a><div class="clearfix"></div>');
@@ -759,6 +761,12 @@ $(document).on('pagebeforeshow', "#admin-plan", function() {
 			});
 			$('.plan_block a.plan-edit-btn').click(function(event) {
 				currentPlanId = $(this).jqmData("plan-id");
+				$.each(adminPlanJson, function(idx, obj) {
+					if (parseInt(obj.id) == currentPlanId) {
+						$('#edit-plan-form #plan_title').val(obj.title);
+						$('#edit-plan-form #plan_content').val(obj.description);
+					}
+				});
 			});
 			$('.plan_block a.plan-del-btn').click(function(event) {
 				currentPlanId = $(this).jqmData("plan-id");
@@ -856,6 +864,9 @@ $(document).on('pagebeforeshow', "#admin-plan", function() {
 			url: api_base + 'update_policy.php',
 			type: 'POST',
 			dataType: 'json',
+			data: {
+				policy: policy
+			},
 			beforeSend: function() {
 				$.mobile.loading('show');
 			},
