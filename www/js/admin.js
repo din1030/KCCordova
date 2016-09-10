@@ -774,6 +774,7 @@ $(document).on('pagebeforeshow', "#admin-plan", function() {
 			},
 			success: function(data) {
 				alert(data.message);
+				$("#add_plan").popup("close");
 			},
 			error: function(request, error) {
 				alert('請確認您的網路連線狀態！');
@@ -788,6 +789,28 @@ $(document).on('pagebeforeshow', "#admin-plan", function() {
 			data: {
 				plan_id: currentPlanId
 			},
+			type: 'POST',
+			dataType: 'json',
+			beforeSend: function() {
+				$.mobile.loading('show');
+			},
+			complete: function() {
+				$.mobile.loading('hide');
+			},
+			success: function(data) {
+				alert(data.message);
+				$("#edit_plan").popup("close");
+			},
+			error: function(request, error) {
+				alert('請確認您的網路連線狀態！');
+			}
+		});
+	});
+	$('form.policy-form').on('submit', function(e) {
+		e.preventDefault(); // prevent native submit
+		var policy = $(this).jqmData("policy");
+		$(this).ajaxSubmit({
+			url: api_base + 'update_policy.php',
 			type: 'POST',
 			dataType: 'json',
 			beforeSend: function() {

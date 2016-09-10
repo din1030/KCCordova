@@ -12,7 +12,7 @@ $sql_string = "INSERT INTO `plan`(`title`,`description`,`created`) VALUES('$plan
 
 $result = $mysqli->query($sql_string);
 if ($mysqli->affected_rows > 0) {
-    $output = array('status' => true, 'message' => "已新增「$plan_title」！");
+    $output = array('status' => true, 'message' => '已新增「'.$plan_title.'」！');
     echo json_encode($output);
 
     return;
