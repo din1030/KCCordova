@@ -41,7 +41,7 @@ if ($mysqli->affected_rows > 0) {
     $email = 'din1030@gmail.com';
     $message = $member['type'].$member['name'].'<br>Email:'.$member['email'].'<br>電話:'.$member['tel'].'<br>手機:'.$member['mobile'].'<br>兌換項目：'.$item['title'].$item['description'];
     $title = '禮品兌換通知';
-    $headers = 'From: Kelly Cub <support@kellyclub.com>'."\n"; //寄件者
+    $headers = 'From: Kelly Club <support@kellyclub.com>'."\n"; //寄件者
     $headers .= "Content-type: text/html; charset=UTF-8\r\n";
     mail($email, '=?utf-8?B?'.base64_encode($title).'?=', $message, $headers);
 

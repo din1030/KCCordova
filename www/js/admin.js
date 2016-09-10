@@ -927,7 +927,6 @@ $(document).on('pagebeforeshow', "#admin-member", function() {
 				var list = $(this).parent().next('.list_table').clone(false);
 				$(list).find('tr :nth-child(3)').remove();
 				var table_caption = $(this).parent().next('.list_table').children('caption').text();
-				currentUserId = user_id;
 				$.ajax({
 					url: api_base + 'send_userlist.php',
 					dataType: 'json',
@@ -935,7 +934,7 @@ $(document).on('pagebeforeshow', "#admin-member", function() {
 					data: {
 						receiver: window.localStorage.getItem('user'),
 						subject: table_caption,
-						list_table: list.prop('outerHTML');
+						list_table: list.prop('outerHTML')
 					}
 				}).done(function(data) {
 					alert(data.message);
