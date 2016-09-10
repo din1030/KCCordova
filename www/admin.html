@@ -72,11 +72,12 @@
                         </div>
                         <div class="clearfix"></div>
                         <div class="">
-                            <button type="button" id="download_list" class="ui-btn ui-btn-inline ui-corner-all purple-btn">下載名單</button>
+                            <button type="button" class="ui-btn ui-btn-inline ui-corner-all purple-btn download-list-btn" data-type="1">下載名單</button>
                             <span class="member_num">會員總數：<span id="normal_num"></span></span>
                             <div class="clearfix"></div>
                         </div>
                         <table id="normal-table" class="list_table" data-filter="true" data-input="#normal-search">
+                            <caption>一般會員列表</caption>
                             <thead>
                                 <tr>
                                     <th>註冊時間</th>
@@ -97,11 +98,12 @@
                         </div>
                         <div class="clearfix"></div>
                         <div class="">
-                            <button type="button" id="download_list" class="ui-btn ui-btn-inline ui-corner-all purple-btn">下載名單</button>
+                            <button type="button" class="ui-btn ui-btn-inline ui-corner-all purple-btn download-list-btn" data-type="2">下載名單</button>
                             <span class="member_num">會員總數：<span id="club_num"></span></span>
                             <div class="clearfix"></div>
                         </div>
                         <table id="club-table" class="list_table" data-filter="true" data-input="#club-search">
+                            <caption>店家管理員列表</caption>
                             <thead>
                                 <tr>
                                     <th>註冊時間</th>
@@ -122,11 +124,12 @@
                         </div>
                         <div class="clearfix"></div>
                         <div class="">
-                            <button type="button" id="download_list" class="ui-btn ui-btn-inline ui-corner-all purple-btn">下載名單</button>
+                            <button type="button" class="ui-btn ui-btn-inline ui-corner-all purple-btn download-list-btn" data-type="3">下載名單</button>
                             <span class="member_num">會員總數：<span id="seeker_num"></span></span>
                             <div class="clearfix"></div>
                         </div>
                         <table id="seeker-table" class="list_table" data-filter="true" data-input="#seeker-search">
+                            <caption>求職者列表</caption>
                             <thead>
                                 <tr>
                                     <th>註冊時間</th>
@@ -146,12 +149,13 @@
                             </form>
                         </div>
                         <div class="clearfix"></div>
-                        <div class="">
-                            <button type="button" id="download_list" class="ui-btn ui-btn-inline ui-corner-all purple-btn">下載名單</button>
-                            <!-- <span class="member_num">會員總數：<span id="approved_num"></span></span> -->
-                            <div class="clearfix"></div>
-                        </div>
+                        <!-- <div class=""> -->
+                        <!-- <button type="button" id="download_list" class="ui-btn ui-btn-inline ui-corner-all purple-btn">下載名單</button> -->
+                        <!-- <span class="member_num">會員總數：<span id="approved_num"></span></span> -->
+                        <!-- <div class="clearfix"></div> -->
+                        <!-- </div> -->
                         <table id="not-approved-table" class="list_table" data-filter="true" data-input="#approved-search">
+                            <caption>待審核會員列表</caption>
                             <thead>
                                 <tr>
                                     <th>註冊時間</th>
@@ -829,7 +833,7 @@
                     </ul>
                 </div>
                 <span class="float-left" style="font-size:20px;font-weight:bold;margin-top:8px;">翁水噹</span>
-                <button type="button" id="download_list" class="ui-btn ui-btn-inline ui-corner-all purple-btn float-right">下載明細</button>
+                <button type="button" id="download_record_list" class="ui-btn ui-btn-inline ui-corner-all purple-btn float-right">下載明細</button>
                 <div class="clearfix"></div>
                 <div id="normal" class="ui-body-d ui-content member-list">
                     <div style="font-size:18px;color:#AA3C89">兌換記錄</div>

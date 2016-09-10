@@ -920,6 +920,29 @@ $(document).on('pagebeforeshow', "#admin-member", function() {
 						break;
 				}
 			});
+
+			$('.download-list-btn').off();
+			$('.download-list-btn').click(function(event) {
+				var type = $(this).jqmData("type");
+				var list = $(this).parent().next('.list_table').clone(false);
+				$(list).find('tr :nth-child(3)').remove();
+				var table_caption = $(this).parent().next('.list_table').children('caption').text();
+				currentUserId = user_id;
+				$.ajax({
+					url: api_base + 'send_userlist.php',
+					dataType: 'json',
+					type: 'POST',
+					data: {
+						receiver: window.localStorage.getItem('user'),
+						subject: table_caption,
+						list_table: list.prop('outerHTML');
+					}
+				}).done(function(data) {
+					alert(data.message);
+				}).fail(function() {
+					alert('請確認您的網路連線狀態！');
+				});
+			});
 		}
 	}).fail(function() {
 		alert('請確認您的網路連線狀態！');
