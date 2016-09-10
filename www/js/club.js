@@ -21,7 +21,7 @@ $(document).on('pagebeforeshow', '#club', function() {
 			$('#club_list').empty();
 			$.each(clubs, function(idx, obj) {
 				var club_li = $('<li></li>').attr('data-icon', 'false').attr('data-admin-id', obj.admin_id)
-					.append('<a href="" data-admin-id="' + obj.admin_id + '" data-ajax="false"><img class="club-thumbnail" src="http://52.69.53.255/KCCordova/www/img/' + obj.thumb + '"><h2>' + obj.name + '</h2><p>' + obj.country + ' ' + obj.area + '｜</p><div class="slogan">' + obj.slogan + '</div><p class="update-time">更新時間 ' + obj.updated + '</p></a>');
+					.append('<a href="" data-admin-id="' + obj.admin_id + '" data-ajax="false"><img class="club-thumbnail" src="' + img_base + obj.thumb + '"><h2>' + obj.name + '</h2><p>' + obj.country + ' ' + obj.area + '｜</p><div class="slogan">' + obj.slogan + '</div><p class="update-time">更新時間 ' + obj.updated + '</p></a>');
 				$(club_li).appendTo($('#club_list'));
 			});
 			$('#club_list').listview('refresh');
@@ -43,7 +43,7 @@ $(document).on('pagebeforeshow', '#club-intro', function() {
 	var get_club_id = window.localStorage.getItem('get_club_id');
 	console.log(get_club_id);
 	$.ajax({
-		url: 'http://52.69.53.255/KCCordova/api/get_club_info.php?club_id=' + get_club_id,
+		url: api_base + 'get_club_info.php?club_id=' + get_club_id,
 		dataType: 'json'
 	}).success(function(data) {
 		if (data.status) {
@@ -62,7 +62,7 @@ $(document).on('pagebeforeshow', '#club-intro', function() {
 			var slideContainer = '<ul class="slides">';
 			$.each(club.pic, function(idx, pic) {
 				if (pic != null && pic != '') {
-					slideContainer += '<li><img src="http://52.69.53.255/KCCordova/www/img/' + pic + '"></li>'
+					slideContainer += '<li><img src="' + img_base + pic + '"></li>'
 				}
 			});
 
@@ -70,7 +70,7 @@ $(document).on('pagebeforeshow', '#club-intro', function() {
 			$('.flexslider').html(slideContainer);
 			$('#club-intro .add-fav-btn').click(function(event) {
 				$.ajax({
-					url: 'http://52.69.53.255/KCCordova/api/add_fav.php?user_id=' + window.localStorage.getItem('user_id') + '&type=2&item_id=' + get_club_id,
+					url: api_base + 'add_fav.php?user_id=' + window.localStorage.getItem('user_id') + '&type=2&item_id=' + get_club_id,
 					dataType: 'json',
 					success: function(result) {
 						alert(result.message);
@@ -141,10 +141,10 @@ $(document).on('pagebeforeshow', '#club-job-info', function() {
 			$('#line').text(club.line);
 			$('#interviewer_pic').attr('src', img_base + club.interviewer_pic);
 			if (club.offer_content != null) {
-				club.offer_content = club.offer_content.replace(/\n/g, "<br>")
+				club.offer_content = club.offer_content.replace(/\n/g, "<br>");
 			}
 			if (club.welfare != null) {
-				club.welfare = club.welfare.replace(/\n/g, "<br>")
+				club.welfare = club.welfare.replace(/\n/g, "<br>");
 			}
 			$('#offer_content').html(club.offer_content);
 			$('#offer_welfare').html(club.welfare);
@@ -235,9 +235,7 @@ $(document).on('pagebeforeshow', "#club-service", function() {
 					var day = 'day1' + no;
 					var content = 'content1' + no;
 					if (club[day] != null && club[day] != 0) {
-						// var li = $('<li></li>').append('<a href="#' + day + '" data-ajax="false">' + club[day] + '</a>');
 						tabs.push('<li><a href="#' + day + '" data-ajax="false">' + week[club[day]] + '</a></li>')
-							// $('#first_tabs ul').append(li);
 						var tab_div = '<div id="' + day + '" class="ui-body-d ui-content">' + club[content] + '</div>';
 						tab_content.push(tab_div);
 					}
@@ -319,7 +317,7 @@ $(document).on('pagebeforeshow', '#club-search', function() {
 			console.log('club_type changed');
 
 			$.ajax({
-				url: 'http://52.69.53.255/KCCordova/api/search_club.php?area_id=' + area + '&type=' + type,
+				url: api_base + 'search_club.php?area_id=' + area + '&type=' + type,
 				dataType: 'json'
 			}).done(function(data) {
 				if (data.status) {
@@ -347,7 +345,7 @@ $(document).on('pagebeforeshow', '#club-result', function() {
 		$('#club_result_list').empty();
 		$.each(clubSearchJson.result, function(idx, obj) {
 			var club_li = $('<li></li>').attr('data-icon', 'false').attr('data-admin-id', obj.admin_id)
-				.append('<a href="" data-admin-id="' + obj.admin_id + '" data-ajax="false"><img class="club-thumbnail" src="http://52.69.53.255/KCCordova/www/img/' + obj.pic1 + '"><h2>' + obj.name + '</h2><p>' + obj.country + ' ' + obj.area + '｜</p><div class="slogan">' + obj.slogan + '</div><p class="update-time">更新時間 ' + obj.updated + '</p></a>');
+				.append('<a href="" data-admin-id="' + obj.admin_id + '" data-ajax="false"><img class="club-thumbnail" src="' + img_base + obj.pic1 + '"><h2>' + obj.name + '</h2><p>' + obj.country + ' ' + obj.area + '｜</p><div class="slogan">' + obj.slogan + '</div><p class="update-time">更新時間 ' + obj.updated + '</p></a>');
 			$(club_li).appendTo($('#club_result_list'));
 		});
 		$('#club_result_list').listview('refresh');

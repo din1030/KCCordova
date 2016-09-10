@@ -26,7 +26,7 @@ $(document).on('pagecreate', '#login', function() {
 				// alert("login current status: " + JSON.stringify(response));
 				if (response.status === 'connected') {
 					$.ajax({
-							url: 'http://52.69.53.255/KCCordova/api/user_action.php',
+							url: api_base + 'user_action.php',
 							dataType: 'json',
 							type: 'POST',
 							data: {
@@ -64,7 +64,7 @@ $(document).on('pagecreate', '#app-reg', function() {
 	$('#app-reg-form').validate({
 		submitHandler: function(form) {
 			$('#app-reg-form').ajaxSubmit({
-				url: 'http://52.69.53.255/KCCordova/api/user_action.php',
+				url: api_base + 'user_action.php',
 				data: {
 					action: 'reg',
 					formData: $('#app-reg-form').serialize()
@@ -190,7 +190,7 @@ $(document).on('pagecreate', '#fb-reg', function() {
 	$('#fb-reg-form').validate({
 		submitHandler: function(form) {
 			$('#fb-reg-form').ajaxSubmit({
-				url: 'http://52.69.53.255/KCCordova/api/user_action.php',
+				url: api_base + 'user_action.php',
 				data: {
 					action: 'fb_reg',
 					formData: $('#fb-reg-form').serialize(),
@@ -278,7 +278,7 @@ $(document).on('pagecreate', '#app-log-in', function() {
 	$('#app-log-form').validate({
 		submitHandler: function(form) {
 			$('#app-log-form').ajaxSubmit({
-				url: 'http://52.69.53.255/KCCordova/api/user_action.php',
+				url: api_base + 'user_action.php',
 				data: {
 					action: 'log',
 					formData: $('#app-log-form').serialize()
@@ -341,14 +341,14 @@ $(document).on('pagecreate', '#app-log-in', function() {
 $(document).on('pagebeforeshow', '#home', function() {
 	$('#home-main').hide();
 	$.ajax({
-		url: 'http://52.69.53.255/KCCordova/api/get_home_setting.php',
+		url: api_base + 'get_home_setting.php',
 		dataType: 'json'
 	}).done(function(data) {
 		if (data.status) {
 			var setting = data.result;
 			var home_img = $('.home-img');
 			$.each(setting, function(idx, obj) {
-				$(home_img).eq(idx).attr('src', 'http://52.69.53.255/KCCordova/www/img/' + obj.pic);
+				$(home_img).eq(idx).attr('src', img_base + '' + obj.pic);
 				$(home_img).eq(idx).parent('a').attr('href', link_to_url(obj.link));
 			});
 			var mask = '<div style="display:block;" class="page_mask text-center" data-position-to="window" data-dismissible="true"><a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a><p>您不是店家管理者<br>求職者資訊僅供店家管理者瀏覽</p></div>';
@@ -390,7 +390,7 @@ $(document).on('pagebeforeshow', '#home', function() {
 				break;
 		}
 	}
-	// $.ajax('http://52.69.53.255/KCCordova/api/getAdsHome.json')
+	// $.ajax(api_base + 'getAdsHome.json')
 	// 	.done(function(res) {
 	// 		var result = res[0];
 	// 		// caches
@@ -402,8 +402,8 @@ $(document).on('pagebeforeshow', '#home', function() {
 	// 			// console.log(ads1);
 	// 			ads1.find('a').attr('href', result.ads[0].adsUrl);
 	// 			ads2.find('a').attr('href', result.ads[1].adsUrl);
-	// 			ads1.find('img').attr('src', 'http://52.69.53.255/KCCordova/www/img/' + result.ads[0].adsImage);
-	// 			ads2.find('img').attr('src', 'http://52.69.53.255/KCCordova/www/img/' + result.ads[1].adsImage);
+	// 			ads1.find('img').attr('src', img_base + '' + result.ads[0].adsImage);
+	// 			ads2.find('img').attr('src', img_base + '' + result.ads[1].adsImage);
 	//
 	// 			$('#ads-home').show();
 	// 		}
@@ -416,7 +416,7 @@ function fbLogin() {
 		// alert('now logged, ID: ' + response.authResponse.userID);
 		window.localStorage.setItem('fb_id', response.authResponse.userID);
 		$.ajax({
-				url: 'http://52.69.53.255/KCCordova/api/user_action.php',
+				url: api_base + 'user_action.php',
 				dataType: 'json',
 				type: 'POST',
 				data: {

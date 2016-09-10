@@ -905,12 +905,14 @@ div[id|=admin] .category-block {
   min-width: 100px;
 }
 .orange-btn {
+  border: none !important;
   padding: 5px 10px;
   color: #fff !important;
   background-color: #ed6615 !important;
   margin-right: 0;
 }
 .green-btn {
+  border: none !important;
   padding: 5px 10px;
   color: #fff !important;
   background-color: #47aa2c !important;

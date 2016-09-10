@@ -111,7 +111,7 @@ $(document).on('pagebeforeshow', "#redeem", function() {
 
 $(document).on('pagebeforecreate', '#news', function() {
 	$.ajax({
-		url: 'http://52.69.53.255/KCCordova/api/get_news.php',
+		url: api_base + 'get_news.php',
 		dataType: 'json'
 	}).success(function(data) {
 		if (data.status) {

@@ -584,10 +584,10 @@ $(document).on('pagebeforeshow', "#admin-news", function() {
 		if (data.status) {
 			$('.news_info_block').remove();
 			$.each(data.result, function(idx, obj) {
-				var news_info_block = $('<div class="news_info_block"></div>').append('<p class="news_title">' + obj.title + '</p>').append('<div class="news_during"><div><span class="item_title">上架時間：</span><span>' + obj.start_date + '</span></div><div><span class="item_title">下架時間：</span><span>' + obj.end_date + '</span></div></div>').append('<div class="news_operation"> <div><span class="item_title">排序：</span><span>' + obj.order_no + '</span><button type="button" class="ui-btn ui-corner-all ui-btn-inline news-del-btn" data-news-id="' + obj.id + '">刪除</button><a class="ui-btn ui-corner-all ui-btn-inline new-edit-btn" data-news-id="' + obj.id + '">編輯</a><div class="clearfix"></div></div> </div>');
+				var news_info_block = $('<div class="news_info_block"></div>').append('<p class="news_title">' + obj.title + '</p>').append('<div class="news_during"><div><span class="item_title">上架時間：</span><span>' + obj.start_date + '</span></div><div><span class="item_title">下架時間：</span><span>' + obj.end_date + '</span></div></div>').append('<div class="news_operation"> <div><span class="item_title">排序：</span><span>' + obj.order_no + '</span><button type="button" class="ui-btn ui-corner-all ui-btn-inline news-del-btn" data-news-id="' + obj.id + '">刪除</button><a class="ui-btn ui-corner-all ui-btn-inline news-edit-btn" data-news-id="' + obj.id + '">編輯</a><div class="clearfix"></div></div> </div>');
 				$(news_info_block).appendTo('#admin-news-main');
 			});
-			$('.news_info_block a.new-edit-btn').click(function(event) {
+			$('.news_info_block a.news-edit-btn').click(function(event) {
 				var news_id = $(this).jqmData("news-id");
 				console.log(news_id);
 				currentNewsId = news_id;
@@ -735,26 +735,58 @@ $(document).on('pagebeforeshow', "#admin-messages", function() {
 
 $(document).on('pagebeforeshow', "#admin-plan", function() {
 	$.ajax({
+		url: api_base + 'get_policy.php',
+		dataType: 'json'
+	}).done(function(data) {
+		if (data.status) {
+			$('#pay_method').html(data.result.pay_method);
+		}
+	}).fail(function() {
+		alert('請確認您的網路連線狀態！');
+	});
+	$.ajax({
 		url: api_base + 'get_plan.php',
 		dataType: 'json'
 	}).done(function(data) {
 		if (data.status) {
-			$each(data.result, function(idx, obj) {
-				var plan_block = $('<div class="plan_block"></div>').append('<p><strong class="item_title">方案名稱：</strong><span class="plan_title">' + obj.title + '</span></p>').append('label class="item_title"><strong>方案內容：</strong></label><div class="">' + obj.description + '</div><hr>').append('<button class="ui-btn ui-btn-inline ui-corner-all orange-btn float-right plan-del-btn" type="button" data-plan-id="' + obj.id + '">刪除</button><a href="#edit_plan" class="ui-btn ui-btn-inline purple-btn ui-corner-all float-right" data-rel="popup" data-plan-id="' + obj.id + '">編輯</a><div class="clearfix"></div>');
-				$(plan_block).insertBefore('#pay-method-form')
+			$.each(data.result, function(idx, obj) {
+				var plan_block = $('<div class="plan_block"></div>').append('<p><strong class="item_title">方案名稱：</strong><span class="plan_title">' + obj.title + '</span></p>').append('<label class="item_title"><strong>方案內容：</strong></label><div class="">' + obj.description.replace(/\n/g, "<br>") + '</div><hr>').append('<button class="ui-btn ui-btn-inline ui-corner-all orange-btn float-right plan-del-btn" type="button" data-plan-id="' + obj.id + '">刪除</button><a href="#edit_plan" class="ui-btn ui-btn-inline purple-btn ui-corner-all float-right plan-edit-btn" data-rel="popup" data-plan-id="' + obj.id + '">編輯</a><div class="clearfix"></div>');
+				$(plan_block).insertBefore('#pay-method-form');
+			});
+			$('.plan_block a.plan-edit-btn').click(function(event) {
+				currentNewsId = $(this).jqmData("news-id");
 			});
 		}
 	}).fail(function() {
 		alert('請確認您的網路連線狀態！');
 	});
-	$('form.policy-form').on('submit', function(e) {
+	$('#add-plan-form').on('submit', function(e) {
 		e.preventDefault(); // prevent native submit
-		var policy = $(this).jqmData("policy");
-		console.log(policy);
 		$(this).ajaxSubmit({
-			url: api_base + 'update_policy.php',
+			url: api_base + 'add_plan.php',
+			type: 'POST',
+			dataType: 'json',
+			beforeSend: function() {
+				$.mobile.loading('show');
+			},
+			complete: function() {
+				$.mobile.loading('hide');
+			},
+			success: function(data) {
+				alert(data.message);
+			},
+			error: function(request, error) {
+				alert('請確認您的網路連線狀態！');
+			}
+		});
+	});
+	$('#edit-plan-form').on('submit', function(e) {
+		e.preventDefault(); // prevent native submit
+		// var plan_id = $(this).jqmData("plan-id");
+		$(this).ajaxSubmit({
+			url: api_base + 'edit_plan.php',
 			data: {
-				policy: policy
+				plan_id: currentPlanId
 			},
 			type: 'POST',
 			dataType: 'json',
