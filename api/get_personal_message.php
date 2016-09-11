@@ -6,16 +6,30 @@ header('Access-Control-Allow-Methods: GET, POST');
 include 'db_setting.php';
 
 $id = $_GET['id'];
-$sql_string = '(SELECT `messages`.*, MAX(`time`) last_time, `club_info`.`name` name, `club_info`.`pic1`, `country`.`country`,`area`.`area` FROM `messages`,`club_info`,`country`,`area` WHERE `to_id`='.$id.' AND `from_type`=2 AND `club_info`.`country_id` = `country`.`id` AND `club_info`.`area_id` = `area`.`id` AND `messages`.`from_id`=`club_info`.`admin_id` GROUP BY `from_id`)
-UNION
-(SELECT `messages`.*, MAX(`time`) last_time, `seeker_info`.`nickname` name, `seeker_info`.`pic1`, `country`.`country`,`area`.`area` FROM `messages`,`seeker_info`,`country`,`area` WHERE `to_id`='.$id.' AND `from_type`=3 AND `seeker_info`.`country_id` = `country`.`id` AND `seeker_info`.`area_id` = `area`.`id` AND `messages`.`from_id`=`seeker_info`.`u_id` GROUP BY `from_id`) ORDER BY `last_time` DESC';
+$user_type = '';
+$from_type = 0;
 
-$sql = $mysqli->query($sql_string);
-if ($sql->num_rows > 0) {
+$user_string = 'SELECT * FROM `user` WHERE `id`='.$id;
+$user_result = $mysqli->query($user_string);
+
+if ($user_result->num_rows > 0) {
+    while ($r = mysqli_fetch_assoc($user_result)) {
+        $user_type = $r['type'];
+    }
+    if ($user_type == '2') {
+        $sql_string = 'SELECT list.`id` from_id,`seeker_info`.`nickname` name, `seeker_info`.`pic1`,`country`.`country`,`area`.`area`,list.`time` last_time  FROM (SELECT `id`, MAX(`last_time`) time FROM (SELECT `messages`.`from_id` id, MAX(`time`) last_time FROM `messages` WHERE `to_id`='.$id.' GROUP BY `from_id` UNION SELECT `messages`.`to_id` id, MAX(`time`) last_time FROM `messages` WHERE `from_id`='.$id.' GROUP BY `to_id`) r GROUP BY `id` ORDER BY `time` DESC) list,`seeker_info`,`country`,`area` WHERE list.`id`=`seeker_info`.`u_id` AND `seeker_info`.`country_id` = `country`.`id` AND `seeker_info`.`area_id` = `area`.`id`';
+        $from_type = '3';
+    } elseif ($user_type == '3') {
+        $sql_string = 'SELECT list.`id` from_id,`club_info`.`name`, `club_info`.`thumb` pic1,`country`.`country`,`area`.`area`,list.`time` last_time  FROM (SELECT `id`, MAX(`last_time`) time FROM (SELECT `messages`.`from_id` id, MAX(`time`) last_time FROM `messages` WHERE `to_id`='.$id.' GROUP BY `from_id` UNION SELECT `messages`.`to_id` id, MAX(`time`) last_time FROM `messages` WHERE `from_id`='.$id.' GROUP BY `to_id`) r GROUP BY `id` ORDER BY `time` DESC) list,`club_info`,`country`,`area` WHERE list.`id`=`club_info`.`admin_id` AND `club_info`.`country_id` = `country`.`id` AND `club_info`.`area_id` = `area`.`id`';
+        $from_type = '2';
+    }
+    $sql = $mysqli->query($sql_string);
     while ($r = mysqli_fetch_assoc($sql)) {
+        $r['from_type'] = $from_type;
         $r['last_time'] = date('Y/m/d H:i', strtotime($r['last_time']));
         $output[] = $r;
     }
+
     echo json_encode(array('status' => true, 'msg' => $output));
 
     return;
