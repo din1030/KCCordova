@@ -8,7 +8,7 @@ var adminPlanJson = '';
 var currentPlanId;
 
 $(document).one("pagebeforeshow", "[data-role='page']", function() {
-	if (window.localStorage.getItem('auth') != '0') {
+	if (window.localStorage.getItem('auth') != '0' && window.localStorage.getItem('auth') != '100') {
 		alert('您不是系統管理員！');
 		document.location.href = './index.html';
 	} else if (window.localStorage.getItem('auth') == null || window.localStorage.getItem('user_id') == null) {
@@ -73,53 +73,18 @@ $(document).on('pagebeforeshow', "#admin-home", function() {
 	}).done(function(data) {
 		var setting = data.result;
 		if (data.status) {
-			$('#home-upper-left-link').val(setting[0].link);
-			$('#home-upper-left-link').prev().text(textSwitch(setting[0].link));
-
-			$('#home-upper-right-link').val(setting[1].link);
-			$('#home-upper-right-link').prev().text(textSwitch(setting[1].link));
-
-			$('#home-middle-link').val(setting[2].link);
-			$('#home-middle-link').prev().text(textSwitch(setting[2].link));
-
-
-			$('#home-lower-left-link').val(setting[3].link);
-			$('#home-lower-left-link').prev().text(textSwitch(setting[3].link));
-
-
-			$('#home-lower-right-link').val(setting[4].link);
-			$('#home-lower-right-link').prev().text(textSwitch(setting[4].link));
-		}
-		$('#pic1').attr('src', img_base + setting[0].pic);
-		$('#pic2').attr('src', img_base + setting[1].pic);
-		$('#pic3').attr('src', img_base + setting[2].pic);
-		$('#pic4').attr('src', img_base + setting[3].pic);
-		$('#pic5').attr('src', img_base + setting[4].pic);
-
-		function textSwitch(text) {
-			switch (text) {
-				case 'club':
-					return '酒店系統'
-					break;
-				case 'seeker':
-					return "求職者";
-					break;
-				case 'life':
-					return '生活服務'
-					break;
-				case 'news':
-					return "最新消息";
-					break;
-				case 'homepages':
-					return '連結官網'
-					break;
-				default:
-					return "酒店系統";
-					break;
-			}
+			$('#home-upper-left-link').val(setting[0].link).selectmenu('refresh');
+			$('#home-upper-right-link').val(setting[1].link).selectmenu('refresh');
+			$('#home-middle-link').val(setting[2].link).selectmenu('refresh');
+			$('#home-lower-left-link').val(setting[3].link).selectmenu('refresh');
+			$('#home-lower-right-link').val(setting[4].link).selectmenu('refresh');
+			$('#pic1').attr('src', img_base + setting[0].pic);
+			$('#pic2').attr('src', img_base + setting[1].pic);
+			$('#pic3').attr('src', img_base + setting[2].pic);
+			$('#pic4').attr('src', img_base + setting[3].pic);
+			$('#pic5').attr('src', img_base + setting[4].pic);
 		}
 	});
-
 
 	$('#adminHomeForm').on('submit', (function(e) {
 		e.preventDefault();
