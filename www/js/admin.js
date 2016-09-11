@@ -544,7 +544,27 @@ $(document).on('pagebeforeshow', "#admin-authority", function() {
 			}
 		});
 	});
+	$.ajax({
+		url: api_base + 'get_admin.php',
+		dataType: 'json'
+	}).done(function(data) {
+		if (data.status) {
+			$.each(data.result, function(idx, obj) {
+				var admin_info = '<div class="admin_info">姓名：' + obj.name + '<br>帳號：' + obj.email + '</div><a href="#edit_admin" class="ui-btn ui-corner-all ui-btn-inline purple-btn admin-edit-btn" data-rel="popup" data-admin-id="' + obj.id + '">編輯管理者</a>';
+				if (obj.type == '0') {
+					admin_info += '<div class="clearfix"></div><br>';
+					$('#main_admin').append(admin_info);
+				} else if (obj.type == '100') {
+					admin_info += '<button class="ui-btn ui-corner-all ui-btn-inline orange-btn admin-del-btn" type="button" data-admin-id="' + obj.id + '">刪除</button><div class="clearfix"></div><br>';
+					$('#sub_admin').append(admin_info);
+				}
+			});
+		}
+	}).fail(function() {
+		alert('請確認您的網路連線狀態！');
+	});
 });
+
 $(document).on('pagebeforeshow', "#admin-news", function() {
 	$.ajax({
 		url: api_base + 'get_news.php',
