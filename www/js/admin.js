@@ -550,19 +550,22 @@ $(document).on('pagebeforeshow', "#admin-authority", function() {
 		dataType: 'json'
 	}).done(function(data) {
 		if (data.status) {
+			$('#main_admin').empty();
+			$('#sub_admin').empty();
 			$.each(data.result, function(idx, obj) {
 				var admin_info_block = '<div class="admin_info_block"><div class="admin_info">姓名：' + obj.name + '<br>帳號：' + obj.email + '</div>';
-				if (window.localStorage.getItem('auth') == '0') {
-					admin_info_block += '<a href="#edit_admin" class="ui-btn ui-corner-all ui-btn-inline purple-btn admin-edit-btn" data-rel="popup" data-admin-id="' + obj.id + '">編輯管理者</a>';
-				} else {
+				if (window.localStorage.getItem('auth') == '100') {
 					$('#admin_add_btn').remove();
 				}
+				// else {
+				// admin_info_block += '<a href="#edit_admin" class="ui-btn ui-corner-all ui-btn-inline purple-btn admin-edit-btn" data-rel="popup" data-admin-id="' + obj.id + '">編輯管理者</a>';
+				// }
 				if (obj.type == '0') {
 					admin_info_block += '<div class="clearfix"></div><br></div>';
 					$('#main_admin').append(admin_info_block);
 				} else if (obj.type == '100') {
 					if (window.localStorage.getItem('auth') == '0') {
-						admin_info_block += '<button class="ui-btn ui-corner-all ui-btn-inline orange-btn admin-del-btn" type="button" data-admin-id="' + obj.id + '">刪除</button>';
+						admin_info_block += '<button class="ui-btn ui-corner-all ui-btn-inline float-right orange-btn admin-del-btn" type="button" data-admin-id="' + obj.id + '">刪除</button>';
 					}
 					admin_info_block += '<div class="clearfix"></div><br></div>';
 					$('#sub_admin').append(admin_info_block);
@@ -572,7 +575,7 @@ $(document).on('pagebeforeshow', "#admin-authority", function() {
 			$('.admin-del-btn').click(function(event) {
 				var btn = $(this);
 				var admin_id = $(this).jqmData("admin-id");
-				if (confirm('確定刪除此消息？') === true) {
+				if (confirm('確定刪除此管理者？') === true) {
 					$.ajax({
 						url: api_base + 'remove_subadmin.php',
 						type: 'POST',
