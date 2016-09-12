@@ -24,7 +24,6 @@ if ($action == 'reg') { // For Register
     $birth = $params['rg_birthday'];
     $tel = $params['rg_tel'];
     $mobile = $params['rg_mobile'];
-    // echo "$email/$password/$name/$gender/$birth/$tel/$mobile";
 
     if (is_null($email) || is_null($password)) {
         $output = array('status' => false, 'message' => '帳號資訊不完整！', 'data' => "$email/$name/$gender/$birth/$tel/$mobile");
@@ -51,7 +50,7 @@ if ($action == 'reg') { // For Register
 
         // 儲存資料
         $sql_string = 'INSERT INTO `user`(`type`,`email`,`password`,`name`,`gender`,`country`,`area`,`birth`,`tel`,`mobile`,`ref_id`,`created`) '.
-            "VALUES ('$type','$email','$password','$name','$gender','$country','$area','$birth','$tel','$mobile','$ref', NULL)";
+            "VALUES ('$type','$email','$password','$name','$gender','$country','$area','$birth','$tel','$mobile','$ref', NOW())";
         $mysqli->query($sql_string);
         if ($mysqli->affected_rows > 0) {
             // 資料送出，更新會員編號
@@ -131,7 +130,7 @@ if ($action == 'reg') { // For Register
 
         // 儲存資料
         $sql_string = 'INSERT INTO `user`(`fb_id`,`type`,`email`,`name`,`gender`,`country`,`area`,`birth`,`tel`,`mobile`,`ref_id`,`created`) '.
-            "VALUES('$fb_id','$type','$email','$name','$gender','$country','$area','$birth','$tel','$mobile','$ref', NULL)";
+            "VALUES('$fb_id','$type','$email','$name','$gender','$country','$area','$birth','$tel','$mobile','$ref', NOW())";
         $mysqli->query($sql_string);
         if ($mysqli->affected_rows > 0) {
             // 資料送出，更新會員編號

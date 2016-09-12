@@ -497,6 +497,7 @@ $(document).on('pagebeforeshow', "#admin-category", function() {
 		});
 	});
 });
+
 $(document).on('pagebeforeshow', "#admin-authority", function() {
 	$.ajax({
 		url: api_base + 'get_policy.php',
@@ -550,26 +551,84 @@ $(document).on('pagebeforeshow', "#admin-authority", function() {
 	}).done(function(data) {
 		if (data.status) {
 			$.each(data.result, function(idx, obj) {
-				var admin_info = '<div class="admin_info">姓名：' + obj.name + '<br>帳號：' + obj.email + '</div>';
+				var admin_info_block = '<div class="admin_info_block"><div class="admin_info">姓名：' + obj.name + '<br>帳號：' + obj.email + '</div>';
 				if (window.localStorage.getItem('auth') == '0') {
-					admin_info += '<a href="#edit_admin" class="ui-btn ui-corner-all ui-btn-inline purple-btn admin-edit-btn" data-rel="popup" data-admin-id="' + obj.id + '">編輯管理者</a>';
+					admin_info_block += '<a href="#edit_admin" class="ui-btn ui-corner-all ui-btn-inline purple-btn admin-edit-btn" data-rel="popup" data-admin-id="' + obj.id + '">編輯管理者</a>';
 				} else {
 					$('#admin_add_btn').remove();
 				}
 				if (obj.type == '0') {
-					admin_info += '<div class="clearfix"></div><br>';
-					$('#main_admin').append(admin_info);
+					admin_info_block += '<div class="clearfix"></div><br></div>';
+					$('#main_admin').append(admin_info_block);
 				} else if (obj.type == '100') {
 					if (window.localStorage.getItem('auth') == '0') {
-						admin_info += '<button class="ui-btn ui-corner-all ui-btn-inline orange-btn admin-del-btn" type="button" data-admin-id="' + obj.id + '">刪除</button>';
+						admin_info_block += '<button class="ui-btn ui-corner-all ui-btn-inline orange-btn admin-del-btn" type="button" data-admin-id="' + obj.id + '">刪除</button>';
 					}
-					admin_info += '<div class="clearfix"></div><br>';
-					$('#sub_admin').append(admin_info);
+					admin_info_block += '<div class="clearfix"></div><br></div>';
+					$('#sub_admin').append(admin_info_block);
+				}
+			});
+			$('.admin-del-btn').off();
+			$('.admin-del-btn').click(function(event) {
+				var btn = $(this);
+				var admin_id = $(this).jqmData("admin-id");
+				if (confirm('確定刪除此消息？') === true) {
+					$.ajax({
+						url: api_base + 'remove_subadmin.php',
+						type: 'POST',
+						dataType: 'json',
+						data: {
+							admin_id: admin_id
+						}
+					}).done(function(data) {
+						if (data.status) {
+							$(btn).parents('.admin_info_block').remove();
+						} else {
+							alert('請重新操作！');
+						}
+					}).fail(function() {
+						alert('請確認您的網路連線狀態！');
+					});
 				}
 			});
 		}
 	}).fail(function() {
 		alert('請確認您的網路連線狀態！');
+	});
+	$('#add-admin-form').off();
+	$('#add-admin-form').on('submit', function(e) {
+		e.preventDefault(); // prevent native submit
+		$(this).ajaxSubmit({
+			url: api_base + 'user_action.php',
+			data: {
+				action: 'reg',
+				formData: $('#add-admin-form').serialize()
+			},
+			type: 'POST',
+			dataType: 'json',
+			beforeSend: function() {
+				$.mobile.loading('show');
+			},
+			complete: function() {
+				$.mobile.loading('hide');
+			},
+			success: function(data) {
+				if (result.status) {
+					alert('已新增次管理者！');
+					$.mobile.changePage($('#admin-authority'), {
+						allowSamePageTransition: true,
+						reloadPage: true,
+						changeHash: true,
+						transition: "none"
+					});
+				} else {
+					alert('請重新操作！');
+				}
+			},
+			error: function(request, error) {
+				alert('請確認您的網路連線狀態！');
+			}
+		});
 	});
 });
 
@@ -979,6 +1038,7 @@ $(document).on('pagebeforeshow', "#admin-member-detail", function() {
 			$('#m_email').val(data.result.email);
 			$('#m_tel').val(data.result.tel);
 			$('#m_mobile').val(data.result.mobile);
+			$('input[name="member_auth"]').removeProp('checked').checkboxradio("refresh");
 			switch (data.result.type) {
 				case '1':
 				default:
@@ -987,12 +1047,14 @@ $(document).on('pagebeforeshow', "#admin-member-detail", function() {
 				case '2':
 					if (data.result.publish_due != null) {
 						$('#club_adv').prop("checked", true).checkboxradio("refresh");
+						$('#publish_due').val(data.result.publish_due);
 					} else {
 						$('#club_basic').prop("checked", true).checkboxradio("refresh");
+						$('#publish_due').val('');
 					}
 					break;
 				case '3':
-					$('#normal').prop("checked", true).checkboxradio("refresh");
+					$('#seeker').prop("checked", true).checkboxradio("refresh");
 					break;
 			}
 			// if (data.result.type == 2) {

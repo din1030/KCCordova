@@ -57,13 +57,13 @@
                 <div data-role="tabs" id="member_type_tab">
                     <div id="member_type_nav" data-role="navbar">
                         <ul>
-                            <li><a href="#normal" data-ajax="false" class="ui-btn-active">一般會員</a></li>
-                            <li><a href="#club" data-ajax="false">店家</a></li>
-                            <li><a href="#seeker" data-ajax="false">求職者</a></li>
+                            <li><a href="#normal_list" data-ajax="false" class="ui-btn-active">一般會員</a></li>
+                            <li><a href="#club_list" data-ajax="false">店家</a></li>
+                            <li><a href="#seeker_list" data-ajax="false">求職者</a></li>
                             <li><a href="#authority" data-ajax="false">待審核</a></li>
                         </ul>
                     </div>
-                    <div id="normal" class="ui-body-d ui-content member-list">
+                    <div id="normal_list" class="ui-body-d ui-content member-list">
                         <div class="list_search">
                             <label class="area_title" for="search">搜尋名單</label>
                             <form>
@@ -89,7 +89,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div id="club" class="ui-body-d ui-content member-list">
+                    <div id="club_list" class="ui-body-d ui-content member-list">
                         <div class="list_search">
                             <label class="area_title" for="search">搜尋名單</label>
                             <form>
@@ -115,7 +115,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div id="seeker" class="ui-body-d ui-content member-list">
+                    <div id="seeker_list" class="ui-body-d ui-content member-list">
                         <div class="list_search">
                             <label class="area_title" for="search">搜尋名單</label>
                             <form>
@@ -190,6 +190,7 @@
                 </div>
                 <div>
                     <div id="auth_list">
+                        <p><strong>調整會員身分權限</strong></p>
                         <fieldset data-role="controlgroup" data-iconpos="right" data-enhanced="false" data-corners="false">
                             <input type="radio" name="member_auth" value="normal" id="normal">
                             <label for="normal">一般會員權限</label>
@@ -203,8 +204,8 @@
                                         <option value="small">付費方案A</option>
                                         <option value="medium">付費方案B</option>
                                     </select> -->
-                                    <label class="area_title" for="due">到期時間</label>
-                                    <input type="date" name="due" class="" id="due" value="2017-01-10">
+                                    <label class="area_title" for="publish_due">到期時間</label>
+                                    <input type="date" name="publish_due" class="" id="publish_due" value="">
                                 </div>
                             </div>
                             <div class="clearfix"></div>
@@ -733,7 +734,7 @@
                         <li class="ui-block-b"><a href="#admin-recommend-redeem" class="ui-btn">兌換禮品管理</a></li>
                     </ul>
                 </div>
-                <div id="normal" class="ui-body-d ui-content member-list">
+                <div id="normal_list" class="ui-body-d ui-content member-list">
                     <div class="list_search">
                         <label class="area_title" for="textinput-1">搜尋名單</label>
                         <input type="text" name="search" class="" id="search" placeholder="姓名或日期(20160520)" data-inline="true">
@@ -844,7 +845,7 @@
                 <span class="float-left" style="font-size:20px;font-weight:bold;margin-top:8px;">翁水噹</span>
                 <button type="button" id="download_record_list" class="ui-btn ui-btn-inline ui-corner-all purple-btn float-right">下載明細</button>
                 <div class="clearfix"></div>
-                <div id="normal" class="ui-body-d ui-content member-list">
+                <div id="" class="ui-body-d ui-content member-list">
                     <div style="font-size:18px;color:#AA3C89">兌換記錄</div>
                     <table class="list_table">
                         <tbody>
@@ -858,18 +859,6 @@
                     <div style="font-size:18px;color:#AA3C89">推薦清單(共 15 人)</div>
                     <table class="list_table">
                         <tbody>
-                            <tr>
-                                <td>翁水噹</td>
-                                <td>註冊時間：2016/07/14 20:15</td>
-                            </tr>
-                            <tr>
-                                <td>翁水噹</td>
-                                <td>註冊時間：2016/07/14 20:15</td>
-                            </tr>
-                            <tr>
-                                <td>翁水噹</td>
-                                <td>註冊時間：2016/07/14 20:15</td>
-                            </tr>
                             <tr>
                                 <td>翁水噹</td>
                                 <td>註冊時間：2016/07/14 20:15</td>
@@ -1310,25 +1299,26 @@
                 </form>
             </div>
             <div id="add_admin" class="msg-popup ui-corner-all" data-role="popup" data-position-to="window" data-transition="pop" data-theme="none" data-shadow="false" data-overlay-theme="b" data-dismissible="false">
-                <form>
-                    <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
-                    <div style="padding:10px 20px;">
+                <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+                <div style="padding:10px 20px;">
+                    <form id="add-admin-form">
                         <h3>新增管理者</h3>
                         <div class="ui-field-contain">
-                            <label class="item_title" for="admin_name" style="color:white;">姓名</label>
+                            <label for="admin_name" style="color:white;">姓名</label>
                             <input type="text" name="admin_name" class="" id="admin_name" placeholder="">
                         </div>
                         <div class="ui-field-contain">
-                            <label class="item_title" for="admin_email" style="color:white;">帳號</label>
+                            <label for="admin_email" style="color:white;">帳號</label>
                             <input type="text" name="admin_email" class="" id="admin_email" placeholder="">
                         </div>
                         <div class="ui-field-contain">
-                            <label class="item_title" for="admin_pswd" style="color:white;">密碼</label>
+                            <label for="admin_pswd" style="color:white;">密碼</label>
                             <input type="text" name="admin_pswd" class="" id="admin_pswd" placeholder="">
                         </div>
+                        <input type="hidden" name="member_type" class="" id="member_type" value="100">
                         <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn send-btn">完成</button>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
             <div id="edit_admin" class="msg-popup ui-corner-all" data-role="popup" data-position-to="window" data-transition="pop" data-theme="none" data-shadow="false" data-overlay-theme="b" data-dismissible="false">
                 <form>
@@ -1336,15 +1326,15 @@
                     <div style="padding:10px 20px;">
                         <h3>編輯管理者</h3>
                         <div class="ui-field-contain">
-                            <label class="item_title" for="admin_name" style="color:white;">姓名</label>
+                            <label for="admin_name" style="color:white;">姓名</label>
                             <input type="text" name="admin_name" class="" id="admin_name" placeholder="">
                         </div>
                         <div class="ui-field-contain">
-                            <label class="item_title" for="admin_email" style="color:white;">帳號</label>
+                            <label for="admin_email" style="color:white;">帳號</label>
                             <input type="text" name="admin_email" class="" id="admin_email" placeholder="">
                         </div>
                         <div class="ui-field-contain">
-                            <label class="item_title" for="admin_pswd" style="color:white;">密碼</label>
+                            <label for="admin_pswd" style="color:white;">密碼</label>
                             <input type="text" name="admin_pswd" class="" id="admin_pswd" placeholder="">
                         </div>
                         <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn send-btn">完成</button>
