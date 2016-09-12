@@ -66,6 +66,10 @@ if ($action == 'reg') { // For Register
                 case '3':
                     $m_id = 'C'.$m_id;
                     break;
+                case '0':
+                case '100':
+                    $m_id = 'X'.$m_id;
+                    break;
                 default:
                     break;
             }

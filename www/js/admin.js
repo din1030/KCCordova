@@ -613,7 +613,7 @@ $(document).on('pagebeforeshow', "#admin-authority", function() {
 				$.mobile.loading('hide');
 			},
 			success: function(data) {
-				if (result.status) {
+				if (data.status) {
 					alert('已新增次管理者！');
 					$.mobile.changePage($('#admin-authority'), {
 						allowSamePageTransition: true,
