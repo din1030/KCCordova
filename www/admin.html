@@ -141,7 +141,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div id="authority" class="ui-body-d ui-content member-list">
+                    <div id="authority" class="ui-body-d ui-content">
                         <div class="list_search">
                             <label class="area_title" for="search">搜尋名單</label>
                             <form>
@@ -180,37 +180,36 @@
                     </a>
                     <span class="page-title">管理者後台</span>
                     <a href="#admin-member" class="ui-link">
-                        <div class="header-btn header-link right-link" style="width:auto">取消</div>
+                        <div class="header-btn header-link right-link" style="width:auto">返回</div>
                     </a>
                 </div>
             </div>
             <!-- /header -->
             <div data-role="main" class="ui-content" id="admin-member-detail-main">
-                <div>
-                    翁水噹
+                <div id="m_name">
                 </div>
                 <div>
                     <div id="auth_list">
-                        <fieldset data-role="controlgroup" data-iconpos="right">
-                            <input type="radio" name="default_lang" id="thai">
-                            <label for="thai">一般會員權限</label>
-                            <input type="radio" name="default_lang" id="eng">
-                            <label for="eng">店家管理-基本權限</label>
-                            <input type="radio" name="default_lang" id="ch_simp">
-                            <label for="ch_simp">店家管理-付費權限</label>
+                        <fieldset data-role="controlgroup" data-iconpos="right" data-enhanced="false" data-corners="false">
+                            <input type="radio" name="member_auth" value="normal" id="normal">
+                            <label for="normal">一般會員權限</label>
+                            <input type="radio" name="member_auth" value="club_basic" id="club_basic">
+                            <label for="club_basic">店家管理-基本權限</label>
+                            <input type="radio" name="member_auth" value="club_adv" id="club_adv">
+                            <label for="club_adv">店家管理-付費權限</label>
                             <div id="plan_block">
                                 <div class="ui-field-contain">
-                                    <select name="select-native-1" id="select-native-1" class="l" data-inline="true" data-mini="true">
+                                    <!-- <select name="plan_select" id="plan_select" data-inline="true" data-mini="true">
                                         <option value="small">付費方案A</option>
                                         <option value="medium">付費方案B</option>
-                                    </select>
-                                    <label class="area_title" for="select-native-2">到期時間</label>
+                                    </select> -->
+                                    <label class="area_title" for="due">到期時間</label>
                                     <input type="date" name="due" class="" id="due" value="2017-01-10">
                                 </div>
                             </div>
                             <div class="clearfix"></div>
-                            <input type="radio" name="default_lang" id="ch_trad">
-                            <label for="ch_trad">求職者權限</label>
+                            <input type="radio" name="member_auth" value="seeker" id="seeker">
+                            <label for="seeker">求職者權限</label>
                         </fieldset>
                     </div>
                 </div>
@@ -223,27 +222,37 @@
                             <option value="seeker">求職者</option>
                         </select>
                     </div> -->
-                    <div class="ui-field-contain">
-                        <label for="rg_email">帳號</label>
-                        <input type="email" name="rg_email" id="rg_email" class="required email" value="adbbe@gmail.com">
-                        <!-- <div class="form-hint">請填寫有效 E-mail 格式</div> -->
+                    <div class="ui-field-contain ui-disabled">
+                        <label for="m_no">會員編號</label>
+                        <input type="text" name="m_no" id="m_no" class="required email" value="">
                     </div>
-                    <div class="ui-field-contain">
+                    <div class="ui-field-contain ui-disabled">
+                        <label for="m_email">帳號</label>
+                        <input type="email" name="m_email" id="m_email" class="required email" value="">
+                    </div>
+                    <!-- <div class="ui-field-contain ui-disabled">
+                        <label for="m_name">姓名</label>
+                        <input type="email" name="m_name" id="m_name" class="required email" value="">
+                    </div> -->
+                    <!-- <div class="ui-field-contain">
                         <label for="rg_pswd">密碼</label>
                         <input type="password" name="rg_pswd" id="rg_pswd" class="required" minlength="4" maxlength="16" value="sdcawa">
-                        <!-- <div class="form-hint">密碼無效</div> -->
+                    </div> -->
+                    <div class="ui-field-contain ui-disabled">
+                        <label class="item_title" for="m_gender">性別</label>
+                        <input type="text" name="m_gender" class="ui-disabled" id="m_gender" value="">
                     </div>
                     <div class="ui-field-contain ui-disabled">
-                        <label class="item_title" for="textinput-2">性別</label>
-                        <input type="text" name="textinput-2" class="ui-disabled" id="textinput-2" value="女">
+                        <label class="item_title" for="m_birth ui-disabled">生日</label>
+                        <input type="text" name="m_birth" class="ui-disabled" id="m_birth" value="">
                     </div>
                     <div class="ui-field-contain ui-disabled">
-                        <label class="item_title" for="textinput-3 ui-disabled">生日</label>
-                        <input type="text" name="textinput-3" class="ui-disabled" id="textinput-3" value="1999/12/31">
+                        <label class="item_title" for="m_tel">電話</label>
+                        <input type="tel" name="m_tel" class="" id="m_tel" value="">
                     </div>
-                    <div class="ui-field-contain">
-                        <label class="item_title" for="textinput-4">手機</label>
-                        <input type="tel" name="textinput-4" class="" id="textinput-4" value="0912345678">
+                    <div class="ui-field-contain ui-disabled">
+                        <label class="item_title" for="m_mobile">手機</label>
+                        <input type="tel" name="m_mobile" class="" id="m_mobile" value="">
                     </div>
                     <div id="club_type_block" class="ui-field-contain" style="display:none">
                         <label for="member_type">店家類別</label>
@@ -262,9 +271,9 @@
                         </select>
                     </div>
                 </div>
-                <div class="">
+                <!-- <div class="">
                     <button id="admin-member-submit-btn" type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn">送出</button>
-                </div>
+                </div> -->
             </div>
         </div>
 

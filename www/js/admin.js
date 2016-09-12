@@ -761,9 +761,6 @@ $(document).on('pagebeforeshow', "#admin-plan", function() {
 					}
 				});
 			});
-			$('.plan_block a.plan-del-btn').click(function(event) {
-				currentPlanId = $(this).jqmData("plan-id");
-			});
 
 			$('.plan_block .plan-del-btn').off();
 			$('.plan_block .plan-del-btn').click(function(event) {
@@ -883,7 +880,7 @@ $(document).on('pagebeforeshow', "#admin-member", function() {
 	}).done(function(data) {
 		if (data.status) {
 			var user = data.result;
-			// $('.list_table tbody').empty();
+			$('.member-list .list_table tbody').empty();
 			$.each(user, function(idx, obj) {
 				var user_tr = '<tr><td>' + obj.created + '</td><td>' + obj.name + '</td><td><a class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn user-detail-btn" data-user-id="' + obj.id + '">進入</a></td></tr>';
 				switch (obj.type) {
@@ -903,6 +900,7 @@ $(document).on('pagebeforeshow', "#admin-member", function() {
 			$('.user-detail-btn').off();
 			$('.user-detail-btn').click(function(event) {
 				var user_id = $(this).jqmData("user-id");
+				window.localStorage.setItem('detail_user_id', user_id);
 				currentUserId = user_id;
 				$.mobile.changePage($('#admin-member-detail'), {
 					reloadPage: true,
@@ -956,10 +954,56 @@ $(document).on('pagebeforeshow', "#admin-member", function() {
 	}).done(function(data) {
 		if (data.status) {
 			var user = data.result;
+			$('#not-approved-table tbody').empty();
 			$.each(user, function(idx, obj) {
-				var user_tr = '<tr><td>' + obj.created + '</td><td>' + obj.name + '</td><td><a class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn user-detail-btn" data-user-id="' + obj.id + '">進入</a></td></tr>';
+				var user_tr = '<tr><td>' + obj.created + '</td><td>' + obj.name + '</td><td><a class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn user-detail-btn" data-user-id="' + obj.id + '">進入</a><button type="button" class="ui-btn ui-corner-all ui-btn-inline ui-mini green-btn user-detail-btn" data-user-id="' + obj.id + '">核准</button></td></tr>';
 				$('#not-approved-table tbody').append(user_tr);
 			});
+		}
+	}).fail(function() {
+		alert('請確認您的網路連線狀態！');
+	});
+});
+$(document).on('pagebeforeshow', "#admin-member-detail", function() {
+	// var page_id = '#' + $.mobile.activePage.attr('id');
+	$.ajax({
+		url: api_base + 'get_user_info.php?user_id=' + window.localStorage.getItem('detail_user_id'),
+		dataType: 'json'
+	}).success(function(data) {
+		if (data.status) {
+			// $(page_id + ' .upper_block > img, .upper_block >  input[type="image"]').attr('src', img_base + data.result.avatar);
+			$('#m_no').val(data.result.member_id);
+			$('#m_name').html(data.result.name);
+			$('#m_gender').val(data.result.gender);
+			$('#m_birth').val(data.result.birth);
+			$('#m_email').val(data.result.email);
+			$('#m_tel').val(data.result.tel);
+			$('#m_mobile').val(data.result.mobile);
+			switch (data.result.type) {
+				case '1':
+				default:
+					$('#normal').prop("checked", true).checkboxradio("refresh");
+					break;
+				case '2':
+					if (data.result.publish_due != null) {
+						$('#club_adv').prop("checked", true).checkboxradio("refresh");
+					} else {
+						$('#club_basic').prop("checked", true).checkboxradio("refresh");
+					}
+					break;
+				case '3':
+					$('#normal').prop("checked", true).checkboxradio("refresh");
+					break;
+			}
+			// if (data.result.type == 2) {
+			// 	if (data.result.plan_title != null) {
+			// 		$(page_id + ' .plan-input').val(data.result.plan_title);
+			// 		$(page_id + ' .plan-during-input').val(data.result.publish_start + '-' + data.result.publish_due);
+			// 		$(page_id + ' .plan-during-input').parent().parent().show();
+			// 	} else {
+			// 		$(page_id + ' .plan-during-input').parent().parent().hide();
+			// 	}
+			// }
 		}
 	}).fail(function() {
 		alert('請確認您的網路連線狀態！');
