@@ -734,13 +734,14 @@
                         <li class="ui-block-b"><a href="#admin-recommend-redeem" class="ui-btn">兌換禮品管理</a></li>
                     </ul>
                 </div>
-                <div id="record_list" class="ui-body-d ui-content member-list">
+                <div id="" class="ui-body-d ui-content member-list">
                     <div class="list_search">
                         <label class="area_title" for="textinput-1">搜尋名單</label>
                         <input type="text" name="search" class="" id="search" placeholder="姓名或時間" data-inline="true">
                         <!-- <button type="submit" id="submit-1" class="ui-btn ui-corner-all purple-btn">GO</button> -->
                     </div>
-                    <table id="record_list" class="record_list_table">
+                    <table id="rec_list_table" class="record_list_table">
+                        <caption>推薦人列表</caption>
                         <thead>
                             <tr>
                                 <th>註冊時間</th>
@@ -749,7 +750,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <!-- <tr>
                                 <td>2016/07/14 20:15</td>
                                 <td>翁水噹</td>
                                 <td>
@@ -762,7 +763,7 @@
                                 <td>
                                     <a href="#admin-recommend-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
                                 </td>
-                            </tr>
+                            </tr> -->
                         </tbody>
                     </table>
                 </div>
@@ -802,7 +803,7 @@
                 <div class="clearfix"></div>
                 <div id="" class="ui-body-d ui-content member-list">
                     <div style="font-size:18px;color:#AA3C89">兌換記錄</div>
-                    <table class="record_list_table">
+                    <table id="redeem_list" class="record_list_table">
                         <tbody>
                             <tr>
                                 <td>(10)屈臣氏1000元禮券</td>
@@ -811,17 +812,17 @@
                         </tbody>
                     </table>
                     <br>
-                    <div style="font-size:18px;color:#AA3C89">推薦清單(共 15 人)</div>
-                    <table class="list_table">
+                    <div style="font-size:18px;color:#AA3C89">推薦清單(共 <span id="recommend_total"></span> 人)</div>
+                    <table id="member_rec_list" class="record_list_table">
                         <tbody>
-                            <tr>
+                            <!-- <tr>
                                 <td>翁水噹</td>
                                 <td>註冊時間：2016/07/14 20:15</td>
                             </tr>
                             <tr>
                                 <td>翁水噹</td>
                                 <td>註冊時間：2016/07/14 20:15</td>
-                            </tr>
+                            </tr> -->
                         </tbody>
                     </table>
                 </div>

@@ -1085,4 +1085,69 @@ $(document).on('pagebeforeshow', "#admin-member-detail", function() {
 		alert('請確認您的網路連線狀態！');
 	});
 });
-$(document).on('pagebeforeshow', "#admin-recommend", function() {});
+
+$(document).on('pagebeforeshow', "#admin-recommend", function() {
+	$.ajax({
+		url: api_base + 'get_referrer_list.php',
+		dataType: 'json'
+	}).done(function(data) {
+		if (data.status) {
+			var ref = data.result;
+			$('#record_list tbody').empty();
+			$.each(ref, function(idx, obj) {
+				var ref_tr = '<tr><td>' + obj.created + '</td><td>' + obj.name + '</td><td><a class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn ref-detail-btn" data-user-id="' + obj.id + '">查看</a></td></tr>';
+				$('#rec_list_table tbody').append(ref_tr);
+
+			});
+			$('.user-detail-btn').off();
+			$('.user-detail-btn').click(function(event) {
+				var user_id = $(this).jqmData("user-id");
+				window.localStorage.setItem('ref_user_id', user_id);
+				$.mobile.changePage($('#admin-recommend-detail'), {
+					reloadPage: true,
+					changeHash: true
+				});
+			});
+		}
+	}).fail(function() {
+		alert('請確認您的網路連線狀態！');
+	});
+});
+
+$(document).on('pagebeforeshow', "#admin-recommend-detail", function() {
+	$.ajax({
+		url: api_base + 'get_redeem_record.php?user_id=' + window.localStorage.getItem('ref_user_id'),
+		dataType: 'json'
+	}).done(function(data) {
+		if (data.status) {
+			var redeem_list = '';
+			$.each(data.result, function(idx, obj) {
+				redeem_list += '<tr><td>(' + obj.point + ')' + obj.title + obj.description + '</td><td>兌換時間：' + obj.created + '</td> </tr>';
+			});
+			$('#redeem_list').append(redeem_list);
+		} else {
+			$('#redeem_list').html(data.message);
+		}
+	}).fail(function() {
+		alert('請確認您的網路連線狀態！');
+	});
+
+	$.ajax({
+		url: api_base + 'get_recommend_list.php?user_id=' + window.localStorage.getItem('ref_user_id'),
+		dataType: 'json'
+	}).done(function(data) {
+		if (data.status) {
+			var rec_list = '';
+			total_point = parseInt(data.total);
+			$('#recommend_total').html(data.total);
+			$.each(data.result, function(idx, obj) {
+				rec_list += '<tr><td>' + obj.name + '</td><td>註冊時間：' + obj.created + '</td></tr>';
+			});
+			$('#member_rec_list tbody').css('padding-left', '1.5em').append(rec_list);
+		} else {
+			$('#member_rec_list tbody').css('padding-left', '0').html(data.message);
+		}
+	}).fail(function() {
+		alert('請確認您的網路連線狀態！');
+	});
+});
