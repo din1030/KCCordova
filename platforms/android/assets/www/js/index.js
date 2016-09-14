@@ -353,7 +353,7 @@ $(document).on('pagebeforeshow', '#home', function() {
 			});
 			var mask = '<div style="display:block;" class="page_mask text-center" data-position-to="window" data-dismissible="true"><a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a><p>您不是店家管理者<br>求職者資訊僅供店家管理者瀏覽</p></div>';
 			$("a[href='./jobseeker.html']").click(function(event) {
-				if (window.localStorage.getItem('auth') != '0' && window.localStorage.getItem('auth') != '2') {
+				if (window.localStorage.getItem('auth') != '0' && window.localStorage.getItem('auth') != '100' && window.localStorage.getItem('auth') != '2') {
 					event.preventDefault();
 					$("[data-role='page']").prepend(mask);
 					$(".page_mask .ui-icon-delete").click(function(event) {

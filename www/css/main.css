@@ -474,26 +474,35 @@ div[id|=admin] .category-block {
 #member_type_nav li a.ui-btn-active {
   background: #aa3c89 !important;
 }
-.list_table {
+.list_table,
+.record_list_table {
   width: 100%;
   border-spacing: 0;
 }
-.list_table th {
+.list_table th,
+.record_list_table th {
   border-bottom: 2px solid #000;
 }
-.list_table td {
+.list_table td,
+.record_list_table td {
   border-bottom: 1px solid #000;
 }
 .list_table tr th:nth-child(1),
-.list_table tr td:nth-child(1) {
+.record_list_table tr th:nth-child(1),
+.list_table tr td:nth-child(1),
+.record_list_table tr td:nth-child(1) {
   text-align: left;
 }
 .list_table tr th:nth-child(2),
-.list_table tr td:nth-child(2) {
+.record_list_table tr th:nth-child(2),
+.list_table tr td:nth-child(2),
+.record_list_table tr td:nth-child(2) {
   text-align: center;
 }
 .list_table tr th:nth-child(3),
-.list_table tr td:nth-child(3) {
+.record_list_table tr th:nth-child(3),
+.list_table tr td:nth-child(3),
+.record_list_table tr td:nth-child(3) {
   text-align: right;
 }
 #admin-member-detail-main > div {

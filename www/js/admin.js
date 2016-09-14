@@ -609,6 +609,7 @@ $(document).on('pagebeforeshow', "#admin-authority", function() {
 			},
 			type: 'POST',
 			dataType: 'json',
+			clearForm: true,
 			beforeSend: function() {
 				$.mobile.loading('show');
 			},
@@ -944,7 +945,7 @@ $(document).on('pagebeforeshow', "#admin-member", function() {
 			var user = data.result;
 			$('.member-list .list_table tbody').empty();
 			$.each(user, function(idx, obj) {
-				var user_tr = '<tr><td>' + obj.created + '</td><td>' + obj.name + '</td><td><a class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn user-detail-btn" data-user-id="' + obj.id + '">進入</a></td></tr>';
+				var user_tr = '<tr><td>' + obj.created + '</td><td>' + obj.name + '</td><td><a class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn user-detail-btn" data-user-id="' + obj.id + '">查看</a></td></tr>';
 				switch (obj.type) {
 					case '1':
 						$('#normal-table tbody').append(user_tr);
@@ -1018,14 +1019,25 @@ $(document).on('pagebeforeshow', "#admin-member", function() {
 			var user = data.result;
 			$('#not-approved-table tbody').empty();
 			$.each(user, function(idx, obj) {
-				var user_tr = '<tr><td>' + obj.created + '</td><td>' + obj.name + '</td><td><a class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn user-detail-btn" data-user-id="' + obj.id + '">進入</a><button type="button" class="ui-btn ui-corner-all ui-btn-inline ui-mini green-btn user-detail-btn" data-user-id="' + obj.id + '">核准</button></td></tr>';
+				var user_tr = '<tr><td>' + obj.created + '</td><td>' + obj.name + '</td><td><a class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn user-detail-btn" data-user-id="' + obj.id + '">查看</a><button type="button" class="ui-btn ui-corner-all ui-btn-inline ui-mini green-btn user-detail-btn" data-user-id="' + obj.id + '">核准</button></td></tr>';
 				$('#not-approved-table tbody').append(user_tr);
+			});
+			$('.user-detail-btn').off();
+			$('.user-detail-btn').click(function(event) {
+				var user_id = $(this).jqmData("user-id");
+				window.localStorage.setItem('detail_user_id', user_id);
+				currentUserId = user_id;
+				$.mobile.changePage($('#admin-member-detail'), {
+					reloadPage: true,
+					changeHash: true
+				});
 			});
 		}
 	}).fail(function() {
 		alert('請確認您的網路連線狀態！');
 	});
 });
+
 $(document).on('pagebeforeshow', "#admin-member-detail", function() {
 	// var page_id = '#' + $.mobile.activePage.attr('id');
 	$.ajax({
@@ -1033,7 +1045,6 @@ $(document).on('pagebeforeshow', "#admin-member-detail", function() {
 		dataType: 'json'
 	}).success(function(data) {
 		if (data.status) {
-			// $(page_id + ' .upper_block > img, .upper_block >  input[type="image"]').attr('src', img_base + data.result.avatar);
 			$('#m_no').val(data.result.member_id);
 			$('#m_name').html(data.result.name);
 			$('#m_gender').val(data.result.gender);
@@ -1074,3 +1085,4 @@ $(document).on('pagebeforeshow', "#admin-member-detail", function() {
 		alert('請確認您的網路連線狀態！');
 	});
 });
+$(document).on('pagebeforeshow', "#admin-recommend", function() {});

@@ -67,7 +67,7 @@
                         <div class="list_search">
                             <label class="area_title" for="search">搜尋名單</label>
                             <form>
-                                <input type="text" name="search" class="" id="normal-search" placeholder="姓名或日期" data-inline="true" data-type="search">
+                                <input type="text" name="search" class="" id="normal-search" placeholder="姓名或時間" data-inline="true" data-type="search">
                             </form>
                         </div>
                         <div class="clearfix"></div>
@@ -93,7 +93,7 @@
                         <div class="list_search">
                             <label class="area_title" for="search">搜尋名單</label>
                             <form>
-                                <input type="text" name="search" class="" id="club-search" placeholder="姓名或日期" data-inline="true" data-type="search">
+                                <input type="text" name="search" class="" id="club-search" placeholder="姓名或時間" data-inline="true" data-type="search">
                             </form>
                         </div>
                         <div class="clearfix"></div>
@@ -119,7 +119,7 @@
                         <div class="list_search">
                             <label class="area_title" for="search">搜尋名單</label>
                             <form>
-                                <input type="text" name="search" class="" id="seeker-search" placeholder="姓名或日期" data-inline="true" data-type="search">
+                                <input type="text" name="search" class="" id="seeker-search" placeholder="姓名或時間" data-inline="true" data-type="search">
                             </form>
                         </div>
                         <div class="clearfix"></div>
@@ -145,7 +145,7 @@
                         <div class="list_search">
                             <label class="area_title" for="search">搜尋名單</label>
                             <form>
-                                <input type="text" name="search" class="" id="approved-search" placeholder="姓名或日期" data-inline="true" data-type="search">
+                                <input type="text" name="search" class="" id="approved-search" placeholder="姓名或時間" data-inline="true" data-type="search">
                             </form>
                         </div>
                         <div class="clearfix"></div>
@@ -715,16 +715,16 @@
                 <div class="area_block">
                     <div class="ui-field-contain">
                         <label class="area_title" for="select-native-1">國家</label>
-                        <select name="select-native-1" id="select-native-1" data-inline="true" data-mini="true">
-                            <option value="">台灣</option>
+                        <select class="country-select" id="select-native-1" data-inline="true" data-mini="true">
+                            <!-- <option value="">台灣</option>
                             <option value="">中國</option>
-                            <option value="">日本</option>
+                            <option value="">日本</option> -->
                         </select>
-                        <label class="area_title" for="select-native-2">地區</label>
-                        <select name="select-native-2" id="select-native-2" data-inline="true" data-mini="true">
-                            <option value="">台北</option>
+                        <label class="area_title" for="area-select">地區</label>
+                        <select class="area-select" name="area-select" id="area-select" data-inline="true" data-mini="true">
+                            <!-- <option value="">台北</option>
                             <option value="">台南</option>
-                            <option value="">高雄</option>
+                            <option value="">高雄</option> -->
                         </select>
                     </div>
                 </div>
@@ -734,13 +734,13 @@
                         <li class="ui-block-b"><a href="#admin-recommend-redeem" class="ui-btn">兌換禮品管理</a></li>
                     </ul>
                 </div>
-                <div id="normal_list" class="ui-body-d ui-content member-list">
+                <div id="record_list" class="ui-body-d ui-content member-list">
                     <div class="list_search">
                         <label class="area_title" for="textinput-1">搜尋名單</label>
-                        <input type="text" name="search" class="" id="search" placeholder="姓名或日期(20160520)" data-inline="true">
-                        <button type="submit" id="submit-1" class="ui-btn ui-corner-all purple-btn">GO</button>
+                        <input type="text" name="search" class="" id="search" placeholder="姓名或時間" data-inline="true">
+                        <!-- <button type="submit" id="submit-1" class="ui-btn ui-corner-all purple-btn">GO</button> -->
                     </div>
-                    <table class="list_table">
+                    <table id="record_list" class="record_list_table">
                         <thead>
                             <tr>
                                 <th>註冊時間</th>
@@ -749,48 +749,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>2016/07/14 20:15</td>
-                                <td>翁水噹</td>
-                                <td>
-                                    <a href="#admin-recommend-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2016/07/14 20:15</td>
-                                <td>翁水噹</td>
-                                <td>
-                                    <a href="#admin-recommend-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2016/07/14 20:15</td>
-                                <td>翁水噹</td>
-                                <td>
-                                    <a href="#admin-recommend-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2016/07/14 20:15</td>
-                                <td>翁水噹</td>
-                                <td>
-                                    <a href="#admin-recommend-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2016/07/14 20:15</td>
-                                <td>翁水噹</td>
-                                <td>
-                                    <a href="#admin-recommend-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2016/07/14 20:15</td>
-                                <td>翁水噹</td>
-                                <td>
-                                    <a href="#admin-recommend-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                </td>
-                            </tr>
                             <tr>
                                 <td>2016/07/14 20:15</td>
                                 <td>翁水噹</td>
@@ -819,6 +777,9 @@
                         <div id="menu-btn" class="header-btn header-link left-link"></div>
                     </a>
                     <span class="page-title">管理者後台</span>
+                    <a href="#admin-recommend" class="ui-link">
+                        <div class="header-btn header-link right-link" style="width:auto">返回</div>
+                    </a>
                 </div>
             </div>
             <!-- /header -->
@@ -836,18 +797,12 @@
                         <option value="./admin.html#admin-category">分類管理</option>
                     </select>
                 </div>
-                <div class="ui-navbar" role="navigation">
-                    <ul id="rec_page" class="page-content-nav ui-grid-a">
-                        <li class="ui-block-a"><a href="#admin-recommend" data-ajax="false" class="ui-btn active">推薦記錄名單</a></li>
-                        <li class="ui-block-b"><a href="#admin-recommend-redeem" class="ui-btn">兌換禮品管理</a></li>
-                    </ul>
-                </div>
                 <span class="float-left" style="font-size:20px;font-weight:bold;margin-top:8px;">翁水噹</span>
                 <button type="button" id="download_record_list" class="ui-btn ui-btn-inline ui-corner-all purple-btn float-right">下載明細</button>
                 <div class="clearfix"></div>
                 <div id="" class="ui-body-d ui-content member-list">
                     <div style="font-size:18px;color:#AA3C89">兌換記錄</div>
-                    <table class="list_table">
+                    <table class="record_list_table">
                         <tbody>
                             <tr>
                                 <td>(10)屈臣氏1000元禮券</td>
@@ -901,16 +856,16 @@
                 <div class="area_block">
                     <div class="ui-field-contain">
                         <label class="area_title" for="select-native-1">國家</label>
-                        <select name="select-native-1" id="select-native-1" data-inline="true" data-mini="true">
-                            <option value="">台灣</option>
+                        <select class="country-select" id="select-native-1" data-inline="true" data-mini="true">
+                            <!-- <option value="">台灣</option>
                             <option value="">中國</option>
-                            <option value="">日本</option>
+                            <option value="">日本</option> -->
                         </select>
-                        <label class="area_title" for="select-native-2">地區</label>
-                        <select nat name="select-native-2" id="select-native-2" data-inline="true" data-mini="true">
-                            <option value="">台北</option>
+                        <label class="area_title" for="area-select">地區</label>
+                        <select class="area-select" name="area-select" id="area-select" data-inline="true" data-mini="true">
+                            <!-- <option value="">台北</option>
                             <option value="">台南</option>
-                            <option value="">高雄</option>
+                            <option value="">高雄</option> -->
                         </select>
                     </div>
                 </div>
@@ -1010,15 +965,15 @@
                         <div style="color:white;">
                             禮品名稱：
                         </div>
-                        <input type="text" name="club_cat" class="" id="club_cat" value="">
+                        <input type="text" name="club_cat" class="" id="club_cat" value="" required="">
                         <div style="color:white;">
                             扣除點數：
                         </div>
-                        <input type="text" name="club_cat" class="" id="club_cat" value="">
+                        <input type="text" name="club_cat" class="" id="club_cat" value="" required="">
                         <div style="color:white;">
                             圖片：
                         </div>
-                        <input type="file" name="name" value="">
+                        <input type="file" name="name" value="" required="">
                         <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn send-btn">送出</button>
                     </div>
                 </form>
@@ -1074,26 +1029,26 @@
                 <form id="news-add-form" enctype="multipart/form-data">
                     <div class="ui-field-contain">
                         <label class="item_title" for="news_title"><strong>標題：</strong></label>
-                        <input type="text" name="news_title" class="" id="news_title" value="">
+                        <input type="text" name="news_title" class="" id="news_title" value="" required="">
                     </div>
                     <div class="ui-field-contain">
                         <label class="item_title" for="news_start">上架時間：</label>
-                        <input type="date" name="news_start" class="" id="news_start" value="">
+                        <input type="date" name="news_start" class="" id="news_start" value="" required="">
                     </div>
                     <div class="ui-field-contain">
                         <label class="item_title" for="news_end">下架時間：</label>
-                        <input type="date" name="news_end" class="" id="news_end" value="">
+                        <input type="date" name="news_end" class="" id="news_end" value="" required="">
                     </div>
                     <div class="ui-field-contain">
                         <label class="item_title" for="news_order">排序：</label>
-                        <input type="number" name="news_order" class="" id="news_order" value="1" min="1">
+                        <input type="number" name="news_order" class="" id="news_order" value="1" min="1" required="">
                     </div>
                     <div class="ui-field-contain">
                         <label class="item_title" for="news_pic"><strong>圖片：</strong></label>
-                        <input type="file" name="news_pic" class="" id="news_pic" value="">
+                        <input type="file" name="news_pic" class="" id="news_pic" value="" required="">
                     </div>
                     <label class="item_title" for="news_content"><strong>內容：</strong></label>
-                    <textarea wrap="virtual" name="news_content" rows="8"></textarea>
+                    <textarea wrap="virtual" name="news_content" rows="8" required=""></textarea>
                     <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn">送出</button>
                 </form>
             </div>
@@ -1117,19 +1072,19 @@
                 <form id="news-edit-form" enctype="multipart/form-data">
                     <div class="ui-field-contain">
                         <label class="item_title" for="news_edit_title"><strong>標題：</strong></label>
-                        <input type="text" name="news_edit_title" class="" id="news_edit_title" value="">
+                        <input type="text" name="news_edit_title" class="" id="news_edit_title" value="" required="">
                     </div>
                     <div class="ui-field-contain">
                         <label class="item_title" for="news_edit_start">上架時間：</label>
-                        <input type="date" name="news_edit_start" class="" id="news_edit_start" value="2016-07-01">
+                        <input type="date" name="news_edit_start" class="" id="news_edit_start" value="" required="">
                     </div>
                     <div class="ui-field-contain">
                         <label class="item_title" for="news_edit_end">下架時間：</label>
-                        <input type="date" name="news_edit_end" class="" id="news_edit_end" value="2016-10-31">
+                        <input type="date" name="news_edit_end" class="" id="news_edit_end" value="" required="">
                     </div>
                     <div class="ui-field-contain">
                         <label class="item_title" for="news_edit_order">排序：</label>
-                        <input type="number" name="news_edit_order" class="" id="news_edit_order" value="0" min="0">
+                        <input type="number" name="news_edit_order" class="" id="news_edit_order" value="0" min="0" required="">
                     </div>
                     <div class="ui-field-contain">
                         <label class="item_title" for="current_pic"><strong>當前圖片：</strong></label>
@@ -1140,7 +1095,7 @@
                         <input type="file" name="news_edit_pic" class="" id="news_edit_pic" value="">
                     </div>
                     <label class="item_title" for="news_edit_content"><strong>內容：</strong></label>
-                    <textarea wrap="virtual" name="news_edit_content" rows="8" id="news_edit_content"></textarea>
+                    <textarea wrap="virtual" name="news_edit_content" rows="8" id="news_edit_content" required=""></textarea>
                     <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn">送出</button>
                 </form>
             </div>
@@ -1178,7 +1133,7 @@
                 <!-- dynamic content -->
                 <form id="pay-method-form" class="policy-form" data-policy="pay_method">
                     <label for="pay_method" class="item_title"><strong>付款方式編輯：</strong></label>
-                    <textarea name="policy_content" id="pay_method" rows="4" class="text-justify"></textarea>
+                    <textarea name="policy_content" id="pay_method" rows="4" class="text-justify" required=""></textarea>
                     <button id="plan-submit-btn" class="ui-btn ui-corner-all" type="submit">修改付款方式</button>
                 </form>
             </div>
@@ -1187,9 +1142,9 @@
                     <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
                     <div style="padding:10px 20px;">
                         <h3>新增方案名稱</h3>
-                        <input type="text" name="plan_title" class="" id="textinput" value="">
+                        <input type="text" name="plan_title" class="" id="textinput" value="" required="">
                         <h3>方案內容</h3>
-                        <textarea name="plan_content" rows="8" data-theme="a"></textarea>
+                        <textarea name="plan_content" rows="8" data-theme="a" required=""></textarea>
                         <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn send-btn">送出</button>
                     </div>
                 </form>
@@ -1199,9 +1154,9 @@
                     <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
                     <div style="padding:10px 20px;">
                         <h3>編輯方案名稱</h3>
-                        <input type="text" name="plan_title" class="" id="plan_title" value="">
+                        <input type="text" name="plan_title" class="" id="plan_title" value="" required="">
                         <h3>方案內容</h3>
-                        <textarea id="plan_content" name="plan_content" rows="8" data-theme="a"></textarea>
+                        <textarea id="plan_content" name="plan_content" rows="8" data-theme="a" required=""></textarea>
                         <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn send-btn">送出</button>
                     </div>
                 </form>
@@ -1263,7 +1218,7 @@
                     <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
                     <div style="padding:10px 20px;">
                         <h3>關於 Kelly Club</h3>
-                        <textarea id="about_text" name="policy_content" rows="8">（關於 Kelly Club 內容）</textarea>
+                        <textarea id="about_text" name="policy_content" rows="8" required="">（關於 Kelly Club 內容）</textarea>
                         <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn send-btn">完成</button>
                     </div>
                 </form>
@@ -1273,7 +1228,7 @@
                     <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
                     <div style="padding:10px 20px;">
                         <h3>服務條款</h3>
-                        <textarea id="service_text" name="policy_content" rows="8">（服務條款內容）</textarea>
+                        <textarea id="service_text" name="policy_content" rows="8" required="">（服務條款內容）</textarea>
                         <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn send-btn">完成</button>
                     </div>
                 </form>
@@ -1283,7 +1238,7 @@
                     <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
                     <div style="padding:10px 20px;">
                         <h3>使用規範</h3>
-                        <textarea id="use_text" name="policy_content" rows="8">（使用規範內容）</textarea>
+                        <textarea id="use_text" name="policy_content" rows="8" required="">（使用規範內容）</textarea>
                         <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn send-btn">完成</button>
                     </div>
                 </form>
@@ -1293,7 +1248,7 @@
                     <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
                     <div style="padding:10px 20px;">
                         <h3>個資保護政策</h3>
-                        <textarea id="privacy_text" name="policy_content" rows="8">（個資保護政策內容）</textarea>
+                        <textarea id="privacy_text" name="policy_content" rows="8" required="">（個資保護政策內容）</textarea>
                         <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn send-btn">完成</button>
                     </div>
                 </form>
@@ -1305,15 +1260,15 @@
                         <h3>新增管理者</h3>
                         <div class="ui-field-contain">
                             <label for="admin_name" style="color:white;">姓名</label>
-                            <input type="text" name="rg_name" class="" id="rg_name" placeholder="">
+                            <input type="text" name="rg_name" class="" id="rg_name" required="">
                         </div>
                         <div class="ui-field-contain">
                             <label for="admin_email" style="color:white;">帳號</label>
-                            <input type="text" name="rg_email" class="" id="rg_email" placeholder="">
+                            <input type="text" name="rg_email" class="" id="rg_email" required="">
                         </div>
                         <div class="ui-field-contain">
                             <label for="admin_pswd" style="color:white;">密碼</label>
-                            <input type="password" name="rg_pswd" class="" id="rg_pswd" placeholder="">
+                            <input type="password" name="rg_pswd" class="" id="rg_pswd" required="">
                         </div>
                         <input type="hidden" name="member_type" class="" id="member_type" value="100">
                         <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn send-btn">完成</button>

@@ -8,7 +8,7 @@ var adminPlanJson = '';
 var currentPlanId;
 
 $(document).one("pagebeforeshow", "[data-role='page']", function() {
-	if (window.localStorage.getItem('auth') != '0') {
+	if (window.localStorage.getItem('auth') != '0' && window.localStorage.getItem('auth') != '100') {
 		alert('您不是系統管理員！');
 		document.location.href = './index.html';
 	} else if (window.localStorage.getItem('auth') == null || window.localStorage.getItem('user_id') == null) {
@@ -73,53 +73,18 @@ $(document).on('pagebeforeshow', "#admin-home", function() {
 	}).done(function(data) {
 		var setting = data.result;
 		if (data.status) {
-			$('#home-upper-left-link').val(setting[0].link);
-			$('#home-upper-left-link').prev().text(textSwitch(setting[0].link));
-
-			$('#home-upper-right-link').val(setting[1].link);
-			$('#home-upper-right-link').prev().text(textSwitch(setting[1].link));
-
-			$('#home-middle-link').val(setting[2].link);
-			$('#home-middle-link').prev().text(textSwitch(setting[2].link));
-
-
-			$('#home-lower-left-link').val(setting[3].link);
-			$('#home-lower-left-link').prev().text(textSwitch(setting[3].link));
-
-
-			$('#home-lower-right-link').val(setting[4].link);
-			$('#home-lower-right-link').prev().text(textSwitch(setting[4].link));
-		}
-		$('#pic1').attr('src', img_base + setting[0].pic);
-		$('#pic2').attr('src', img_base + setting[1].pic);
-		$('#pic3').attr('src', img_base + setting[2].pic);
-		$('#pic4').attr('src', img_base + setting[3].pic);
-		$('#pic5').attr('src', img_base + setting[4].pic);
-
-		function textSwitch(text) {
-			switch (text) {
-				case 'club':
-					return '酒店系統'
-					break;
-				case 'seeker':
-					return "求職者";
-					break;
-				case 'life':
-					return '生活服務'
-					break;
-				case 'news':
-					return "最新消息";
-					break;
-				case 'homepages':
-					return '連結官網'
-					break;
-				default:
-					return "酒店系統";
-					break;
-			}
+			$('#home-upper-left-link').val(setting[0].link).selectmenu('refresh');
+			$('#home-upper-right-link').val(setting[1].link).selectmenu('refresh');
+			$('#home-middle-link').val(setting[2].link).selectmenu('refresh');
+			$('#home-lower-left-link').val(setting[3].link).selectmenu('refresh');
+			$('#home-lower-right-link').val(setting[4].link).selectmenu('refresh');
+			$('#pic1').attr('src', img_base + setting[0].pic);
+			$('#pic2').attr('src', img_base + setting[1].pic);
+			$('#pic3').attr('src', img_base + setting[2].pic);
+			$('#pic4').attr('src', img_base + setting[3].pic);
+			$('#pic5').attr('src', img_base + setting[4].pic);
 		}
 	});
-
 
 	$('#adminHomeForm').on('submit', (function(e) {
 		e.preventDefault();
@@ -532,6 +497,7 @@ $(document).on('pagebeforeshow', "#admin-category", function() {
 		});
 	});
 });
+
 $(document).on('pagebeforeshow', "#admin-authority", function() {
 	$.ajax({
 		url: api_base + 'get_policy.php',
@@ -579,7 +545,97 @@ $(document).on('pagebeforeshow', "#admin-authority", function() {
 			}
 		});
 	});
+	$.ajax({
+		url: api_base + 'get_admin.php',
+		dataType: 'json'
+	}).done(function(data) {
+		if (data.status) {
+			$('#main_admin').empty();
+			$('#sub_admin').empty();
+			$.each(data.result, function(idx, obj) {
+				var admin_info_block = '<div class="admin_info_block"><div class="admin_info">姓名：' + obj.name + '<br>帳號：' + obj.email + '</div>';
+				if (window.localStorage.getItem('auth') == '100') {
+					$('#admin_add_btn').remove();
+				}
+				// else {
+				// admin_info_block += '<a href="#edit_admin" class="ui-btn ui-corner-all ui-btn-inline purple-btn admin-edit-btn" data-rel="popup" data-admin-id="' + obj.id + '">編輯管理者</a>';
+				// }
+				if (obj.type == '0') {
+					admin_info_block += '<div class="clearfix"></div><br></div>';
+					$('#main_admin').append(admin_info_block);
+				} else if (obj.type == '100') {
+					if (window.localStorage.getItem('auth') == '0') {
+						admin_info_block += '<button class="ui-btn ui-corner-all ui-btn-inline float-right orange-btn admin-del-btn" type="button" data-admin-id="' + obj.id + '">刪除</button>';
+					}
+					admin_info_block += '<div class="clearfix"></div><br></div>';
+					$('#sub_admin').append(admin_info_block);
+				}
+			});
+			$('.admin-del-btn').off();
+			$('.admin-del-btn').click(function(event) {
+				var btn = $(this);
+				var admin_id = $(this).jqmData("admin-id");
+				if (confirm('確定刪除此管理者？') === true) {
+					$.ajax({
+						url: api_base + 'remove_subadmin.php',
+						type: 'POST',
+						dataType: 'json',
+						data: {
+							admin_id: admin_id
+						}
+					}).done(function(data) {
+						if (data.status) {
+							$(btn).parents('.admin_info_block').remove();
+						} else {
+							alert('請重新操作！');
+						}
+					}).fail(function() {
+						alert('請確認您的網路連線狀態！');
+					});
+				}
+			});
+		}
+	}).fail(function() {
+		alert('請確認您的網路連線狀態！');
+	});
+	$('#add-admin-form').off();
+	$('#add-admin-form').on('submit', function(e) {
+		e.preventDefault(); // prevent native submit
+		$(this).ajaxSubmit({
+			url: api_base + 'user_action.php',
+			data: {
+				action: 'reg',
+				formData: $('#add-admin-form').serialize()
+			},
+			type: 'POST',
+			dataType: 'json',
+			clearForm: true,
+			beforeSend: function() {
+				$.mobile.loading('show');
+			},
+			complete: function() {
+				$.mobile.loading('hide');
+			},
+			success: function(data) {
+				if (data.status) {
+					alert('已新增次管理者！');
+					$.mobile.changePage($('#admin-authority'), {
+						allowSamePageTransition: true,
+						reloadPage: true,
+						changeHash: true,
+						transition: "none"
+					});
+				} else {
+					alert('請重新操作！');
+				}
+			},
+			error: function(request, error) {
+				alert('請確認您的網路連線狀態！');
+			}
+		});
+	});
 });
+
 $(document).on('pagebeforeshow', "#admin-news", function() {
 	$.ajax({
 		url: api_base + 'get_news.php',
@@ -768,9 +824,6 @@ $(document).on('pagebeforeshow', "#admin-plan", function() {
 					}
 				});
 			});
-			$('.plan_block a.plan-del-btn').click(function(event) {
-				currentPlanId = $(this).jqmData("plan-id");
-			});
 
 			$('.plan_block .plan-del-btn').off();
 			$('.plan_block .plan-del-btn').click(function(event) {
@@ -890,7 +943,7 @@ $(document).on('pagebeforeshow', "#admin-member", function() {
 	}).done(function(data) {
 		if (data.status) {
 			var user = data.result;
-			// $('.list_table tbody').empty();
+			$('.member-list .list_table tbody').empty();
 			$.each(user, function(idx, obj) {
 				var user_tr = '<tr><td>' + obj.created + '</td><td>' + obj.name + '</td><td><a class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn user-detail-btn" data-user-id="' + obj.id + '">進入</a></td></tr>';
 				switch (obj.type) {
@@ -910,6 +963,7 @@ $(document).on('pagebeforeshow', "#admin-member", function() {
 			$('.user-detail-btn').off();
 			$('.user-detail-btn').click(function(event) {
 				var user_id = $(this).jqmData("user-id");
+				window.localStorage.setItem('detail_user_id', user_id);
 				currentUserId = user_id;
 				$.mobile.changePage($('#admin-member-detail'), {
 					reloadPage: true,
@@ -963,10 +1017,59 @@ $(document).on('pagebeforeshow', "#admin-member", function() {
 	}).done(function(data) {
 		if (data.status) {
 			var user = data.result;
+			$('#not-approved-table tbody').empty();
 			$.each(user, function(idx, obj) {
-				var user_tr = '<tr><td>' + obj.created + '</td><td>' + obj.name + '</td><td><a class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn user-detail-btn" data-user-id="' + obj.id + '">進入</a></td></tr>';
+				var user_tr = '<tr><td>' + obj.created + '</td><td>' + obj.name + '</td><td><a class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn user-detail-btn" data-user-id="' + obj.id + '">進入</a><button type="button" class="ui-btn ui-corner-all ui-btn-inline ui-mini green-btn user-detail-btn" data-user-id="' + obj.id + '">核准</button></td></tr>';
 				$('#not-approved-table tbody').append(user_tr);
 			});
+		}
+	}).fail(function() {
+		alert('請確認您的網路連線狀態！');
+	});
+});
+$(document).on('pagebeforeshow', "#admin-member-detail", function() {
+	// var page_id = '#' + $.mobile.activePage.attr('id');
+	$.ajax({
+		url: api_base + 'get_user_info.php?user_id=' + window.localStorage.getItem('detail_user_id'),
+		dataType: 'json'
+	}).success(function(data) {
+		if (data.status) {
+			// $(page_id + ' .upper_block > img, .upper_block >  input[type="image"]').attr('src', img_base + data.result.avatar);
+			$('#m_no').val(data.result.member_id);
+			$('#m_name').html(data.result.name);
+			$('#m_gender').val(data.result.gender);
+			$('#m_birth').val(data.result.birth);
+			$('#m_email').val(data.result.email);
+			$('#m_tel').val(data.result.tel);
+			$('#m_mobile').val(data.result.mobile);
+			$('input[name="member_auth"]').removeProp('checked').checkboxradio("refresh");
+			switch (data.result.type) {
+				case '1':
+				default:
+					$('#normal').prop("checked", true).checkboxradio("refresh");
+					break;
+				case '2':
+					if (data.result.publish_due != null) {
+						$('#club_adv').prop("checked", true).checkboxradio("refresh");
+						$('#publish_due').val(data.result.publish_due);
+					} else {
+						$('#club_basic').prop("checked", true).checkboxradio("refresh");
+						$('#publish_due').val('');
+					}
+					break;
+				case '3':
+					$('#seeker').prop("checked", true).checkboxradio("refresh");
+					break;
+			}
+			// if (data.result.type == 2) {
+			// 	if (data.result.plan_title != null) {
+			// 		$(page_id + ' .plan-input').val(data.result.plan_title);
+			// 		$(page_id + ' .plan-during-input').val(data.result.publish_start + '-' + data.result.publish_due);
+			// 		$(page_id + ' .plan-during-input').parent().parent().show();
+			// 	} else {
+			// 		$(page_id + ' .plan-during-input').parent().parent().hide();
+			// 	}
+			// }
 		}
 	}).fail(function() {
 		alert('請確認您的網路連線狀態！');
