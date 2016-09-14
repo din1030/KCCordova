@@ -14,7 +14,7 @@ if ($sql->num_rows > 0) {
     $used_point = 0;
     while ($r = mysqli_fetch_assoc($sql)) {
         $used_point += $r['point'];
-        $r['created'] = date('Y/m/d', strtotime($r['created']));
+        $r['created'] = date('Y/m/d H:i', strtotime($r['created']));
         $output[] = $r;
     }
     echo json_encode(array('status' => true, 'used_point' => $used_point, 'result' => $output));

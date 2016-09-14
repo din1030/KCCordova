@@ -1099,8 +1099,8 @@ $(document).on('pagebeforeshow', "#admin-recommend", function() {
 				$('#rec_list_table tbody').append(ref_tr);
 
 			});
-			$('.user-detail-btn').off();
-			$('.user-detail-btn').click(function(event) {
+			$('.ref-detail-btn').off();
+			$('.ref-detail-btn').click(function(event) {
 				var user_id = $(this).jqmData("user-id");
 				window.localStorage.setItem('ref_user_id', user_id);
 				$.mobile.changePage($('#admin-recommend-detail'), {
@@ -1124,9 +1124,9 @@ $(document).on('pagebeforeshow', "#admin-recommend-detail", function() {
 			$.each(data.result, function(idx, obj) {
 				redeem_list += '<tr><td>(' + obj.point + ')' + obj.title + obj.description + '</td><td>兌換時間：' + obj.created + '</td> </tr>';
 			});
-			$('#redeem_list').append(redeem_list);
+			$('#redeem_list tbody').append(redeem_list);
 		} else {
-			$('#redeem_list').html(data.message);
+			$('#redeem_list').html('<caption>未取得兌換記錄，請重新操作！</caption>');
 		}
 	}).fail(function() {
 		alert('請確認您的網路連線狀態！');
@@ -1143,9 +1143,9 @@ $(document).on('pagebeforeshow', "#admin-recommend-detail", function() {
 			$.each(data.result, function(idx, obj) {
 				rec_list += '<tr><td>' + obj.name + '</td><td>註冊時間：' + obj.created + '</td></tr>';
 			});
-			$('#member_rec_list tbody').css('padding-left', '1.5em').append(rec_list);
+			$('#member_rec_list tbody').append(rec_list);
 		} else {
-			$('#member_rec_list tbody').css('padding-left', '0').html(data.message);
+			$('#member_rec_list').html('<caption>未取得推薦清單，請重新操作！</caption>');
 		}
 	}).fail(function() {
 		alert('請確認您的網路連線狀態！');
