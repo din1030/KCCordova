@@ -1084,6 +1084,23 @@ $(document).on('pagebeforeshow', "#admin-member-detail", function() {
 	}).fail(function() {
 		alert('請確認您的網路連線狀態！');
 	});
+
+	$.ajax({
+		url: api_base + 'get_redeem_record.php?user_id=' + window.localStorage.getItem('detail_user_id'),
+		dataType: 'json'
+	}).done(function(data) {
+		if (data.status) {
+			var redeem_list = '';
+			$.each(data.result, function(idx, obj) {
+				redeem_list += '<tr><td>(' + obj.point + ')' + obj.title + obj.description + '</td><td>' + obj.created + '</td> </tr>';
+			});
+			$('#member_redeem_list tbody').append(redeem_list);
+		} else {
+			$('#member_redeem_list').html('<caption>尚無兌換記錄。</caption>');
+		}
+	}).fail(function() {
+		alert('請確認您的網路連線狀態！');
+	});
 });
 
 $(document).on('pagebeforeshow', "#admin-recommend", function() {
@@ -1093,7 +1110,7 @@ $(document).on('pagebeforeshow', "#admin-recommend", function() {
 	}).done(function(data) {
 		if (data.status) {
 			var ref = data.result;
-			$('#record_list tbody').empty();
+			$('#rec_list_table tbody').empty();
 			$.each(ref, function(idx, obj) {
 				var ref_tr = '<tr><td>' + obj.created + '</td><td>' + obj.name + '</td><td><a class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn ref-detail-btn" data-user-id="' + obj.id + '">查看</a></td></tr>';
 				$('#rec_list_table tbody').append(ref_tr);
@@ -1116,23 +1133,6 @@ $(document).on('pagebeforeshow', "#admin-recommend", function() {
 
 $(document).on('pagebeforeshow', "#admin-recommend-detail", function() {
 	$.ajax({
-		url: api_base + 'get_redeem_record.php?user_id=' + window.localStorage.getItem('ref_user_id'),
-		dataType: 'json'
-	}).done(function(data) {
-		if (data.status) {
-			var redeem_list = '';
-			$.each(data.result, function(idx, obj) {
-				redeem_list += '<tr><td>(' + obj.point + ')' + obj.title + obj.description + '</td><td>兌換時間：' + obj.created + '</td> </tr>';
-			});
-			$('#redeem_list tbody').append(redeem_list);
-		} else {
-			$('#redeem_list').html('<caption>未取得兌換記錄，請重新操作！</caption>');
-		}
-	}).fail(function() {
-		alert('請確認您的網路連線狀態！');
-	});
-
-	$.ajax({
 		url: api_base + 'get_recommend_list.php?user_id=' + window.localStorage.getItem('ref_user_id'),
 		dataType: 'json'
 	}).done(function(data) {
@@ -1141,7 +1141,7 @@ $(document).on('pagebeforeshow', "#admin-recommend-detail", function() {
 			total_point = parseInt(data.total);
 			$('#recommend_total').html(data.total);
 			$.each(data.result, function(idx, obj) {
-				rec_list += '<tr><td>' + obj.name + '</td><td>註冊時間：' + obj.created + '</td></tr>';
+				rec_list += '<tr><td>' + obj.name + '</td><td>' + obj.created + '</td></tr>';
 			});
 			$('#member_rec_list tbody').append(rec_list);
 		} else {

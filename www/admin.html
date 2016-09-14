@@ -42,15 +42,11 @@
                     <div class="ui-field-contain">
                         <label class="area_title" for="country-select">國家</label>
                         <select name="country-select" class="country-select" id="country-select" data-inline="true" data-mini="true">
-                            <!-- <option value="small">台灣</option>
-                            <option value="medium">中國</option>
-                            <option value="large">日本</option> -->
+                            <!-- dynamic content -->
                         </select>
                         <label class="area_title" for="area-select">地區</label>
                         <select name="area-select" class="area-select" id="area-select" data-inline="true" data-mini="true">
-                            <!-- <option value="small">台北</option>
-                            <option value="medium">台南</option>
-                            <option value="large">高雄</option> -->
+                            <!-- dynamic content -->
                         </select>
                     </div>
                 </div>
@@ -272,6 +268,19 @@
                         </select>
                     </div>
                 </div>
+                <div class="">
+                    <div style="font-size:18px;color:#AA3C89">禮品兌換記錄</div>
+                    <table id="member_redeem_list" class="record_list_table">
+                        <thead>
+                            <tr>
+                                <th>兌換項目</th>
+                                <th>兌換時間</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
                 <!-- <div class="">
                     <button id="admin-member-submit-btn" type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn">送出</button>
                 </div> -->
@@ -438,15 +447,11 @@
                     <div class="ui-field-contain">
                         <label class="area_title" for="select-native-1">國家</label>
                         <select class="country-select" name="select-native-1" id="select-native-1" data-inline="true" data-mini="true">
-                            <!-- <option value="">台灣</option>
-                            <option value="">中國</option>
-                            <option value="">日本</option> -->
+                            <!-- dynamic content -->
                         </select>
                         <label class="area_title" for="select-native-2">地區</label>
                         <select class="area-select" name="select-native-2" id="select-native-2" data-inline="true" data-mini="true">
-                            <!-- <option value="">台北</option>
-                            <option value="">台南</option>
-                            <option value="">高雄</option> -->
+                            <!-- dynamic content -->
                         </select>
                     </div>
                 </div>
@@ -716,15 +721,11 @@
                     <div class="ui-field-contain">
                         <label class="area_title" for="select-native-1">國家</label>
                         <select class="country-select" id="select-native-1" data-inline="true" data-mini="true">
-                            <!-- <option value="">台灣</option>
-                            <option value="">中國</option>
-                            <option value="">日本</option> -->
+                            <!-- dynamic content -->
                         </select>
                         <label class="area_title" for="area-select">地區</label>
                         <select class="area-select" name="area-select" id="area-select" data-inline="true" data-mini="true">
-                            <!-- <option value="">台北</option>
-                            <option value="">台南</option>
-                            <option value="">高雄</option> -->
+                            <!-- dynamic content -->
                         </select>
                     </div>
                 </div>
@@ -736,11 +737,12 @@
                 </div>
                 <div id="" class="ui-body-d ui-content member-list">
                     <div class="list_search">
-                        <label class="area_title" for="textinput-1">搜尋名單</label>
-                        <input type="text" name="search" class="" id="search" placeholder="姓名或時間" data-inline="true">
-                        <!-- <button type="submit" id="submit-1" class="ui-btn ui-corner-all purple-btn">GO</button> -->
+                        <label class="area_title" for="search">搜尋名單</label>
+                        <form>
+                            <input type="text" name="search" class="" id="rec-search" placeholder="姓名或時間" data-inline="true" data-type="search">
+                        </form>
                     </div>
-                    <table id="rec_list_table" class="record_list_table">
+                    <table id="rec_list_table" class="record_list_table" data-filter="true" data-input="#rec-search">
                         <caption>推薦人列表</caption>
                         <thead>
                             <tr>
@@ -750,20 +752,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- <tr>
-                                <td>2016/07/14 20:15</td>
-                                <td>翁水噹</td>
-                                <td>
-                                    <a href="#admin-recommend-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2016/07/14 20:15</td>
-                                <td>翁水噹</td>
-                                <td>
-                                    <a href="#admin-recommend-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                </td>
-                            </tr> -->
+                            <!-- dynamic content -->
                         </tbody>
                     </table>
                 </div>
@@ -798,31 +787,20 @@
                         <option value="./admin.html#admin-category">分類管理</option>
                     </select>
                 </div>
-                <span class="float-left" style="font-size:20px;font-weight:bold;margin-top:8px;">翁水噹</span>
-                <button type="button" id="download_record_list" class="ui-btn ui-btn-inline ui-corner-all purple-btn float-right">下載明細</button>
-                <div class="clearfix"></div>
+                <p style="font-size:20px;font-weight:bold;">翁水噹</p>
+                <!-- <button type="button" id="download_record_list" class="ui-btn ui-btn-inline ui-corner-all purple-btn float-right">下載明細</button> -->
+                <!-- <div class="clearfix"></div> -->
                 <div id="" class="ui-body-d ui-content member-list">
-                    <div style="font-size:18px;color:#AA3C89">兌換記錄</div>
-                    <table id="redeem_list" class="record_list_table">
-                        <tbody>
-                            <!-- <tr>
-                                <td>(10)屈臣氏1000元禮券</td>
-                                <td>兌換時間：2016/07/14 20:15</td>
-                            </tr> -->
-                        </tbody>
-                    </table>
-                    <br>
                     <div style="font-size:18px;color:#AA3C89">推薦清單(共 <span id="recommend_total"></span> 人)</div>
                     <table id="member_rec_list" class="record_list_table">
-                        <tbody>
-                            <!-- <tr>
-                                <td>翁水噹</td>
-                                <td>註冊時間：2016/07/14 20:15</td>
-                            </tr>
+                        <thead>
                             <tr>
-                                <td>翁水噹</td>
-                                <td>註冊時間：2016/07/14 20:15</td>
-                            </tr> -->
+                                <th>被推薦人</th>
+                                <th>註冊時間</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- dynamic content -->
                         </tbody>
                     </table>
                 </div>
@@ -858,15 +836,11 @@
                     <div class="ui-field-contain">
                         <label class="area_title" for="select-native-1">國家</label>
                         <select class="country-select" id="select-native-1" data-inline="true" data-mini="true">
-                            <!-- <option value="">台灣</option>
-                            <option value="">中國</option>
-                            <option value="">日本</option> -->
+                            <!-- dynamic content -->
                         </select>
                         <label class="area_title" for="area-select">地區</label>
                         <select class="area-select" name="area-select" id="area-select" data-inline="true" data-mini="true">
-                            <!-- <option value="">台北</option>
-                            <option value="">台南</option>
-                            <option value="">高雄</option> -->
+                            <!-- dynamic content -->
                         </select>
                     </div>
                 </div>

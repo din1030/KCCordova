@@ -499,11 +499,18 @@ div[id|=admin] .category-block {
 .record_list_table tr td:nth-child(2) {
   text-align: center;
 }
-.list_table tr th:nth-child(3),
-.record_list_table tr th:nth-child(3),
-.list_table tr td:nth-child(3),
-.record_list_table tr td:nth-child(3) {
+.list_table tr th:last-child,
+.record_list_table tr th:last-child,
+.list_table tr td:last-child,
+.record_list_table tr td:last-child {
   text-align: right;
+}
+#member_redeem_list tr th,
+#member_rec_list tr th,
+#member_redeem_list tr td,
+#member_rec_list tr td {
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 #admin-member-detail-main > div {
   background-color: #fff;

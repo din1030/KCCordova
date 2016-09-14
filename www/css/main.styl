@@ -474,8 +474,14 @@ div[id|=admin]
             text-align: left
         th:nth-child(2), td:nth-child(2)
             text-align: center
-        th:nth-child(3), td:nth-child(3)
+        th:last-child, td:last-child
             text-align: right
+
+#member_redeem_list, #member_rec_list
+    tr
+        th, td
+            padding-top: 10px
+            padding-bottom: 10px
 
 #admin-member-detail-main
     > div
