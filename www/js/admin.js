@@ -1266,7 +1266,8 @@ $(document).on('pagebeforeshow', "#admin-recommend-detail", function() {
 		if (data.status) {
 			var rec_list = '';
 			total_point = parseInt(data.total);
-			$('#referrer_name').html(data.ref_name);
+			$('#member_rec_list tbody').empty();
+			$('#referrer_name').html(data.result[0].ref_name);
 			$('#recommend_total').html(data.total);
 			$.each(data.result, function(idx, obj) {
 				rec_list += '<tr><td>' + obj.name + '</td><td>' + obj.created + '</td></tr>';
