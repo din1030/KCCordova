@@ -1151,3 +1151,59 @@ $(document).on('pagebeforeshow', "#admin-recommend-detail", function() {
 		alert('請確認您的網路連線狀態！');
 	});
 });
+
+$(document).on('pagecreate', "#admin-recommend-redeem", function() {
+	$.ajax({
+		url: api_base + 'get_redeem_item.php',
+		dataType: 'json'
+	}).done(function(data) {
+		if (data.status) {
+			var redeem_block = '';
+			$('#redeem_list').empty();
+			$.each(data.result, function(idx, obj) {
+				redeem_block = '<div class="redeem_item_block"><div class="ui-field-contain"><label class="item_title" for="redeem_item_title"><strong>禮品標題：</strong></label><span class="redeem_item_title">' + obj.title + '</span></div><div class="redeem-pic-block"><div class="left-block"><div class="ui-field-contain"><label class="item_title" for="redeem_item_description"><strong>禮品內容：</strong></label><span class="redeem_item_description">' + obj.description + '</span></div><div class="ui-field-contain"><label class="item_title" for="redeem_item_point"><strong>扣除點數：</strong></label><span class="redeem_item_point">' + obj.point + '</span></div></div><div class="img-block"><input type="image" class="redeem-pic" src="' + img_base + obj.photo + '" /></div><div class="clearfix"></div></div><button type="button" class="ui-btn ui-corner-all ui-btn-inline float-right orange-btn redeem-del-btn" data-item-id="' + obj.id + '">刪除</button><a href="#edit_redeem_item" class="ui-btn ui-btn-inline purple-btn ui-corner-all float-right redeem-edit-btn" data-rel="popup" data-item-id="' + obj.id + '">編輯</a><div class="clearfix"></div></div>';
+				$('#redeem_list').append(redeem_block);
+			});
+
+			$('.redeem_item_block a.redeem-edit-btn').off();
+			$('.redeem_item_block a.redeem-edit-btn').click(function(event) {
+				currentPlanId = $(this).jqmData("plan-id");
+				$.each(adminPlanJson, function(idx, obj) {
+					if (parseInt(obj.id) == currentPlanId) {
+						$('#redeem-edit-form #redeem_title').val(obj.title);
+						$('#redeem-edit-form #redeem_description').val(obj.description);
+						$('#redeem-edit-form #redeem_point').val(obj.point);
+						// $('#redeem-edit-form #plan_content').val(obj.redeem_point);
+					}
+				});
+			});
+
+			$('.redeem_item_block .redeem-del-btn').off();
+			$('.redeem_item_block .redeem-del-btn').click(function(event) {
+				var btn = $(this);
+				var item_id = $(this).jqmData("item-id");
+				// console.log(item_id);
+				if (confirm('確定刪除此禮品？') === true) {
+					$.ajax({
+						url: api_base + 'remove_redeem.php',
+						type: 'POST',
+						dataType: 'json',
+						data: {
+							item_id: item_id
+						}
+					}).done(function(data) {
+						if (data.status) {
+							$(btn).parents('.redeem_item_block').remove();
+						} else {
+							alert('請重新操作！');
+						}
+					}).fail(function() {
+						alert('請確認您的網路連線狀態！');
+					});
+				}
+			});
+		}
+	}).fail(function() {
+		alert('請確認您的網路連線狀態！');
+	});
+});

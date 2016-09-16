@@ -832,18 +832,18 @@
                         <option value="./admin.html#admin-category">分類管理</option>
                     </select>
                 </div>
-                <div class="area_block">
+                <!-- <div class="area_block">
                     <div class="ui-field-contain">
                         <label class="area_title" for="select-native-1">國家</label>
-                        <select class="country-select" id="select-native-1" data-inline="true" data-mini="true">
-                            <!-- dynamic content -->
-                        </select>
+                        <select class="country-select" id="select-native-1" data-inline="true" data-mini="true"> -->
+                <!-- dynamic content -->
+                <!-- </select>
                         <label class="area_title" for="area-select">地區</label>
-                        <select class="area-select" name="area-select" id="area-select" data-inline="true" data-mini="true">
-                            <!-- dynamic content -->
-                        </select>
+                        <select class="area-select" name="area-select" id="area-select" data-inline="true" data-mini="true"> -->
+                <!-- dynamic content -->
+                <!-- </select>
                     </div>
-                </div>
+                </div> -->
                 <div class="ui-navbar" role="navigation">
                     <ul id="rec_page" class="page-content-nav ui-grid-a">
                         <li class="ui-block-a"><a href="#admin-recommend" class="ui-btn">推薦記錄名單</a></li>
@@ -854,101 +854,56 @@
                     新增禮品
                 </a>
                 <div class="clearfix"></div>
-                <div class="redeem_item_block">
-                    <div class="ui-field-contain">
-                        <label class="item_title" for="redeem_item"><strong>禮品名稱：</strong></label>
-                        <input type="text" name="redeem_item" class="" id="redeem_item" value="全聯禮券100元">
-                    </div>
-                    <div class="redeem-pic-block">
-                        <div class="left-block">
-                            <div class="ui-field-contain">
-                                <label class="item_title" for=""><strong>扣除點數：</strong></label>
-                                <input type="text" name="" class="" id="" value="10">
-                            </div>
-                        </div>
-                        <div class="img-block">
-                            <input type="image" class="redeem-pic" src="./img/redeem_item.jpg" />
-                            <input type="file" class="redeem-pic-input" />
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
+                <div id="redeem_list">
+                    <!-- dynamic content -->
                 </div>
-                <div class="redeem_item_block">
-                    <div class="ui-field-contain">
-                        <label class="item_title" for="redeem_item"><strong>禮品名稱：</strong></label>
-                        <input type="text" name="redeem_item" class="" id="redeem_item" value="全聯禮券100元">
-                    </div>
-                    <div class="redeem-pic-block">
-                        <div class="left-block">
-                            <div class="ui-field-contain">
-                                <label class="item_title" for=""><strong>扣除點數：</strong></label>
-                                <input type="text" name="" class="" id="" value="15">
-                            </div>
-                        </div>
-                        <div class="img-block">
-                            <input type="image" class="redeem-pic" src="./img/redeem_item.jpg" />
-                            <input type="file" class="redeem-pic-input" />
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-                <div class="redeem_item_block">
-                    <div class="ui-field-contain">
-                        <label class="item_title" for="redeem_item"><strong>禮品名稱：</strong></label>
-                        <input type="text" name="redeem_item" class="" id="redeem_item" value="全聯禮券100元">
-                    </div>
-                    <div class="redeem-pic-block">
-                        <div class="left-block">
-                            <div class="ui-field-contain">
-                                <label class="item_title" for=""><strong>扣除點數：</strong></label>
-                                <input type="text" name="" class="" id="" value="20">
-                            </div>
-                        </div>
-                        <div class="img-block">
-                            <input type="image" class="redeem-pic" src="./img/redeem_item.jpg" />
-                            <input type="file" class="redeem-pic-input" />
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-                <div class="redeem_item_block">
-                    <div class="ui-field-contain">
-                        <label class="item_title" for="redeem_item"><strong>禮品名稱：</strong></label>
-                        <input type="text" name="redeem_item" class="" id="redeem_item" value="全聯禮券100元">
-                    </div>
-                    <div class="redeem-pic-block">
-                        <div class="left-block">
-                            <div class="ui-field-contain">
-                                <label class="item_title" for=""><strong>扣除點數：</strong></label>
-                                <input type="text" name="" class="" id="" value="20">
-                            </div>
-                        </div>
-                        <div class="img-block">
-                            <input type="image" class="redeem-pic" src="./img/redeem_item.jpg" />
-                            <input type="file" class="redeem-pic-input" />
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-                <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn">完成</button>
             </div>
             <div id="add_redeem_item" class="msg-popup ui-corner-all" data-role="popup" data-position-to="window" data-transition="pop" data-theme="none" data-shadow="false" data-overlay-theme="b" data-dismissible="false">
-                <form>
+                <form id="redeem-add-form" enctype="multipart/form-data">
                     <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
                     <div style="padding:10px 20px;">
                         <h3>新增禮品</h3>
                         <div style="color:white;">
-                            禮品名稱：
+                            禮品標題：
                         </div>
-                        <input type="text" name="club_cat" class="" id="club_cat" value="" required="">
+                        <input type="text" name="redeem_title" class="" id="redeem_title" value="" required="">
+                        <div style="color:white;">
+                            禮品內容：
+                        </div>
+                        <input type="text" name="redeem_description" class="" id="redeem_description" value="" required="">
                         <div style="color:white;">
                             扣除點數：
                         </div>
-                        <input type="text" name="club_cat" class="" id="club_cat" value="" required="">
+                        <input type="text" name="redeem_point" class="" id="redeem_point" value="" required="">
                         <div style="color:white;">
                             圖片：
                         </div>
-                        <input type="file" name="name" value="" required="">
+                        <input type="file" name="redeem_pic" value="" required="">
+                        <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn send-btn">送出</button>
+                    </div>
+                </form>
+            </div>
+            <div id="edit_redeem_item" class="msg-popup ui-corner-all" data-role="popup" data-position-to="window" data-transition="pop" data-theme="none" data-shadow="false" data-overlay-theme="b" data-dismissible="false">
+                <form id="redeem-edit-form" enctype="multipart/form-data">
+                    <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+                    <div style="padding:10px 20px;">
+                        <h3>編輯禮品項目</h3>
+                        <div style="color:white;">
+                            禮品標題：
+                        </div>
+                        <input type="text" name="redeem_title" class="" id="redeem_title" value="" required="">
+                        <div style="color:white;">
+                            禮品內容：
+                        </div>
+                        <input type="text" name="redeem_description" class="" id="redeem_description" value="" required="">
+                        <div style="color:white;">
+                            扣除點數：
+                        </div>
+                        <input type="text" name="redeem_point" class="" id="redeem_point" value="" required="">
+                        <div style="color:white;">
+                            圖片：
+                        </div>
+                        <input type="file" name="redeem_pic" value="">
                         <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn send-btn">送出</button>
                     </div>
                 </form>
@@ -1107,6 +1062,8 @@
                 <div class="clearfix"></div>
                 <!-- dynamic content -->
                 <form id="pay-method-form" class="policy-form" data-policy="pay_method">
+                    <label for="pay_method" class="item_title"><strong>付款方式編輯：</strong></label>
+                    <textarea name="policy_content" id="pay_method" rows="4" class="text-justify" requi="pay-method-form" class="policy-form" data-policy="pay_method">
                     <label for="pay_method" class="item_title"><strong>付款方式編輯：</strong></label>
                     <textarea name="policy_content" id="pay_method" rows="4" class="text-justify" required=""></textarea>
                     <button id="plan-submit-btn" class="ui-btn ui-corner-all" type="submit">修改付款方式</button>

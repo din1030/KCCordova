@@ -5,7 +5,7 @@ header('Access-Control-Allow-Methods: GET, POST');
 
 include 'db_setting.php';
 
-$sql_string = 'SELECT * FROM `redeem_item`';
+$sql_string = 'SELECT * FROM `redeem_item` WHERE `active`=1';
 $sql = $mysqli->query($sql_string);
 if ($sql->num_rows > 0) {
     while ($r = mysqli_fetch_assoc($sql)) {

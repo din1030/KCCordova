@@ -585,6 +585,11 @@ div[id|=admin] .category-block {
 }
 .redeem_item_block {
   padding: 0 0 10px 0;
+}
+.redeem_item_block label {
+  margin: 0;
+}
+.redeem-pic-block {
   border-bottom: 1px solid;
 }
 .redeem-pic-block > div:first-child {
