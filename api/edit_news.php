@@ -17,7 +17,7 @@ $target_dir = '../www/img/';
 $new_filename = 'news_'.$news_id.'_'.basename($_FILES['news_edit_pic']['name']);
 $target_file = $target_dir.$new_filename;
 
-if (file_exists($_FILES['thumb']['tmp_name']) && is_uploaded_file($_FILES['thumb']['tmp_name'])) {
+if (file_exists($_FILES['news_edit_pic']['tmp_name']) && is_uploaded_file($_FILES['news_edit_pic']['tmp_name'])) {
     if (move_uploaded_file($_FILES['news_edit_pic']['tmp_name'], $target_file)) {
         $pic_string = ",`pic`='".$new_filename."'";
     }

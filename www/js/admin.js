@@ -6,6 +6,8 @@ var currentNewsId;
 var currentUserId;
 var adminPlanJson = '';
 var currentPlanId;
+var adminRedeemJson = '';
+var currentItemId;
 
 $(document).one("pagebeforeshow", "[data-role='page']", function() {
 	if (window.localStorage.getItem('auth') != '0' && window.localStorage.getItem('auth') != '100') {
@@ -1158,6 +1160,7 @@ $(document).on('pagecreate', "#admin-recommend-redeem", function() {
 		dataType: 'json'
 	}).done(function(data) {
 		if (data.status) {
+			adminRedeemJson = data.result;
 			var redeem_block = '';
 			$('#redeem_list').empty();
 			$.each(data.result, function(idx, obj) {
@@ -1167,9 +1170,9 @@ $(document).on('pagecreate', "#admin-recommend-redeem", function() {
 
 			$('.redeem_item_block a.redeem-edit-btn').off();
 			$('.redeem_item_block a.redeem-edit-btn').click(function(event) {
-				currentPlanId = $(this).jqmData("plan-id");
-				$.each(adminPlanJson, function(idx, obj) {
-					if (parseInt(obj.id) == currentPlanId) {
+				currentItemId = $(this).jqmData("item-id");
+				$.each(adminRedeemJson, function(idx, obj) {
+					if (parseInt(obj.id) == currentItemId) {
 						$('#redeem-edit-form #redeem_title').val(obj.title);
 						$('#redeem-edit-form #redeem_description').val(obj.description);
 						$('#redeem-edit-form #redeem_point').val(obj.point);
@@ -1185,7 +1188,7 @@ $(document).on('pagecreate', "#admin-recommend-redeem", function() {
 				// console.log(item_id);
 				if (confirm('確定刪除此禮品？') === true) {
 					$.ajax({
-						url: api_base + 'remove_redeem.php',
+						url: api_base + 'remove_redeem_item.php',
 						type: 'POST',
 						dataType: 'json',
 						data: {
@@ -1201,6 +1204,70 @@ $(document).on('pagecreate', "#admin-recommend-redeem", function() {
 						alert('請確認您的網路連線狀態！');
 					});
 				}
+			});
+			$('#redeem-edit-form').off();
+			$('#redeem-edit-form').on('submit', function(e) {
+				e.preventDefault(); // prevent native submit
+				// var plan_id = $(this).jqmData("plan-id");
+				$(this).ajaxSubmit({
+					url: api_base + 'edit_redeem_item.php',
+					data: {
+						item_id: currentItemId
+					},
+					type: 'POST',
+					dataType: 'json',
+					beforeSend: function() {
+						$.mobile.loading('show');
+					},
+					complete: function() {
+						$.mobile.loading('hide');
+					},
+					success: function(data) {
+						$("#edit_redeem_item").popup("close");
+						alert(data.message);
+						if (data.status) {
+							$.mobile.changePage($('#admin-plan'), {
+								allowSamePageTransition: true,
+								reloadPage: true,
+								changeHash: true,
+								transition: "none"
+							});
+						}
+					},
+					error: function(request, error) {
+						alert('請確認您的網路連線狀態！');
+					}
+				});
+			});
+			$('#redeem-add-form').off();
+			$('#redeem-add-form').on('submit', function(e) {
+				e.preventDefault(); // prevent native submit
+				$(this).ajaxSubmit({
+					url: api_base + 'add_redeem_item.php',
+					type: 'POST',
+					dataType: 'json',
+					beforeSend: function() {
+						$.mobile.loading('show');
+					},
+					complete: function() {
+						$.mobile.loading('hide');
+					},
+					success: function(data) {
+						$("#add_redeem_item").popup("close");
+						alert(data.message);
+						if (data.status) {
+							$.mobile.changePage($('#admin-plan'), {
+								allowSamePageTransition: true,
+								reloadPage: true,
+								changeHash: true,
+								transition: "none"
+							});
+						}
+					},
+					error: function(request, error) {
+						alert('請確認您的網路連線狀態！');
+					}
+				});
 			});
 		}
 	}).fail(function() {
