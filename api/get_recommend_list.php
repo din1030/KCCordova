@@ -7,7 +7,7 @@ include 'db_setting.php';
 
 $user_id = $_GET['user_id'];
 
-$sql_string = "SELECT rec.`name`,rec.`created` FROM `user` ref JOIN `user` rec ON ref.`member_id`= rec.`ref_id` WHERE ref.`id`=$user_id ORDER BY rec.`created` DESC";
+$sql_string = "SELECT ref.`name` ref_name,rec.`name`,rec.`created` FROM `user` ref JOIN `user` rec ON ref.`member_id`= rec.`ref_id` WHERE ref.`id`=$user_id ORDER BY rec.`created` DESC";
 
 $sql = $mysqli->query($sql_string);
 if ($sql->num_rows > 0) {
@@ -15,6 +15,7 @@ if ($sql->num_rows > 0) {
         $r['created'] = date('Y/m/d H:i', strtotime($r['created']));
         $output[] = $r;
     }
+    $output['ref_name'] = $r['ref_name'];
     echo json_encode(array('status' => true, 'total' => $sql->num_rows, 'result' => $output));
 
     return;

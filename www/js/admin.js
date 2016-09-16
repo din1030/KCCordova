@@ -1234,10 +1234,10 @@ $(document).on('pagebeforeshow', "#admin-recommend", function() {
 					changeHash: true
 				});
 			});
-			$('#admin-recommend #area-select').change(function(event) {
+			$('#admin-recommend #serach-btn').click(function(event) {
 				$('#rec_list_table tbody').empty();
 				$.each(adminRecJson, function(idx, obj) {
-					if (obj.country == $('#admin-recommend country-select').val() && obj.area == $('#admin-recommend area-select').val()) {
+					if (obj.country == $('#admin-recommend #country-select').val() && obj.area == $('#admin-recommend #area-select').val()) {
 						var ref_tr = '<tr><td>' + obj.created + '</td><td>' + obj.name + '</td><td><a class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn ref-detail-btn" data-user-id="' + obj.id + '" data-country="' + obj.country + '" data-area="' + obj.area + '">查看</a></td></tr>';
 						$('#rec_list_table tbody').append(ref_tr);
 					}
@@ -1266,6 +1266,7 @@ $(document).on('pagebeforeshow', "#admin-recommend-detail", function() {
 		if (data.status) {
 			var rec_list = '';
 			total_point = parseInt(data.total);
+			$('#referrer_name').html(data.ref_name);
 			$('#recommend_total').html(data.total);
 			$.each(data.result, function(idx, obj) {
 				rec_list += '<tr><td>' + obj.name + '</td><td>' + obj.created + '</td></tr>';

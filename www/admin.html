@@ -720,13 +720,14 @@
                 <div class="area_block">
                     <div class="ui-field-contain">
                         <label class="area_title" for="select-native-1">國家</label>
-                        <select class="country-select" id="select-native-1" data-inline="true" data-mini="true">
+                        <select class="country-select" id="country-select" data-inline="true" data-mini="true">
                             <!-- dynamic content -->
                         </select>
                         <label class="area_title" for="area-select">地區</label>
                         <select class="area-select" name="area-select" id="area-select" data-inline="true" data-mini="true">
                             <!-- dynamic content -->
                         </select>
+                        <button id="serach-btn" type="button" class="ui-btn ui-corner-all ui-btn-inline no-bg-bd purple-btn">查詢</button>
                     </div>
                 </div>
                 <div class="ui-navbar" role="navigation">
@@ -787,7 +788,7 @@
                         <option value="./admin.html#admin-category">分類管理</option>
                     </select>
                 </div>
-                <p style="font-size:20px;font-weight:bold;">翁水噹</p>
+                <p id="referrer_name" style="font-size:20px;font-weight:bold;"></p>
                 <!-- <button type="button" id="download_record_list" class="ui-btn ui-btn-inline ui-corner-all purple-btn float-right">下載明細</button> -->
                 <!-- <div class="clearfix"></div> -->
                 <div id="" class="ui-body-d ui-content member-list">
