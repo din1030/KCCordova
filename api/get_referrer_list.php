@@ -5,7 +5,7 @@ header('Access-Control-Allow-Methods: GET, POST');
 
 include 'db_setting.php';
 
-$sql_string = 'SELECT DISTINCT ref.`id`,ref.`name`,ref.`created` FROM `user` ref JOIN `user` rec ON ref.`member_id`= rec.`ref_id`';
+$sql_string = 'SELECT DISTINCT ref.`id`,ref.`name`,ref.`country`,ref.`area`,ref.`created` FROM `user` ref JOIN `user` rec ON ref.`member_id`= rec.`ref_id`';
 
 $sql = $mysqli->query($sql_string);
 if ($sql->num_rows > 0) {

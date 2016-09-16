@@ -474,27 +474,43 @@ div[id|=admin] .category-block {
 #member_type_nav li a.ui-btn-active {
   background: #aa3c89 !important;
 }
-.list_table {
+.list_table,
+.record_list_table {
   width: 100%;
   border-spacing: 0;
 }
-.list_table th {
+.list_table th,
+.record_list_table th {
   border-bottom: 2px solid #000;
 }
-.list_table td {
+.list_table td,
+.record_list_table td {
   border-bottom: 1px solid #000;
 }
 .list_table tr th:nth-child(1),
-.list_table tr td:nth-child(1) {
+.record_list_table tr th:nth-child(1),
+.list_table tr td:nth-child(1),
+.record_list_table tr td:nth-child(1) {
   text-align: left;
 }
 .list_table tr th:nth-child(2),
-.list_table tr td:nth-child(2) {
+.record_list_table tr th:nth-child(2),
+.list_table tr td:nth-child(2),
+.record_list_table tr td:nth-child(2) {
   text-align: center;
 }
-.list_table tr th:nth-child(3),
-.list_table tr td:nth-child(3) {
+.list_table tr th:last-child,
+.record_list_table tr th:last-child,
+.list_table tr td:last-child,
+.record_list_table tr td:last-child {
   text-align: right;
+}
+#member_redeem_list tr th,
+#member_rec_list tr th,
+#member_redeem_list tr td,
+#member_rec_list tr td {
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 #admin-member-detail-main > div {
   background-color: #fff;
@@ -569,6 +585,13 @@ div[id|=admin] .category-block {
 }
 .redeem_item_block {
   padding: 0 0 10px 0;
+}
+.redeem_item_block label {
+  margin: 0;
+  display: inline-block;
+  width: auto;
+}
+.redeem-pic-block {
   border-bottom: 1px solid;
 }
 .redeem-pic-block > div:first-child {

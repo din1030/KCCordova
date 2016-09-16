@@ -1,6 +1,7 @@
 var officialMsg;
 var officialState;
 var currentMsg;
+var msgType;
 
 $(document).one("pagebeforeshow", "[data-role='page']", function() {
 	if (window.localStorage.getItem('auth') == null || window.localStorage.getItem('user_id') == null) {
@@ -62,13 +63,15 @@ $(document).on("pagebeforeshow", '#messages', function() {
 		$('#personal_msg').html(markup);
 
 		function seekerMarkup(data) {
-			var markup = '<div class="detail_block msg_block seeker_msg" data-msg-type="' + data.from_type + '" id="msg-' + data.from_id + '" data-from-id="' + data.from_id + '" data-official="false"><div class="ui-bar ui-bar-a"><span class="float-left">【求職者】留言</span><span class="float-right" style="margin-right: 20px;">' + data.last_time + '</span><button class="ui-btn ui-corner-all ui-btn-inline ui-mini ui-btn-right ui-icon-delete ui-btn-icon-notext del-fav-btn" type="button" name="button" data-shadow="false">x</button></div><a class="msg-open" href=""><div class="ui-body ui-body-a"><div class="avatar msg-avatar float-left"><img src="' + img_base + data.pic1 + '" style="width: 70px; height: 70px; border-radius: 50%;" alt=""></div><strong>' + data.name + '</strong><br> 應徵地區：' + data.country + ' ' + data.area + '</div></a></div>';
+			// var markup = '<div class="detail_block msg_block seeker_msg" data-msg-type="' + data.from_type + '" id="msg-' + data.from_id + '" data-from-id="' + data.from_id + '" data-official="false"><div class="ui-bar ui-bar-a"><span class="float-left">【求職者】留言</span><span class="float-right" style="margin-right: 20px;">' + data.last_time + '</span><button class="ui-btn ui-corner-all ui-btn-inline ui-mini ui-btn-right ui-icon-delete ui-btn-icon-notext del-fav-btn" type="button" name="button" data-shadow="false">x</button></div><a class="msg-open" href=""><div class="ui-body ui-body-a"><div class="avatar msg-avatar float-left"><img src="' + img_base + data.pic1 + '" style="width: 70px; height: 70px; border-radius: 50%;" alt=""></div><strong>' + data.name + '</strong><br> 應徵地區：' + data.country + ' ' + data.area + '</div></a></div>';
+			var markup = '<div class="detail_block msg_block seeker_msg" data-msg-type="' + data.from_type + '" id="msg-' + data.from_id + '" data-from-id="' + data.from_id + '" data-official="false"><div class="ui-bar ui-bar-a"><span class="float-left">【求職者】留言</span><span class="float-right" style="margin-right: 20px;">' + data.last_time + '</span></div><a class="msg-open" href=""><div class="ui-body ui-body-a"><div class="avatar msg-avatar float-left"><img src="' + img_base + data.pic1 + '" style="width: 70px; height: 70px; border-radius: 50%;" alt=""></div><strong>' + data.name + '</strong><br> 應徵地區：' + data.country + ' ' + data.area + '</div></a></div>';
 
 			return markup;
 		}
 
 		function clubMarkup(data) {
-			var markup = '<div class="detail_block msg_block shop_msg" data-msg-type="' + data.from_type + '" id="msg-' + data.from_id + '" data-from-id="' + data.from_id + '" data-official="false"><div class="ui-bar ui-bar-a"><span class="float-left">【店家】留言</span><span class="float-right" style="margin-right: 20px;">' + data.last_time + '</span><button class="ui-btn ui-corner-all ui-btn-inline ui-mini ui-btn-right ui-icon-delete ui-btn-icon-notext del-fav-btn" type="button" name="button" data-shadow="false">x</button></div><a class="msg-open" href=""><div class="ui-body ui-body-a"><div class="avatar msg-avatar float-left"><img src="' + img_base + data.pic1 + '" style="width: 70px; height: 70px; border-radius: 50%;" alt=""></div><strong>' + data.name + '</strong><br> ' + data.country + ' ' + data.area + '</div></a></div>';
+			var markup = '<div class="detail_block msg_block shop_msg" data-msg-type="' + data.from_type + '" id="msg-' + data.from_id + '" data-from-id="' + data.from_id + '" data-official="false"><div class="ui-bar ui-bar-a"><span class="float-left">【店家】留言</span><span class="float-right" style="margin-right: 20px;">' + data.last_time + '</span></div><a class="msg-open" href=""><div class="ui-body ui-body-a"><div class="avatar msg-avatar float-left"><img src="' + img_base + data.pic1 + '" style="width: 70px; height: 70px; border-radius: 50%;" alt=""></div><strong>' + data.name + '</strong><br> ' + data.country + ' ' + data.area + '</div></a></div>';
+			// var markup = '<div class="detail_block msg_block shop_msg" data-msg-type="' + data.from_type + '" id="msg-' + data.from_id + '" data-from-id="' + data.from_id + '" data-official="false"><div class="ui-bar ui-bar-a"><span class="float-left">【店家】留言</span><span class="float-right" style="margin-right: 20px;">' + data.last_time + '</span><button class="ui-btn ui-corner-all ui-btn-inline ui-mini ui-btn-right ui-icon-delete ui-btn-icon-notext del-fav-btn" type="button" name="button" data-shadow="false">x</button></div><a class="msg-open" href=""><div class="ui-body ui-body-a"><div class="avatar msg-avatar float-left"><img src="' + img_base + data.pic1 + '" style="width: 70px; height: 70px; border-radius: 50%;" alt=""></div><strong>' + data.name + '</strong><br> ' + data.country + ' ' + data.area + '</div></a></div>';
 
 			return markup;
 		}
@@ -98,21 +101,21 @@ $(document).on("pagebeforeshow", '#messages', function() {
 		});
 	});
 
-	$('#messages-main').on('click', '.ui-icon-delete', function() {
-		console.log('hit delete!');
-		var id = $(this).parent().parent().jqmData('msg-id');
-		if (confirm('Delete?') === true) {
-			// $.ajax({
-			// 	method: "DELETE",
-			// 	url: "delete.php",
-			// 	data: { from_id: id, userId: userId"
-			// }).done(function() {
-			// 	//rmv view
-			// 	$('#msg-' + id ).remove();
-			// })
-			$('#msg-' + id).remove();
-		}
-	});
+	// $('#messages-main').on('click', '.ui-icon-delete', function() {
+	// 	console.log('hit delete!');
+	// 	var id = $(this).parent().parent().jqmData('msg-id');
+	// 	if (confirm('Delete?') === true) {
+	// $.ajax({
+	// 	method: "DELETE",
+	// 	url: "delete.php",
+	// 	data: { from_id: id, userId: userId"
+	// }).done(function() {
+	// 	//rmv view
+	// 	$('#msg-' + id ).remove();
+	// })
+	// $('#msg-' + id).remove();
+	// }
+	// });
 });
 
 $(document).on("pagebeforeshow", '#messages-detail', function(e, d) {
@@ -142,12 +145,12 @@ $(document).on("pagebeforeshow", '#messages-detail', function(e, d) {
 	function officialMarkup(items) {
 		var markup = '';
 		$.each(items, function(i, v) {
-			markup += '' +
+			markup +=
 				'<div class="detail_block msg_block" data-official="true" id="officialmsg-' + v.id + '">' +
 				'<div class="ui-bar ui-bar-a" style="background-color: #71bb06;">' +
 				'<span class="float-left">【官方】留言 ' + (i + 1) + '</span>' +
 				'<span class="float-right" id="official_msg_date" style="margin-right: 20px;"></span>' +
-				'<button data-msg-id="' + v.id + '" class="delete-btn ui-btn ui-corner-all ui-btn-inline ui-mini ui-btn-right ui-icon-delete ui-btn-icon-notext del-fav-btn" type="button" name="button" data-shadow="false">x</button>' +
+				// '<button data-msg-id="' + v.id + '" class="delete-btn ui-btn ui-corner-all ui-btn-inline ui-mini ui-btn-right ui-icon-delete ui-btn-icon-notext del-fav-btn" type="button" name="button" data-shadow="false">x</button>' +
 				'</div>' +
 				'<a href="" class="msg-open">' +
 				'<div class="ui-body ui-body-a">' + '<strong>' + v.title + '</strong><br>' + v.content + '</div>' +
@@ -184,21 +187,21 @@ $(document).on("pagebeforeshow", '#messages-detail', function(e, d) {
 
 	//event handler
 
-	$('#msg-holder').on('click', '.delete-btn', function() {
-		console.log('hit delete!');
-		var id = $(this).jqmData('msg-id');
-		if (confirm('Delete?') === true) {
-			// $.ajax({
-			// 	method: "DELETE",
-			// 	url: "delete.php",
-			// 	data: { from_id: id, userId: userId"
-			// }).done(function() {
-			// 	//rmv view
-			// 	$('#msg-' + id ).remove();
-			// })
-			$('#officialmsg-' + id).remove();
-		}
-	});
+	// $('#msg-holder').on('click', '.delete-btn', function() {
+	// 	console.log('hit delete!');
+	// 	var id = $(this).jqmData('msg-id');
+	// 	if (confirm('Delete?') === true) {
+	// $.ajax({
+	// 	method: "DELETE",
+	// 	url: "delete.php",
+	// 	data: { from_id: id, userId: userId"
+	// }).done(function() {
+	// 	//rmv view
+	// 	$('#msg-' + id ).remove();
+	// })
+	// 		$('#officialmsg-' + id).remove();
+	// 	}
+	// });
 
 	$('#msg-holder').on('click', '#sendMsg', function(e) {
 		var to_id = $(this).jqmData('to-id');

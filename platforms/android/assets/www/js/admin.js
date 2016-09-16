@@ -6,6 +6,8 @@ var currentNewsId;
 var currentUserId;
 var adminPlanJson = '';
 var currentPlanId;
+var adminRedeemJson = '';
+var currentItemId;
 
 $(document).one("pagebeforeshow", "[data-role='page']", function() {
 	if (window.localStorage.getItem('auth') != '0' && window.localStorage.getItem('auth') != '100') {
@@ -187,16 +189,28 @@ $(document).on('pagebeforeshow', "#admin-lifeservice", function() {
 		dataType: 'json'
 	}).success(function(data) {
 		if (data.status) {
-			adminLifeJson = data;
+			adminLifeJson = data.result;
 			// console.log(dataJson);
+			$('.life_category_block').remove();
 			$.each(data.result, function(idx, obj) {
 				var life_category_block = $('<div class="life_category_block"></div>').append('<div> <strong class="item_title">分類名稱：</strong><span class="cat_title">' + obj.title + '</span></div>');
-				var life_pic_block = $('<div class="life-pic-block"></div>').append('<div class="left-block text-center"> <a href="#edit_life_category" class="ui-btn ui-btn-inline ui-corner-all green-btn" data-rel="popup" data-life-cat="' + obj.id + '"> 編輯分類 </a> <br> <a class="ui-btn ui-btn-inline ui-corner-all green-btn store-btn" data-life-cat="' + obj.id + '"> 分類店家清單 </a> </div> <div class="img-block"> <input type="image" class="life-pic" src="' +
+				var life_pic_block = $('<div class="life-pic-block"></div>').append('<div class="left-block text-center"> <a href="#edit_life_category" class="ui-btn ui-btn-inline ui-corner-all green-btn life-cat-edit-btn" data-rel="popup" data-life-cat="' + obj.id + '"> 編輯分類 </a> <br> <a class="ui-btn ui-btn-inline ui-corner-all green-btn store-btn" data-life-cat="' + obj.id + '"> 分類店家清單 </a> </div> <div class="img-block"> <input type="image" class="life-pic" src="' +
 					img_base + obj.pic + '" /> <input type="file" class="life-pic-input" /> </div> <div class="clearfix"></div>');
 				$(life_category_block).append(life_pic_block);
-				$(life_category_block).append('<button id="life-cate-del-btn" class="ui-btn ui-corner-all ui-btn-inline orange-btn float-right" type="button" data-life-cat="' + obj.id + '">刪除</button><div class="clearfix"></div>');
+				$(life_category_block).append('<button class="ui-btn ui-corner-all ui-btn-inline orange-btn float-right life-cate-del-btn" type="button" data-life-cat="' + obj.id + '">刪除</button><div class="clearfix"></div>');
 				$(life_category_block).appendTo($('#admin-lifeservice-main'));
 				$('[type="file"]').textinput();
+			});
+			$('.life_category_block a.life-cat-edit-btn').off();
+			$('.life_category_block a.life-cat-edit-btn').click(function(event) {
+				var cat_id = $(this).jqmData("life-cat");
+				currentCatId = cat_id;
+				$.each(adminLifeJson, function(idx, obj) {
+					if (parseInt(obj.id) == currentCatId) {
+						$('#life-cat-edit-form #life_cat').val(obj.title);
+					}
+				});
+
 			});
 			$('.life_category_block a.store-btn').off();
 			$('.life_category_block a.store-btn').click(function(event) {
@@ -208,6 +222,99 @@ $(document).on('pagebeforeshow', "#admin-lifeservice", function() {
 					changeHash: true
 				});
 			});
+			$('.life_category_block .life-cate-del-btn').off();
+			$('.life_category_block .life-cate-del-btn').click(function(event) {
+				var btn = $(this);
+				var cat_id = $(this).jqmData("life-cat");
+				if (confirm('確定刪除此分類？') === true) {
+					$.ajax({
+						url: api_base + 'remove_category.php',
+						type: 'POST',
+						dataType: 'json',
+						data: {
+							cat_id: cat_id
+						}
+					}).done(function(data) {
+						if (data.status) {
+							$(btn).parents('.life_category_block').remove();
+						} else {
+							alert('請重新操作！');
+						}
+					}).fail(function() {
+						alert('請確認您的網路連線狀態！');
+					});
+				}
+			});
+			$('#life-cat-add-form').off();
+			$('#life-cat-add-form').on('submit', function(e) {
+				e.preventDefault(); // prevent native submit
+				$(this).ajaxSubmit({
+					url: api_base + 'add_category.php',
+					data: {
+						type: 'life'
+					},
+					type: 'POST',
+					dataType: 'json',
+					beforeSend: function() {
+						$.mobile.loading('show');
+					},
+					complete: function() {
+						$.mobile.loading('hide');
+					},
+					success: function(data) {
+						if (data.status) {
+							alert(data.message);
+							$("#add_life_category").popup("close");
+							$.mobile.changePage($("#admin-lifeservice"), {
+								allowSamePageTransition: true,
+								reloadPage: true,
+								changeHash: true,
+								transition: "none"
+							});
+						} else {
+							alert(data.message);
+						}
+					},
+					error: function(request, error) {
+						alert('請確認您的網路連線狀態！');
+					}
+				})
+			});
+			$('#life-cat-edit-form').off();
+			$('#life-cat-edit-form').on('submit', function(e) {
+				e.preventDefault(); // prevent native submit
+				$(this).ajaxSubmit({
+					url: api_base + 'edit_life_category.php',
+					data: {
+						cat_id: currentCatId
+					},
+					type: 'POST',
+					dataType: 'json',
+					beforeSend: function() {
+						$.mobile.loading('show');
+					},
+					complete: function() {
+						$.mobile.loading('hide');
+					},
+					success: function(data) {
+						if (data.status) {
+							alert(data.message);
+							$("#edit_life_category").popup("close");
+							$.mobile.changePage($("#admin-lifeservice"), {
+								allowSamePageTransition: true,
+								reloadPage: true,
+								changeHash: true,
+								transition: "none"
+							});
+						} else {
+							alert(data.message);
+						}
+					},
+					error: function(request, error) {
+						alert('請確認您的網路連線狀態！');
+					}
+				})
+			});
 		}
 	}).fail(function() {
 		alert('請確認您的網路連線狀態！');
@@ -218,7 +325,7 @@ $(document).on('pagebeforeshow', "#admin-lifeservice-store", function() {
 		console.log(adminLifeJson);
 		console.log(currentCatId);
 		$('.life_store_block').remove();
-		$.each(adminLifeJson.result, function(idx, obj) {
+		$.each(adminLifeJson, function(idx, obj) {
 			if (obj.id == currentCatId) {
 				$.each(obj.store, function(idx, store) {
 					var life_store_block = $('<div class="life_store_block"></div>').append('<div> <strong class="item_title">店家名稱：</strong><span class="store_title">' + store.name + '</span></div>');
@@ -945,7 +1052,7 @@ $(document).on('pagebeforeshow', "#admin-member", function() {
 			var user = data.result;
 			$('.member-list .list_table tbody').empty();
 			$.each(user, function(idx, obj) {
-				var user_tr = '<tr><td>' + obj.created + '</td><td>' + obj.name + '</td><td><a class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn user-detail-btn" data-user-id="' + obj.id + '">進入</a></td></tr>';
+				var user_tr = '<tr><td>' + obj.created + '</td><td>' + obj.name + '</td><td><a class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn user-detail-btn" data-user-id="' + obj.id + '">查看</a></td></tr>';
 				switch (obj.type) {
 					case '1':
 						$('#normal-table tbody').append(user_tr);
@@ -1019,14 +1126,25 @@ $(document).on('pagebeforeshow', "#admin-member", function() {
 			var user = data.result;
 			$('#not-approved-table tbody').empty();
 			$.each(user, function(idx, obj) {
-				var user_tr = '<tr><td>' + obj.created + '</td><td>' + obj.name + '</td><td><a class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn user-detail-btn" data-user-id="' + obj.id + '">進入</a><button type="button" class="ui-btn ui-corner-all ui-btn-inline ui-mini green-btn user-detail-btn" data-user-id="' + obj.id + '">核准</button></td></tr>';
+				var user_tr = '<tr><td>' + obj.created + '</td><td>' + obj.name + '</td><td><a class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn user-detail-btn" data-user-id="' + obj.id + '">查看</a><button type="button" class="ui-btn ui-corner-all ui-btn-inline ui-mini green-btn user-detail-btn" data-user-id="' + obj.id + '">核准</button></td></tr>';
 				$('#not-approved-table tbody').append(user_tr);
+			});
+			$('.user-detail-btn').off();
+			$('.user-detail-btn').click(function(event) {
+				var user_id = $(this).jqmData("user-id");
+				window.localStorage.setItem('detail_user_id', user_id);
+				currentUserId = user_id;
+				$.mobile.changePage($('#admin-member-detail'), {
+					reloadPage: true,
+					changeHash: true
+				});
 			});
 		}
 	}).fail(function() {
 		alert('請確認您的網路連線狀態！');
 	});
 });
+
 $(document).on('pagebeforeshow', "#admin-member-detail", function() {
 	// var page_id = '#' + $.mobile.activePage.attr('id');
 	$.ajax({
@@ -1034,7 +1152,6 @@ $(document).on('pagebeforeshow', "#admin-member-detail", function() {
 		dataType: 'json'
 	}).success(function(data) {
 		if (data.status) {
-			// $(page_id + ' .upper_block > img, .upper_block >  input[type="image"]').attr('src', img_base + data.result.avatar);
 			$('#m_no').val(data.result.member_id);
 			$('#m_name').html(data.result.name);
 			$('#m_gender').val(data.result.gender);
@@ -1070,6 +1187,193 @@ $(document).on('pagebeforeshow', "#admin-member-detail", function() {
 			// 		$(page_id + ' .plan-during-input').parent().parent().hide();
 			// 	}
 			// }
+		}
+	}).fail(function() {
+		alert('請確認您的網路連線狀態！');
+	});
+
+	$.ajax({
+		url: api_base + 'get_redeem_record.php?user_id=' + window.localStorage.getItem('detail_user_id'),
+		dataType: 'json'
+	}).done(function(data) {
+		if (data.status) {
+			var redeem_list = '';
+			$.each(data.result, function(idx, obj) {
+				redeem_list += '<tr><td>(' + obj.point + ')' + obj.title + obj.description + '</td><td>' + obj.created + '</td> </tr>';
+			});
+			$('#member_redeem_list tbody').append(redeem_list);
+		} else {
+			$('#member_redeem_list').html('<caption>尚無兌換記錄。</caption>');
+		}
+	}).fail(function() {
+		alert('請確認您的網路連線狀態！');
+	});
+});
+
+$(document).on('pagebeforeshow', "#admin-recommend", function() {
+	$.ajax({
+		url: api_base + 'get_referrer_list.php',
+		dataType: 'json'
+	}).done(function(data) {
+		if (data.status) {
+			var ref = data.result;
+			$('#rec_list_table tbody').empty();
+			$.each(ref, function(idx, obj) {
+				var ref_tr = '<tr><td>' + obj.created + '</td><td>' + obj.name + '</td><td><a class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn ref-detail-btn" data-user-id="' + obj.id + '">查看</a></td></tr>';
+				$('#rec_list_table tbody').append(ref_tr);
+
+			});
+			$('.ref-detail-btn').off();
+			$('.ref-detail-btn').click(function(event) {
+				var user_id = $(this).jqmData("user-id");
+				window.localStorage.setItem('ref_user_id', user_id);
+				$.mobile.changePage($('#admin-recommend-detail'), {
+					reloadPage: true,
+					changeHash: true
+				});
+			});
+		}
+	}).fail(function() {
+		alert('請確認您的網路連線狀態！');
+	});
+});
+
+$(document).on('pagebeforeshow', "#admin-recommend-detail", function() {
+	$.ajax({
+		url: api_base + 'get_recommend_list.php?user_id=' + window.localStorage.getItem('ref_user_id'),
+		dataType: 'json'
+	}).done(function(data) {
+		if (data.status) {
+			var rec_list = '';
+			total_point = parseInt(data.total);
+			$('#recommend_total').html(data.total);
+			$.each(data.result, function(idx, obj) {
+				rec_list += '<tr><td>' + obj.name + '</td><td>' + obj.created + '</td></tr>';
+			});
+			$('#member_rec_list tbody').append(rec_list);
+		} else {
+			$('#member_rec_list').html('<caption>未取得推薦清單，請重新操作！</caption>');
+		}
+	}).fail(function() {
+		alert('請確認您的網路連線狀態！');
+	});
+});
+
+$(document).on('pagecreate', "#admin-recommend-redeem", function() {
+	$.ajax({
+		url: api_base + 'get_redeem_item.php',
+		dataType: 'json'
+	}).done(function(data) {
+		if (data.status) {
+			adminRedeemJson = data.result;
+			var redeem_block = '';
+			$('#redeem_list').empty();
+			$.each(data.result, function(idx, obj) {
+				redeem_block = '<div class="redeem_item_block"><div class="ui-field-contain"><label class="item_title" for="redeem_item_title"><strong>禮品標題：</strong></label><span class="redeem_item_title">' + obj.title + '</span></div><div class="redeem-pic-block"><div class="left-block"><div class="ui-field-contain"><label class="item_title" for="redeem_item_description"><strong>禮品內容：</strong></label><span class="redeem_item_description">' + obj.description + '</span></div><div class="ui-field-contain"><label class="item_title" for="redeem_item_point"><strong>扣除點數：</strong></label><span class="redeem_item_point">' + obj.point + '</span></div></div><div class="img-block"><input type="image" class="redeem-pic" src="' + img_base + obj.photo + '" /></div><div class="clearfix"></div></div><button type="button" class="ui-btn ui-corner-all ui-btn-inline float-right orange-btn redeem-del-btn" data-item-id="' + obj.id + '">刪除</button><a href="#edit_redeem_item" class="ui-btn ui-btn-inline purple-btn ui-corner-all float-right redeem-edit-btn" data-rel="popup" data-item-id="' + obj.id + '">編輯</a><div class="clearfix"></div></div>';
+				$('#redeem_list').append(redeem_block);
+			});
+
+			$('.redeem_item_block a.redeem-edit-btn').off();
+			$('.redeem_item_block a.redeem-edit-btn').click(function(event) {
+				currentItemId = $(this).jqmData("item-id");
+				$.each(adminRedeemJson, function(idx, obj) {
+					if (parseInt(obj.id) == currentItemId) {
+						$('#redeem-edit-form #redeem_title').val(obj.title);
+						$('#redeem-edit-form #redeem_description').val(obj.description);
+						$('#redeem-edit-form #redeem_point').val(obj.point);
+						// $('#redeem-edit-form #plan_content').val(obj.redeem_point);
+					}
+				});
+			});
+
+			$('.redeem_item_block .redeem-del-btn').off();
+			$('.redeem_item_block .redeem-del-btn').click(function(event) {
+				var btn = $(this);
+				var item_id = $(this).jqmData("item-id");
+				// console.log(item_id);
+				if (confirm('確定刪除此禮品？') === true) {
+					$.ajax({
+						url: api_base + 'remove_redeem_item.php',
+						type: 'POST',
+						dataType: 'json',
+						data: {
+							item_id: item_id
+						}
+					}).done(function(data) {
+						if (data.status) {
+							$(btn).parents('.redeem_item_block').remove();
+						} else {
+							alert('請重新操作！');
+						}
+					}).fail(function() {
+						alert('請確認您的網路連線狀態！');
+					});
+				}
+			});
+			$('#redeem-edit-form').off();
+			$('#redeem-edit-form').on('submit', function(e) {
+				e.preventDefault(); // prevent native submit
+				// var plan_id = $(this).jqmData("plan-id");
+				$(this).ajaxSubmit({
+					url: api_base + 'edit_redeem_item.php',
+					data: {
+						item_id: currentItemId
+					},
+					type: 'POST',
+					dataType: 'json',
+					beforeSend: function() {
+						$.mobile.loading('show');
+					},
+					complete: function() {
+						$.mobile.loading('hide');
+					},
+					success: function(data) {
+						$("#edit_redeem_item").popup("close");
+						alert(data.message);
+						if (data.status) {
+							$.mobile.changePage($('#admin-recommend-redeem'), {
+								allowSamePageTransition: true,
+								reloadPage: true,
+								changeHash: true,
+								transition: "none"
+							});
+						}
+					},
+					error: function(request, error) {
+						alert('請確認您的網路連線狀態！');
+					}
+				});
+			});
+			$('#redeem-add-form').off();
+			$('#redeem-add-form').on('submit', function(e) {
+				e.preventDefault(); // prevent native submit
+				$(this).ajaxSubmit({
+					url: api_base + 'add_redeem_item.php',
+					type: 'POST',
+					dataType: 'json',
+					beforeSend: function() {
+						$.mobile.loading('show');
+					},
+					complete: function() {
+						$.mobile.loading('hide');
+					},
+					success: function(data) {
+						$("#add_redeem_item").popup("close");
+						alert(data.message);
+						if (data.status) {
+							$.mobile.changePage($('#admin-recommend-redeem'), {
+								allowSamePageTransition: true,
+								reloadPage: true,
+								changeHash: true,
+								transition: "none"
+							});
+						}
+					},
+					error: function(request, error) {
+						alert('請確認您的網路連線狀態！');
+					}
+				});
+			});
 		}
 	}).fail(function() {
 		alert('請確認您的網路連線狀態！');

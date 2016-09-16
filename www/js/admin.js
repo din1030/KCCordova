@@ -8,6 +8,7 @@ var adminPlanJson = '';
 var currentPlanId;
 var adminRedeemJson = '';
 var currentItemId;
+var adminRecJson = '';
 
 $(document).one("pagebeforeshow", "[data-role='page']", function() {
 	if (window.localStorage.getItem('auth') != '0' && window.localStorage.getItem('auth') != '100') {
@@ -204,8 +205,9 @@ $(document).on('pagebeforeshow', "#admin-lifeservice", function() {
 			$('.life_category_block a.life-cat-edit-btn').off();
 			$('.life_category_block a.life-cat-edit-btn').click(function(event) {
 				var cat_id = $(this).jqmData("life-cat");
+				currentCatId = cat_id;
 				$.each(adminLifeJson, function(idx, obj) {
-					if (parseInt(obj.id) == cat_id) {
+					if (parseInt(obj.id) == currentCatId) {
 						$('#life-cat-edit-form #life_cat').val(obj.title);
 					}
 				});
@@ -225,7 +227,6 @@ $(document).on('pagebeforeshow', "#admin-lifeservice", function() {
 			$('.life_category_block .life-cate-del-btn').click(function(event) {
 				var btn = $(this);
 				var cat_id = $(this).jqmData("life-cat");
-				currentCatId = cat_id;
 				if (confirm('確定刪除此分類？') === true) {
 					$.ajax({
 						url: api_base + 'remove_category.php',
@@ -1211,15 +1212,16 @@ $(document).on('pagebeforeshow', "#admin-member-detail", function() {
 });
 
 $(document).on('pagebeforeshow', "#admin-recommend", function() {
+	// var ref = '';
 	$.ajax({
 		url: api_base + 'get_referrer_list.php',
 		dataType: 'json'
 	}).done(function(data) {
 		if (data.status) {
-			var ref = data.result;
+			adminRecJson = data.result;
 			$('#rec_list_table tbody').empty();
-			$.each(ref, function(idx, obj) {
-				var ref_tr = '<tr><td>' + obj.created + '</td><td>' + obj.name + '</td><td><a class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn ref-detail-btn" data-user-id="' + obj.id + '">查看</a></td></tr>';
+			$.each(adminRecJson, function(idx, obj) {
+				var ref_tr = '<tr><td>' + obj.created + '</td><td>' + obj.name + '</td><td><a class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn ref-detail-btn" data-user-id="' + obj.id + '" data-country="' + obj.country + '" data-area="' + obj.area + '">查看</a></td></tr>';
 				$('#rec_list_table tbody').append(ref_tr);
 
 			});
@@ -1230,6 +1232,24 @@ $(document).on('pagebeforeshow', "#admin-recommend", function() {
 				$.mobile.changePage($('#admin-recommend-detail'), {
 					reloadPage: true,
 					changeHash: true
+				});
+			});
+			$('#admin-recommend #area-select').change(function(event) {
+				$('#rec_list_table tbody').empty();
+				$.each(adminRecJson, function(idx, obj) {
+					if (obj.country == $('#admin-recommend country-select').val() && obj.area == $('#admin-recommend area-select').val()) {
+						var ref_tr = '<tr><td>' + obj.created + '</td><td>' + obj.name + '</td><td><a class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn ref-detail-btn" data-user-id="' + obj.id + '" data-country="' + obj.country + '" data-area="' + obj.area + '">查看</a></td></tr>';
+						$('#rec_list_table tbody').append(ref_tr);
+					}
+				});
+				$('.ref-detail-btn').off();
+				$('.ref-detail-btn').click(function(event) {
+					var user_id = $(this).jqmData("user-id");
+					window.localStorage.setItem('ref_user_id', user_id);
+					$.mobile.changePage($('#admin-recommend-detail'), {
+						reloadPage: true,
+						changeHash: true
+					});
 				});
 			});
 		}

@@ -42,15 +42,11 @@
                     <div class="ui-field-contain">
                         <label class="area_title" for="country-select">國家</label>
                         <select name="country-select" class="country-select" id="country-select" data-inline="true" data-mini="true">
-                            <!-- <option value="small">台灣</option>
-                            <option value="medium">中國</option>
-                            <option value="large">日本</option> -->
+                            <!-- dynamic content -->
                         </select>
                         <label class="area_title" for="area-select">地區</label>
                         <select name="area-select" class="area-select" id="area-select" data-inline="true" data-mini="true">
-                            <!-- <option value="small">台北</option>
-                            <option value="medium">台南</option>
-                            <option value="large">高雄</option> -->
+                            <!-- dynamic content -->
                         </select>
                     </div>
                 </div>
@@ -272,6 +268,19 @@
                         </select>
                     </div>
                 </div>
+                <div class="">
+                    <div style="font-size:18px;color:#AA3C89">禮品兌換記錄</div>
+                    <table id="member_redeem_list" class="record_list_table">
+                        <thead>
+                            <tr>
+                                <th>兌換項目</th>
+                                <th>兌換時間</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
                 <!-- <div class="">
                     <button id="admin-member-submit-btn" type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn">送出</button>
                 </div> -->
@@ -438,15 +447,11 @@
                     <div class="ui-field-contain">
                         <label class="area_title" for="select-native-1">國家</label>
                         <select class="country-select" name="select-native-1" id="select-native-1" data-inline="true" data-mini="true">
-                            <!-- <option value="">台灣</option>
-                            <option value="">中國</option>
-                            <option value="">日本</option> -->
+                            <!-- dynamic content -->
                         </select>
                         <label class="area_title" for="select-native-2">地區</label>
                         <select class="area-select" name="select-native-2" id="select-native-2" data-inline="true" data-mini="true">
-                            <!-- <option value="">台北</option>
-                            <option value="">台南</option>
-                            <option value="">高雄</option> -->
+                            <!-- dynamic content -->
                         </select>
                     </div>
                 </div>
@@ -457,35 +462,35 @@
                 <!-- dynamic content -->
             </div>
             <div id="add_life_category" class="msg-popup ui-corner-all" data-role="popup" data-position-to="window" data-transition="pop" data-theme="none" data-shadow="false" data-overlay-theme="b" data-dismissible="false">
-                <form>
+                <form id="life-cat-add-form" enctype="multipart/form-data">
                     <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
                     <div style="padding:10px 20px;">
                         <h3>新增分類</h3>
                         <div style="color:white;">
                             分類名稱：
                         </div>
-                        <input type="text" name="club_cat" class="" id="club_cat" value="">
+                        <input type="text" name="title" class="" id="life_cat" value="">
                         <div style="color:white;">
                             圖片：
                         </div>
-                        <input type="file" name="name" value="">
+                        <input type="file" name="life_pic" value="">
                         <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn send-btn">送出</button>
                     </div>
                 </form>
             </div>
             <div id="edit_life_category" class="msg-popup ui-corner-all" data-role="popup" data-position-to="window" data-transition="pop" data-theme="none" data-shadow="false" data-overlay-theme="b" data-dismissible="false">
-                <form>
+                <form id="life-cat-edit-form" enctype="multipart/form-data">
                     <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
                     <div style="padding:10px 20px;">
                         <h3>編輯分類</h3>
                         <div style="color:white;">
                             分類名稱：
                         </div>
-                        <input type="text" name="club_cat" class="" id="club_cat" value="">
+                        <input type="text" name="title" class="" id="life_cat" value="">
                         <div style="color:white;">
                             圖片：
                         </div>
-                        <input type="file" name="name" value="">
+                        <input type="file" name="life_pic" value="">
                         <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn send-btn">送出</button>
                     </div>
                 </form>
@@ -716,15 +721,11 @@
                     <div class="ui-field-contain">
                         <label class="area_title" for="select-native-1">國家</label>
                         <select class="country-select" id="select-native-1" data-inline="true" data-mini="true">
-                            <!-- <option value="">台灣</option>
-                            <option value="">中國</option>
-                            <option value="">日本</option> -->
+                            <!-- dynamic content -->
                         </select>
                         <label class="area_title" for="area-select">地區</label>
                         <select class="area-select" name="area-select" id="area-select" data-inline="true" data-mini="true">
-                            <!-- <option value="">台北</option>
-                            <option value="">台南</option>
-                            <option value="">高雄</option> -->
+                            <!-- dynamic content -->
                         </select>
                     </div>
                 </div>
@@ -734,13 +735,15 @@
                         <li class="ui-block-b"><a href="#admin-recommend-redeem" class="ui-btn">兌換禮品管理</a></li>
                     </ul>
                 </div>
-                <div id="record_list" class="ui-body-d ui-content member-list">
+                <div id="" class="ui-body-d ui-content member-list">
                     <div class="list_search">
-                        <label class="area_title" for="textinput-1">搜尋名單</label>
-                        <input type="text" name="search" class="" id="search" placeholder="姓名或時間" data-inline="true">
-                        <!-- <button type="submit" id="submit-1" class="ui-btn ui-corner-all purple-btn">GO</button> -->
+                        <label class="area_title" for="search">搜尋名單</label>
+                        <form>
+                            <input type="text" name="search" class="" id="rec-search" placeholder="姓名或時間" data-inline="true" data-type="search">
+                        </form>
                     </div>
-                    <table class="list_table">
+                    <table id="rec_list_table" class="record_list_table" data-filter="true" data-input="#rec-search">
+                        <caption>推薦人列表</caption>
                         <thead>
                             <tr>
                                 <th>註冊時間</th>
@@ -749,20 +752,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>2016/07/14 20:15</td>
-                                <td>翁水噹</td>
-                                <td>
-                                    <a href="#admin-recommend-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2016/07/14 20:15</td>
-                                <td>翁水噹</td>
-                                <td>
-                                    <a href="#admin-recommend-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                </td>
-                            </tr>
+                            <!-- dynamic content -->
                         </tbody>
                     </table>
                 </div>
@@ -777,6 +767,9 @@
                         <div id="menu-btn" class="header-btn header-link left-link"></div>
                     </a>
                     <span class="page-title">管理者後台</span>
+                    <a href="#admin-recommend" class="ui-link">
+                        <div class="header-btn header-link right-link" style="width:auto">返回</div>
+                    </a>
                 </div>
             </div>
             <!-- /header -->
@@ -794,37 +787,20 @@
                         <option value="./admin.html#admin-category">分類管理</option>
                     </select>
                 </div>
-                <div class="ui-navbar" role="navigation">
-                    <ul id="rec_page" class="page-content-nav ui-grid-a">
-                        <li class="ui-block-a"><a href="#admin-recommend" data-ajax="false" class="ui-btn active">推薦記錄名單</a></li>
-                        <li class="ui-block-b"><a href="#admin-recommend-redeem" class="ui-btn">兌換禮品管理</a></li>
-                    </ul>
-                </div>
-                <span class="float-left" style="font-size:20px;font-weight:bold;margin-top:8px;">翁水噹</span>
-                <button type="button" id="download_record_list" class="ui-btn ui-btn-inline ui-corner-all purple-btn float-right">下載明細</button>
-                <div class="clearfix"></div>
+                <p style="font-size:20px;font-weight:bold;">翁水噹</p>
+                <!-- <button type="button" id="download_record_list" class="ui-btn ui-btn-inline ui-corner-all purple-btn float-right">下載明細</button> -->
+                <!-- <div class="clearfix"></div> -->
                 <div id="" class="ui-body-d ui-content member-list">
-                    <div style="font-size:18px;color:#AA3C89">兌換記錄</div>
-                    <table class="list_table">
+                    <div style="font-size:18px;color:#AA3C89">推薦清單(共 <span id="recommend_total"></span> 人)</div>
+                    <table id="member_rec_list" class="record_list_table">
+                        <thead>
+                            <tr>
+                                <th>被推薦人</th>
+                                <th>註冊時間</th>
+                            </tr>
+                        </thead>
                         <tbody>
-                            <tr>
-                                <td>(10)屈臣氏1000元禮券</td>
-                                <td>兌換時間：2016/07/14 20:15</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <br>
-                    <div style="font-size:18px;color:#AA3C89">推薦清單(共 15 人)</div>
-                    <table class="list_table">
-                        <tbody>
-                            <tr>
-                                <td>翁水噹</td>
-                                <td>註冊時間：2016/07/14 20:15</td>
-                            </tr>
-                            <tr>
-                                <td>翁水噹</td>
-                                <td>註冊時間：2016/07/14 20:15</td>
-                            </tr>
+                            <!-- dynamic content -->
                         </tbody>
                     </table>
                 </div>
@@ -856,22 +832,18 @@
                         <option value="./admin.html#admin-category">分類管理</option>
                     </select>
                 </div>
-                <div class="area_block">
+                <!-- <div class="area_block">
                     <div class="ui-field-contain">
                         <label class="area_title" for="select-native-1">國家</label>
-                        <select class="country-select" id="select-native-1" data-inline="true" data-mini="true">
-                            <!-- <option value="">台灣</option>
-                            <option value="">中國</option>
-                            <option value="">日本</option> -->
-                        </select>
+                        <select class="country-select" id="select-native-1" data-inline="true" data-mini="true"> -->
+                <!-- dynamic content -->
+                <!-- </select>
                         <label class="area_title" for="area-select">地區</label>
-                        <select class="area-select" name="area-select" id="area-select" data-inline="true" data-mini="true">
-                            <!-- <option value="">台北</option>
-                            <option value="">台南</option>
-                            <option value="">高雄</option> -->
-                        </select>
+                        <select class="area-select" name="area-select" id="area-select" data-inline="true" data-mini="true"> -->
+                <!-- dynamic content -->
+                <!-- </select>
                     </div>
-                </div>
+                </div> -->
                 <div class="ui-navbar" role="navigation">
                     <ul id="rec_page" class="page-content-nav ui-grid-a">
                         <li class="ui-block-a"><a href="#admin-recommend" class="ui-btn">推薦記錄名單</a></li>
@@ -882,101 +854,56 @@
                     新增禮品
                 </a>
                 <div class="clearfix"></div>
-                <div class="redeem_item_block">
-                    <div class="ui-field-contain">
-                        <label class="item_title" for="redeem_item"><strong>禮品名稱：</strong></label>
-                        <input type="text" name="redeem_item" class="" id="redeem_item" value="全聯禮券100元">
-                    </div>
-                    <div class="redeem-pic-block">
-                        <div class="left-block">
-                            <div class="ui-field-contain">
-                                <label class="item_title" for=""><strong>扣除點數：</strong></label>
-                                <input type="text" name="" class="" id="" value="10">
-                            </div>
-                        </div>
-                        <div class="img-block">
-                            <input type="image" class="redeem-pic" src="./img/redeem_item.jpg" />
-                            <input type="file" class="redeem-pic-input" />
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
+                <div id="redeem_list">
+                    <!-- dynamic content -->
                 </div>
-                <div class="redeem_item_block">
-                    <div class="ui-field-contain">
-                        <label class="item_title" for="redeem_item"><strong>禮品名稱：</strong></label>
-                        <input type="text" name="redeem_item" class="" id="redeem_item" value="全聯禮券100元">
-                    </div>
-                    <div class="redeem-pic-block">
-                        <div class="left-block">
-                            <div class="ui-field-contain">
-                                <label class="item_title" for=""><strong>扣除點數：</strong></label>
-                                <input type="text" name="" class="" id="" value="15">
-                            </div>
-                        </div>
-                        <div class="img-block">
-                            <input type="image" class="redeem-pic" src="./img/redeem_item.jpg" />
-                            <input type="file" class="redeem-pic-input" />
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-                <div class="redeem_item_block">
-                    <div class="ui-field-contain">
-                        <label class="item_title" for="redeem_item"><strong>禮品名稱：</strong></label>
-                        <input type="text" name="redeem_item" class="" id="redeem_item" value="全聯禮券100元">
-                    </div>
-                    <div class="redeem-pic-block">
-                        <div class="left-block">
-                            <div class="ui-field-contain">
-                                <label class="item_title" for=""><strong>扣除點數：</strong></label>
-                                <input type="text" name="" class="" id="" value="20">
-                            </div>
-                        </div>
-                        <div class="img-block">
-                            <input type="image" class="redeem-pic" src="./img/redeem_item.jpg" />
-                            <input type="file" class="redeem-pic-input" />
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-                <div class="redeem_item_block">
-                    <div class="ui-field-contain">
-                        <label class="item_title" for="redeem_item"><strong>禮品名稱：</strong></label>
-                        <input type="text" name="redeem_item" class="" id="redeem_item" value="全聯禮券100元">
-                    </div>
-                    <div class="redeem-pic-block">
-                        <div class="left-block">
-                            <div class="ui-field-contain">
-                                <label class="item_title" for=""><strong>扣除點數：</strong></label>
-                                <input type="text" name="" class="" id="" value="20">
-                            </div>
-                        </div>
-                        <div class="img-block">
-                            <input type="image" class="redeem-pic" src="./img/redeem_item.jpg" />
-                            <input type="file" class="redeem-pic-input" />
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-                <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn">完成</button>
             </div>
             <div id="add_redeem_item" class="msg-popup ui-corner-all" data-role="popup" data-position-to="window" data-transition="pop" data-theme="none" data-shadow="false" data-overlay-theme="b" data-dismissible="false">
-                <form>
+                <form id="redeem-add-form" enctype="multipart/form-data">
                     <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
                     <div style="padding:10px 20px;">
                         <h3>新增禮品</h3>
                         <div style="color:white;">
-                            禮品名稱：
+                            禮品標題：
                         </div>
-                        <input type="text" name="club_cat" class="" id="club_cat" value="" required="">
+                        <input type="text" name="redeem_title" class="" id="redeem_title" value="" required="">
+                        <div style="color:white;">
+                            禮品內容：
+                        </div>
+                        <input type="text" name="redeem_description" class="" id="redeem_description" value="" required="">
                         <div style="color:white;">
                             扣除點數：
                         </div>
-                        <input type="text" name="club_cat" class="" id="club_cat" value="" required="">
+                        <input type="text" name="redeem_point" class="" id="redeem_point" value="" required="">
                         <div style="color:white;">
                             圖片：
                         </div>
-                        <input type="file" name="name" value="" required="">
+                        <input type="file" name="redeem_pic" value="" required="">
+                        <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn send-btn">送出</button>
+                    </div>
+                </form>
+            </div>
+            <div id="edit_redeem_item" class="msg-popup ui-corner-all" data-role="popup" data-position-to="window" data-transition="pop" data-theme="none" data-shadow="false" data-overlay-theme="b" data-dismissible="false">
+                <form id="redeem-edit-form" enctype="multipart/form-data">
+                    <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+                    <div style="padding:10px 20px;">
+                        <h3>編輯禮品項目</h3>
+                        <div style="color:white;">
+                            禮品標題：
+                        </div>
+                        <input type="text" name="redeem_title" class="" id="redeem_title" value="" required="">
+                        <div style="color:white;">
+                            禮品內容：
+                        </div>
+                        <input type="text" name="redeem_description" class="" id="redeem_description" value="" required="">
+                        <div style="color:white;">
+                            扣除點數：
+                        </div>
+                        <input type="text" name="redeem_point" class="" id="redeem_point" value="" required="">
+                        <div style="color:white;">
+                            圖片：
+                        </div>
+                        <input type="file" name="redeem_pic" value="">
                         <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn send-btn">送出</button>
                     </div>
                 </form>
@@ -1135,6 +1062,8 @@
                 <div class="clearfix"></div>
                 <!-- dynamic content -->
                 <form id="pay-method-form" class="policy-form" data-policy="pay_method">
+                    <label for="pay_method" class="item_title"><strong>付款方式編輯：</strong></label>
+                    <textarea name="policy_content" id="pay_method" rows="4" class="text-justify" requi="pay-method-form" class="policy-form" data-policy="pay_method">
                     <label for="pay_method" class="item_title"><strong>付款方式編輯：</strong></label>
                     <textarea name="policy_content" id="pay_method" rows="4" class="text-justify" required=""></textarea>
                     <button id="plan-submit-btn" class="ui-btn ui-corner-all" type="submit">修改付款方式</button>
