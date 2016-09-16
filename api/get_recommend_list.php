@@ -13,9 +13,9 @@ $sql = $mysqli->query($sql_string);
 if ($sql->num_rows > 0) {
     while ($r = mysqli_fetch_assoc($sql)) {
         $r['created'] = date('Y/m/d H:i', strtotime($r['created']));
+        $output['ref_name'] = $r['ref_name'];
         $output[] = $r;
     }
-    $output['ref_name'] = $r['ref_name'];
     echo json_encode(array('status' => true, 'total' => $sql->num_rows, 'result' => $output));
 
     return;
