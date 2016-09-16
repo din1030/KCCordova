@@ -62,13 +62,12 @@ $(document).on('pagebeforeshow', "#redeem", function() {
 			$('.recommend_count').html(remain_point);
 			// $('.recommend_count').html((remain_point > 0) ? remain_point : 0);
 			$.each(data.result, function(idx, obj) {
-				redeem_block = '<div class="detail_block redeem_item_block"><div class="ui-bar ui-bar-a"><h3>' + obj.title + '</h3></div><div class="ui-body ui-body-a"><div class="float-left text-center"><button type="button" class="ui-btn ui-corner-all no-bg-bd purple-btn redeem-btn" data-item-id="' + obj.id + '" data-point="' + obj.point + '">確定兌換</button>' + obj.description + '<br> (' + obj.point + ')</div><div class="redeem_pic float-right" style="background-image:url(' + img_base + obj.photo + ')"></div></div></div>';
+				redeem_block = '<div class="detail_block redeem_item_block"><div class="ui-bar ui-bar-a"><h3>' + obj.title + '</h3></div><div class="ui-body ui-body-a"><div class="float-left text-center"><button type="button" class="ui-btn ui-corner-all no-bg-bd purple-btn redeem-btn" data-item-id="' + obj.id + '" data-point="' + obj.point + '">確定兌換</button>' + obj.description + '<br> (' + obj.point + ')</div><div class="redeem_pic float-right" style="background-image:url(\'' + img_base + obj.photo + '\')"></div></div></div>';
 				$('#redeem-main').append(redeem_block);
 			});
 			// 兌換提示
-			var redeem_item = 'XXXX';
 			var success_mask = '<div style="display:block;" class="page_mask text-center" data-position-to="window" data-dismissible="true"><a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a><p>兌換成功！<br>感謝您推薦朋友使用 Kelly Club!</p></div>';
-			var fail_mask = '<div style="display:block;" class="page_mask text-center" data-position-to="window" data-dismissible="true"><a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a><p>很抱歉！<br>您的點數不足，快推薦朋友使用 Kelly Club 獲取點數吧！</p></div>';
+			var fail_mask = '<div style="display:block;" class="page_mask text-center" data-position-to="window" data-dismissible="true"><a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a><p style="padding: 0 40px;">很抱歉！<br>您的點數不足，快推薦朋友使用 Kelly Club 獲取點數吧！</p></div>';
 			// remain_point = 15;
 			$(".redeem-btn").click(function(event) {
 				var item_id = $(this).jqmData('item-id');

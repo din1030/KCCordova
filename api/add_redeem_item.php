@@ -18,11 +18,11 @@ if ($mysqli->query($insert_string)) {
     $new_filename = 'redeem_'.$last_id.'_'.basename($_FILES['redeem_pic']['name']);
     $target_file = $target_dir.$new_filename;
     if (move_uploaded_file($_FILES['redeem_pic']['tmp_name'], $target_file)) {
-        $pic_string = "UPDATE `redeem` SET `pic`='$new_filename' WHERE `id`=$last_id";
+        $pic_string = "UPDATE `redeem` SET `photo`='$new_filename' WHERE `id`=$last_id";
         $mysqli->query($pic_string);
     }
 
-    $output = array('status' => true, 'message' => '已新增最新消息！');
+    $output = array('status' => true, 'message' => '已新增兌換禮品！');
     echo json_encode($output);
 
     return;

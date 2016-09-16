@@ -189,16 +189,26 @@ $(document).on('pagebeforeshow', "#admin-lifeservice", function() {
 		dataType: 'json'
 	}).success(function(data) {
 		if (data.status) {
-			adminLifeJson = data;
+			adminLifeJson = data.result;
 			// console.log(dataJson);
 			$.each(data.result, function(idx, obj) {
 				var life_category_block = $('<div class="life_category_block"></div>').append('<div> <strong class="item_title">分類名稱：</strong><span class="cat_title">' + obj.title + '</span></div>');
-				var life_pic_block = $('<div class="life-pic-block"></div>').append('<div class="left-block text-center"> <a href="#edit_life_category" class="ui-btn ui-btn-inline ui-corner-all green-btn" data-rel="popup" data-life-cat="' + obj.id + '"> 編輯分類 </a> <br> <a class="ui-btn ui-btn-inline ui-corner-all green-btn store-btn" data-life-cat="' + obj.id + '"> 分類店家清單 </a> </div> <div class="img-block"> <input type="image" class="life-pic" src="' +
+				var life_pic_block = $('<div class="life-pic-block"></div>').append('<div class="left-block text-center"> <a href="#edit_life_category" class="ui-btn ui-btn-inline ui-corner-all green-btn life-cat-edit-btn" data-rel="popup" data-life-cat="' + obj.id + '"> 編輯分類 </a> <br> <a class="ui-btn ui-btn-inline ui-corner-all green-btn store-btn" data-life-cat="' + obj.id + '"> 分類店家清單 </a> </div> <div class="img-block"> <input type="image" class="life-pic" src="' +
 					img_base + obj.pic + '" /> <input type="file" class="life-pic-input" /> </div> <div class="clearfix"></div>');
 				$(life_category_block).append(life_pic_block);
-				$(life_category_block).append('<button id="life-cate-del-btn" class="ui-btn ui-corner-all ui-btn-inline orange-btn float-right" type="button" data-life-cat="' + obj.id + '">刪除</button><div class="clearfix"></div>');
+				$(life_category_block).append('<button class="ui-btn ui-corner-all ui-btn-inline orange-btn float-right life-cate-del-btn" type="button" data-life-cat="' + obj.id + '">刪除</button><div class="clearfix"></div>');
 				$(life_category_block).appendTo($('#admin-lifeservice-main'));
 				$('[type="file"]').textinput();
+			});
+			$('.life_category_block a.life-cat-edit-btn').off();
+			$('.life_category_block a.life-cat-edit-btn').click(function(event) {
+				var cat_id = $(this).jqmData("life-cat");
+				$.each(adminLifeJson, function(idx, obj) {
+					if (parseInt(obj.id) == cat_id) {
+						$('#life-cat-edit-form #life_cat').val(obj.title);
+					}
+				});
+
 			});
 			$('.life_category_block a.store-btn').off();
 			$('.life_category_block a.store-btn').click(function(event) {
@@ -210,6 +220,61 @@ $(document).on('pagebeforeshow', "#admin-lifeservice", function() {
 					changeHash: true
 				});
 			});
+			$('.life_category_block .life-cate-del-btn').off();
+			$('.life_category_block .life-cate-del-btn').click(function(event) {
+				var btn = $(this);
+				var cat_id = $(this).jqmData("life-cat");
+				if (confirm('確定刪除此分類？') === true) {
+					$.ajax({
+						url: api_base + 'remove_category.php',
+						type: 'POST',
+						dataType: 'json',
+						data: {
+							cat_id: cat_id
+						}
+					}).done(function(data) {
+						if (data.status) {
+							$(btn).parents('.life_category_block').remove();
+						} else {
+							alert('請重新操作！');
+						}
+					}).fail(function() {
+						alert('請確認您的網路連線狀態！');
+					});
+				}
+			});
+			$('#life-cat-add-form').off();
+			$('#life-cat-add-form').on('submit', function(e) {
+				e.preventDefault(); // prevent native submit
+				$(this).ajaxSubmit({
+					url: api_base + 'add_category.php',
+					data: {
+						type: 'life'
+					},
+					type: 'POST',
+					dataType: 'json',
+					beforeSend: function() {
+						$.mobile.loading('show');
+					},
+					complete: function() {
+						$.mobile.loading('hide');
+					},
+					success: function(data) {
+						if (data.status) {
+							alert(data.message);
+							$.mobile.changePage($("#admin-lifeservice-store"), {
+								reloadPage: true,
+								changeHash: true
+							});
+						} else {
+							alert(data.message);
+						}
+					},
+					error: function(request, error) {
+						alert('請確認您的網路連線狀態！');
+					}
+				})
+			});
 		}
 	}).fail(function() {
 		alert('請確認您的網路連線狀態！');
@@ -220,7 +285,7 @@ $(document).on('pagebeforeshow', "#admin-lifeservice-store", function() {
 		console.log(adminLifeJson);
 		console.log(currentCatId);
 		$('.life_store_block').remove();
-		$.each(adminLifeJson.result, function(idx, obj) {
+		$.each(adminLifeJson, function(idx, obj) {
 			if (obj.id == currentCatId) {
 				$.each(obj.store, function(idx, store) {
 					var life_store_block = $('<div class="life_store_block"></div>').append('<div> <strong class="item_title">店家名稱：</strong><span class="store_title">' + store.name + '</span></div>');
@@ -1226,7 +1291,7 @@ $(document).on('pagecreate', "#admin-recommend-redeem", function() {
 						$("#edit_redeem_item").popup("close");
 						alert(data.message);
 						if (data.status) {
-							$.mobile.changePage($('#admin-plan'), {
+							$.mobile.changePage($('#admin-recommend-redeem'), {
 								allowSamePageTransition: true,
 								reloadPage: true,
 								changeHash: true,
@@ -1256,7 +1321,7 @@ $(document).on('pagecreate', "#admin-recommend-redeem", function() {
 						$("#add_redeem_item").popup("close");
 						alert(data.message);
 						if (data.status) {
-							$.mobile.changePage($('#admin-plan'), {
+							$.mobile.changePage($('#admin-recommend-redeem'), {
 								allowSamePageTransition: true,
 								reloadPage: true,
 								changeHash: true,

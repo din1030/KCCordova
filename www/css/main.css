@@ -588,6 +588,8 @@ div[id|=admin] .category-block {
 }
 .redeem_item_block label {
   margin: 0;
+  display: inline-block;
+  width: auto;
 }
 .redeem-pic-block {
   border-bottom: 1px solid;
