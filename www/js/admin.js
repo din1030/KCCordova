@@ -191,6 +191,7 @@ $(document).on('pagebeforeshow', "#admin-lifeservice", function() {
 		if (data.status) {
 			adminLifeJson = data.result;
 			// console.log(dataJson);
+			$('.life_category_block').remove();
 			$.each(data.result, function(idx, obj) {
 				var life_category_block = $('<div class="life_category_block"></div>').append('<div> <strong class="item_title">分類名稱：</strong><span class="cat_title">' + obj.title + '</span></div>');
 				var life_pic_block = $('<div class="life-pic-block"></div>').append('<div class="left-block text-center"> <a href="#edit_life_category" class="ui-btn ui-btn-inline ui-corner-all green-btn life-cat-edit-btn" data-rel="popup" data-life-cat="' + obj.id + '"> 編輯分類 </a> <br> <a class="ui-btn ui-btn-inline ui-corner-all green-btn store-btn" data-life-cat="' + obj.id + '"> 分類店家清單 </a> </div> <div class="img-block"> <input type="image" class="life-pic" src="' +
@@ -224,6 +225,7 @@ $(document).on('pagebeforeshow', "#admin-lifeservice", function() {
 			$('.life_category_block .life-cate-del-btn').click(function(event) {
 				var btn = $(this);
 				var cat_id = $(this).jqmData("life-cat");
+				currentCatId = cat_id;
 				if (confirm('確定刪除此分類？') === true) {
 					$.ajax({
 						url: api_base + 'remove_category.php',
@@ -262,9 +264,47 @@ $(document).on('pagebeforeshow', "#admin-lifeservice", function() {
 					success: function(data) {
 						if (data.status) {
 							alert(data.message);
-							$.mobile.changePage($("#admin-lifeservice-store"), {
+							$("#add_life_category").popup("close");
+							$.mobile.changePage($("#admin-lifeservice"), {
+								allowSamePageTransition: true,
 								reloadPage: true,
-								changeHash: true
+								changeHash: true,
+								transition: "none"
+							});
+						} else {
+							alert(data.message);
+						}
+					},
+					error: function(request, error) {
+						alert('請確認您的網路連線狀態！');
+					}
+				})
+			});
+			$('#life-cat-edit-form').off();
+			$('#life-cat-edit-form').on('submit', function(e) {
+				e.preventDefault(); // prevent native submit
+				$(this).ajaxSubmit({
+					url: api_base + 'edit_life_category.php',
+					data: {
+						cat_id: currentCatId
+					},
+					type: 'POST',
+					dataType: 'json',
+					beforeSend: function() {
+						$.mobile.loading('show');
+					},
+					complete: function() {
+						$.mobile.loading('hide');
+					},
+					success: function(data) {
+						if (data.status) {
+							alert(data.message);
+							$("#edit_life_category").popup("close");
+							$.mobile.changePage($("#admin-lifeservice"), {
+								allowSamePageTransition: true,
+								reloadPage: true,
+								changeHash: true,
+								transition: "none"
 							});
 						} else {
 							alert(data.message);
