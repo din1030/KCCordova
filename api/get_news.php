@@ -6,8 +6,12 @@ header('Access-Control-Allow-Methods: GET, POST');
 include 'db_setting.php';
 
 $news_id = $_GET['news_id'];
+$type = $_GET['type'];
 
-$sql_string = 'SELECT * FROM `news` WHERE NOW() BETWEEN `start_date` AND `end_date`';
+$sql_string = 'SELECT * FROM `news` WHERE 1';
+if ($type != 'all') {
+    $sql_string .= ' AND NOW() BETWEEN `start_date` AND `end_date`';
+}
 if (!empty($news_id)) {
     $sql_string .= " AND `id`=$news_id LIMIT 1";
 } else {

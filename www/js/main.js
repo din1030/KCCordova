@@ -18,13 +18,13 @@ $(document).ready(function() {
 $(document).on("pagebeforeshow", "[data-role='page']", function() {
 	// Each of the four pages in this demo has a data-title attribute
 	// which value is equal to the text of the nav button
-	// For example, on first page: <div data-role="page" data-title="Info">
-	var current = $(this).jqmData("title");
+	// For example, on first page: <div data-role="page" data-page="Info">
+	var current = $(this).jqmData("page");
 	// Remove active class from nav buttons
 	$("[data-role='navbar'] a div.active").removeClass("active");
 	// Add active class to current nav button
 	$("[data-role='navbar'] a div").each(function() {
-		if ($(this).jqmData("title") === current) {
+		if ($(this).jqmData("page") === current) {
 			$(this).addClass("active");
 		}
 	});
