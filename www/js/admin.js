@@ -76,11 +76,11 @@ $(document).on('pagebeforeshow', "#admin-home", function() {
 	}).done(function(data) {
 		var setting = data.result;
 		if (data.status) {
-			$('#home-upper-left-link').val(setting[0].link).selectmenu('refresh');
-			$('#home-upper-right-link').val(setting[1].link).selectmenu('refresh');
-			$('#home-middle-link').val(setting[2].link).selectmenu('refresh');
-			$('#home-lower-left-link').val(setting[3].link).selectmenu('refresh');
-			$('#home-lower-right-link').val(setting[4].link).selectmenu('refresh');
+			$('#p1_link').val(setting[0].link).selectmenu('refresh');
+			$('#p2_link').val(setting[1].link).selectmenu('refresh');
+			$('#p3_link').val(setting[2].link).selectmenu('refresh');
+			$('#p4_link').val(setting[3].link).selectmenu('refresh');
+			$('#p5_link').val(setting[4].link).selectmenu('refresh');
 			$('#home-pic1').attr('src', img_base + setting[0].pic);
 			$('#home-pic2').attr('src', img_base + setting[1].pic);
 			$('#home-pic3').attr('src', img_base + setting[2].pic);
