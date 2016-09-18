@@ -9,7 +9,7 @@ $target_dir = '../www/img/';
 
 $link_arr = array('', $_POST['p1_link'], $_POST['p2_link'], $_POST['p3_link'], $_POST['p4_link'], $_POST['p5_link']);
 for ($i = 1; $i <= 5; ++$i) {
-    $setting_update_string = "UPDATE `home_setting` SET `link`='".$link_arr[$i].' WHERE `position`='.$i;
+    $setting_update_string = "UPDATE `home_setting` SET `link`='".$link_arr[$i]."' WHERE `position`=".$i;
     if (!$mysqli->query($setting_update_string)) {
         $output = array('status' => false, 'message' => '更新失敗！');
         echo json_encode($output);
