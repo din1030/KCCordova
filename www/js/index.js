@@ -18,6 +18,12 @@ $(document).on('pagebeforeshow', '#disclaimer', function() {
 		alert('請確認您的網路連線狀態！');
 	});
 });
+$(document).on('pagebeforeshow', '#language', function() {
+	$('#lang-next').click(function(event) {
+		window.localStorage.setItem('lang_id', $('[name="default_lang"]:radio:checked').val());
+		// console.log(window.localStorage.getItem('lang_id'));
+	});
+});
 
 $(document).on('pagecreate', '#login', function() {
 	$('#fb_login_btn').click(function(event) {
@@ -336,6 +342,31 @@ $(document).on('pagecreate', '#app-log-in', function() {
 		$('#app-log-form').valid();
 		// return false; // cancel original event to prevent form submitting
 	});
+	$('#forget-pswd-form').on('submit', function(e) {
+		e.preventDefault();
+		$(this).ajaxSubmit({
+			url: api_base + 'reset_password.php',
+			type: 'POST',
+			dataType: 'json',
+			beforeSend: function() {
+				$.mobile.loading('show');
+			},
+			complete: function() {
+				// This callback function will trigger on data sent/received complete
+				$.mobile.loading('hide');
+			},
+			success: function(result) {
+				if (result.status) {
+					//
+				} else {
+					alert(result.message);
+				}
+			},
+			error: function(request, error) {
+				alert('請確認您的網路連線狀態！');
+			}
+		});
+	});
 });
 
 $(document).on('pagebeforeshow', '#home', function() {
@@ -390,24 +421,6 @@ $(document).on('pagebeforeshow', '#home', function() {
 				break;
 		}
 	}
-	// $.ajax(api_base + 'getAdsHome.json')
-	// 	.done(function(res) {
-	// 		var result = res[0];
-	// 		// caches
-	// 		var ads1 = $('#ads-home .ui-block-a');
-	// 		var ads2 = $('#ads-home .ui-block-b');
-	//
-	// 		if (result.status) {
-	// 			// console.log('yes');
-	// 			// console.log(ads1);
-	// 			ads1.find('a').attr('href', result.ads[0].adsUrl);
-	// 			ads2.find('a').attr('href', result.ads[1].adsUrl);
-	// 			ads1.find('img').attr('src', img_base + '' + result.ads[0].adsImage);
-	// 			ads2.find('img').attr('src', img_base + '' + result.ads[1].adsImage);
-	//
-	// 			$('#ads-home').show();
-	// 		}
-	// 	})
 });
 
 function fbLogin() {

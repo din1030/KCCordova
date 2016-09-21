@@ -41,7 +41,7 @@ $(document).on('pagebeforeshow', '#club', function() {
 
 $(document).on('pagebeforeshow', '#club-intro', function() {
 	var get_club_id = window.localStorage.getItem('get_club_id');
-	console.log(get_club_id);
+	// console.log(get_club_id);
 	$.ajax({
 		url: api_base + 'get_club_info.php?club_id=' + get_club_id,
 		dataType: 'json'
@@ -95,7 +95,7 @@ var map;
 var marker;
 
 function initialize(address) {
-	console.log(address);
+	// console.log(address);
 	//初始化地圖時的定位經緯度設定
 	var latlng = new google.maps.LatLng(23.973875, 120.982024); //台灣緯度Latitude、經度Longitude：23.973875,120.982024
 	//初始化地圖options設定
@@ -129,7 +129,7 @@ function initialize(address) {
 
 $(document).on('pagebeforeshow', '#club-job-info', function() {
 	var get_club_id = window.localStorage.getItem('get_club_id');
-	console.log(get_club_id);
+	// console.log(get_club_id);
 	$.ajax({
 		url: api_base + 'get_club_offer.php?club_id=' + get_club_id,
 		dataType: 'json'
@@ -211,7 +211,7 @@ $(document).on('pagebeforehide', '#club-intro', function() {
 
 $(document).on('pagebeforeshow', "#club-service", function() {
 	var get_club_id = window.localStorage.getItem('get_club_id');
-	console.log(get_club_id);
+	// console.log(get_club_id);
 	$.ajax({
 		url: api_base + 'get_club_consume.php?club_id=' + get_club_id,
 		dataType: 'json'
@@ -303,7 +303,7 @@ $(document).on('pagebeforeshow', '#club-search', function() {
 		url: api_base + 'get_form_content.php?action=get_category&type=club',
 		dataType: 'json'
 	}).done(function(data) {
-		console.log(data);
+		// console.log(data);
 		var classificationList = '';
 		$.each(data, function(idx, obj) {
 			classificationList += '<option value="' + obj.id + '">' + obj.title + '</option>';
@@ -314,7 +314,6 @@ $(document).on('pagebeforeshow', '#club-search', function() {
 		$('#club-search-btn').on('click', function() {
 			var area = $('#area-select').val();
 			var type = $('#club_type').val();
-			console.log('club_type changed');
 
 			$.ajax({
 				url: api_base + 'search_club.php?area_id=' + area + '&type=' + type,
@@ -323,7 +322,7 @@ $(document).on('pagebeforeshow', '#club-search', function() {
 				if (data.status) {
 					clubSearchJson = data;
 					clubSearchState = true;
-					console.log(clubSearchState, clubSearchJson);
+					// console.log(clubSearchState, clubSearchJson);
 					$.mobile.changePage($('#club-result'), {
 						reloadPage: true,
 						changeHash: true
@@ -339,9 +338,8 @@ $(document).on('pagebeforeshow', '#club-search', function() {
 });
 
 $(document).on('pagebeforeshow', '#club-result', function() {
-	console.log(clubSearchState, clubSearchJson);
+	// console.log(clubSearchState, clubSearchJson);
 	if (clubSearchState && clubSearchJson != '') {
-		console.log(clubSearchState, clubSearchJson);
 		$('#club_result_list').empty();
 		$.each(clubSearchJson.result, function(idx, obj) {
 			var club_li = $('<li></li>').attr('data-icon', 'false').attr('data-admin-id', obj.admin_id)

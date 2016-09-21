@@ -28,7 +28,7 @@ $(document).on('pagebeforecreate', '#jobseeker', function() {
 					block_class = 'ui-block-c';
 				}
 				var seeker_div = $('<div></div>').attr('data-seeker-id', obj.u_id).addClass(block_class + ' seeker_div')
-					.append('<div class="seeker_list_item"><a data-ajax="false"><img src="' + img_base +  obj.avatar + '" alt="" /></a></div>');
+					.append('<div class="seeker_list_item"><a data-ajax="false"><img src="' + img_base + obj.avatar + '" alt="" /></a></div>');
 				$(seeker_div).appendTo($('#seeker-grid'));
 			});
 			// $('#club_list').listview('refresh');
@@ -52,29 +52,28 @@ $(document).on('pagebeforeshow', '#jobseeker-resume', function() {
 		dataType: 'json'
 	}).success(function(data) {
 		if (data.status) {
-			$('#club_title').html(data.result[0].name);
-			$('#nickname-span').html(data.result[0].nickname);
-			$('#country-span').html(data.result[0].country + ' ' + data.result[0].area);
-			$('#birth-span').html(data.result[0].birth);
-			$('#mobile-span').html(data.result[0].mobile);
-			$('#height-span').html(data.result[0].height);
-			$('#weight-span').html(data.result[0].weight);
-			$('#measurements-span').html(data.result[0].measurements);
-			$('#education-span').html(data.result[0].education);
+			var seeker = data.result[0];
+			$('#club_title').html(seeker.name);
+			$('#nickname-span').html(seeker.nickname);
+			$('#country-span').html(seeker.country + ' ' + seeker.area);
+			$('#birth-span').html(seeker.birth);
+			$('#mobile-span').html(seeker.mobile);
+			$('#height-span').html(seeker.height);
+			$('#weight-span').html(seeker.weight);
+			$('#measurements-span').html(seeker.measurements);
+			$('#education-span').html(seeker.education);
 
 			var slideContainer = '<ul class="slides">';
-			$.each(data.result[0].pic, function(idx, pic) {
+			$.each(seeker.pic, function(idx, pic) {
 				if (pic != null && pic != '') {
-					slideContainer += '<li><img src="' + img_base +  pic + '"></li>'
+					slideContainer += '<li><img src="' + img_base + pic + '"></li>'
 				}
 			});
-
 			slideContainer += '</ul>';
-
 			$('.flexslider').html(slideContainer);
-			switch (data.result[0].singing) {
+
+			switch (seeker.singing) {
 				case 'great':
-				default:
 					$('#singing-span').html('很好');
 					break;
 				case 'soso':
@@ -83,10 +82,12 @@ $(document).on('pagebeforeshow', '#jobseeker-resume', function() {
 				case 'bad':
 					$('#singing-span').html('不佳');
 					break;
-			}
-			switch (data.result[0].dancing) {
-				case 'great':
 				default:
+					$('#singing-span').html('（未填）');
+					break;
+			}
+			switch (seeker.dancing) {
+				case 'great':
 					$('#dancing-span').html('很好');
 					break;
 				case 'soso':
@@ -95,10 +96,12 @@ $(document).on('pagebeforeshow', '#jobseeker-resume', function() {
 				case 'bad':
 					$('#dancing-span').html('不佳');
 					break;
-			}
-			switch (data.result[0].drinking) {
-				case 'great':
 				default:
+					$('#dancing-span').html('（未填）');
+					break;
+			}
+			switch (seeker.drinking) {
+				case 'great':
 					$('#drinking-span').html('很好');
 					break;
 				case 'soso':
@@ -107,10 +110,12 @@ $(document).on('pagebeforeshow', '#jobseeker-resume', function() {
 				case 'bad':
 					$('#drinking-span').html('不佳');
 					break;
-			}
-			switch (data.result[0].cooperation) {
-				case 'great':
 				default:
+					$('#drinking-span').html('（未填）');
+					break;
+			}
+			switch (seeker.cooperation) {
+				case 'great':
 					$('#cooperation-span').html('很好');
 					break;
 				case 'soso':
@@ -119,10 +124,12 @@ $(document).on('pagebeforeshow', '#jobseeker-resume', function() {
 				case 'bad':
 					$('#cooperation-span').html('不佳');
 					break;
-			}
-			switch (data.result[0].marital) {
-				case 'married':
 				default:
+					$('#cooperation-span').html('（未填）');
+					break;
+			}
+			switch (seeker.marital) {
+				case 'married':
 					$('#marital-span').html('已婚');
 					break;
 				case 'single':
@@ -131,10 +138,12 @@ $(document).on('pagebeforeshow', '#jobseeker-resume', function() {
 				case 'divorced':
 					$('#marital-span').html('離異');
 					break;
-			}
-			switch (data.result[0].workingtime) {
-				case 'afternoon':
 				default:
+					$('#marital-span').html('（未填）');
+					break;
+			}
+			switch (seeker.workingtime) {
+				case 'afternoon':
 					$('#workingtime-span').html('午班');
 					break;
 				case 'night':
@@ -143,10 +152,13 @@ $(document).on('pagebeforeshow', '#jobseeker-resume', function() {
 				case 'PT':
 					$('#workingtime-span').html('PT');
 					break;
+				default:
+					$('#workingtime-span').html('（未填）');
+					break;
 			}
-			$('#languages-span').html(data.result[0].languages);
-			$('#pay-span').html(data.result[0].pay);
-			$('#content-span').html(data.result[0].job_content.replace(/\n/g, "<br>"));
+			$('#languages-span').html(seeker.languages);
+			$('#pay-span').html(seeker.pay);
+			$('#content-span').html(seeker.job_content.replace(/\n/g, "<br>"));
 			$('#msg-seeker-btn').click(function(event) {
 				// var to_id = $(this).jqmData('to-id');
 				var msg_content = $('#msg_content').val();
@@ -239,7 +251,7 @@ $(document).on('pagebeforeshow', '#jobseeker-result', function() {
 				block_class = 'ui-block-c';
 			}
 			var seeker_div = $('<div></div>').attr('data-seeker-id', obj.u_id).addClass(block_class + ' seeker_div')
-				.append('<div class="seeker_list_item"><a data-ajax="false"><img src="' + img_base +  obj.pic1 + '" alt="" /></a></div>');
+				.append('<div class="seeker_list_item"><a data-ajax="false"><img src="' + img_base + obj.pic1 + '" alt="" /></a></div>');
 			$(seeker_div).appendTo($('#seeker-result-grid'));
 		});
 		$('#seeker-result-grid .seeker_div').click(function(event) {
