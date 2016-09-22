@@ -13,7 +13,7 @@ if ($sql->num_rows == 1) {
     if ($mysqli->query("UPDATE `user` SET `reset_code`='$reset_code' WHERE `email`='$email'")) {
         // $reset_link = 'http://52.69.53.255/KCCordova/reset_password.php?email='.$email.'&reset_code='.$reset_code;
         // $message = '請店選或複製以下連結以設定新的密碼，若您未曾申請重設密碼，忽略本信件即可。<br><a href="'.$reset_link.'">'.$reset_link.'</a>';
-        $message = '您的密碼重設驗證碼為 '.$reset_code.'，若您未設申請重設密碼，忽略本信件即可。';
+        $message = '您的密碼重設驗證碼為 <strong>'.$reset_code.'</strong>，若您未申請重設密碼，忽略本信件即可。';
         $title = '密碼重設驗證碼通知';
         $headers = 'From: Kelly Club <support@kellyclub.com>'."\n"; //寄件者
         $headers .= "Content-type: text/html; charset=UTF-8\r\n";
