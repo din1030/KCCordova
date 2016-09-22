@@ -3,12 +3,13 @@ var officialState;
 var currentMsg;
 var msgType;
 
-$(document).one("pagebeforeshow", "[data-role='page']", function() {
-	if (window.localStorage.getItem('auth') == null || window.localStorage.getItem('user_id') == null) {
-		alert('您尚未登入！');
-		document.location.href = './index.html';
-	}
-});
+// $(document).one("pagebeforeshow", "[data-role='page']", function() {
+// 	if (window.localStorage.getItem('auth') == null || window.localStorage.getItem('user_id') == null) {
+// 		alert('您尚未登入！');
+// 		document.location.href = './index.html';
+// 	}
+// });
+
 $(document).on("pagebeforeshow", '#messages', function() {
 	$('#messages-main').off('click');
 	$('#msg-holder').off('click');

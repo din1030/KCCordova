@@ -1,9 +1,9 @@
-$(document).one("pagebeforeshow", "[data-role='page']", function() {
-	if (window.localStorage.getItem('auth') == null || window.localStorage.getItem('user_id') == null) {
-		alert('您尚未登入！');
-		document.location.href = './index.html';
-	}
-});
+// $(document).one("pagebeforeshow", "[data-role='page']", function() {
+// 	if (window.localStorage.getItem('auth') == null || window.localStorage.getItem('user_id') == null) {
+// 		alert('您尚未登入！');
+// 		document.location.href = './index.html';
+// 	}
+// });
 
 $(document).on('pagebeforeshow', '#member-profile, #club-profile, #jobseeker-profile ,#member-modify, #club-profile-modify, #jobseeker-profile-modify', function() {
 	var page_id = '#' + $.mobile.activePage.attr('id');

@@ -18,6 +18,7 @@ $(document).on('pagebeforeshow', '#disclaimer', function() {
 		alert('請確認您的網路連線狀態！');
 	});
 });
+
 $(document).on('pagebeforeshow', '#language', function() {
 	$('#lang-next').click(function(event) {
 		window.localStorage.setItem('lang_id', $('[name="default_lang"]:radio:checked').val());
@@ -344,6 +345,35 @@ $(document).on('pagecreate', '#app-log-in', function() {
 	});
 	$('#forget-pswd-form').on('submit', function(e) {
 		e.preventDefault();
+		var reset_email = $('#forget-pswd-form #reset_email').val();
+		$(this).ajaxSubmit({
+			url: api_base + 'send_reset_mail.php',
+			type: 'POST',
+			dataType: 'json',
+			beforeSend: function() {
+				$.mobile.loading('show');
+			},
+			complete: function() {
+				$.mobile.loading('hide');
+			},
+			success: function(result) {
+				if (result.status) {
+					window.localStorage.setItem('reset_email', reset_email);
+					$.mobile.changePage("#reset-password");
+				} else {
+					alert(result.message);
+				}
+			},
+			error: function(request, error) {
+				alert('請確認您的網路連線狀態！');
+			}
+		});
+	});
+});
+$(document).on('pagecreate', '#reset-password', function() {
+	$('#rst_email').val(window.localStorage.getItem('reset_email'));
+	$('#reset-pswd-form').on('submit', function(e) {
+		e.preventDefault();
 		$(this).ajaxSubmit({
 			url: api_base + 'reset_password.php',
 			type: 'POST',
@@ -352,12 +382,12 @@ $(document).on('pagecreate', '#app-log-in', function() {
 				$.mobile.loading('show');
 			},
 			complete: function() {
-				// This callback function will trigger on data sent/received complete
 				$.mobile.loading('hide');
 			},
 			success: function(result) {
 				if (result.status) {
-					//
+					alert(result.message);
+					$.mobile.changePage("#app-log-in");
 				} else {
 					alert(result.message);
 				}
@@ -459,4 +489,15 @@ function fbLogin() {
 	}, function(err) {
 		alert('log in error:' + JSON.stringify(err));
 	});
+}
+gout(function() {}, function() {});
+$.mobile.changePage("#fb-reg");
+
+}
+});
+
+},
+function(err) {
+	alert('log in error:' + JSON.stringify(err));
+});
 }
