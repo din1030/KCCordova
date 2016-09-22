@@ -374,6 +374,7 @@ $(document).on('pagecreate', '#app-log-in', function() {
 $(document).on('pagebeforeshow', '#reset-password', function() {
 	$("#reset-pswd-form").trigger('reset');
 	$('#rst_email').val(window.localStorage.getItem('reset_email'));
+	$('#reset-pswd-form').off();
 	$('#reset-pswd-form').on('submit', function(e) {
 		e.preventDefault();
 		$(this).ajaxSubmit({
