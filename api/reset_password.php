@@ -21,9 +21,6 @@ if ($mysqli->query($update_string)) {
         echo json_encode(array('status' => true, 'message' => '密碼已更新！'));
 
         return;
-    } elseif ($mysqli->affected_rows == 0) {
-        echo json_encode(array('status' => false, 'message' => '新密碼與舊密碼相同！'));
-        exit;
     }
 } else {
     echo json_encode(array('status' => false, 'message' => '請重新操作！'));
