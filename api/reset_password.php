@@ -16,11 +16,15 @@ $password = password_hash($_POST['reset_pswd'], PASSWORD_DEFAULT);
 $reset_code = $_POST['reset_code'];
 
 $update_string = "UPDATE `user` SET `password`='$password' WHERE `email`='$email' AND `reset_code`='$reset_code'";
-$result = $mysqli->query($update_string);
-if ($result->affected_rows == 1) {
-    echo json_encode(array('status' => true, 'message' => '密碼已更新！'));
+if ($mysqli->query($update_string)) {
+    if ($mysqli->affected_rows == 1) {
+        echo json_encode(array('status' => true, 'message' => '密碼已更新！'));
 
-    return;
+        return;
+    } elseif ($mysqli->affected_rows == 0) {
+        echo json_encode(array('status' => false, 'message' => '新密碼與舊密碼相同！'));
+        exit;
+    }
 } else {
     echo json_encode(array('status' => false, 'message' => '請重新操作！'));
     exit;

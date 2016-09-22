@@ -19,7 +19,7 @@ if ($sql->num_rows == 1) {
         $headers .= "Content-type: text/html; charset=UTF-8\r\n";
         mail($email, '=?utf-8?B?'.base64_encode($title).'?=', $message, $headers);
 
-        echo json_encode(array('status' => true, 'message' => '兌換成功！'));
+        echo json_encode(array('status' => true, 'message' => '通知信已寄出！'));
 
         return;
     }

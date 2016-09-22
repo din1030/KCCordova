@@ -359,6 +359,7 @@ $(document).on('pagecreate', '#app-log-in', function() {
 			success: function(result) {
 				if (result.status) {
 					window.localStorage.setItem('reset_email', reset_email);
+					alert(result.message);
 					$.mobile.changePage("#reset-password");
 				} else {
 					alert(result.message);
