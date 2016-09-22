@@ -490,14 +490,3 @@ function fbLogin() {
 		alert('log in error:' + JSON.stringify(err));
 	});
 }
-gout(function() {}, function() {});
-$.mobile.changePage("#fb-reg");
-
-}
-});
-
-},
-function(err) {
-	alert('log in error:' + JSON.stringify(err));
-});
-}
