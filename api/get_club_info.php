@@ -6,10 +6,15 @@ header('Access-Control-Allow-Methods: GET, POST');
 include 'db_setting.php';
 
 $club_id = $_GET['club_id'];
-
+$only_approved = $_GET['only_approved'];
 $sql_string = 'SELECT `club_info`.*,`category`.`title` cat_title,`country`.`country`,`area`.`area` FROM `club_info`,`country`,`area`,`category` WHERE `club_info`.`country_id` = `country`.`id` AND `club_info`.`area_id` = `area`.`id`AND `category`.`id`=`club_info`.`category`';
+if (!empty($only_approved)) {
+    $sql_string .= " AND `approved`='1'";
+}
 if (!empty($club_id)) { // 有指定 ID
     $sql_string .=  " AND `club_info`.`admin_id`='$club_id'";
+} else {
+    $sql_string .= ' ORDER BY `admin_id` DESC';
 }
 
 $result = $mysqli->query($sql_string);

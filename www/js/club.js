@@ -12,9 +12,9 @@ $(document).on('pagebeforeshow', '#club', function() {
 	$.ajax({
 		url: api_base + 'get_club_info.php',
 		dataType: 'json',
-		// data: {
-		// 	published: 'published'
-		// }
+		data: {
+			only_approved: true
+		}
 	}).success(function(data) {
 		if (data.status) {
 			var clubs = data.result;
@@ -44,7 +44,10 @@ $(document).on('pagebeforeshow', '#club-intro', function() {
 	// console.log(get_club_id);
 	$.ajax({
 		url: api_base + 'get_club_info.php?club_id=' + get_club_id,
-		dataType: 'json'
+		dataType: 'json',
+		data: {
+			only_approved: true
+		}
 	}).success(function(data) {
 		if (data.status) {
 			var club = data.result[0];

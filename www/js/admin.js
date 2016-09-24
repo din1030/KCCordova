@@ -1012,13 +1012,13 @@ $(document).on('pagebeforeshow', "#admin-member", function() {
 			$.each(data.amount, function(idx, obj) {
 				switch (obj.type) {
 					case '1':
-						$('#normal_num').append(obj.amt);
+						$('#normal_num').html(obj.amt);
 						break;
 					case '2':
-						$('#club_num').append(obj.amt);
+						$('#club_num').html(obj.amt);
 						break;
 					case '3':
-						$('#seeker_num').append(obj.amt);
+						$('#seeker_num').html(obj.amt);
 						break;
 					default:
 						break;
@@ -1085,7 +1085,12 @@ $(document).on('pagebeforeshow', "#admin-member", function() {
 				}).done(function(data) {
 					alert(data.message);
 					if (data.status) {
-						btn.parents('tr').remove();
+						$.mobile.changePage($('#admin-member'), {
+							allowSamePageTransition: true,
+							reloadPage: true,
+							changeHash: true,
+							transition: "none"
+						});
 					}
 				}).fail(function() {
 					alert('請確認您的網路連線狀態！');

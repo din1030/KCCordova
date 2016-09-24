@@ -7,12 +7,18 @@ include 'db_setting.php';
 
 $user_id = $_GET['user_id'];
 $only_active = $_GET['only_active'];
+$only_approved = $_GET['only_approved'];
 $sql_string = 'SELECT `seeker_info`.*,`user`.`name`,`user`.`birth`,`user`.`mobile`,`user`.`avatar`,`country`.`country`,`area`.`area`,`category`.`title` job_title FROM `seeker_info`,`user`,`country`,`area`,`category` WHERE `seeker_info`.`u_id`=`user`.`id` AND `seeker_info`.`country_id`=`country`.`id` AND `seeker_info`.`area_id`=`area`.`id` AND `category`.`id`=`seeker_info`.`seek_category`';
-if (isset($only_active)) {
+if (!empty($only_active)) {
     $sql_string .= " AND `active`='1'";
+}
+if (!empty($only_approved)) {
+    $sql_string .= " AND `approved`='1'";
 }
 if (!empty($user_id)) {
     $sql_string .= " AND `u_id`=$user_id LIMIT 1";
+} else {
+    $sql_string .= ' ORDER BY `u_id` DESC';
 }
 $sql = $mysqli->query($sql_string);
 if ($sql->num_rows > 0) {
