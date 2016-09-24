@@ -33,31 +33,30 @@ $(document).on('pagecreate', '#login', function() {
 				// alert("login current status: " + JSON.stringify(response));
 				if (response.status === 'connected') {
 					$.ajax({
-							url: api_base + 'user_action.php',
-							dataType: 'json',
-							type: 'POST',
-							data: {
-								action: 'fb_log',
-								fb_id: response.authResponse.userID
-							}
-						})
-						.done(function(result) {
-							if (result.status) {
-								window.localStorage.setItem('user_id', result.user_id);
-								window.localStorage.setItem('fb_id', response.authResponse.userID);
-								window.localStorage.setItem('user', result.user);
-								window.localStorage.setItem('auth', result.auth);
-								window.localStorage.setItem('approved', result.approved);
-								window.localStorage.setItem('name', result.name);
-								window.localStorage.setItem('country_id', result.country_id);
-								window.localStorage.setItem('area_id', result.area_id);
-								// alert(window.localStorage.getItem('name') + ' ' + window.localStorage.getItem('user') + '(' + window.localStorage.getItem('auth') + ')');
-								$.mobile.changePage("#home");
-							} else {
-								// alert(result.message + '(login)' + result.sql);
-								facebookConnectPlugin.logout(function() {}, function() {});
-							}
-						});
+						url: api_base + 'user_action.php',
+						dataType: 'json',
+						type: 'POST',
+						data: {
+							action: 'fb_log',
+							fb_id: response.authResponse.userID
+						}
+					}).done(function(result) {
+						if (result.status) {
+							window.localStorage.setItem('user_id', result.user_id);
+							window.localStorage.setItem('fb_id', response.authResponse.userID);
+							window.localStorage.setItem('user', result.user);
+							window.localStorage.setItem('auth', result.auth);
+							window.localStorage.setItem('approved', result.approved);
+							window.localStorage.setItem('name', result.name);
+							window.localStorage.setItem('country_id', result.country_id);
+							window.localStorage.setItem('area_id', result.area_id);
+							// alert(window.localStorage.getItem('name') + ' ' + window.localStorage.getItem('user') + '(' + window.localStorage.getItem('auth') + ')');
+							$.mobile.changePage("#home");
+						} else {
+							// alert(result.message + '(login)' + result.sql);
+							facebookConnectPlugin.logout(function() {}, function() {});
+						}
+					});
 				} else {
 					// the user isn't logged in to Facebook.
 					fbLogin();
@@ -302,6 +301,7 @@ $(document).on('pagecreate', '#app-log-in', function() {
 						window.localStorage.setItem('user_id', result.user_id);
 						window.localStorage.setItem('user', result.user);
 						window.localStorage.setItem('auth', result.auth);
+						window.localStorage.setItem('approved', result.approved);
 						window.localStorage.setItem('name', result.name);
 						window.localStorage.setItem('country_id', result.country_id);
 						window.localStorage.setItem('area_id', result.area_id);
