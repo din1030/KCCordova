@@ -134,8 +134,12 @@ $(document).on('pagebeforeshow', '#club-job-info', function() {
 	var get_club_id = window.localStorage.getItem('get_club_id');
 	// console.log(get_club_id);
 	$.ajax({
-		url: api_base + 'get_club_offer.php?club_id=' + get_club_id,
-		dataType: 'json'
+		url: api_base + 'get_club_offer.php',
+		dataType: 'json',
+		data: {
+			club_id: get_club_id,
+			published: true
+		}
 	}).success(function(data) {
 		if (data.status) {
 			var club = data.result[0];
@@ -221,8 +225,12 @@ $(document).on('pagebeforeshow', "#club-service", function() {
 	var get_club_id = window.localStorage.getItem('get_club_id');
 	// console.log(get_club_id);
 	$.ajax({
-		url: api_base + 'get_club_consume.php?club_id=' + get_club_id,
-		dataType: 'json'
+		url: api_base + 'get_club_consume.php',
+		dataType: 'json',
+		data: {
+			club_id: get_club_id,
+			published: true
+		}
 	}).success(function(data) {
 		if (data.status) {
 			var club = data.result[0];
