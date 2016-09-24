@@ -59,6 +59,7 @@ $(document).on("pagebeforeshow", "[data-role='page']", function() {
 				$(".page_mask").remove();
 			});
 		} else if (window.localStorage.getItem('auth') == '2' && window.localStorage.getItem('approved') == '0') {
+			event.preventDefault();
 			$("[data-role='page']").prepend(not_approved_mask);
 			$(".page_mask .ui-icon-delete").click(function(event) {
 				$(".page_mask").remove();

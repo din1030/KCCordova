@@ -197,6 +197,8 @@ $(document).on('pagebeforeshow', '#club-job-info', function() {
 $(document).on('pagebeforeshow', "#club-intro, #club-service", function() {
 	// 沒有權限觀看應徵資訊的提示
 	var mask = '<div style="display:block;" class="page_mask text-center" data-position-to="window" data-dismissible="true"><a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a><p>您不是求職者會員<br>店家應徵資訊僅供求職者會員瀏覽</p></div>';
+	// 沒有權限觀看應徵資訊的提示
+	var not_approved_mask = '<div style="display:block;" class="page_mask text-center" data-position-to="window" data-dismissible="true"><a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a><p>您的身分尚未通過審核<br>暫時無法瀏覽店家應徵資訊</p></div>';
 	if (window.localStorage.getItem('auth') != '0' && window.localStorage.getItem('auth') != '100' && window.localStorage.getItem('auth') != '3' && window.localStorage.getItem('user_id') != window.localStorage.getItem('get_club_id')) {
 		$("a[href='#club-job-info']").click(function(event) {
 			event.preventDefault();
@@ -205,11 +207,13 @@ $(document).on('pagebeforeshow', "#club-intro, #club-service", function() {
 				$(".page_mask").remove();
 			});
 		});
+	} else if (window.localStorage.getItem('auth') == '3' && window.localStorage.getItem('approved') == '0') {
+		event.preventDefault();
+		$("[data-role='page']").prepend(not_approved_mask);
+		$(".page_mask .ui-icon-delete").click(function(event) {
+			$(".page_mask").remove();
+		});
 	}
-});
-
-$(document).on('pagebeforehide', '#club-intro', function() {
-	// window.localStorage.removeItem('get_club_id');
 });
 
 $(document).on('pagebeforeshow', "#club-service", function() {
