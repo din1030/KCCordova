@@ -18,7 +18,7 @@ if ($sql->num_rows > 0) {
         $r['created'] = date('Y/m/d H:i', strtotime($r['created']));
         $output[] = $r;
     }
-    $amt_string = "SELECT `type`, count(*) amt FROM `user` WHERE `type`!='0' GROUP BY `type`";
+    $amt_string = "SELECT `type`, count(*) amt FROM `user` WHERE `approved`=1' AND `type`!='0' AND `type`!='100' GROUP BY `type`";
     $amt_result = $mysqli->query($amt_string);
     while ($r = mysqli_fetch_assoc($amt_result)) {
         $amount[] = $r;
