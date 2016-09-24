@@ -184,7 +184,7 @@ if ($action == 'reg') { // For Register
     } else {
         $user = $sql->fetch_assoc();
         if (password_verify($password, $user['password'])) { // 密碼正確
-            $output = array('status' => true, 'message' => '登入成功！', 'user_id' => $user['id'], 'user' => $email, 'auth' => $user['type'], 'name' => $user['name'], 'country_id' => $user['country'], 'area_id' => $user['area']);
+            $output = array('status' => true, 'message' => '登入成功！', 'user_id' => $user['id'], 'approved' => $user['approved'], 'user' => $email, 'auth' => $user['type'], 'name' => $user['name'], 'country_id' => $user['country'], 'area_id' => $user['area']);
             echo json_encode($output);
 
             return;
@@ -205,7 +205,7 @@ if ($action == 'reg') { // For Register
         exit;
     } else {
         $user = $sql->fetch_assoc();
-        $output = array('status' => true, 'message' => '登入成功！', 'auth' => $user['type'], 'user_id' => $user['id'], 'fb_id' => $user['fb_id'], 'user' => $user['email'], 'name' => $user['name'], 'country_id' => $user['country'], 'area_id' => $user['area']);
+        $output = array('status' => true, 'message' => '登入成功！', 'auth' => $user['type'], 'user_id' => $user['id'], 'fb_id' => $user['fb_id'], 'approved' => $user['approved'], 'user' => $user['email'], 'name' => $user['name'], 'country_id' => $user['country'], 'area_id' => $user['area']);
         echo json_encode($output);
 
         return;

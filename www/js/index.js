@@ -47,6 +47,7 @@ $(document).on('pagecreate', '#login', function() {
 								window.localStorage.setItem('fb_id', response.authResponse.userID);
 								window.localStorage.setItem('user', result.user);
 								window.localStorage.setItem('auth', result.auth);
+								window.localStorage.setItem('approved', result.approved);
 								window.localStorage.setItem('name', result.name);
 								window.localStorage.setItem('country_id', result.country_id);
 								window.localStorage.setItem('area_id', result.area_id);
@@ -214,6 +215,7 @@ $(document).on('pagecreate', '#fb-reg', function() {
 						window.localStorage.setItem('user_id', result.user_id);
 						window.localStorage.setItem('user', result.user);
 						window.localStorage.setItem('auth', result.auth);
+						window.localStorage.setItem('approved', result.approved);
 						window.localStorage.setItem('name', result.name);
 						window.localStorage.setItem('country_id', result.country_id);
 						window.localStorage.setItem('area_id', result.area_id);
