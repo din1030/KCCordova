@@ -5,7 +5,7 @@ header('Access-Control-Allow-Methods: GET, POST');
 
 include 'db_setting.php';
 
-$sql_string = "SELECT u.`id`, u.`type`, u.`name`, u.`created` FROM `user` u  WHERE (`type`='2' OR `type`='3') AND `approved`=0";
+$sql_string = "SELECT u.`id`,u.`type`,u.`name`,u.`country`,u.`area`,u.`created` FROM `user` u  WHERE (`type`='2' OR `type`='3') AND `approved`=0";
 
 $sql = $mysqli->query($sql_string);
 if ($sql->num_rows > 0) {

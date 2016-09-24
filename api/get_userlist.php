@@ -10,7 +10,7 @@ $type_string = '';
 if (!empty($type)) { // 有指定 type
     $type_string = " AND `type`='$type'";
 }
-$sql_string = 'SELECT u.`id`, u.`type`, u.`name`, u.`created` FROM `user` u WHERE `approved`=1'.$type_string.' ORDER BY u.`created` DESC';
+$sql_string = 'SELECT u.`id`,u.`type`,u.`name`,u.`country`,u.`area`,u.`created` FROM `user` u WHERE `approved`=1'.$type_string.' ORDER BY u.`created` DESC';
 
 $sql = $mysqli->query($sql_string);
 if ($sql->num_rows > 0) {
