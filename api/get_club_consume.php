@@ -13,7 +13,7 @@ FROM `club_consume` LEFT JOIN `club_consume_detail` USING(`admin_id`)
 LEFT JOIN `club_info` USING(`admin_id`)
 WHERE `admin_id`='.$club_id;
 
-if (isset($published)) {
+if (!empty($published)) {
     $sql_string .= ' AND (NOW() BETWEEN `club_info`.`publish_start` AND `club_info`.`publish_due`)';
 }
 

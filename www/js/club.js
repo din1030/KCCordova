@@ -80,7 +80,7 @@ $(document).on('pagebeforeshow', '#club-intro', function() {
 					}
 				});
 			});
-			if (club.publish_plan == 0) {
+			if (club.publish_plan == 0 || club.state == '0') {
 				$('#brief_block, #map_block').hide();
 			} else {
 				$('#brief_block, #map_block').show();

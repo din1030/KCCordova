@@ -10,7 +10,7 @@ $published = $_GET['published'];
 
 $sql_string = "SELECT `club_offer`.*, `club_info`.`publish_plan` FROM `club_offer` JOIN `club_info` USING(`admin_id`) WHERE `club_offer`.`admin_id`= '$admin_id'";
 
-if (isset($published)) {
+if (!empty($published)) {
     $sql_string .= ' AND (NOW() BETWEEN `club_info`.`publish_start` AND `club_info`.`publish_due`)';
 }
 
