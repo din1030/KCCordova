@@ -14,7 +14,7 @@
 
     <body>
         <!-- recommand record -->
-        <div data-role="page" id="recommend-record" data-theme="a" data-title="club">
+        <div data-role="page" id="recommend-record" data-theme="a" data-page="club">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
@@ -73,7 +73,7 @@
         </div>
 
         <!-- redeem -->
-        <div data-role="page" id="redeem" data-theme="a" data-title="club">
+        <div data-role="page" id="redeem" data-theme="a" data-page="club">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
@@ -148,7 +148,7 @@
         </div>
 
         <!-- news -->
-        <div data-role="page" id="news" data-theme="a" data-title="news">
+        <div data-role="page" id="news" data-theme="a" data-page="news">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
@@ -181,7 +181,7 @@
         </div>
 
         <!-- share -->
-        <div data-role="page" id="share" data-theme="a" data-title="share" class="pink-bg">
+        <div data-role="page" id="share" data-theme="a" data-page="share" class="pink-bg">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
@@ -218,7 +218,7 @@
         </div>
 
         <!-- setting -->
-        <div data-role="page" id="setting" data-theme="a" data-title="setting">
+        <div data-role="page" id="setting" data-theme="a" data-page="setting">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
@@ -286,18 +286,18 @@
                         <li class="ui-field-contain">
                             <label for="user_lang">語言</label>
                             <select name="user_lang" id="user_lang">
-                                <option value="">正體中文</option>
-                                <option value="">簡體中文</option>
-                                <option value="">英文</option>
-                                <option value="">日文</option>
+                                <option value="0">正體中文</option>
+                                <option value="1">简体中文</option>
+                                <option value="2">English</option>
+                                <option value="3">日本語</option>
                             </select>
                         </li>
                         <li class="ui-field-contain">
                             <label for="user_country">國家</label>
                             <select name="user_country" id="user_country">
-                                <option value="">台灣</option>
-                                <option value="">中國</option>
-                                <option value="">日本</option>
+                                <option value="1">台灣</option>
+                                <option value="2">中國</option>
+                                <option value="3">日本</option>
                             </select>
                         </li>
                     </ul>
@@ -309,7 +309,7 @@
         </div>
 
         <!-- about -->
-        <div data-role="page" id="about" class="policy-page" data-theme="a" data-title="about">
+        <div data-role="page" id="about" class="policy-page" data-theme="a" data-page="about">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
@@ -330,7 +330,7 @@
         </div>
 
         <!-- service -->
-        <div data-role="page" id="service" class="policy-page" data-theme="a" data-title="service">
+        <div data-role="page" id="service" class="policy-page" data-theme="a" data-page="service">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
@@ -351,7 +351,7 @@
         </div>
 
         <!-- use -->
-        <div data-role="page" id="use" class="policy-page" data-theme="a" data-title="use">
+        <div data-role="page" id="use" class="policy-page" data-theme="a" data-page="use">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
@@ -372,7 +372,7 @@
         </div>
 
         <!-- privacy -->
-        <div data-role="page" id="privacy" class="policy-page" data-theme="a" data-title="privacy">
+        <div data-role="page" id="privacy" class="policy-page" data-theme="a" data-page="privacy">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
@@ -398,27 +398,27 @@
                 <ul>
                     <li>
                         <a href="./club.html" data-ajax="false">
-                            <div class="footer-tab tab1" data-title="club"></div>
+                            <div class="footer-tab tab1" data-page="club"></div>
                         </a>
                     </li>
                     <li>
                         <a href="./jobseeker.html" data-ajax="false">
-                            <div class="footer-tab tab2" data-title="jobseeker"></div>
+                            <div class="footer-tab tab2" data-page="jobseeker"></div>
                         </a>
                     </li>
                     <li>
                         <a href="./lifeservice.html" data-ajax="false">
-                            <div class="footer-tab tab3 active" data-title="lifeservice"></div>
+                            <div class="footer-tab tab3 active" data-page="lifeservice"></div>
                         </a>
                     </li>
                     <li>
                         <a href="#messages" data-ajax="false">
-                            <div class="footer-tab tab4" data-title="messages"></div>
+                            <div class="footer-tab tab4" data-page="messages"></div>
                         </a>
                     </li>
                     <li>
                         <a href="./favorite.html" data-ajax="false">
-                            <div class="footer-tab tab5" data-title="favorite"></div>
+                            <div class="footer-tab tab5" data-page="favorite"></div>
                         </a>
                     </li>
                 </ul>

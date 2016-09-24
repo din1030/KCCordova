@@ -18,13 +18,13 @@ $(document).ready(function() {
 $(document).on("pagebeforeshow", "[data-role='page']", function() {
 	// Each of the four pages in this demo has a data-title attribute
 	// which value is equal to the text of the nav button
-	// For example, on first page: <div data-role="page" data-title="Info">
-	var current = $(this).jqmData("title");
+	// For example, on first page: <div data-role="page" data-page="Info">
+	var current = $(this).jqmData("page");
 	// Remove active class from nav buttons
 	$("[data-role='navbar'] a div.active").removeClass("active");
 	// Add active class to current nav button
 	$("[data-role='navbar'] a div").each(function() {
-		if ($(this).jqmData("title") === current) {
+		if ($(this).jqmData("page") === current) {
 			$(this).addClass("active");
 		}
 	});
@@ -121,7 +121,7 @@ $(document).on('pagecreate', function() {
 	} else if (window.localStorage.getItem('auth') == '3') {
 		href = './profile_seeker.html';
 	}
-	var panel = '<div data-role="panel" id="menu-panel" data-display="push" data-theme="a" data-position-fixed="true">' + '<div class="ui-panel-inner"><ul data-role="listview" class="ui-listview">' + '<li><a href="./index.html#home" class="ui-btn" data-ajax="false"><div class="menu-icon icon0"></div> 首頁 </a></li>' + '<li><a id="profile-link" href="' + href + '" class="ui-btn" data-ajax="false"><div class="menu-icon icon1"></div> 我的檔案 </a></li>' + '<li><a href="./menu.html#recommend-record" class="ui-btn" data-ajax="false"><div class="menu-icon icon2"></div> 推薦紀錄 </a></li>' + '<li><a href="./menu.html#news" class="ui-btn" data-ajax="false"><div class="menu-icon icon3"></div> 最新消息 </a></li>' + '<li><a href="./menu.html#share" class="ui-btn" data-ajax="false"><div class="menu-icon icon4"></div> 分享好友 </a></li>' + '<li><a href="http://www.kelly-club.com/" class="ui-btn" rel="external" target="_blank"><div class="menu-icon icon5"></div> 連官網 </a></li>' + '<li><a href="./menu.html#setting" class="ui-btn" data-ajax="false"><div class="menu-icon icon6"></div> 設定 </a></li>' + '<li><a id="menu-logout" href="./index.html#login" class="ui-btn" data-ajax="false"><div class="menu-icon icon7"></div> 登出 </a></li>' + admin_li + ' </ul></div></div>';
+	var panel = '<div data-role="panel" id="menu-panel" data-display="push" data-theme="a" data-position-fixed="true">' + '<div class="ui-panel-inner"><ul data-role="listview" class="ui-listview">' + '<li><a href="./index.html#home" class="ui-btn" data-ajax="false"><div class="menu-icon icon0"></div> 首頁 </a></li>' + '<li><a id="profile-link" href="' + href + '" class="ui-btn" data-ajax="false"><div class="menu-icon icon1"></div> 我的檔案 </a></li>' + '<li><a href="./menu.html#recommend-record" class="ui-btn" data-ajax="false"><div class="menu-icon icon2"></div> 推薦紀錄 </a></li>' + '<li><a href="./menu.html#news" class="ui-btn" data-ajax="false"><div class="menu-icon icon3"></div> 最新消息 </a></li>' + '<li><a href="./menu.html#share" class="ui-btn" data-ajax="false"><div class="menu-icon icon4"></div> 分享好友 </a></li>' + '<li><a href="http://www.kelly-club.com/" class="ui-btn" rel="external" target="_blank"><div class="menu-icon icon5"></div> 連官網 </a></li>' + '<li><a href="./menu.html#setting" class="ui-btn" data-ajax="false"><div class="menu-icon icon6"></div> 設定 </a></li>' + '<li><a id="menu-logout" class="ui-btn" data-ajax="false"><div class="menu-icon icon7"></div> 登出 </a></li>' + admin_li + ' </ul></div></div>';
 	$.mobile.pageContainer.prepend(panel);
 
 	// 登出清掉 localStorage
@@ -130,13 +130,16 @@ $(document).on('pagecreate', function() {
 		// window.localStorage.removeItem('user');
 		// window.localStorage.removeItem('auth');
 		// window.localStorage.removeItem('name');
-		facebookConnectPlugin.logout(function() {}, function() {});
+		if (typeof acebookConnectPlugin != 'undefined') {
+			facebookConnectPlugin.logout(function() {}, function() {});
+		}
+		document.location.href = './index.html#language';
 	});
 	$("#menu-panel").panel();
 });
 
 $(document).on('pageshow', "#jobseeker-resume, #club-intro, #lifeservice-detail", function() {
-	console.log('hit slide reload');
+	// console.log('hit slide reload');
 	// console.log($('.flexslider'));
 	$('.flexslider').unbind().removeData();
 	$('.flexslider').flexslider({

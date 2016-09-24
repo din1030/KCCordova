@@ -22,9 +22,9 @@ $(document).one("pagebeforeshow", "[data-role='page']", function() {
 
 $(document).on('pagebeforeshow', "[data-role='page'].admin-page", function() {
 	var page_id = $.mobile.activePage.attr('id');
-	var page_title = $.mobile.activePage.jqmData('title');
+	var page_name = $.mobile.activePage.jqmData('page');
 
-	$('#' + page_id + ' select.navigateToPage').val('./admin.html#' + page_title).selectmenu('refresh');
+	$('#' + page_id + ' select.navigateToPage').val('./admin.html#' + page_name).selectmenu('refresh');
 });
 
 $(document).on('pagecreate', ".admin-page", function() {
@@ -76,112 +76,43 @@ $(document).on('pagebeforeshow', "#admin-home", function() {
 	}).done(function(data) {
 		var setting = data.result;
 		if (data.status) {
-			$('#home-upper-left-link').val(setting[0].link).selectmenu('refresh');
-			$('#home-upper-right-link').val(setting[1].link).selectmenu('refresh');
-			$('#home-middle-link').val(setting[2].link).selectmenu('refresh');
-			$('#home-lower-left-link').val(setting[3].link).selectmenu('refresh');
-			$('#home-lower-right-link').val(setting[4].link).selectmenu('refresh');
-			$('#pic1').attr('src', img_base + setting[0].pic);
-			$('#pic2').attr('src', img_base + setting[1].pic);
-			$('#pic3').attr('src', img_base + setting[2].pic);
-			$('#pic4').attr('src', img_base + setting[3].pic);
-			$('#pic5').attr('src', img_base + setting[4].pic);
+			$('#p1_link').val(setting[0].link).selectmenu('refresh');
+			$('#p2_link').val(setting[1].link).selectmenu('refresh');
+			$('#p3_link').val(setting[2].link).selectmenu('refresh');
+			$('#p4_link').val(setting[3].link).selectmenu('refresh');
+			$('#p5_link').val(setting[4].link).selectmenu('refresh');
+			$('#home-pic1').attr('src', img_base + setting[0].pic);
+			$('#home-pic2').attr('src', img_base + setting[1].pic);
+			$('#home-pic3').attr('src', img_base + setting[2].pic);
+			$('#home-pic4').attr('src', img_base + setting[3].pic);
+			$('#home-pic5').attr('src', img_base + setting[4].pic);
 		}
 	});
 
-	$('#adminHomeForm').on('submit', (function(e) {
+	$('#home-setting-form').on('submit', function(e) {
 		e.preventDefault();
-		var formData = new FormData(this);
-		console.log(formData);
-
-		$.ajax({
+		$(this).ajaxSubmit({
+			url: api_base + 'update_home_setting.php',
 			type: 'POST',
-			url: $(this).attr('action'),
-			data: formData,
-			cache: false,
-			contentType: false,
-			processData: false,
-			success: function(data) {
-				console.log("success");
-				console.log(data);
+			dataType: 'json',
+			beforeSend: function() {
+				$.mobile.loading('show');
 			},
-			error: function(data) {
-				console.log("error");
-				console.log(data);
+			complete: function() {
+				$.mobile.loading('hide');
+			},
+			success: function(data) {
+				// if (data.status) {
+				alert(data.message);
+				// } else {
+				// alert(data.message);
+				// }
+			},
+			error: function(request, error) {
+				alert('請確認您的網路連線狀態！');
 			}
 		});
-	}));
-
-	// $('#image-home').on('click', function (e) {
-	// 	e.preventDefault();
-	// 	console.log('test2');
-	// 	//check val
-	// 	var uLeftL = $('#home-upper-left-link').val();
-	// 	var uRightL = $('#home-upper-right-link').val();
-	// 	var middleL = $('#home-middle-link').val();
-	// 	var lLeftL = $('#home-lower-left-link').val();
-	// 	var lRightL = $('#home-lower-right-link').val();
-	//
-	// 	var pic1 = document.querySelector('#pic1').files[0];
-	// 	var pic2 = document.querySelector('#pic2').files[0];
-	// 	var pic3 = document.querySelector('#pic3').files[0];
-	// 	var pic4 = document.querySelector('#pic4').files[0];
-	// 	var pic5 = document.querySelector('#pic5').files[0];
-	//
-	// 	var fileToCheck = [uLeftL, uRightL, middleL, lLeftL, lRightL, pic1, pic2, pic3, pic4, pic5];
-	//
-	// 	for (var i = 0; i < fileToCheck.length; i++) {
-	// 		if (fileToCheck[i] === null || typeof fileToCheck[i] === 'undefined') {
-	// 			alert('check required value');
-	// 			return false;
-	// 		}
-	// 	}
-	//
-	// 	var dataObj = {
-	// 		picture1: {
-	// 			file: pic1,
-	// 			filename: pic1.name,
-	// 			link: uLeftL,
-	// 		},
-	// 		picture2: {
-	// 			file: pic2,
-	// 			filename: pic2.name,
-	// 			link: uRightL,
-	// 		},
-	// 		picture3: {
-	// 			file: pic3,
-	// 			filename: pic3.name,
-	// 			link: middleL,
-	// 		},
-	// 		picture4: {
-	// 			file: pic4,
-	// 			filename: pic4.name,
-	// 			link: lLeftL,
-	// 		},
-	// 		picture5: {
-	// 			file: pic5,
-	// 			filename: pic5.name,
-	// 			link: lRightL,
-	// 		}
-	// 	};
-	//
-	//
-	// 	console.log(dataObj);
-	//
-	// 	$.ajax({
-	// 		url: 'request.php',
-	// 		type: 'POST',
-	// 		dataType: 'json',
-	// 		data: dataObj,
-	// 		error : function (){ document.title='error'; },
-	// 		success: function (data) {
-	// 			alert(data);
-	// 		}
-	// 	});
-	//
-	//
-	// });
-
+	});
 });
 
 $(document).on('pagebeforeshow', "#admin-lifeservice", function() {
@@ -746,7 +677,7 @@ $(document).on('pagebeforeshow', "#admin-authority", function() {
 
 $(document).on('pagebeforeshow', "#admin-news", function() {
 	$.ajax({
-		url: api_base + 'get_news.php',
+		url: api_base + 'get_news.php?type=all',
 		dataType: 'json'
 	}).done(function(data) {
 		if (data.status) {

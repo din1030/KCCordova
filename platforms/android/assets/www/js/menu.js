@@ -3,12 +3,12 @@ var used_point = 0;
 var total_point = 0;
 var policy = {};
 
-$(document).one("pagebeforeshow", "[data-role='page']", function() {
-	if (window.localStorage.getItem('auth') == null || window.localStorage.getItem('user_id') == null) {
-		alert('您尚未登入！');
-		document.location.href = './index.html';
-	}
-});
+// $(document).one("pagebeforeshow", "[data-role='page']", function() {
+// 	if (window.localStorage.getItem('auth') == null || window.localStorage.getItem('user_id') == null) {
+// 		alert('您尚未登入！');
+// 		document.location.href = './index.html';
+// 	}
+// });
 
 $(document).on('pagebeforeshow', "#recommend-record", function() {
 	$.ajax({
@@ -202,7 +202,17 @@ $(document).on('pagebeforeshow', "#setting", function() {
 	}).fail(function() {
 		alert('請確認您的網路連線狀態！');
 	});
+	$('#user_lang').val(window.localStorage.getItem('lang_id')).selectmenu('refresh');
+	$('#user_country').val(window.localStorage.getItem('country_id')).selectmenu('refresh');
 
+	$('#user_lang').change(function(event) {
+		window.localStorage.setItem('lang_id', $('#user_lang').val());
+		console.log(window.localStorage.getItem('lang_id'));
+	});
+	$('#user_country').change(function(event) {
+		window.localStorage.setItem('country_id', $('#user_country').val());
+		console.log(window.localStorage.getItem('country_id'));
+	});
 });
 
 $(document).on('pagebeforeshow', ".policy-page", function() {

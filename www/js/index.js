@@ -55,7 +55,6 @@ $(document).on('pagecreate', '#login', function() {
 							} else {
 								// alert(result.message + '(login)' + result.sql);
 								facebookConnectPlugin.logout(function() {}, function() {});
-
 							}
 						});
 				} else {
@@ -155,12 +154,10 @@ $(document).on('pagecreate', '#app-reg', function() {
 			}
 		}
 	});
-
 	$('#reg-submit-btn').click(function() {
 		$('#app-reg-form').valid();
 		// return false; // cancel original event to prevent form submitting
 	});
-
 	$.ajax({
 		url: api_base + 'get_policy.php',
 		dataType: 'json'
@@ -171,7 +168,6 @@ $(document).on('pagecreate', '#app-reg', function() {
 	}).fail(function() {
 		alert('請確認您的網路連線狀態！');
 	});
-
 });
 
 $(document).on('pagecreate', '#fb-reg', function() {
@@ -274,7 +270,6 @@ $(document).on('pagecreate', '#fb-reg', function() {
 			}
 		}
 	});
-
 	$('#fb-reg-submit-btn').click(function() {
 		$('#fb-reg-form').valid();
 		// return false; // cancel original event to prevent form submitting
@@ -371,6 +366,7 @@ $(document).on('pagecreate', '#app-log-in', function() {
 		});
 	});
 });
+
 $(document).on('pagebeforeshow', '#reset-password', function() {
 	$("#reset-pswd-form").trigger('reset');
 	$('#rst_email').val(window.localStorage.getItem('reset_email'));
@@ -427,7 +423,6 @@ $(document).on('pagebeforeshow', '#home', function() {
 			});
 		}
 		$('#home-main').show();
-
 	}).fail(function() {
 		alert('請確認您的網路連線狀態！');
 	});
@@ -485,10 +480,8 @@ function fbLogin() {
 					// alert(result.message + '/' + result.sql);
 					// facebookConnectPlugin.logout(function() {}, function() {});
 					$.mobile.changePage("#fb-reg");
-
 				}
 			});
-
 	}, function(err) {
 		alert('log in error:' + JSON.stringify(err));
 	});

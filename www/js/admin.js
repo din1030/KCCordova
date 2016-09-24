@@ -1058,7 +1058,7 @@ $(document).on('pagebeforeshow', "#admin-member", function() {
 			var user = data.result;
 			$('#not-approved-table tbody').empty();
 			$.each(user, function(idx, obj) {
-				var user_tr = '<tr><td>' + obj.created + '</td><td>' + obj.name + '</td><td><a class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn user-detail-btn" data-user-id="' + obj.id + '">查看</a><button type="button" class="ui-btn ui-corner-all ui-btn-inline ui-mini green-btn user-detail-btn" data-user-id="' + obj.id + '">核准</button></td></tr>';
+				var user_tr = '<tr><td>' + obj.created + '</td><td>' + obj.name + '</td><td><a class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn user-detail-btn" data-user-id="' + obj.id + '">查看</a><button type="button" class="ui-btn ui-corner-all ui-btn-inline ui-mini green-btn user-approve-btn" data-user-id="' + obj.id + '">核准</button></td></tr>';
 				$('#not-approved-table tbody').append(user_tr);
 			});
 			$('.user-detail-btn').off();
@@ -1069,6 +1069,26 @@ $(document).on('pagebeforeshow', "#admin-member", function() {
 				$.mobile.changePage($('#admin-member-detail'), {
 					reloadPage: true,
 					changeHash: true
+				});
+			});
+			$('.user-approve-btn').off();
+			$('.user-approve-btn').click(function(event) {
+				var btn = $(this);
+				var user_id = $(this).jqmData("user-id");
+				$.ajax({
+					url: api_base + 'approve_user.php',
+					dataType: 'json',
+					type: 'POST',
+					data: {
+						user_id: user_id
+					}
+				}).done(function(data) {
+					alert(data.message);
+					if (data.status) {
+						btn.parents('tr').remove();
+					}
+				}).fail(function() {
+					alert('請確認您的網路連線狀態！');
 				});
 			});
 		}

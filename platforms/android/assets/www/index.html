@@ -82,14 +82,14 @@
                     </div>
                     <div id="lang_list">
                         <fieldset data-role="controlgroup" data-iconpos="right">
-                            <input type="radio" name="default_lang" id="ch_trad">
+                            <input type="radio" name="default_lang" id="ch_trad" value="0" checked="">
                             <label for="ch_trad">正體中文</label>
-                            <input type="radio" name="default_lang" id="ch_simp">
-                            <label for="ch_simp">簡體中文</label>
-                            <input type="radio" name="default_lang" id="eng">
-                            <label for="eng">英文</label>
-                            <input type="radio" name="default_lang" id="jpn">
-                            <label for="jpn">日文</label>
+                            <input type="radio" name="default_lang" id="ch_simp" value="1">
+                            <label for="ch_simp">简体中文</label>
+                            <input type="radio" name="default_lang" id="eng" value="2">
+                            <label for="eng">English</label>
+                            <input type="radio" name="default_lang" id="jpn" value="3">
+                            <label for="jpn">日本語</label>
                         </fieldset>
                     </div>
                     <div class="text-center">
@@ -97,9 +97,9 @@
                     </div>
                 </div>
                 <div class="float-right">
-                    <a href="#login" class="ui-btn ui-corner-all ui-btn-inline no-bg-bd" style="font-size:20px; color:#CB6EEA;">下一步
-                            <img src="./img/icons/next.png" alt="" style="width:1em; height:1em; vertical-align: text-bottom;" />
-                        </a>
+                    <a id="lang-next" href="#login" class="ui-btn ui-corner-all ui-btn-inline no-bg-bd" style="font-size:20px; color:#CB6EEA;">下一步
+                        <img src="./img/icons/next.png" alt="" style="width:1em; height:1em; vertical-align: text-bottom;" />
+                    </a>
                 </div>
             </div>
         </div>
@@ -173,12 +173,61 @@
                         <button id="login-btn" class="ui-shadow ui-btn ui-corner-all" type="submit">登入</button>
                     </form>
                     <div class="form-hint">
-                        <a href="#" class="form-hint">忘記密碼？</a>
+                        <a href="#forget-pswd" class="form-hint" data-rel="popup">忘記密碼？</a>
                     </div>
                     <div class="log-info">
                         只要登入 Kelly Club
                         <br>即可使用 APP專屬身分優質服務
                     </div>
+                </div>
+                <div id="forget-pswd" class="ui-corner-all" data-role="popup" data-position-to="window" data-transition="pop" data-theme="a" data-shadow="false" data-overlay-theme="b" style="min-height:150px;padding:20px;">
+                    請輸入您註冊之 email，我們將會把密碼重設通知信寄給您。
+                    <form id="forget-pswd-form">
+                        <input type="email" name="reset_email" id="reset_email" placeholder="example@gmail.com">
+                        <button type="submit" name="button">送出</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- in app log in -->
+        <div data-role="page" id="reset-password" data-theme="a" class="pink-bg">
+            <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
+                <div style="width:100%; text-align:center;">
+                    <a href="#login" class="ui-link float-left header-link left-link">
+                        取消
+                    </a>
+                    <span class="page-title">重設密碼</span>
+                </div>
+            </div>
+            <div data-role="main" class="ui-content log-operation" id="reset-password-main">
+                <div id="logo">
+                    <img src="./img/logo_color.png" alt="" />
+                    <div id="subtitle">
+                        全省八大行業
+                        <br> 資訊專用APP平台
+                    </div>
+                </div>
+                <div id="login-form-block">
+                    <form id="reset-pswd-form">
+                        <div class="ui-field-contain ui-disabled">
+                            <label for="rst_email">帳號</label>
+                            <input type="email" name="rst_email" id="rst_email">
+                        </div>
+                        <div class="ui-field-contain">
+                            <label for="reset_pswd">新密碼</label>
+                            <input type="password" name="reset_pswd" id="reset_pswd" placeholder="請輸入新密碼" class="required" minlength="4" maxlength="16" required="">
+                        </div>
+                        <div class="ui-field-contain">
+                            <label for="reset_pswd_chk">確認密碼</label>
+                            <input type="password" name="reset_pswd_chk" id="reset_pswd_chk" placeholder="請再次輸入密碼" class="required" minlength="4" maxlength="16" required="">
+                        </div>
+                        <div class="ui-field-contain">
+                            <label for="reset_code">驗證碼</label>
+                            <input type="text" name="reset_code" id="reset_code" placeholder="請輸入系統寄給您的驗證碼" class="required" required="">
+                        </div>
+                        <button id="login-btn" class="ui-shadow ui-btn ui-corner-all" type="submit">重設密碼</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -477,27 +526,27 @@
                     <ul>
                         <li>
                             <a href="./club.html" data-ajax="false">
-                                <div class="footer-tab tab1" data-title="club"></div>
+                                <div class="footer-tab tab1" data-page="club"></div>
                             </a>
                         </li>
                         <li>
                             <a href="./jobseeker.html" data-ajax="false">
-                                <div class="footer-tab tab2" data-title="jobseeker"></div>
+                                <div class="footer-tab tab2" data-page="jobseeker"></div>
                             </a>
                         </li>
                         <li>
                             <a href="./lifeservice.html" data-ajax="false">
-                                <div class="footer-tab tab3" data-title="lifeservice"></div>
+                                <div class="footer-tab tab3" data-page="lifeservice"></div>
                             </a>
                         </li>
                         <li>
                             <a href="./messages.html" data-ajax="false">
-                                <div class="footer-tab tab4" data-title="messages"></div>
+                                <div class="footer-tab tab4" data-page="messages"></div>
                             </a>
                         </li>
                         <li>
                             <a href="./favorite.html" data-ajax="false">
-                                <div class="footer-tab tab5" data-title="favorite"></div>
+                                <div class="footer-tab tab5" data-page="favorite"></div>
                             </a>
                         </li>
                     </ul>

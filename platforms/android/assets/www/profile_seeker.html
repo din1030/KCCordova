@@ -14,7 +14,7 @@
 
     <body>
         <!-- jobseeker profile -->
-        <div data-role="page" id="jobseeker-profile" data-theme="a" data-title="jobseeker-profile">
+        <div data-role="page" id="jobseeker-profile" data-theme="a" data-page="jobseeker-profile">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
@@ -73,7 +73,7 @@
         </div>
 
         <!-- jobseeker profile modify -->
-        <div data-role="page" id="jobseeker-profile-modify" data-theme="a" data-title="jobseeker-profile-modify" class="profile-pic-page">
+        <div data-role="page" id="jobseeker-profile-modify" data-theme="a" data-page="jobseeker-profile-modify" class="profile-pic-page">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
@@ -139,7 +139,7 @@
         </div>
 
         <!-- jobseeker resume -->
-        <div data-role="page" id="jobseeker-resume" data-theme="a" data-title="jobseeker-resume">
+        <div data-role="page" id="jobseeker-resume" data-theme="a" data-page="jobseeker-resume">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
@@ -156,44 +156,56 @@
                 </div>
             </div>
             <!-- /header -->
-            <div data-role="main" class="ui-content profile-main" id="jobseeker-resume-main">
-                <div class="">
-                    <fieldset>
-                        <label for="open-resume" style="display:inline-block;">公開求職資料：</label>
-                        <input type="checkbox" id="open-resume" data-role="flipswitch" data-on-text="是" data-off-text="否" checked>
-                    </fieldset>
-                    <span class="item_title">藝名：</span>
-                    <sapn id="nickname-span"></sapn>
-                    <br><span class="item_title">應徵類別：</span>
-                    <sapn id="caregory-span"></sapn>
-                    <br><span class="item_title">應徵地區：</span><span id="country-span"></span>
-                    <br><span class="item_title">生日：</span><span id="birth-span"></span>
-                    <br><span class="item_title">手機：</span><span id="mobile-span"></span>
-                    <br><span class="item_title">身高：</span><span id="height-span"></span>公分
-                    <br><span class="item_title">體重：</span><span id="weight-span"></span>公斤
-                    <br><span class="item_title">三圍：</span><span id="measurements-span"></span>
-                    <br><span class="item_title">歌唱能力：</span><span id="singing-span"></span>
-                    <br><span class="item_title">舞蹈能力：</span><span id="dancing-span"></span>
-                    <br><span class="item_title">酒量：</span><span id="drinking-span"></span>
-                    <br><span class="item_title">配合度：</span><span id="cooperation-span"></span>
-                    <br><span class="item_title">語言能力：</span><span id="languages-span"></span>
-                    <br><span class="item_title">婚姻狀況：</span><span id="marital-span"></span>
-                    <br><span class="item_title">最高學歷：</span><span id="education-span"></span>
-                    <br><span class="item_title">可上班時段：</span><span id="workingtime-span"></span>
-                    <br><span class="item_title">希望待遇：</span><span id="pay-span"></span>
-                    <br><span class="item_title">[應徵內容]</span>
-                    <br><span id="content-span"></span>
-                    <span class="item_title">[已上傳圖片]</span>
-                    <div id="pic_div"></div>
+            <div data-role="main" class="ui-content" id="jobseeker-resume-main">
+                <fieldset style="padding-left:10px;">
+                    <label for="open-resume" style="display:inline-block;">公開求職資料：</label>
+                    <input type="checkbox" id="open-resume" data-role="flipswitch" data-on-text="是" data-off-text="否" checked>
+                </fieldset>
+                <div class="flexslider">
+                    <!-- * dynamic content here * -->
+                </div>
+                <div id="info_block" class="detail_block">
+                    <div class="ui-bar ui-bar-a">
+                        <h3>求職者資訊</h3>
+                    </div>
+                    <div class="ui-body ui-body-a">
+                        <div id="club_title"></div>
+                        <span class="item_title">藝名：</span>
+                        <sapn id="nickname-span"></sapn>
+                        <br><span class="item_title">應徵地區：</span><span id="country-span"></span>
+                        <br><span class="item_title">生日：</span><span id="birth-span"></span>
+                        <br><span class="item_title">手機：</span><span id="mobile-span"></span>
+                        <br><span class="item_title">身高：</span><span id="height-span"></span>公分
+                        <br><span class="item_title">體重：</span><span id="weight-span"></span>公斤
+                        <br><span class="item_title">三圍：</span><span id="measurements-span"></span>
+                        <br><span class="item_title">歌唱能力：</span><span id="singing-span"></span>
+                        <br><span class="item_title">舞蹈能力：</span><span id="dancing-span"></span>
+                        <br><span class="item_title">酒量：</span><span id="drinking-span"></span>
+                        <br><span class="item_title">配合度：</span><span id="cooperation-span"></span>
+                        <br><span class="item_title">語言能力：</span><span id="languages-span"></span>
+                        <br><span class="item_title">婚姻狀況：</span><span id="marital-span"></span>
+                        <br><span class="item_title">最高學歷：</span><span id="education-span"></span>
+                        <br><span class="item_title">可上班時段：</span><span id="workingtime-span"></span>
+                        <br><span class="item_title">希望待遇：</span><span id="pay-span"></span>
+                    </div>
+                </div>
+                <div id="brief_block" class="detail_block">
+                    <div class="ui-bar ui-bar-a">
+                        <h3>應徵內容</h3>
+                    </div>
+                    <div class="ui-body ui-body-a text-justify">
+                        <span id="content-span"></span>
+                    </div>
+                </div>
+                <div class="detail_block">
                     <a href="#jobseeker-resume-modify" class="ui-btn ui-corner-all">編輯資料</a>
-                    <!-- <button id="member-submit-btn" class="ui-shadow ui-btn ui-corner-all" type="submit">編輯資料</button> -->
                 </div>
             </div>
             <!-- /main -->
         </div>
 
         <!-- jobseeker resume modify -->
-        <div data-role="page" id="jobseeker-resume-modify" data-theme="a" data-title="jobseeker-resume-modify">
+        <div data-role="page" id="jobseeker-resume-modify" data-theme="a" data-page="jobseeker-resume-modify">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
@@ -342,8 +354,8 @@
                         <label class="item_title" for="pay-input">希望待遇</label>
                         <fieldset data-role="controlgroup" data-type="horizontal">
                             <input type="text" name="pay-input" class="" id="pay-input" value="">
-                            <input type="checkbox" name="msg_talk" id="msg_talk">
-                            <label for="msg_talk">站內訊息談</label>
+                            <!-- <input type="checkbox" name="msg_talk" id="msg_talk"> -->
+                            <!-- <label for="msg_talk">站內訊息談</label> -->
                         </fieldset>
                     </div>
                     <div>
@@ -363,7 +375,7 @@
         </div>
 
         <!-- jobseeker resume pic -->
-        <div data-role="page" id="jobseeker-resume-pic" data-theme="a" data-title="jobseeker-resume-pic">
+        <div data-role="page" id="jobseeker-resume-pic" data-theme="a" data-page="jobseeker-resume-pic">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
@@ -401,12 +413,12 @@
                 <ul>
                     <li>
                         <a href="./club.html" data-ajax="false">
-                            <div class="footer-tab tab1" data-title="club"></div>
+                            <div class="footer-tab tab1" data-page="club"></div>
                         </a>
                     </li>
                     <li>
                         <a href="./jobseeker.html" data-ajax="false">
-                            <div class="footer-tab tab2 active" data-title="jobseeker"></div>
+                            <div class="footer-tab tab2 active" data-page="jobseeker"></div>
                         </a>
                     </li>
                     <li>
@@ -421,7 +433,7 @@
                     </li>
                     <li>
                         <a href="./favorite.html" data-ajax="false">
-                            <div class="footer-tab tab5" data-title="favorite"></div>
+                            <div class="footer-tab tab5" data-page="favorite"></div>
                         </a>
                     </li>
                 </ul>

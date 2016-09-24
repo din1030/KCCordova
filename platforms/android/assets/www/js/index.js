@@ -19,6 +19,13 @@ $(document).on('pagebeforeshow', '#disclaimer', function() {
 	});
 });
 
+$(document).on('pagebeforeshow', '#language', function() {
+	$('#lang-next').click(function(event) {
+		window.localStorage.setItem('lang_id', $('[name="default_lang"]:radio:checked').val());
+		// console.log(window.localStorage.getItem('lang_id'));
+	});
+});
+
 $(document).on('pagecreate', '#login', function() {
 	$('#fb_login_btn').click(function(event) {
 		facebookConnectPlugin.getLoginStatus(
@@ -48,7 +55,6 @@ $(document).on('pagecreate', '#login', function() {
 							} else {
 								// alert(result.message + '(login)' + result.sql);
 								facebookConnectPlugin.logout(function() {}, function() {});
-
 							}
 						});
 				} else {
@@ -148,12 +154,10 @@ $(document).on('pagecreate', '#app-reg', function() {
 			}
 		}
 	});
-
 	$('#reg-submit-btn').click(function() {
 		$('#app-reg-form').valid();
 		// return false; // cancel original event to prevent form submitting
 	});
-
 	$.ajax({
 		url: api_base + 'get_policy.php',
 		dataType: 'json'
@@ -164,7 +168,6 @@ $(document).on('pagecreate', '#app-reg', function() {
 	}).fail(function() {
 		alert('請確認您的網路連線狀態！');
 	});
-
 });
 
 $(document).on('pagecreate', '#fb-reg', function() {
@@ -267,7 +270,6 @@ $(document).on('pagecreate', '#fb-reg', function() {
 			}
 		}
 	});
-
 	$('#fb-reg-submit-btn').click(function() {
 		$('#fb-reg-form').valid();
 		// return false; // cancel original event to prevent form submitting
@@ -336,6 +338,64 @@ $(document).on('pagecreate', '#app-log-in', function() {
 		$('#app-log-form').valid();
 		// return false; // cancel original event to prevent form submitting
 	});
+	$('#forget-pswd-form').on('submit', function(e) {
+		e.preventDefault();
+		var reset_email = $('#forget-pswd-form #reset_email').val();
+		$(this).ajaxSubmit({
+			url: api_base + 'send_reset_mail.php',
+			type: 'POST',
+			dataType: 'json',
+			beforeSend: function() {
+				$.mobile.loading('show');
+			},
+			complete: function() {
+				$.mobile.loading('hide');
+			},
+			success: function(result) {
+				if (result.status) {
+					window.localStorage.setItem('reset_email', reset_email);
+					alert(result.message);
+					$.mobile.changePage("#reset-password");
+				} else {
+					alert(result.message);
+				}
+			},
+			error: function(request, error) {
+				alert('請確認您的網路連線狀態！');
+			}
+		});
+	});
+});
+
+$(document).on('pagebeforeshow', '#reset-password', function() {
+	$("#reset-pswd-form").trigger('reset');
+	$('#rst_email').val(window.localStorage.getItem('reset_email'));
+	$('#reset-pswd-form').off();
+	$('#reset-pswd-form').on('submit', function(e) {
+		e.preventDefault();
+		$(this).ajaxSubmit({
+			url: api_base + 'reset_password.php',
+			type: 'POST',
+			dataType: 'json',
+			beforeSend: function() {
+				$.mobile.loading('show');
+			},
+			complete: function() {
+				$.mobile.loading('hide');
+			},
+			success: function(result) {
+				if (result.status) {
+					alert(result.message);
+					$.mobile.changePage("#app-log-in");
+				} else {
+					alert(result.message);
+				}
+			},
+			error: function(request, error) {
+				alert('請確認您的網路連線狀態！');
+			}
+		});
+	});
 });
 
 $(document).on('pagebeforeshow', '#home', function() {
@@ -363,7 +423,6 @@ $(document).on('pagebeforeshow', '#home', function() {
 			});
 		}
 		$('#home-main').show();
-
 	}).fail(function() {
 		alert('請確認您的網路連線狀態！');
 	});
@@ -390,24 +449,6 @@ $(document).on('pagebeforeshow', '#home', function() {
 				break;
 		}
 	}
-	// $.ajax(api_base + 'getAdsHome.json')
-	// 	.done(function(res) {
-	// 		var result = res[0];
-	// 		// caches
-	// 		var ads1 = $('#ads-home .ui-block-a');
-	// 		var ads2 = $('#ads-home .ui-block-b');
-	//
-	// 		if (result.status) {
-	// 			// console.log('yes');
-	// 			// console.log(ads1);
-	// 			ads1.find('a').attr('href', result.ads[0].adsUrl);
-	// 			ads2.find('a').attr('href', result.ads[1].adsUrl);
-	// 			ads1.find('img').attr('src', img_base + '' + result.ads[0].adsImage);
-	// 			ads2.find('img').attr('src', img_base + '' + result.ads[1].adsImage);
-	//
-	// 			$('#ads-home').show();
-	// 		}
-	// 	})
 });
 
 function fbLogin() {
@@ -439,10 +480,8 @@ function fbLogin() {
 					// alert(result.message + '/' + result.sql);
 					// facebookConnectPlugin.logout(function() {}, function() {});
 					$.mobile.changePage("#fb-reg");
-
 				}
 			});
-
 	}, function(err) {
 		alert('log in error:' + JSON.stringify(err));
 	});

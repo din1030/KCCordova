@@ -1,9 +1,9 @@
-$(document).one("pagebeforeshow", "[data-role='page']", function() {
-	if (window.localStorage.getItem('auth') == null || window.localStorage.getItem('user_id') == null) {
-		alert('您尚未登入！');
-		document.location.href = './index.html';
-	}
-});
+// $(document).one("pagebeforeshow", "[data-role='page']", function() {
+// 	if (window.localStorage.getItem('auth') == null || window.localStorage.getItem('user_id') == null) {
+// 		alert('您尚未登入！');
+// 		document.location.href = './index.html';
+// 	}
+// });
 
 $(document).on('pagebeforecreate', '#pay', function() {
 	$.ajax({

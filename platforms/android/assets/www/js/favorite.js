@@ -1,9 +1,9 @@
-$(document).one("pagebeforeshow", "[data-role='page']", function() {
-	if (window.localStorage.getItem('auth') == null || window.localStorage.getItem('user_id') == null) {
-		alert('您尚未登入！');
-		document.location.href = './index.html';
-	}
-});
+// $(document).one("pagebeforeshow", "[data-role='page']", function() {
+// 	if (window.localStorage.getItem('auth') == null || window.localStorage.getItem('user_id') == null) {
+// 		alert('您尚未登入！');
+// 		document.location.href = './index.html';
+// 	}
+// });
 
 $(document).on('pagebeforecreate', '#favorite', function() {
 	$.ajax({
@@ -31,7 +31,7 @@ $(document).on('pagebeforecreate', '#favorite', function() {
 					link = './lifeservice.html#lifeservice-detail';
 				}
 				var fav_div = $('<div></div>').addClass('detail_block msg_block').attr('data-type', obj.type).attr('data-user-id', user_id)
-					.append('<div class="ui-bar ui-bar-a"><sapn>' + type_word + '</sapn><button class="ui-btn ui-corner-all ui-btn-inline ui-mini ui-btn-right ui-icon-delete ui-btn-icon-notext del-fav-btn" type="button" name="button" data-fav-id="' + obj.fav_id + '" data-shadow="false">x</button></div><a href="' + link + '" data-ajax="false"><div class="ui-body ui-body-a"><div class="avatar msg-avatar float-left"><img src="' + img_base +  obj.pic1 + '" style="width: 70px; height: 70px; border-radius: 50%;" alt=""></div><strong>' + name + '</strong><br>' + obj.country + '｜' + obj.area + '</div></a>');
+					.append('<div class="ui-bar ui-bar-a"><sapn>' + type_word + '</sapn><button class="ui-btn ui-corner-all ui-btn-inline ui-mini ui-btn-right ui-icon-delete ui-btn-icon-notext del-fav-btn" type="button" name="button" data-fav-id="' + obj.fav_id + '" data-shadow="false">x</button></div><a href="' + link + '" data-ajax="false"><div class="ui-body ui-body-a"><div class="avatar msg-avatar float-left"><img src="' + img_base + obj.pic1 + '" style="width: 70px; height: 70px; border-radius: 50%;" alt=""></div><strong>' + name + '</strong><br>' + obj.country + '｜' + obj.area + '</div></a>');
 				$(fav_div).appendTo($('[data-role="main"]'));
 
 			});
@@ -54,7 +54,7 @@ $(document).on('pagebeforecreate', '#favorite', function() {
 				}
 			});
 		} else {
-			$('<div>' + data.message + '</div>').appendTo($('[data-role="main"]'));
+			$('<p style="text-align: center; background-color:white; padding:15px;">' + data.message + '</p>').appendTo($('[data-role="main"]'));
 		}
 		$('.detail_block').click(function(event) {
 			var type = $(this).jqmData("type");

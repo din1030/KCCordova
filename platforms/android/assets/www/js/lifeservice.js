@@ -3,12 +3,12 @@ var dataJson = '';
 var searchJson;
 var searchState = false;
 
-$(document).on("pagebeforecreate", "[data-role='page']", function() {
-	if (window.localStorage.getItem('auth') == null || window.localStorage.getItem('user_id') == null) {
-		alert('您尚未登入！');
-		document.location.href = './index.html';
-	}
-});
+// $(document).on("pagebeforecreate", "[data-role='page']", function() {
+// 	if (window.localStorage.getItem('auth') == null || window.localStorage.getItem('user_id') == null) {
+// 		alert('您尚未登入！');
+// 		document.location.href = './index.html';
+// 	}
+// });
 
 $(document).on('pagebeforecreate', '#lifeservice', function() {
 	$.ajax({
@@ -19,7 +19,7 @@ $(document).on('pagebeforecreate', '#lifeservice', function() {
 			dataJson = data;
 			// console.log(dataJson);
 			$.each(data.result, function(idx, obj) {
-				var classification_li = $('<div></div>').append('<a href="" data-id="' + obj.id + '" data-ajax="false"><img src="' + img_base +  obj.pic + '"></a>');
+				var classification_li = $('<div></div>').append('<a href="" data-id="' + obj.id + '" data-ajax="false"><img src="' + img_base + obj.pic + '"></a>');
 				$(classification_li).appendTo($('#service-category-block'));
 			});
 			$('#service-category-block a').click(function(event) {
@@ -82,7 +82,7 @@ $(document).on('pagebeforeshow', '#lifeservice-list', function() {
 	function classListRefresh(store) {
 		var store_list = '';
 		$.each(store, function(idx, obj) {
-			store_list += '<li data-icon="false"><a data-store-id="' + obj.id + '" data-ajax="false"><img class="life-thumbnail" src="' + img_base +  obj.pic1 + '"><h2>' + obj.name + '</h2><p>' + obj.country + ' ' + obj.area + '</p><div class="slogan">' + obj.slogan + '</div></a></li>';
+			store_list += '<li data-icon="false"><a data-store-id="' + obj.id + '" data-ajax="false"><img class="life-thumbnail" src="' + img_base + obj.pic1 + '"><h2>' + obj.name + '</h2><p>' + obj.country + ' ' + obj.area + '</p><div class="slogan">' + obj.slogan + '</div></a></li>';
 		})
 
 		$('#lifeservice-list-main ul').html(store_list);
@@ -124,7 +124,7 @@ $(document).on('pagebeforeshow', '#lifeservice-detail', function() {
 			if (data.status) {
 				var service = data.result[0];
 				var details = '<div id="club_title">' + service.name + '</div>地址：' + service.address + '<br>電話：' + service.tel + '<br>營業時間：<br>';
-				var contactInfo = '<div class="avatar float-left"><img src="' + img_base +  service.contact_pic + '" alt="" style="width: 70px; height: 70px; border-radius: 50%;"></div><strong>' + service.contact_name + '</strong><small>預約窗口</small><br> Line:' + service.contact_line;
+				var contactInfo = '<div class="avatar float-left"><img src="' + img_base + service.contact_pic + '" alt="" style="width: 70px; height: 70px; border-radius: 50%;"></div><strong>' + service.contact_name + '</strong><small>預約窗口</small><br> Line:' + service.contact_line;
 				var consume_content = service.consume_content;
 				var slideContainer = '<ul class="slides">';
 
@@ -136,7 +136,7 @@ $(document).on('pagebeforeshow', '#lifeservice-detail', function() {
 
 				$.each(service.pic, function(idx, pic) {
 					if (pic != null && pic != '') {
-						slideContainer += '<li><img src="' + img_base +  pic + '"></li>';
+						slideContainer += '<li><img src="' + img_base + pic + '"></li>';
 					}
 				});
 

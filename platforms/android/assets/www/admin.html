@@ -13,7 +13,7 @@
 
     <body>
         <!-- admin member -->
-        <div data-role="page" id="admin-member" data-theme="a" data-title="admin-member" class="admin-page">
+        <div data-role="page" id="admin-member" data-theme="a" data-page="admin-member" class="admin-page">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
@@ -168,7 +168,7 @@
         </div>
 
         <!-- admin member detail -->
-        <div data-role="page" id="admin-member-detail" data-theme="a" data-title="admin-member-detail">
+        <div data-role="page" id="admin-member-detail" data-theme="a" data-page="admin-member-detail">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
@@ -288,7 +288,7 @@
         </div>
 
         <!-- admin home -->
-        <div data-role="page" id="admin-home" data-theme="a" data-title="admin-home" class="admin-page">
+        <div data-role="page" id="admin-home" data-theme="a" data-page="admin-home" class="admin-page">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
@@ -312,13 +312,13 @@
                         <option value="./admin.html#admin-category">分類管理</option>
                     </select>
                 </div>
-                <form id="adminHomeForm" action="data.php">
+                <form id="home-setting-form">
                     <div class="home-pic-block">
                         <div class="left-block">
                             <div class="pic-position">首頁左上圖</div>
                             <div>連結頁面</div>
                             <div class="">
-                                <select required id="home-upper-left-link" name="home-upper-left-link" data-mini="true" data-inline="true">
+                                <select required id="p1_link" name="p1_link" data-inline="true">
                                     <option value="club">酒店系統</option>
                                     <option value="seeker">求職者</option>
                                     <option value="life">生活服務</option>
@@ -328,7 +328,7 @@
                             </div>
                         </div>
                         <div class="img-block">
-                            <input type="image" class="home-pic" id="pic1" src="./img/home1.jpg" />
+                            <input type="image" class="home-pic" id="home-pic1" src="./img/home1.jpg" />
                             <input type="file" name="pic1" class="home-pic-input" />
                         </div>
                         <div class="clearfix"></div>
@@ -338,7 +338,7 @@
                             <div class="pic-position">首頁右上圖</div>
                             <div>連結頁面</div>
                             <div class="">
-                                <select required name="home-upper-right-link" id="home-upper-right-link" data-mini="true" data-inline="true">
+                                <select required name="p2_link" id="p2_link" data-inline="true">
                                     <option value="club">酒店系統</option>
                                     <option value="seeker">求職者</option>
                                     <option value="life">生活服務</option>
@@ -348,7 +348,7 @@
                             </div>
                         </div>
                         <div class="img-block">
-                            <input type="image" class="home-pic" id="pic2" src="./img/home1.jpg" />
+                            <input type="image" class="home-pic" id="home-pic2" src="./img/home1.jpg" />
                             <input type="file" name="pic2" class="home-pic-input" />
                         </div>
                         <div class="clearfix"></div>
@@ -358,7 +358,7 @@
                             <div class="pic-position">首頁中大圖</div>
                             <div>連結頁面</div>
                             <div class="">
-                                <select required name="home-middle-link" id="home-middle-link" data-mini="true" data-inline="true">
+                                <select required name="p3_link" id="p3_link" data-inline="true">
                                     <option value="club">酒店系統</option>
                                     <option value="seeker">求職者</option>
                                     <option value="life">生活服務</option>
@@ -368,7 +368,7 @@
                             </div>
                         </div>
                         <div class="img-block">
-                            <input type="image" class="home-pic" id="pic3" src="./img/home1.jpg" />
+                            <input type="image" class="home-pic" id="home-pic3" src="./img/home1.jpg" />
                             <input type="file" name="pic3" class="home-pic-input" />
                         </div>
                         <div class="clearfix"></div>
@@ -378,7 +378,7 @@
                             <div class="pic-position">首頁左下圖</div>
                             <div>連結頁面</div>
                             <div class="">
-                                <select required name="home-lower-left-link" id="home-lower-left-link" data-mini="true" data-inline="true">
+                                <select required name="p4_link" id="p4_link" data-inline="true">
                                     <option value="club">酒店系統</option>
                                     <option value="seeker">求職者</option>
                                     <option value="life">生活服務</option>
@@ -388,7 +388,7 @@
                             </div>
                         </div>
                         <div class="img-block">
-                            <input type="image" class="home-pic" id="pic4" src="./img/home1.jpg" />
+                            <input type="image" class="home-pic" id="home-pic4" src="./img/home1.jpg" />
                             <input type="file" name="pic4" class="home-pic-input" />
                         </div>
                         <div class="clearfix"></div>
@@ -398,7 +398,7 @@
                             <div class="pic-position">首頁右下圖</div>
                             <div>連結頁面</div>
                             <div class="">
-                                <select required name="home-lower-right-link" id="home-lower-right-link" data-mini="true" data-inline="true">
+                                <select required name="p5_link" id="p5_link" data-inline="true">
                                     <option value="club">酒店系統</option>
                                     <option value="seeker">求職者</option>
                                     <option value="life">生活服務</option>
@@ -408,18 +408,18 @@
                             </div>
                         </div>
                         <div class="img-block">
-                            <input type="image" class="home-pic" id="pic5" src="./img/home1.jpg" />
+                            <input type="image" class="home-pic" id="home-pic5" src="./img/home1.jpg" />
                             <input type="file" name="pic5" class="home-pic-input" />
                         </div>
                         <div class="clearfix"></div>
                     </div>
-                    <button type="submit" id="image-home" class="ui-btn ui-corner-all no-bg-bd send-btn purple-btn">送出</button>
+                    <button type="submit" id="setting-submit" class="ui-btn ui-corner-all no-bg-bd  purple-btn">送出</button>
                 </form>
             </div>
         </div>
 
         <!-- admin lifeservice -->
-        <div data-role="page" id="admin-lifeservice" data-theme="a" data-title="admin-lifeservice" class="admin-page">
+        <div data-role="page" id="admin-lifeservice" data-theme="a" data-page="admin-lifeservice" class="admin-page">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
@@ -498,7 +498,7 @@
         </div>
 
         <!-- admin lifeservice store -->
-        <div data-role="page" id="admin-lifeservice-store" data-theme="a" data-title="admin-lifeservice" class="admin-page">
+        <div data-role="page" id="admin-lifeservice-store" data-theme="a" data-page="admin-lifeservice" class="admin-page">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
@@ -534,7 +534,7 @@
         </div>
 
         <!-- admin lifeservice store info -->
-        <div data-role="page" id="admin-lifeservice-store-info" data-theme="a" data-title="admin-lifeservice" class="admin-page">
+        <div data-role="page" id="admin-lifeservice-store-info" data-theme="a" data-page="admin-lifeservice" class="admin-page">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
@@ -610,7 +610,7 @@
         </div>
 
         <!-- admin lifeservice store info -->
-        <div data-role="page" id="admin-add-lifeservice-store" data-theme="a" data-title="admin-lifeservice" class="admin-page">
+        <div data-role="page" id="admin-add-lifeservice-store" data-theme="a" data-page="admin-lifeservice" class="admin-page">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
@@ -693,7 +693,7 @@
         </div>
 
         <!-- admin recommend -->
-        <div data-role="page" id="admin-recommend" data-theme="a" data-title="admin-recommend" class="admin-page">
+        <div data-role="page" id="admin-recommend" data-theme="a" data-page="admin-recommend" class="admin-page">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
@@ -761,7 +761,7 @@
         </div>
 
         <!-- admin recommend detail-->
-        <div data-role="page" id="admin-recommend-detail" data-theme="a" data-title="admin-recommend" class="admin-page">
+        <div data-role="page" id="admin-recommend-detail" data-theme="a" data-page="admin-recommend" class="admin-page">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
@@ -809,7 +809,7 @@
         </div>
 
         <!-- admin redeem -->
-        <div data-role="page" id="admin-recommend-redeem" data-theme="a" data-title="admin-recommend" class="admin-page">
+        <div data-role="page" id="admin-recommend-redeem" data-theme="a" data-page="admin-recommend" class="admin-page">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
@@ -912,7 +912,7 @@
         </div>
 
         <!-- admin news -->
-        <div data-role="page" id="admin-news" data-theme="a" data-title="admin-news" class="admin-page">
+        <div data-role="page" id="admin-news" data-theme="a" data-page="admin-news" class="admin-page">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
@@ -943,7 +943,7 @@
         </div>
 
         <!-- admin news add -->
-        <div data-role="page" id="admin-news-add" data-theme="a" data-title="admin-news" class="admin-page">
+        <div data-role="page" id="admin-news-add" data-theme="a" data-page="admin-news" class="admin-page">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
@@ -986,7 +986,7 @@
         </div>
 
         <!-- admin news edit -->
-        <div data-role="page" id="admin-news-edit" data-theme="a" data-title="admin-news" class="admin-page">
+        <div data-role="page" id="admin-news-edit" data-theme="a" data-page="admin-news" class="admin-page">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
@@ -1033,7 +1033,7 @@
         </div>
 
         <!-- admin plan -->
-        <div data-role="page" id="admin-plan" data-theme="a" data-title="admin-plan" class="admin-page">
+        <div data-role="page" id="admin-plan" data-theme="a" data-page="admin-plan" class="admin-page">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
@@ -1097,7 +1097,7 @@
         </div>
 
         <!-- admin authority -->
-        <div data-role="page" id="admin-authority" data-theme="a" data-title="admin-authority" class="admin-page">
+        <div data-role="page" id="admin-authority" data-theme="a" data-page="admin-authority" class="admin-page">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
@@ -1232,7 +1232,7 @@
         </div>
 
         <!-- admin messages -->
-        <div data-role="page" id="admin-messages" data-theme="a" data-title="admin-messages" class="admin-page">
+        <div data-role="page" id="admin-messages" data-theme="a" data-page="admin-messages" class="admin-page">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
@@ -1280,7 +1280,7 @@
         </div>
 
         <!-- admin category -->
-        <div data-role="page" id="admin-category" data-theme="a" data-title="admin-category" class="admin-page">
+        <div data-role="page" id="admin-category" data-theme="a" data-page="admin-category" class="admin-page">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
@@ -1355,17 +1355,17 @@
                 <ul>
                     <li>
                         <a href="./club.html" data-ajax="false">
-                            <div class="footer-tab tab1" data-title="club"></div>
+                            <div class="footer-tab tab1" data-page="club"></div>
                         </a>
                     </li>
                     <li>
                         <a href="./jobseeker.html" data-ajax="false">
-                            <div class="footer-tab tab2" data-title="jobseeker"></div>
+                            <div class="footer-tab tab2" data-page="jobseeker"></div>
                         </a>
                     </li>
                     <li>
                         <a href="./lifeservice.html" data-ajax="false">
-                            <div class="footer-tab tab3 active" data-title="lifeservice"></div>
+                            <div class="footer-tab tab3 active" data-page="lifeservice"></div>
                         </a>
                     </li>
                     <li>
@@ -1375,7 +1375,7 @@
                     </li>
                     <li>
                         <a href="./favorite.html" data-ajax="false">
-                            <div class="footer-tab tab5" data-title="favorite"></div>
+                            <div class="footer-tab tab5" data-page="favorite"></div>
                         </a>
                     </li>
                 </ul>

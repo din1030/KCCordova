@@ -1,9 +1,9 @@
-$(document).one("pagebeforeshow", "[data-role='page']", function() {
-	if (window.localStorage.getItem('auth') == null || window.localStorage.getItem('user_id') == null) {
-		alert('您尚未登入！');
-		document.location.href = './index.html';
-	}
-});
+// $(document).one("pagebeforeshow", "[data-role='page']", function() {
+// 	if (window.localStorage.getItem('auth') == null || window.localStorage.getItem('user_id') == null) {
+// 		alert('您尚未登入！');
+// 		document.location.href = './index.html';
+// 	}
+// });
 
 $(document).on('pagebeforeshow', '#member-profile, #club-profile, #jobseeker-profile ,#member-modify, #club-profile-modify, #jobseeker-profile-modify', function() {
 	var page_id = '#' + $.mobile.activePage.attr('id');
@@ -38,7 +38,7 @@ $(document).on('pagebeforeshow', '#member-modify, #club-profile-modify, #jobseek
 	$('.profile-submit-btn').off();
 	var page_id = '#' + $.mobile.activePage.attr('id');
 	$(page_id + ' .profile-submit-btn').click(function(event) {
-		console.log(page_id);
+		// console.log(page_id);
 		var backpage = $(this).jqmData("backpage");
 		$(this).parents('form').ajaxSubmit({
 			url: api_base + 'profile_modify.php',
@@ -56,7 +56,7 @@ $(document).on('pagebeforeshow', '#member-modify, #club-profile-modify, #jobseek
 			success: function(data) {
 				if (data.status) {
 					alert(data.message);
-					$.mobile.changePage($(page_id), {
+					$.mobile.changePage($(backpage), {
 						reloadPage: true,
 						changeHash: true
 					});
@@ -77,7 +77,7 @@ if (window.localStorage.getItem('auth') == '3') {
 			url: api_base + 'get_form_content.php?action=get_category&type=job',
 			dataType: 'json'
 		}).done(function(data) {
-			console.log(data);
+			// console.log(data);
 			var classificationList = '';
 			$.each(data, function(idx, obj) {
 				classificationList += '<option value="' + obj.id + '">' + obj.title + '</option>';
@@ -97,6 +97,16 @@ if (window.localStorage.getItem('auth') == '3') {
 				} else {
 					$('#open-resume').removeProp('checked').flipswitch("refresh");
 				}
+				var slideContainer = '<ul class="slides">';
+				$.each(data.result[0].pic, function(idx, pic) {
+					if (pic != null && pic != '') {
+						slideContainer += '<li><img src="' + img_base + pic + '"></li>'
+					}
+				});
+				slideContainer += '</ul>';
+				$('.flexslider').html(slideContainer);
+
+				$('#club_title').html(seeker.name);
 				$('#nickname-span').html(seeker.nickname);
 				$('#caregory-span').html(seeker.job_title);
 				$('#country-span').html(seeker.country + ' ' + seeker.area);
@@ -108,7 +118,6 @@ if (window.localStorage.getItem('auth') == '3') {
 				$('#education-span').html(seeker.education);
 				switch (seeker.singing) {
 					case 'great':
-					default:
 						$('#singing-span').html('很好');
 						break;
 					case 'soso':
@@ -117,10 +126,12 @@ if (window.localStorage.getItem('auth') == '3') {
 					case 'bad':
 						$('#singing-span').html('不佳');
 						break;
+					default:
+						$('#singing-span').html('（未填）');
+						break;
 				}
 				switch (seeker.dancing) {
 					case 'great':
-					default:
 						$('#dancing-span').html('很好');
 						break;
 					case 'soso':
@@ -129,10 +140,12 @@ if (window.localStorage.getItem('auth') == '3') {
 					case 'bad':
 						$('#dancing-span').html('不佳');
 						break;
+					default:
+						$('#dancing-span').html('（未填）');
+						break;
 				}
 				switch (seeker.drinking) {
 					case 'great':
-					default:
 						$('#drinking-span').html('很好');
 						break;
 					case 'soso':
@@ -141,10 +154,12 @@ if (window.localStorage.getItem('auth') == '3') {
 					case 'bad':
 						$('#drinking-span').html('不佳');
 						break;
+					default:
+						$('#drinking-span').html('（未填）');
+						break;
 				}
 				switch (seeker.cooperation) {
 					case 'great':
-					default:
 						$('#cooperation-span').html('很好');
 						break;
 					case 'soso':
@@ -153,10 +168,12 @@ if (window.localStorage.getItem('auth') == '3') {
 					case 'bad':
 						$('#cooperation-span').html('不佳');
 						break;
+					default:
+						$('#cooperation-span').html('（未填）');
+						break;
 				}
 				switch (seeker.marital) {
 					case 'married':
-					default:
 						$('#marital-span').html('已婚');
 						break;
 					case 'single':
@@ -165,10 +182,12 @@ if (window.localStorage.getItem('auth') == '3') {
 					case 'divorced':
 						$('#marital-span').html('離異');
 						break;
+					default:
+						$('#marital-span').html('（未填）');
+						break;
 				}
 				switch (seeker.workingtime) {
 					case 'afternoon':
-					default:
 						$('#workingtime-span').html('午班');
 						break;
 					case 'night':
@@ -177,11 +196,14 @@ if (window.localStorage.getItem('auth') == '3') {
 					case 'PT':
 						$('#workingtime-span').html('PT');
 						break;
+					default:
+						$('#workingtime-span').html('（未填）');
+						break;
 				}
-				$('#pic_div').empty();
-				$.each(seeker.pic, function(idx, obj) {
-					$('#pic_div').append('<div>' + obj + '</div>')
-				});
+				// $('#pic_div').empty();
+				// $.each(seeker.pic, function(idx, obj) {
+				// 	$('#pic_div').append('<div>' + obj + '</div>')
+				// });
 				$('#languages-span').html(seeker.languages);
 				$('#pay-span').html(seeker.pay);
 				$('#content-span').html(seeker.job_content.replace(/\n/g, "<br>"));
