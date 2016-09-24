@@ -8,9 +8,9 @@ include 'db_setting.php';
 $type = $_GET['type'];
 $type_string = '';
 if (!empty($type)) { // 有指定 type
-    $type_string = " WHERE `type`='$type'";
+    $type_string = " AND `type`='$type'";
 }
-$sql_string = 'SELECT u.`id`, u.`type`, u.`name`, u.`created` FROM `user` u'.$type_string.' ORDER BY u.`created` DESC';
+$sql_string = 'SELECT u.`id`, u.`type`, u.`name`, u.`created` FROM `user` u WHERE `approved`=1'.$type_string.' ORDER BY u.`created` DESC';
 
 $sql = $mysqli->query($sql_string);
 if ($sql->num_rows > 0) {
