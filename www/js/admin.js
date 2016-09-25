@@ -1196,21 +1196,28 @@ $(document).on('pagebeforeshow', "#admin-member-detail", function() {
 					$.ajax({
 						url: api_base + 'get_plan.php',
 						dataType: 'json'
-					}).done(function(data) {
-						if (data.status) {
-							$.each(data.result, function(idx, obj) {
+					}).done(function(plan) {
+						if (plan.status) {
+							$.each(plan.result, function(idx, obj) {
 								$('select#plan_select').append('<option value="' + obj.id + '">' + obj.title + '</option>')
 							});
 							$('select#plan_select').selectmenu('refresh');
 							$('#plan_block').show();
-							if (data.result.publish_title != null) {
-								$('#plan_select').val(data.result.p_id).selectmenu('refresh');
+							if (data.result.plan_title != null) {
+								$('select#plan_select').val(data.result.p_id).selectmenu('refresh');
 								$('#publish_due').val(data.result.publish_due);
+							} else {
+								$('select#plan_select').val(0).selectmenu('refresh');
+								$('#publish_due').val('');
 							}
 						}
 					}).fail(function() {
 						alert('請確認您的網路連線狀態！');
 					});
+					// if (data.result.plan_title != null) {
+					// 	$('select#plan_select').val(data.result.p_id).selectmenu('refresh');
+					// 	$('#publish_due').val(data.result.publish_due);
+					// }
 					break;
 				case '3':
 					// $('#seeker').prop("checked", true).checkboxradio("refresh");
@@ -1218,15 +1225,6 @@ $(document).on('pagebeforeshow', "#admin-member-detail", function() {
 					$('#auth_type').val('求職者');
 					break;
 			}
-			// if (data.result.type == 2) {
-			// 	if (data.result.plan_title != null) {
-			// 		$(page_id + ' .plan-input').val(data.result.plan_title);
-			// 		$(page_id + ' .plan-during-input').val(data.result.publish_start + '-' + data.result.publish_due);
-			// 		$(page_id + ' .plan-during-input').parent().parent().show();
-			// 	} else {
-			// 		$(page_id + ' .plan-during-input').parent().parent().hide();
-			// 	}
-			// }
 		}
 	}).fail(function() {
 		alert('請確認您的網路連線狀態！');

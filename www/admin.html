@@ -282,9 +282,13 @@
                             <!-- <option value="2">付費方案B</option> -->
                         </select>
                     </div>
-                    <div class="ui-field-contain">
-                        <label class="item_title" for="publish_due">到期時間</label>
-                        <input type="date" name="publish_due" class="" id="publish_due" value=""></div>
+                    <form id="member-plan-update-form">
+                        <div class="ui-field-contain">
+                            <label class="item_title" for="publish_due">到期時間</label>
+                            <input type="date" name="publish_due" class="" id="publish_due" value="">
+                        </div>
+                        <button id="member-plan-update-btn" type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn">修 改</button>
+                    </form>
                     <div class="clearfix"></div>
                 </div>
                 <div class="">
@@ -300,9 +304,9 @@
                         </tbody>
                     </table>
                 </div>
-                <!-- <div class="">
-                    <button id="admin-member-submit-btn" type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn">送出</button>
-                </div> -->
+                <div class="">
+                    <a class="ui-btn ui-corner-all no-bg-bd green-btn">編輯店家資訊</a>
+                </div>
             </div>
         </div>
 
@@ -1045,7 +1049,7 @@
                         <input type="file" name="news_edit_pic" class="" id="news_edit_pic" value="">
                     </div>
                     <label class="item_title" for="news_edit_content"><strong>內容：</strong></label>
-                    <textarea wrap="virtual" name="news_edit_content" rows="8" id="news_edit_content" required=""></textarea>
+                    <textarea wrap="virtual" name="news_edit_content" rows="8" id="news_edit_content" required=""></teired=""></textarea>
                     <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn">送出</button>
                 </form>
             </div>
