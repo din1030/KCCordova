@@ -20,7 +20,7 @@ if ($sql->num_rows > 0) {
         }
         $output = $r;
         if ($r['type'] == 2) {
-            $plan_string = "SELECT `plan`.`title` as plan_title, `club_info`.`publish_start`, `club_info`.`publish_due` FROM `club_info`,`plan` WHERE `club_info`.`publish_plan`=`plan`.`id` AND  `club_info`.`publish_due` >= CURDATE() AND `admin_id`=$user_id LIMIT 1";
+            $plan_string = "SELECT `plan`.`id` p_id,`plan`.`title` as plan_title, `club_info`.`publish_start`, `club_info`.`publish_due` FROM `club_info`,`plan` WHERE `club_info`.`publish_plan`=`plan`.`id` AND  `club_info`.`publish_due` >= CURDATE() AND `admin_id`=$user_id LIMIT 1";
             $club_sql = $mysqli->query($plan_string);
             if ($club_sql->num_rows > 0) {
                 $club = mysqli_fetch_assoc($club_sql);

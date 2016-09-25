@@ -534,18 +534,6 @@ div[id|=admin] .category-block {
   font-weight: normal;
   border-bottom: 1px solid #bbb;
 }
-#plan_block .ui-field-contain * {
-  float: left;
-}
-#plan_block .ui-field-contain > :first-child .ui-btn {
-  border-bottom: 1px solid #ddd;
-}
-#plan_block .ui-field-contain > :nth-child(2) {
-  margin-left: 10px;
-}
-#plan_block .ui-field-contain > :nth-child(3) {
-  width: 40%;
-}
 #member_info_block label {
   margin-top: 6px;
 }
@@ -693,7 +681,8 @@ div[id|=admin] .category-block {
 .store-pic-block > div:nth-child(2) [type='image'] + .ui-input-text {
   display: none;
 }
-.admin-page .item_title {
+.admin-page .item_title,
+#admin-member-detail .item_title {
   color: #aa3c89 !important;
 }
 [data-role=header] {

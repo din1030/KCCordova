@@ -185,10 +185,10 @@
             <div data-role="main" class="ui-content" id="admin-member-detail-main">
                 <div id="m_name">
                 </div>
-                <div>
-                    <div id="auth_list">
-                        <p><strong>調整會員身分權限</strong></p>
-                        <fieldset data-role="controlgroup" data-iconpos="right" data-enhanced="false" data-corners="false">
+                <!-- <div> -->
+                <!-- <div id="auth_type"> -->
+                <!-- <p><strong>會員身分權限</strong></p> -->
+                <!-- <fieldset data-role="controlgroup" data-iconpos="right" data-enhanced="false" data-corners="false">
                             <input type="radio" name="member_auth" value="normal" id="normal">
                             <label for="normal">一般會員權限</label>
                             <input type="radio" name="member_auth" value="club_basic" id="club_basic">
@@ -197,10 +197,10 @@
                             <label for="club_adv">店家管理-付費權限</label>
                             <div id="plan_block">
                                 <div class="ui-field-contain">
-                                    <!-- <select name="plan_select" id="plan_select" data-inline="true" data-mini="true">
+                                    <select name="plan_select" id="plan_select">
                                         <option value="small">付費方案A</option>
                                         <option value="medium">付費方案B</option>
-                                    </select> -->
+                                    </select>
                                     <label class="area_title" for="publish_due">到期時間</label>
                                     <input type="date" name="publish_due" class="" id="publish_due" value="">
                                 </div>
@@ -208,24 +208,27 @@
                             <div class="clearfix"></div>
                             <input type="radio" name="member_auth" value="seeker" id="seeker">
                             <label for="seeker">求職者權限</label>
-                        </fieldset>
-                    </div>
-                </div>
+                        </fieldset> -->
+                <!-- </div> -->
+                <!-- </div> -->
                 <div id="member_info_block">
-                    <!-- <div class="ui-field-contain">
-                        <label for="member_type">身分</label>
-                        <select name="member_type" id="member_type">
+                    <div class="ui-field-contain ui-disabled">
+                        <label class="item_title" for="member_type">身分</label>
+                        <input type="text" name="auth_type" id="auth_type" value="">
+                        <!-- <div id="auth_type">
+                        </div> -->
+                        <!-- <select name="member_type" id="member_type">
                             <option value="normal" selected>一般會員</option>
                             <option value="club">店家管理員</option>
                             <option value="seeker">求職者</option>
-                        </select>
-                    </div> -->
-                    <div class="ui-field-contain ui-disabled">
-                        <label for="m_no">會員編號</label>
-                        <input type="text" name="m_no" id="m_no" class="required email" value="">
+                        </select> -->
                     </div>
                     <div class="ui-field-contain ui-disabled">
-                        <label for="m_email">帳號</label>
+                        <label class="item_title" for="m_no">會員編號</label>
+                        <input type="text" name="m_no" id="m_no" value="">
+                    </div>
+                    <div class="ui-field-contain ui-disabled">
+                        <label class="item_title" for="m_email">帳號</label>
                         <input type="email" name="m_email" id="m_email" class="required email" value="">
                     </div>
                     <!-- <div class="ui-field-contain ui-disabled">
@@ -268,6 +271,21 @@
                             <option value="3">類別三</option> -->
                         </select>
                     </div>
+                </div>
+                <div id="plan_block">
+                    <!-- <div style="font-size:18px;color:#AA3C89">店家付費方案</div> -->
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="plan_select">付費方案</label>
+                        <select name="plan_select" id="plan_select" data-inline="true">
+                            <option value="0">未購買付費方案</option>
+                            <!-- <option value="1">付費方案A</option> -->
+                            <!-- <option value="2">付費方案B</option> -->
+                        </select>
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="publish_due">到期時間</label>
+                        <input type="date" name="publish_due" class="" id="publish_due" value=""></div>
+                    <div class="clearfix"></div>
                 </div>
                 <div class="">
                     <div style="font-size:18px;color:#AA3C89">禮品兌換記錄</div>

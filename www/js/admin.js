@@ -1170,7 +1170,7 @@ $(document).on('pagebeforeshow', "#admin-member", function() {
 });
 
 $(document).on('pagebeforeshow', "#admin-member-detail", function() {
-	// var page_id = '#' + $.mobile.activePage.attr('id');
+	var page_id = '#' + $.mobile.activePage.attr('id');
 	$.ajax({
 		url: api_base + 'get_user_info.php?user_id=' + window.localStorage.getItem('detail_user_id'),
 		dataType: 'json'
@@ -1183,23 +1183,39 @@ $(document).on('pagebeforeshow', "#admin-member-detail", function() {
 			$('#m_email').val(data.result.email);
 			$('#m_tel').val(data.result.tel);
 			$('#m_mobile').val(data.result.mobile);
-			$('input[name="member_auth"]').removeProp('checked').checkboxradio("refresh");
+			// $('input[name="member_auth"]').removeProp('checked').checkboxradio("refresh");
 			switch (data.result.type) {
 				case '1':
 				default:
-					$('#normal').prop("checked", true).checkboxradio("refresh");
+					// $('#normal').prop("checked", true).checkboxradio("refresh");
+					$('#plan_block').hide();
+					$('#auth_type').val('一般會員');
 					break;
 				case '2':
-					if (data.result.publish_due != null) {
-						$('#club_adv').prop("checked", true).checkboxradio("refresh");
-						$('#publish_due').val(data.result.publish_due);
-					} else {
-						$('#club_basic').prop("checked", true).checkboxradio("refresh");
-						$('#publish_due').val('');
-					}
+					$('#auth_type').val('店家管理者');
+					$.ajax({
+						url: api_base + 'get_plan.php',
+						dataType: 'json'
+					}).done(function(data) {
+						if (data.status) {
+							$.each(data.result, function(idx, obj) {
+								$('select#plan_select').append('<option value="' + obj.id + '">' + obj.title + '</option>')
+							});
+							$('select#plan_select').selectmenu('refresh');
+							$('#plan_block').show();
+							if (data.result.publish_title != null) {
+								$('#plan_select').val(data.result.p_id).selectmenu('refresh');
+								$('#publish_due').val(data.result.publish_due);
+							}
+						}
+					}).fail(function() {
+						alert('請確認您的網路連線狀態！');
+					});
 					break;
 				case '3':
-					$('#seeker').prop("checked", true).checkboxradio("refresh");
+					// $('#seeker').prop("checked", true).checkboxradio("refresh");
+					$('#plan_block').hide();
+					$('#auth_type').val('求職者');
 					break;
 			}
 			// if (data.result.type == 2) {
@@ -1223,7 +1239,7 @@ $(document).on('pagebeforeshow', "#admin-member-detail", function() {
 		if (data.status) {
 			var redeem_list = '';
 			$.each(data.result, function(idx, obj) {
-				redeem_list += '<tr><td>(' + obj.point + ')' + obj.title + obj.description + '</td><td>' + obj.created + '</td> </tr>';
+				redeem_list += '<tr><td>(' + obj.point + ')' + obj.title + obj.description + '</td><td>' + obj.created + '</td></tr>';
 			});
 			$('#member_redeem_list tbody').append(redeem_list);
 		} else {
