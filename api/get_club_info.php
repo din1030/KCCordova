@@ -7,9 +7,13 @@ include 'db_setting.php';
 
 $club_id = $_GET['club_id'];
 $only_approved = $_GET['only_approved'];
+$lang = $_GET['lang'];
 $sql_string = 'SELECT `club_info`.*,`category`.`title` cat_title,`country`.`country`,`area`.`area`, IF((NOW() BETWEEN `club_info`.`publish_start` AND `club_info`.`publish_due`), "1", "0") state FROM `user`,`club_info`,`country`,`area`,`category` WHERE `user`.`id`=`club_info`.`admin_id` AND `club_info`.`country_id` = `country`.`id` AND `club_info`.`area_id` = `area`.`id` AND `category`.`id`=`club_info`.`category`';
 if (!empty($only_approved)) {
     $sql_string .= " AND `user`.`approved`='1'";
+}
+if (!empty($lang)) {
+    $sql_string .= " AND `user`.`lang`='$lang'";
 }
 if (!empty($club_id)) { // 有指定 ID
     $sql_string .=  " AND `club_info`.`admin_id`='$club_id'";

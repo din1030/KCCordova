@@ -13,7 +13,8 @@ $(document).on('pagebeforeshow', '#club', function() {
 		url: api_base + 'get_club_info.php',
 		dataType: 'json',
 		data: {
-			only_approved: true
+			only_approved: true,
+			lang: window.localStorage.getItem('lang_id')
 		}
 	}).success(function(data) {
 		if (data.status) {
