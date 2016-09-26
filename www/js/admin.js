@@ -1182,12 +1182,10 @@ $(document).on('pagebeforeshow', "#admin-member-detail", function() {
 			$('#m_email').val(data.result.email);
 			$('#m_tel').val(data.result.tel);
 			$('#m_mobile').val(data.result.mobile);
-			// $('input[name="member_auth"]').removeProp('checked').checkboxradio("refresh");
 			switch (data.result.type) {
 				case '1':
 				default:
-					// $('#normal').prop("checked", true).checkboxradio("refresh");
-					$('#plan_block').hide();
+					$('.club_only').hide();
 					$('#auth_type').val('一般會員');
 					break;
 				case '2':
@@ -1201,26 +1199,47 @@ $(document).on('pagebeforeshow', "#admin-member-detail", function() {
 								$('select#plan_select').append('<option value="' + obj.id + '">' + obj.title + '</option>')
 							});
 							$('select#plan_select').selectmenu('refresh');
-							$('#plan_block').show();
+							$('.club_only').show();
 							if (data.result.plan_title != null) {
 								$('select#plan_select').val(data.result.p_id).selectmenu('refresh');
+								$('#publish_start').val(data.result.publish_start);
 								$('#publish_due').val(data.result.publish_due);
 							} else {
 								$('select#plan_select').val(0).selectmenu('refresh');
 								$('#publish_due').val('');
 							}
+							$('#member-plan-update-form').off();
+							$('#member-plan-update-form').on('submit', function(e) {
+								e.preventDefault(); // prevent native submit
+								// var plan_id = $(this).jqmData("plan-id");
+								$(this).ajaxSubmit({
+									url: api_base + 'update_club_plan.php',
+									data: {
+										club_id: window.localStorage.getItem('detail_user_id')
+									},
+									type: 'POST',
+									dataType: 'json',
+									beforeSend: function() {
+										$.mobile.loading('show');
+									},
+									complete: function() {
+										$.mobile.loading('hide');
+									},
+									success: function(data) {
+										alert(data.message);
+									},
+									error: function(request, error) {
+										alert('請確認您的網路連線狀態！');
+									}
+								});
+							});
 						}
 					}).fail(function() {
 						alert('請確認您的網路連線狀態！');
 					});
-					// if (data.result.plan_title != null) {
-					// 	$('select#plan_select').val(data.result.p_id).selectmenu('refresh');
-					// 	$('#publish_due').val(data.result.publish_due);
-					// }
 					break;
 				case '3':
-					// $('#seeker').prop("checked", true).checkboxradio("refresh");
-					$('#plan_block').hide();
+					$('.club_only').hide();
 					$('#auth_type').val('求職者');
 					break;
 			}
@@ -1228,7 +1247,6 @@ $(document).on('pagebeforeshow', "#admin-member-detail", function() {
 	}).fail(function() {
 		alert('請確認您的網路連線狀態！');
 	});
-
 	$.ajax({
 		url: api_base + 'get_redeem_record.php?user_id=' + window.localStorage.getItem('detail_user_id'),
 		dataType: 'json'

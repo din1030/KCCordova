@@ -231,14 +231,6 @@
                         <label class="item_title" for="m_email">帳號</label>
                         <input type="email" name="m_email" id="m_email" class="required email" value="">
                     </div>
-                    <!-- <div class="ui-field-contain ui-disabled">
-                        <label for="m_name">姓名</label>
-                        <input type="email" name="m_name" id="m_name" class="required email" value="">
-                    </div> -->
-                    <!-- <div class="ui-field-contain">
-                        <label for="rg_pswd">密碼</label>
-                        <input type="password" name="rg_pswd" id="rg_pswd" class="required" minlength="4" maxlength="16" value="sdcawa">
-                    </div> -->
                     <div class="ui-field-contain ui-disabled">
                         <label class="item_title" for="m_gender">性別</label>
                         <input type="text" name="m_gender" class="ui-disabled" id="m_gender" value="">
@@ -255,39 +247,40 @@
                         <label class="item_title" for="m_mobile">手機</label>
                         <input type="tel" name="m_mobile" class="" id="m_mobile" value="">
                     </div>
-                    <div id="club_type_block" class="ui-field-contain" style="display:none">
+                    <!-- <div id="club_type_block" class="ui-field-contain" style="display:none">
                         <label for="member_type">店家類別</label>
                         <select name="member_type" id="member_type">
-                            <!-- <option value="1">類別一</option>
+                            <option value="1">類別一</option>
                             <option value="2">類別二</option>
-                            <option value="3" selected>類別三</option> -->
+                            <option value="3" selected>類別三</option>
                         </select>
                     </div>
                     <div id="seeker_type_block" class="ui-field-contain" style="display:none">
                         <label for="member_type">求職類別</label>
                         <select name="member_type" id="member_type">
-                            <!-- <option value="1" selected>類別一</option>
+                            <option value="1" selected>類別一</option>
                             <option value="2">類別二</option>
-                            <option value="3">類別三</option> -->
+                            <option value="3">類別三</option>
                         </select>
-                    </div>
+                    </div> -->
                 </div>
-                <div id="plan_block">
-                    <!-- <div style="font-size:18px;color:#AA3C89">店家付費方案</div> -->
-                    <div class="ui-field-contain">
-                        <label class="item_title" for="plan_select">付費方案</label>
-                        <select name="plan_select" id="plan_select" data-inline="true">
-                            <option value="0">未購買付費方案</option>
-                            <!-- <option value="1">付費方案A</option> -->
-                            <!-- <option value="2">付費方案B</option> -->
-                        </select>
-                    </div>
+                <div id="plan_block" class="club_only">
                     <form id="member-plan-update-form">
+                        <div class="ui-field-contain">
+                            <label class="item_title" for="plan_select">付費方案</label>
+                            <select name="plan_select" id="plan_select" data-inline="true">
+                                <option value="0">未購買付費方案</option>
+                            </select>
+                        </div>
+                        <div class="ui-field-contain">
+                            <label class="item_title" for="publish_start">開始時間</label>
+                            <input type="date" name="publish_start" class="" id="publish_start" value="">
+                        </div>
                         <div class="ui-field-contain">
                             <label class="item_title" for="publish_due">到期時間</label>
                             <input type="date" name="publish_due" class="" id="publish_due" value="">
                         </div>
-                        <button id="member-plan-update-btn" type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn">修 改</button>
+                        <button id="member-plan-update-btn" type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn">更新付費方案</button>
                     </form>
                     <div class="clearfix"></div>
                 </div>
@@ -304,7 +297,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="">
+                <div class="club_only">
                     <a class="ui-btn ui-corner-all no-bg-bd green-btn">編輯店家資訊</a>
                 </div>
             </div>
