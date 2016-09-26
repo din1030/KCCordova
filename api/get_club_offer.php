@@ -7,11 +7,15 @@ include 'db_setting.php';
 
 $admin_id = $_GET['club_id'];
 $published = $_GET['published'];
+$lang = $_GET['lang'];
 
 $sql_string = "SELECT `club_offer`.*, `club_info`.`publish_plan` FROM `club_offer` JOIN `club_info` USING(`admin_id`) WHERE `club_offer`.`admin_id`= '$admin_id'";
 
 if (!empty($published)) {
     $sql_string .= ' AND (NOW() BETWEEN `club_info`.`publish_start` AND `club_info`.`publish_due`)';
+}
+if (!empty($lang)) {
+    $sql_string .= " AND `club_info`.`lang`='$lang'";
 }
 
 $result = $mysqli->query($sql_string);

@@ -13,7 +13,7 @@ if (!empty($only_approved)) {
     $sql_string .= " AND `user`.`approved`='1'";
 }
 if (!empty($lang)) {
-    $sql_string .= " AND `user`.`lang`='$lang'";
+    $sql_string .= " AND `club_info`.`lang`='$lang'";
 }
 if (!empty($club_id)) { // 有指定 ID
     $sql_string .=  " AND `club_info`.`admin_id`='$club_id'";
