@@ -22,7 +22,7 @@ if ($sql->num_rows > 0) {
         $r['created'] = date('Y/m/d H:i', strtotime($r['created']));
         $output[] = $r;
     }
-    $amt_string = "SELECT u.`type`, count(*) amt FROM `user` u WHERE `u.`type`!='3' AND u.`type`!='0' AND u.`type`!='100' OR (u.`type`='3' AND u.`approved`=1) GROUP BY u.`type`";
+    $amt_string = "SELECT u.`type`, count(*) amt FROM `user` u WHERE u.`type`!='3' AND u.`type`!='0' AND u.`type`!='100' OR (u.`type`='3' AND u.`approved`=1) GROUP BY u.`type`";
     $amt_result = $mysqli->query($amt_string);
     while ($r = mysqli_fetch_assoc($amt_result)) {
         $amount[] = $r;
