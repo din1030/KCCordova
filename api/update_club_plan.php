@@ -9,6 +9,10 @@ $club_id = $_POST['club_id'];
 $publish_plan = $_POST['plan_select'];
 $publish_start = $_POST['publish_start'];
 $publish_due = $_POST['publish_due'];
+if ($publish_plan == '0') {
+    $publish_start = '0000-00-00';
+    $publish_due = '0000-00-00';
+}
 
 $sql_string = "UPDATE `club_info` SET `publish_plan`='$publish_plan',`publish_start`='$publish_start',`publish_due`='$publish_due' WHERE `admin_id`= '$club_id'";
 if ($mysqli->query($sql_string)) {
