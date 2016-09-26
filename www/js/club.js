@@ -140,6 +140,7 @@ $(document).on('pagebeforeshow', '#club-job-info', function() {
 		dataType: 'json',
 		data: {
 			club_id: get_club_id,
+			lang: window.localStorage.getItem('lang_id'),
 			published: true
 		}
 	}).success(function(data) {
@@ -231,6 +232,7 @@ $(document).on('pagebeforeshow', "#club-service", function() {
 		dataType: 'json',
 		data: {
 			club_id: get_club_id,
+			lang: window.localStorage.getItem('lang_id'),
 			published: true
 		}
 	}).success(function(data) {
@@ -356,28 +358,29 @@ $(document).on('pagebeforeshow', '#club-search', function() {
 });
 
 $(document).on('pagebeforeshow', '#club-result', function() {
-	// console.log(clubSearchState, clubSearchJson);
-	if (clubSearchState && clubSearchJson != '') {
-		$('#club_result_list').empty();
-		$.each(clubSearchJson.result, function(idx, obj) {
-			var club_li = $('<li></li>').attr('data-icon', 'false').attr('data-admin-id', obj.admin_id)
-				.append('<a href="" data-admin-id="' + obj.admin_id + '" data-ajax="false"><img class="club-thumbnail" src="' + img_base + obj.pic1 + '"><h2>' + obj.name + '</h2><p>' + obj.country + ' ' + obj.area + '｜</p><div class="slogan">' + obj.slogan + '</div><p class="update-time">更新時間 ' + obj.updated + '</p></a>');
-			$(club_li).appendTo($('#club_result_list'));
-		});
-		$('#club_result_list').listview('refresh');
-		$('#club_result_list li').click(function(event) {
-			var admin_id = $(this).jqmData("admin-id");
-			window.localStorage.setItem('get_club_id', admin_id);
-			$.mobile.changePage($('#club-intro'), {
-				reloadPage: true,
-				changeHash: true
-			});
-		});
-		clubSearchState = false;
-	} else {
-		$.mobile.changePage($('#club'), {
+// console.log(clubSearchState, clubSearchJson);
+if (clubSearchState && clubSearchJson != '') {
+	$('#club_result_list').empty();
+	$.each(clubSearchJson.result, function(idx, obj) {
+		var club_li = $('<li></li>').attr('data-icon', 'false').attr('data-admin-id', obj.admin_id)
+			.append('<a href="" data-admin-id="' + obj.admin_id + '" data-ajax="false"><img class="club-thumbnail" src="' + img_base + obj.pic1 + '"><h2>' + obj.name + '</h2><p>' + obj.country + ' ' + obj.area + '｜</p><div class="slogan">' + obj.slogan + '</div><p class="update-time">更新時間 ' + obj.updated + '</p></a>');
+		$(club_li).appendTo($('#club_result_list'));
+	});
+	$('#club_result_list').listview('refresh');
+	$('#club_result_list li').click(function(event) {
+		var admin_id = $(this).jqmData("admin-id");
+		window.localStorage.setItem('get_club_id', admin_id);
+		$.mobile.changePage($('#club-intro'), {
 			reloadPage: true,
 			changeHash: true
 		});
-	}
+	});
+	clubSearchState = false;
+} else {
+	$.mobile.changePage($('#club'), {
+		reloadPage: true,
+		changeHash: true
+	});
+}
+});
 });

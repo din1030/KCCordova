@@ -1206,12 +1206,16 @@ $(document).on('pagebeforeshow', "#admin-member-detail", function() {
 								$('#publish_due').val(data.result.publish_due);
 							} else {
 								$('select#plan_select').val(0).selectmenu('refresh');
+								$('#publish_start').val('');
 								$('#publish_due').val('');
 							}
 							$('#member-plan-update-form').off();
 							$('#member-plan-update-form').on('submit', function(e) {
 								e.preventDefault(); // prevent native submit
-								// var plan_id = $(this).jqmData("plan-id");
+								if ($('select#plan_select').val() != '0' && (!$('#publish_start').val() || !$('#publish_due').val())) {
+									alert('請確實填寫方案有效期間！');
+									return false;
+								}
 								$(this).ajaxSubmit({
 									url: api_base + 'update_club_plan.php',
 									data: {
@@ -1227,6 +1231,12 @@ $(document).on('pagebeforeshow', "#admin-member-detail", function() {
 									},
 									success: function(data) {
 										alert(data.message);
+										if (data.status) {
+											if ($('select#plan_select').val() == '0') {
+												$('#publish_start').val('');
+												$('#publish_due').val('');
+											}
+										}
 									},
 									error: function(request, error) {
 										alert('請確認您的網路連線狀態！');
