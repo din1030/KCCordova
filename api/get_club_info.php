@@ -12,7 +12,7 @@ $sql_string = 'SELECT `club_info`.*,`category`.`title` cat_title,`country`.`coun
 if (!empty($only_approved)) {
     $sql_string .= " AND `user`.`approved`='1'";
 }
-if (!empty($lang)) {
+if (!empty($lang)) { // 語言
     $sql_string .= " AND `club_info`.`lang`='$lang'";
 }
 if (!empty($club_id)) { // 有指定 ID

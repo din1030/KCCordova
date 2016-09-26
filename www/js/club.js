@@ -47,7 +47,8 @@ $(document).on('pagebeforeshow', '#club-intro', function() {
 		url: api_base + 'get_club_info.php?club_id=' + get_club_id,
 		dataType: 'json',
 		data: {
-			only_approved: true
+			only_approved: true,
+			lang: window.localStorage.getItem('lang_id')
 		}
 	}).success(function(data) {
 		if (data.status) {

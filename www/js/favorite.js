@@ -25,7 +25,7 @@ $(document).on('pagebeforecreate', '#favorite', function() {
 					name = obj.nickname;
 					link = './jobseeker.html#jobseeker-resume';
 				} else if (obj.type == 4) {
-					type_word = '【生活服務】收藏';
+					type_word = '【旅遊資訊】收藏';
 					user_id = obj.id;
 					name = obj.name;
 					link = './lifeservice.html#lifeservice-detail';

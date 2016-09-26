@@ -15,7 +15,7 @@ if (!empty($published)) {
     $sql_string .= ' AND (NOW() BETWEEN `club_info`.`publish_start` AND `club_info`.`publish_due`)';
 }
 if (!empty($lang)) {
-    $sql_string .= " AND `club_info`.`lang`='$lang'";
+    $sql_string .= " AND `club_offer`.`lang`='$lang'";
 }
 
 $result = $mysqli->query($sql_string);

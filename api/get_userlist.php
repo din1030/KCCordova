@@ -7,10 +7,14 @@ include 'db_setting.php';
 
 $type = $_GET['type'];
 $type_string = '';
+$sql_string = 'SELECT u.`id`,u.`type`,u.`name`,u.`country`,u.`area`,u.`created` FROM `user` u WHERE 1';
+
 if (!empty($type)) { // 有指定 type
-    $type_string = " AND `type`='$type'";
+    $sql_string .= " AND u.`type`='$type'";
+} else {  // 不需審核或已審核通過之使用者（不含管理者）
+    $sql_string .= " AND u.`type`!='3' AND u.`type`!='0' AND u.`type`!='100' OR (u.`type`='3' AND u.`approved`=1)";
 }
-$sql_string = 'SELECT u.`id`,u.`type`,u.`name`,u.`country`,u.`area`,u.`created` FROM `user` u WHERE `approved`=1'.$type_string.' ORDER BY u.`created` DESC';
+$sql_string .= ' ORDER BY u.`created` DESC';
 
 $sql = $mysqli->query($sql_string);
 if ($sql->num_rows > 0) {

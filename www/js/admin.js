@@ -52,22 +52,22 @@ $(document).on('pagecreate', ".admin-page", function() {
 	});
 });
 
-$(document).on('pageshow', "#admin-member-detail", function() {
-	$('#member_type').change(function(event) {
-		if ($(this).val() == 'club') {
-			$('#seeker_type_block').hide();
-			$('#club_type_block').show();
-		} else if ($(this).val() == 'seeker') {
-			$('#club_type_block').hide();
-			$('#seeker_type_block').show();
-
-		} else if ($(this).val() == 'normal') {
-			$('#club_type_block').hide();
-			$('#seeker_type_block').hide();
-
-		}
-	});
-});
+// $(document).on('pageshow', "#admin-member-detail", function() {
+// 	$('#member_type').change(function(event) {
+// 		if ($(this).val() == 'club') {
+// 			$('#seeker_type_block').hide();
+// 			$('#club_type_block').show();
+// 		} else if ($(this).val() == 'seeker') {
+// 			$('#club_type_block').hide();
+// 			$('#seeker_type_block').show();
+//
+// 		} else if ($(this).val() == 'normal') {
+// 			$('#club_type_block').hide();
+// 			$('#seeker_type_block').hide();
+//
+// 		}
+// 	});
+// });
 
 
 $(document).on('pagebeforeshow', "#admin-home", function() {
@@ -1026,7 +1026,6 @@ $(document).on('pagebeforeshow', "#admin-member", function() {
 						break;
 				}
 			});
-
 			$('.download-list-btn').off();
 			$('.download-list-btn').click(function(event) {
 				var type = $(this).jqmData("type");
