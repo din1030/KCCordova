@@ -13,7 +13,8 @@ $(document).on('pagebeforecreate', '#jobseeker', function() {
 		url: api_base + 'get_seeker_info.php',
 		dataType: 'json',
 		data: {
-			only_active: true
+			only_active: true,
+			only_approved: true
 		}
 	}).success(function(data) {
 		if (data.status) {
@@ -49,7 +50,11 @@ $(document).on('pagebeforeshow', '#jobseeker-resume', function() {
 	console.log(get_seeker_id);
 	$.ajax({
 		url: api_base + 'get_seeker_info.php?user_id=' + get_seeker_id,
-		dataType: 'json'
+		dataType: 'json',
+		data: {
+			only_active: true,
+			only_approved: true
+		}
 	}).success(function(data) {
 		if (data.status) {
 			var seeker = data.result[0];

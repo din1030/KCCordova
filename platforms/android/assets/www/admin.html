@@ -28,7 +28,7 @@
                     <select class="navigateToPage">
                         <option value="./admin.html#admin-member" selected>會員管理</option>
                         <option value="./admin.html#admin-home">首頁管理</option>
-                        <option value="./admin.html#admin-lifeservice">生活服務管理</option>
+                        <option value="./admin.html#admin-lifeservice">旅遊資訊管理</option>
                         <option value="./admin.html#admin-recommend">推薦記錄管理</option>
                         <option value="./admin.html#admin-news">最新消息管理</option>
                         <option value="./admin.html#admin-plan">刊登方案管理</option>
@@ -48,6 +48,7 @@
                         <select name="area-select" class="area-select" id="area-select" data-inline="true" data-mini="true">
                             <!-- dynamic content -->
                         </select>
+                        <button id="serach-btn" type="button" class="ui-btn ui-corner-all ui-btn-inline no-bg-bd purple-btn">查詢</button>
                     </div>
                 </div>
                 <div data-role="tabs" id="member_type_tab">
@@ -69,7 +70,7 @@
                         <div class="clearfix"></div>
                         <div class="">
                             <button type="button" class="ui-btn ui-btn-inline ui-corner-all purple-btn download-list-btn" data-type="1">下載名單</button>
-                            <span class="member_num">會員總數：<span id="normal_num"></span></span>
+                            <span class="member_num">一般會員總數：<span id="normal_num"></span></span>
                             <div class="clearfix"></div>
                         </div>
                         <table id="normal-table" class="list_table" data-filter="true" data-input="#normal-search">
@@ -95,7 +96,7 @@
                         <div class="clearfix"></div>
                         <div class="">
                             <button type="button" class="ui-btn ui-btn-inline ui-corner-all purple-btn download-list-btn" data-type="2">下載名單</button>
-                            <span class="member_num">會員總數：<span id="club_num"></span></span>
+                            <span class="member_num">店家會員總數：<span id="club_num"></span></span>
                             <div class="clearfix"></div>
                         </div>
                         <table id="club-table" class="list_table" data-filter="true" data-input="#club-search">
@@ -121,7 +122,7 @@
                         <div class="clearfix"></div>
                         <div class="">
                             <button type="button" class="ui-btn ui-btn-inline ui-corner-all purple-btn download-list-btn" data-type="3">下載名單</button>
-                            <span class="member_num">會員總數：<span id="seeker_num"></span></span>
+                            <span class="member_num">求職者會員總數：<span id="seeker_num"></span></span>
                             <div class="clearfix"></div>
                         </div>
                         <table id="seeker-table" class="list_table" data-filter="true" data-input="#seeker-search">
@@ -151,7 +152,7 @@
                         <!-- <div class="clearfix"></div> -->
                         <!-- </div> -->
                         <table id="not-approved-table" class="list_table" data-filter="true" data-input="#approved-search">
-                            <caption>待審核會員列表</caption>
+                            <caption>待審核店家列表</caption>
                             <thead>
                                 <tr>
                                     <th>註冊時間</th>
@@ -184,10 +185,10 @@
             <div data-role="main" class="ui-content" id="admin-member-detail-main">
                 <div id="m_name">
                 </div>
-                <div>
-                    <div id="auth_list">
-                        <p><strong>調整會員身分權限</strong></p>
-                        <fieldset data-role="controlgroup" data-iconpos="right" data-enhanced="false" data-corners="false">
+                <!-- <div> -->
+                <!-- <div id="auth_type"> -->
+                <!-- <p><strong>會員身分權限</strong></p> -->
+                <!-- <fieldset data-role="controlgroup" data-iconpos="right" data-enhanced="false" data-corners="false">
                             <input type="radio" name="member_auth" value="normal" id="normal">
                             <label for="normal">一般會員權限</label>
                             <input type="radio" name="member_auth" value="club_basic" id="club_basic">
@@ -196,10 +197,10 @@
                             <label for="club_adv">店家管理-付費權限</label>
                             <div id="plan_block">
                                 <div class="ui-field-contain">
-                                    <!-- <select name="plan_select" id="plan_select" data-inline="true" data-mini="true">
+                                    <select name="plan_select" id="plan_select">
                                         <option value="small">付費方案A</option>
                                         <option value="medium">付費方案B</option>
-                                    </select> -->
+                                    </select>
                                     <label class="area_title" for="publish_due">到期時間</label>
                                     <input type="date" name="publish_due" class="" id="publish_due" value="">
                                 </div>
@@ -207,34 +208,29 @@
                             <div class="clearfix"></div>
                             <input type="radio" name="member_auth" value="seeker" id="seeker">
                             <label for="seeker">求職者權限</label>
-                        </fieldset>
-                    </div>
-                </div>
+                        </fieldset> -->
+                <!-- </div> -->
+                <!-- </div> -->
                 <div id="member_info_block">
-                    <!-- <div class="ui-field-contain">
-                        <label for="member_type">身分</label>
-                        <select name="member_type" id="member_type">
+                    <div class="ui-field-contain ui-disabled">
+                        <label class="item_title" for="member_type">身分</label>
+                        <input type="text" name="auth_type" id="auth_type" value="">
+                        <!-- <div id="auth_type">
+                        </div> -->
+                        <!-- <select name="member_type" id="member_type">
                             <option value="normal" selected>一般會員</option>
                             <option value="club">店家管理員</option>
                             <option value="seeker">求職者</option>
-                        </select>
-                    </div> -->
-                    <div class="ui-field-contain ui-disabled">
-                        <label for="m_no">會員編號</label>
-                        <input type="text" name="m_no" id="m_no" class="required email" value="">
+                        </select> -->
                     </div>
                     <div class="ui-field-contain ui-disabled">
-                        <label for="m_email">帳號</label>
+                        <label class="item_title" for="m_no">會員編號</label>
+                        <input type="text" name="m_no" id="m_no" value="">
+                    </div>
+                    <div class="ui-field-contain ui-disabled">
+                        <label class="item_title" for="m_email">帳號</label>
                         <input type="email" name="m_email" id="m_email" class="required email" value="">
                     </div>
-                    <!-- <div class="ui-field-contain ui-disabled">
-                        <label for="m_name">姓名</label>
-                        <input type="email" name="m_name" id="m_name" class="required email" value="">
-                    </div> -->
-                    <!-- <div class="ui-field-contain">
-                        <label for="rg_pswd">密碼</label>
-                        <input type="password" name="rg_pswd" id="rg_pswd" class="required" minlength="4" maxlength="16" value="sdcawa">
-                    </div> -->
                     <div class="ui-field-contain ui-disabled">
                         <label class="item_title" for="m_gender">性別</label>
                         <input type="text" name="m_gender" class="ui-disabled" id="m_gender" value="">
@@ -251,22 +247,42 @@
                         <label class="item_title" for="m_mobile">手機</label>
                         <input type="tel" name="m_mobile" class="" id="m_mobile" value="">
                     </div>
-                    <div id="club_type_block" class="ui-field-contain" style="display:none">
+                    <!-- <div id="club_type_block" class="ui-field-contain" style="display:none">
                         <label for="member_type">店家類別</label>
                         <select name="member_type" id="member_type">
-                            <!-- <option value="1">類別一</option>
+                            <option value="1">類別一</option>
                             <option value="2">類別二</option>
-                            <option value="3" selected>類別三</option> -->
+                            <option value="3" selected>類別三</option>
                         </select>
                     </div>
                     <div id="seeker_type_block" class="ui-field-contain" style="display:none">
                         <label for="member_type">求職類別</label>
                         <select name="member_type" id="member_type">
-                            <!-- <option value="1" selected>類別一</option>
+                            <option value="1" selected>類別一</option>
                             <option value="2">類別二</option>
-                            <option value="3">類別三</option> -->
+                            <option value="3">類別三</option>
                         </select>
-                    </div>
+                    </div> -->
+                </div>
+                <div id="plan_block" class="club_only">
+                    <form id="member-plan-update-form">
+                        <div class="ui-field-contain">
+                            <label class="item_title" for="plan_select">付費方案</label>
+                            <select name="plan_select" id="plan_select" data-inline="true">
+                                <option value="0">未購買付費方案</option>
+                            </select>
+                        </div>
+                        <div class="ui-field-contain">
+                            <label class="item_title" for="publish_start">開始時間</label>
+                            <input type="date" name="publish_start" class="" id="publish_start" value="">
+                        </div>
+                        <div class="ui-field-contain">
+                            <label class="item_title" for="publish_due">到期時間</label>
+                            <input type="date" name="publish_due" class="" id="publish_due" value="">
+                        </div>
+                        <button id="member-plan-update-btn" type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn">更新付費方案</button>
+                    </form>
+                    <div class="clearfix"></div>
                 </div>
                 <div class="">
                     <div style="font-size:18px;color:#AA3C89">禮品兌換記錄</div>
@@ -281,9 +297,9 @@
                         </tbody>
                     </table>
                 </div>
-                <!-- <div class="">
-                    <button id="admin-member-submit-btn" type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn">送出</button>
-                </div> -->
+                <div class="club_only">
+                    <a class="ui-btn ui-corner-all no-bg-bd green-btn">編輯店家資訊</a>
+                </div>
             </div>
         </div>
 
@@ -303,7 +319,7 @@
                     <select class="navigateToPage">
                         <option value="./admin.html#admin-member">會員管理</option>
                         <option value="./admin.html#admin-home" selected>首頁管理</option>
-                        <option value="./admin.html#admin-lifeservice">生活服務管理</option>
+                        <option value="./admin.html#admin-lifeservice">旅遊資訊管理</option>
                         <option value="./admin.html#admin-recommend">推薦記錄管理</option>
                         <option value="./admin.html#admin-news">最新消息管理</option>
                         <option value="./admin.html#admin-plan">刊登方案管理</option>
@@ -321,7 +337,7 @@
                                 <select required id="p1_link" name="p1_link" data-inline="true">
                                     <option value="club">酒店系統</option>
                                     <option value="seeker">求職者</option>
-                                    <option value="life">生活服務</option>
+                                    <option value="life">旅遊資訊</option>
                                     <option value="news">最新消息</option>
                                     <option value="website">Kelly Club 官網</option>
                                 </select>
@@ -341,7 +357,7 @@
                                 <select required name="p2_link" id="p2_link" data-inline="true">
                                     <option value="club">酒店系統</option>
                                     <option value="seeker">求職者</option>
-                                    <option value="life">生活服務</option>
+                                    <option value="life">旅遊資訊</option>
                                     <option value="news">最新消息</option>
                                     <option value="website">Kelly Club 官網</option>
                                 </select>
@@ -361,7 +377,7 @@
                                 <select required name="p3_link" id="p3_link" data-inline="true">
                                     <option value="club">酒店系統</option>
                                     <option value="seeker">求職者</option>
-                                    <option value="life">生活服務</option>
+                                    <option value="life">旅遊資訊</option>
                                     <option value="news">最新消息</option>
                                     <option value="website">Kelly Club 官網</option>
                                 </select>
@@ -381,7 +397,7 @@
                                 <select required name="p4_link" id="p4_link" data-inline="true">
                                     <option value="club">酒店系統</option>
                                     <option value="seeker">求職者</option>
-                                    <option value="life">生活服務</option>
+                                    <option value="life">旅遊資訊</option>
                                     <option value="news">最新消息</option>
                                     <option value="website">Kelly Club 官網</option>
                                 </select>
@@ -401,7 +417,7 @@
                                 <select required name="p5_link" id="p5_link" data-inline="true">
                                     <option value="club">酒店系統</option>
                                     <option value="seeker">求職者</option>
-                                    <option value="life">生活服務</option>
+                                    <option value="life">旅遊資訊</option>
                                     <option value="news">最新消息</option>
                                     <option value="website">Kelly Club 官網</option>
                                 </select>
@@ -434,7 +450,7 @@
                     <select class="navigateToPage">
                         <option value="./admin.html#admin-member">會員管理</option>
                         <option value="./admin.html#admin-home">首頁管理</option>
-                        <option value="./admin.html#admin-lifeservice" selected>生活服務管理</option>
+                        <option value="./admin.html#admin-lifeservice" selected>旅遊資訊管理</option>
                         <option value="./admin.html#admin-recommend">推薦記錄管理</option>
                         <option value="./admin.html#admin-news">最新消息管理</option>
                         <option value="./admin.html#admin-plan">刊登方案管理</option>
@@ -443,18 +459,18 @@
                         <option value="./admin.html#admin-category">分類管理</option>
                     </select>
                 </div>
-                <div class="area_block">
+                <!-- <div class="area_block">
                     <div class="ui-field-contain">
                         <label class="area_title" for="select-native-1">國家</label>
-                        <select class="country-select" name="select-native-1" id="select-native-1" data-inline="true" data-mini="true">
-                            <!-- dynamic content -->
-                        </select>
+                        <select class="country-select" name="select-native-1" id="select-native-1" data-inline="true" data-mini="true"> -->
+                <!-- dynamic content -->
+                <!-- </select>
                         <label class="area_title" for="select-native-2">地區</label>
-                        <select class="area-select" name="select-native-2" id="select-native-2" data-inline="true" data-mini="true">
-                            <!-- dynamic content -->
-                        </select>
+                        <select class="area-select" name="select-native-2" id="select-native-2" data-inline="true" data-mini="true"> -->
+                <!-- dynamic content -->
+                <!-- </select>
                     </div>
-                </div>
+                </div> -->
                 <a href="#add_life_category" class="ui-btn ui-btn-inline purple-btn ui-corner-all float-right" data-rel="popup">
                     新增分類
                 </a>
@@ -516,7 +532,7 @@
                     <select class="navigateToPage">
                         <option value="./admin.html#admin-member">會員管理</option>
                         <option value="./admin.html#admin-home">首頁管理</option>
-                        <option value="./admin.html#admin-lifeservice" selected>生活服務管理</option>
+                        <option value="./admin.html#admin-lifeservice" selected>旅遊資訊管理</option>
                         <option value="./admin.html#admin-recommend">推薦記錄管理</option>
                         <option value="./admin.html#admin-news">最新消息管理</option>
                         <option value="./admin.html#admin-plan">刊登方案管理</option>
@@ -708,7 +724,7 @@
                     <select class="navigateToPage">
                         <option value="./admin.html#admin-member">會員管理</option>
                         <option value="./admin.html#admin-home">首頁管理</option>
-                        <option value="./admin.html#admin-lifeservice">生活服務管理</option>
+                        <option value="./admin.html#admin-lifeservice">旅遊資訊管理</option>
                         <option value="./admin.html#admin-recommend" selected>推薦記錄管理</option>
                         <option value="./admin.html#admin-news">最新消息管理</option>
                         <option value="./admin.html#admin-plan">刊登方案管理</option>
@@ -779,7 +795,7 @@
                     <select class="navigateToPage">
                         <option value="./admin.html#admin-member">會員管理</option>
                         <option value="./admin.html#admin-home">首頁管理</option>
-                        <option value="./admin.html#admin-lifeservice">生活服務管理</option>
+                        <option value="./admin.html#admin-lifeservice">旅遊資訊管理</option>
                         <option value="./admin.html#admin-recommend" selected>推薦記錄管理</option>
                         <option value="./admin.html#admin-news">最新消息管理</option>
                         <option value="./admin.html#admin-plan">刊登方案管理</option>
@@ -824,7 +840,7 @@
                     <select class="navigateToPage">
                         <option value="./admin.html#admin-member">會員管理</option>
                         <option value="./admin.html#admin-home">首頁管理</option>
-                        <option value="./admin.html#admin-lifeservice">生活服務管理</option>
+                        <option value="./admin.html#admin-lifeservice">旅遊資訊管理</option>
                         <option value="./admin.html#admin-recommend" selected>推薦記錄管理</option>
                         <option value="./admin.html#admin-news">最新消息管理</option>
                         <option value="./admin.html#admin-plan">刊登方案管理</option>
@@ -927,7 +943,7 @@
                     <select class="navigateToPage">
                         <option value="./admin.html#admin-member">會員管理</option>
                         <option value="./admin.html#admin-home">首頁管理</option>
-                        <option value="./admin.html#admin-lifeservice">生活服務管理</option>
+                        <option value="./admin.html#admin-lifeservice">旅遊資訊管理</option>
                         <option value="./admin.html#admin-recommend">推薦記錄管理</option>
                         <option value="./admin.html#admin-news" selected>最新消息管理</option>
                         <option value="./admin.html#admin-plan">刊登方案管理</option>
@@ -1026,7 +1042,7 @@
                         <input type="file" name="news_edit_pic" class="" id="news_edit_pic" value="">
                     </div>
                     <label class="item_title" for="news_edit_content"><strong>內容：</strong></label>
-                    <textarea wrap="virtual" name="news_edit_content" rows="8" id="news_edit_content" required=""></textarea>
+                    <textarea wrap="virtual" name="news_edit_content" rows="8" id="news_edit_content" required=""></teired=""></textarea>
                     <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn">送出</button>
                 </form>
             </div>
@@ -1048,7 +1064,7 @@
                     <select class="navigateToPage">
                         <option value="./admin.html#admin-member">會員管理</option>
                         <option value="./admin.html#admin-home">首頁管理</option>
-                        <option value="./admin.html#admin-lifeservice">生活服務管理</option>
+                        <option value="./admin.html#admin-lifeservice">旅遊資訊管理</option>
                         <option value="./admin.html#admin-recommend">推薦記錄管理</option>
                         <option value="./admin.html#admin-news">最新消息管理</option>
                         <option value="./admin.html#admin-plan" selected>刊登方案管理</option>
@@ -1112,7 +1128,7 @@
                     <select class="navigateToPage">
                         <option value="./admin.html#admin-member">會員管理</option>
                         <option value="./admin.html#admin-home">首頁管理</option>
-                        <option value="./admin.html#admin-lifeservice">生活服務管理</option>
+                        <option value="./admin.html#admin-lifeservice">旅遊資訊管理</option>
                         <option value="./admin.html#admin-recommend">推薦記錄管理</option>
                         <option value="./admin.html#admin-news">最新消息管理</option>
                         <option value="./admin.html#admin-plan">刊登方案管理</option>
@@ -1247,7 +1263,7 @@
                     <select class="navigateToPage">
                         <option value="./admin.html#admin-member">會員管理</option>
                         <option value="./admin.html#admin-home">首頁管理</option>
-                        <option value="./admin.html#admin-lifeservice">生活服務管理</option>
+                        <option value="./admin.html#admin-lifeservice">旅遊資訊管理</option>
                         <option value="./admin.html#admin-recommend">推薦記錄管理</option>
                         <option value="./admin.html#admin-news">最新消息管理</option>
                         <option value="./admin.html#admin-plan">刊登方案管理</option>
@@ -1295,7 +1311,7 @@
                     <select class="navigateToPage">
                         <option value="./admin.html#admin-member">會員管理</option>
                         <option value="./admin.html#admin-home">首頁管理</option>
-                        <option value="./admin.html#admin-lifeservice">生活服務管理</option>
+                        <option value="./admin.html#admin-lifeservice">旅遊資訊管理</option>
                         <option value="./admin.html#admin-recommend">推薦記錄管理</option>
                         <option value="./admin.html#admin-news">最新消息管理</option>
                         <option value="./admin.html#admin-plan">刊登方案管理</option>

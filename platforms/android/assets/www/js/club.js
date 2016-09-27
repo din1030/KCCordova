@@ -12,9 +12,10 @@ $(document).on('pagebeforeshow', '#club', function() {
 	$.ajax({
 		url: api_base + 'get_club_info.php',
 		dataType: 'json',
-		// data: {
-		// 	published: 'published'
-		// }
+		data: {
+			only_approved: true,
+			lang: window.localStorage.getItem('lang_id')
+		}
 	}).success(function(data) {
 		if (data.status) {
 			var clubs = data.result;
@@ -44,7 +45,11 @@ $(document).on('pagebeforeshow', '#club-intro', function() {
 	// console.log(get_club_id);
 	$.ajax({
 		url: api_base + 'get_club_info.php?club_id=' + get_club_id,
-		dataType: 'json'
+		dataType: 'json',
+		data: {
+			only_approved: true,
+			lang: window.localStorage.getItem('lang_id')
+		}
 	}).success(function(data) {
 		if (data.status) {
 			var club = data.result[0];
@@ -77,7 +82,7 @@ $(document).on('pagebeforeshow', '#club-intro', function() {
 					}
 				});
 			});
-			if (club.publish_plan == 0) {
+			if (club.publish_plan == 0 || club.state == '0') {
 				$('#brief_block, #map_block').hide();
 			} else {
 				$('#brief_block, #map_block').show();
@@ -131,8 +136,13 @@ $(document).on('pagebeforeshow', '#club-job-info', function() {
 	var get_club_id = window.localStorage.getItem('get_club_id');
 	// console.log(get_club_id);
 	$.ajax({
-		url: api_base + 'get_club_offer.php?club_id=' + get_club_id,
-		dataType: 'json'
+		url: api_base + 'get_club_offer.php',
+		dataType: 'json',
+		data: {
+			club_id: get_club_id,
+			lang: window.localStorage.getItem('lang_id'),
+			published: true
+		}
 	}).success(function(data) {
 		if (data.status) {
 			var club = data.result[0];
@@ -192,29 +202,50 @@ $(document).on('pagebeforeshow', '#club-job-info', function() {
 });
 
 $(document).on('pagebeforeshow', "#club-intro, #club-service", function() {
+
+	// 沒有登入的提示
+	var not_login_mask = '<div style="display:block;" class="page_mask text-center" data-position-to="window" data-dismissible="true"><a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a><p>您尚未登入<br>店家應徵資訊僅供求職者會員瀏覽</p><a href="index.html#login" class="ui-btn ui-btn-inline purple-btn ui-corner-all" data-ajax="false">註冊/登入</a></div>';
 	// 沒有權限觀看應徵資訊的提示
-	var mask = '<div style="display:block;" class="page_mask text-center" data-position-to="window" data-dismissible="true"><a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a><p>您不是求職者會員<br>店家應徵資訊僅供求職者會員瀏覽</p></div>';
-	if (window.localStorage.getItem('auth') != '0' && window.localStorage.getItem('auth') != '100' && window.localStorage.getItem('auth') != '3' && window.localStorage.getItem('user_id') != window.localStorage.getItem('get_club_id')) {
-		$("a[href='#club-job-info']").click(function(event) {
+	var not_seeker_mask = '<div style="display:block;" class="page_mask text-center" data-position-to="window" data-dismissible="true"><a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a><p>您不是求職者會員<br>店家應徵資訊僅供求職者會員瀏覽</p></div>';
+	// 沒有權限觀看應徵資訊的提示
+	// var not_approved_mask = '<div style="display:block;" class="page_mask text-center" data-position-to="window" data-dismissible="true"><a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a><p>您的身分尚未通過審核<br>暫時無法瀏覽店家應徵資訊</p></div>';
+	$("a[href='#club-job-info']").off();
+	$("a[href='#club-job-info']").click(function(event) {
+		if (window.localStorage.getItem('auth') == null || typeof window.localStorage.getItem('auth') == 'undefined') {
 			event.preventDefault();
-			$("[data-role='page']").prepend(mask);
-			$(".page_mask .ui-icon-delete").click(function(event) {
+			$.mobile.activePage.prepend(not_login_mask);
+			// $("[data-role='page']").prepend(not_login_mask);
+			$(".page_mask a").click(function(event) {
 				$(".page_mask").remove();
 			});
-		});
-	}
-});
-
-$(document).on('pagebeforehide', '#club-intro', function() {
-	// window.localStorage.removeItem('get_club_id');
+		} else if (window.localStorage.getItem('auth') != '0' && window.localStorage.getItem('auth') != '100' && window.localStorage.getItem('auth') != '3' && window.localStorage.getItem('user_id') != window.localStorage.getItem('get_club_id')) {
+			event.preventDefault();
+			$.mobile.activePage.prepend(not_seeker_mask);
+			$(".page_mask a").click(function(event) {
+				$(".page_mask").remove();
+			});
+		}
+		// else if (window.localStorage.getItem('auth') == '3' && window.localStorage.getItem('approved') == '0') {
+		// 	event.preventDefault();
+		// 	$.mobile.activePage.prepend(not_approved_mask);
+		// 	$(".page_mask a").click(function(event) {
+		// 		$(".page_mask").remove();
+		// 	});
+		// }
+	});
 });
 
 $(document).on('pagebeforeshow', "#club-service", function() {
 	var get_club_id = window.localStorage.getItem('get_club_id');
 	// console.log(get_club_id);
 	$.ajax({
-		url: api_base + 'get_club_consume.php?club_id=' + get_club_id,
-		dataType: 'json'
+		url: api_base + 'get_club_consume.php',
+		dataType: 'json',
+		data: {
+			club_id: get_club_id,
+			lang: window.localStorage.getItem('lang_id'),
+			published: true
+		}
 	}).success(function(data) {
 		if (data.status) {
 			var club = data.result[0];

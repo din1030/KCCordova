@@ -29,7 +29,7 @@ $(document).on("pagebeforeshow", "[data-role='page']", function() {
 		}
 	});
 	// 動態顯示登入使用者
-	var member = '（未登入！）';
+	var member = '您好！';
 	switch (window.localStorage.getItem('auth')) {
 		case '0':
 		case '100':
@@ -47,13 +47,54 @@ $(document).on("pagebeforeshow", "[data-role='page']", function() {
 	}
 	$('span.member').text(member);
 
+	// 沒有登入的提示
+	var club_login_mask = '<div style="display:block;" class="page_mask text-center" data-position-to="window" data-dismissible="true"><a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a><p>您尚未登入<br>求職者資訊僅供店家管理者會員瀏覽</p><a href="index.html#login" class="ui-btn ui-btn-inline purple-btn ui-corner-all" data-ajax="false">註冊/登入</a></div>';
 	// 沒有權限觀看求職者的提示
-	var mask = '<div style="display:block;" class="page_mask text-center" data-position-to="window" data-dismissible="true"><a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a><p>您不是店家管理者<br>求職者資訊僅供店家管理者瀏覽</p></div>';
+	var not_club_mask = '<div style="display:block;" class="page_mask text-center" data-position-to="window" data-dismissible="true"><a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a><p>您不是店家管理者<br>求職者資訊僅供店家管理者瀏覽</p></div>';
+	// 店家尚未審核的提示
+	var not_approved_mask = '<div style="display:block;" class="page_mask text-center" data-position-to="window" data-dismissible="true"><a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a><p>您的身分尚未通過審核<br>暫時無法瀏覽求職者資訊</p></div>';
+
+	$("a[href='./jobseeker.html']").off();
 	$("a[href='./jobseeker.html']").click(function(event) {
-		if (window.localStorage.getItem('auth') != '0' && window.localStorage.getItem('auth') != '100' && window.localStorage.getItem('auth') != '2') {
+		if (window.localStorage.getItem('auth') == null || typeof window.localStorage.getItem('auth') == 'undefined') {
 			event.preventDefault();
-			$("[data-role='page']").prepend(mask);
-			$(".page_mask .ui-icon-delete").click(function(event) {
+			$.mobile.activePage.prepend(club_login_mask);
+			$(".page_mask a").click(function(event) {
+				$(".page_mask").remove();
+			});
+		} else if (window.localStorage.getItem('auth') != '0' && window.localStorage.getItem('auth') != '100' && window.localStorage.getItem('auth') != '2') {
+			event.preventDefault();
+			$.mobile.activePage.prepend(not_club_mask);
+			$(".page_mask a").click(function(event) {
+				$(".page_mask").remove();
+			});
+		} else if (window.localStorage.getItem('auth') == '2' && window.localStorage.getItem('approved') == '0') {
+			event.preventDefault();
+			$.mobile.activePage.prepend(not_approved_mask);
+			$(".page_mask a").click(function(event) {
+				$(".page_mask").remove();
+			});
+		}
+	});
+	// 沒有登入的提示
+	var not_login_mask = '<div style="display:block;" class="page_mask text-center" data-position-to="window" data-dismissible="true"><a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a><p>本功能僅供註冊會員使用</p><a href="index.html#login" class="ui-btn ui-btn-inline purple-btn ui-corner-all" data-ajax="false">註冊/登入</a></div>';
+
+	$("#profile-link, #rec-link").off();
+	$("#profile-link, #rec-link").click(function(event) {
+		if (window.localStorage.getItem('auth') == null || typeof window.localStorage.getItem('auth') == 'undefined') {
+			event.preventDefault();
+			$.mobile.activePage.prepend(not_login_mask);
+			$(".page_mask a").click(function(event) {
+				$(".page_mask").remove();
+			});
+		}
+	});
+	$("a[href='./messages.html'], a[href='./favorite.html']").off();
+	$("a[href='./messages.html'], a[href='./favorite.html']").click(function(event) {
+		if (window.localStorage.getItem('auth') == null || typeof window.localStorage.getItem('auth') == 'undefined') {
+			event.preventDefault();
+			$.mobile.activePage.prepend(not_login_mask);
+			$(".page_mask a").click(function(event) {
 				$(".page_mask").remove();
 			});
 		}
@@ -110,6 +151,7 @@ $(document).on("pagebeforeshow", "[data-role='page']", function() {
 $(document).on('pagecreate', function() {
 	var href;
 	var admin_li = '';
+	var log_li = '';
 	if (window.localStorage.getItem('auth') == '0' || window.localStorage.getItem('auth') == '100') {
 		// Admin 才會有後台選項
 		admin_li = '<li><a href="./admin.html" class="ui-btn" data-ajax="false"><div class="menu-icon icon8"></div> 管理者後台 </a></li>';
@@ -121,12 +163,22 @@ $(document).on('pagecreate', function() {
 	} else if (window.localStorage.getItem('auth') == '3') {
 		href = './profile_seeker.html';
 	}
-	var panel = '<div data-role="panel" id="menu-panel" data-display="push" data-theme="a" data-position-fixed="true">' + '<div class="ui-panel-inner"><ul data-role="listview" class="ui-listview">' + '<li><a href="./index.html#home" class="ui-btn" data-ajax="false"><div class="menu-icon icon0"></div> 首頁 </a></li>' + '<li><a id="profile-link" href="' + href + '" class="ui-btn" data-ajax="false"><div class="menu-icon icon1"></div> 我的檔案 </a></li>' + '<li><a href="./menu.html#recommend-record" class="ui-btn" data-ajax="false"><div class="menu-icon icon2"></div> 推薦紀錄 </a></li>' + '<li><a href="./menu.html#news" class="ui-btn" data-ajax="false"><div class="menu-icon icon3"></div> 最新消息 </a></li>' + '<li><a href="./menu.html#share" class="ui-btn" data-ajax="false"><div class="menu-icon icon4"></div> 分享好友 </a></li>' + '<li><a href="http://www.kelly-club.com/" class="ui-btn" rel="external" target="_blank"><div class="menu-icon icon5"></div> 連官網 </a></li>' + '<li><a href="./menu.html#setting" class="ui-btn" data-ajax="false"><div class="menu-icon icon6"></div> 設定 </a></li>' + '<li><a id="menu-logout" class="ui-btn" data-ajax="false"><div class="menu-icon icon7"></div> 登出 </a></li>' + admin_li + ' </ul></div></div>';
+	if (window.localStorage.getItem('auth') == null || typeof window.localStorage.getItem('auth') == 'undefined') {
+		log_li = '<li><a href="index.html#login" id="menu-login" class="ui-btn" data-ajax="false"><div class="menu-icon icon7"></div>登入</a></li>';
+	} else {
+		log_li = '<li><a id="menu-logout" class="ui-btn" data-ajax="false"><div class="menu-icon icon7"></div>登出</a></li>';
+	}
+
+	var panel = '<div data-role="panel" id="menu-panel" data-display="push" data-theme="a" data-position-fixed="true">' + '<div class="ui-panel-inner"><ul data-role="listview" class="ui-listview">' + '<li><a href="./index.html#home" class="ui-btn" data-ajax="false"><div class="menu-icon icon0"></div> 首頁 </a></li>' + '<li><a id="profile-link" href="' + href + '" class="ui-btn" data-ajax="false"><div class="menu-icon icon1"></div> 我的檔案 </a></li>' + '<li><a id="rec-link" href="./menu.html#recommend-record" class="ui-btn" data-ajax="false"><div class="menu-icon icon2"></div> 推薦紀錄 </a></li>' + '<li><a href="./menu.html#news" class="ui-btn" data-ajax="false"><div class="menu-icon icon3"></div> 最新消息 </a></li>' + '<li><a href="./menu.html#share" class="ui-btn" data-ajax="false"><div class="menu-icon icon4"></div> 分享好友 </a></li>' + '<li><a href="http://www.kelly-club.com/" class="ui-btn" rel="external" target="_blank"><div class="menu-icon icon5"></div> 連官網 </a></li>' + '<li><a href="./menu.html#setting" class="ui-btn" data-ajax="false"><div class="menu-icon icon6"></div> 設定 </a></li>' + log_li + admin_li + ' </ul></div></div>';
 	$.mobile.pageContainer.prepend(panel);
 
+	$('#menu-login').click(function(event) {
+		$("#menu-panel").panel("close");
+	});
 	// 登出清掉 localStorage
 	$('#menu-logout').click(function(event) {
 		window.localStorage.clear();
+		$("#menu-panel").panel("close");
 		// window.localStorage.removeItem('user');
 		// window.localStorage.removeItem('auth');
 		// window.localStorage.removeItem('name');
@@ -137,6 +189,10 @@ $(document).on('pagecreate', function() {
 	});
 	$("#menu-panel").panel();
 });
+$(document).on("pagebeforehide", "[data-role='page']", function() {
+	$("#menu-panel").panel("close");
+});
+
 
 $(document).on('pageshow', "#jobseeker-resume, #club-intro, #lifeservice-detail", function() {
 	// console.log('hit slide reload');
