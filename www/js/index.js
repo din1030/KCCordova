@@ -51,7 +51,8 @@ $(document).on('pagecreate', '#login', function() {
 							window.localStorage.setItem('country_id', result.country_id);
 							window.localStorage.setItem('area_id', result.area_id);
 							// alert(window.localStorage.getItem('name') + ' ' + window.localStorage.getItem('user') + '(' + window.localStorage.getItem('auth') + ')');
-							$.mobile.changePage("#home");
+							// $.mobile.changePage("#home");
+							document.location.href = './index.html#home';
 						} else {
 							// alert(result.message + '(login)' + result.sql);
 							facebookConnectPlugin.logout(function() {}, function() {});
@@ -477,7 +478,9 @@ function fbLogin() {
 					window.localStorage.setItem('country_id', result.country_id);
 					window.localStorage.setItem('area_id', result.area_id);
 					// alert(window.localStorage.getItem('name') + ' ' + window.localStorage.getItem('user') + '(' + window.localStorage.getItem('auth') + ')');
-					$.mobile.changePage("#home");
+					// $.mobile.changePage("#home");
+					document.location.href = './index.html#home';
+
 				} else {
 					// alert(result.message + '/' + result.sql);
 					// facebookConnectPlugin.logout(function() {}, function() {});

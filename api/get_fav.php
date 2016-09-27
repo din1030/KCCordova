@@ -12,7 +12,7 @@ $sql = $mysqli->query($sql_string);
 if ($sql->num_rows > 0) {
     while ($r = mysqli_fetch_assoc($sql)) {
         if ($r['type'] == 2) {  // club
-            $sql_string2 = 'SELECT `club_info`.`admin_id`,`club_info`.`name`,`club_info`.`pic1`,`country`.`country`,`area`.`area` FROM `club_info`,`country`,`area` WHERE `club_info`.`country_id` = `country`.`id` AND `club_info`.`area_id` = `area`.`id` AND `club_info`.`admin_id`='.$r['item_id'];
+            $sql_string2 = 'SELECT `club_info`.`admin_id`,`club_info`.`name`,`club_info`.`thumb`,`country`.`country`,`area`.`area` FROM `club_info`,`country`,`area` WHERE `club_info`.`country_id` = `country`.`id` AND `club_info`.`area_id` = `area`.`id` AND `club_info`.`admin_id`='.$r['item_id'];
             $sql2 = $mysqli->query($sql_string2);
             $detail = mysqli_fetch_assoc($sql2);
             $detail['fav_id'] = $r['id'];
