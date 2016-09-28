@@ -344,7 +344,7 @@ $(document).on('pagebeforeshow', '#club-search', function() {
 			var area = $('#area-select').val();
 			var type = $('#club_type').val();
 			$.ajax({
-				url: api_base + 'search_club.php?area_id=' + area + '&type=' + type,
+				url: api_base + 'search_club.php?area_id=' + area + '&type=' + type + '&lang=' + window.localStorage.getItem('lang_id'),
 				dataType: 'json'
 			}).done(function(data) {
 				if (data.status) {
