@@ -679,9 +679,9 @@ if (window.localStorage.getItem('auth') == '2') {
 								$('.' + content).html(consume[content]);
 							}
 						}
-						$('.promo_content').html(consume.promo_content);
 					}
 					consume.promo_content = consume.promo_content.replace(/\n/g, "<br>");
+					$('.promo_content').html(consume.promo_content);
 				} else if (page_id == 'club-consume-modify') {
 					if (consume.title1 != null && consume.title1 != '') {
 

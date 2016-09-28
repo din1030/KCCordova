@@ -46,10 +46,10 @@ $target_file = $target_dir.$new_filename;
 $sql_string = "SELECT * FROM `club_consume` WHERE `admin_id` = '$admin_id' AND `lang`='$lang' LIMIT 1";
 $sql = $mysqli->query($sql_string);
 if ($sql->num_rows > 0) {
-    $update_string = "UPDATE `club_consume` SET `contact_name`='$contact_name',`contact_tel`='$contact_tel',`contact_line`='$contact_line',`promo_content`='$promo_content' WHERE `admin_id` = '$admin_id'";
+    $update_string = "UPDATE `club_consume` SET `contact_name`='$contact_name',`contact_tel`='$contact_tel',`contact_line`='$contact_line',`promo_content`='$promo_content' WHERE `admin_id` = '$admin_id' AND `lang`='$lang'";
     if ($mysqli->query($update_string)) {
         if (move_uploaded_file($_FILES['contact-pic-input']['tmp_name'], $target_file)) {
-            $pic_string = "UPDATE `club_consume` SET `contact_pic` =  '$new_filename' WHERE `admin_id` = $admin_id";
+            $pic_string = "UPDATE `club_consume` SET `contact_pic` =  '$new_filename' WHERE `admin_id` = '$admin_id' AND `lang`='$lang'";
             $mysqli->query($pic_string);
         }
 
@@ -77,12 +77,11 @@ if ($sql->num_rows > 0) {
     $mysqli->query($insert_string);
     if ($mysqli->affected_rows > 0) {
         if (move_uploaded_file($_FILES['contact-pic-input']['tmp_name'], $target_file)) {
-            $pic_string = "UPDATE `club_consume` SET `contact_pic` =  '$new_filename' WHERE `admin_id` = $admin_id";
+            $pic_string = "UPDATE `club_consume` SET `contact_pic` =  '$new_filename' WHERE `admin_id` = '$admin_id' AND `lang`='$lang'";
             $mysqli->query($pic_string);
         }
 
         $insert_string = 'INSERT INTO `club_consume_detail`(`admin_id`,`lang`,`title1`, `day11`, `content11`, `day12`, `content12`, `day13`, `content13`, `day14`, `content14`, `day15`, `content15`, `title2`, `day21`, `content21`, `day22`, `content22`, `day23`, `content23`, `day24`, `content24`, `day25`, `content25`) '."VALUES ('$admin_id','$lang','$title1','$day11','$content11','$day12','$content12','$day13','$content13','$day14','$content14','$day15','$content15','$title2','$day21','$content21','$day22','$content22','$day23','$content23','$day24','$content24','$day25','$content25')";
-        $detail_string = "UPDATE `club_consume_detail` SET `title1`='$title1',`day11`='$day11',`content11`='$content11',`day12`='$day12',`content12`='$content12',`day13`='$day13',`content13`='$content13',`day14`='$day14',`content14`='$content14',`day15`='$day15',`content15`='$content15'";
 
         if ($mysqli->query($insert_string)) {
             $output = array('status' => true, 'message' => '資料已修改！');
@@ -90,7 +89,7 @@ if ($sql->num_rows > 0) {
 
             return;
         } else {
-            $output = array('status' => false, 'message' => '操作錯誤，請稍後再試！', 'sql' => $update_string);
+            $output = array('status' => false, 'message' => '操作錯誤，請稍後再試！', 'sql' => $insert_string);
             echo json_encode($output);
             exit;
         }

@@ -26,6 +26,8 @@ $(document).on("pagebeforeshow", function() {
 
 $(document).on("pagebeforehide", function() {
 	$('form').trigger('reset');
+	$('textarea').text('');
+	$('.reset_content').empty();
 });
 
 $(document).on('pagebeforeshow', '#club-info, #club-info-modify', function() {
@@ -194,7 +196,7 @@ $(document).on('pagebeforeshow', '#club-hire-modify', function() {
 		$(this).ajaxSubmit({
 			url: api_base + 'club_offer_modify.php',
 			data: {
-				admin_id: window.localStorage.getItem('user_id'),
+				admin_id: window.localStorage.getItem('detail_user_id'),
 				lang: window.localStorage.getItem('lang_id')
 			},
 			type: 'POST',
@@ -225,7 +227,7 @@ $(document).on('pagebeforeshow', '#club-hire-modify', function() {
 $(document).on('pagebeforeshow', '#club-consume, #club-consume-modify', function() {
 	var page_id = $(this).attr('id');
 	$.ajax({
-		url: api_base + 'get_club_consume.php?club_id=' + window.localStorage.getItem('user_id'),
+		url: api_base + 'get_club_consume.php?club_id=' + window.localStorage.getItem('detail_user_id'),
 		dataType: 'json',
 		data: {
 			lang: window.localStorage.getItem('lang_id')
@@ -260,9 +262,9 @@ $(document).on('pagebeforeshow', '#club-consume, #club-consume-modify', function
 							$('.' + content).html(consume[content]);
 						}
 					}
-					$('.promo_content').html(consume.promo_content);
 				}
 				consume.promo_content = consume.promo_content.replace(/\n/g, "<br>");
+				$('.promo_content').html(consume.promo_content);
 			} else if (page_id == 'club-consume-modify') {
 				if (consume.title1 != null && consume.title1 != '') {
 					$('#title1').val(consume.title1);
@@ -303,7 +305,7 @@ $(document).on('pagebeforeshow', '#club-consume-modify', function() {
 		$(this).ajaxSubmit({
 			url: api_base + 'club_consume_modify.php',
 			data: {
-				admin_id: window.localStorage.getItem('user_id'),
+				admin_id: window.localStorage.getItem('detail_user_id'),
 				lang: window.localStorage.getItem('lang_id')
 			},
 			type: 'POST',
