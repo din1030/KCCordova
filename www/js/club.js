@@ -334,18 +334,15 @@ $(document).on('pagebeforeshow', '#club-search', function() {
 		url: api_base + 'get_form_content.php?action=get_category&type=club',
 		dataType: 'json'
 	}).done(function(data) {
-		// console.log(data);
 		var classificationList = '';
 		$.each(data, function(idx, obj) {
 			classificationList += '<option value="' + obj.id + '">' + obj.title + '</option>';
 		});
 		$('#club_type').html(classificationList);
 		$('#club_type').selectmenu('refresh');
-
 		$('#club-search-btn').on('click', function() {
 			var area = $('#area-select').val();
 			var type = $('#club_type').val();
-
 			$.ajax({
 				url: api_base + 'search_club.php?area_id=' + area + '&type=' + type,
 				dataType: 'json'
@@ -353,7 +350,6 @@ $(document).on('pagebeforeshow', '#club-search', function() {
 				if (data.status) {
 					clubSearchJson = data;
 					clubSearchState = true;
-					// console.log(clubSearchState, clubSearchJson);
 					$.mobile.changePage($('#club-result'), {
 						reloadPage: true,
 						changeHash: true
@@ -369,7 +365,6 @@ $(document).on('pagebeforeshow', '#club-search', function() {
 });
 
 $(document).on('pagebeforeshow', '#club-result', function() {
-	// console.log(clubSearchState, clubSearchJson);
 	if (clubSearchState && clubSearchJson != '') {
 		$('#club_result_list').empty();
 		$.each(clubSearchJson.result, function(idx, obj) {

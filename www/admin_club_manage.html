@@ -13,140 +13,6 @@
     </head>
 
     <body>
-        <!-- club profile -->
-        <div data-role="page" id="club-profile" data-theme="a" data-page="club-profile">
-            <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
-                <div style="width:100%; text-align:center;">
-                    <a href="#menu-panel" class="ui-link">
-                        <div id="menu-btn" class="header-btn header-link left-link"></div>
-                    </a>
-                    <span class="page-title">我的檔案</span>
-                </div>
-                <div data-role="navbar">
-                    <ul class="page-content-nav club-page-nav">
-                        <li><a href="#club-profile" class="active">個人資料</a></li>
-                        <li><a href="#club-info">店家資料</a></li>
-                        <li><a href="#club-consume">店家消費</a></li>
-                        <li><a href="#club-hire">應徵資訊</a></li>
-                    </ul>
-                </div>
-            </div>
-            <!-- /header -->
-            <div data-role="main" class="ui-content profile-main" id="club-profile-main">
-                <div class="upper_block">
-                    <img src="./img/default_club_pic.jpg" alt="" height="100" />
-                    <div class="name_block">
-                        <div class="name_div"></div>
-                    </div>
-                </div>
-                <div class="clearfix"></div>
-                <hr>
-                <div class="">
-                    <div class="ui-field-contain ui-disabled">
-                        <label class="item_title" for="member-id-input">會員編號</label>
-                        <input type="text" name="member-id-input" class="ui-disabled member-id-input" id="member-id-input" value="">
-                    </div>
-                    <div class="ui-field-contain ui-disabled">
-                        <label class="item_title" for="textinput-1">身分</label>
-                        <input type="text" name="textinput-1" class="ui-disabled" id="textinput-1" value="店家管理員">
-                    </div>
-                    <div class="ui-field-contain ui-disabled">
-                        <label class="item_title" for="gender-input">性別</label>
-                        <input type="text" name="gender-input" class="ui-disabled gender-input" id="gender-input" value="男">
-                    </div>
-                    <div class="ui-field-contain ui-disabled">
-                        <label class="item_title" for="birth-input">生日</label>
-                        <input type="text" name="birth-input" class="ui-disabled birth-input" id="birth-input" value="1999-12-31">
-                    </div>
-                    <div class="ui-field-contain ui-disabled">
-                        <label class="item_title" for="mobile-input">手機</label>
-                        <input type="tel" name="mobile-input" class="ui-disabled mobile-input" id="mobile-input" value="0912345678">
-                    </div>
-                    <div class="ui-field-contain ui-disabled">
-                        <label class="item_title" for="tel-input">電話</label>
-                        <input type="tel" name="tel-input" class="ui-disabled tel-input" id="tel-input" value="02-77777777">
-                    </div>
-                    <div class="ui-field-contain ui-disabled">
-                        <label class="item_title" for="plan-input">刊登方案</label>
-                        <input type="text" name="plan-input" class="ui-disabled plan-input" id="plan-input" value="未購買刊登方案">
-                    </div>
-                    <div class="ui-field-contain ui-disabled">
-                        <label class="item_title" for="plan-during-input">刊登時間</label>
-                        <input type="text" name="plan-during-input" class="ui-disabled plan-during-input" id="plan-during-input" value="未刊登">
-                    </div>
-                    <a href="./plan.html" class="ui-btn ui-corner-all" data-ajax="false" style="color:white;background-color:#AE53C9;">刊登續約</a>
-                    <a href="#club-profile-modify" class="ui-btn ui-corner-all">編輯資料</a>
-                </div>
-            </div>
-            <!-- /main -->
-        </div>
-
-        <!-- club profile modify -->
-        <div data-role="page" id="club-profile-modify" data-theme="a" data-page="club-profile-modify" class="profile-pic-page">
-            <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
-                <div style="width:100%; text-align:center;">
-                    <a href="#menu-panel" class="ui-link">
-                        <div id="menu-btn" class="header-btn header-link left-link"></div>
-                    </a>
-                    <span class="page-title">我的檔案</span>
-                    <a href="#club-profile" class="ui-link" data-ajax="false">
-                        <div class="header-btn header-link right-link" style="width:auto">返回</div>
-                    </a>
-                </div>
-                <div data-role="navbar">
-                    <ul class="page-content-nav club-page-nav">
-                        <li><a href="#club-profile" class="active">個人資料</a></li>
-                        <li><a href="#club-info">店家資料</a></li>
-                        <li><a href="#club-consume">店家消費</a></li>
-                        <li><a href="#club-hire">應徵資訊</a></li>
-                    </ul>
-                </div>
-            </div>
-            <!-- /header -->
-            <div data-role="main" class="ui-content profile-main" id="club-profile-modify-main">
-                <form id="club-profile-modify-from" method="post" enctype="multipart/form-data">
-                    <div class="upper_block">
-                        <input type="image" class="profile-pic" src="./img/default_club_pic.jpg" />
-                        <input id="profile-pic" name="profile_photo" type="file" class="profile-pic-input" accept="image/*" />
-                        <div class="name_block">
-                            <div class="name_div"></div>
-                            <!-- <br> -->
-                            <div>可更換大頭圖</div>
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-                    <hr>
-                    <div class="">
-                        <div class="ui-field-contain ui-disabled">
-                            <div class="ui-field-contain ui-disabled">
-                                <label class="item_title" for="member-id-input">會員編號</label>
-                                <input type="text" name="member-id-input" class="ui-disabled member-id-input" id="member-id-input" value="">
-                            </div>
-                            <label class="item_title" for="textinput-1">身分</label>
-                            <input type="text" name="textinput-1" class="ui-disabled" id="textinput-1" value="店家管理者">
-                        </div>
-                        <div class="ui-field-contain ui-disabled">
-                            <label class="item_title" for="textinput-2">性別</label>
-                            <input type="text" name="gender-input" class="ui-disabled gender-input" id="gender-input" value="">
-                        </div>
-                        <div class="ui-field-contain ui-disabled">
-                            <label class="item_title" for="textinput-3">生日</label>
-                            <input type="date" name="birth-input" class="ui-disabled birth-input" id="birth-input" value="">
-                        </div>
-                        <div class="ui-field-contain">
-                            <label class="item_title" for="tel-input">電話</label>
-                            <input type="tel" name="tel-input" class="tel-input" id="tel-input" value="">
-                        </div>
-                        <div class="ui-field-contain">
-                            <label class="item_title" for="mobile-input">手機</label>
-                            <input type="tel" name="mobile-input" class="mobile-input" id="mobile-input" value="">
-                        </div>
-                        <button class="ui-shadow ui-btn ui-corner-all profile-submit-btn" data-backpage="#club-profile" type="button">送出</button>
-                    </div>
-                </form>
-            </div>
-            <!-- /main -->
-        </div>
 
         <!-- club info -->
         <div data-role="page" id="club-info" data-theme="a" data-page="club-info">
@@ -155,11 +21,13 @@
                     <a href="#menu-panel" class="ui-link">
                         <div id="menu-btn" class="header-btn header-link left-link"></div>
                     </a>
-                    <span class="page-title">我的檔案</span>
+                    <span class="page-title">管理者後台-店家檔案</span>
+                    <a href="admin.html#admin-member-detail" class="ui-link" data-ajax="false">
+                        <div class="header-btn header-link right-link" style="width:auto">返回</div>
+                    </a>
                 </div>
                 <div data-role="navbar">
                     <ul class="page-content-nav club-page-nav">
-                        <li><a href="#club-profile">個人資料</a></li>
                         <li><a href="#club-info" class="active">店家資料</a></li>
                         <li><a href="#club-consume">店家消費</a></li>
                         <li><a href="#club-hire">應徵資訊</a></li>
@@ -169,62 +37,70 @@
             <!-- /header -->
             <div data-role="main" class="ui-content profile-main" id="club-info-main">
                 <div class="">
-                    <div class="ui-field-contain ui-disabled">
-                        <label class="item_title" for="name-input">店名</label>
-                        <input type="text" name="name-input" class="ui-disabled name-input" id="name-input" value="">
+                    <div class="ui-field-contain">
+                        <label for="lang_setting">語言切換</label>
+                        <select name="lang_setting" class="lang_setting">
+                            <option value="1">正體中文</option>
+                            <option value="2">简体中文</option>
+                            <option value="3">English</option>
+                            <option value="4">日本語</option>
+                        </select>
                     </div>
-                    <div class="ui-field-contain ui-disabled">
-                        <label class="item_title" for="category-input">店家類別</label>
-                        <input type="text" name="category-input" class="ui-disabled category-input" id="category-input" value="">
-                    </div>
-                    <div class="ui-field-contain ui-disabled">
-                        <label class="item_title" for="tel-input">電話</label>
-                        <input type="tel" name="tel-input" class="ui-disabled tel-input" id="tel-input" value="">
-                    </div>
-                    <div class="ui-field-contain ui-disabled">
-                        <label class="item_title" for="address-input">地址</label>
-                        <input type="text" name="address-input" class="ui-disabled address-input" id="address-input" value="">
-                    </div>
-                    <div class="ui-field-contain ui-disabled">
-                        <div class="">
-                            <label class="item_title">營業時間</label>
+                    <hr>
+                    <form class="static-form">
+                        <div class="ui-field-contain ui-disabled">
+                            <label class="item_title" for="name-input">店名</label>
+                            <input type="text" name="name-input" class="ui-disabled name-input" id="name-input" value="">
                         </div>
-                        <input type="text" name="opentime1" class="ui-disabled opentime1" id="opentime1" value="" placeholder="（尚未填寫）">
-                        <input type="text" name="opentime2" class="ui-disabled opentime2" id="opentime2" value="">
-                        <input type="text" name="opentime3" class="ui-disabled opentime3" id="opentime3" value="">
-                        <input type="text" name="opentime4" class="ui-disabled opentime4" id="opentime4" value="">
-                        <input type="text" name="opentime5" class="ui-disabled opentime5" id="opentime5" value="">
-                    </div>
-                    <div class="ui-field-contain ui-disabled">
-                        <label class="item_title" for="website-input">官方網站</label>
-                        <input type="url" name="website-input" class="ui-disabled website-input" id="website-input" value="">
-                    </div>
-                    <div class="ui-field-contain ui-disabled">
-                        <label class="item_title" for="slogan-input">店家標語</label>
-                        <input type="text" name="slogan-input" class="ui-disabled slogan-input" id="slogan-input" value="">
-                    </div>
-                    <!-- <div class="ui-field-contain ui-disabled">
-                        <label class="item_title" for="textinput-9">店家小圖</label>
-                        <input type="text" name="textinput-9" class="ui-disabled" id="textinput-9" value="xxx.jpg">
-                    </div> -->
-                    <div class="ui-field-contain ui-disabled">
-                        <div class="">
-                            <label class="item_title">照片</label>
+                        <div class="ui-field-contain ui-disabled">
+                            <label class="item_title" for="category-input">店家類別</label>
+                            <input type="text" name="category-input" class="ui-disabled category-input" id="category-input" value="">
                         </div>
-                        <div id="pic_block">
+                        <div class="ui-field-contain ui-disabled">
+                            <label class="item_title" for="tel-input">電話</label>
+                            <input type="tel" name="tel-input" class="ui-disabled tel-input" id="tel-input" value="">
                         </div>
-                    </div>
-                    <div class="ui-field-contain ui-disabled">
-                        <label class="item_title" for="">影片</label>
-                        <input type="url" name="video-input" class="ui-disabled video-input" id="video-input" value="">
-                    </div>
-                    <div class="ui-field-contain ui-disabled">
-                        <div class="">
-                            <label class="item_title">店家介紹</label>
+                        <div class="ui-field-contain ui-disabled">
+                            <label class="item_title" for="address-input">地址</label>
+                            <input type="text" name="address-input" class="ui-disabled address-input" id="address-input" value="">
                         </div>
-                        <div class="description">
+                        <div class="ui-field-contain ui-disabled">
+                            <div class="">
+                                <label class="item_title">營業時間</label>
+                            </div>
+                            <input type="text" name="opentime1" class="ui-disabled opentime1" id="opentime1" value="" placeholder="（尚未填寫）">
+                            <input type="text" name="opentime2" class="ui-disabled opentime2" id="opentime2" value="">
+                            <input type="text" name="opentime3" class="ui-disabled opentime3" id="opentime3" value="">
+                            <input type="text" name="opentime4" class="ui-disabled opentime4" id="opentime4" value="">
+                            <input type="text" name="opentime5" class="ui-disabled opentime5" id="opentime5" value="">
                         </div>
-                    </div>
+                        <div class="ui-field-contain ui-disabled">
+                            <label class="item_title" for="website-input">官方網站</label>
+                            <input type="url" name="website-input" class="ui-disabled website-input" id="website-input" value="">
+                        </div>
+                        <div class="ui-field-contain ui-disabled">
+                            <label class="item_title" for="slogan-input">店家標語</label>
+                            <input type="text" name="slogan-input" class="ui-disabled slogan-input" id="slogan-input" value="">
+                        </div>
+                        <div class="ui-field-contain ui-disabled">
+                            <div class="">
+                                <label class="item_title">照片</label>
+                            </div>
+                            <div id="pic_block">
+                            </div>
+                        </div>
+                        <div class="ui-field-contain ui-disabled">
+                            <label class="item_title" for="">影片</label>
+                            <input type="url" name="video-input" class="ui-disabled video-input" id="video-input" value="">
+                        </div>
+                        <div class="ui-field-contain ui-disabled">
+                            <div class="">
+                                <label class="item_title">店家介紹</label>
+                            </div>
+                            <div class="description">
+                            </div>
+                        </div>
+                    </form>
                     <a href="#club-info-modify" class="ui-btn ui-corner-all">編輯資料</a>
                     <a href="#club-pic" class="ui-btn ui-corner-all">上傳圖片</a>
                 </div>
@@ -239,11 +115,13 @@
                     <a href="#menu-panel" class="ui-link">
                         <div id="menu-btn" class="header-btn header-link left-link"></div>
                     </a>
-                    <span class="page-title">我的檔案</span>
+                    <span class="page-title">管理者後台-店家檔案</span>
+                    <a href="#club-info" class="ui-link" data-ajax="false">
+                        <div class="header-btn header-link right-link" style="width:auto">取消</div>
+                    </a>
                 </div>
                 <div data-role="navbar">
                     <ul class="page-content-nav club-page-nav">
-                        <li><a href="#club-profile">個人資料</a></li>
                         <li><a href="#club-info" class="active">店家資料</a></li>
                         <li><a href="#club-consume">店家消費</a></li>
                         <li><a href="#club-hire">應徵資訊</a></li>
@@ -253,6 +131,16 @@
             <!-- /header -->
             <div data-role="main" class="ui-content profile-main" id="club-info-modify-main">
                 <form id="club-info-form" method="post">
+                    <div class="ui-field-contain">
+                        <label for="lang_setting">語言切換</label>
+                        <select name="lang_setting" class="lang_setting">
+                            <option value="1">正體中文</option>
+                            <option value="2">简体中文</option>
+                            <option value="3">English</option>
+                            <option value="4">日本語</option>
+                        </select>
+                    </div>
+                    <hr>
                     <div class="">
                         <div class="ui-field-contain">
                             <label class="item_title" for="name-input">店名</label>
@@ -312,13 +200,14 @@
                         <small style="color:#BE0800;">（請先上傳至 Youtube 或 Vimeo 影音平台再將網址貼於本欄位）</small>
                         <div class="">
                             <label class="item_title">店家介紹</label>
-                            <textarea wrap="virtual" name="description" class="description" rows="4" cols="40"></textarea>
+                            <textarea name="description" class="description" rows="4" cols="40"></textarea>
                         </div>
-                        <button id="member-submit-btn" class="ui-shadow ui-btn ui-corner-all" type="submit">送出</button>
                     </div>
-                </form>
+                    <button id="member-submit-btn" class="ui-shadow ui-btn ui-corner-all" type="submit">送出</button>
             </div>
-            <!-- /main -->
+            </form>
+        </div>
+        <!-- /main -->
         </div>
 
         <!-- club consume -->
@@ -328,11 +217,13 @@
                     <a href="#menu-panel" class="ui-link">
                         <div id="menu-btn" class="header-btn header-link left-link"></div>
                     </a>
-                    <span class="page-title">我的檔案</span>
+                    <span class="page-title">管理者後台-店家檔案</span>
+                    <a href="admin.html#admin-member-detail" class="ui-link" data-ajax="false">
+                        <div class="header-btn header-link right-link" style="width:auto">返回</div>
+                    </a>
                 </div>
                 <div data-role="navbar">
                     <ul class="page-content-nav club-page-nav">
-                        <li><a href="#club-profile">個人資料</a></li>
                         <li><a href="#club-info">店家資料</a></li>
                         <li><a href="#club-consume" class="active">店家消費</a></li>
                         <li><a href="#club-hire">應徵資訊</a></li>
@@ -342,53 +233,65 @@
             <!-- /header -->
             <div data-role="main" class="ui-content profile-main" id="club-consume-main">
                 <div class="">
-                    <div class="ui-field-contain ui-disabled">
-                        <label class="item_title" for="contact-input">公關專員</label>
-                        <input type="text" name="contact-input" id="contact-input" class="contact-input" value="">
+                    <div class="ui-field-contain">
+                        <label for="lang_setting">語言切換</label>
+                        <select name="lang_setting" class="lang_setting">
+                            <option value="1">正體中文</option>
+                            <option value="2">简体中文</option>
+                            <option value="3">English</option>
+                            <option value="4">日本語</option>
+                        </select>
                     </div>
-                    <div class="ui-field-contain ui-disabled">
-                        <label class="item_title" for="contact-pic-input">公關大頭圖</label>
-                        <input type="text" name="contact-pic-input" class="contact-pic-input" id="contact-pic-input" value="">
-                    </div>
-                    <div class="ui-field-contain ui-disabled">
-                        <label class="item_title" for="contact-tel-input">公關電話</label>
-                        <input type="tel" name="contact-tel-input" class="contact-tel-input" id="contact-tel-input" value="">
-                    </div>
-                    <div class="ui-field-contain ui-disabled">
-                        <label class="item_title" for="contact-line-input">公關 LINE</label>
-                        <input type="text" name="contact-line-input" class="contact-line-input" id="contact-line-input" value="">
-                    </div>
-                    <label class="item_title">消費介紹</label>
-                    <div class="consume_detail_block1">
-                        <label class="item_title title1"></label>
-                        <label class="day11"></label>
-                        <div class="content11"></div>
-                        <label class="day12"></label>
-                        <div class="content12"></div>
-                        <label class="day13"></label>
-                        <div class="content13"></div>
-                        <label class="day14"></label>
-                        <div class="content14"></div>
-                        <label class="day15"></label>
-                        <div class="content15"></div>
-                    </div>
-                    <div class="consume_detail_block2">
-                        <label class="item_title title2"></label>
-                        <label class="day21"></label>
-                        <div class="content21"></div>
-                        <label class="day22"></label>
-                        <div class="content22"></div>
-                        <label class="day23"></label>
-                        <div class="content23"></div>
-                        <label class="day24"></label>
-                        <div class="content24"></div>
-                        <label class="day25"></label>
-                        <div class="content25"></div>
-                    </div>
-                    <div class="ui-disabled">
-                        <label class="item_title" for="promo_content">優惠活動訊息</label>
-                        <div class="promo_content"></div>
-                    </div>
+                    <hr>
+                    <form class="static-form">
+                        <div class="ui-field-contain ui-disabled">
+                            <label class="item_title" for="contact-input">公關專員</label>
+                            <input type="text" name="contact-input" id="contact-input" class="contact-input" value="">
+                        </div>
+                        <div class="ui-field-contain ui-disabled">
+                            <label class="item_title" for="contact-pic-input">公關大頭圖</label>
+                            <input type="text" name="contact-pic-input" class="contact-pic-input" id="contact-pic-input" value="">
+                        </div>
+                        <div class="ui-field-contain ui-disabled">
+                            <label class="item_title" for="contact-tel-input">公關電話</label>
+                            <input type="tel" name="contact-tel-input" class="contact-tel-input" id="contact-tel-input" value="">
+                        </div>
+                        <div class="ui-field-contain ui-disabled">
+                            <label class="item_title" for="contact-line-input">公關 LINE</label>
+                            <input type="text" name="contact-line-input" class="contact-line-input" id="contact-line-input" value="">
+                        </div>
+                        <label class="item_title">消費介紹</label>
+                        <div class="consume_detail_block1">
+                            <label class="item_title title1"></label>
+                            <label class="day11"></label>
+                            <div class="content11"></div>
+                            <label class="day12"></label>
+                            <div class="content12"></div>
+                            <label class="day13"></label>
+                            <div class="content13"></div>
+                            <label class="day14"></label>
+                            <div class="content14"></div>
+                            <label class="day15"></label>
+                            <div class="content15"></div>
+                        </div>
+                        <div class="consume_detail_block2">
+                            <label class="item_title title2"></label>
+                            <label class="day21"></label>
+                            <div class="content21"></div>
+                            <label class="day22"></label>
+                            <div class="content22"></div>
+                            <label class="day23"></label>
+                            <div class="content23"></div>
+                            <label class="day24"></label>
+                            <div class="content24"></div>
+                            <label class="day25"></label>
+                            <div class="content25"></div>
+                        </div>
+                        <div class="ui-disabled">
+                            <label class="item_title" for="promo_content">優惠活動訊息</label>
+                            <div class="promo_content"></div>
+                        </div>
+                    </form>
                     <a href="#club-consume-modify" class="ui-btn ui-corner-all">編輯資料</a>
                 </div>
             </div>
@@ -402,11 +305,13 @@
                     <a href="#menu-panel" class="ui-link">
                         <div id="menu-btn" class="header-btn header-link left-link"></div>
                     </a>
-                    <span class="page-title">我的檔案</span>
+                    <span class="page-title">管理者後台-店家檔案</span>
+                    <a href="#club-consume" class="ui-link" data-ajax="false">
+                        <div class="header-btn header-link right-link" style="width:auto">取消</div>
+                    </a>
                 </div>
                 <div data-role="navbar">
                     <ul class="page-content-nav club-page-nav">
-                        <li><a href="#club-profile">個人資料</a></li>
                         <li><a href="#club-info">店家資料</a></li>
                         <li><a href="#club-consume" class="active">店家消費</a></li>
                         <li><a href="#club-hire">應徵資訊</a></li>
@@ -416,6 +321,16 @@
             <!-- /header -->
             <div data-role="main" class="ui-content profile-main" id="club-consume-modify-main">
                 <div class="">
+                    <div class="ui-field-contain">
+                        <label for="lang_setting">語言切換</label>
+                        <select name="lang_setting" class="lang_setting">
+                            <option value="1">正體中文</option>
+                            <option value="2">简体中文</option>
+                            <option value="3">English</option>
+                            <option value="4">日本語</option>
+                        </select>
+                    </div>
+                    <hr>
                     <form id="club-consume-form" method="post" enctype="multipart/form-data">
                         <div class="ui-field-contain">
                             <label class="item_title" for="contact-input">公關專員</label>
@@ -602,11 +517,13 @@
                     <a href="#menu-panel" class="ui-link">
                         <div id="menu-btn" class="header-btn header-link left-link"></div>
                     </a>
-                    <span class="page-title">我的檔案</span>
+                    <span class="page-title">管理者後台-店家檔案</span>
+                    <a href="admin.html#admin-member-detail" class="ui-link" data-ajax="false">
+                        <div class="header-btn header-link right-link" style="width:auto">返回</div>
+                    </a>
                 </div>
                 <div data-role="navbar">
                     <ul class="page-content-nav club-page-nav">
-                        <li><a href="#club-profile">個人資料</a></li>
                         <li><a href="#club-info">店家資料</a></li>
                         <li><a href="#club-consume">店家消費</a></li>
                         <li><a href="#club-hire" class="active">應徵資訊</a></li>
@@ -616,33 +533,45 @@
             <!-- /header -->
             <div data-role="main" class="ui-content profile-main" id="club-hire-main">
                 <div class="">
-                    <div class="ui-field-contain ui-disabled">
-                        <label class="item_title" for="interviewer-input">經理面試人</label>
-                        <input type="text" name="interviewer-input" class="interviewer-input" value="">
+                    <div class="ui-field-contain">
+                        <label for="lang_setting">語言切換</label>
+                        <select name="lang_setting" class="lang_setting">
+                            <option value="1">正體中文</option>
+                            <option value="2">简体中文</option>
+                            <option value="3">English</option>
+                            <option value="4">日本語</option>
+                        </select>
                     </div>
-                    <div class="ui-field-contain ui-disabled">
-                        <label class="item_title" for="interviewer-pic-input">經理大頭圖</label>
-                        <input type="text" name="interviewer-pic-input" class="interviewer-pic-input">
-                    </div>
-                    <div class="ui-field-contain ui-disabled">
-                        <label class="item_title" for="interview-tel-input">經理電話</label>
-                        <input type="tel" name="interview-tel-input" class="interview-tel-input" id="interview-tel-input" value="">
-                    </div>
-                    <div class="ui-field-contain ui-disabled">
-                        <label class="item_title" for="interview-line-input">經理 LINE</label>
-                        <input type="text" name="interview-line-input" class="interview-line-input" value="">
-                    </div>
-                    <div class="ui-disabled">
-                        <label class="item_title" for="offer_content">上班時段/服務內容</label>
-                        <div id="offer_content" class="offer_content">
+                    <hr>
+                    <form class="static-form">
+                        <div class="ui-field-contain ui-disabled">
+                            <label class="item_title" for="interviewer-input">經理面試人</label>
+                            <input type="text" name="interviewer-input" class="interviewer-input" value="">
                         </div>
-                    </div>
-                    <div class="ui-disabled">
-                        <label class="item_title" for="welfare">公司制度與福利</label>
-                        <div class=welfare "" id="welfare">
+                        <div class="ui-field-contain ui-disabled">
+                            <label class="item_title" for="interviewer-pic-input">經理大頭圖</label>
+                            <input type="text" name="interviewer-pic-input" class="interviewer-pic-input">
+                        </div>
+                        <div class="ui-field-contain ui-disabled">
+                            <label class="item_title" for="interview-tel-input">經理電話</label>
+                            <input type="tel" name="interview-tel-input" class="interview-tel-input" id="interview-tel-input" value="">
+                        </div>
+                        <div class="ui-field-contain ui-disabled">
+                            <label class="item_title" for="interview-line-input">經理 LINE</label>
+                            <input type="text" name="interview-line-input" class="interview-line-input" value="">
+                        </div>
+                        <div class="ui-disabled">
+                            <label class="item_title" for="offer_content">上班時段/服務內容</label>
+                            <div id="offer_content" class="offer_content">
+                            </div>
+                        </div>
+                        <div class="ui-disabled">
+                            <label class="item_title" for="welfare">公司制度與福利</label>
+                            <div class=welfare "" id="welfare">
 
+                            </div>
                         </div>
-                    </div>
+                    </form>
                     <a href="#club-hire-modify" class="ui-btn ui-corner-all">編輯資料</a>
                 </div>
             </div>
@@ -656,11 +585,13 @@
                     <a href="#menu-panel" class="ui-link">
                         <div id="menu-btn" class="header-btn header-link left-link"></div>
                     </a>
-                    <span class="page-title">我的檔案</span>
+                    <span class="page-title">管理者後台-店家檔案</span>
+                    <a href="#club-hire" class="ui-link" data-ajax="false">
+                        <div class="header-btn header-link right-link" style="width:auto">取消</div>
+                    </a>
                 </div>
                 <div data-role="navbar">
                     <ul class="page-content-nav club-page-nav">
-                        <li><a href="#club-profile">個人資料</a></li>
                         <li><a href="#club-info">店家資料</a></li>
                         <li><a href="#club-consume">店家消費</a></li>
                         <li><a href="#club-hire" class="active">應徵資訊</a></li>
@@ -670,6 +601,16 @@
             <!-- /header -->
             <div data-role="main" class="ui-content profile-main" id="club-hire-modify-main">
                 <div class="">
+                    <div class="ui-field-contain">
+                        <label for="lang_setting">語言切換</label>
+                        <select name="lang_setting" class="lang_setting">
+                            <option value="1">正體中文</option>
+                            <option value="2">简体中文</option>
+                            <option value="3">English</option>
+                            <option value="4">日本語</option>
+                        </select>
+                    </div>
+                    <hr>
                     <form id="club-hire-form" method="post" enctype="multipart/form-data">
                         <div class="ui-field-contain">
                             <label class="item_title" for="interviewer-input">經理面試人</label>
@@ -702,15 +643,15 @@
             <!-- /main -->
         </div>
 
-        <!-- jobseeker resume pic -->
+        <!-- club pic -->
         <div data-role="page" id="club-pic" data-theme="a" data-page="club-pic">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
                         <div id="menu-btn" class="header-btn header-link left-link"></div>
                     </a>
-                    <span class="page-title">我的檔案</span>
-                    <a href="#club-info" class="ui-link" data-ajax="false">
+                    <span class="page-title">管理者後台-店家檔案</span>
+                    <a href="#club-info-modify" class="ui-link" data-ajax="false">
                         <div class="header-btn header-link right-link" style="width:auto">返回</div>
                     </a>
                 </div>
@@ -776,7 +717,9 @@
         <script src="./js/jquery.form.min.js"></script>
         <script type="text/javascript" src="cordova.js"></script>
         <script src="./js/main.js"></script>
-        <script src="./js/profile.js"></script>
+        <script src="./js/admin_club_manage.js"></script>
     </body>
+
+</html>
 
 </html>
