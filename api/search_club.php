@@ -8,7 +8,7 @@ include 'db_setting.php';
 $type = $_GET['type'];
 $area_id = $_GET['area_id'];
 
-$sql_string = 'SELECT `club_info`.`admin_id`,`club_info`.`name`,`club_info`.`pic1`,`club_info`.`slogan`,`club_info`.`updated`,`country`.`country`,`area`.`area` FROM `club_info`,`country`,`area` WHERE `club_info`.`country_id` = `country`.`id` AND `club_info`.`area_id` = `area`.`id` AND `club_info`.`category` ='.$type.' AND `club_info`.`area_id`='.$area_id;
+$sql_string = 'SELECT `club_info`.`admin_id`,`club_info`.`name`,`club_info`.`pic1`,`club_info`.`slogan`,`club_info`.`updated`,`country`.`country`,`area`.`area` FROM `club_info`,`country`,`area` WHERE `club_info`.`country_id` = `country`.`id` AND `club_info`.`area_id` = `area`.`id` AND `club_info`.`category` ='.$type.' AND `club_info`.`area_id`='.$area_id." AND `club_info`.`lang`='$lang'";
 
 $sql = $mysqli->query($sql_string);
 if ($sql->num_rows > 0) {
