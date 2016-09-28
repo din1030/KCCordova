@@ -6,6 +6,8 @@ header('Access-Control-Allow-Methods: GET, POST');
 include 'db_setting.php';
 
 $admin_id = $_POST['admin_id'];
+$lang = $_POST['lang'];
+
 $contact_name = $_POST['contact-input'];
 $contact_tel = $_POST['contact-tel-input'];
 $contact_line = $_POST['contact-line-input'];
@@ -41,7 +43,7 @@ $new_filename = $admin_id.'_'.basename($_FILES['contact-pic-input']['name']);
 $target_file = $target_dir.$new_filename;
 
 // 判斷是否已有資料
-$sql_string = "SELECT * FROM `club_consume` WHERE `admin_id` = '$admin_id' LIMIT 1";
+$sql_string = "SELECT * FROM `club_consume` WHERE `admin_id` = '$admin_id' AND `lang`='$lang' LIMIT 1";
 $sql = $mysqli->query($sql_string);
 if ($sql->num_rows > 0) {
     $update_string = "UPDATE `club_consume` SET `contact_name`='$contact_name',`contact_tel`='$contact_tel',`contact_line`='$contact_line',`promo_content`='$promo_content' WHERE `admin_id` = '$admin_id'";
@@ -71,7 +73,7 @@ if ($sql->num_rows > 0) {
     }
 } else {
     // 儲存資料
-    $insert_string = "INSERT INTO `club_consume`(`admin_id`, `contact_name`, `contact_tel`, `contact_line`, `promo_content`, `created`) VALUES ('$admin_id','$contact_name','$contact_tel','$contact_line','$promo_content', NOW())";
+    $insert_string = "INSERT INTO `club_consume`(`admin_id`,`lang`, `contact_name`, `contact_tel`, `contact_line`, `promo_content`, `created`) VALUES ('$admin_id','$lang','$contact_name','$contact_tel','$contact_line','$promo_content', NOW())";
     $mysqli->query($insert_string);
     if ($mysqli->affected_rows > 0) {
         if (move_uploaded_file($_FILES['contact-pic-input']['tmp_name'], $target_file)) {
@@ -79,7 +81,7 @@ if ($sql->num_rows > 0) {
             $mysqli->query($pic_string);
         }
 
-        $insert_string = 'INSERT INTO `club_consume_detail`(`admin_id`, `title1`, `day11`, `content11`, `day12`, `content12`, `day13`, `content13`, `day14`, `content14`, `day15`, `content15`, `title2`, `day21`, `content21`, `day22`, `content22`, `day23`, `content23`, `day24`, `content24`, `day25`, `content25`) '."VALUES ('$admin_id','$title1','$day11','$content11','$day12','$content12','$day13','$content13','$day14','$content14','$day15','$content15','$title2','$day21','$content21','$day22','$content22','$day23','$content23','$day24','$content24','$day25','$content25')";
+        $insert_string = 'INSERT INTO `club_consume_detail`(`admin_id`,,`lang` `title1`, `day11`, `content11`, `day12`, `content12`, `day13`, `content13`, `day14`, `content14`, `day15`, `content15`, `title2`, `day21`, `content21`, `day22`, `content22`, `day23`, `content23`, `day24`, `content24`, `day25`, `content25`) '."VALUES ('$admin_id','$lang','$title1','$day11','$content11','$day12','$content12','$day13','$content13','$day14','$content14','$day15','$content15','$title2','$day21','$content21','$day22','$content22','$day23','$content23','$day24','$content24','$day25','$content25')";
         $detail_string = "UPDATE `club_consume_detail` SET `title1`='$title1',`day11`='$day11',`content11`='$content11',`day12`='$day12',`content12`='$content12',`day13`='$day13',`content13`='$content13',`day14`='$day14',`content14`='$content14',`day15`='$day15',`content15`='$content15'";
 
         if ($mysqli->query($insert_string)) {

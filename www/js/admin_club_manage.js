@@ -129,6 +129,7 @@ $(document).on('pagebeforeshow', '#club-info, #club-info-modify', function() {
 });
 
 $(document).on('pagebeforeshow', '#club-info-modify', function() {
+	$('#club-info-form').off();
 	$('#club-info-form').on('submit', function(e) {
 		e.preventDefault(); // prevent native submit
 		$(this).ajaxSubmit({
@@ -186,6 +187,7 @@ $(document).on('pagebeforeshow', '#club-hire, #club-hire-modify', function() {
 	});
 });
 $(document).on('pagebeforeshow', '#club-hire-modify', function() {
+	$('#club-hire-form').off();
 	$('#club-hire-form').on('submit', function(e) {
 		e.preventDefault(); // prevent native submit
 		$(this).ajaxSubmit({
@@ -261,7 +263,6 @@ $(document).on('pagebeforeshow', '#club-consume, #club-consume-modify', function
 				consume.promo_content = consume.promo_content.replace(/\n/g, "<br>");
 			} else if (page_id == 'club-consume-modify') {
 				if (consume.title1 != null && consume.title1 != '') {
-
 					$('#title1').val(consume.title1);
 					$('#select11').val(consume.day11).selectmenu('refresh');
 					$('#content11').text(consume.content11);
@@ -275,7 +276,6 @@ $(document).on('pagebeforeshow', '#club-consume, #club-consume-modify', function
 					$('#content15').text(consume.content15);
 				}
 				if (consume.title2 != null && consume.title2 != '') {
-
 					$('#title2').val(consume.title2);
 					$('#select21').val(consume.day21).selectmenu('refresh');
 					$('#content21').text(consume.content21);
@@ -293,7 +293,9 @@ $(document).on('pagebeforeshow', '#club-consume, #club-consume-modify', function
 		}
 	});
 });
+
 $(document).on('pagebeforeshow', '#club-consume-modify', function() {
+	$('#club-consume-form').off();
 	$('#club-consume-form').on('submit', function(e) {
 		e.preventDefault(); // prevent native submit
 		$(this).ajaxSubmit({
