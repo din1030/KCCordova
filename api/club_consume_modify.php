@@ -54,7 +54,7 @@ if ($sql->num_rows > 0) {
         }
 
         $detail_string = "UPDATE `club_consume_detail` SET `title1`='$title1',`day11`='$day11',`content11`='$content11',`day12`='$day12',`content12`='$content12',`day13`='$day13',`content13`='$content13',`day14`='$day14',`content14`='$content14',`day15`='$day15',`content15`='$content15',";
-        $detail_string .= "`title2`='$title2',`day21`='$day21',`content21`='$content21',`day22`='$day22',`content22`='$content22',`day23`='$day23',`content23`='$content23',`day24`='$day24',`content24`='$content24',`day25`='$day25',`content25`='$content25' WHERE `admin_id` = $admin_id";
+        $detail_string .= "`title2`='$title2',`day21`='$day21',`content21`='$content21',`day22`='$day22',`content22`='$content22',`day23`='$day23',`content23`='$content23',`day24`='$day24',`content24`='$content24',`day25`='$day25',`content25`='$content25' WHERE `admin_id` = '$admin_id' AND `lang`='$lang'";
 
         if ($mysqli->query($detail_string)) {
             $output = array('status' => true, 'message' => '資料已修改！');
@@ -81,7 +81,7 @@ if ($sql->num_rows > 0) {
             $mysqli->query($pic_string);
         }
 
-        $insert_string = 'INSERT INTO `club_consume_detail`(`admin_id`,,`lang` `title1`, `day11`, `content11`, `day12`, `content12`, `day13`, `content13`, `day14`, `content14`, `day15`, `content15`, `title2`, `day21`, `content21`, `day22`, `content22`, `day23`, `content23`, `day24`, `content24`, `day25`, `content25`) '."VALUES ('$admin_id','$lang','$title1','$day11','$content11','$day12','$content12','$day13','$content13','$day14','$content14','$day15','$content15','$title2','$day21','$content21','$day22','$content22','$day23','$content23','$day24','$content24','$day25','$content25')";
+        $insert_string = 'INSERT INTO `club_consume_detail`(`admin_id`,`lang`,`title1`, `day11`, `content11`, `day12`, `content12`, `day13`, `content13`, `day14`, `content14`, `day15`, `content15`, `title2`, `day21`, `content21`, `day22`, `content22`, `day23`, `content23`, `day24`, `content24`, `day25`, `content25`) '."VALUES ('$admin_id','$lang','$title1','$day11','$content11','$day12','$content12','$day13','$content13','$day14','$content14','$day15','$content15','$title2','$day21','$content21','$day22','$content22','$day23','$content23','$day24','$content24','$day25','$content25')";
         $detail_string = "UPDATE `club_consume_detail` SET `title1`='$title1',`day11`='$day11',`content11`='$content11',`day12`='$day12',`content12`='$content12',`day13`='$day13',`content13`='$content13',`day14`='$day14',`content14`='$content14',`day15`='$day15',`content15`='$content15'";
 
         if ($mysqli->query($insert_string)) {

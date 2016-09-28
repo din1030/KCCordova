@@ -136,6 +136,7 @@ $(document).on('pagebeforeshow', '#club-info-modify', function() {
 			url: api_base + 'club_info_modify.php',
 			data: {
 				admin_id: window.localStorage.getItem('detail_user_id'),
+				lang: window.localStorage.getItem('lang_id')
 			},
 			type: 'POST',
 			dataType: 'json',
@@ -194,6 +195,7 @@ $(document).on('pagebeforeshow', '#club-hire-modify', function() {
 			url: api_base + 'club_offer_modify.php',
 			data: {
 				admin_id: window.localStorage.getItem('user_id'),
+				lang: window.localStorage.getItem('lang_id')
 			},
 			type: 'POST',
 			dataType: 'json',
@@ -302,6 +304,7 @@ $(document).on('pagebeforeshow', '#club-consume-modify', function() {
 			url: api_base + 'club_consume_modify.php',
 			data: {
 				admin_id: window.localStorage.getItem('user_id'),
+				lang: window.localStorage.getItem('lang_id')
 			},
 			type: 'POST',
 			dataType: 'json',
