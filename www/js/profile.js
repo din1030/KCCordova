@@ -452,10 +452,10 @@ if (window.localStorage.getItem('auth') == '2') {
 	$(document).on('pagebeforeshow', '#club-info, #club-info-modify', function() {
 		var page_id = '#' + $(this).attr('id');
 		$.ajax({
-			url: api_base + 'get_club_info.php?',
+			url: api_base + 'get_club_info.php',
 			data: {
 				club_id: window.localStorage.getItem('user_id'),
-				lang: window.localStorage.getItem('lang')
+				lang: window.localStorage.getItem('lang_id')
 			},
 			dataType: 'json'
 		}).success(function(data) {
@@ -597,7 +597,7 @@ if (window.localStorage.getItem('auth') == '2') {
 			url: api_base + 'get_club_offer.php',
 			data: {
 				club_id: window.localStorage.getItem('user_id'),
-				lang: window.localStorage.getItem('lang')
+				lang: window.localStorage.getItem('lang_id')
 			},
 			dataType: 'json'
 		}).success(function(data) {
@@ -657,7 +657,7 @@ if (window.localStorage.getItem('auth') == '2') {
 			url: api_base + 'get_club_consume.php',
 			data: {
 				club_id: window.localStorage.getItem('user_id'),
-				lang: window.localStorage.getItem('lang')
+				lang: window.localStorage.getItem('lang_id')
 			},
 			dataType: 'json'
 		}).success(function(data) {
