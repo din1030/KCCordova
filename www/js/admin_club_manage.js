@@ -28,7 +28,7 @@ $(document).on("pagebeforehide", function() {
 	$('form').trigger('reset');
 	$('textarea').text('');
 	$('.reset_content').empty();
-
+	$('select[name^="select"]').val('0').selectmenu('refresh');
 });
 
 $(document).on('pagebeforeshow', '#club-info, #club-info-modify', function() {
