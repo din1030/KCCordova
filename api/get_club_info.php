@@ -18,7 +18,7 @@ if (!empty($lang)) { // 語言
 if (!empty($club_id)) { // 有指定 ID
     $sql_string .=  " AND `club_info`.`admin_id`='$club_id'";
 } else {
-    $sql_string .= ' ORDER BY `admin_id` DESC';
+    $sql_string .= ' ORDER BY `club_info`.`admin_id` DESC';
 }
 
 $result = $mysqli->query($sql_string);

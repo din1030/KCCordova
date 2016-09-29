@@ -12,7 +12,7 @@ $lang = $_GET['lang'];
 $sql_string = 'SELECT `club_consume`.*,`club_consume_detail`.* FROM `club_consume` LEFT JOIN `club_consume_detail` USING(`admin_id`,`lang`) LEFT JOIN `club_info` USING(`admin_id`,`lang`) WHERE `admin_id`='.$club_id;
 
 if (!empty($published)) {
-    $sql_string .= ' AND (NOW() BETWEEN `club_info`.`publish_start` AND `club_info`.`publish_due`)';
+    $sql_string .= ' AND (CURDATE() BETWEEN `club_info`.`publish_start` AND `club_info`.`publish_due`)';
 }
 if (!empty($lang)) {
     $sql_string .= " AND `club_consume`.`lang`='$lang'";
