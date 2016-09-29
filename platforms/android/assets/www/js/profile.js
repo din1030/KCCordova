@@ -38,7 +38,6 @@ $(document).on('pagebeforeshow', '#member-modify, #club-profile-modify, #jobseek
 	$('.profile-submit-btn').off();
 	var page_id = '#' + $.mobile.activePage.attr('id');
 	$(page_id + ' .profile-submit-btn').click(function(event) {
-		// console.log(page_id);
 		var backpage = $(this).jqmData("backpage");
 		$(this).parents('form').ajaxSubmit({
 			url: api_base + 'profile_modify.php',
@@ -452,9 +451,12 @@ $(document).on('pagecreate', "#club-pic", function() {
 if (window.localStorage.getItem('auth') == '2') {
 	$(document).on('pagebeforeshow', '#club-info, #club-info-modify', function() {
 		var page_id = '#' + $(this).attr('id');
-		console.log(page_id);
 		$.ajax({
-			url: api_base + 'get_club_info.php?club_id=' + window.localStorage.getItem('user_id'),
+			url: api_base + 'get_club_info.php',
+			data: {
+				club_id: window.localStorage.getItem('user_id'),
+				lang: window.localStorage.getItem('lang_id')
+			},
 			dataType: 'json'
 		}).success(function(data) {
 			if (data.status) {
@@ -561,6 +563,7 @@ if (window.localStorage.getItem('auth') == '2') {
 				url: api_base + 'club_info_modify.php',
 				data: {
 					admin_id: window.localStorage.getItem('user_id'),
+					lang: window.localStorage.getItem('lang_id')
 				},
 				type: 'POST',
 				dataType: 'json',
@@ -591,7 +594,11 @@ if (window.localStorage.getItem('auth') == '2') {
 		var page_id = '#' + $(this).attr('id');
 		console.log(page_id);
 		$.ajax({
-			url: api_base + 'get_club_offer.php?club_id=' + window.localStorage.getItem('user_id'),
+			url: api_base + 'get_club_offer.php',
+			data: {
+				club_id: window.localStorage.getItem('user_id'),
+				lang: window.localStorage.getItem('lang_id')
+			},
 			dataType: 'json'
 		}).success(function(data) {
 			if (data.status) {
@@ -616,6 +623,7 @@ if (window.localStorage.getItem('auth') == '2') {
 				url: api_base + 'club_offer_modify.php',
 				data: {
 					admin_id: window.localStorage.getItem('user_id'),
+					lang: window.localStorage.getItem('lang_id')
 				},
 				type: 'POST',
 				dataType: 'json',
@@ -646,7 +654,11 @@ if (window.localStorage.getItem('auth') == '2') {
 		var page_id = $(this).attr('id');
 		console.log(page_id);
 		$.ajax({
-			url: api_base + 'get_club_consume.php?club_id=' + window.localStorage.getItem('user_id'),
+			url: api_base + 'get_club_consume.php',
+			data: {
+				club_id: window.localStorage.getItem('user_id'),
+				lang: window.localStorage.getItem('lang_id')
+			},
 			dataType: 'json'
 		}).success(function(data) {
 			if (data.status) {
@@ -667,16 +679,6 @@ if (window.localStorage.getItem('auth') == '2') {
 								$('.' + content).html(consume[content]);
 							}
 						}
-						// $('label.day11').text(week[consume.day11]);
-						// $('.content11').html(consume.content11);
-						// $('label.day12').text(week[consume.day12]);
-						// $('.content12').html(consume.content12);
-						// $('label.day13').text(week[consume.day13]);
-						// $('.content13').html(consume.content13);
-						// $('label.day14').text(week[consume.day14]);
-						// $('.content14').html(consume.content14);
-						// $('label.day15').text(week[consume.day15]);
-						// $('.content15').html(consume.content15);
 					}
 					if (consume.title2 != null && consume.title2 != '') {
 						$('label.title2').text('2. ' + consume.title2);
@@ -688,19 +690,9 @@ if (window.localStorage.getItem('auth') == '2') {
 								$('.' + content).html(consume[content]);
 							}
 						}
-						// $('label.day21').text(week[consume.day21]);
-						// $('.content21').html(consume.content21);
-						// $('label.day22').text(week[consume.day22]);
-						// $('.content22').html(consume.content22);
-						// $('label.day23').text(week[consume.day23]);
-						// $('.content23').html(consume.content23);
-						// $('label.day24').text(week[consume.day24]);
-						// $('.content24').html(consume.content24);
-						// $('label.day25').text(week[consume.day25]);
-						// $('.content25').html(consume.content25);
-						$('.promo_content').html(consume.promo_content);
 					}
 					consume.promo_content = consume.promo_content.replace(/\n/g, "<br>");
+					$('.promo_content').html(consume.promo_content);
 				} else if (page_id == 'club-consume-modify') {
 					if (consume.title1 != null && consume.title1 != '') {
 
@@ -742,6 +734,7 @@ if (window.localStorage.getItem('auth') == '2') {
 				url: api_base + 'club_consume_modify.php',
 				data: {
 					admin_id: window.localStorage.getItem('user_id'),
+					lang: window.localStorage.getItem('lang_id')
 				},
 				type: 'POST',
 				dataType: 'json',

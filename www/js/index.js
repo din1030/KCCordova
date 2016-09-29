@@ -220,7 +220,7 @@ $(document).on('pagecreate', '#fb-reg', function() {
 						window.localStorage.setItem('country_id', result.country_id);
 						window.localStorage.setItem('area_id', result.area_id);
 						// alert(window.localStorage.getItem('name') + ' ' + window.localStorage.getItem('user') + '(' + window.localStorage.getItem('auth') + ')');
-						$.mobile.changePage("#home");
+						document.location.href = './index.html#home';
 					} else {
 						alert(result.message + '(fb-reg)' + result.sql);
 						facebookConnectPlugin.logout(function() {}, function() {});
@@ -307,7 +307,7 @@ $(document).on('pagecreate', '#app-log-in', function() {
 						window.localStorage.setItem('country_id', result.country_id);
 						window.localStorage.setItem('area_id', result.area_id);
 						// alert(window.localStorage.getItem('name') + ' ' + window.localStorage.getItem('user') + '(' + window.localStorage.getItem('auth') + ')');
-						$.mobile.changePage("#home");
+						document.location.href = './index.html#home';
 					} else {
 						alert(result.message);
 					}

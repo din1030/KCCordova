@@ -207,11 +207,11 @@ $(document).on('pagebeforeshow', "#setting", function() {
 
 	$('#user_lang').change(function(event) {
 		window.localStorage.setItem('lang_id', $('#user_lang').val());
-		console.log(window.localStorage.getItem('lang_id'));
+		// console.log(window.localStorage.getItem('lang_id'));
 	});
 	$('#user_country').change(function(event) {
 		window.localStorage.setItem('country_id', $('#user_country').val());
-		console.log(window.localStorage.getItem('country_id'));
+		// console.log(window.localStorage.getItem('country_id'));
 	});
 });
 

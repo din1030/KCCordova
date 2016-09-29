@@ -220,7 +220,7 @@ $(document).on('pagecreate', '#fb-reg', function() {
 						window.localStorage.setItem('country_id', result.country_id);
 						window.localStorage.setItem('area_id', result.area_id);
 						// alert(window.localStorage.getItem('name') + ' ' + window.localStorage.getItem('user') + '(' + window.localStorage.getItem('auth') + ')');
-						$.mobile.changePage("#home");
+						document.location.href = './index.html#home';
 					} else {
 						alert(result.message + '(fb-reg)' + result.sql);
 						facebookConnectPlugin.logout(function() {}, function() {});
@@ -307,7 +307,7 @@ $(document).on('pagecreate', '#app-log-in', function() {
 						window.localStorage.setItem('country_id', result.country_id);
 						window.localStorage.setItem('area_id', result.area_id);
 						// alert(window.localStorage.getItem('name') + ' ' + window.localStorage.getItem('user') + '(' + window.localStorage.getItem('auth') + ')');
-						$.mobile.changePage("#home");
+						document.location.href = './index.html#home';
 					} else {
 						alert(result.message);
 					}
@@ -414,12 +414,31 @@ $(document).on('pagebeforeshow', '#home', function() {
 				$(home_img).eq(idx).attr('src', img_base + '' + obj.pic);
 				$(home_img).eq(idx).parent('a').attr('href', link_to_url(obj.link));
 			});
-			var mask = '<div style="display:block;" class="page_mask text-center" data-position-to="window" data-dismissible="true"><a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a><p>您不是店家管理者<br>求職者資訊僅供店家管理者瀏覽</p></div>';
+			// 沒有登入的提示
+			var club_login_mask = '<div style="display:block;" class="page_mask text-center" data-position-to="window" data-dismissible="true"><a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a><p>您尚未登入<br>求職者資訊僅供店家管理者會員瀏覽</p><a href="index.html#login" class="ui-btn ui-btn-inline purple-btn ui-corner-all" data-ajax="false">註冊/登入</a></div>';
+			// 沒有權限觀看求職者的提示
+			var not_club_mask = '<div style="display:block;" class="page_mask text-center" data-position-to="window" data-dismissible="true"><a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a><p>您不是店家管理者<br>求職者資訊僅供店家管理者瀏覽</p></div>';
+			// 店家尚未審核的提示
+			var not_approved_mask = '<div style="display:block;" class="page_mask text-center" data-position-to="window" data-dismissible="true"><a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a><p>您的身分尚未通過審核<br>暫時無法瀏覽求職者資訊</p></div>';
+
+			$("a[href='./jobseeker.html']").off();
 			$("a[href='./jobseeker.html']").click(function(event) {
-				if (window.localStorage.getItem('auth') != '0' && window.localStorage.getItem('auth') != '100' && window.localStorage.getItem('auth') != '2') {
+				if (window.localStorage.getItem('auth') == null || typeof window.localStorage.getItem('auth') == 'undefined') {
 					event.preventDefault();
-					$("[data-role='page']").prepend(mask);
-					$(".page_mask .ui-icon-delete").click(function(event) {
+					$.mobile.activePage.prepend(club_login_mask);
+					$(".page_mask a").click(function(event) {
+						$(".page_mask").remove();
+					});
+				} else if (window.localStorage.getItem('auth') != '0' && window.localStorage.getItem('auth') != '100' && window.localStorage.getItem('auth') != '2') {
+					event.preventDefault();
+					$.mobile.activePage.prepend(not_club_mask);
+					$(".page_mask a").click(function(event) {
+						$(".page_mask").remove();
+					});
+				} else if (window.localStorage.getItem('auth') == '2' && window.localStorage.getItem('approved') == '0') {
+					event.preventDefault();
+					$.mobile.activePage.prepend(not_approved_mask);
+					$(".page_mask a").click(function(event) {
 						$(".page_mask").remove();
 					});
 				}
