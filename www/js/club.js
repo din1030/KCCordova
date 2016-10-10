@@ -21,8 +21,9 @@ $(document).on('pagebeforeshow', '#club', function() {
 			var clubs = data.result;
 			$('#club_list').empty();
 			$.each(clubs, function(idx, obj) {
-				var club_li = $('<li></li>').attr('data-icon', 'false').attr('data-admin-id', obj.admin_id)
-					.append('<a href="" data-admin-id="' + obj.admin_id + '" data-ajax="false"><img class="club-thumbnail" src="' + img_base + obj.thumb + '"><h2>' + obj.name + '</h2><p>' + obj.country + ' ' + obj.area + '｜</p><div class="slogan">' + obj.slogan + '</div><p class="update-time">更新時間 ' + obj.updated + '</p></a>');
+				// var club_li = $('<li></li>').attr('data-icon', 'false').attr('data-admin-id', obj.admin_id).append('<a href="" data-admin-id="' + obj.admin_id + '" data-ajax="false"><img class="club-thumbnail" src="' + img_base + obj.thumb + '"><h2>' + obj.name + '</h2><p>' + obj.country + ' ' + obj.area + '｜</p><div class="slogan">' + obj.slogan + '</div><p class="update-time">更新時間 ' + obj.updated + '</p></a>');
+				var club_li = $('<li></li>').attr('data-icon', 'false').attr('data-admin-id', obj.admin_id).append('<a href="" data-admin-id="' + obj.admin_id + '" data-ajax="false"><div class="club-thumbnail" style="background-image:url(\'' + img_base + obj.thumb + '\')"></div><div><h2>' + obj.name + '</h2><p>' + obj.country + ' ' + obj.area + '｜</p><div class="slogan">' + obj.slogan + '</div><p class="update-time">更新時間 ' + obj.updated + '</p></div></a>');
+
 				$(club_li).appendTo($('#club_list'));
 			});
 			$('#club_list').listview('refresh');

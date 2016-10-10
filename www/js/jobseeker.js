@@ -28,8 +28,10 @@ $(document).on('pagebeforecreate', '#jobseeker', function() {
 				} else if ((idx % 3) == 2) {
 					block_class = 'ui-block-c';
 				}
-				var seeker_div = $('<div></div>').attr('data-seeker-id', obj.u_id).addClass(block_class + ' seeker_div')
-					.append('<div class="seeker_list_item"><a data-ajax="false"><img src="' + img_base + obj.avatar + '" alt="" /></a></div>');
+				var seeker_div = $('<div></div>').attr('data-seeker-id', obj.u_id).addClass(block_class + ' seeker_div').append('<div class="seeker_list_item"><a data-ajax="false"><div style="background-image:url(\'' + img_base + obj.avatar + '\');"></div></a></div>');
+
+				// var seeker_div = $('<div></div>').attr('data-seeker-id', obj.u_id).addClass(block_class + ' seeker_div').append('<div class="seeker_list_item"><a data-ajax="false"><img src="' + img_base + obj.avatar + '" alt="" /></a></div>');
+
 				$(seeker_div).appendTo($('#seeker-grid'));
 			});
 			// $('#club_list').listview('refresh');
