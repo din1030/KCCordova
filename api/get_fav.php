@@ -19,7 +19,7 @@ if ($sql->num_rows > 0) {
             $detail['type'] = 2;
             $output[] = $detail;
         } elseif ($r['type'] == 3) { // jobseeker
-            $sql_string3 = 'SELECT `seeker_info`.`u_id`,`seeker_info`.`nickname`,`seeker_info`.`pic1`,`country`.`country`,`area`.`area` FROM `seeker_info`,`country`,`area`'.' WHERE `seeker_info`.`country_id`=`country`.`id` AND `seeker_info`.`area_id`=`area`.`id` AND `seeker_info`.`u_id`='.$r['item_id'];
+            $sql_string3 = 'SELECT `seeker_info`.`u_id`,`seeker_info`.`nickname`,`seeker_info`.`pic1` thumb,`country`.`country`,`area`.`area` FROM `seeker_info`,`country`,`area`'.' WHERE `seeker_info`.`country_id`=`country`.`id` AND `seeker_info`.`area_id`=`area`.`id` AND `seeker_info`.`u_id`='.$r['item_id'];
             $sql3 = $mysqli->query($sql_string3);
             $detail = mysqli_fetch_assoc($sql3);
             $detail['fav_id'] = $r['id'];

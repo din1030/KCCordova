@@ -182,8 +182,18 @@ textarea {
 }
 #club-main .club-thumbnail,
 #club-result-main .club-thumbnail {
+  position: absolute;
+  left: 0;
+  top: 0;
   height: 100%;
+  width: 100%;
   max-width: calc(8em - 10px);
+  background-size: cover;
+  background-position: center;
+}
+#club-main .club-thumbnail + div,
+#club-result-main .club-thumbnail + div {
+  margin-left: 8em;
 }
 #jobseeker-main .ui-grid-b,
 #jobseeker-result-main .ui-grid-b {
@@ -203,13 +213,16 @@ textarea {
 #jobseeker-result-main .seeker_list_item {
   height: 100%;
 }
-#jobseeker-main .seeker_list_item img,
-#jobseeker-result-main .seeker_list_item img {
+#jobseeker-main .seeker_list_item div,
+#jobseeker-result-main .seeker_list_item div {
   width: 100%;
+  height: 100%;
   max-height: 100%;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
+  background-size: cover;
+  background-position: center;
 }
 #lifeservice-main #service-category-block div {
   margin: 8px 16px;
