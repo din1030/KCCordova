@@ -14,24 +14,30 @@ if ($sql->num_rows > 0) {
         if ($r['type'] == 2) {  // club
             $sql_string2 = 'SELECT `club_info`.`admin_id`,`club_info`.`name`,`club_info`.`thumb`,`country`.`country`,`area`.`area` FROM `club_info`,`country`,`area` WHERE `club_info`.`country_id` = `country`.`id` AND `club_info`.`area_id` = `area`.`id` AND `club_info`.`admin_id`='.$r['item_id'];
             $sql2 = $mysqli->query($sql_string2);
-            $detail = mysqli_fetch_assoc($sql2);
-            $detail['fav_id'] = $r['id'];
-            $detail['type'] = 2;
-            $output[] = $detail;
+            if ($sql2->num_rows > 0) {
+                $detail = mysqli_fetch_assoc($sql2);
+                $detail['fav_id'] = $r['id'];
+                $detail['type'] = 2;
+                $output[] = $detail;
+            }
         } elseif ($r['type'] == 3) { // jobseeker
             $sql_string3 = 'SELECT `seeker_info`.`u_id`,`seeker_info`.`nickname`,`seeker_info`.`pic1` thumb,`country`.`country`,`area`.`area` FROM `seeker_info`,`country`,`area`'.' WHERE `seeker_info`.`country_id`=`country`.`id` AND `seeker_info`.`area_id`=`area`.`id` AND `seeker_info`.`u_id`='.$r['item_id'];
             $sql3 = $mysqli->query($sql_string3);
-            $detail = mysqli_fetch_assoc($sql3);
-            $detail['fav_id'] = $r['id'];
-            $detail['type'] = 3;
-            $output[] = $detail;
-        } elseif ($r['type'] == 4) { //life service
+            if ($sql3->num_rows > 0) {
+                $detail = mysqli_fetch_assoc($sql3);
+                $detail['fav_id'] = $r['id'];
+                $detail['type'] = 3;
+                $output[] = $detail;
+            }
+        } elseif ($r['type'] == 4) { // life service
             $sql_string4 = 'SELECT `lifeservice_info`.`id`,`lifeservice_info`.`name`,`lifeservice_info`.`pic1` thumb,`country`.`country`,`area`.`area` FROM `lifeservice_info`,`country`,`area` WHERE `lifeservice_info`.`country_id` = `country`.`id` AND `lifeservice_info`.`area_id` = `area`.`id` AND `lifeservice_info`.`id`='.$r['item_id'];
             $sql4 = $mysqli->query($sql_string4);
-            $detail = mysqli_fetch_assoc($sql4);
-            $detail['fav_id'] = $r['id'];
-            $detail['type'] = 4;
-            $output[] = $detail;
+            if ($sql4->num_rows > 0) {
+                $detail = mysqli_fetch_assoc($sql4);
+                $detail['fav_id'] = $r['id'];
+                $detail['type'] = 4;
+                $output[] = $detail;
+            }
         }
     }
     echo json_encode(array('status' => true, 'result' => $output));
