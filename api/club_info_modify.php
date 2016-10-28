@@ -46,7 +46,7 @@ if ($sql->num_rows > 0) {
     $insert_string = 'INSERT INTO `club_info`(`admin_id`,`lang`, `category`,`country_id`,`area_id`,`name`,`address`,`club_tel`, `slogan`,`video_url`,`website`,`opentime1`,`opentime2`,`opentime3`,`opentime4`,`opentime5`,`description`,`created`) VALUES'." ('$admin_id','$lang',$category,'$country_id','$area_id','$name','$address','$tel','$slogan','$video','$website','$opentime1','$opentime2','$opentime3','$opentime4','$opentime5','$description', NOW())";
 
     if ($mysqli->query($insert_string)) {
-        $pic_copy_str = "UPDATE `club_info` c1, (SELECT * FROM `club_info` WHERE `admin_id` = 17 LIMIT 1) c2 SET c1.`pic1`=c2.`pic1`, c1.`pic2`=c2.`pic2`, c1.`pic3`=c2.`pic3`, c1.`pic4`=c2.`pic4`, c1.`pic5`=c2.`pic5`, c1.`publish_plan`=c2.`publish_plan`, c1.`publish_start`=c2.`publish_start`, c1.`publish_due`=c2.`publish_due` WHERE c1.`admin_id`='$admin_id' AND c1.`lang`='$lang'";
+        $pic_copy_str = "UPDATE `club_info` c1, (SELECT * FROM `club_info` WHERE `admin_id`='$admin_id' LIMIT 1) c2 SET c1.`pic1`=c2.`pic1`, c1.`pic2`=c2.`pic2`, c1.`pic3`=c2.`pic3`, c1.`pic4`=c2.`pic4`, c1.`pic5`=c2.`pic5`, c1.`publish_plan`=c2.`publish_plan`, c1.`publish_start`=c2.`publish_start`, c1.`publish_due`=c2.`publish_due` WHERE c1.`admin_id`='$admin_id' AND c1.`lang`='$lang'";
         if ($mysqli->query($pic_copy_str)) {
             $output = array('status' => true, 'message' => '資料已新增！');
             echo json_encode($output);
