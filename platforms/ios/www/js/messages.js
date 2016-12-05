@@ -1,98 +1,99 @@
 var officialMsg;
 var officialState;
-
 var currentMsg;
+var msgType;
 
+// $(document).one("pagebeforeshow", "[data-role='page']", function() {
+// 	if (window.localStorage.getItem('auth') == null || window.localStorage.getItem('user_id') == null) {
+// 		alert('您尚未登入！');
+// 		document.location.href = './index.html';
+// 	}
+// });
 
-$(document).on("pagebeforeshow", '#messages', function () {
-	console.log(memberType);
-
+$(document).on("pagebeforeshow", '#messages', function() {
 	$('#messages-main').off('click');
 	$('#msg-holder').off('click');
-
-	// post memberType and userId from main.js global variable - OFFICIAL MSG
 	$.ajax({
-		url: "../api/officialmessage.json",
+		url: "http://52.69.53.255/KCCordova/api/get_official_message.php",
 		method: "GET", //should be post?
+		dataType: 'json',
 		data: {
-			type: memberType,
-			id: memberId
+			type: parseInt(window.localStorage.getItem('auth'))
 		}
-	}).done(function (e) {
+	}).done(function(data) {
 		//cache as global
-		officialMsg = e;
-
+		officialMsg = data;
 		//show only if have msg
-		if (e.status) {
-			var lastLength = e.msg.length - 1; //last array as latest msg
-			var lastOfficialMsg = e.msg[lastLength];
+		if (data.msg != null) {
+			var lastLength = data.msg.length - 1; //last array as latest msg
+			var lastOfficialMsg = data.msg[0];
 
-			$('#official_msg_date').text(lastOfficialMsg._msgDate);
-
-			var msgBox = '<strong>' + lastOfficialMsg._msgTitle + '</strong><br>' + lastOfficialMsg._msgBody;
+			$('#official_msg_date').text(lastOfficialMsg.created);
+			var msgBox = '<strong>' + lastOfficialMsg.title + '</strong><br>' + lastOfficialMsg.content;
 
 			$('.offcial_msg_block .ui-body-a').html(msgBox);
-			$('.offcial_msg_block').attr('data-msg-id', lastOfficialMsg._msgId);
-			$('.offcial_msg_block').attr('id', 'msg-' + lastOfficialMsg._msgId);
+			$('.offcial_msg_block').attr('data-msg-id', lastOfficialMsg.id);
+			$('.offcial_msg_block').attr('id', 'msg-' + lastOfficialMsg.id);
 			$('.offcial_msg_block').show();
 		}
-
-
-	})
+	}).fail(function() {
+		alert('請確認您的網路連線狀態！');
+	});
 
 	$.ajax({
-		url: "../api/personalmessage.json",
+		url: "http://52.69.53.255/KCCordova/api/get_personal_message.php",
 		method: "GET", //should be post?
-		data: memberId
-	}).done(function (e) {
+		dataType: 'json',
+		data: {
+			id: parseInt(window.localStorage.getItem('user_id'))
+		}
+	}).done(function(data) {
 		var markup = '';
-
-		$.each(e.msg, function (i, v) {
-			switch (v._msgType) {
-				case 0:
-					markup += seekerMarkup(v);
+		$.each(data.msg, function(idx, obj) {
+			switch (parseInt(obj.from_type)) {
+				case 2:
+					markup += clubMarkup(obj);
 					break;
-				case 1:
-					markup += shopMarkup(v);
+				case 3:
+					markup += seekerMarkup(obj);
 					break;
 				default:
 					console.error('Error!')
 			}
-
 		});
-
-
 		$('#personal_msg').html(markup);
 
-
 		function seekerMarkup(data) {
-			var markup = '<div class="detail_block msg_block seeker_msg" id="msg-' + data._msgId + '" data-msg-id="' + data._msgId + '" data-official="false"><div class="ui-bar ui-bar-a"><span class="float-left">【求職者】留言</span><span class="float-right" style="margin-right: 20px;">' + data._msgDate + '</span><button class="ui-btn ui-corner-all ui-btn-inline ui-mini ui-btn-right ui-icon-delete ui-btn-icon-notext del-fav-btn" type="button" name="button" data-shadow="false">x</button></div><a class="msg-open" href=""><div class="ui-body ui-body-a"><div class="avatar msg-avatar float-left"><img src="' + data._userImg + '" style="width: 70px; height: 70px; border-radius: 50%;" alt=""></div><strong>' + data._userName + '</strong><br> ' + data._nickName + '	<br> 應徵地區：' + data._place + '<div class="float-right msg-badge"><span class="">' + data._lengthUnread + '</span></div></div></a></div>';
+			// var markup = '<div class="detail_block msg_block seeker_msg" data-msg-type="' + data.from_type + '" id="msg-' + data.from_id + '" data-from-id="' + data.from_id + '" data-official="false"><div class="ui-bar ui-bar-a"><span class="float-left">【求職者】留言</span><span class="float-right" style="margin-right: 20px;">' + data.last_time + '</span><button class="ui-btn ui-corner-all ui-btn-inline ui-mini ui-btn-right ui-icon-delete ui-btn-icon-notext del-fav-btn" type="button" name="button" data-shadow="false">x</button></div><a class="msg-open" href=""><div class="ui-body ui-body-a"><div class="avatar msg-avatar float-left"><img src="' + img_base + data.pic1 + '" style="width: 70px; height: 70px; border-radius: 50%;" alt=""></div><strong>' + data.name + '</strong><br> 應徵地區：' + data.country + ' ' + data.area + '</div></a></div>';
+			var markup = '<div class="detail_block msg_block seeker_msg" data-msg-type="' + data.from_type + '" id="msg-' + data.from_id + '" data-from-id="' + data.from_id + '" data-official="false"><div class="ui-bar ui-bar-a"><span class="float-left">【求職者】留言</span><span class="float-right" style="margin-right: 20px;">' + data.last_time + '</span></div><a class="msg-open" href=""><div class="ui-body ui-body-a"><div class="avatar msg-avatar float-left"><img src="' + img_base + data.pic1 + '" style="width: 70px; height: 70px; border-radius: 50%;" alt=""></div><strong>' + data.name + '</strong><br> 應徵地區：' + data.country + ' ' + data.area + '</div></a></div>';
 
 			return markup;
 		}
 
-
-		function shopMarkup(data) {
-			var markup = '<div class="detail_block msg_block shop_msg" id="msg-' + data._msgId + '" data-msg-id="' + data._msgId + '" data-official="false"><div class="ui-bar ui-bar-a"><span class="float-left">【店家】留言</span><span class="float-right" style="margin-right: 20px;">' + data._msgDate + '</span><button class="ui-btn ui-corner-all ui-btn-inline ui-mini ui-btn-right ui-icon-delete ui-btn-icon-notext del-fav-btn" type="button" name="button" data-shadow="false">x</button></div><a class="msg-open" href=""><div class="ui-body ui-body-a"><div class="avatar msg-avatar float-left">	<img src="' + data._userImg + '" style="width: 70px; height: 70px; border-radius: 50%;" alt=""></div><strong>' + data._userName + '</strong><br> ' + data._place + '<br> ' + data._job + '	<div class="float-right msg-badge"><span class="">' + data._lengthUnread + '</span></div></div></a></div>';
+		function clubMarkup(data) {
+			var markup = '<div class="detail_block msg_block shop_msg" data-msg-type="' + data.from_type + '" id="msg-' + data.from_id + '" data-from-id="' + data.from_id + '" data-official="false"><div class="ui-bar ui-bar-a"><span class="float-left">【店家】留言</span><span class="float-right" style="margin-right: 20px;">' + data.last_time + '</span></div><a class="msg-open" href=""><div class="ui-body ui-body-a"><div class="avatar msg-avatar float-left"><img src="' + img_base + data.pic1 + '" style="width: 70px; height: 70px; border-radius: 50%;" alt=""></div><strong>' + data.name + '</strong><br> ' + data.country + ' ' + data.area + '</div></a></div>';
+			// var markup = '<div class="detail_block msg_block shop_msg" data-msg-type="' + data.from_type + '" id="msg-' + data.from_id + '" data-from-id="' + data.from_id + '" data-official="false"><div class="ui-bar ui-bar-a"><span class="float-left">【店家】留言</span><span class="float-right" style="margin-right: 20px;">' + data.last_time + '</span><button class="ui-btn ui-corner-all ui-btn-inline ui-mini ui-btn-right ui-icon-delete ui-btn-icon-notext del-fav-btn" type="button" name="button" data-shadow="false">x</button></div><a class="msg-open" href=""><div class="ui-body ui-body-a"><div class="avatar msg-avatar float-left"><img src="' + img_base + data.pic1 + '" style="width: 70px; height: 70px; border-radius: 50%;" alt=""></div><strong>' + data.name + '</strong><br> ' + data.country + ' ' + data.area + '</div></a></div>';
 
 			return markup;
 		}
+	}).fail(function() {
+		alert('請確認您的網路連線狀態！');
 	});
 
-
-	//event handler
-
-	$('#messages-main').on('click', '.msg-open', function (e) {
+	// event handler
+	$('#messages-main').on('click', '.msg-open', function(e) {
 		e.preventDefault();
 		var findParent = $(this).parent();
 		var official = findParent.jqmData('official');
-		var msgId = findParent.jqmData('msg-id');
+		var from_id = findParent.jqmData('from-id');
+		var type = findParent.jqmData('msg-type')
 
 		if (official) {
 			officialState = true;
 		} else {
 			officialState = false;
-			currentMsg = msgId;
+			currentMsg = from_id;
+			msgType = type;
 		}
 
 		$.mobile.changePage($('#messages-detail'), {
@@ -101,139 +102,142 @@ $(document).on("pagebeforeshow", '#messages', function () {
 		});
 	});
 
-	$('#messages-main').on('click', '.ui-icon-delete', function() {
-		var id = $(this).parent().parent().jqmData('msg-id');
-		if(confirm('Delete?') === true) {
-			// $.ajax({
-			// 	method: "DELETE",
-			// 	url: "delete.php",
-			// 	data: { msgId: id, userId: userId"
-			// }).done(function() {
-			// 	//rmv view
-			// 	$('#msg-' + id ).remove();
-			// })
-			$('#msg-' + id ).remove();
-		}
-
-		console.log(id);
-
-	});
-
-
+	// $('#messages-main').on('click', '.ui-icon-delete', function() {
+	// 	console.log('hit delete!');
+	// 	var id = $(this).parent().parent().jqmData('msg-id');
+	// 	if (confirm('Delete?') === true) {
+	// $.ajax({
+	// 	method: "DELETE",
+	// 	url: "delete.php",
+	// 	data: { from_id: id, userId: userId"
+	// }).done(function() {
+	// 	//rmv view
+	// 	$('#msg-' + id ).remove();
+	// })
+	// $('#msg-' + id).remove();
+	// }
+	// });
 });
 
-
-$(document).on("pagebeforeshow", '#messages-detail', function () {
-	console.log(memberType);
+$(document).on("pagebeforeshow", '#messages-detail', function(e, d) {
 	$('#msg-holder').empty();
 	$('#messages-main').off('click');
 	$('#msg-holder').off('click');
 
 	if (!officialState) {
 		$.ajax({
+			url: "http://52.69.53.255/KCCordova/api/get_message_log.php",
 			method: "GET", //should be post
-			data: currentMsg,
-			url: "../api/messagelog.json"
-		}).done(function (e) {
-			console.log(e);
-			$('#msg-holder').html(conversationMarkup(e));
-		})
+			dataType: 'json',
+			data: {
+				self_id: parseInt(window.localStorage.getItem('user_id')),
+				talk_id: currentMsg
+			}
+		}).done(function(data) {
+			console.log(data);
+			$('#msg-holder').html(conversationMarkup(data));
+		}).fail(function() {
+			alert('請確認您的網路連線狀態！');
+		});
 	} else {
 		$('#msg-holder').html(officialMarkup(officialMsg.msg));
 	}
 
-
 	function officialMarkup(items) {
 		var markup = '';
 		$.each(items, function(i, v) {
-			markup += '' +
-				'<div class="detail_block msg_block" data-official="true" id="msg-'+ v._msgId +'">' +
+			markup +=
+				'<div class="detail_block msg_block" data-official="true" id="officialmsg-' + v.id + '">' +
 				'<div class="ui-bar ui-bar-a" style="background-color: #71bb06;">' +
-				'<span class="float-left">【官方】留言 '+ (i+1) + '</span>' +
+				'<span class="float-left">【官方】留言 ' + (i + 1) + '</span>' +
 				'<span class="float-right" id="official_msg_date" style="margin-right: 20px;"></span>' +
-				'<button data-msg-id="' + v._msgId + '" class="delete-btn ui-btn ui-corner-all ui-btn-inline ui-mini ui-btn-right ui-icon-delete ui-btn-icon-notext del-fav-btn" type="button" name="button" data-shadow="false">x</button>' +
+				// '<button data-msg-id="' + v.id + '" class="delete-btn ui-btn ui-corner-all ui-btn-inline ui-mini ui-btn-right ui-icon-delete ui-btn-icon-notext del-fav-btn" type="button" name="button" data-shadow="false">x</button>' +
 				'</div>' +
 				'<a href="" class="msg-open">' +
-				'<div class="ui-body ui-body-a">' + '<strong>' + v._msgTitle + '</strong><br>' + v._msgBody +'</div>' +
-			'</a>' +
-			'</div>';
+				'<div class="ui-body ui-body-a">' + '<strong>' + v.title + '</strong><br>' + v.content + '</div>' +
+				'</a>' +
+				'</div>';
 		})
 		return markup;
 	}
 
-
-	function conversationMarkup(data) {
-		var markup = '<div class="detail_block conversation_block"><div class="ui-bar ui-bar-a"><h3>【求職者】留言</h3></div><div class="ui-body ui-body-a">';
-		var myId = data.userId;
-
-		$.each(data.msg_log, function(i, v) {
-			if(v._userId === myId) {
-				markup += '<div class="msg_wrapper"><div class="msg_title"><span class="msg_me">我</span><span class="msg_time float-right">'+ v._date +'</span></div><div class="msg_body text-justify">'+ v._msg +'</div>	</div>';
+	function conversationMarkup(result) {
+		var markup = '<div class="detail_block conversation_block"><div class="ui-bar ui-bar-a"><h3>' + msgTypeText() + '</h3></div><div class="ui-body ui-body-a">';
+		var myId = parseInt(window.localStorage.getItem('user_id'));
+		$.each(result.msg, function(i, v) {
+			if (v.from_id == myId) {
+				markup += '<div class="msg_wrapper"><div class="msg_title"><span class="msg_me">我</span><span class="msg_time float-right">' + v.time + '</span></div><div class="msg_body text-justify">' + v.content + '</div>	</div>';
 			} else {
-				markup += '<div class="msg_wrapper"> <div class="msg_title">	<span class="msg_sender">'+ v._username +'</span>	<span class="msg_time float-right">'+ v._date +'</span></div><div class="msg_body text-justify">	'+ v._msg +'	</div></div>';
+				markup += '<div class="msg_wrapper"> <div class="msg_title"><span class="msg_sender">' + v.name + '</span><span class="msg_time float-right">' + v.time + '</span></div><div class="msg_body text-justify">' + v.content + '</div></div>';
 			}
 		})
 
-		markup += '</div><div id="reply_lock"><h3>留言</h3>	<textarea name="msg_reply" rows="4" cols="40"></textarea><button type="submit" id="sendMsg" class="ui-btn ui-corner-all no-bg-bd purple-btn send-btn" data-msg-id="'+ data.msgId +'">送出</button></div></div>';
+		markup += '</div><div id="reply_block"><h3>留言</h3>	<textarea id="msg_reply" name="msg_reply" rows="4" cols="40"></textarea><button type="submit" id="sendMsg" class="ui-btn ui-corner-all no-bg-bd purple-btn send-btn" data-to-id="' + result.talk_id + '">送出</button></div></div>';
 
 		return markup;
+	}
+
+	function msgTypeText() {
+		if (msgType === 3) {
+			return '【求職者】留言';
+		} else if (msgType === 2) {
+			return '【店家】留言';
+		}
+		return '留言';
 	}
 
 	//event handler
 
-	$('#msg-holder').on('click', '.delete-btn', function() {
-		var id = $(this).jqmData('msg-id');
-		if(confirm('Delete?') === true) {
-			// $.ajax({
-			// 	method: "DELETE",
-			// 	url: "delete.php",
-			// 	data: { msgId: id, userId: userId"
-			// }).done(function() {
-			// 	//rmv view
-			// 	$('#msg-' + id ).remove();
-			// })
-			$('#msg-' + id ).remove();
-		}
-
-		console.log(id);
-
-	});
+	// $('#msg-holder').on('click', '.delete-btn', function() {
+	// 	console.log('hit delete!');
+	// 	var id = $(this).jqmData('msg-id');
+	// 	if (confirm('Delete?') === true) {
+	// $.ajax({
+	// 	method: "DELETE",
+	// 	url: "delete.php",
+	// 	data: { from_id: id, userId: userId"
+	// }).done(function() {
+	// 	//rmv view
+	// 	$('#msg-' + id ).remove();
+	// })
+	// 		$('#officialmsg-' + id).remove();
+	// 	}
+	// });
 
 	$('#msg-holder').on('click', '#sendMsg', function(e) {
-		var id = $(this).jqmData('msg-id');
-		var val = $(this).prev().val();
-
-		// $.ajax({
-		// 	method: "POST",
-		// 	url: "create.php",
-		// 	data: {
-		// 		userId: userId,
-		// 		msgId: id
-		// 	}
-		// }).done(function(){
-		// 	//append
-		//
-		// 	$('.conversation_block .ui-body-a').append(chatMarkup(val));
-		// })
-
-		$('.conversation_block .ui-body-a').append(chatMarkup(val));
-
+		var to_id = $(this).jqmData('to-id');
+		var msg_content = $('#msg_reply').val();
+		$.ajax({
+			url: "http://52.69.53.255/KCCordova/api/send_message.php",
+			dataType: "json",
+			method: "POST",
+			data: {
+				self_id: parseInt(window.localStorage.getItem('user_id')),
+				self_type: parseInt(window.localStorage.getItem('auth')),
+				talk_id: to_id,
+				content: msg_content
+			}
+		}).done(function(data) {
+			$('#msg_reply').val('');
+			$('.conversation_block .ui-body-a').append(chatMarkup(data.msg));
+		}).fail(function() {
+			alert('請確認您的網路連線狀態！');
+		});
 
 		function chatMarkup(v) {
 
 			function formatDate(date) {
 				var hours = date.getHours();
 				var minutes = date.getMinutes();
-				return date.getFullYear() + "/" + (date.getMonth()+1) + "/" + date.getDate() + " " + hours + ':' + minutes;
+				var month = date.getMonth() + 1;
+				month = (month < 10) ? '0' + month : '' + month;
+				return date.getFullYear() + "/" + month + "/" + date.getDate() + " " + hours + ':' + minutes;
 			}
 
 			var date = formatDate(new Date());
-			var markup = '<div class="msg_wrapper"><div class="msg_title"><span class="msg_me">我</span><span class="msg_time float-right">' + date + '</span></div><div class="msg_body text-justify">' + v +'</div>	</div>';
+			var markup = '<div class="msg_wrapper"><div class="msg_title"><span class="msg_me">我</span><span class="msg_time float-right">' + date + '</span></div><div class="msg_body text-justify">' + v.content + '</div>	</div>';
 
 			return markup;
 		}
 	})
-
-
-
 });

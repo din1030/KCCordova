@@ -4,7 +4,8 @@
     <head>
         <title>Kelly Club 全省八大行業資訊專用APP平台</title>
         <meta charset='UTF-8'>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+
         <link rel="stylesheet" href="./js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.css" />
         <link rel="stylesheet" href="./css/font-awesome.css" />
         <link rel="stylesheet" href="./js/flex-slider/flexslider.css" type="text/css">
@@ -12,6 +13,58 @@
     </head>
 
     <body>
+        <!-- notice page -->
+        <div data-role="page" id="disclaimer" class="pink-bg">
+            <div data-role="main" class="ui-content log-operation" id="language-main">
+                <div id="feather"><img src="./img/feather.png" alt="" /></div>
+                <div id="logo">
+                    <img src="./img/logo_color.png" alt="" />
+                    <div id="subtitle" style="margin-bottom:20px;">
+                        全省八大行業
+                        <br> 資訊專用APP平台
+                    </div>
+                </div>
+                <div class="padding_main_content">
+                    <h3 class="text-center">免責聲明</h3>
+                    <p>
+                        當您成為Kelly club app 資訊交流平台（以下稱「本平台」）的用戶後，即表示您已詳細閱讀及明確了解本平台之<a href="#pre_service_policy" data-rel="popup">服務條款</a>、<a href="#pre_privacy_policy" data-rel="popup">隱私權保護政策</a>，並同意在下列情況時本平台毋需承擔任何責任：
+                    </p>
+                    <p>
+
+                        1. 本平台僅提供資訊交流，不保證訊息真實性，當您使用本平台願個人承擔風險，用戶同意使用「本平台」各項服務係基於用戶的個人意願，並同意自負任何風險，包括因為訊息真實性未經查證與輕忽而造成個人損失與傷害。
+                    </p>
+                    <p>
+                        2. 「本平台」僅提供特色娛樂服務業訊息交流，不保證訊息真實性，也不介入業者經營，所有職務內容與商業行為皆與「本平台」無關。
+                    </p>
+                    <p>
+                        3. 用戶在「本平台」刊登之店家（或求職者）訊息與求職福利、消費資訊與上傳照片等行為，純屬用戶個人行為，「本平台」對其真實性與否不負有任何責任。
+                    </p>
+                    <p>
+                        4. 對於透過「本平台」提供之服務與職務，完全由該用戶提供人負全責，若有任何瑕疵或法律責任，均與「本平台」無關。
+                    </p>
+                    <p>
+                        5. 任何由於駭客攻擊、電腦病毒侵入或發作、因政府管制而造成的暫時性關閉等影響網路正常經營之不可抗力而造成的資料洩漏、丟失、被盜用或被竄改等，均與「本平台」無關。
+                    </p>
+                    <p>
+                        6. 由於與「本平台」連結的其它網站所造成之個人資料洩漏，及由此而導致的任何法律爭議和後果，均與「本平台」無關。
+                    </p>
+                    <p>
+                        7. 對於用戶透過「本平台」刊登虛假資訊、欺騙、及敲詐行為者，純屬用戶個人行為，「本平台」對因此而產生的一切糾紛不負有任何責任，特此聲明！
+                    </p>
+                </div>
+                <div class="text-center">
+                    <a href="#language" class="ui-btn ui-corner-all ui-btn-inline no-bg-bd" style="font-size:20px; color:#CB6EEA;">我了解，開始使用 Kelly Club
+                        <img src="./img/icons/next.png" alt="" style="width:1em; height:1em; vertical-align: text-bottom;" />
+                    </a>
+                </div>
+            </div>
+            <div id="pre_service_policy" class="ui-corner-all" data-role="popup" data-position-to="window" data-transition="pop" data-theme="a" data-shadow="false" data-overlay-theme="b" style="width:100%;min-height:150px;">
+            </div>
+            <div id="pre_privacy_policy" class="ui-corner-all" data-role="popup" data-position-to="window" data-transition="pop" data-theme="a" data-shadow="false" data-overlay-theme="b" style="width:100%;min-height:150px;">
+            </div>
+        </div>
+        <!-- /notice page -->
+
         <!-- language page -->
         <div data-role="page" id="language" class="pink-bg">
             <div data-role="main" class="ui-content log-operation" id="language-main">
@@ -29,23 +82,22 @@
                     </div>
                     <div id="lang_list">
                         <fieldset data-role="controlgroup" data-iconpos="right">
-                            <input type="radio" name="default_lang" id="thai">
-                            <label for="thai">日文</label>
-                            <input type="radio" name="default_lang" id="eng">
-                            <label for="eng">英文</label>
-                            <input type="radio" name="default_lang" id="ch_simp">
-                            <label for="ch_simp">簡體中文</label>
-                            <input type="radio" name="default_lang" id="ch_trad">
+                            <input type="radio" name="default_lang" id="ch_trad" value="1" checked="">
                             <label for="ch_trad">正體中文</label>
+                            <input type="radio" name="default_lang" id="ch_simp" value="2">
+                            <label for="ch_simp">简体中文</label>
+                            <input type="radio" name="default_lang" id="eng" value="3">
+                            <label for="eng">English</label>
+                            <input type="radio" name="default_lang" id="jpn" value="4">
+                            <label for="jpn">日本語</label>
                         </fieldset>
                     </div>
                     <div class="text-center">
-                        登入後如想選擇不同語言
-                        <br> 請至「設定」切換
+                        登入後如想切換語言請至「設定」頁面
                     </div>
                 </div>
                 <div class="float-right">
-                    <a href="#login" class="ui-btn ui-corner-all ui-btn-inline no-bg-bd" style="font-size:20px; color:#CB6EEA;">下一步
+                    <a id="lang-next" href="#home" class="ui-btn ui-corner-all ui-btn-inline no-bg-bd" style="font-size:20px; color:#CB6EEA;">下一步
                         <img src="./img/icons/next.png" alt="" style="width:1em; height:1em; vertical-align: text-bottom;" />
                     </a>
                 </div>
@@ -55,6 +107,14 @@
 
         <!-- login page -->
         <div data-role="page" id="login" class="pink-bg">
+            <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
+                <div style="width:100%; text-align:center;">
+                    <a href="#home" class="ui-link float-left header-link left-link">
+                        取消
+                    </a>
+                    <span class="page-title">註冊/登入</span>
+                </div>
+            </div>
             <div data-role="main" class="ui-content log-operation" id="login-main">
                 <div id="feather"><img src="./img/feather.png" alt="" /></div>
                 <div id="logo">
@@ -65,7 +125,7 @@
                     </div>
                 </div>
                 <div id="login-block">
-                    <a href="#home">
+                    <a id="fb_login_btn">
                         <img src="./img/reg_fb.png" alt="" />
                     </a>
                     <br>
@@ -80,6 +140,9 @@
                         FB帳號僅供登入使用
                         <br> 絕不會在FB上發佈任何動態
                     </div>
+                    <p class="text-right">
+                        v0.9.9
+                    </p>
                 </div>
             </div>
         </div>
@@ -93,9 +156,6 @@
                         取消
                     </a>
                     <span class="page-title">登入</span>
-                    <!-- <button id="login-btn" class="float-right no-bg-bd">
-                        登入
-                    </button> -->
                 </div>
             </div>
             <div data-role="main" class="ui-content log-operation" id="app-log-in-main">
@@ -121,18 +181,66 @@
                         <button id="login-btn" class="ui-shadow ui-btn ui-corner-all" type="submit">登入</button>
                     </form>
                     <div class="form-hint">
-                        <a href="#" class="form-hint">忘記密碼？</a>
+                        <a href="#forget-pswd" class="form-hint" data-rel="popup">忘記密碼？</a>
                     </div>
                     <div class="log-info">
                         只要登入 Kelly Club
                         <br>即可使用 APP專屬身分優質服務
                     </div>
                 </div>
-
+                <div id="forget-pswd" class="ui-corner-all" data-role="popup" data-position-to="window" data-transition="pop" data-theme="a" data-shadow="false" data-overlay-theme="b" style="min-height:150px;padding:20px;">
+                    請輸入您註冊之 email，我們將會把密碼重設通知信寄給您。
+                    <form id="forget-pswd-form">
+                        <input type="email" name="reset_email" id="reset_email" placeholder="example@gmail.com">
+                        <button type="submit" name="button">送出</button>
+                    </form>
+                </div>
             </div>
         </div>
 
         <!-- in app log in -->
+        <div data-role="page" id="reset-password" data-theme="a" class="pink-bg">
+            <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
+                <div style="width:100%; text-align:center;">
+                    <a href="#login" class="ui-link float-left header-link left-link">
+                        取消
+                    </a>
+                    <span class="page-title">重設密碼</span>
+                </div>
+            </div>
+            <div data-role="main" class="ui-content log-operation" id="reset-password-main">
+                <div id="logo">
+                    <img src="./img/logo_color.png" alt="" />
+                    <div id="subtitle">
+                        全省八大行業
+                        <br> 資訊專用APP平台
+                    </div>
+                </div>
+                <div id="login-form-block">
+                    <form id="reset-pswd-form">
+                        <div class="ui-field-contain ui-disabled">
+                            <label for="rst_email">帳號</label>
+                            <input type="email" name="rst_email" id="rst_email">
+                        </div>
+                        <div class="ui-field-contain">
+                            <label for="reset_pswd">新密碼</label>
+                            <input type="password" name="reset_pswd" id="reset_pswd" placeholder="請輸入新密碼" class="required" minlength="4" maxlength="16" required="">
+                        </div>
+                        <div class="ui-field-contain">
+                            <label for="reset_pswd_chk">確認密碼</label>
+                            <input type="password" name="reset_pswd_chk" id="reset_pswd_chk" placeholder="請再次輸入密碼" class="required" minlength="4" maxlength="16" required="">
+                        </div>
+                        <div class="ui-field-contain">
+                            <label for="reset_code">驗證碼</label>
+                            <input type="text" name="reset_code" id="reset_code" placeholder="請輸入系統寄給您的驗證碼" class="required" required="">
+                        </div>
+                        <button id="login-btn" class="ui-shadow ui-btn ui-corner-all" type="submit">重設密碼</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- in app reg -->
         <div data-role="page" id="app-reg" data-theme="a" class="pink-bg">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
@@ -140,9 +248,6 @@
                         取消
                     </a>
                     <span class="page-title">填寫註冊資料</span>
-                    <!-- <button id="login-btn" class="float-right no-bg-bd">
-                        送出
-                    </button> -->
                 </div>
             </div>
             <div data-role="main" class="ui-content log-operation" id="app-reg-main">
@@ -181,7 +286,7 @@
                         <!-- 大頭 -->
                         <div class="ui-field-contain">
                             <label for="rg_ref">推薦人編號</label>
-                            <input type="text" name="rg_ref" id="rg_ref" placeholder="" class="" value="">
+                            <input type="text" name="rg_ref" id="rg_ref" placeholder="例：A00001" class="" value="">
                             <!-- <div class="form-hint">請填寫推薦人之帳號(Email)</div> -->
                         </div>
                         <div class="ui-field-contain">
@@ -205,24 +310,24 @@
                         </div>
                         <div class="ui-field-contain">
                             <label for="rg_country">所在國家</label>
-                            <select name="rg_country" id="rg_country">
-                                <option value="TW" selected>台灣</option>
-                                <option value="TH">日本</option>
-                                <option value="CN">中國</option>
+                            <select name="rg_country" id="rg_country" class="country-select">
+                                <!-- <option value="1" selected>台灣</option>
+                                <option value="2">日本</option>
+                                <option value="3">中國</option> -->
                             </select>
                         </div>
                         <div class="ui-field-contain">
-                            <label for="rg_location">所在區域</label>
-                            <select name="rg_location" id="rg_location">
-                                <option value="1" selected>基隆</option>
+                            <label for="rg_area">所在區域</label>
+                            <select name="rg_area" id="rg_area" class="area-select">
+                                <!-- <option value="1" selected>基隆</option>
                                 <option value="2">台北</option>
                                 <option value="3">桃園</option>
-                                <option value="4">新竹</option>
+                                <option value="4">新竹</option> -->
                             </select>
                         </div>
                         <div class="ui-field-contain">
                             <label for="rg_birthday">生日</label>
-                            <input type="date" name="rg_birthday" id="rg_birthday" class="required">
+                            <input type="date" name="rg_birthday" id="rg_birthday" class="">
                         </div>
                         <div class="ui-field-contain">
                             <label for="rg_tel">電話</label>
@@ -232,19 +337,135 @@
                             <label for="rg_mobile">手機</label>
                             <input type="tel" name="rg_mobile" id="rg_mobile" placeholder="" class="required" value="">
                         </div>
-                        <div class="ui-field-contain">
+                        <!-- <div class="ui-field-contain">
                             <label for="rg_codes">驗證碼</label>
                             <input type="text" name="rg_codes" id="rg_codes" placeholder="" class="required" value="">
-                            <!-- <div class="form-hint">驗證碼不正確</div> -->
-                        </div>
+                        </div> -->
                         <p style="font-size:0.8em; text-align:justify;">
-                            當您同意註冊本服務，表示您已年滿18歲，必已了解並同意接受<a href="">服務條款</a>，「店家」及「求職者」註冊需經管理者審核身分確認，審核通過後將通知您並開通APP功能。
+                            當您同意註冊本服務，表示您已年滿18歲，必已了解並同意接受<a href="#service_policy" data-rel="popup">服務條款</a>，「店家」及「求職者」註冊需經管理者審核身分確認，審核通過後將通知您並開通APP功能。
                         </p>
                         <button id="reg-submit-btn" class="ui-btn ui-corner-all" type="submit">送出註冊資料</button>
                     </form>
                     <div class="log-info">
                         只要註冊並登入 Kelly Club
                         <br>即可使用 APP專屬身分優質服務
+                    </div>
+                    <div id="service_policy" class="ui-corner-all" data-role="popup" data-position-to="window" data-transition="pop" data-theme="a" data-shadow="false" data-overlay-theme="b" style="width:100%;min-height:150px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- fb reg -->
+        <div data-role="page" id="fb-reg" data-theme="a" class="pink-bg">
+            <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
+                <div style="width:100%; text-align:center;">
+                    <a href="#login" class="ui-link float-left header-link left-link">
+                        取消
+                    </a>
+                    <span class="page-title">填寫資料</span>
+                </div>
+            </div>
+            <div data-role="main" class="ui-content log-operation" id="fb-reg-main">
+                <div id="logo">
+                    <img src="./img/logo_color.png" alt="" />
+                    <div id="subtitle">
+                        全省八大行業
+                        <br> 資訊專用APP平台
+                    </div>
+                </div>
+                <div id="login-form-block">
+                    <form id="fb-reg-form" data-ajax="false">
+                        <div class="ui-field-contain">
+                            <label for="member_type">註冊身分</label>
+                            <select name="member_type" id="member_type">
+                                <option value="1" selected>一般會員</option>
+                                <option value="2">店家管理員</option>
+                                <option value="3">求職者</option>
+                            </select>
+                        </div>
+                        <div class="ui-field-contain">
+                            <label for="rg_email">Email</label>
+                            <input type="email" name="rg_email" id="rg_email" placeholder="請填寫您的 E-mail" class="required email" value="">
+                            <!-- <div class="form-hint">請填寫有效 E-mail 格式</div> -->
+                        </div>
+                        <!-- <div class="ui-field-contain">
+                            <label for="rg_pswd">密碼</label>
+                            <input type="password" name="rg_pswd" id="rg_pswd" placeholder="請填寫4-16字元英數字" class="required" minlength="4" maxlength="16" value="">
+                            <div class="form-hint">密碼無效</div>
+                        </div>
+                        <div class="ui-field-contain">
+                            <label for="rg_pswd_chk">密碼確認</label>
+                            <input type="password" name="rg_pswd_chk" id="rg_pswd_chk" placeholder="再次輸入密碼" class="required" value="">
+                            <div class="form-hint">密碼不一致</div>
+                        </div> -->
+                        <!-- 大頭 -->
+                        <div class="ui-field-contain">
+                            <label for="rg_ref">推薦人編號</label>
+                            <input type="text" name="rg_ref" id="rg_ref" class="" value="" placeholder="例：A00001">
+                            <!-- <div class="form-hint">請填寫推薦人之帳號(Email)</div> -->
+                        </div>
+                        <div class="ui-field-contain">
+                            <label for="rg_name">姓名</label>
+                            <input type="text" name="rg_name" id="rg_name" placeholder="" class="required" value="">
+                            <!-- <div class="form-hint">請填寫您的姓名</div> -->
+                        </div>
+                        <div class="ui-field-contain">
+                            <label>性別</label>
+                            <fieldset data-role="controlgroup" data-type="horizontal">
+                                <label for="genderb">
+                                    <input type="radio" name="rg_gender" id="genderb" value="0"> 女
+                                </label>
+                                <label for="gendera">
+                                    <input type="radio" name="rg_gender" id="gendera" value="1"> 男
+                                </label>
+                                <label for="genderc">
+                                    <input type="radio" name="rg_gender" id="genderc" value="2"> 第三性
+                                </label>
+                            </fieldset>
+                        </div>
+                        <div class="ui-field-contain">
+                            <label for="rg_country">所在國家</label>
+                            <select name="rg_country" id="rg_country" class="country-select">
+                                <!-- <option value="1" selected>台灣</option>
+                                <option value="2">日本</option>
+                                <option value="3">中國</option> -->
+                            </select>
+                        </div>
+                        <div class="ui-field-contain">
+                            <label for="rg_area">所在區域</label>
+                            <select name="rg_area" id="rg_area" class="area-select">
+                                <!-- <option value="1" selected>基隆</option>
+                                <option value="2">台北</option>
+                                <option value="3">桃園</option>
+                                <option value="4">新竹</option> -->
+                            </select>
+                        </div>
+                        <div class="ui-field-contain">
+                            <label for="rg_birthday">生日</label>
+                            <input type="date" name="rg_birthday" id="rg_birthday" class="">
+                        </div>
+                        <div class="ui-field-contain">
+                            <label for="rg_tel">電話</label>
+                            <input type="tel" name="rg_tel" id="rg_tel" placeholder="" class="required" value="">
+                        </div>
+                        <div class="ui-field-contain">
+                            <label for="rg_mobile">手機</label>
+                            <input type="tel" name="rg_mobile" id="rg_mobile" placeholder="" class="required" value="">
+                        </div>
+                        <!-- <div class="ui-field-contain">
+                            <label for="rg_codes">驗證碼</label>
+                            <input type="text" name="rg_codes" id="rg_codes" placeholder="" class="required" value="">
+                            <div class="form-hint">驗證碼不正確</div>
+                        </div> -->
+                        <p style="font-size:0.8em; text-align:justify;">
+                            當您同意註冊本服務，表示您已年滿18歲，必已了解並同意接受<a href="">服務條款</a>，「店家」及「求職者」註冊需經管理者審核身分確認，審核通過後將通知您並開通APP功能。
+                        </p>
+                        <button id="fb-reg-submit-btn" class="ui-btn ui-corner-all" type="submit">送出註冊資料</button>
+                    </form>
+                    <div class="log-info">
+                        只要註冊並登入 Kelly Club
+                        <br>即可使用 APP 專屬身分優質服務
                     </div>
                 </div>
             </div>
@@ -265,43 +486,43 @@
             <div data-role="main" class="ui-content" id="home-main">
                 <div class="ui-grid-a">
                     <div class="ui-block-a">
-                        <a href="./club.html" data-ajax="false">
+                        <a href="" data-ajax="false">
                             <img class="home-img" src="./img/home1.jpg" alt="" />
                         </a>
                     </div>
                     <div class="ui-block-b">
-                        <a href="./jobseeker.html" data-ajax="false">
+                        <a href="" data-ajax="false">
                             <img class="home-img" src="./img/home2.jpg" alt="" />
                         </a>
                     </div>
                 </div>
                 <div class="ui-grid-solo">
                     <div class="ui-block-a">
-                        <a href="#" class="">
+                        <a href="#" class="" data-ajax="false">
                             <img class="home-img" src="./img/home3.jpg" alt="" />
                         </a>
                     </div>
                 </div>
                 <div class="ui-grid-a">
                     <div class="ui-block-a">
-                        <a href="#" class="">
+                        <a href="http://www.kelly-club.com/" class="" data-ajax="false">
                             <img class="home-img" src="./img/home4.jpg" alt="" />
                         </a>
                     </div>
                     <div class="ui-block-b">
-                        <a href="http://www.kelly-club.com/" class="">
+                        <a href="" class="" data-ajax="false">
                             <img class="home-img" src="./img/home5.jpg" alt="" />
                         </a>
                     </div>
                 </div>
-                <div class="ui-grid-a" id="ads-home">
-                    <div class="ui-block-a">
-                        <a href="#" class="">
+                <div class="ui-grid-a" id="">
+                    <div class="ui-block-a ads-home">
+                        <a href="" class="">
                             <img class="home-img" src="./img/home4.jpg" alt="" />
                         </a>
                     </div>
-                    <div class="ui-block-b">
-                        <a href="http://www.kelly-club.com/" class="">
+                    <div class="ui-block-b ads-home">
+                        <a href="" class="">
                             <img class="home-img" src="./img/home5.jpg" alt="" />
                         </a>
                     </div>
@@ -313,27 +534,27 @@
                     <ul>
                         <li>
                             <a href="./club.html" data-ajax="false">
-                                <div class="footer-tab tab1" data-title="club"></div>
+                                <div class="footer-tab tab1" data-page="club"></div>
                             </a>
                         </li>
                         <li>
                             <a href="./jobseeker.html" data-ajax="false">
-                                <div class="footer-tab tab2" data-title="jobseeker"></div>
+                                <div class="footer-tab tab2" data-page="jobseeker"></div>
                             </a>
                         </li>
                         <li>
                             <a href="./lifeservice.html" data-ajax="false">
-                                <div class="footer-tab tab3" data-title="lifeservice"></div>
+                                <div class="footer-tab tab3" data-page="lifeservice"></div>
                             </a>
                         </li>
                         <li>
                             <a href="./messages.html" data-ajax="false">
-                                <div class="footer-tab tab4" data-title="messages"></div>
+                                <div class="footer-tab tab4" data-page="messages"></div>
                             </a>
                         </li>
                         <li>
                             <a href="./favorite.html" data-ajax="false">
-                                <div class="footer-tab tab5" data-title="favorite"></div>
+                                <div class="footer-tab tab5" data-page="favorite"></div>
                             </a>
                         </li>
                     </ul>
@@ -341,7 +562,6 @@
                 <!-- /navbar -->
             </div>
         </div>
-
         <script src="./js/jquery-1.12.4.min.js"></script>
         <script src="./js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
         <script src="./js/flex-slider/jquery.flexslider-min.js"></script>
@@ -349,6 +569,7 @@
         <script src="./js/jquery-validation-1.15.0/additional-methods.min.js"></script>
         <script src="./js/jquery-validation-1.15.0/localization/messages_zh_TW.js"></script>
         <script src="./js/jquery.form.min.js"></script>
+        <script type="text/javascript" src="cordova.js"></script>
         <script src="./js/main.js"></script>
         <script src="./js/index.js"></script>
     </body>

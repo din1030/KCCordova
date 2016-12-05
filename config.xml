@@ -4,12 +4,15 @@
     <description>
         Kelly Club 八大行業資訊平台
     </description>
-    <author email="din1030@gmail.com" href="http://cordova.io">
+    <author email="din1030@gmail.com" href="">
         Din Chia-Ting Cheng
     </author>
     <icon src="www/img/app_icon.png" />
     <content src="index.html" />
     <preference name="Orientation" value="portrait" />
+    <preference name="StatusBarOverlaysWebView" value="false" />
+    <preference name="StatusBarBackgroundColor" value="#cb6eea" />
+    <preference name="StatusBarStyle" value="lightcontent" />
     <plugin name="cordova-plugin-whitelist" version="1" />
     <access origin="*" />
     <allow-intent href="http://*/*" />

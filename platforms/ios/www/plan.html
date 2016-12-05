@@ -3,8 +3,9 @@
 
     <head>
         <title>Kelly Club 全省八大行業資訊專用APP平台</title>
-    <meta charset='UTF-8'>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset='UTF-8'>
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+
         <link rel="stylesheet" href="./js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.css" />
         <link rel="stylesheet" href="./css/font-awesome.css" />
         <link rel="stylesheet" href="./js/flex-slider/flexslider.css" type="text/css">
@@ -13,7 +14,7 @@
 
     <body>
         <!-- life service -->
-        <div data-role="page" id="plan" data-theme="a" data-title="plan">
+        <div data-role="page" id="plan" data-theme="a" data-page="plan">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
@@ -32,10 +33,10 @@
                         <sapn>【刊登類型】A方案 6個月</sapn>
                     </div>
                     <div class="ui-body ui-body-a">
-                        <strong>優惠價： NT$10,000(原價 $12,000)</strong>
+                        <!-- <strong>優惠價： NT$10,000(原價 $12,000)</strong>
                         <br> 刊登店家介紹廣告
                         <br> 與求職者站內訊息聯絡
-                        <br> 可刊登生活服務訊息三則
+                        <br> 可刊登旅遊資訊訊息三則 -->
                     </div>
                 </div>
                 <div id="" class="detail_block">
@@ -43,10 +44,10 @@
                         <sapn>【刊登類型】B方案 一年</sapn>
                     </div>
                     <div class="ui-body ui-body-a">
-                        <strong>優惠價： NT$18,000(原價 $24,000) 加贈刊登30天</strong>
+                        <!-- <strong>優惠價： NT$18,000(原價 $24,000) 加贈刊登30天</strong>
                         <br> 刊登店家介紹廣告
                         <br> 與求職者站內訊息聯絡
-                        <br> 可刊登生活服務訊息三則
+                        <br> 可刊登旅遊資訊訊息三則 -->
                     </div>
                 </div>
                 <div class="text-center">
@@ -56,7 +57,7 @@
         </div>
 
         <!-- pay method -->
-        <div data-role="page" id="pay" data-theme="a" data-title="plan">
+        <div data-role="page" id="pay" data-theme="a" data-page="plan">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
@@ -75,18 +76,6 @@
                 </div>
                 <hr>
                 <div id="pay_block">
-                    <p>
-                        一、請加入 Kelly Club 官方 Line，告知服務人員您的身分與店家， 如第一次刊登者，本公司會派專員到府拜訪，解說 APP 使用方式，如有任何疑問可在 Line 詢問或來電 0981-529246 全國服務專線，奔公司服務人員會為您解說。
-
-                    </p>
-                    <p>
-                        二、選擇您想要之刊登方案並透過 Line 告知服務人員您的繳費帳號末四碼及匯款時間，審核後將立即開通刊登與使用權限。
-                    </p>
-                    <p>
-                        銀行：合作金庫大里分行（006
-                        <br>戶名：賴鳳茹
-                        <br>帳號：1025872310343
-                    </p>
                 </div>
                 <br>
                 <div class="pay-btn-block text-center">
@@ -105,27 +94,27 @@
                 <ul>
                     <li>
                         <a href="./club.html" data-ajax="false">
-                            <div class="footer-tab tab1" data-title="club"></div>
+                            <div class="footer-tab tab1" data-page="club"></div>
                         </a>
                     </li>
                     <li>
                         <a href="./jobseeker.html" data-ajax="false">
-                            <div class="footer-tab tab2" data-title="jobseeker"></div>
+                            <div class="footer-tab tab2" data-page="jobseeker"></div>
                         </a>
                     </li>
                     <li>
                         <a href="./lifeservice.html" data-ajax="false">
-                            <div class="footer-tab tab3 active" data-title="lifeservice"></div>
+                            <div class="footer-tab tab3 active" data-page="lifeservice"></div>
                         </a>
                     </li>
                     <li>
                         <a href="./messages.html" data-ajax="false">
-                            <div class="footer-tab tab4" data-title="messages"></div>
+                            <div class="footer-tab tab4" data-page="messages"></div>
                         </a>
                     </li>
                     <li>
                         <a href="./favorite.html" data-ajax="false">
-                            <div class="footer-tab tab5" data-title="favorite"></div>
+                            <div class="footer-tab tab5" data-page="favorite"></div>
                         </a>
                     </li>
                 </ul>
@@ -135,7 +124,9 @@
         <script src="./js/jquery-1.12.4.min.js"></script>
         <script src="./js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
         <script src="./js/flex-slider/jquery.flexslider-min.js"></script>
+        <script type="text/javascript" src="cordova.js"></script>
         <script src="./js/main.js"></script>
+        <script src="./js/plan.js"></script>
     </body>
 
 </html>

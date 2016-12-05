@@ -4,7 +4,8 @@
     <head>
         <title>Kelly Club 全省八大行業資訊專用APP平台</title>
         <meta charset='UTF-8'>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+
         <link rel="stylesheet" href="./js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.css" />
         <link rel="stylesheet" href="./css/font-awesome.css" />
         <link rel="stylesheet" href="./js/flex-slider/flexslider.css" type="text/css">
@@ -13,13 +14,13 @@
 
     <body>
         <!-- life service -->
-        <div data-role="page" id="lifeservice" data-theme="a" data-title="lifeservice">
+        <div data-role="page" id="lifeservice" data-theme="a" data-page="lifeservice">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
                         <div id="menu-btn" class="header-btn header-link left-link"></div>
                     </a>
-                    <span class="page-title">生活服務</span>
+                    <span class="page-title">旅遊資訊</span>
                     <a href="#lifeservice-search" class="ui-link">
                         <div id="search-btn" class="header-btn header-link right-link"></div>
                     </a>
@@ -29,7 +30,7 @@
             <div data-role="main" class="ui-content" id="lifeservice-main">
                 <div class="member-info">
                     <div class="float-right">
-                        <span class="member">（未知使用者）</span>
+                        <span class="member">（未登入！）</span>
                     </div>
                     <div class="clearfix"></div>
                 </div>
@@ -71,7 +72,7 @@
         </div>
 
         <!-- lifeservice search -->
-        <div data-role="page" id="lifeservice-search" data-theme="a" data-title="lifeservice">
+        <div data-role="page" id="lifeservice-search" data-theme="a" data-page="lifeservice">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
@@ -87,7 +88,7 @@
             <div data-role="main" class="ui-content" id="lifeservice-search-main">
                 <div class="member-info">
                     <div class="float-left">
-                        <span class="member">（未知使用者）</span>
+                        <span class="member">（未登入！）</span>
                     </div>
                     <div class="clearfix"></div>
                 </div>
@@ -95,33 +96,34 @@
                     <form class="" action="index.html" method="post">
                         <div class="ui-field-contain">
                             <label for="county">區域</label>
-                            <select name="county" id="county">
+                            <select name="county" id="county" class="area-select">
                                 <!--<option value="small">台北市</option>-->
                                 <!--<option value="medium">新北市</option>-->
                                 <!--<option value="large">台中市</option>-->
                             </select>
                         </div>
                         <div class="ui-field-contain">
-                            <label for="club_type">店家類別</label>
-                            <select name="club_type" id="club_type">
+                            <label for="life_type">店家類別</label>
+                            <select name="life_type" id="life_type">
                                 <!--<option value="small">類別一</option>-->
                                 <!--<option value="medium">類別二</option>-->
                                 <!--<option value="large">類別三</option>-->
                             </select>
                         </div>
+                        <button type="button" name="button" id="lifeservice-search-btn">搜尋</button>
                     </form>
                 </div>
             </div>
         </div>
 
         <!-- club -->
-        <div data-role="page" id="lifeservice-list" data-theme="a" data-title="lifeservice">
+        <div data-role="page" id="lifeservice-list" data-theme="a" data-page="lifeservice">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
                         <div id="menu-btn" class="header-btn header-link left-link"></div>
                     </a>
-                    <span class="page-title">生活服務</span>
+                    <span class="page-title">旅遊資訊</span>
                     <a href="#lifeservice-search" class="ui-link">
                         <div id="search-btn" class="header-btn header-link right-link"></div>
                     </a>
@@ -130,7 +132,7 @@
             <!-- /header -->
             <div data-role="main" class="ui-content" id="lifeservice-list-main">
                 <div class="category-block">
-                    <select name="select-choice-1" id="select-choice-1" data-native-menu="false">
+                    <select name="lifeservice-category-select" id="lifeservice-category-select" data-native-menu="false">
                         <!--<option value="standard">美甲美睫</option>-->
                         <!--<option value="rush">美容美體</option>-->
                         <!--<option value="express">禮服租賃</option>-->
@@ -243,14 +245,14 @@
         </div>
 
         <!-- lifeservice detail -->
-        <div data-role="page" id="lifeservice-detail" data-theme="a" data-title="lifeservice">
+        <div data-role="page" id="lifeservice-detail" data-theme="a" data-page="lifeservice">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
                         <div id="menu-btn" class="header-btn header-link left-link"></div>
                     </a>
-                    <span class="page-title">生活服務</span>
-                    <a href="#jobseeker-search" class="ui-link">
+                    <span class="page-title">旅遊資訊</span>
+                    <a href="#lifeservice-search" class="ui-link">
                         <div id="search-btn" class="header-btn header-link right-link"></div>
                     </a>
                 </div>
@@ -258,40 +260,14 @@
             <!-- /header -->
             <div data-role="main" class="ui-content" id="lifeservice-detail-main">
                 <div class="flexslider">
-                    <ul class="slides">
-                        <!-- <li>-->
-                        <!--<img src="./img/slide1.jpg" />-->
-                        <!--</li>-->
-                        <!--<li>-->
-                        <!--<img src="./img/slide2.jpg" />-->
-                        <!--</li>-->
-                        <!--<li>-->
-                        <!--<img src="./img/slide3.jpg" />-->
-                        <!--</li>-->
-                        <!--<li>-->
-                        <!--<img src="./img/slide4.jpg" />-->
-                        <!--</li> -->
-                    </ul>
+                    <!-- dynamic content -->
                 </div>
                 <div id="info_block" class="detail_block">
                     <div class="ui-bar ui-bar-a">
                         <h3>店家資訊</h3>
                     </div>
                     <div class="ui-body ui-body-a">
-                        <!--<div id="club_title">日式美睫美甲</div>-->
-                        <!--位置：台中市南屯區大川街38號-->
-                        <!--<br>電話：04-22493919、22493910-->
-                        <!--<br>營業時間：-->
-                        <!--<br>星期三～星期五：22：00-03：30-->
-                        <!--<br>星期六、日：22：00-03：30-->
-                        <!--<div id="action_block" class="text-right">-->
-                        <!--<a href="#" class="ui-btn ui-btn-inline no-bg-bd" rel="external" data-ajax="false">-->
-                        <!--<img src="./img/icons/official_site.png" alt="" />-->
-                        <!--</a>-->
-                        <!--<button type="button" class="ui-btn ui-btn-inline no-bg-bd">-->
-                        <!--<img src="./img/icons/fav_gray.png" alt="" />-->
-                        <!--</button>-->
-                        <!--</div>-->
+                        <!-- dynamic content -->
                     </div>
                 </div>
                 <div id="contact_block" class="detail_block">
@@ -299,12 +275,7 @@
                         <h3>預約資訊</h3>
                     </div>
                     <div class="ui-body ui-body-a">
-                        <!--<div class="avatar float-left">-->
-                        <!--&lt;!&ndash; <img src="./img/seeker-a.jpg" alt="" /> &ndash;&gt;-->
-                        <!--</div>-->
-                        <!--<strong>設計師 Larmar </strong>&nbsp;<small>預約窗口</small>-->
-                        <!--<br> 電話：0912-345678-->
-                        <!--<br> LINE: kabc1230-->
+                        <!-- dynamic content -->
                     </div>
                 </div>
                 <div id="details_block" class="detail_block">
@@ -312,18 +283,7 @@
                         <h3>消費介紹</h3>
                     </div>
                     <div class="ui-body ui-body-a">
-                        <!--<p>-->
-                        <!--真甲甲油凝膠-->
-                        <!--</p>-->
-                        <!--<p>-->
-                        <!--凝膠指甲-->
-                        <!--</p>-->
-                        <!--<p>-->
-                        <!--卸甲服務-->
-                        <!--</p>-->
-                        <!--<p>-->
-                        <!--其他造型服務-->
-                        <!--</p>-->
+                        <!-- dynamic content -->
                     </div>
                 </div>
                 <div id="compaign_block" class="detail_block">
@@ -331,7 +291,7 @@
                         <h3>優惠活動</h3>
                     </div>
                     <div class="ui-body ui-body-a text-justify">
-                        <!--凡下載 Kelly Club app 至本店消費出示使用畫面可享九折優惠-->
+                        <!-- dynamic content -->
                     </div>
                 </div>
             </div>
@@ -343,17 +303,17 @@
                 <ul>
                     <li>
                         <a href="./club.html" data-ajax="false">
-                            <div class="footer-tab tab1" data-title="club"></div>
+                            <div class="footer-tab tab1" data-page="club"></div>
                         </a>
                     </li>
                     <li>
                         <a href="./jobseeker.html" data-ajax="false">
-                            <div class="footer-tab tab2" data-title="jobseeker"></div>
+                            <div class="footer-tab tab2" data-page="jobseeker"></div>
                         </a>
                     </li>
                     <li>
                         <a href="#lifeservice">
-                            <div class="footer-tab tab3 active" data-title="lifeservice"></div>
+                            <div class="footer-tab tab3 active" data-page="lifeservice"></div>
                         </a>
                     </li>
                     <li>
@@ -363,7 +323,7 @@
                     </li>
                     <li>
                         <a href="./favorite.html" data-ajax="false">
-                            <div class="footer-tab tab5" data-title="favorite"></div>
+                            <div class="footer-tab tab5" data-page="favorite"></div>
                         </a>
                     </li>
                 </ul>
@@ -373,6 +333,7 @@
         <script src="./js/jquery-1.12.4.min.js"></script>
         <script src="./js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
         <script src="./js/flex-slider/jquery.flexslider-min.js"></script>
+        <script type="text/javascript" src="cordova.js"></script>
         <script src="./js/main.js"></script>
         <script src="./js/lifeservice.js"></script>
     </body>

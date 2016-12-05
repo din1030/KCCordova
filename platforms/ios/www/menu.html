@@ -4,7 +4,8 @@
     <head>
         <title>Kelly Club 全省八大行業資訊專用APP平台</title>
         <meta charset='UTF-8'>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+
         <link rel="stylesheet" href="./js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.css" />
         <link rel="stylesheet" href="./css/font-awesome.css" />
         <link rel="stylesheet" href="./js/flex-slider/flexslider.css" type="text/css">
@@ -13,7 +14,7 @@
 
     <body>
         <!-- recommand record -->
-        <div data-role="page" id="recommend-record" data-theme="a" data-title="club">
+        <div data-role="page" id="recommend-record" data-theme="a" data-page="club">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
@@ -35,12 +36,12 @@
             <div data-role="main" class="ui-content" id="recommend-record-main">
                 <div class="member-info">
                     <div class="float-right">
-                        <span class="member">（未知使用者）</span>
+                        <span class="member">（未登入！）</span>
                     </div>
                     <div class="float-left">
                         可用推薦點數：
-                        <span id="recommend_count">10</span> （累積推薦點數：
-                        <span id="recommend_total">25</span>）
+                        <span class="recommend_count">0</span> （累積推薦點數：
+                        <span id="recommend_total">0</span>）
                     </div>
                     <div class="clearfix"></div>
                 </div>
@@ -48,23 +49,23 @@
                     <div class="rec_content_title">兌換記錄</div>
                     <div>
                         <ul id="redeem_list" style="list-style:none">
-                            <li>(20)屈臣氏禮券1000元<span class="float-right">2016/05/20</span></li>
+                            <!-- <li>(20)屈臣氏禮券1000元<span class="float-right">2016/05/20</span></li>
                             <li>(10)屈臣氏禮券500元<span class="float-right">2016/05/20</span></li>
                             <li>(10)屈臣氏禮券500元<span class="float-right">2016/05/20</span></li>
-                            <li>(10)屈臣氏禮券500元<span class="float-right">2016/05/20</span></li>
+                            <li>(10)屈臣氏禮券500元<span class="float-right">2016/05/20</span></li> -->
                         </ul>
                     </div>
                     <div class="rec_content_title">推薦會員列表</div>
                     <div>
                         <ol id="recommend_list" reversed>
+                            <!-- <li>翁水蘭<span class="float-right">2016/05/20</span></li>
                             <li>翁水蘭<span class="float-right">2016/05/20</span></li>
                             <li>翁水蘭<span class="float-right">2016/05/20</span></li>
                             <li>翁水蘭<span class="float-right">2016/05/20</span></li>
                             <li>翁水蘭<span class="float-right">2016/05/20</span></li>
                             <li>翁水蘭<span class="float-right">2016/05/20</span></li>
                             <li>翁水蘭<span class="float-right">2016/05/20</span></li>
-                            <li>翁水蘭<span class="float-right">2016/05/20</span></li>
-                            <li>翁水蘭<span class="float-right">2016/05/20</span></li>
+                            <li>翁水蘭<span class="float-right">2016/05/20</span></li> -->
                         </ol>
                     </div>
                 </div>
@@ -72,7 +73,7 @@
         </div>
 
         <!-- redeem -->
-        <div data-role="page" id="redeem" data-theme="a" data-title="club">
+        <div data-role="page" id="redeem" data-theme="a" data-page="club">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
@@ -94,11 +95,11 @@
             <div data-role="main" class="ui-content" id="redeem-main">
                 <div class="member-info">
                     <div class="float-right">
-                        <span class="member">（未知使用者）</span>
+                        <span class="member">（未登入！）</span>
                     </div>
                     <div class="float-left">
                         可用推薦點數：
-                        <span id="recommend_count">10</span>
+                        <span class="recommend_count">0</span>
                     </div>
                     <div class="clearfix"></div>
                 </div>
@@ -108,11 +109,9 @@
                     </div>
                     <div class="ui-body ui-body-a">
                         <div class="float-left text-center">
-                            <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn redeem-btn">確定兌換</button>
-                            100元禮券
+                            <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn redeem-btn">確定兌換</button> 100元禮券
                             <br> (10)
                         </div>
-
                         <div class="redeem_pic float-right">
                         </div>
                     </div>
@@ -123,8 +122,7 @@
                     </div>
                     <div class="ui-body ui-body-a">
                         <div class="float-left text-center">
-                            <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn redeem-btn">確定兌換</button>
-                            500元禮券
+                            <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn redeem-btn">確定兌換</button> 500元禮券
                             <br> (20)
                         </div>
 
@@ -138,8 +136,7 @@
                     </div>
                     <div class="ui-body ui-body-a">
                         <div class="float-left text-center">
-                            <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn redeem-btn">確定兌換</button>
-                            1000元禮券
+                            <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn redeem-btn">確定兌換</button> 1000元禮券
                             <br> (30)
                         </div>
 
@@ -151,16 +148,13 @@
         </div>
 
         <!-- news -->
-        <div data-role="page" id="news" data-theme="a" data-title="news">
+        <div data-role="page" id="news" data-theme="a" data-page="news">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
                         <div id="menu-btn" class="header-btn header-link left-link"></div>
                     </a>
                     <span class="page-title">最新消息</span>
-                    <!-- <a id="next_news" class="ui-link">
-                        <div class="header-btn header-link right-link" style="width:auto">下一篇</div>
-                    </a> -->
                 </div>
             </div>
             <!-- /header -->
@@ -173,19 +167,21 @@
                 </div>
                 <h3 id="news_title">即將推出新活動</h3>
                 <hr>
-                <div class="news-img-block">
-                    <img id="news_pic" src="./img/home3.jpg" alt="" style="width: 100%; max-height: 300px" />
+                <div class="news-img-block" style="text-align:center;">
+                    <img id="news_pic" src="./img/home3.jpg" alt="" />
                 </div>
                 <div id="new_content" class="news-content-bolck">
                     即將推出新活動，敬請期待！
                 </div>
-                <button type="button" id="prev_news" class="ui-btn ui-corner-all no-bg-bd send-btn purple-btn">上一篇</button>
-                <button type="button" id="next_news" class="ui-btn ui-corner-all no-bg-bd send-btn purple-btn">下一篇</button>
+                <div class="text-center">
+                    <button type="button" id="prev_news" class="ui-btn ui-corner-all no-bg-bd send-btn purple-btn" style="display:inline;">上一篇</button>
+                    <button type="button" id="next_news" class="ui-btn ui-corner-all no-bg-bd send-btn purple-btn" style="display:inline;">下一篇</button>
+                </div>
             </div>
         </div>
 
         <!-- share -->
-        <div data-role="page" id="share" data-theme="a" data-title="share" class="pink-bg">
+        <div data-role="page" id="share" data-theme="a" data-page="share" class="pink-bg">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
@@ -210,7 +206,7 @@
                         <h4>透過 Line 分享</h4>
                     </div>
                     <div class="share-btn">
-                        <a href=""><img src="./img/icons/fb_logo.png" width="60" height="60" alt="FB 分享" /></a>
+                        <a id="fb_share_btn"><img src="./img/icons/fb_logo.png" width="60" height="60" alt="FB 分享" /></a>
                         <h4>透過 Facebook 分享</h4>
                     </div>
                 </div>
@@ -222,7 +218,7 @@
         </div>
 
         <!-- setting -->
-        <div data-role="page" id="setting" data-theme="a" data-title="setting">
+        <div data-role="page" id="setting" data-theme="a" data-page="setting">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
@@ -278,9 +274,9 @@
                 <div class="">
                     <ul data-role="listview" data-inset="true">
                         <li><a href="#about">關於 Kelly Club</a></li>
-                        <li><a href="#service_policy">服務條款</a></li>
-                        <li><a href="#terms_of_use">使用規範</a></li>
-                        <li><a href="#privacy_polocy">個資保護政策</a></li>
+                        <li><a href="#service">服務條款</a></li>
+                        <li><a href="#use">使用規範</a></li>
+                        <li><a href="#privacy">個資保護政策</a></li>
                     </ul>
                 </div>
                 <!-- <br> -->
@@ -290,137 +286,109 @@
                         <li class="ui-field-contain">
                             <label for="user_lang">語言</label>
                             <select name="user_lang" id="user_lang">
-                                <option value="">正體中文</option>
-                                <option value="">簡體中文</option>
-                                <option value="">日文</option>
+                                <option value="1">正體中文</option>
+                                <option value="2">简体中文</option>
+                                <option value="3">English</option>
+                                <option value="4">日本語</option>
                             </select>
                         </li>
                         <li class="ui-field-contain">
                             <label for="user_country">國家</label>
                             <select name="user_country" id="user_country">
-                                <option value="">台灣</option>
-                                <option value="">中國</option>
-                                <option value="">日本</option>
+                                <option value="1">台灣</option>
+                                <option value="2">中國</option>
+                                <option value="3">日本</option>
                             </select>
                         </li>
                     </ul>
                 </div>
+                <p class="text-right">
+                    目前版本：v0.9.9
+                </p>
             </div>
         </div>
 
         <!-- about -->
-        <div data-role="page" id="about" data-theme="a" data-title="about">
+        <div data-role="page" id="about" class="policy-page" data-theme="a" data-page="about">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
                         <div id="menu-btn" class="header-btn header-link left-link"></div>
                     </a>
                     <span class="page-title">設定</span>
+                    <a href="#setting" class="ui-link">
+                        <div class="header-btn header-link right-link" style="width:auto">返回</div>
+                    </a>
                 </div>
             </div>
             <!-- /header -->
             <div data-role="main" class="ui-content policy-page-content" id="about-main">
                 <h4>關於 Kelly Club</h4>
                 <hr>
-                <p>
-                    （關於 Kelly Club內容）
-                </p>
-                <p>
-                    （關於 Kelly Club內容）
-                </p>
-                <p>
-                    （關於 Kelly Club內容）
-                </p>
-                <p>
-                    （關於 Kelly Club內容）
-                </p>
+                <div class="policy-text"></div>
             </div>
         </div>
 
-        <!-- service_policy -->
-        <div data-role="page" id="service_policy" data-theme="a" data-title="service_policy">
+        <!-- service -->
+        <div data-role="page" id="service" class="policy-page" data-theme="a" data-page="service">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
                         <div id="menu-btn" class="header-btn header-link left-link"></div>
                     </a>
                     <span class="page-title">設定</span>
+                    <a href="#setting" class="ui-link">
+                        <div class="header-btn header-link right-link" style="width:auto">返回</div>
+                    </a>
                 </div>
             </div>
             <!-- /header -->
-            <div data-role="main" class="ui-content policy-page-content" id="service_policy-main">
+            <div data-role="main" class="ui-content policy-page-content" id="service-main">
                 <h4>服務條款</h4>
                 <hr>
-                <p>
-                    （服務條款內容）
-                </p>
-                <p>
-                    （服務條款內容）
-                </p>
-                <p>
-                    （服務條款內容）
-                </p>
-                <p>
-                    （服務條款內容）
-                </p>
+                <div class="policy-text"></div>
             </div>
         </div>
 
-        <!-- terms_of_use -->
-        <div data-role="page" id="terms_of_use" data-theme="a" data-title="terms_of_use">
+        <!-- use -->
+        <div data-role="page" id="use" class="policy-page" data-theme="a" data-page="use">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
                         <div id="menu-btn" class="header-btn header-link left-link"></div>
                     </a>
                     <span class="page-title">設定</span>
+                    <a href="#setting" class="ui-link">
+                        <div class="header-btn header-link right-link" style="width:auto">返回</div>
+                    </a>
                 </div>
             </div>
             <!-- /header -->
-            <div data-role="main" class="ui-content policy-page-content" id="terms_of_use-main">
+            <div data-role="main" class="ui-content policy-page-content" id="use-main">
                 <h4>使用規範</h4>
                 <hr>
-                <p>
-                    （使用規範內容）
-                </p>
-                <p>
-                    （使用規範內容）
-                </p>
-                <p>
-                    （使用規範內容）
-                </p>
-                <p>
-                    （使用規範內容）
-                </p>
+                <div class="policy-text"></div>
             </div>
         </div>
 
-        <!-- privacy_polocy -->
-        <div data-role="page" id="privacy_polocy" data-theme="a" data-title="privacy_polocy">
+        <!-- privacy -->
+        <div data-role="page" id="privacy" class="policy-page" data-theme="a" data-page="privacy">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
                         <div id="menu-btn" class="header-btn header-link left-link"></div>
                     </a>
                     <span class="page-title">設定</span>
+                    <a href="#setting" class="ui-link">
+                        <div class="header-btn header-link right-link" style="width:auto">返回</div>
+                    </a>
                 </div>
             </div>
             <!-- /header -->
-            <div data-role="main" class="ui-content policy-page-content" id="privacy_polocy-main">
+            <div data-role="main" class="ui-content policy-page-content" id="privacy-main">
                 <h4>個資保護政策</h4>
                 <hr>
-                <p>
-                    （個資保護政策內容）
-                </p>
-                <p>
-                    （個資保護政策內容）
-                </p>
-                <p>
-                    （個資保護政策內容）
-                </p>
-                <p>
-                    （個資保護政策內容）
-                </p>
+                <div class="policy-text"></div>
             </div>
         </div>
 
@@ -430,27 +398,27 @@
                 <ul>
                     <li>
                         <a href="./club.html" data-ajax="false">
-                            <div class="footer-tab tab1" data-title="club"></div>
+                            <div class="footer-tab tab1" data-page="club"></div>
                         </a>
                     </li>
                     <li>
                         <a href="./jobseeker.html" data-ajax="false">
-                            <div class="footer-tab tab2" data-title="jobseeker"></div>
+                            <div class="footer-tab tab2" data-page="jobseeker"></div>
                         </a>
                     </li>
                     <li>
                         <a href="./lifeservice.html" data-ajax="false">
-                            <div class="footer-tab tab3 active" data-title="lifeservice"></div>
+                            <div class="footer-tab tab3 active" data-page="lifeservice"></div>
                         </a>
                     </li>
                     <li>
                         <a href="#messages" data-ajax="false">
-                            <div class="footer-tab tab4" data-title="messages"></div>
+                            <div class="footer-tab tab4" data-page="messages"></div>
                         </a>
                     </li>
                     <li>
                         <a href="./favorite.html" data-ajax="false">
-                            <div class="footer-tab tab5" data-title="favorite"></div>
+                            <div class="footer-tab tab5" data-page="favorite"></div>
                         </a>
                     </li>
                 </ul>
@@ -459,6 +427,7 @@
         </div>
         <script src="./js/jquery-1.12.4.min.js"></script>
         <script src="./js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
+        <script type="text/javascript" src="cordova.js"></script>
         <script src="./js/main.js"></script>
         <script src="./js/menu.js"></script>
     </body>

@@ -26,6 +26,8 @@ html, body, [data-role=page], [data-role=content]
     margin: 0
 textarea
     height: inherit !important
+    width: 100%
+    box-sizing: border-box
 
 .no-bg-bd
     background:none !important
@@ -97,7 +99,7 @@ textarea
         padding-top: 6px
 
 // app-log-in
-#app-log-in-main, #app-reg
+#app-log-in-main, #app-reg, #fb-reg, #reset-password
     #logo, #login-form-block
         margin: 70px auto
 
@@ -116,7 +118,7 @@ textarea
         img
             width: 50%
     #logo #subtitle
-        margin-bottom: 100px
+        margin-bottom: 50px
     #login-block *
         margin: 10px 0
 
@@ -169,9 +171,27 @@ textarea
             background-color: #FFF !important
             border-bottom: 6px solid #AA3C89
 
+#club-main , #club-result-main
+    .ui-listview
+        li h2
+            margin: 0
+        & > .ui-li-has-thumb > .ui-btn
+            padding-left: 8em
+    .club-thumbnail
+        position: absolute
+        left: 0
+        top: 0
+        height: 100%
+        width: 100%
+        max-width: calc(8em - 10px)
+        background-size: cover
+        background-position: center
+        + div
+            margin-left: 8em
+
 //  --- end club style ---
 // job seeker
-#jobseeker-main
+#jobseeker-main, #jobseeker-result-main
     .ui-grid-b
         margin: 0 4px 10px 4px
     // .seeker_list_item
@@ -179,9 +199,15 @@ textarea
         margin: 4px
         width: calc(33.33vw - 11px)
         height: calc(33.33vw - 11px)
-    .seeker_list_item img
-        width: 100%
-        border-radius(5px)
+    .seeker_list_item
+        height: 100%
+        div
+            width: 100%
+            height: 100%
+            max-height: 100%
+            border-radius(5px)
+            background-size:cover
+            background-position:center
 
 // --- end jobseeker style ---
 
@@ -200,6 +226,9 @@ textarea
             margin: 0
         & > .ui-li-has-thumb > .ui-btn
             padding-left: 7em
+    .life-thumbnail
+        height: 100%
+        max-width: calc(7em - 10px)
 // --- life service style---
 
 // messages
@@ -278,6 +307,9 @@ textarea
         margin: 0
     .news-content-bolck
         margin-top: 15px
+#news_pic
+    max-height: 250px
+    max-width: 100%
 
 // --- news style ---
 
@@ -310,11 +342,12 @@ textarea
     padding: 15px 30px
     background-color: #FFF
     h4
+        font-size: 18px
         text-align: center
         color: deep-purple
         margin: 10px auto
-    p
-        font-size: 12px
+    .policy-text
+        // font-size: 16px
         padding-bottom: 15px
 
 // --- setting page ---
@@ -426,13 +459,6 @@ div[id|=admin]
         width: 64px
         padding-top: 5px
         margin-right: 5px
-    .ui-input-text
-        width: calc(100% - 120px - 15px)
-    .ui-btn
-        margin-left: 5px
-        width: 50px
-        float: right
-        padding: 8px
 .member_num
     float: right
     margin-top: 15px
@@ -446,7 +472,7 @@ div[id|=admin]
     &.ui-btn-active
         background: deep-purple !important
 
-.list_table
+.list_table, .record_list_table
     width: 100%
     // border-collapse: collapse
     border-spacing: 0
@@ -459,8 +485,14 @@ div[id|=admin]
             text-align: left
         th:nth-child(2), td:nth-child(2)
             text-align: center
-        th:nth-child(3), td:nth-child(3)
+        th:last-child, td:last-child
             text-align: right
+
+#member_redeem_list, #member_rec_list
+    tr
+        th, td
+            padding-top: 10px
+            padding-bottom: 10px
 
 #admin-member-detail-main
     > div
@@ -481,17 +513,17 @@ div[id|=admin]
         font-weight: normal
         border-bottom: 1px solid inacitve-gray
 
-#plan_block .ui-field-contain
-    *
-        float: left
-    > :first-child
-        .ui-btn
-            border-bottom: 1px solid #DDD
-        // width: 20%
-    > :nth-child(2)
-        margin-left: 10px
-    > :nth-child(3)
-        width: 40%
+// #plan_block .ui-field-contain
+//     *
+//         float: left
+//     > :first-child
+//         .ui-btn
+//             border-bottom: 1px solid #DDD
+//         // width: 20%
+//     > :nth-child(2)
+//         margin-left: 10px
+//     > :nth-child(3)
+//         width: 40%
 
 #member_info_block
     label
@@ -534,8 +566,13 @@ div[id|=admin]
 
 .redeem_item_block
     padding: 0 0 10px 0
-    border-bottom: 1px solid
+    label
+        margin: 0
+        display: inline-block
+        width: auto
+
 .redeem-pic-block
+    border-bottom: 1px solid
     > div:first-child
         float: left
         width: 50%
@@ -550,6 +587,8 @@ div[id|=admin]
             width: 100%
             + .ui-input-text
                 display: none
+.news_title
+    font-size: 1.2em
 
 .news_operation
     margin-bottom: 15px
@@ -610,7 +649,7 @@ div[id|=admin]
             + .ui-input-text
                 display: none
 
-.admin-page
+.admin-page, #admin-member-detail
     .item_title
         color: deep-purple !important
 
@@ -709,7 +748,7 @@ for num in 0..8
             color: #000
             border-bottom: 6px solid #AA3C89
 
-@media screen and (max-width: 400px)
+@media (max-width: 700px)
     [data-role="navbar"].ui-navbar ul.page-content-nav
         li > a
             font-size: 1em
@@ -762,7 +801,7 @@ for num in 0..8
 
 [id$=popup].ui-popup-container
     width: 80%
-    .msg-popup
+    .msg-popup, .cat-popup, .policy-popup
         h3, button
             color: #FFF
             font-weight: normal
@@ -793,6 +832,7 @@ for num in 0..8
         // width: 25%
 
 .orange-btn
+    border: none !important
     padding: 5px 10px
     color: #FFF !important
     background-color: #ED6615 !important
@@ -800,6 +840,7 @@ for num in 0..8
     // margin: 0 0 10px 0
 
 .green-btn
+    border: none !important
     padding: 5px 10px
     color: #FFF !important
     background-color: #47AA2C !important
@@ -833,6 +874,7 @@ for tab in 1..5
     left: 0
     p
         margin-top: 40vh
+        padding: 30px
 
 .category-block
     padding: 0 10px
@@ -840,9 +882,14 @@ for tab in 1..5
 // --- end shared element style ---
 
 // overwrite
+textarea.ui-input-text.ui-textinput-autogrow
+    overflow: scroll
 
 .ui-navbar
-	z-index 1001
+	z-index: 1001
 
-#offcial_msg_block
-	display none;
+.offcial_msg_block
+	display: none
+
+.ads-home
+	display: none

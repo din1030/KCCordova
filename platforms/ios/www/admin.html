@@ -4,7 +4,8 @@
     <head>
         <title>Kelly Club 全省八大行業資訊專用APP平台</title>
         <meta charset='UTF-8'>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+
         <link rel="stylesheet" href="./js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.css" />
         <link rel="stylesheet" href="./css/font-awesome.css" />
         <link rel="stylesheet" href="css/main.css" />
@@ -12,7 +13,7 @@
 
     <body>
         <!-- admin member -->
-        <div data-role="page" id="admin-member" data-theme="a" data-title="admin-member" class="admin-page">
+        <div data-role="page" id="admin-member" data-theme="a" data-page="admin-member" class="admin-page">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
@@ -27,51 +28,53 @@
                     <select class="navigateToPage">
                         <option value="./admin.html#admin-member" selected>會員管理</option>
                         <option value="./admin.html#admin-home">首頁管理</option>
-                        <option value="./admin.html#admin-lifeservice">生活服務管理</option>
+                        <option value="./admin.html#admin-lifeservice">旅遊資訊管理</option>
                         <option value="./admin.html#admin-recommend">推薦記錄管理</option>
-                        <option value="./admin.html#admin-news">發佈消息</option>
+                        <option value="./admin.html#admin-news">最新消息管理</option>
                         <option value="./admin.html#admin-plan">刊登方案管理</option>
-                        <option value="./admin.html#admin-authority">管理者權限</option>
-                        <option value="./admin.html#admin-messages">站內消息</option>
+                        <option value="./admin.html#admin-authority">條款與後台權限管理</option>
+                        <option value="./admin.html#admin-messages">發送站內訊息</option>
                         <option value="./admin.html#admin-category">分類管理</option>
                     </select>
                 </div>
                 <hr>
                 <div class="area_block">
                     <div class="ui-field-contain">
-                        <label class="area_title" for="select-native-1">國家</label>
-                        <select name="select-native-1" id="select-native-1" data-inline="true" data-mini="true">
-                            <option value="small">台灣</option>
-                            <option value="medium">中國</option>
-                            <option value="large">日本</option>
+                        <label class="area_title" for="country-select">國家</label>
+                        <select name="country-select" class="country-select" id="country-select" data-inline="true" data-mini="true">
+                            <!-- dynamic content -->
                         </select>
-                        <label class="area_title" for="select-native-2">地區</label>
-                        <select name="select-native-2" id="select-native-2" data-inline="true" data-mini="true">
-                            <option value="small">台北</option>
-                            <option value="medium">台南</option>
-                            <option value="large">高雄</option>
+                        <label class="area_title" for="area-select">地區</label>
+                        <select name="area-select" class="area-select" id="area-select" data-inline="true" data-mini="true">
+                            <!-- dynamic content -->
                         </select>
+                        <button id="serach-btn" type="button" class="ui-btn ui-corner-all ui-btn-inline no-bg-bd purple-btn">查詢</button>
                     </div>
                 </div>
                 <div data-role="tabs" id="member_type_tab">
                     <div id="member_type_nav" data-role="navbar">
                         <ul>
-                            <li><a href="#normal" data-ajax="false" class="ui-btn-active">一般會員</a></li>
-                            <li><a href="#club" data-ajax="false">店家</a></li>
-                            <li><a href="#seeker" data-ajax="false">求職者</a></li>
+                            <li><a href="#normal_list" data-ajax="false" class="ui-btn-active">一般會員</a></li>
+                            <li><a href="#club_list" data-ajax="false">店家</a></li>
+                            <li><a href="#seeker_list" data-ajax="false">求職者</a></li>
                             <li><a href="#authority" data-ajax="false">待審核</a></li>
                         </ul>
                     </div>
-                    <div id="normal" class="ui-body-d ui-content member-list">
+                    <div id="normal_list" class="ui-body-d ui-content member-list">
                         <div class="list_search">
-                            <label class="area_title" for="textinput-1">搜尋名單</label>
-                            <input type="text" name="search" class="" id="search" placeholder="姓名或日期(20160520)" data-inline="true">
-                            <button type="submit" id="submit-1" class="ui-btn ui-corner-all purple-btn">GO</button>
+                            <label class="area_title" for="search">搜尋名單</label>
+                            <form>
+                                <input type="text" name="search" class="" id="normal-search" placeholder="姓名或時間" data-inline="true" data-type="search">
+                            </form>
                         </div>
-                        <button type="button" id="download_list" class="ui-btn ui-btn-inline ui-corner-all purple-btn">下載名單</button>
-                        <span class="member_num">會員總數：21432</span>
                         <div class="clearfix"></div>
-                        <table class="list_table">
+                        <div class="">
+                            <button type="button" class="ui-btn ui-btn-inline ui-corner-all purple-btn download-list-btn" data-type="1">下載名單</button>
+                            <span class="member_num">一般會員總數：<span id="normal_num"></span></span>
+                            <div class="clearfix"></div>
+                        </div>
+                        <table id="normal-table" class="list_table" data-filter="true" data-input="#normal-search">
+                            <caption>一般會員列表</caption>
                             <thead>
                                 <tr>
                                     <th>註冊時間</th>
@@ -80,75 +83,24 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>2016/07/14 20:15</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2016/07/14 20:15</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2016/07/14 20:15</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2016/07/14 20:15</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2016/07/14 20:15</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2016/07/14 20:15</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2016/07/14 20:15</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2016/07/14 20:15</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
-                    <div id="club" class="ui-body-d ui-content member-list">
+                    <div id="club_list" class="ui-body-d ui-content member-list">
                         <div class="list_search">
-                            <label class="area_title" for="textinput-1">搜尋名單</label>
-                            <input type="text" name="search" class="" id="search" placeholder="姓名或日期(20160520)" data-inline="true">
-                            <button type="submit" id="submit-1" class="ui-btn ui-corner-all purple-btn">GO</button>
+                            <label class="area_title" for="search">搜尋名單</label>
+                            <form>
+                                <input type="text" name="search" class="" id="club-search" placeholder="姓名或時間" data-inline="true" data-type="search">
+                            </form>
                         </div>
-                        <button type="button" id="download_list" class="ui-btn ui-btn-inline ui-corner-all purple-btn">下載名單</button>
-                        <span class="member_num">會員總數：21432</span>
                         <div class="clearfix"></div>
-                        <table class="list_table">
+                        <div class="">
+                            <button type="button" class="ui-btn ui-btn-inline ui-corner-all purple-btn download-list-btn" data-type="2">下載名單</button>
+                            <span class="member_num">店家會員總數：<span id="club_num"></span></span>
+                            <div class="clearfix"></div>
+                        </div>
+                        <table id="club-table" class="list_table" data-filter="true" data-input="#club-search">
+                            <caption>店家管理員列表</caption>
                             <thead>
                                 <tr>
                                     <th>註冊時間</th>
@@ -157,75 +109,24 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>2016/07/14 22:19</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2016/07/14 22:19</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2016/07/14 22:19</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2016/07/14 22:19</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2016/07/14 22:19</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2016/07/14 22:19</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2016/07/14 22:19</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2016/07/14 20:15</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
-                    <div id="seeker" class="ui-body-d ui-content member-list">
+                    <div id="seeker_list" class="ui-body-d ui-content member-list">
                         <div class="list_search">
-                            <label class="area_title" for="textinput-1">搜尋名單</label>
-                            <input type="text" name="search" class="" id="search" placeholder="姓名或日期(20160520)" data-inline="true">
-                            <button type="submit" id="submit-1" class="ui-btn ui-corner-all purple-btn">GO</button>
+                            <label class="area_title" for="search">搜尋名單</label>
+                            <form>
+                                <input type="text" name="search" class="" id="seeker-search" placeholder="姓名或時間" data-inline="true" data-type="search">
+                            </form>
                         </div>
-                        <button type="button" id="download_list" class="ui-btn ui-btn-inline ui-corner-all purple-btn">下載名單</button>
-                        <span class="member_num">會員總數：21432</span>
                         <div class="clearfix"></div>
-                        <table class="list_table">
+                        <div class="">
+                            <button type="button" class="ui-btn ui-btn-inline ui-corner-all purple-btn download-list-btn" data-type="3">下載名單</button>
+                            <span class="member_num">求職者會員總數：<span id="seeker_num"></span></span>
+                            <div class="clearfix"></div>
+                        </div>
+                        <table id="seeker-table" class="list_table" data-filter="true" data-input="#seeker-search">
+                            <caption>求職者列表</caption>
                             <thead>
                                 <tr>
                                     <th>註冊時間</th>
@@ -234,75 +135,24 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>2016/07/14 18:15</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2016/07/14 18:15</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2016/07/14 18:15</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2016/07/14 18:15</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2016/07/14 18:15</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2016/07/14 18:15</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2016/07/14 18:15</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2016/07/14 18:15</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
-                    <div id="authority" class="ui-body-d ui-content member-list">
+                    <div id="authority" class="ui-body-d ui-content">
                         <div class="list_search">
-                            <label class="area_title" for="textinput-1">搜尋名單</label>
-                            <input type="text" name="search" class="" id="search" placeholder="姓名或日期(20160520)" data-inline="true">
-                            <button type="submit" id="submit-1" class="ui-btn ui-corner-all purple-btn">GO</button>
+                            <label class="area_title" for="search">搜尋名單</label>
+                            <form>
+                                <input type="text" name="search" class="" id="approved-search" placeholder="姓名或時間" data-inline="true" data-type="search">
+                            </form>
                         </div>
-                        <button type="button" id="download_list" class="ui-btn ui-btn-inline ui-corner-all purple-btn">下載名單</button>
-                        <span class="member_num">會員總數：21432</span>
                         <div class="clearfix"></div>
-                        <table class="list_table">
+                        <!-- <div class=""> -->
+                        <!-- <button type="button" id="download_list" class="ui-btn ui-btn-inline ui-corner-all purple-btn">下載名單</button> -->
+                        <!-- <span class="member_num">會員總數：<span id="approved_num"></span></span> -->
+                        <!-- <div class="clearfix"></div> -->
+                        <!-- </div> -->
+                        <table id="not-approved-table" class="list_table" data-filter="true" data-input="#approved-search">
+                            <caption>待審核店家列表</caption>
                             <thead>
                                 <tr>
                                     <th>註冊時間</th>
@@ -311,62 +161,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>2016/07/14 18:15</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2016/07/14 18:15</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2016/07/14 18:15</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2016/07/14 20:15</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2016/07/14 20:15</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2016/07/14 20:15</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2016/07/14 20:15</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2016/07/14 20:15</td>
-                                    <td>翁水噹</td>
-                                    <td>
-                                        <a href="#admin-member-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                    </td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -375,7 +169,7 @@
         </div>
 
         <!-- admin member detail -->
-        <div data-role="page" id="admin-member-detail" data-theme="a" data-title="admin-member-detail">
+        <div data-role="page" id="admin-member-detail" data-theme="a" data-page="admin-member-detail">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
@@ -383,72 +177,77 @@
                     </a>
                     <span class="page-title">管理者後台</span>
                     <a href="#admin-member" class="ui-link">
-                        <div class="header-btn header-link right-link" style="width:auto">取消</div>
+                        <div class="header-btn header-link right-link" style="width:auto">返回</div>
                     </a>
                 </div>
             </div>
             <!-- /header -->
             <div data-role="main" class="ui-content" id="admin-member-detail-main">
-                <div>
-                    翁水噹
+                <div id="m_name">
                 </div>
-                <div>
-                    <div id="auth_list">
-                        <fieldset data-role="controlgroup" data-iconpos="right">
-                            <input type="radio" name="default_lang" id="thai">
-                            <label for="thai">一般會員權限</label>
-                            <input type="radio" name="default_lang" id="eng">
-                            <label for="eng">店家管理-基本權限</label>
-                            <input type="radio" name="default_lang" id="ch_simp">
-                            <label for="ch_simp">店家管理-付費權限</label>
+                <!-- <div> -->
+                <!-- <div id="auth_type"> -->
+                <!-- <p><strong>會員身分權限</strong></p> -->
+                <!-- <fieldset data-role="controlgroup" data-iconpos="right" data-enhanced="false" data-corners="false">
+                            <input type="radio" name="member_auth" value="normal" id="normal">
+                            <label for="normal">一般會員權限</label>
+                            <input type="radio" name="member_auth" value="club_basic" id="club_basic">
+                            <label for="club_basic">店家管理-基本權限</label>
+                            <input type="radio" name="member_auth" value="club_adv" id="club_adv">
+                            <label for="club_adv">店家管理-付費權限</label>
                             <div id="plan_block">
                                 <div class="ui-field-contain">
-                                    <select name="select-native-1" id="select-native-1" class="l" data-inline="true" data-mini="true">
+                                    <select name="plan_select" id="plan_select">
                                         <option value="small">付費方案A</option>
                                         <option value="medium">付費方案B</option>
                                     </select>
-                                    <label class="area_title" for="select-native-2">到期時間</label>
-                                    <input type="date" name="due" class="" id="due" value="2017-01-10">
+                                    <label class="area_title" for="publish_due">到期時間</label>
+                                    <input type="date" name="publish_due" class="" id="publish_due" value="">
                                 </div>
                             </div>
                             <div class="clearfix"></div>
-                            <input type="radio" name="default_lang" id="ch_trad">
-                            <label for="ch_trad">求職者權限</label>
-                        </fieldset>
-                    </div>
-                </div>
+                            <input type="radio" name="member_auth" value="seeker" id="seeker">
+                            <label for="seeker">求職者權限</label>
+                        </fieldset> -->
+                <!-- </div> -->
+                <!-- </div> -->
                 <div id="member_info_block">
-                    <!-- <div class="ui-field-contain">
-                        <label for="member_type">身分</label>
-                        <select name="member_type" id="member_type">
+                    <div class="ui-field-contain ui-disabled">
+                        <label class="item_title" for="member_type">身分</label>
+                        <input type="text" name="auth_type" id="auth_type" value="">
+                        <!-- <div id="auth_type">
+                        </div> -->
+                        <!-- <select name="member_type" id="member_type">
                             <option value="normal" selected>一般會員</option>
                             <option value="club">店家管理員</option>
                             <option value="seeker">求職者</option>
-                        </select>
-                    </div> -->
-                    <div class="ui-field-contain">
-                        <label for="rg_email">帳號</label>
-                        <input type="email" name="rg_email" id="rg_email" class="required email" value="adbbe@gmail.com">
-                        <!-- <div class="form-hint">請填寫有效 E-mail 格式</div> -->
-                    </div>
-                    <div class="ui-field-contain">
-                        <label for="rg_pswd">密碼</label>
-                        <input type="password" name="rg_pswd" id="rg_pswd" class="required" minlength="4" maxlength="16" value="sdcawa">
-                        <!-- <div class="form-hint">密碼無效</div> -->
+                        </select> -->
                     </div>
                     <div class="ui-field-contain ui-disabled">
-                        <label class="item_title" for="textinput-2">性別</label>
-                        <input type="text" name="textinput-2" class="ui-disabled" id="textinput-2" value="女">
+                        <label class="item_title" for="m_no">會員編號</label>
+                        <input type="text" name="m_no" id="m_no" value="">
                     </div>
                     <div class="ui-field-contain ui-disabled">
-                        <label class="item_title" for="textinput-3 ui-disabled">生日</label>
-                        <input type="text" name="textinput-3" class="ui-disabled" id="textinput-3" value="1999/12/31">
+                        <label class="item_title" for="m_email">帳號</label>
+                        <input type="email" name="m_email" id="m_email" class="required email" value="">
                     </div>
-                    <div class="ui-field-contain">
-                        <label class="item_title" for="textinput-4">手機</label>
-                        <input type="tel" name="textinput-4" class="" id="textinput-4" value="0912345678">
+                    <div class="ui-field-contain ui-disabled">
+                        <label class="item_title" for="m_gender">性別</label>
+                        <input type="text" name="m_gender" class="ui-disabled" id="m_gender" value="">
                     </div>
-                    <div id="club_type_block" class="ui-field-contain" style="display:none">
+                    <div class="ui-field-contain ui-disabled">
+                        <label class="item_title" for="m_birth ui-disabled">生日</label>
+                        <input type="text" name="m_birth" class="ui-disabled" id="m_birth" value="">
+                    </div>
+                    <div class="ui-field-contain ui-disabled">
+                        <label class="item_title" for="m_tel">電話</label>
+                        <input type="tel" name="m_tel" class="" id="m_tel" value="">
+                    </div>
+                    <div class="ui-field-contain ui-disabled">
+                        <label class="item_title" for="m_mobile">手機</label>
+                        <input type="tel" name="m_mobile" class="" id="m_mobile" value="">
+                    </div>
+                    <!-- <div id="club_type_block" class="ui-field-contain" style="display:none">
                         <label for="member_type">店家類別</label>
                         <select name="member_type" id="member_type">
                             <option value="1">類別一</option>
@@ -463,16 +262,49 @@
                             <option value="2">類別二</option>
                             <option value="3">類別三</option>
                         </select>
-                    </div>
+                    </div> -->
+                </div>
+                <div id="plan_block" class="club_only">
+                    <form id="member-plan-update-form">
+                        <div class="ui-field-contain">
+                            <label class="item_title" for="plan_select">付費方案</label>
+                            <select name="plan_select" id="plan_select" data-inline="true">
+                                <option value="0">未購買付費方案</option>
+                            </select>
+                        </div>
+                        <div class="ui-field-contain">
+                            <label class="item_title" for="publish_start">開始時間</label>
+                            <input type="date" name="publish_start" class="" id="publish_start" value="">
+                        </div>
+                        <div class="ui-field-contain">
+                            <label class="item_title" for="publish_due">到期時間</label>
+                            <input type="date" name="publish_due" class="" id="publish_due" value="">
+                        </div>
+                        <button id="member-plan-update-btn" type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn">更新付費方案</button>
+                    </form>
+                    <div class="clearfix"></div>
                 </div>
                 <div class="">
-                    <button id="admin-member-submit-btn" type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn">送出</button>
+                    <div style="font-size:18px;color:#AA3C89">禮品兌換記錄</div>
+                    <table id="member_redeem_list" class="record_list_table">
+                        <thead>
+                            <tr>
+                                <th>兌換項目</th>
+                                <th>兌換時間</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="club_only">
+                    <a href="admin_club_manage.html" class="ui-btn ui-corner-all no-bg-bd green-btn" data-ajax="false">編輯店家資訊</a>
                 </div>
             </div>
         </div>
 
         <!-- admin home -->
-        <div data-role="page" id="admin-home" data-theme="a" data-title="admin-home" class="admin-page">
+        <div data-role="page" id="admin-home" data-theme="a" data-page="admin-home" class="admin-page">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
@@ -487,32 +319,32 @@
                     <select class="navigateToPage">
                         <option value="./admin.html#admin-member">會員管理</option>
                         <option value="./admin.html#admin-home" selected>首頁管理</option>
-                        <option value="./admin.html#admin-lifeservice">生活服務管理</option>
+                        <option value="./admin.html#admin-lifeservice">旅遊資訊管理</option>
                         <option value="./admin.html#admin-recommend">推薦記錄管理</option>
-                        <option value="./admin.html#admin-news">發佈消息</option>
+                        <option value="./admin.html#admin-news">最新消息管理</option>
                         <option value="./admin.html#admin-plan">刊登方案管理</option>
-                        <option value="./admin.html#admin-authority">管理者權限</option>
-                        <option value="./admin.html#admin-messages">站內消息</option>
+                        <option value="./admin.html#admin-authority">條款與後台權限管理</option>
+                        <option value="./admin.html#admin-messages">發送站內訊息</option>
                         <option value="./admin.html#admin-category">分類管理</option>
                     </select>
                 </div>
-                <form id="adminHomeForm" action="data.php">
+                <form id="home-setting-form">
                     <div class="home-pic-block">
                         <div class="left-block">
                             <div class="pic-position">首頁左上圖</div>
                             <div>連結頁面</div>
                             <div class="">
-                                <select required id="home-upper-left-link" name="home-upper-left-link" data-mini="true" data-inline="true">
-                                    <option value="hotel">酒店系統</option>
-                                    <option value="recruit">求職者</option>
-                                    <option value="live">生活服務</option>
+                                <select required id="p1_link" name="p1_link" data-inline="true">
+                                    <option value="club">酒店系統</option>
+                                    <option value="seeker">求職者</option>
+                                    <option value="life">旅遊資訊</option>
                                     <option value="news">最新消息</option>
-                                    <option value="homepages">Kelly Club 官網</option>
+                                    <option value="website">Kelly Club 官網</option>
                                 </select>
                             </div>
                         </div>
                         <div class="img-block">
-                            <input type="image" class="home-pic" id="pic1" src="./img/home1.jpg" />
+                            <input type="image" class="home-pic" id="home-pic1" src="./img/home1.jpg" />
                             <input type="file" name="pic1" class="home-pic-input" />
                         </div>
                         <div class="clearfix"></div>
@@ -522,17 +354,17 @@
                             <div class="pic-position">首頁右上圖</div>
                             <div>連結頁面</div>
                             <div class="">
-                                <select required name="home-upper-right-link" id="home-upper-right-link" data-mini="true" data-inline="true">
-                                    <option value="hotel">酒店系統</option>
-                                    <option value="recruit">求職者</option>
-                                    <option value="live">生活服務</option>
+                                <select required name="p2_link" id="p2_link" data-inline="true">
+                                    <option value="club">酒店系統</option>
+                                    <option value="seeker">求職者</option>
+                                    <option value="life">旅遊資訊</option>
                                     <option value="news">最新消息</option>
-                                    <option value="homepages">Kelly Club 官網</option>
+                                    <option value="website">Kelly Club 官網</option>
                                 </select>
                             </div>
                         </div>
                         <div class="img-block">
-                            <input type="image" class="home-pic" id="pic2" src="./img/home1.jpg" />
+                            <input type="image" class="home-pic" id="home-pic2" src="./img/home1.jpg" />
                             <input type="file" name="pic2" class="home-pic-input" />
                         </div>
                         <div class="clearfix"></div>
@@ -542,17 +374,17 @@
                             <div class="pic-position">首頁中大圖</div>
                             <div>連結頁面</div>
                             <div class="">
-                                <select required name="home-middle-link" id="home-middle-link" data-mini="true" data-inline="true">
-                                    <option value="hotel">酒店系統</option>
-                                    <option value="recruit">求職者</option>
-                                    <option value="live">生活服務</option>
+                                <select required name="p3_link" id="p3_link" data-inline="true">
+                                    <option value="club">酒店系統</option>
+                                    <option value="seeker">求職者</option>
+                                    <option value="life">旅遊資訊</option>
                                     <option value="news">最新消息</option>
-                                    <option value="homepages">Kelly Club 官網</option>
+                                    <option value="website">Kelly Club 官網</option>
                                 </select>
                             </div>
                         </div>
                         <div class="img-block">
-                            <input type="image" class="home-pic" id="pic3" src="./img/home1.jpg" />
+                            <input type="image" class="home-pic" id="home-pic3" src="./img/home1.jpg" />
                             <input type="file" name="pic3" class="home-pic-input" />
                         </div>
                         <div class="clearfix"></div>
@@ -562,17 +394,17 @@
                             <div class="pic-position">首頁左下圖</div>
                             <div>連結頁面</div>
                             <div class="">
-                                <select required name="home-lower-left-link" id="home-lower-left-link" data-mini="true" data-inline="true">
-                                    <option value="hotel">酒店系統</option>
-                                    <option value="recruit">求職者</option>
-                                    <option value="live">生活服務</option>
+                                <select required name="p4_link" id="p4_link" data-inline="true">
+                                    <option value="club">酒店系統</option>
+                                    <option value="seeker">求職者</option>
+                                    <option value="life">旅遊資訊</option>
                                     <option value="news">最新消息</option>
-                                    <option value="homepages">Kelly Club 官網</option>
+                                    <option value="website">Kelly Club 官網</option>
                                 </select>
                             </div>
                         </div>
                         <div class="img-block">
-                            <input type="image" class="home-pic" id="pic4" src="./img/home1.jpg" />
+                            <input type="image" class="home-pic" id="home-pic4" src="./img/home1.jpg" />
                             <input type="file" name="pic4" class="home-pic-input" />
                         </div>
                         <div class="clearfix"></div>
@@ -582,28 +414,28 @@
                             <div class="pic-position">首頁右下圖</div>
                             <div>連結頁面</div>
                             <div class="">
-                                <select required name="home-lower-right-link" id="home-lower-right-link" data-mini="true" data-inline="true">
-                                    <option value="hotel">酒店系統</option>
-                                    <option value="recruit">求職者</option>
-                                    <option value="live">生活服務</option>
+                                <select required name="p5_link" id="p5_link" data-inline="true">
+                                    <option value="club">酒店系統</option>
+                                    <option value="seeker">求職者</option>
+                                    <option value="life">旅遊資訊</option>
                                     <option value="news">最新消息</option>
-                                    <option value="homepages">Kelly Club 官網</option>
+                                    <option value="website">Kelly Club 官網</option>
                                 </select>
                             </div>
                         </div>
                         <div class="img-block">
-                            <input type="image" class="home-pic" id="pic5" src="./img/home1.jpg" />
+                            <input type="image" class="home-pic" id="home-pic5" src="./img/home1.jpg" />
                             <input type="file" name="pic5" class="home-pic-input" />
                         </div>
                         <div class="clearfix"></div>
                     </div>
-                    <button type="submit" id="image-home" class="ui-btn ui-corner-all no-bg-bd send-btn purple-btn">完成</button>
+                    <button type="submit" id="setting-submit" class="ui-btn ui-corner-all no-bg-bd  purple-btn">送出</button>
                 </form>
             </div>
         </div>
 
         <!-- admin lifeservice -->
-        <div data-role="page" id="admin-lifeservice" data-theme="a" data-title="admin-lifeservice" class="admin-page">
+        <div data-role="page" id="admin-lifeservice" data-theme="a" data-page="admin-lifeservice" class="admin-page">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
@@ -618,90 +450,63 @@
                     <select class="navigateToPage">
                         <option value="./admin.html#admin-member">會員管理</option>
                         <option value="./admin.html#admin-home">首頁管理</option>
-                        <option value="./admin.html#admin-lifeservice" selected>生活服務管理</option>
+                        <option value="./admin.html#admin-lifeservice" selected>旅遊資訊管理</option>
                         <option value="./admin.html#admin-recommend">推薦記錄管理</option>
-                        <option value="./admin.html#admin-news">發佈消息</option>
+                        <option value="./admin.html#admin-news">最新消息管理</option>
                         <option value="./admin.html#admin-plan">刊登方案管理</option>
-                        <option value="./admin.html#admin-authority">管理者權限</option>
-                        <option value="./admin.html#admin-messages">站內消息</option>
+                        <option value="./admin.html#admin-authority">條款與後台權限管理</option>
+                        <option value="./admin.html#admin-messages">發送站內訊息</option>
                         <option value="./admin.html#admin-category">分類管理</option>
                     </select>
                 </div>
-                <div class="area_block">
+                <!-- <div class="area_block">
                     <div class="ui-field-contain">
                         <label class="area_title" for="select-native-1">國家</label>
-                        <select name="select-native-1" id="select-native-1" data-inline="true" data-mini="true">
-                            <option value="">台灣</option>
-                            <option value="">中國</option>
-                            <option value="">日本</option>
-                        </select>
+                        <select class="country-select" name="select-native-1" id="select-native-1" data-inline="true" data-mini="true"> -->
+                <!-- dynamic content -->
+                <!-- </select>
                         <label class="area_title" for="select-native-2">地區</label>
-                        <select name="select-native-2" id="select-native-2" data-inline="true" data-mini="true">
-                            <option value="">台北</option>
-                            <option value="">台南</option>
-                            <option value="">高雄</option>
-                        </select>
+                        <select class="area-select" name="select-native-2" id="select-native-2" data-inline="true" data-mini="true"> -->
+                <!-- dynamic content -->
+                <!-- </select>
                     </div>
-                </div>
+                </div> -->
                 <a href="#add_life_category" class="ui-btn ui-btn-inline purple-btn ui-corner-all float-right" data-rel="popup">
                     新增分類
                 </a>
                 <div class="clearfix"></div>
-                <div class="life_category_block">
-                    <div class="ui-field-contain ">
-                        <label class="item_title" for="life_category"><strong>分類名稱：</strong></label>
-                        <input type="text" name="life_category" class="" id="life_category" value="美睫美甲">
-                    </div>
-                    <div class="life-pic-block">
-                        <div class="left-block text-center">
-                            <a href="#admin-lifeservice-store" class="ui-btn ui-btn-inline ui-corner-all green-btn">
-                                編輯分類店家
-                            </a>
-                        </div>
-                        <div class="img-block">
-                            <input type="image" class="life-pic" src="./img/service.jpg" />
-                            <input type="file" class="life-pic-input" />
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <button id="msg-submit-btn" class="ui-btn ui-corner-all ui-btn-inline orange-btn float-right" type="button">刪除</button>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="life_category_block">
-                    <div class="ui-field-contain ">
-                        <label class="item_title" for="life_category"><strong>分類名稱：</strong></label>
-                        <input type="text" name="life_category" class="" id="life_category" value="禮服租賃">
-                    </div>
-                    <div class="life-pic-block">
-                        <div class="left-block text-center">
-                            <a href="#admin-lifeservice-store" class="ui-btn ui-btn-inline ui-corner-all green-btn">
-                                編輯分類店家
-                            </a>
-                        </div>
-                        <div class="img-block">
-                            <input type="image" class="life-pic" src="./img/service.jpg" />
-                            <input type="file" class="life-pic-input" />
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <button id="msg-submit-btn" class="ui-btn ui-corner-all ui-btn-inline orange-btn float-right" type="button">刪除</button>
-                    <div class="clearfix"></div>
-                </div>
-                <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn">完成</button>
+                <!-- dynamic content -->
             </div>
             <div id="add_life_category" class="msg-popup ui-corner-all" data-role="popup" data-position-to="window" data-transition="pop" data-theme="none" data-shadow="false" data-overlay-theme="b" data-dismissible="false">
-                <form>
+                <form id="life-cat-add-form" enctype="multipart/form-data">
                     <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
                     <div style="padding:10px 20px;">
                         <h3>新增分類</h3>
                         <div style="color:white;">
                             分類名稱：
                         </div>
-                        <input type="text" name="club_cat" class="" id="club_cat" value="">
+                        <input type="text" name="title" class="" id="life_cat" value="">
                         <div style="color:white;">
                             圖片：
                         </div>
-                        <input type="file" name="name" value="">
+                        <input type="file" name="life_pic" value="">
+                        <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn send-btn">送出</button>
+                    </div>
+                </form>
+            </div>
+            <div id="edit_life_category" class="msg-popup ui-corner-all" data-role="popup" data-position-to="window" data-transition="pop" data-theme="none" data-shadow="false" data-overlay-theme="b" data-dismissible="false">
+                <form id="life-cat-edit-form" enctype="multipart/form-data">
+                    <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+                    <div style="padding:10px 20px;">
+                        <h3>編輯分類</h3>
+                        <div style="color:white;">
+                            分類名稱：
+                        </div>
+                        <input type="text" name="title" class="" id="life_cat" value="">
+                        <div style="color:white;">
+                            圖片：
+                        </div>
+                        <input type="file" name="life_pic" value="">
                         <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn send-btn">送出</button>
                     </div>
                 </form>
@@ -709,7 +514,7 @@
         </div>
 
         <!-- admin lifeservice store -->
-        <div data-role="page" id="admin-lifeservice-store" data-theme="a" data-title="admin-lifeservice" class="admin-page">
+        <div data-role="page" id="admin-lifeservice-store" data-theme="a" data-page="admin-lifeservice" class="admin-page">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
@@ -727,65 +532,25 @@
                     <select class="navigateToPage">
                         <option value="./admin.html#admin-member">會員管理</option>
                         <option value="./admin.html#admin-home">首頁管理</option>
-                        <option value="./admin.html#admin-lifeservice" selected>生活服務管理</option>
+                        <option value="./admin.html#admin-lifeservice" selected>旅遊資訊管理</option>
                         <option value="./admin.html#admin-recommend">推薦記錄管理</option>
-                        <option value="./admin.html#admin-news">發佈消息</option>
+                        <option value="./admin.html#admin-news">最新消息管理</option>
                         <option value="./admin.html#admin-plan">刊登方案管理</option>
-                        <option value="./admin.html#admin-authority">管理者權限</option>
-                        <option value="./admin.html#admin-messages">站內消息</option>
+                        <option value="./admin.html#admin-authority">條款與後台權限管理</option>
+                        <option value="./admin.html#admin-messages">發送站內訊息</option>
                         <option value="./admin.html#admin-category">分類管理</option>
                     </select>
                 </div>
-                <a href="#admin-lifeservice-store-info" class="ui-btn ui-btn-inline purple-btn ui-corner-all float-right">
+                <a href="#admin-add-lifeservice-store" class="ui-btn ui-btn-inline purple-btn ui-corner-all float-right">
                     新增店家
                 </a>
                 <div class="clearfix"></div>
-                <div class="life_store_block">
-                    <div class="ui-field-contain ">
-                        <label class="item_title" for="life_category"><strong>店家名稱：</strong></label>
-                        <input type="text" name="life_category" class="" id="life_category" value="美甲概念館">
-                    </div>
-                    <div class="store-pic-block">
-                        <div class="left-block">
-                            <a href="#admin-lifeservice-store-info" class="ui-btn ui-corner-all green-btn">
-                                編輯店家資訊
-                            </a>
-                            <button id="msg-submit-btn" class="ui-btn ui-corner-all orange-btn" type="button">刪除</button>
-                        </div>
-                        <div class="img-block">
-                            <input type="image" class="store-pic" src="./img/service.jpg" />
-                            <input type="file" class="store-pic-input" />
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="life_store_block">
-                    <div class="ui-field-contain ">
-                        <label class="item_title" for="life_category"><strong>店家名稱：</strong></label>
-                        <input type="text" name="life_category" class="" id="life_category" value="美甲概念館">
-                    </div>
-                    <div class="store-pic-block">
-                        <div class="left-block">
-                            <a href="#admin-lifeservice-store-info" class="ui-btn ui-corner-all green-btn">
-                                編輯店家資訊
-                            </a>
-                            <button id="msg-submit-btn" class="ui-btn ui-corner-all orange-btn" type="button">刪除</button>
-                        </div>
-                        <div class="img-block">
-                            <input type="image" class="store-pic" src="./img/service.jpg" />
-                            <input type="file" class="store-pic-input" />
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-                <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn">完成</button>
+                <!-- dynamic content -->
             </div>
         </div>
 
         <!-- admin lifeservice store info -->
-        <div data-role="page" id="admin-lifeservice-store-info" data-theme="a" data-title="admin-lifeservice" class="admin-page">
+        <div data-role="page" id="admin-lifeservice-store-info" data-theme="a" data-page="admin-lifeservice" class="admin-page">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
@@ -800,53 +565,151 @@
             <!-- /header -->
             <div data-role="main" class="ui-content" id="admin-lifeservice-store-info-main">
                 <br>
-                <span class="item_title">上傳圖片：</span>
-                <input type="file" data-clear-btn="true" name="file-2" id="file-2" value="">
-                <input type="file" data-clear-btn="true" name="file-2" id="file-2" value="">
-                <input type="file" data-clear-btn="true" name="file-2" id="file-2" value="">
-                <input type="file" data-clear-btn="true" name="file-2" id="file-2" value="">
-                <input type="file" data-clear-btn="true" name="file-2" id="file-2" value="">
-                <div class="ui-field-contain ">
-                    <label class="item_title" for="textinput-1">店名</label>
-                    <input type="text" name="textinput-1" class="" id="textinput-1" value="紐吧">
+                <form id="edit-lifeservice-form" method="post" enctype="multipart/form-data">
+                    <span class="item_title">上傳圖片：</span>
+                    <input type="file" data-clear-btn="true" name="pic1" id="pic1" value="">
+                    <input type="file" data-clear-btn="true" name="pic2" id="pic2" value="">
+                    <input type="file" data-clear-btn="true" name="pic3" id="pic3" value="">
+                    <input type="file" data-clear-btn="true" name="pic4" id="pic4" value="">
+                    <input type="file" data-clear-btn="true" name="pic5" id="pic5" value="">
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="name-input">店名</label>
+                        <input type="text" name="name-input" class="" id="name-input" value="">
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="tel-input">電話</label>
+                        <input type="tel" name="tel-input" class="" id="tel-input" value="">
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="country-select">所在國家</label>
+                        <select name="country-select" id="life_country" class="country-select">
+                            <!-- dynamic content -->
+                        </select>
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="area-select">所在區域</label>
+                        <select name="area-select" id="life_area" class="area-select">
+                            <!-- dynamic content -->
+                        </select>
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="address-input">地址</label>
+                        <input type="text" name="address-input" class="" id="address-input" value="">
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="textinput-9">大頭圖</label>
+                        <input type="file" data-clear-btn="true" name="contact_pic" id="contact_pic">
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="contact-input">預約人</label>
+                        <input type="text" name="contact-input" class="" id="contact-input" value="">
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="contact-line-input">LINE</label>
+                        <input type="text" name="contact-line-input" class="" id="contact-line-input" value="">
+                    </div>
+                    <span class="item_title">營業時間：</span>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="opentime1">第一行</label>
+                        <input type="text" name="opentime1" class="" id="opentime1" value="">
+                        <label class="item_title" for="opentime2">第二行</label>
+                        <input type="text" name="opentime2" class="" id="opentime2" value="">
+                    </div>
+                    <label class="item_title" for="consume_content">消費介紹：</label>
+                    <textarea wrap="virtual" name="consume_content" id="consume_content" rows="8"></textarea>
+                    <label class="item_title" for="promo_content">優惠活動：</label>
+                    <textarea wrap="virtual" name="promo_content" id="promo_content" rows="8"></textarea>
+                    <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn">完成</button>
+                </form>
+
+            </div>
+        </div>
+
+        <!-- admin lifeservice store info -->
+        <div data-role="page" id="admin-add-lifeservice-store" data-theme="a" data-page="admin-lifeservice" class="admin-page">
+            <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
+                <div style="width:100%; text-align:center;">
+                    <a href="#menu-panel" class="ui-link">
+                        <div id="menu-btn" class="header-btn header-link left-link"></div>
+                    </a>
+                    <span class="page-title">管理者後台</span>
+                    <a href="#admin-lifeservice-store" class="ui-link">
+                        <div class="header-btn header-link right-link" style="width:auto">取消</div>
+                    </a>
                 </div>
-                <div class="ui-field-contain ">
-                    <label class="item_title" for="textinput-4">電話</label>
-                    <input type="tel" name="textinput-4" class="" id="textinput-4" value="02-28569754">
-                </div>
-                <div class="ui-field-contain ">
-                    <label class="item_title" for="textinput-5">地址</label>
-                    <input type="text" name="textinput-5" class="" id="textinput-5" value="台中市北屯區安順東九街221號5F">
-                </div>
-                <span class="item_title">營業時間：</span>
-                <div class="ui-field-contain ">
-                    <label class="item_title" for="textinput-2">第一行</label>
-                    <input type="text" name="textinput-2" class="" id="textinput-2" value="ＸＸＸ">
-                    <label class="item_title" for="textinput-2">第二行</label>
-                    <input type="text" name="textinput-2" class="" id="textinput-2" value="ＸＸＸ">
-                </div>
-                <div class="ui-field-contain ">
-                    <label class="item_title" for="textinput-2">預約人</label>
-                    <input type="text" name="textinput-2" class="" id="textinput-2" value="ＸＸＸ">
-                </div>
-                <div class="ui-field-contain ">
-                    <label class="item_title" for="textinput-9">大頭圖</label>
-                    <input type="file" data-clear-btn="true" name="file-1" id="file-1" value="">
-                </div>
-                <div class="ui-field-contain ">
-                    <label class="item_title" for="textinput-5">LINE</label>
-                    <input type="text" name="textinput-5" class="" id="textinput-5" value="aaa123">
-                </div>
-                <label class="item_title" for="news_content">消費介紹：</label>
-                <textarea wrap="virtual" name="news_content" rows="8" cols="40"></textarea>
-                <label class="item_title" for="news_content">優惠活動：</label>
-                <textarea wrap="virtual" name="news_content" rows="8" cols="40"></textarea>
-                <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn">完成</button>
+            </div>
+            <!-- /header -->
+            <div data-role="main" class="ui-content" id="admin-add-lifeservice-store-main">
+                <br>
+                <form id="add-lifeservice-form" method="post" enctype="multipart/form-data">
+                    <span class="item_title">上傳圖片：</span>
+                    <input type="file" data-clear-btn="true" name="pic1" id="pic1" value="">
+                    <input type="file" data-clear-btn="true" name="pic2" id="pic2" value="">
+                    <input type="file" data-clear-btn="true" name="pic3" id="pic3" value="">
+                    <input type="file" data-clear-btn="true" name="pic4" id="pic4" value="">
+                    <input type="file" data-clear-btn="true" name="pic5" id="pic5" value="">
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="name-input">店名</label>
+                        <input type="text" name="name-input" class="" id="name-input" value="">
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="tel-input">電話</label>
+                        <input type="tel" name="tel-input" class="" id="tel-input" value="">
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="country-select">所在國家</label>
+                        <select name="country-select" id="country-select" class="country-select">
+                            <!-- dynamic content -->
+                        </select>
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="area-select">所在區域</label>
+                        <select name="area-select" id="area-select" class="area-select">
+                            <!-- dynamic content -->
+                        </select>
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="address-input">地址</label>
+                        <input type="text" name="address-input" class="" id="address-input" value="">
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="website-input">官方網站</label>
+                        <input type="text" name="website-input" class="" id="website-input" value="">
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="slogan-input">店家標語</label>
+                        <input type="text" name="slogan-input" class="" id="slogan-input" value="">
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="textinput-9">大頭圖</label>
+                        <input type="file" data-clear-btn="true" name="contact_pic" id="contact_pic">
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="contact-input">預約人</label>
+                        <input type="text" name="contact-input" class="" id="contact-input" value="">
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="contact-line-input">LINE</label>
+                        <input type="text" name="contact-line-input" class="" id="contact-line-input" value="">
+                    </div>
+                    <span class="item_title">營業時間：</span>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="opentime1">第一行</label>
+                        <input type="text" name="opentime1" class="" id="opentime1" value="">
+                        <label class="item_title" for="opentime2">第二行</label>
+                        <input type="text" name="opentime2" class="" id="opentime2" value="">
+                    </div>
+                    <label class="item_title" for="consume_content">消費介紹：</label>
+                    <textarea wrap="virtual" name="consume_content" id="consume_content" rows="8"></textarea>
+                    <label class="item_title" for="promo_content">優惠活動：</label>
+                    <textarea wrap="virtual" name="promo_content" id="promo_content" rows="8"></textarea>
+                    <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn">完成</button>
+                </form>
             </div>
         </div>
 
         <!-- admin recommend -->
-        <div data-role="page" id="admin-recommend" data-theme="a" data-title="admin-recommend" class="admin-page">
+        <div data-role="page" id="admin-recommend" data-theme="a" data-page="admin-recommend" class="admin-page">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
@@ -861,29 +724,26 @@
                     <select class="navigateToPage">
                         <option value="./admin.html#admin-member">會員管理</option>
                         <option value="./admin.html#admin-home">首頁管理</option>
-                        <option value="./admin.html#admin-lifeservice">生活服務管理</option>
+                        <option value="./admin.html#admin-lifeservice">旅遊資訊管理</option>
                         <option value="./admin.html#admin-recommend" selected>推薦記錄管理</option>
-                        <option value="./admin.html#admin-news">發佈消息</option>
+                        <option value="./admin.html#admin-news">最新消息管理</option>
                         <option value="./admin.html#admin-plan">刊登方案管理</option>
-                        <option value="./admin.html#admin-authority">管理者權限</option>
-                        <option value="./admin.html#admin-messages">站內消息</option>
+                        <option value="./admin.html#admin-authority">條款與後台權限管理</option>
+                        <option value="./admin.html#admin-messages">發送站內訊息</option>
                         <option value="./admin.html#admin-category">分類管理</option>
                     </select>
                 </div>
                 <div class="area_block">
                     <div class="ui-field-contain">
                         <label class="area_title" for="select-native-1">國家</label>
-                        <select name="select-native-1" id="select-native-1" data-inline="true" data-mini="true">
-                            <option value="">台灣</option>
-                            <option value="">中國</option>
-                            <option value="">日本</option>
+                        <select class="country-select" id="country-select" data-inline="true" data-mini="true">
+                            <!-- dynamic content -->
                         </select>
-                        <label class="area_title" for="select-native-2">地區</label>
-                        <select name="select-native-2" id="select-native-2" data-inline="true" data-mini="true">
-                            <option value="">台北</option>
-                            <option value="">台南</option>
-                            <option value="">高雄</option>
+                        <label class="area_title" for="area-select">地區</label>
+                        <select class="area-select" name="area-select" id="area-select" data-inline="true" data-mini="true">
+                            <!-- dynamic content -->
                         </select>
+                        <button id="serach-btn" type="button" class="ui-btn ui-corner-all ui-btn-inline no-bg-bd purple-btn">查詢</button>
                     </div>
                 </div>
                 <div class="ui-navbar" role="navigation">
@@ -892,13 +752,15 @@
                         <li class="ui-block-b"><a href="#admin-recommend-redeem" class="ui-btn">兌換禮品管理</a></li>
                     </ul>
                 </div>
-                <div id="normal" class="ui-body-d ui-content member-list">
+                <div id="" class="ui-body-d ui-content member-list">
                     <div class="list_search">
-                        <label class="area_title" for="textinput-1">搜尋名單</label>
-                        <input type="text" name="search" class="" id="search" placeholder="姓名或日期(20160520)" data-inline="true">
-                        <button type="submit" id="submit-1" class="ui-btn ui-corner-all purple-btn">GO</button>
+                        <label class="area_title" for="search">搜尋名單</label>
+                        <form>
+                            <input type="text" name="search" class="" id="rec-search" placeholder="姓名或時間" data-inline="true" data-type="search">
+                        </form>
                     </div>
-                    <table class="list_table">
+                    <table id="rec_list_table" class="record_list_table" data-filter="true" data-input="#rec-search">
+                        <caption>推薦人列表</caption>
                         <thead>
                             <tr>
                                 <th>註冊時間</th>
@@ -907,62 +769,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>2016/07/14 20:15</td>
-                                <td>翁水噹</td>
-                                <td>
-                                    <a href="#admin-recommend-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2016/07/14 20:15</td>
-                                <td>翁水噹</td>
-                                <td>
-                                    <a href="#admin-recommend-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2016/07/14 20:15</td>
-                                <td>翁水噹</td>
-                                <td>
-                                    <a href="#admin-recommend-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2016/07/14 20:15</td>
-                                <td>翁水噹</td>
-                                <td>
-                                    <a href="#admin-recommend-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2016/07/14 20:15</td>
-                                <td>翁水噹</td>
-                                <td>
-                                    <a href="#admin-recommend-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2016/07/14 20:15</td>
-                                <td>翁水噹</td>
-                                <td>
-                                    <a href="#admin-recommend-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2016/07/14 20:15</td>
-                                <td>翁水噹</td>
-                                <td>
-                                    <a href="#admin-recommend-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2016/07/14 20:15</td>
-                                <td>翁水噹</td>
-                                <td>
-                                    <a href="#admin-recommend-detail" class="ui-btn ui-corner-all ui-btn-inline ui-mini purple-btn">進入</a>
-                                </td>
-                            </tr>
+                            <!-- dynamic content -->
                         </tbody>
                     </table>
                 </div>
@@ -970,13 +777,16 @@
         </div>
 
         <!-- admin recommend detail-->
-        <div data-role="page" id="admin-recommend-detail" data-theme="a" data-title="admin-recommend" class="admin-page">
+        <div data-role="page" id="admin-recommend-detail" data-theme="a" data-page="admin-recommend" class="admin-page">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
                         <div id="menu-btn" class="header-btn header-link left-link"></div>
                     </a>
                     <span class="page-title">管理者後台</span>
+                    <a href="#admin-recommend" class="ui-link">
+                        <div class="header-btn header-link right-link" style="width:auto">返回</div>
+                    </a>
                 </div>
             </div>
             <!-- /header -->
@@ -985,58 +795,29 @@
                     <select class="navigateToPage">
                         <option value="./admin.html#admin-member">會員管理</option>
                         <option value="./admin.html#admin-home">首頁管理</option>
-                        <option value="./admin.html#admin-lifeservice">生活服務管理</option>
+                        <option value="./admin.html#admin-lifeservice">旅遊資訊管理</option>
                         <option value="./admin.html#admin-recommend" selected>推薦記錄管理</option>
-                        <option value="./admin.html#admin-news">發佈消息</option>
+                        <option value="./admin.html#admin-news">最新消息管理</option>
                         <option value="./admin.html#admin-plan">刊登方案管理</option>
-                        <option value="./admin.html#admin-authority">管理者權限</option>
-                        <option value="./admin.html#admin-messages">站內消息</option>
+                        <option value="./admin.html#admin-authority">條款與後台權限管理</option>
+                        <option value="./admin.html#admin-messages">發送站內訊息</option>
                         <option value="./admin.html#admin-category">分類管理</option>
                     </select>
                 </div>
-                <div class="ui-navbar" role="navigation">
-                    <ul id="rec_page" class="page-content-nav ui-grid-a">
-                        <li class="ui-block-a"><a href="#admin-recommend" data-ajax="false" class="ui-btn active">推薦記錄名單</a></li>
-                        <li class="ui-block-b"><a href="#admin-recommend-redeem" class="ui-btn">兌換禮品管理</a></li>
-                    </ul>
-                </div>
-                <span class="float-left" style="font-size:20px;font-weight:bold;margin-top:8px;">翁水噹</span>
-                <button type="button" id="download_list" class="ui-btn ui-btn-inline ui-corner-all purple-btn float-right">下載明細</button>
-                <div class="clearfix"></div>
-                <div id="normal" class="ui-body-d ui-content member-list">
-                    <div style="font-size:18px;color:#AA3C89">兌換記錄</div>
-                    <table class="list_table">
+                <p id="referrer_name" style="font-size:20px;font-weight:bold;"></p>
+                <!-- <button type="button" id="download_record_list" class="ui-btn ui-btn-inline ui-corner-all purple-btn float-right">下載明細</button> -->
+                <!-- <div class="clearfix"></div> -->
+                <div id="" class="ui-body-d ui-content member-list">
+                    <div style="font-size:18px;color:#AA3C89">推薦清單(共 <span id="recommend_total"></span> 人)</div>
+                    <table id="member_rec_list" class="record_list_table">
+                        <thead>
+                            <tr>
+                                <th>被推薦人</th>
+                                <th>註冊時間</th>
+                            </tr>
+                        </thead>
                         <tbody>
-                            <tr>
-                                <td>(10)屈臣氏1000元禮券</td>
-                                <td>兌換時間：2016/07/14 20:15</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <br>
-                    <div style="font-size:18px;color:#AA3C89">推薦清單(共 15 人)</div>
-                    <table class="list_table">
-                        <tbody>
-                            <tr>
-                                <td>翁水噹</td>
-                                <td>註冊時間：2016/07/14 20:15</td>
-                            </tr>
-                            <tr>
-                                <td>翁水噹</td>
-                                <td>註冊時間：2016/07/14 20:15</td>
-                            </tr>
-                            <tr>
-                                <td>翁水噹</td>
-                                <td>註冊時間：2016/07/14 20:15</td>
-                            </tr>
-                            <tr>
-                                <td>翁水噹</td>
-                                <td>註冊時間：2016/07/14 20:15</td>
-                            </tr>
-                            <tr>
-                                <td>翁水噹</td>
-                                <td>註冊時間：2016/07/14 20:15</td>
-                            </tr>
+                            <!-- dynamic content -->
                         </tbody>
                     </table>
                 </div>
@@ -1044,7 +825,7 @@
         </div>
 
         <!-- admin redeem -->
-        <div data-role="page" id="admin-recommend-redeem" data-theme="a" data-title="admin-recommend" class="admin-page">
+        <div data-role="page" id="admin-recommend-redeem" data-theme="a" data-page="admin-recommend" class="admin-page">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
@@ -1059,31 +840,27 @@
                     <select class="navigateToPage">
                         <option value="./admin.html#admin-member">會員管理</option>
                         <option value="./admin.html#admin-home">首頁管理</option>
-                        <option value="./admin.html#admin-lifeservice">生活服務管理</option>
+                        <option value="./admin.html#admin-lifeservice">旅遊資訊管理</option>
                         <option value="./admin.html#admin-recommend" selected>推薦記錄管理</option>
-                        <option value="./admin.html#admin-news">發佈消息</option>
+                        <option value="./admin.html#admin-news">最新消息管理</option>
                         <option value="./admin.html#admin-plan">刊登方案管理</option>
-                        <option value="./admin.html#admin-authority">管理者權限</option>
-                        <option value="./admin.html#admin-messages">站內消息</option>
+                        <option value="./admin.html#admin-authority">條款與後台權限管理</option>
+                        <option value="./admin.html#admin-messages">發送站內訊息</option>
                         <option value="./admin.html#admin-category">分類管理</option>
                     </select>
                 </div>
-                <div class="area_block">
+                <!-- <div class="area_block">
                     <div class="ui-field-contain">
                         <label class="area_title" for="select-native-1">國家</label>
-                        <select name="select-native-1" id="select-native-1" data-inline="true" data-mini="true">
-                            <option value="">台灣</option>
-                            <option value="">中國</option>
-                            <option value="">日本</option>
-                        </select>
-                        <label class="area_title" for="select-native-2">地區</label>
-                        <select nat name="select-native-2" id="select-native-2" data-inline="true" data-mini="true">
-                            <option value="">台北</option>
-                            <option value="">台南</option>
-                            <option value="">高雄</option>
-                        </select>
+                        <select class="country-select" id="select-native-1" data-inline="true" data-mini="true"> -->
+                <!-- dynamic content -->
+                <!-- </select>
+                        <label class="area_title" for="area-select">地區</label>
+                        <select class="area-select" name="area-select" id="area-select" data-inline="true" data-mini="true"> -->
+                <!-- dynamic content -->
+                <!-- </select>
                     </div>
-                </div>
+                </div> -->
                 <div class="ui-navbar" role="navigation">
                     <ul id="rec_page" class="page-content-nav ui-grid-a">
                         <li class="ui-block-a"><a href="#admin-recommend" class="ui-btn">推薦記錄名單</a></li>
@@ -1094,101 +871,56 @@
                     新增禮品
                 </a>
                 <div class="clearfix"></div>
-                <div class="redeem_item_block">
-                    <div class="ui-field-contain ">
-                        <label class="item_title" for="redeem_item"><strong>禮品名稱：</strong></label>
-                        <input type="text" name="redeem_item" class="" id="redeem_item" value="全聯禮券100元">
-                    </div>
-                    <div class="redeem-pic-block">
-                        <div class="left-block">
-                            <div class="ui-field-contain ">
-                                <label class="item_title" for=""><strong>扣除點數：</strong></label>
-                                <input type="text" name="" class="" id="" value="10">
-                            </div>
-                        </div>
-                        <div class="img-block">
-                            <input type="image" class="redeem-pic" src="./img/redeem_item.jpg" />
-                            <input type="file" class="redeem-pic-input" />
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
+                <div id="redeem_list">
+                    <!-- dynamic content -->
                 </div>
-                <div class="redeem_item_block">
-                    <div class="ui-field-contain ">
-                        <label class="item_title" for="redeem_item"><strong>禮品名稱：</strong></label>
-                        <input type="text" name="redeem_item" class="" id="redeem_item" value="全聯禮券100元">
-                    </div>
-                    <div class="redeem-pic-block">
-                        <div class="left-block">
-                            <div class="ui-field-contain ">
-                                <label class="item_title" for=""><strong>扣除點數：</strong></label>
-                                <input type="text" name="" class="" id="" value="15">
-                            </div>
-                        </div>
-                        <div class="img-block">
-                            <input type="image" class="redeem-pic" src="./img/redeem_item.jpg" />
-                            <input type="file" class="redeem-pic-input" />
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-                <div class="redeem_item_block">
-                    <div class="ui-field-contain ">
-                        <label class="item_title" for="redeem_item"><strong>禮品名稱：</strong></label>
-                        <input type="text" name="redeem_item" class="" id="redeem_item" value="全聯禮券100元">
-                    </div>
-                    <div class="redeem-pic-block">
-                        <div class="left-block">
-                            <div class="ui-field-contain ">
-                                <label class="item_title" for=""><strong>扣除點數：</strong></label>
-                                <input type="text" name="" class="" id="" value="20">
-                            </div>
-                        </div>
-                        <div class="img-block">
-                            <input type="image" class="redeem-pic" src="./img/redeem_item.jpg" />
-                            <input type="file" class="redeem-pic-input" />
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-                <div class="redeem_item_block">
-                    <div class="ui-field-contain ">
-                        <label class="item_title" for="redeem_item"><strong>禮品名稱：</strong></label>
-                        <input type="text" name="redeem_item" class="" id="redeem_item" value="全聯禮券100元">
-                    </div>
-                    <div class="redeem-pic-block">
-                        <div class="left-block">
-                            <div class="ui-field-contain ">
-                                <label class="item_title" for=""><strong>扣除點數：</strong></label>
-                                <input type="text" name="" class="" id="" value="20">
-                            </div>
-                        </div>
-                        <div class="img-block">
-                            <input type="image" class="redeem-pic" src="./img/redeem_item.jpg" />
-                            <input type="file" class="redeem-pic-input" />
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-                <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn">完成</button>
             </div>
             <div id="add_redeem_item" class="msg-popup ui-corner-all" data-role="popup" data-position-to="window" data-transition="pop" data-theme="none" data-shadow="false" data-overlay-theme="b" data-dismissible="false">
-                <form>
+                <form id="redeem-add-form" enctype="multipart/form-data">
                     <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
                     <div style="padding:10px 20px;">
                         <h3>新增禮品</h3>
                         <div style="color:white;">
-                            禮品名稱：
+                            禮品標題：
                         </div>
-                        <input type="text" name="club_cat" class="" id="club_cat" value="">
+                        <input type="text" name="redeem_title" class="" id="redeem_title" value="" required="">
+                        <div style="color:white;">
+                            禮品內容：
+                        </div>
+                        <input type="text" name="redeem_description" class="" id="redeem_description" value="" required="">
                         <div style="color:white;">
                             扣除點數：
                         </div>
-                        <input type="text" name="club_cat" class="" id="club_cat" value="">
+                        <input type="text" name="redeem_point" class="" id="redeem_point" value="" required="">
                         <div style="color:white;">
                             圖片：
                         </div>
-                        <input type="file" name="name" value="">
+                        <input type="file" name="redeem_pic" value="" required="">
+                        <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn send-btn">送出</button>
+                    </div>
+                </form>
+            </div>
+            <div id="edit_redeem_item" class="msg-popup ui-corner-all" data-role="popup" data-position-to="window" data-transition="pop" data-theme="none" data-shadow="false" data-overlay-theme="b" data-dismissible="false">
+                <form id="redeem-edit-form" enctype="multipart/form-data">
+                    <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+                    <div style="padding:10px 20px;">
+                        <h3>編輯禮品項目</h3>
+                        <div style="color:white;">
+                            禮品標題：
+                        </div>
+                        <input type="text" name="redeem_title" class="" id="redeem_title" value="" required="">
+                        <div style="color:white;">
+                            禮品內容：
+                        </div>
+                        <input type="text" name="redeem_description" class="" id="redeem_description" value="" required="">
+                        <div style="color:white;">
+                            扣除點數：
+                        </div>
+                        <input type="text" name="redeem_point" class="" id="redeem_point" value="" required="">
+                        <div style="color:white;">
+                            圖片：
+                        </div>
+                        <input type="file" name="redeem_pic" value="">
                         <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn send-btn">送出</button>
                     </div>
                 </form>
@@ -1196,7 +928,7 @@
         </div>
 
         <!-- admin news -->
-        <div data-role="page" id="admin-news" data-theme="a" data-title="admin-news" class="admin-page">
+        <div data-role="page" id="admin-news" data-theme="a" data-page="admin-news" class="admin-page">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
@@ -1211,89 +943,66 @@
                     <select class="navigateToPage">
                         <option value="./admin.html#admin-member">會員管理</option>
                         <option value="./admin.html#admin-home">首頁管理</option>
-                        <option value="./admin.html#admin-lifeservice">生活服務管理</option>
+                        <option value="./admin.html#admin-lifeservice">旅遊資訊管理</option>
                         <option value="./admin.html#admin-recommend">推薦記錄管理</option>
-                        <option value="./admin.html#admin-news" selected>發佈消息</option>
+                        <option value="./admin.html#admin-news" selected>最新消息管理</option>
                         <option value="./admin.html#admin-plan">刊登方案管理</option>
-                        <option value="./admin.html#admin-authority">管理者權限</option>
-                        <option value="./admin.html#admin-messages">站內消息</option>
+                        <option value="./admin.html#admin-authority">條款與後台權限管理</option>
+                        <option value="./admin.html#admin-messages">發送站內訊息</option>
                         <option value="./admin.html#admin-category">分類管理</option>
                     </select>
                 </div>
-                <a href="#admin-news-edit" class="ui-btn ui-corner-all ui-btn-inline purple-btn float-right">新增消息</a>
+                <a href="#admin-news-add" class="ui-btn ui-corner-all ui-btn-inline purple-btn float-right">新增消息</a>
                 <div class="clearfix"></div>
-                <div class="news_info_block">
-                    <div class="news_title">(最新消息標題)</div>
-                    <div class="news_during">
-                        <div class="ui-field-contain">
-                            <label class="area_title" for="select-native-1">上架時間</label>
-                            <input type="date" name="news_start" class="" id="news_start" value="2016-01-01">
-                        </div>
-                        <div class="ui-field-contain">
-                            <label class="area_title" for="select-native-2">下架時間</label>
-                            <input type="date" name="news_end" class="" id="news_end" value="2016-12-31">
-                        </div>
-                    </div>
-                    <div class="news_operation">
-                        <div class="ui-field-contain">
-                            <label class="area_title" for="select-native-1">排序</label>
-                            <input type="number" name="news_order" class="" id="news_order" value="1">
-                            <button type="button" class="ui-btn ui-corner-all ui-btn-inline">刪除</button>
-                            <a href="#admin-news-edit" class="ui-btn ui-corner-all ui-btn-inline">編輯</a>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
+                <!-- dynamic content -->
+            </div>
+        </div>
+
+        <!-- admin news add -->
+        <div data-role="page" id="admin-news-add" data-theme="a" data-page="admin-news" class="admin-page">
+            <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
+                <div style="width:100%; text-align:center;">
+                    <a href="#menu-panel" class="ui-link">
+                        <div id="menu-btn" class="header-btn header-link left-link"></div>
+                    </a>
+                    <span class="page-title">管理者後台</span>
+                    <a href="#admin-news" class="ui-link">
+                        <div class="header-btn header-link right-link" style="width:auto">取消</div>
+                    </a>
                 </div>
-                <div class="news_info_block">
-                    <div class="news_title">推薦朋友送禮券</div>
-                    <div class="news_during">
-                        <div class="ui-field-contain">
-                            <label class="area_title" for="select-native-1">上架時間</label>
-                            <input type="date" name="news_start" class="" id="news_start" value="2016-07-01">
-                        </div>
-                        <div class="ui-field-contain">
-                            <label class="area_title" for="select-native-2">下架時間</label>
-                            <input type="date" name="news_end" class="" id="news_end" value="2016-10-31">
-                        </div>
+            </div>
+            <!-- /header -->
+            <div data-role="main" class="ui-content" id="admin-news-add-main">
+                <form id="news-add-form" enctype="multipart/form-data">
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="news_title"><strong>標題：</strong></label>
+                        <input type="text" name="news_title" class="" id="news_title" value="" required="">
                     </div>
-                    <div class="news_operation">
-                        <div class="ui-field-contain">
-                            <label class="area_title" for="select-native-1">排序</label>
-                            <input type="number" name="news_order" class="" id="news_order" value="2">
-                            <button type="button" class="ui-btn ui-corner-all ui-btn-inline">刪除</button>
-                            <a href="#admin-news-edit" class="ui-btn ui-corner-all ui-btn-inline">編輯</a>
-                            <div class="clearfix"></div>
-                        </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="news_start">上架時間：</label>
+                        <input type="date" name="news_start" class="" id="news_start" value="" required="">
                     </div>
-                </div>
-                <div class="news_info_block">
-                    <div class="news_title">推薦朋友送禮券</div>
-                    <div class="news_during">
-                        <div class="ui-field-contain">
-                            <label class="area_title" for="select-native-1">上架時間</label>
-                            <input type="date" name="news_start" class="" id="news_start" value="2016-01-01">
-                        </div>
-                        <div class="ui-field-contain">
-                            <label class="area_title" for="select-native-2">下架時間</label>
-                            <input type="date" name="news_end" class="" id="news_end" value="2016-01-31">
-                        </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="news_end">下架時間：</label>
+                        <input type="date" name="news_end" class="" id="news_end" value="" required="">
                     </div>
-                    <div class="news_operation">
-                        <div class="ui-field-contain">
-                            <label class="area_title" for="select-native-1">排序</label>
-                            <input type="number" name="news_order" class="" id="news_order" value="3">
-                            <button type="button" class="ui-btn ui-corner-all ui-btn-inline">刪除</button>
-                            <a href="#admin-news-edit" class="ui-btn ui-corner-all ui-btn-inline">編輯</a>
-                            <div class="clearfix"></div>
-                        </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="news_order">排序：</label>
+                        <input type="number" name="news_order" class="" id="news_order" value="1" min="1" required="">
                     </div>
-                </div>
-                <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn">送出</button>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="news_pic"><strong>圖片：</strong></label>
+                        <input type="file" name="news_pic" class="" id="news_pic" value="" required="">
+                    </div>
+                    <label class="item_title" for="news_content"><strong>內容：</strong></label>
+                    <textarea wrap="virtual" name="news_content" rows="8" required=""></textarea>
+                    <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn">送出</button>
+                </form>
             </div>
         </div>
 
         <!-- admin news edit -->
-        <div data-role="page" id="admin-news-edit" data-theme="a" data-title="admin-news" class="admin-page">
+        <div data-role="page" id="admin-news-edit" data-theme="a" data-page="admin-news" class="admin-page">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
@@ -1307,22 +1016,40 @@
             </div>
             <!-- /header -->
             <div data-role="main" class="ui-content" id="admin-news-edit-main">
-                <div class="ui-field-contain">
-                    <label class="item_title" for="news_title"><strong>標題：</strong></label>
-                    <input type="text" name="news_title" class="" id="news_title" value="">
-                </div>
-                <div class="ui-field-contain">
-                    <label class="item_title" for="news_pic"><strong>圖片：</strong></label>
-                    <input type="file" name="news_pic" class="" id="news_pic" value="">
-                </div>
-                <label class="item_title" for="news_content"><strong>內容：</strong></label>
-                <textarea wrap="virtual" name="news_content" rows="8" cols="40"></textarea>
-                <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn">完成</button>
+                <form id="news-edit-form" enctype="multipart/form-data">
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="news_edit_title"><strong>標題：</strong></label>
+                        <input type="text" name="news_edit_title" class="" id="news_edit_title" value="" required="">
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="news_edit_start">上架時間：</label>
+                        <input type="date" name="news_edit_start" class="" id="news_edit_start" value="" required="">
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="news_edit_end">下架時間：</label>
+                        <input type="date" name="news_edit_end" class="" id="news_edit_end" value="" required="">
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="news_edit_order">排序：</label>
+                        <input type="number" name="news_edit_order" class="" id="news_edit_order" value="0" min="0" required="">
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="current_pic"><strong>當前圖片：</strong></label>
+                        <span id="current_pic"></span>
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="news_edit_pic"><strong>更改圖片：</strong></label>
+                        <input type="file" name="news_edit_pic" class="" id="news_edit_pic" value="">
+                    </div>
+                    <label class="item_title" for="news_edit_content"><strong>內容：</strong></label>
+                    <textarea wrap="virtual" name="news_edit_content" rows="8" id="news_edit_content" required=""></teired=""></textarea>
+                    <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn">送出</button>
+                </form>
             </div>
         </div>
 
         <!-- admin plan -->
-        <div data-role="page" id="admin-plan" data-theme="a" data-title="admin-plan" class="admin-page">
+        <div data-role="page" id="admin-plan" data-theme="a" data-page="admin-plan" class="admin-page">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
@@ -1337,53 +1064,48 @@
                     <select class="navigateToPage">
                         <option value="./admin.html#admin-member">會員管理</option>
                         <option value="./admin.html#admin-home">首頁管理</option>
-                        <option value="./admin.html#admin-lifeservice">生活服務管理</option>
+                        <option value="./admin.html#admin-lifeservice">旅遊資訊管理</option>
                         <option value="./admin.html#admin-recommend">推薦記錄管理</option>
-                        <option value="./admin.html#admin-news">發佈消息</option>
+                        <option value="./admin.html#admin-news">最新消息管理</option>
                         <option value="./admin.html#admin-plan" selected>刊登方案管理</option>
-                        <option value="./admin.html#admin-authority">管理者權限</option>
-                        <option value="./admin.html#admin-messages">站內消息</option>
+                        <option value="./admin.html#admin-authority">條款與後台權限管理</option>
+                        <option value="./admin.html#admin-messages">發送站內訊息</option>
                         <option value="./admin.html#admin-category">分類管理</option>
                     </select>
                 </div>
                 <a href="#add_plan" class="ui-btn ui-btn-inline purple-btn ui-corner-all float-right" data-rel="popup">
                     新增方案
                 </a>
-                <div class="plan_block">
-                    <div class="ui-field-contain ">
-                        <label class="item_title" for="video"><strong>方案名稱：</strong></label>
-                        <input type="text" name="video" class="" id="video" value="A 方案">
-                    </div>
-                    <label class="item_title"><strong>方案內容：</strong></label>
-                    <textarea wrap="virtual" name="job_content" rows="4" cols="40" class="text-justify">優惠價： NT$10,000(原價 $12,000)。刊登店家介紹廣告、與求職者站內訊息聯絡、可刊登生活服務訊息三則。
-                    </textarea>
-                    <hr>
-                    <button id="plan-del-btn" class="ui-btn ui-btn-inline ui-corner-all orange-btn float-right" type="button">刪除</button>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="plan_block">
-                    <div class="ui-field-contain ">
-                        <label class="item_title" for="video"><strong>方案名稱：</strong></label>
-                        <input type="text" name="video" class="" id="video" value="B 方案">
-                    </div>
-                    <label class="item_title"><strong>方案內容：</strong></label>
-                    <textarea wrap="virtual" name="job_content" rows="4" cols="40" class="text-justify">優惠價： NT$10,000(原價 $12,000)。刊登店家介紹廣告、與求職者站內訊息聯絡、可刊登生活服務訊息三則。</textarea>
-                    <hr>
-                    <button id="plan-del-btn" class="ui-btn ui-btn-inline ui-corner-all orange-btn float-right" type="button">刪除</button>
-                    <div class="clearfix"></div>
-                    <label class="item_title"><strong>付款方式編輯：</strong></label>
-                    <textarea name="job_content" rows="4" cols="40" class="text-justify">一、請加入 Kelly Club 官方 Line，告知服務人員您的身分與店家， 如第一次刊登者，本公司會派專員到府拜訪，解說 APP 使用方式，如有任何疑問可在 Line 詢問或來電 0981-529246 全國服務專線，奔公司服務人員會為您解說。&#13;&#10; 二、選擇您想要之刊登方案並透過 Line 告知服務人員您的繳費帳號末四碼及匯款時間，審核後將立即開通刊登與使用權限。 銀行：合作金庫大里分行（006 &#13;&#10;戶名：賴鳳茹 &#13;&#10;帳號：1025872310343</textarea>
-                </div>
-                <button id="plan-submit-btn" class="ui-btn ui-corner-all" type="submit">送出</button>
+                <div class="clearfix"></div>
+                <!-- dynamic content -->
+                <form id="pay-method-form" class="policy-form" data-policy="pay_method">
+                    <label for="pay_method" class="item_title"><strong>付款方式編輯：</strong></label>
+                    <textarea name="policy_content" id="pay_method" rows="4" class="text-justify" requi="pay-method-form" class="policy-form" data-policy="pay_method">
+                    <label for="pay_method" class="item_title"><strong>付款方式編輯：</strong></label>
+                    <textarea name="policy_content" id="pay_method" rows="4" class="text-justify" required=""></textarea>
+                    <button id="plan-submit-btn" class="ui-btn ui-corner-all" type="submit">修改付款方式</button>
+                </form>
             </div>
             <div id="add_plan" class="msg-popup ui-corner-all" data-role="popup" data-position-to="window" data-transition="pop" data-theme="none" data-shadow="false" data-overlay-theme="b" data-dismissible="false">
-                <form>
+                <form id="add-plan-form">
                     <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
                     <div style="padding:10px 20px;">
-                        <h3>方案名稱</h3>
-                        <input type="text" name="plan_title" class="" id="textinput" value="">
+                        <h3>新增方案名稱</h3>
+                        <input type="text" name="plan_title" class="" id="textinput" value="" required="">
                         <h3>方案內容</h3>
-                        <textarea name="plan_content" rows="8" data-theme="a"></textarea>
+                        <textarea name="plan_content" rows="8" data-theme="a" required=""></textarea>
+                        <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn send-btn">送出</button>
+                    </div>
+                </form>
+            </div>
+            <div id="edit_plan" class="msg-popup ui-corner-all" data-role="popup" data-position-to="window" data-transition="pop" data-theme="none" data-shadow="false" data-overlay-theme="b" data-dismissible="false">
+                <form id="edit-plan-form">
+                    <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+                    <div style="padding:10px 20px;">
+                        <h3>編輯方案名稱</h3>
+                        <input type="text" name="plan_title" class="" id="plan_title" value="" required="">
+                        <h3>方案內容</h3>
+                        <textarea id="plan_content" name="plan_content" rows="8" data-theme="a" required=""></textarea>
                         <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn send-btn">送出</button>
                     </div>
                 </form>
@@ -1391,7 +1113,7 @@
         </div>
 
         <!-- admin authority -->
-        <div data-role="page" id="admin-authority" data-theme="a" data-title="admin-authority" class="admin-page">
+        <div data-role="page" id="admin-authority" data-theme="a" data-page="admin-authority" class="admin-page">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
@@ -1406,12 +1128,12 @@
                     <select class="navigateToPage">
                         <option value="./admin.html#admin-member">會員管理</option>
                         <option value="./admin.html#admin-home">首頁管理</option>
-                        <option value="./admin.html#admin-lifeservice">生活服務管理</option>
+                        <option value="./admin.html#admin-lifeservice">旅遊資訊管理</option>
                         <option value="./admin.html#admin-recommend">推薦記錄管理</option>
-                        <option value="./admin.html#admin-news">發佈消息</option>
+                        <option value="./admin.html#admin-news">最新消息管理</option>
                         <option value="./admin.html#admin-plan">刊登方案管理</option>
-                        <option value="./admin.html#admin-authority" selected>管理者權限</option>
-                        <option value="./admin.html#admin-messages">站內消息</option>
+                        <option value="./admin.html#admin-authority" selected>條款與後台權限管理</option>
+                        <option value="./admin.html#admin-messages">發送站內訊息</option>
                         <option value="./admin.html#admin-category">分類管理</option>
                     </select>
                 </div>
@@ -1428,124 +1150,105 @@
                     <div class="admin_type">
                         主管理者：
                     </div>
-                    <div class="admin_info">
-                        姓名：OOO
-                        <br> 帳號：qwerty@gamail.com
-                        <br>密碼：xxxxxxxxxx
+                    <div id="main_admin">
+                        <!-- dynamic content -->
                     </div>
-                    <a href="#edit_admin" class="ui-btn ui-corner-all ui-btn-inline purple-btn" data-rel="popup">編輯管理者</a>
-                    <div class="clearfix"></div>
                     <div class="admin_type">
                         次管理者：
-                        <a href="#add_admin" class="ui-btn ui-corner-all ui-btn-inline purple-btn float-right" style="margin:0;" data-rel="popup">新增次管理者</a>
+                        <a id="admin_add_btn" href="#add_admin" class="ui-btn ui-corner-all ui-btn-inline green-btn float-right" style="margin:0;" data-rel="popup">新增次管理者</a>
                     </div>
-                    <div class="vice_admin_block">
-                        <div class="admin_info">
-                            姓名：OOO
-                            <br> 帳號：qwerty@gamail.com
-                            <br>密碼：xxxxxxxxxx
-                        </div>
-                        <a href="#edit_admin" class="ui-btn ui-corner-all ui-btn-inline purple-btn" data-rel="popup">編輯管理者</a>
-                        <button id="msg-submit-btn" class="ui-btn ui-corner-all ui-btn-inline orange-btn float-right" type="button">刪除</button>
+                    <div id="sub_admin">
+                        <!-- dynamic content -->
                     </div>
-                    <div class="vice_admin_block">
-                        <div class="admin_info">
-                            姓名：OOO
-                            <br> 帳號：qwerty@gamail.com
-                            <br>密碼：xxxxxxxxxx
-                        </div>
-                        <a href="#edit_admin" class="ui-btn ui-corner-all ui-btn-inline purple-btn" data-rel="popup">編輯管理者</a>
-                        <button id="msg-submit-btn" class="ui-btn ui-corner-all ui-btn-inline orange-btn float-right" type="button">刪除</button>
-                    </div>
-
                 </div>
             </div>
-            <div id="about_edit" class="msg-popup ui-corner-all" data-role="popup" data-position-to="window" data-transition="pop" data-theme="none" data-shadow="false" data-overlay-theme="b" data-dismissible="false">
-                <form>
+            <div id="about_edit" class="policy-popup ui-corner-all" data-role="popup" data-position-to="window" data-transition="pop" data-theme="none" data-shadow="false" data-overlay-theme="b" data-dismissible="false">
+                <form class="policy-form" data-policy="about">
                     <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
                     <div style="padding:10px 20px;">
                         <h3>關於 Kelly Club</h3>
-                        <textarea name="about" rows="20" cols="40">（關於 Kelly Club 內容）</textarea>
+                        <textarea id="about_text" name="policy_content" rows="8" required="">（關於 Kelly Club 內容）</textarea>
                         <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn send-btn">完成</button>
                     </div>
                 </form>
             </div>
-            <div id="service_policy_edit" class="msg-popup ui-corner-all" data-role="popup" data-position-to="window" data-transition="pop" data-theme="none" data-shadow="false" data-overlay-theme="b" data-dismissible="false">
-                <form>
+            <div id="service_policy_edit" class="policy-popup ui-corner-all" data-role="popup" data-position-to="window" data-transition="pop" data-theme="none" data-shadow="false" data-overlay-theme="b" data-dismissible="false">
+                <form class="policy-form" data-policy="service">
                     <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
                     <div style="padding:10px 20px;">
                         <h3>服務條款</h3>
-                        <textarea name="about" rows="20" cols="40">（服務條款內容）</textarea>
+                        <textarea id="service_text" name="policy_content" rows="8" required="">（服務條款內容）</textarea>
                         <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn send-btn">完成</button>
                     </div>
                 </form>
             </div>
-            <div id="terms_of_use_edit" class="msg-popup ui-corner-all" data-role="popup" data-position-to="window" data-transition="pop" data-theme="none" data-shadow="false" data-overlay-theme="b" data-dismissible="false">
-                <form>
+            <div id="terms_of_use_edit" class="policy-popup ui-corner-all" data-role="popup" data-position-to="window" data-transition="pop" data-theme="none" data-shadow="false" data-overlay-theme="b" data-dismissible="false">
+                <form class="policy-form" data-policy="use">
                     <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
                     <div style="padding:10px 20px;">
                         <h3>使用規範</h3>
-                        <textarea name="about" rows="20" cols="40">（使用規範內容）</textarea>
+                        <textarea id="use_text" name="policy_content" rows="8" required="">（使用規範內容）</textarea>
                         <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn send-btn">完成</button>
                     </div>
                 </form>
             </div>
-            <div id="privacy_polocy_edit" class="msg-popup ui-corner-all" data-role="popup" data-position-to="window" data-transition="pop" data-theme="none" data-shadow="false" data-overlay-theme="b" data-dismissible="false">
-                <form>
+            <div id="privacy_polocy_edit" class="policy-popup ui-corner-all" data-role="popup" data-position-to="window" data-transition="pop" data-theme="none" data-shadow="false" data-overlay-theme="b" data-dismissible="false">
+                <form class="policy-form" data-policy="privacy">
                     <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
                     <div style="padding:10px 20px;">
                         <h3>個資保護政策</h3>
-                        <textarea name="about" rows="20" cols="40">（個資保護政策內容）</textarea>
+                        <textarea id="privacy_text" name="policy_content" rows="8" required="">（個資保護政策內容）</textarea>
                         <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn send-btn">完成</button>
                     </div>
                 </form>
             </div>
             <div id="add_admin" class="msg-popup ui-corner-all" data-role="popup" data-position-to="window" data-transition="pop" data-theme="none" data-shadow="false" data-overlay-theme="b" data-dismissible="false">
-                <form>
-                    <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
-                    <div style="padding:10px 20px;">
+                <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+                <div style="padding:10px 20px;">
+                    <form id="add-admin-form">
                         <h3>新增管理者</h3>
                         <div class="ui-field-contain">
-                            <label class="item_title" for="admin_name" style="color:white;">姓名</label>
-                            <input type="text" name="admin_name" class="" id="admin_name" placeholder="">
+                            <label for="admin_name" style="color:white;">姓名</label>
+                            <input type="text" name="rg_name" class="" id="rg_name" required="">
                         </div>
                         <div class="ui-field-contain">
-                            <label class="item_title" for="admin_email" style="color:white;">帳號</label>
-                            <input type="text" name="admin_email" class="" id="admin_email" placeholder="">
+                            <label for="admin_email" style="color:white;">帳號</label>
+                            <input type="text" name="rg_email" class="" id="rg_email" required="">
                         </div>
                         <div class="ui-field-contain">
-                            <label class="item_title" for="admin_pswd" style="color:white;">密碼</label>
-                            <input type="text" name="admin_pswd" class="" id="admin_pswd" placeholder="">
+                            <label for="admin_pswd" style="color:white;">密碼</label>
+                            <input type="password" name="rg_pswd" class="" id="rg_pswd" required="">
                         </div>
+                        <input type="hidden" name="member_type" class="" id="member_type" value="100">
                         <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn send-btn">完成</button>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
-            <div id="edit_admin" class="msg-popup ui-corner-all" data-role="popup" data-position-to="window" data-transition="pop" data-theme="none" data-shadow="false" data-overlay-theme="b" data-dismissible="false">
+            <!-- <div id="edit_admin" class="msg-popup ui-corner-all" data-role="popup" data-position-to="window" data-transition="pop" data-theme="none" data-shadow="false" data-overlay-theme="b" data-dismissible="false">
                 <form>
                     <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
                     <div style="padding:10px 20px;">
                         <h3>編輯管理者</h3>
                         <div class="ui-field-contain">
-                            <label class="item_title" for="admin_name" style="color:white;">姓名</label>
+                            <label for="admin_name" style="color:white;">姓名</label>
                             <input type="text" name="admin_name" class="" id="admin_name" placeholder="">
                         </div>
-                        <div class="ui-field-contain">
-                            <label class="item_title" for="admin_email" style="color:white;">帳號</label>
+                        <div class="ui-field-contain ui-dis">
+                            <label for="admin_email" style="color:white;">帳號</label>
                             <input type="text" name="admin_email" class="" id="admin_email" placeholder="">
                         </div>
                         <div class="ui-field-contain">
-                            <label class="item_title" for="admin_pswd" style="color:white;">密碼</label>
-                            <input type="text" name="admin_pswd" class="" id="admin_pswd" placeholder="">
+                            <label for="admin_pswd" style="color:white;">密碼</label>
+                            <input type="password" name="admin_pswd" class="" id="admin_pswd" placeholder="">
                         </div>
                         <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn send-btn">完成</button>
                     </div>
                 </form>
-            </div>
+            </div> -->
         </div>
 
         <!-- admin messages -->
-        <div data-role="page" id="admin-messages" data-theme="a" data-title="admin-messages" class="admin-page">
+        <div data-role="page" id="admin-messages" data-theme="a" data-page="admin-messages" class="admin-page">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
@@ -1560,39 +1263,40 @@
                     <select class="navigateToPage">
                         <option value="./admin.html#admin-member">會員管理</option>
                         <option value="./admin.html#admin-home">首頁管理</option>
-                        <option value="./admin.html#admin-lifeservice">生活服務管理</option>
+                        <option value="./admin.html#admin-lifeservice">旅遊資訊管理</option>
                         <option value="./admin.html#admin-recommend">推薦記錄管理</option>
-                        <option value="./admin.html#admin-news">發佈消息</option>
+                        <option value="./admin.html#admin-news">最新消息管理</option>
                         <option value="./admin.html#admin-plan">刊登方案管理</option>
-                        <option value="./admin.html#admin-authority">管理者權限</option>
-                        <option value="./admin.html#admin-messages" selected>站內消息</option>
+                        <option value="./admin.html#admin-authority">條款與後台權限管理</option>
+                        <option value="./admin.html#admin-messages" selected>發送站內訊息</option>
                         <option value="./admin.html#admin-category">分類管理</option>
                     </select>
                 </div>
-                <div class="ui-field-contain">
-                    <label class="item_title" for="textinput-5">官方訊息標題</label>
-                    <input type="text" name="offcial_msg" class="" id="offcial_msg" placeholder="請輸入標題">
-                </div>
-                <div class="ui-field-contain">
-                    <label class="item_title" for="textinput-1">發佈對象</label>
-                    <select name="receiver" id="receiver">
-                        <option value="all">所有會員</option>
-                        <option value="normal">一般會員</option>
-                        <option value="club">店家管理員</option>
-                        <option value="jobseeker">求職者</option>
+                <form id="admin-msg-form">
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="msg_title">官方訊息標題</label>
+                        <input type="text" name="msg_title" class="" id="msg_title" placeholder="請輸入標題">
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="textinput-1">發佈對象</label>
+                        <select name="msg_type" id="msg_type">
+                        <option value="0">所有會員</option>
+                        <option value="1">一般會員</option>
+                        <option value="2">店家管理員</option>
+                        <option value="3">求職者</option>
                     </select>
-                </div>
-                <div>
-                    <label class="item_title" for="job_content">訊息內容</label>
-                    <textarea wrap="virtual" name="msg_content" rows="10" cols="40">活動時間：即日起至2016/12/31。&#13;&#10;推薦求職者就送禮券！
-                    </textarea>
-                </div>
-                <button id="msg-submit-btn" class="ui-btn ui-corner-all ui-btn-inline float-right purple-btn" type="submit">發佈</button>
+                    </div>
+                    <div>
+                        <label class="item_title" for="job_content">訊息內容</label>
+                        <textarea wrap="virtual" name="msg_content" rows="10"></textarea>
+                    </div>
+                    <button id="msg-submit-btn" class="ui-btn ui-corner-all ui-btn-inline float-right purple-btn" type="submit">發佈</button>
+                </form>
             </div>
         </div>
 
         <!-- admin category -->
-        <div data-role="page" id="admin-category" data-theme="a" data-title="admin-category" class="admin-page">
+        <div data-role="page" id="admin-category" data-theme="a" data-page="admin-category" class="admin-page">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
@@ -1607,12 +1311,12 @@
                     <select class="navigateToPage">
                         <option value="./admin.html#admin-member">會員管理</option>
                         <option value="./admin.html#admin-home">首頁管理</option>
-                        <option value="./admin.html#admin-lifeservice">生活服務管理</option>
+                        <option value="./admin.html#admin-lifeservice">旅遊資訊管理</option>
                         <option value="./admin.html#admin-recommend">推薦記錄管理</option>
-                        <option value="./admin.html#admin-news">發佈消息</option>
+                        <option value="./admin.html#admin-news">最新消息管理</option>
                         <option value="./admin.html#admin-plan">刊登方案管理</option>
-                        <option value="./admin.html#admin-authority">管理者權限</option>
-                        <option value="./admin.html#admin-messages">站內消息</option>
+                        <option value="./admin.html#admin-authority">條款與後台權限管理</option>
+                        <option value="./admin.html#admin-messages">發送站內訊息</option>
                         <option value="./admin.html#admin-category" selected>分類管理</option>
                     </select>
                 </div>
@@ -1623,25 +1327,8 @@
                     </a>
                     <div class="clearfix"></div>
                 </div>
-                <div class="cat_list_item">
-                    <span class="cat_title">汽車酒店</span>
-                    <button id="plan-del-btn" class="ui-btn ui-btn-inline ui-corner-all orange-btn float-right" type="button">刪除</button>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="cat_list_item">
-                    <span class="cat_title">商務型酒店</span>
-                    <button id="plan-del-btn" class="ui-btn ui-btn-inline ui-corner-all orange-btn float-right" type="button">刪除</button>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="cat_list_item">
-                    <span class="cat_title">城市酒店</span>
-                    <button id="plan-del-btn" class="ui-btn ui-btn-inline ui-corner-all orange-btn float-right" type="button">刪除</button>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="cat_list_item">
-                    <span class="cat_title">高級酒店</span>
-                    <button id="plan-del-btn" class="ui-btn ui-btn-inline ui-corner-all orange-btn float-right" type="button">刪除</button>
-                    <div class="clearfix"></div>
+                <div id="club_cat_list">
+                    <!-- dynamic content -->
                 </div>
                 <br>
                 <div class="cat_title_block">
@@ -1651,43 +1338,27 @@
                     </a>
                     <div class="clearfix"></div>
                 </div>
-                <div class="cat_list_item">
-                    <span class="cat_title">便服小姐</span>
-                    <button id="plan-del-btn" class="ui-btn ui-btn-inline ui-corner-all orange-btn float-right" type="button">刪除</button>
-                    <div class="clearfix"></div>
+                <div id="job_cat_list">
+                    <!-- dynamic content -->
                 </div>
-                <div class="cat_list_item">
-                    <span class="cat_title">禮服小姐</span>
-                    <button id="plan-del-btn" class="ui-btn ui-btn-inline ui-corner-all orange-btn float-right" type="button">刪除</button>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="cat_list_item">
-                    <span class="cat_title">制服酒店</span>
-                    <button id="plan-del-btn" class="ui-btn ui-btn-inline ui-corner-all orange-btn float-right" type="button">刪除</button>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="cat_list_item">
-                    <span class="cat_title">公關</span>
-                    <button id="plan-del-btn" class="ui-btn ui-btn-inline ui-corner-all orange-btn float-right" type="button">刪除</button>
-                    <div class="clearfix"></div>
-                </div>
+                <br>
             </div>
-            <div id="add_club_cat" class="msg-popup ui-corner-all" data-role="popup" data-position-to="window" data-transition="pop" data-theme="none" data-shadow="false" data-overlay-theme="b" data-dismissible="false">
-                <form>
+            <div id="add_club_cat" class="cat-popup ui-corner-all" data-role="popup" data-position-to="window" data-transition="pop" data-theme="none" data-shadow="false" data-overlay-theme="b" data-dismissible="false">
+                <form id="add-club-cat-form" class="cat-form" data-type="club">
                     <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
                     <div style="padding:10px 20px;">
                         <h3>新增酒店分類</h3>
-                        <input type="text" name="club_cat" class="" id="club_cat" value="">
+                        <input type="text" name="title" class="" id="title" value="">
                         <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn send-btn">送出</button>
                     </div>
                 </form>
             </div>
-            <div id="add_job_cat" class="msg-popup ui-corner-all" data-role="popup" data-position-to="window" data-transition="pop" data-theme="none" data-shadow="false" data-overlay-theme="b" data-dismissible="false">
-                <form>
+            <div id="add_job_cat" class="cat-popup ui-corner-all" data-role="popup" data-position-to="window" data-transition="pop" data-theme="none" data-shadow="false" data-overlay-theme="b" data-dismissible="false">
+                <form id="add-job-cat-form" class="cat-form" data-type="job">
                     <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
                     <div style="padding:10px 20px;">
                         <h3>新增求職者分類</h3>
-                        <input type="text" name="job_cat" class="" id="job_cat" value="">
+                        <input type="text" name="title" class="" id="title" value="">
                         <button type="submit" class="ui-btn ui-corner-all no-bg-bd purple-btn send-btn">送出</button>
                     </div>
                 </form>
@@ -1700,17 +1371,17 @@
                 <ul>
                     <li>
                         <a href="./club.html" data-ajax="false">
-                            <div class="footer-tab tab1" data-title="club"></div>
+                            <div class="footer-tab tab1" data-page="club"></div>
                         </a>
                     </li>
                     <li>
                         <a href="./jobseeker.html" data-ajax="false">
-                            <div class="footer-tab tab2" data-title="jobseeker"></div>
+                            <div class="footer-tab tab2" data-page="jobseeker"></div>
                         </a>
                     </li>
                     <li>
                         <a href="./lifeservice.html" data-ajax="false">
-                            <div class="footer-tab tab3 active" data-title="lifeservice"></div>
+                            <div class="footer-tab tab3 active" data-page="lifeservice"></div>
                         </a>
                     </li>
                     <li>
@@ -1720,7 +1391,7 @@
                     </li>
                     <li>
                         <a href="./favorite.html" data-ajax="false">
-                            <div class="footer-tab tab5" data-title="favorite"></div>
+                            <div class="footer-tab tab5" data-page="favorite"></div>
                         </a>
                     </li>
                 </ul>
@@ -1729,6 +1400,8 @@
         </div>
         <script src="./js/jquery-1.12.4.min.js"></script>
         <script src="./js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
+        <script src="./js/jquery.form.min.js"></script>
+        <script type="text/javascript" src="cordova.js"></script>
         <script src="./js/main.js"></script>
         <script src="./js/admin.js"></script>
     </body>

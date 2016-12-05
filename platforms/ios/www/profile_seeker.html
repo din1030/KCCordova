@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Kelly Club 全省八大行業資訊專用APP平台</title>
+        <meta charset='UTF-8'>
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+
+        <link rel="stylesheet" href="./js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.css" />
+        <link rel="stylesheet" href="./css/font-awesome.css" />
+        <link rel="stylesheet" href="./js/flex-slider/flexslider.css" type="text/css">
+        <link rel="stylesheet" href="css/main.css" />
+    </head>
+
+    <body>
+        <!-- jobseeker profile -->
+        <div data-role="page" id="jobseeker-profile" data-theme="a" data-page="jobseeker-profile">
+            <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
+                <div style="width:100%; text-align:center;">
+                    <a href="#menu-panel" class="ui-link">
+                        <div id="menu-btn" class="header-btn header-link left-link"></div>
+                    </a>
+                    <span class="page-title">我的檔案</span>
+                </div>
+                <div data-role="navbar">
+                    <ul class="page-content-nav">
+                        <li><a href="#jobseeker-profile" data-ajax="false" class="active">個人資料</a></li>
+                        <li><a href="#jobseeker-resume">求職資料</a></li>
+                        <li><a href="#jobseeker-resume-pic">上傳圖片</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /header -->
+            <div data-role="main" class="ui-content profile-main" id="jobseeker-profile-main">
+
+                <div class="upper_block">
+                    <img src="./img/default_profile_pic.jpg" alt="" height="100" />
+                    <div class="name_block">
+                        <div class="name_div"></div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <hr>
+                <div class="">
+                    <div class="ui-field-contain ui-disabled">
+                        <label class="item_title" for="member-id-input">會員編號</label>
+                        <input type="text" name="member-id-input" class="ui-disabled member-id-input" id="member-id-input" value="">
+                    </div>
+                    <div class="ui-field-contain ui-disabled">
+                        <label class="item_title" for="textinput-1">身分</label>
+                        <input type="text" name="textinput-1" class="ui-disabled" id="textinput-1" value="求職者">
+                    </div>
+                    <div class="ui-field-contain ui-disabled">
+                        <label class="item_title" for="gender-input">性別</label>
+                        <input type="text" name="gender-input" class="ui-disabled gender-input" id="gender-input" value="女">
+                    </div>
+                    <div class="ui-field-contain ui-disabled">
+                        <label class="item_title" for="birth-input">生日</label>
+                        <input type="text" name="birth-input" class="ui-disabled birth-input" id="birth-input" value="1999/12/31">
+                    </div>
+                    <div class="ui-field-contain ui-disabled">
+                        <label class="item_title" for="tel-input">電話</label>
+                        <input type="tel" name="tel-input" class="ui-disabled tel-input" id="tel-input" value="02-77777777">
+                    </div>
+                    <div class="ui-field-contain ui-disabled">
+                        <label class="item_title" for="mobile-input">手機</label>
+                        <input type="tel" name="mobile-input" class="ui-disabled mobile-input" id="mobile-input" value="0912345678">
+                    </div>
+                    <a href="#jobseeker-profile-modify" class="ui-btn ui-corner-all">編輯資料</a>
+                </div>
+            </div>
+            <!-- /main -->
+        </div>
+
+        <!-- jobseeker profile modify -->
+        <div data-role="page" id="jobseeker-profile-modify" data-theme="a" data-page="jobseeker-profile-modify" class="profile-pic-page">
+            <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
+                <div style="width:100%; text-align:center;">
+                    <a href="#menu-panel" class="ui-link">
+                        <div id="menu-btn" class="header-btn header-link left-link"></div>
+                    </a>
+                    <span class="page-title">我的檔案</span>
+                    <a href="#jobseeker-profile" class="ui-link" data-ajax="false">
+                        <div class="header-btn header-link right-link" style="width:auto">返回</div>
+                    </a>
+                </div>
+                <div data-role="navbar">
+                    <ul class="page-content-nav">
+                        <li><a href="#jobseeker-profile" data-ajax="false" class="active">個人資料</a></li>
+                        <li><a href="#jobseeker-resume">求職資料</a></li>
+                        <li><a href="#jobseeker-resume-pic">上傳圖片</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /header -->
+            <div data-role="main" class="ui-content profile-main" id="jobseeker-profile-modify-main">
+                <form id="seeker-profile-form" method="post" enctype="multipart/form-data">
+                    <div class="upper_block">
+                        <input type="image" class="profile-pic" src="./img/default_profile_pic.jpg" />
+                        <input id="profile_photo" name="profile_photo" type="file" class="profile-pic-input" accept="image/*" />
+                        <div class="name_block">
+                            <div class="name_div"></div>
+                            <!-- <br> -->
+                            <div>可更換大頭圖</div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <hr>
+                    <div class="">
+                        <div class="ui-field-contain ui-disabled">
+                            <label class="item_title" for="member-id-input">會員編號</label>
+                            <input type="text" name="member-id-input" class="ui-disabled member-id-input" id="member-id-input" value="">
+                        </div>
+                        <div class="ui-field-contain ui-disabled">
+                            <label class="item_title" for="textinput-1">身分</label>
+                            <input type="text" name="textinput-1" class="ui-disabled" id="textinput-1" value="求職者">
+                        </div>
+                        <div class="ui-field-contain ui-disabled">
+                            <label class="item_title" for="gender-input">性別</label>
+                            <input type="text" name="gender-input" class="ui-disabled gender-input" id="gender-input" value="女">
+                        </div>
+                        <div class="ui-field-contain ui-disabled">
+                            <label class="item_title" for="birth-input">生日</label>
+                            <input type="date" name="birth-input" class="ui-disabled birth-input" id="birth-input" value="1985-11-12">
+                        </div>
+                        <div class="ui-field-contain">
+                            <label class="item_title" for="tel-input">電話</label>
+                            <input type="tel" name="tel-input" class="tel-input" id="tel-input" value="02-77777777">
+                        </div>
+                        <div class="ui-field-contain">
+                            <label class="item_title" for="mobile-input">手機</label>
+                            <input type="tel" name="mobile-input" class="mobile-input" id="mobile-input" value="0912345678">
+                        </div>
+                        <button class="ui-shadow ui-btn ui-corner-all profile-submit-btn" data-backpage="#jobseeker-profile" type="button">送出</button>
+                    </div>
+                </form>
+            </div>
+            <!-- /main -->
+        </div>
+
+        <!-- jobseeker resume -->
+        <div data-role="page" id="jobseeker-resume" data-theme="a" data-page="jobseeker-resume">
+            <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
+                <div style="width:100%; text-align:center;">
+                    <a href="#menu-panel" class="ui-link">
+                        <div id="menu-btn" class="header-btn header-link left-link"></div>
+                    </a>
+                    <span class="page-title">我的檔案</span>
+                </div>
+                <div data-role="navbar">
+                    <ul class="page-content-nav">
+                        <li><a href="#jobseeker-profile">個人資料</a></li>
+                        <li><a href="#jobseeker-resume" data-ajax="false" class="active">求職資料</a></li>
+                        <li><a href="#jobseeker-resume-pic">上傳圖片</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /header -->
+            <div data-role="main" class="ui-content" id="jobseeker-resume-main">
+                <fieldset style="padding-left:10px;">
+                    <label for="open-resume" style="display:inline-block;">公開求職資料：</label>
+                    <input type="checkbox" id="open-resume" data-role="flipswitch" data-on-text="是" data-off-text="否" checked>
+                </fieldset>
+                <div class="flexslider">
+                    <!-- * dynamic content here * -->
+                </div>
+                <div id="info_block" class="detail_block">
+                    <div class="ui-bar ui-bar-a">
+                        <h3>求職者資訊</h3>
+                    </div>
+                    <div class="ui-body ui-body-a">
+                        <div id="club_title"></div>
+                        <span class="item_title">藝名：</span>
+                        <sapn id="nickname-span"></sapn>
+                        <br><span class="item_title">應徵地區：</span><span id="country-span"></span>
+                        <br><span class="item_title">生日：</span><span id="birth-span"></span>
+                        <br><span class="item_title">手機：</span><span id="mobile-span"></span>
+                        <br><span class="item_title">身高：</span><span id="height-span"></span>公分
+                        <br><span class="item_title">體重：</span><span id="weight-span"></span>公斤
+                        <br><span class="item_title">三圍：</span><span id="measurements-span"></span>
+                        <br><span class="item_title">歌唱能力：</span><span id="singing-span"></span>
+                        <br><span class="item_title">舞蹈能力：</span><span id="dancing-span"></span>
+                        <br><span class="item_title">酒量：</span><span id="drinking-span"></span>
+                        <br><span class="item_title">配合度：</span><span id="cooperation-span"></span>
+                        <br><span class="item_title">語言能力：</span><span id="languages-span"></span>
+                        <br><span class="item_title">婚姻狀況：</span><span id="marital-span"></span>
+                        <br><span class="item_title">最高學歷：</span><span id="education-span"></span>
+                        <br><span class="item_title">可上班時段：</span><span id="workingtime-span"></span>
+                        <br><span class="item_title">希望待遇：</span><span id="pay-span"></span>
+                    </div>
+                </div>
+                <div id="brief_block" class="detail_block">
+                    <div class="ui-bar ui-bar-a">
+                        <h3>應徵內容</h3>
+                    </div>
+                    <div class="ui-body ui-body-a text-justify">
+                        <span id="content-span"></span>
+                    </div>
+                </div>
+                <div class="detail_block">
+                    <a href="#jobseeker-resume-modify" class="ui-btn ui-corner-all">編輯資料</a>
+                </div>
+            </div>
+            <!-- /main -->
+        </div>
+
+        <!-- jobseeker resume modify -->
+        <div data-role="page" id="jobseeker-resume-modify" data-theme="a" data-page="jobseeker-resume-modify">
+            <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
+                <div style="width:100%; text-align:center;">
+                    <a href="#menu-panel" class="ui-link">
+                        <div id="menu-btn" class="header-btn header-link left-link"></div>
+                    </a>
+                    <span class="page-title">我的檔案</span>
+                    <a href="#jobseeker-resume" class="ui-link" data-ajax="false">
+                        <div class="header-btn header-link right-link" style="width:auto">返回</div>
+                    </a>
+                </div>
+                <div data-role="navbar">
+                    <ul class="page-content-nav">
+                        <li><a href="#jobseeker-profile">個人資料</a></li>
+                        <li><a href="#jobseeker-resume" data-ajax="false" class="active">求職資料</a></li>
+                        <li><a href="#jobseeker-resume-pic">上傳圖片</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /header -->
+            <div data-role="main" class="ui-content profile-main" id="jobseeker-resume-modify-main">
+                <form id="jobseeker-resume-modify-form" method="post">
+                    <div class="">
+                        <div class="ui-field-contain">
+                            <label class="item_title" for="nickname-input">藝名</label>
+                            <input type="text" name="nickname-input" class="nickname-input" id="nickname-input" value="">
+                        </div>
+                        <div class="ui-field-contain">
+                            <label class="item_title" for="seeker_category">店家類別</label>
+                            <select name="seeker_category" id="seeker_category">
+                                <!-- <option value="1">The 1st Option</option>
+                                <option value="2">The 2nd Option</option>
+                                <option value="3">The 3rd Option</option>
+                                <option value="4">The 4th Option</option> -->
+                            </select>
+                        </div>
+                        <div class="ui-field-contain">
+                            <label class="item_title" for="textinput-1">應徵地區</label>
+                            <fieldset data-role="controlgroup" data-type="horizontal">
+                                <select class="country-select" name="seeker_country" id="seeker_country">
+                                    <!-- <option value="1">台灣</option>
+                                    <option value="2">中國</option>
+                                    <option value="3">日本</option> -->
+                                </select>
+                                <select class="area-select" name="seeker_area" id="seeker_area">
+                                </select>
+                            </fieldset>
+                        </div>
+                        <!-- <div class="ui-field-contain">
+                        <label class="item_title" for="birth-input">生日</label>
+                        <input type="date" name="birth-input" class="" id="birth-input" value="1989-01-10">
+                        </div> -->
+                        <!-- <div class="ui-field-contain">
+                            <label class="item_title" for="mobile-input">手機</label>
+                            <input type="tel" name="mobile-input" class="mobile-input" id="mobile-input" value="0988-166691">
+                        </div> -->
+                        <div class="ui-field-contain">
+                            <label class="item_title" for="height-input">身高</label>
+                            <input type="number" name="height-input" class="" id="height-input" value="">
+                            <span>公分</span>
+                        </div>
+                        <div class="ui-field-contain">
+                            <label class="item_title" for="weight-input">體重</label>
+                            <input type="number" name="weight-input" class="" id="weight-input" value="">
+                            <span>公斤</span>
+                        </div>
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="measurements-input">三圍</label>
+                        <input type="text" name="measurements-input" class="" id="measurements-input" value="" placeholder="例：32D、24、35">
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="sing">歌唱能力</label>
+                        <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                            <input type="radio" name="singing" id="singinga" value="great">
+                            <label for="singinga">很棒</label>
+                            <input type="radio" name="singing" id="singingb" value="soso">
+                            <label for="singingb">普通</label>
+                            <input type="radio" name="singing" id="singingc" value="bad">
+                            <label for="singingc">不佳</label>
+                        </fieldset>
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="textinput-1">舞蹈能力</label>
+                        <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                            <input type="radio" name="dancing" id="dancinga" value="great">
+                            <label for="dancinga">很棒</label>
+                            <input type="radio" name="dancing" id="dancingb" value="soso">
+                            <label for="dancingb">普通</label>
+                            <input type="radio" name="dancing" id="dancingc" value="bad">
+                            <label for="dancingc">不佳</label>
+                        </fieldset>
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="textinput-1">酒量</label>
+                        <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                            <input type="radio" name="drinking" id="drinkinga" value="great">
+                            <label for="drinkinga">很棒</label>
+                            <input type="radio" name="drinking" id="drinkingb" value="soso">
+                            <label for="drinkingb">普通</label>
+                            <input type="radio" name="drinking" id="drinkingc" value="bad">
+                            <label for="drinkingc">不佳</label>
+                        </fieldset>
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="textinput-1">配合度</label>
+                        <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                            <input type="radio" name="cooperation" id="cooperationa" value="great">
+                            <label for="cooperationa">很棒</label>
+                            <input type="radio" name="cooperation" id="cooperationb" value="soso">
+                            <label for="cooperationb">普通</label>
+                            <input type="radio" name="cooperation" id="cooperationc" value="bad">
+                            <label for="cooperationc">不佳</label>
+                        </fieldset>
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="lang-input">語言能力</label>
+                        <input type="text" name="lang-input" class="" id="lang-input" placeholder="例：國語、台語" value="">
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="marital">婚姻狀況</label>
+                        <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                            <input type="radio" name="marital" id="maritala" value="married">
+                            <label for="maritala">已婚</label>
+                            <input type="radio" name="marital" id="maritalb" value="single">
+                            <label for="maritalb">未婚</label>
+                            <input type="radio" name="marital" id="maritalc" value="divorced">
+                            <label for="maritalc">離異</label>
+                        </fieldset>
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="education">最高學歷</label>
+                        <input type="text" name="education" class="" id="education-input" value="">
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="worktime">可上班時段</label>
+                        <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                            <input type="radio" name="worktime" id="worktimea" value="afternoon">
+                            <label for="worktimea">午場</label>
+                            <input type="radio" name="worktime" id="worktimeb" value="night">
+                            <label for="worktimeb">晚場</label>
+                            <input type="radio" name="worktime" id="worktimec" value="PT">
+                            <label for="worktimec">PT</label>
+                        </fieldset>
+                    </div>
+                    <div class="ui-field-contain">
+                        <label class="item_title" for="pay-input">希望待遇</label>
+                        <fieldset data-role="controlgroup" data-type="horizontal">
+                            <input type="text" name="pay-input" class="" id="pay-input" value="">
+                            <!-- <input type="checkbox" name="msg_talk" id="msg_talk"> -->
+                            <!-- <label for="msg_talk">站內訊息談</label> -->
+                        </fieldset>
+                    </div>
+                    <div>
+                        <label class="item_title" for="job_content">應徵內容</label>
+                        <textarea wrap="virtual" id="job_content" name="job_content" rows="4" cols="40"></textarea>
+                    </div>
+                    <!-- <br><span class="item_title">上傳圖片：</span>
+                    <input type="file" data-clear-btn="true" name="file-2" id="file-2" value="">
+                    <input type="file" data-clear-btn="true" name="file-2" id="file-2" value="">
+                    <input type="file" data-clear-btn="true" name="file-2" id="file-2" value="">
+                    <input type="file" data-clear-btn="true" name="file-2" id="file-2" value="">
+                    <input type="file" data-clear-btn="true" name="file-2" id="file-2" value=""> -->
+                    <button id="seeker-resume-send-btn" class="ui-shadow ui-btn ui-corner-all" type="button">送出</button>
+                </form>
+            </div>
+            <!-- main -->
+        </div>
+
+        <!-- jobseeker resume pic -->
+        <div data-role="page" id="jobseeker-resume-pic" data-theme="a" data-page="jobseeker-resume-pic">
+            <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
+                <div style="width:100%; text-align:center;">
+                    <a href="#menu-panel" class="ui-link">
+                        <div id="menu-btn" class="header-btn header-link left-link"></div>
+                    </a>
+                    <span class="page-title">我的檔案</span>
+                </div>
+                <div data-role="navbar">
+                    <ul class="page-content-nav">
+                        <li><a href="#jobseeker-profile">個人資料</a></li>
+                        <li><a href="#jobseeker-resume" data-ajax="false">求職資料</a></li>
+                        <li><a href="#jobseeker-resume-pic" class="active">上傳圖片</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /header -->
+            <div data-role="main" class="ui-content profile-main" id="jobseeker-resume-pic-main">
+                <form id="jobseeker-resume-pic-form" method="post" enctype="multipart/form-data">
+                    <div class="item_title">上傳圖片：</div>
+                    圖一
+                    <input type="file" data-clear-btn="true" name="pic_1" id="pic_1" value=""> 圖二
+                    <input type="file" data-clear-btn="true" name="pic_2" id="pic_2" value=""> 圖三
+                    <input type="file" data-clear-btn="true" name="pic_3" id="pic_3" value=""> 圖四
+                    <input type="file" data-clear-btn="true" name="pic_4" id="pic_4" value=""> 圖五
+                    <input type="file" data-clear-btn="true" name="pic_5" id="pic_5" value="">
+                    <button id="seeker-resume-send-btn" class="ui-shadow ui-btn ui-corner-all" type="submit">送出</button>
+                </form>
+            </div>
+            <!-- main -->
+        </div>
+
+        <!-- external footer -->
+        <div data-role="footer" data-position="fixed" data-theme="a" data-tap-toggle="false">
+            <div data-role="navbar">
+                <ul>
+                    <li>
+                        <a href="./club.html" data-ajax="false">
+                            <div class="footer-tab tab1" data-page="club"></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./jobseeker.html" data-ajax="false">
+                            <div class="footer-tab tab2 active" data-page="jobseeker"></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./lifeservice.html" data-ajax="false">
+                            <div class="footer-tab tab3"></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./messages.html" data-ajax="false">
+                            <div class="footer-tab tab4"></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./favorite.html" data-ajax="false">
+                            <div class="footer-tab tab5" data-page="favorite"></div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /footer -->
+        </div>
+        <script src="./js/jquery-1.12.4.min.js"></script>
+        <script src="./js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
+        <script src="./js/flex-slider/jquery.flexslider-min.js"></script>
+        <script src="./js/jquery.form.min.js"></script>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script src="./js/main.js"></script>
+        <script src="./js/profile.js"></script>
+    </body>
+
+</html>

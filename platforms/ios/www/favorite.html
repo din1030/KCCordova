@@ -3,8 +3,9 @@
 
     <head>
         <title>Kelly Club 全省八大行業資訊專用APP平台</title>
-    <meta charset='UTF-8'>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset='UTF-8'>
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+
         <link rel="stylesheet" href="./js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.css" />
         <link rel="stylesheet" href="./css/font-awesome.css" />
         <link rel="stylesheet" href="./js/flex-slider/flexslider.css" type="text/css">
@@ -13,7 +14,7 @@
 
     <body>
         <!-- life service -->
-        <div data-role="page" id="favorite" data-theme="a" data-title="favorite">
+        <div data-role="page" id="favorite" data-theme="a" data-page="favorite">
             <div data-role="header" data-position="fixed" data-theme="a" data-tap-toggle="false">
                 <div style="width:100%; text-align:center;">
                     <a href="#menu-panel" class="ui-link">
@@ -26,41 +27,11 @@
             <div data-role="main" class="ui-content" id="favorite-main">
                 <div class="member-info">
                     <div class="float-right">
-                        <span class="member">（未知使用者）</span>
+                        <span class="member">（未登入！）</span>
                     </div>
                     <div class="clearfix"></div>
                 </div>
-                <!-- <div id="" class="detail_block msg_block">
-                    <div class="ui-bar ui-bar-a text-center">
-                        <sapn>【求職者】收藏</sapn>
-                        <button class="ui-btn ui-corner-all ui-btn-inline ui-mini ui-btn-right ui-icon-delete ui-btn-icon-notext del-fav-btn" type="button" name="button" data-shadow="false">x</button>
-                    </div>
-                    <a href="./jobseeker.html#jobseeker-resume" data-ajax="false">
-                        <div class="ui-body ui-body-a">
-                            <div class="avatar msg-avatar float-left">
-                            </div>
-                            <strong>翁水蘭</strong>
-                            <br> 藝名：水噹噹
-                            <br> 應徵地區：台中市
-                        </div>
-                    </a>
-                </div> -->
-                <!-- <div id="" class="detail_block msg_block">
-                    <div class="ui-bar ui-bar-a">
-                        <sapn>【生活服務】收藏</sapn>
-                        <button class="ui-btn ui-corner-all ui-btn-inline ui-mini ui-btn-right ui-icon-delete ui-btn-icon-notext del-fav-btn" type="button" name="button" data-shadow="false">x</button>
-                    </div>
-                    <a href="./lifeservice.html#lifeservice-detail" data-ajax="false">
-                        <div class="ui-body ui-body-a">
-                            <div class="avatar msg-avatar float-left">
-                                <img src="./img/seeker-a.jpg" alt="" />
-                            </div>
-                            <strong>Divas 美甲美睫概念館</strong>
-                            <br> 台中市｜西屯區
-                            <br> 公關 Larmar 客服專員
-                        </div>
-                    </a>
-                </div> -->
+                <!-- dynamic content -->
             </div>
         </div>
 
@@ -70,27 +41,27 @@
                 <ul>
                     <li>
                         <a href="./club.html" data-ajax="false">
-                            <div class="footer-tab tab1" data-title="club"></div>
+                            <div class="footer-tab tab1" data-page="club"></div>
                         </a>
                     </li>
                     <li>
                         <a href="./jobseeker.html" data-ajax="false">
-                            <div class="footer-tab tab2" data-title="jobseeker"></div>
+                            <div class="footer-tab tab2" data-page="jobseeker"></div>
                         </a>
                     </li>
                     <li>
                         <a href="./lifeservice.html" data-ajax="false">
-                            <div class="footer-tab tab3 active" data-title="lifeservice"></div>
+                            <div class="footer-tab tab3 active" data-page="lifeservice"></div>
                         </a>
                     </li>
                     <li>
                         <a href="./messages.html" data-ajax="false">
-                            <div class="footer-tab tab4" data-title="messages"></div>
+                            <div class="footer-tab tab4" data-page="messages"></div>
                         </a>
                     </li>
                     <li>
                         <a href="./favorite.html" data-ajax="false">
-                            <div class="footer-tab tab5" data-title="favorite"></div>
+                            <div class="footer-tab tab5" data-page="favorite"></div>
                         </a>
                     </li>
                 </ul>
@@ -100,6 +71,7 @@
         <script src="./js/jquery-1.12.4.min.js"></script>
         <script src="./js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
         <script src="./js/flex-slider/jquery.flexslider-min.js"></script>
+        <script type="text/javascript" src="cordova.js"></script>
         <script src="./js/main.js"></script>
         <script src="./js/favorite.js"></script>
     </body>
